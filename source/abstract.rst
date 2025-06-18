@@ -6,7 +6,7 @@ describes
 the operating environment
 for a utility-focused
 grid edge device
-with sufficent detail
+with sufficient detail
 so that two vendors
 working from the specification alone
 can create an implementation
@@ -15,4 +15,4 @@ can run on both without modification.
 
 While the initial focus is smart meters,
 the GEISA Execution Environment (EE)
-runs on a variety of devivce types.
+runs on a variety of device types.
