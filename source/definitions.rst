@@ -1,13 +1,10 @@
-Definitions, Acryonyms, and Apprviations
+Definitions, Acryonyms, and Abbreviations
 ----------------------------------------
 
 ..
-    Clear definitions
-    for all
-    terms,
-    ancrony s,
-    and abbrevivations
-    uses in the document
+    Clear definitions for all terms, 
+    acronyms, and abbreviations
+    used in the document
 
 ADC
     Analog-to-digital conversion
@@ -37,7 +34,7 @@ LAN
     Local Area Network
 
 MQTT
-    Message Queueing Telephany Transport
+    Message Queueing Telemetry Transport
 
 OS
     Operating System
