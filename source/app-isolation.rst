@@ -109,7 +109,7 @@ Container resource limits shall include the following:
 - CPU limit (% of CPU)
 - Memory Limit (in 1K units)
 - Persistent Storage Limit (in 1K units)
-- Non-Persisten Storage Limit (in 1K units)
+- Non-Persistent Storage Limit (in 1K units)
 - Allowed Network Bandwidth (in 1K units)
 
     - Ongoing Limit Outbound
@@ -122,7 +122,7 @@ Container resource limits shall include the following:
     - LAN
     - FAN
 
-- Defin Container Access Levels
+- Define Container Access Levels
 
     - Level 0 - Read and Control - Core Features - Immutable
     - Level 1 - Read and Control - Utility
