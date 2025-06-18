@@ -21,9 +21,9 @@ The specification outline is as follows:
 - Operating System
 - Base Libraries
 - Core Services
-- Applicaiton Isolation
+- Application Isolation
 - Application Management
-- Applicaiton Programmingn Interfaces (APIs)
+- Applicaiton Programming Interfaces (APIs)
 - Security
 
 
