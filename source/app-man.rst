@@ -45,11 +45,11 @@ GEISA application meta-data shall include:
     such as the URL of a server.
     The system operator should be able to change the configuration
     information without needing to redeploy the application.
-- Launch Stragety
+- Launch Strategy
     - Includes details such as whether the application should
 
     automatically be restarted if it fails,
-    and how manhy failures with a given period of time constitues a permanent failure.
+    and how many failures with a given period of time constitues a permanent failure.
 
 Here is an example of meta-data.
 
