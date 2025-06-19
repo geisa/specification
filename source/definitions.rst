@@ -1,5 +1,5 @@
 Definitions, Acryonyms, and Abbreviations
-----------------------------------------
+-----------------------------------------------
 
 ..
     Clear definitions for all terms, 
