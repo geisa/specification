@@ -12,6 +12,7 @@ GEISA Specification 0.1.0
    :caption: Contents:
 
    abstract
+   contributors
    keywords
    legal-info
 
