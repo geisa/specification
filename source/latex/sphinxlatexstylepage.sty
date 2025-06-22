@@ -1,0 +1,50 @@
+%% PAGE STYLING
+%
+% change this info string if making any custom modification
+\ProvidesPackage{sphinxlatexstylepage}[GEISA page styling]
+
+% Separate paragraphs by space by default.
+\RequirePackage{parskip}
+
+% Style parameters and macros used by most documents here
+\raggedbottom
+\sloppy
+\hbadness = 5000                % don't print trivial gripes
+
+% Require package fancyhdr except under memoir class
+\@ifclassloaded{memoir}{}{\RequirePackage{fancyhdr}}
+% Use \pagestyle{normal} as the primary pagestyle for text.
+% Redefine the 'normal' header/footer style when using "fancyhdr" package:
+\@ifpackageloaded{fancyhdr}{%
+   \fancypagestyle{plain}{
+     \fancyhf{} %Clear the footer and header
+     \fancyfoot[RE,RO]{\thepage} % Put page numbers on the right
+     % Put copyright on the left
+     \fancyfoot[LE,LO]{\copyright 2025 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
+     \fancyhead[LE,LO]{{\py@HeaderFamily \@title}} % Title on the left
+     \fancyhead[RE,RO]{{\py@HeaderFamily \py@release}} % Release on the right
+     \renewcommand{\headrulewidth}{0.4pt} %Horizontal rules
+     \renewcommand{\footrulewidth}{0.4pt} %Horizontal rules
+   }
+   % Same as 'plain', this way we can use it in template
+   % FIXME: shouldn't this have a running header with Name and Release like 'manual'?
+   \fancypagestyle{normal}{
+     \fancyhf{} %Clear the footer and header
+     \fancyfoot[RE,RO]{\thepage} % Put page numbers on the right
+     % Put copyright on the left
+     \fancyfoot[LE,LO]{\copyright 2025 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
+     \fancyhead[LE,LO]{{\py@HeaderFamily \@title}} % Title on the left
+     \fancyhead[RE,RO]{{\py@HeaderFamily \py@release}} % Release on the right
+     \renewcommand{\headrulewidth}{0.4pt} %Horizontal rules
+     \renewcommand{\footrulewidth}{0.4pt} %Horizontal rules
+   }
+  }%
+  {% no fancyhdr: memoir class
+   % Provide default for 'normal' style simply as an alias of 'plain' style
+   % This way we can use \pagestyle{normal} in LaTeX template
+   \def\ps@normal{\ps@plain}
+   % Users of memoir class are invited to redefine 'normal' style in preamble
+  }
+
+
+\endinput
