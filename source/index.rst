@@ -13,24 +13,23 @@ GEISA Specification 0.1.0
 
    abstract
    contributors
-   keywords
-   legal-info
+   license
 
-   intro
+   introduction
    references
    definitions
     
    design-principles
-   envisioned-system-architecture
+   system-architecture
    hardware
 
-   os
-   fs
-   libs
+   operating-system
+   file-layout
+   base-libraries
    core-services
 
    app-isolation
-   app-man
+   app-management
    api
 
    security
