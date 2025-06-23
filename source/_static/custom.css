@@ -1,8 +1,16 @@
-body {
-    font-family: Arial, sans-serif;
+/* Disable hyphenation */
+
+div.body {
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	-webkit-hyphens: none;
+	hyphens: none;
 }
 
-h1, h2, h3 {
-    font-family: Arial, sans-serif;
+div.body p, div.body dd, div.body li, div.body blockquote {
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	-webkit-hyphens: none;
+	hyphens: none;
 }
 

@@ -26,43 +26,45 @@ exclude_patterns = []
 # The * notation allows the html engine to use the SVG format and LaTex to use PDF
 #
 rst_prolog = """
-.. |geisa-ee-logo| image:: images/geisa-ee-icon.*
+.. |GEISA| replace:: Grid Edge Interoperability & Security Alliance 
+
+.. |geisa-ee-logo| image:: /images/geisa-ee-icon.*
     :alt: GEISA Execution Environment
     :height: 48pt
 
-.. |geisa-api-logo| image:: images/geisa-api-icon.*
+.. |geisa-api-logo| image:: /images/geisa-api-icon.*
     :alt: GEISA Application Programming Interface
     :height: 48pt
 
-.. |geisa-adm-logo| image:: images/geisa-adm-icon.*
+.. |geisa-adm-logo| image:: /images/geisa-adm-icon.*
     :alt: GEISA Application & Device Management
     :height: 48pt
 
-.. |geisa-ee-hdr| image:: images/geisa-ee-header.*
+.. |geisa-ee-hdr| image:: /images/geisa-ee-header.*
     :alt: GEISA Execution Environment
     :height: 48pt
 
-.. |geisa-api-hdr| image:: images/geisa-api-header.*
+.. |geisa-api-hdr| image:: /images/geisa-api-header.*
     :alt: GEISA Application Programming Interface
     :height: 48pt
 
-.. |geisa-adm-hdr| image:: images/geisa-adm-header.*
+.. |geisa-adm-hdr| image:: /images/geisa-adm-header.*
     :alt: GEISA Application & Device Management
     :height: 48pt
 
-.. |geisa-ee-globe| image:: images/geisa-globe-thick.*
+.. |geisa-ee-globe| image:: /images/geisa-globe-thick.*
     :alt: GEISA Execution Environment
     :width: 14pt
 
-.. |geisa-api-gear| image:: images/geisa-gear-thick.*
+.. |geisa-api-gear| image:: /images/geisa-gear-thick.*
     :alt: GEISA Application Programming Interface
     :width: 14pt
 
-.. |geisa-adm-baton| image:: images/geisa-baton-thick.*
+.. |geisa-adm-baton| image:: /images/geisa-baton-thick.*
     :alt: GEISA Application & Device Management
     :width: 14pt
 
-.. |geisa-pyramid| image:: images/geisa-pyramid.*
+.. |geisa-pyramid| image:: /images/geisa-pyramid.*
     :alt: GEISA Pyramid 
     :width: 20pt
 
