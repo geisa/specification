@@ -9,7 +9,7 @@
 project = 'GEISA Specification'
 copyright = 'Copyright 2025-%Y, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
 author = 'Contributors to GEISA'
-release = '0.1.0'
+release = '0.1.1'
 html_title = 'GEISA Specification'
 
 # -- General configuration ---------------------------------------------------
@@ -19,6 +19,14 @@ extensions = []
 
 templates_path = ['_templates']
 exclude_patterns = []
+
+numfig = True
+numfig_format = {
+    'code-block': 'Listing %s',
+    'figure': 'Figure %s',
+    'section': 'Section %s',
+    'table': 'Table %s',
+}
 
 # -- Global Inlines ----------------------------------------------------------
 # These are used throughout the docs to make it easy to add GEISA specific

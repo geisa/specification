@@ -1,12 +1,13 @@
 Conformance
 -----------------------
 
-To enable platform vendors, application developments, management system providers, 
+To enable platform vendors, application developers, management system providers, 
 and utilities to validate whether a given system component conforms with this
-specification, GEISA provides an open source conformance test framework.
+specification, |GEISA| provides an open source conformance test framework.
 
 This framework is licensed under the `Apache License`_ and is available in the
 |GEISA| `github repository`_.
+
 |geisa-pyramid|
 
 .. _Apache License: https://www.apache.org/licenses/LICENSE-2.0

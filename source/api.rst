@@ -1,9 +1,14 @@
 Application Programming Interface (API)
 -----------------------------------------
 
-For GEISA applications to be **source portable** between multiple platforms,
-the GEISA standard establishes a well define set of APIs between the
-application and the common operating environment.
+|geisa-api-hdr|
 
-TODO: Copy info from Confluence
+For GEISA applications to be interoperable across multiple platforms,
+the GEISA specification establishes a well defined set of APIs between the
+application and the platform implementation.
+
+.. toctree::
+   api/architecture
+   api/enumeration
+   api/waveform
 

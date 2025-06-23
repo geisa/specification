@@ -1,7 +1,7 @@
 Base Libraries
 --------------
 
-Applicaiton isolation is assumed to be provided through containers.
+Application isolation is assumed to be provided through containers.
 Containers are able to inherit from the host operating system.
 To facilitate clean and regular updates,
 and to minimze container sizes,

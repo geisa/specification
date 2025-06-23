@@ -36,11 +36,30 @@ Glossary
    EE
     Execution Environment
 
+   EMA
+    Edge Management Agent
+
+    The EMA is the logical component of a GEISA ADM conformant platform
+    which implements ADM support.
+
+   EMS
+    Edge Management System
+
+    Note: with the electric utility industry, EMS often means
+    *Energy* Management System.  Similarly, within the network management
+    system EMS often means *Element* Management System.  
+    Within this specification EMS is used exclusively for Edge 
+    Management System.
+
    GEISA
-    Grid Edge Interoperability and Security Alliance
+    `Grid Edge Interoperability and Security Alliancei
+    <https://lfenergy.org/projects/geisa/>`_
 
    GPIO
     General Purpose Input/Output
+
+   GUI
+    Graphical User Interface
 
    HAN
     Home Area Network
@@ -49,10 +68,21 @@ Glossary
     Local Area Network
 
    MQTT
-    Message Queueing Telemetry Transport
+    `MQTT <https://en.wikipedia.org/wiki/MQTT>`_ 
+    is a light-weight publish and subscribe protocol formerly
+    known as Message Queueing Telemetry Transport. 
+
 
    OS
     Operating System
+
+   Platform Implementation
+    A combination of hardware and software which provides one or more
+    GEISA conformant interfaces (ADM, API, EE).
+
+   POSIX
+    `Portable Operating System Interface 
+    <https://en.wikipedia.org/wiki/POSIX>`_
 
    RMS
     Root Mean Square
