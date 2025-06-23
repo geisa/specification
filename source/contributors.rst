@@ -4,20 +4,23 @@
 Contributors
 --------------------
 
-The following individuals contributed to the development of the GEISA specification.  Our sincere thanks to them for the time and through they put into this effort:
+The following individuals contributed to the development of the |GEISA| specification.  
+Our sincere thanks to them for the time and thought they put into this effort:
 
-* Brandon Thayer
-* Rick Steuer
-* Richard Lam
+* Will Bell
+* Matt Casperson
+* Craig Cornwall
+* Matt Gillmore
+* Michael Garrison Stuber
 * Bryan Green
+* Ryan Houlette
+* Don Jackson
 * David Johnson
+* Richard Lam
 * Norm McEntire
 * Vlad Pambucol
 * Jonah Petri
-* Ryan Houlette
-* Craig Cornwall
-* Michael Garrison Stuber
-* Will Bell
-* Matt Gillmore
+* Rick Steuer
+* Brandon Thayer
 
-
+|geisa-pyramid|

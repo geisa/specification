@@ -1,47 +1,65 @@
-Definitions, Acryonyms, and Abbreviations
+Glossary
 -----------------------------------------------
 
-..
-    Clear definitions for all terms, 
-    acronyms, and abbreviations
-    used in the document
+.. glossary::
 
-ADC
+   ADC
     Analog-to-digital conversion
 
-API
+    Analog-to-digital converter
+
+   ADM
+        Application and Device Management
+
+   AMI
+        Advanced Metering Infrastructure
+
+   API
     Applications Programming Interface
 
-COAP
+   CoAP
     Constrained Applications Protocol
 
-FAN
+
+   DER
+        Distributed Energy Resource
+
+        Distributed Energy Resource is a generic term that typically includes
+        photo-voltaics coupled with a smart inverter, battery energy storage systems,
+        electric vehicles, demand response, and other dispatchable load or generation
+        available on the electric distribution network.  DER is typically owned by
+        consumers or businesses, rather than utilities or wholesale energy market participants.
+
+   FAN
     Field Area Network
 
-EE
+   EE
     Execution Environment
 
-GEISA
+   GEISA
     Grid Edge Interoperability and Security Alliance
 
-GPIO
+   GPIO
     General Purpose Input/Output
 
-HAN
+   HAN
     Home Area Network
 
-LAN
+   LAN
     Local Area Network
 
-MQTT
+   MQTT
     Message Queueing Telemetry Transport
 
-OS
+   OS
     Operating System
 
-RMS
+   RMS
     Root Mean Square
 
-SPI
+   SPI
     Serial Peripheral Interface
+
+|geisa-pyramid|
+
 

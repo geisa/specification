@@ -17,10 +17,11 @@ GEISA Specification 0.1.0
 
    introduction
    references
-   definitions
+   glossary
     
    design-principles
    system-architecture
+   conformance
    hardware
 
    operating-system

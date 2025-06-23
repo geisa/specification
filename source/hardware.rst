@@ -1,96 +1,131 @@
-Hardware Requirements
+Hardware Expectations
 ---------------------
 
-.. note::
+The GEISA specification is written to align with the hardware
+already in use by platform vendors serving electric utilities.
+This version of the specification refers to hardware *expectations*,
+rather than hardware *requirements*, because it does not require
+binary compatibility. [#]_  Neverthless, it is important to define
+the expected hardware deployment platform, as it informs a variety
+of design decisions.
 
-    The original text specified an ARMv7 platform with
-    512MB or RAM and 1GB of flash. However the text
-    below focused on the GEISA EE environment instead
-    of the lower-layer hardware platform.
+A full GEISA compliant platform, including ADM, API, and EE interoperability
+conformance, should be realizable on:
 
-As a **source-code interoperabiilty** specification,
-the underlying hardware must ensure
-that that it supports the GEISA EE.
+- ARMv7 CPU with NEON extensions
+- 512 MB of RAM
+- 1 GB of Flash
+- One (or more) network interfaces
+- One (or more) metrology interfaces
 
-The vision is that GEISA EE runs on 
+As this version of the specification does *not* require binary compatibility,
+but is limited to source-code compatibility only, platform implementers MAY 
+choose to use alternate CPUs and/or fewer resources; however, 
+platform implementers should be aware that:
+
+- It may not be possible to implement a fully conformant (ADM, API, and EE) 
+  platform on a device with fewer resources
+- If GEISA is extended to include binary compatibility in the future, ARM
+  CPUs are expected to be the exclusive target architecture.
+
+The vision is that the GEISA EE |geisa-ee-globe| runs on 
 a wide range of hardware platforms with various capabilities:
 
-- Device type such as smart meter, load switch, EV charger, etc.
-- Processor architectures such as ARM32, ARM64, RV32, RV64, AMR64, etc.
+- Device types such as smart meters, load switches, EV chargers, etc.
 - Single core and multi core
-- RAM sizes from 512MB and higher
-- Storage sizes from 1GB and higher
-- Networking Interfaces such as mesh, Wi-Fi, celluar, etc.
-- Metrology Interfaces to provide voltage, current, etc.
-- Hardware Interfaces such as GPIO, ADC, SPI, etc.
-- Hardware Watchdog
+- Processor extensions and coprocessors such as GPUs  
+- RAM sizes greater than the minimum 512MB target
+- Storage sizes greater than the minimum 1 GB target
+- Multiple networking interfaces such as mesh, Wi-Fi, cellular, etc.
+- Metrology interfaces to provide voltage, current, etc.
+- Actuators, such as relays and contactors
+- Sensors, including temperature, humidity, location, and vibration
+- Hardware watchdog
+- Generic hardware interfaces such as GPIO, ADC, SPI, etc.
 
-A given hardware platform must provide a tool-chain
-for buidling the GEISA EE,
-along with the necessary hardware resources.
+Platform providers offering a GEISA EE |geisa-ee-globe| MUST provide a toolchain which allows application
+developers to compile applications written for the GEISA EE. [#]_
 
-Metrology Hardware
+
+Metrology
 ^^^^^^^^^^^^^^^^^^
 
-One of the primary targets for the GEISA EE is on smart electric meters,
-hence the need for a standardize interface to metrology information.
+GEISA specifically addresses edge computing enviroments used by electric utilities.
+It is assumed there there is a source of metrological data available on GEISA devices.
+The GEISA API |geisa-api-gear| provides a mechanism for GEISA applications to obtain
+details regarding the metrological capabilities of the device (see :doc:`api/enumeration`)
 
 .. note::
 
-    A GEISA EE environment is not expected to provide metrology info
-    when used on a non-metrology device.
+    The GEISA API is not expected to provide metrological information
+    when used on a non-metrological device; however, some platforms without a
+    local metrology MAY support providing remote metrological data
+    through their local GEISA API
 
-Minimal **static** metrology information:
+Metrological hardware, at a minimum, should be able to provide: [#]_
 
-- Number of Phases
-- Meter Rating
-- Meter Form
-- Base Frequency
-- Serial Number
-
-Minimal **dynamic RMS values** information:
-
-- Voltage Reading, RMS
-- Current Reading, RMS
+- Instantaneous RMS Voltage Reading
+- Instantaneous RMS Current Reading
 - Frequency
 
-Minimal **dynamic waveform** information:
+When coupled with a billing register, metrological hardware may also
+be able to provide derived quantities such as demand values, cummulative
+values, and interval values.
 
-- Voltage Reading, ADC
-- Voltage Scaling, ADC
-- Current Reading, ADC
-- Current Scaling, ADC
-- Samples/Cycle, 16, 64, 128, 256, 512, etc.
-- Resolution per sample, e.g. 16-bits
-- Wall Clock Time
-- Monotinic Time
+Metrological hardware may also be able to provide waveform data.  
+See :doc:`api/waveform` for additional details.  
+When waveform data is provided, at a miminum, it SHALL provide:
 
-Sensor Hardware
+- 64 samples per cycle (3.84 kHz at 60 Hz AC frequency)
+- 16 bits per sample
+
+Platforms may provide higher sampling rates (e.g. 128, 256, 512, 16,384 samples per cycle or more)
+and greater sampling resolution (e.g. 32 bits per sample).
+
+Depending on the device, waveform data may be provided for voltage, current, or both.  
+Waveform data may be split-phase, phase-to-phase, or phase-to-neutral.  
+The GEISA API allows applications to obtain details about the waveform data available
+on the platform so that they can correctly interpret the information the platform exposes
+through the API.
+
+Sensors
 ^^^^^^^^^^^^^^^
 
-A GEISA EE compliant platform can optionally
-provide one or more sensors.
+A GEISA platform MAY optionally provide one or more sensors.
+Sensors are exposed through the GEISA API |geisa-api-gear|.
 
-Some example sensors that may be provided include:
+Sensors that may be provided include:
 
 - Temperature Sensor
 - Humidity Sensor
 - Switch Sensor
 - GPS
+- Vibration / accelerometer
 
-Hardware Enumeration
-^^^^^^^^^^^^^^^^^^^^
+Actuators
+^^^^^^^^^^^^^^^^^^
 
-The GEISA EE provides an API so that GIESA compliant applications
-can query the hardware resources available:
+A GEISA platform MAY optionally provide one or more actuators.
+Actuators are exposed through the GEISA API |geisa-api-gear|.
 
-- Device Info - returns device info, e.g. meter, ev charger, etc.
-- CPU Info - return CPU info such as arch, number of cores, etc.
-- RAM Info - return memory available to GEISA EE applciation
-- Persistent Storage Info - return persistent storage info for GEISA EE application
-- Non-Persistent Storage Info - return non-persistent storage info for GEISA EE application
-- Network Info
-- Metrology Info
+Actuators that may be provided include:
 
+- Service disconnect switch
+- DER disconnect switch
+- Demand response relay
 
+|geisa-pyramid|
 
+.. [#] Note: inductively powered devices, such a remote fault indicators, may lack a ground reference
+   and thus may be unable to provide voltage data.  Similarly, some devices may lack a current
+   sensor and may be limited to voltage only.  Electric meters are expected to be able to provide both.
+
+.. [#] Future versions of the GEISA specification may require binary compatibility, though it
+   is likely this will only be done in conjunction with a GEISA community reference implementation.
+
+.. [#] GEISA specifically assumes a GNU/Linux environment (see :doc:`operating-system`), such that
+   it is likely that the tool chain in use is open-source.  If a vendor is using a commercial tool
+   chain, there is no requirement that the platform vendor provide a license; however, they MUST
+   provide information regarding where third parties can purchase the necessary tool chain and
+   the version of the tool chain in use, and they must provide any supporting files required to allow
+   the tool chain to be used to compile applications for their platform.

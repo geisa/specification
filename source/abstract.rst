@@ -1,18 +1,10 @@
 Abstract
 --------
 
-The GEISA Specification
-describes
-the operating environment
-for a utility-focused
-grid edge device
-with sufficient detail
-so that two vendors
-working from the specification alone
-can create an implementation
-such that a GEISA compliant application
-can run on both without modification.
+The |GEISA| Specification defines an interoperable execution environment,
+application programming interface, and management interface for edge computing
+environments used by electric utilities. These edge computing environments
+are available on electric meters and distribution automation devices and enable
+a variety of customer-facing and utility-facing use cases.
 
-While the initial focus is smart meters,
-the GEISA Execution Environment (EE)
-runs on a variety of device types.
+|geisa-pyramid|
