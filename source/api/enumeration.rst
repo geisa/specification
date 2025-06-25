@@ -1,6 +1,12 @@
 Platform Enumeration 
 ---------------------
 
+.. warning::
+
+  This section has NOT been updated to reflect the working group discussion
+  which occurred on 2025/6/24.
+
+
 Different platform implementers may choose to offer different hardware
 capabilities.  With this in mind, the GEISA API provides a mechanism
 for describing or enumerating the hardware platform's capabilities.
