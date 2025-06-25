@@ -30,7 +30,7 @@ For convenience, binary multiples for samples per cycle are preferred:
 Data MUST be interleaved by channel, alternating between voltage and current 
 until all phases are exhausted, before moving to the next sample period.
 
-For example, a polyphase wye connected meter would report its data as follows:
+For example, a polyphase connected meter would report its data as follows:
 
 - Voltage Phase A, Time 0
 - Current Phase A, Time 0
@@ -66,21 +66,24 @@ Split phase meters with a neutral reference would report data as Phase A and Pha
 - Current Phase B, Time 1
 - Voltage Phase A, Time 2 . . .
  
-For example, a polyphase delta connected meter would report its data as follows:
+For example, a polyphase connected meter with a neutral current measurement would report its data as follows:
 
-- Voltage Phase AB, Time 0
-- Current Phase AB, Time 0
-- Voltage Phase BC, Time 0
-- Current Phase BC, Time 0
-- Voltage Phase CA, Time 0
-- Current Phase CA, Time 0
-- Voltage Phase AB, Time 1
-- Current Phase AB, Time 1
-- Voltage Phase BC, Time 1
-- Current Phase BC, Time 1
-- Voltage Phase CA, Time 1
-- Current Phase CA, Time 1
-- Voltage Phase AB, Time 2 . . .
+- Voltage Phase A, Time 0
+- Current Phase A, Time 0
+- Voltage Phase B, Time 0
+- Current Phase B, Time 0
+- Voltage Phase C, Time 0
+- Current Phase C, Time 0
+- Neutral Current, Time 0
+- Voltage Phase A, Time 1
+- Current Phase A, Time 1
+- Voltage Phase B, Time 1
+- Current Phase B, Time 1
+- Voltage Phase C, Time 1
+- Current Phase C, Time 1
+- Neutral Current, Time 1
+- Voltage Phase A, Time 2 . . .
+ 
  
  
 
