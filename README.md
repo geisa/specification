@@ -8,6 +8,8 @@ Python venv creates a virtual environment so that Sphinx can be installed using 
 Here are the steps that were used from a posix environment:
 
 <pre>
+$ sudo apt install latexmk librsvg2-bin # or your package manager of choice
+
 $ mkdir specification
 
 $ cd specification
@@ -16,12 +18,14 @@ $ python3 -m venv venv
 
 source venv/bin/activate
 
-(venv) $ pip3 install sphinx
+(venv) $ pip3 install sphinx sphinxcontrib-svg2pdfconverter
 
-(venv) $ make html
-
-(venv) $ make latexpdf
+(venv) $ make all
 
 </pre>
+
+Alternative make targets include `html` and `latexpdf` to build just those outputs.
+
+To build a custom sphix target, use `SPHINXTARGETS=foo make all`.
 
 If you are building this documentation tree from the git repository, substitute the ```mkdir specification``` with the appropriate ```git clone``` command.
