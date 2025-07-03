@@ -3,13 +3,30 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from git import Repo
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+# returns "x.x.x-hhhhhh[-dirty]" as needed
+def geisa_get_release() -> str:
+    release = "unknown"
+    with open ('geisa_release.txt', 'r') as f:
+        release = f.read().rstrip()
+
+    # append version string with git hash and optionally 'dirty'
+    repo = Repo("..")
+    release += '-'
+    release += repo.head.object.hexsha[:7]
+    if repo.is_dirty():
+        release += '-dirty'
+
+    return release
 
 project = 'GEISA Specification'
 copyright = 'Copyright 2025-%Y, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
 author = 'Contributors to GEISA'
-release = '0.1.1'
+release = geisa_get_release()
 html_title = 'GEISA Specification'
 
 # -- General configuration ---------------------------------------------------
