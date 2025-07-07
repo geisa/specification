@@ -1,10 +1,10 @@
-.. GEISA Specification 0.1.0 documentation master file, created by
+.. GEISA Specification documentation master file, created by
    sphinx-quickstart on Sun Jun 15 03:41:33 2025.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-GEISA Specification 0.1.0
-=========================
+GEISA Specification |release|
+=================================
 
 .. toctree::
    :maxdepth: 3
