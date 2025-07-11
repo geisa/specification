@@ -29,15 +29,17 @@ For convenience, binary multiples for samples per cycle are preferred but not re
   (e.g. ~8 kHz, ~16 kHz, ~32 kHz, and ~1MHz, respectively)
 - 32-bit sample resolution
 
-Different devices will have different number of capture channels each typically sampling a single Voltage or Current input.  The total number of channels and how those are assigned may not be known at application build time and are discoverable by querying the GEISA API message bus.
+Different devices will have a different number of capture channels, each typically sampling a single voltage or current input.
+The total number of channels and how those are assigned may not be known at application build time and are discoverable by querying the GEISA API message bus.
 
-Data for all channels MUST be aligned to one another.  An individual sample in channel 1 MUST have been sampled at the same time that the corresponding samples in channels 2+ were.
+Data for all channels MUST be aligned to one another.  An individual sample in channel 1 MUST have been sampled at the same time that the corresponding samples in other channels (i.e., 2, 3, etc.) were.
 
 
 .. Note::
 
   Devices MAY expose different waveform stream choices to applications if they support multiple capture frequencies or channel counts.  If so, an application MUST be able to activate one or more streams simultaneously if desired.
 
+.. _waveform_metadata:
 
 Metadata
 ^^^^^^^^
@@ -45,25 +47,31 @@ Metadata
 When activating a waveform stream, the platform provides the application the following metadata:
 
 - The path to the data socket
-- The type of data, one of int16, int32, or float32
+- The type of data: one of int16, int32, or float32
 - The number of voltage channels
 - The number of current channels
-- The total number of channels (Typically the sum of 3 items above, but MAY be larger)
+- The total number of channels (typically the sum of 3 items above, but MAY be larger)
 - The sampling frequency in Hz
 - If the frames are AC cycle aligned or not
-- If data type is integer, the voltage scaling factor to convert to Volts
-- If data type is integer, the current scaling factor to convert to Amps
+- If data type is integer, the voltage scaling factor to convert to volts
+- If data type is integer, the current scaling factor to convert to amps
 - The expected data frame frequency (ex: 200msec)
 
 
 Data Format
 ^^^^^^^^^^^
 
-Once activated via GEISA API, applications can then open and start receiving data frames from a dedicated `AF_UNIX` family `SOCK_SEQPACKET` type socket.  This socket MUST be provisioned into the application's isolated environment using a path provided in the activation API response.
+Once activated via GEISA API, applications can then open and start receiving data frames from a 
+dedicated ``AF_UNIX`` family ``SOCK_SEQPACKET`` type socket.  
+This socket MUST be provisioned into the application's isolated environment using 
+a path provided in the activation API response.
 
-`SOCK_SEQPACKET` type sockets provide the application in-order delivery of data that honors message boundaries and provide the sender connection-oriented semantics.
+``SOCK_SEQPACKET`` type sockets provide the application in-order delivery of data 
+that honors message boundaries and provide the sender connection-oriented semantics.
 
-The sending process in the platform, constructs data frames and sends them over this socket without serialization/deserialization and is suitable for receipt directly into native data buffers for processing by the application.
+The sending process in the platform constructs data frames and sends them over this 
+socket without serialization/deserialization. The process is suitable for receipt directly 
+into native data buffers for processing by the application.
 
 The data frame is formatted as follows (example C language structure)::
 
@@ -80,11 +88,13 @@ The data frame is formatted as follows (example C language structure)::
      } data;
    };
 
-Notably absent from the data frame is the metadata listed above as well as the frame length which is obtained from the `recv()` or similar syscall.
+Notably absent from the data frame is the :ref:`waveform_metadata` listed above as well as the frame length 
+which is obtained from the ``recv()`` or similar syscall.
 
-The `timestamp` field MUST be the timestamp for the first sample in the frame.
+The ``timestamp`` field MUST be the timestamp for the first sample in the frame.
 
-The `data` union represents a variable length array of one of the three supported data types.  The array size is computed as `sample_count * total_channel_count`.
+The ``data`` union represents a variable length array of one of the three supported data types.  
+The array size is computed as ``sample_count * total_channel_count``.
 
 Samples within the data array MUST be ordered as follows:
 
@@ -106,7 +116,7 @@ Samples within the data array MUST be ordered as follows:
 - And so on...
 
 
-A standard split phase 2S meter with 1 Voltage and 2 Current channels (3 total channels) would report its data as follows:
+A standard split phase 2S [#ansiforms]_ meter with one voltage and two current channels (three total channels) would report its data as follows:
 
 - Voltage Phase AB, Time 0
 - Current Phase A, Time 0
@@ -116,7 +126,7 @@ A standard split phase 2S meter with 1 Voltage and 2 Current channels (3 total c
 - Current Phase B, Time 1
 
 
-A standard split phase 12S meter with 2 Voltage and 2 Current channels (4 total channels) would report its data as follows:
+A standard split phase 12S meter with two voltage and two current channels (four total channels) would report its data as follows:
 
 - Voltage Phase A, Time 0
 - Voltage Phase B, Time 0
@@ -128,7 +138,7 @@ A standard split phase 12S meter with 2 Voltage and 2 Current channels (4 total 
 - Current Phase B, Time 1
 
 
-For example, a polyphase meter with 3 Voltage and 3 Current channels (6 total channels) would report its data as follows:
+For example, a polyphase meter with three voltage and three current channels (six total channels) would report its data as follows:
 
 - Voltage Phase A, Time 0
 - Voltage Phase B, Time 0
@@ -144,7 +154,7 @@ For example, a polyphase meter with 3 Voltage and 3 Current channels (6 total ch
 - Current Phase C, Time 1
 
 
-For example, a polyphase with neutral meter with 3 Voltage and 4 Current channels (7 total channels) would report its data as follows:
+For example, a polyphase with neutral meter with three voltage and four current channels (seven total channels) would report its data as follows:
 
 - Voltage Phase A, Time 0
 - Voltage Phase B, Time 0
@@ -166,4 +176,8 @@ For example, a polyphase with neutral meter with 3 Voltage and 4 Current channel
 |geisa-pyramid|
 
 
-
+.. [#ansiforms] ANSI defines a series of standard meter "forms" for the North American market in the `ANSI C12.1 standard
+   <https://webstore.ansi.org/standards/nema/ansic122024>`__.  
+   Each form has specific physical and electrical characteristics.  
+   Readers may find the summary published by the Great Lakes Electric Meter School helpful: 
+   https://glems.org/wp-content/uploads/2021/02/Wiring-Diagrams_Website-Revised.pdf
