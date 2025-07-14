@@ -57,6 +57,14 @@ rst_prolog = """
     :alt: GEISA Execution Environment
     :height: 48pt
 
+.. |geisa-lee-logo| image:: /images/geisa-lee-icon.*
+    :alt: GEISA Linux Execution Environment
+    :height: 48pt
+
+.. |geisa-vee-logo| image:: /images/geisa-vee-icon.*
+    :alt: GEISA Virtual Execution Environment
+    :height: 48pt
+
 .. |geisa-api-logo| image:: /images/geisa-api-icon.*
     :alt: GEISA Application Programming Interface
     :height: 48pt
@@ -69,6 +77,14 @@ rst_prolog = """
     :alt: GEISA Execution Environment
     :height: 48pt
 
+.. |geisa-lee-hdr| image:: /images/geisa-lee-header.*
+    :alt: GEISA Linux Execution Environment
+    :height: 48pt
+
+.. |geisa-vee-hdr| image:: /images/geisa-vee-header.*
+    :alt: GEISA Virtual Execution Environment
+    :height: 48pt
+
 .. |geisa-api-hdr| image:: /images/geisa-api-header.*
     :alt: GEISA Application Programming Interface
     :height: 48pt
@@ -79,6 +95,14 @@ rst_prolog = """
 
 .. |geisa-ee-globe| image:: /images/geisa-globe-thick.*
     :alt: GEISA Execution Environment
+    :width: 14pt
+
+.. |geisa-lee-tux| image:: /images/geisa-tux.*
+    :alt: GEISA Linux Execution Environment
+    :width: 14pt
+
+.. |geisa-vee-bot| image:: /images/geisa-coffeebot.*
+    :alt: GEISA Virtual Execution Environment
     :width: 14pt
 
 .. |geisa-api-gear| image:: /images/geisa-gear-thick.*
