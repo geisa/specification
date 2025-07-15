@@ -9,18 +9,21 @@ may also be present in Distribution Automation (DA) devices, customer gateways, 
 utility owned devices.
 
 The goal of the GEISA specification is to address end-to-end interoperability for edge environments.
-Within the GEISA specification, interoperability is be broken down into three areas:
+Within the GEISA specification, interoperability is be broken down into four areas:
 
 * Application and Device Mangement (ADM)
 * Application Programming Interface (API)
-* Execution Environment (EE)
+* Linux Execution Environment (LEE)
+* Virtual Execution Environment (VEE)
 
-Vendor implementations of the GEISA specificiation may not support interoperability in all areas.  
+Vendor implementations of the GEISA specificiation may not support interoperability in all areas. 
+For example, it is likely that most platform vendors will support either a Linux execution environment,
+or a virtual execution environment, but not both; though there is nothing in the specification that precludes supporting both. 
 For clarity, this specification uses icons for each aspect of interoperability 
 so it is clear which requirements apply to a given 
-level of conformance.  The icons are:
+type of conformance.  The icons are:
 
-|geisa-ee-logo| |geisa-adm-logo| |geisa-api-logo|
+|geisa-adm-logo| |geisa-api-logo| |geisa-lee-logo| |geisa-vee-logo| |geisa-ee-logo|
 
 Throughout this specification there are blocks associated with each aspect of interoperability.  
 In this introduction, the blocks explain, at a high level, the interoperability behaviors 
@@ -40,14 +43,36 @@ When this documentation notes something that is ADM related, there may be an orc
 |geisa-pyramid|
 
 |geisa-ee-hdr|
+While GEISA defines two specific execution environments (discussed below), ocassionaly there are requirements
+common to both.  
 
-Execution Environment interoperability allows software developers to have a consistent environment
-for running programs.  EE conformant devices provide a standard set of base libraries, a consistent file 
+When this specification discusses execution environments in general, there may be a globe icon 
+|geisa-ee-globe| to highlight it.
+
+|geisa-pyramid|
+
+|geisa-lee-hdr|
+
+Linux Execution Environment interoperability allows software developers to have a consistent embedded
+Linux environment for running programs.  
+LEE conformant devices provide a standard set of base libraries, a consistent file 
 system layout, and other details which ensure app developers do not have to manage variations across
 platform implementations.
 
-When this specification notes something that is EE related, there may be a globe icon
-|geisa-ee-globe| to highlight it.
+When this specification notes something that is LEE related, there may be a Tux icon
+|geisa-lee-tux| to highlight it.
+
+|geisa-pyramid|
+
+|geisa-vee-hdr|
+
+Virtual Execution Environment interoperability allows software developers to have a consistent virtual
+machine environment for running programs.
+VEE conformant devices provide the ability to run programs that rely on standard Java |reg| class libraries.
+
+When this specification notes something that is VEE related, there may be a coffee drinking robot icon 
+|geisa-vee-bot| to highlight it.
+
 
 |geisa-pyramid|
 
@@ -78,17 +103,20 @@ This specification currently addresses:
 - :doc:`system-architecture`
 - :doc:`conformance`
 - :doc:`hardware`
-- :doc:`operating-system` |geisa-ee-globe|
-- :doc:`base-libraries` |geisa-ee-globe|
-- :doc:`core-services` |geisa-ee-globe|
-- :doc:`app-isolation` |geisa-ee-globe|
+- :doc:`operating-system` |geisa-lee-tux|
+- :doc:`base-libraries` |geisa-lee-tux|
+- :doc:`core-services` |geisa-lee-tux|
+- :doc:`app-isolation` 
+- :doc:`virtual-environment` |geisa-vee-bot|
 - :doc:`app-management` |geisa-adm-baton| 
 - :doc:`api` |geisa-api-gear| 
 - :doc:`security` 
 
 This specification follows [RFC2119]_ conventions, using "MUST", "MAY", and "SHOULD" to 
-indicate what is expected from a conformant implementation.  Do note that conformance 
-for each of three GEISA defined aspects of interoperability (ADM |geisa-adm-baton|, 
-API |geisa-api-gear|, & EE |geisa-ee-globe|) is considered independently.
+indicate what is expected from a conformant implementation.  
+
+Please note that conformance 
+for each of GEISA defined aspects of interoperability (ADM |geisa-adm-baton|, 
+API |geisa-api-gear|, LEE |geisa-lee-tux| & VEE |geisa-vee-bot|) is considered independently.
 
 |geisa-pyramid|

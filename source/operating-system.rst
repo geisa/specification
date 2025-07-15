@@ -1,30 +1,30 @@
 Operating System
 ----------------
 
-GEISA shall use Linux as the core operating system,
-based,
-in part,
-due to the requirment for application isolation.
+|geisa-lee-hdr|
 
-.. note::
-
-    It is not clear that GEISA 1.0.0 should specify an exact kernel since
-    existing vendors/utilities are using various versions of the
-    Linux kernel.
-
-    If the focus on GEISA is on the EE, one can argue that the EE
-    should be isolated from a given version of the kernel.
-
-GEISA will use a Linux 6.x kernel (exact version TBD).
+GEISA LEE shall use Linux as the core operating system.
+GEISA SHALL use a Linux 6.x or greater kernel.
 
 The GEISA Linux kernel must minimize the attack surface and size.
 This means removing all unnecessary components and extranous modules.
-
 Whether the GEISA Linux kernel supports loadable kernel modules
 or not is an implementation decision that is
-invisible to a GEISA application.
+invisible to a GEISA application; 
+however, for security  and efficiency reasons, it is recommended that platform implementers
+limit the use of loadable modules.
 
 There is no requirement for the underlying Linux kernel
 to support real-time features,
 and no real-time features are exposed to GEISA applications.
+
+|geisa-pyramid|
+
+|geisa-vee-hdr|
+
+GEISA VEE does not specify the operating system which underlies 
+the virtual execution environment, as applications are limited to the VEE itself.
+
+|geisa-pyramid|
+
 

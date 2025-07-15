@@ -14,10 +14,13 @@ Our sincere thanks to them for the time and thought they put into this effort:
 * Michael Garrison Stuber
 * Bryan Green
 * Ryan Houlette
+* Marissa Hummon
 * Don Jackson
 * David Johnson
 * Richard Lam
+* Heather Lancaster
 * Norm McEntire
+* Kenny O'Dell
 * Vlad Pambucol
 * Jonah Petri
 * Rick Steuer

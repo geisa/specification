@@ -9,7 +9,7 @@ binary compatibility. [#]_  Neverthless, it is important to define
 the expected hardware deployment platform, as it informs a variety
 of design decisions.
 
-A full GEISA compliant platform, including ADM, API, and EE interoperability
+A full GEISA compliant platform, including ADM, API, and LEE or VEE interoperability
 conformance, should be realizable on:
 
 - ARMv7 CPU with NEON extensions
@@ -23,10 +23,10 @@ but is limited to source-code compatibility only, platform implementers MAY
 choose to use alternate CPUs and/or fewer resources; however, 
 platform implementers should be aware that:
 
-- It may not be possible to implement a fully conformant (ADM, API, and EE) 
+- It MAY NOT be possible to implement a fully conformant (ADM, API, and EE) 
   platform on a device with fewer resources
 - If GEISA is extended to include binary compatibility in the future, ARM
-  CPUs are expected to be the exclusive target architecture.
+  CPUs are expected to be the exclusive target architecture for LEE |geisa-lee-tux|.
 
 The vision is that the GEISA EE |geisa-ee-globe| runs on 
 a wide range of hardware platforms with various capabilities:
@@ -76,7 +76,7 @@ Metrological hardware may also be able to provide waveform data.
 See :doc:`api/waveform` for additional details.  
 When waveform data is provided, at a miminum, it SHALL provide:
 
-- 64 samples per cycle (3.84 kHz at 60 Hz AC frequency)
+- 128 samples per cycle (7.68 kHz at 60 Hz AC frequency)
 - 16 bits per sample
 
 Platforms may provide higher sampling rates (e.g. 128, 256, 512, 16,384 samples per cycle or more)
@@ -116,16 +116,18 @@ Actuators that may be provided include:
 
 |geisa-pyramid|
 
-.. [#] Note: inductively powered devices, such a remote fault indicators, may lack a ground reference
-   and thus may be unable to provide voltage data.  Similarly, some devices may lack a current
-   sensor and may be limited to voltage only.  Electric meters are expected to be able to provide both.
-
 .. [#] Future versions of the GEISA specification may require binary compatibility, though it
    is likely this will only be done in conjunction with a GEISA community reference implementation.
 
-.. [#] GEISA specifically assumes a GNU/Linux environment (see :doc:`operating-system`), such that
+.. [#] GEISA LEE specifically assumes a GNU/Linux environment (see :doc:`operating-system`), such that
    it is likely that the tool chain in use is open-source.  If a vendor is using a commercial tool
    chain, there is no requirement that the platform vendor provide a license; however, they MUST
    provide information regarding where third parties can purchase the necessary tool chain and
    the version of the tool chain in use, and they must provide any supporting files required to allow
    the tool chain to be used to compile applications for their platform.
+
+.. [#] Note: inductively powered devices, such a remote fault indicators, may lack a ground reference
+   and thus may be unable to provide voltage data.  Similarly, some devices may lack a current
+   sensor and may be limited to voltage only.  Electric meters are expected to be able to provide both.
+
+

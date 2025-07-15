@@ -51,6 +51,8 @@ numfig_format = {
 # The * notation allows the html engine to use the SVG format and LaTex to use PDF
 #
 rst_prolog = """
+.. include :: <isonum.txt>
+
 .. |GEISA| replace:: Grid Edge Interoperability & Security Alliance 
 
 .. |geisa-ee-logo| image:: /images/geisa-ee-icon.*

@@ -54,6 +54,11 @@ The GEISA API offers the transactions sets for the following purposes:
     Exposes sensor data such as temperature, humidity, location, seismic data, vibration,
     acceleration, and light / insolation.
 
+- Event Data
+
+- System Messaging
+
+
 .. note::
 
   Additional transaction sets may be added in future versions of the GEISA specification.

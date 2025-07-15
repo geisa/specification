@@ -67,6 +67,9 @@ Glossary
    LAN
     Local Area Network
 
+   LEE
+    Linux Execution Environment
+
    MQTT
     `MQTT <https://en.wikipedia.org/wiki/MQTT>`_ 
     is a light-weight publish and subscribe protocol formerly
@@ -89,6 +92,9 @@ Glossary
 
    SPI
     Serial Peripheral Interface
+ 
+   VEE
+    Virtual Execution Environment
 
 |geisa-pyramid|
 

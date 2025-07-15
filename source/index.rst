@@ -31,6 +31,9 @@ GEISA Specification |release|
 
    app-isolation
    app-management
+
+   virtual-environment
+
    api
 
    security

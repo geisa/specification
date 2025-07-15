@@ -1,29 +1,21 @@
 Application Isolation
 ---------------------
 
+.. note::
+
+  :doc:`virtual-environment` are assumed to provide strong isolation 
+  from the underlying operating system.  As a result, while VEE
+  MUST support the permissions discussed in this chapter, many of the 
+  technical details discussed in this chapter are specific to LEE.
+
+
 GEISA applications shall be isolated from each other
 for the following reasons:
 
 - To ensure that one application cannot impact another application.
 - To ensure that one application cannot see the artifacts of another application.
 
-.. note::
-
-    Other than specifiying that application that **isolation** shall be provided,
-    it is not clear that the GEISA 1.0 specification should specify the
-    isolation technology.
-
-    One vendor/utility may have an existing implmentation with Linux Containers (LXC),
-    while another may have an existing implementation with systemd.
-
-    It may be useful to make this an “after 1.0” GEISA release requirement,
-    or a future GEISA Extension.
-
-    The most immediate need is for GEISA apps to run on multiple platforms from multiple vendors/utilities,
-    perhaps using isolation techniques that are already used by existting vendor.
-
-
-Reguardless of container implmeentation (e.g. LXC, systemd, etc.),
+Regardless of application isolation implementation (e.g. LXC container, systemd, VEE, etc.),
 an **authenticated appllication manifest** shall control access
 to the following:
 
@@ -37,12 +29,12 @@ to the following:
 Permissions
 ^^^^^^^^^^^
 
-Most if not all of the bullets below are achieved by having each app in it's own isolated conainer.
+Most if not all of the bullets below are achieved by having each app in its own isolated conainer.
 
 - Apps should run in independent processes
 - Apps must run with least privilege
 - Apps access permissions should be deny by default
-- App-to-app communication will be denied by default (**NOTE** perhaps hold off on app communication until after GEISA 1.0.0)
+- App-to-app communication will be denied by default 
 - Apps cannot access other apps memory or other resources
 - Apps should not know about other apps unless explicitly informed
 - Apps access to the local file-system will be isolated/restricted
@@ -92,7 +84,7 @@ By default, apps are not given any network access.
 API Control
 ^^^^^^^^^^^
 
-These permissions realte to controlling app access to the network.
+These permissions relate to controlling app access to the network.
 
 - Metrology Acccess (e.g. 1-second RMS, Waveforms)
 - Actuator Access (if present)

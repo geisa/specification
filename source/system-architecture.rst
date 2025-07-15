@@ -2,7 +2,7 @@ System Architecture
 ------------------------------
 
 As discussed in :doc:`introduction`, the |GEISA| specification describes 
-three types of interoperability: ADM, API, and EE.  
+four types of interoperability: ADM, API, LEE, and VEE.  
 These types of interoperability live in a general system context, which is shown below in
 :numref:`geisa-architecture`.
 
@@ -41,30 +41,48 @@ both a GEISA conformant execution environment and a GEISA conformant application
 
 |geisa-ee-hdr|
 
-GEISA applications are provided as container images, as detailed in :doc:`app-isolation`. 
-An EE conformant GEISA implementation is able to mount a a container image and grant that container
+GEISA defines two different execution environments: a Linux Execution Environment |geisa-lee-tux|
+and a Virtual Execution Environmenti |geisa-vee-bot|.
+Platforms may offer one or both of these EE.  
+While the GEISA API should be accessible from both EE, there is no expectation that code written
+for one EE will work on the other without being ported. 
+
+|geisa-lee-hdr|
+
+LEE GEISA applications are provided as container images, as detailed in :doc:`app-isolation`. 
+An LEE conformant GEISA implementation is able to mount a container image and grant that container
 the rights the system operator permitted the application in the deployment manifest.
 The container runtime used by the platform implementation is out of scope, but conformant implementations 
 MUST be able to enforce the permissions and controls the GEISA specification requires.
 
-An EE conformant GEISA implementation must provide a set of :doc:`base-libraries` and doc:`core-services`
-to containers running in the environment.  The goal of GEISA EE conformance is to provide a consistent
+An LEE conformant GEISA implementation must provide a set of :doc:`base-libraries` and :doc:`core-services`
+to containers running in the environment.  The goal of GEISA LEE conformance is to provide a consistent
 and efficient execution enviroment to edge applications running on the platform.  
 Platform implementers may use any GNU/Linux variant they see fit, provided it meets the requirements
 noted in :doc:`operating-system`; however, for security and efficiency reasons, implementers SHOULD NOT 
 use full general purpose GNU/Linux operating systems.  Implementers SHOULD use distributions specifically
 built for embedded enviroments and should excise any unnecessary system components.
 
-GEISA EE elements |geisa-ee-globe| are shown in blue in :numref:`geisa-architecture` above.
+GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architecture` above.
 
 |geisa-pyramid|
 
+|geisa-vee-hdr|
+
+VEE GEISA applications are provided VEE archives, as detailed in :doc:`virtual-environment`.
+A VEE conformant GEISA implementation is able to launch the archive in a VEE as necessary and grant the 
+application the rights the system operatator permitted the application in the deployment manifest.
+The VEE used by the platform implementation is out of scope, but conformant implementations MUST
+be able to enforce the permissions and controls the GEISA specification requires, 
+and support the GEISA required APIs.
+
+GEISA VEE elements |geisa-vee-bot| are not currently shown in :numref:`geisa-architecture` above.
 
 |geisa-api-hdr|
 
 General operating system functions such as file system access, math libraries, and network socket APIs 
-are provided by the GEISA EE discussed above.  The GEISA API facilitates access to platform capabilities
-that are not serviced by well-known POSIX APIs.  The GEISA API is described in detail in :doc:`api`.
+are provided by the GEISA LEE or VEE discussed above.  The GEISA API facilitates access to platform capabilities
+that are not serviced by the LEE's or VEE's respective APIs.  The GEISA API is described in detail in :doc:`api`.
 The GEISA API will provide access to metrological data, sensor data, billing data, actuators, and,
 for GEISA ADM conformant implementations, message exchange with the EMS.
 
