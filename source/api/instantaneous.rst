@@ -41,19 +41,26 @@ Additional device types may be define in the future.
 MQTT Details
 =============
 - QoS: 0 / Unacknowledged
-- Topic: ``geisa-stream``
+- Topic: ``geisa/api/instantaneous-data``
 
 API Permissions
 ================
-- Read-only
-- ``geisa-stream`` permission required to access
+
+- Application:
+
+  - Subscribe: ``geisa/api/instantaneous-data``
+
+- Platform:
+
+  - Publish: ``geisa/api/instantaneous-data``
+
 
 Transaction Data
 =================
 
 .. warning:: 
   
-  Need to add protobuf stuff here.
+  Need to add refererence to content within |geisa-schemas-repo| here.
 
 
 |geisa-pyramid|

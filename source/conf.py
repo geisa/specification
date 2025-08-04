@@ -55,6 +55,12 @@ rst_prolog = """
 
 .. |GEISA| replace:: Grid Edge Interoperability & Security Alliance 
 
+.. |geisa-specification-repo| replace::  https://github.com/geisa/specification
+
+.. |geisa-conformance-repo| replace::  https://github.com/geisa/conformance
+
+.. |geisa-schemas-repo| replace::  https://github.com/geisa/schemas
+
 .. |geisa-ee-logo| image:: /images/geisa-ee-icon.*
     :alt: GEISA Execution Environment
     :height: 48pt
