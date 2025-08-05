@@ -46,26 +46,32 @@ Responsible for:
 - The GEISA specification may assist the implementer with achieving certain implementer requirements but it is not responsible for the final design, implementation and/or operation of controls defined by the implementer and required to meet certain implementer requirements.- 
 
 .. _threat_model:
+
 Threat Model
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The GEISA Execution Environment **inputs**:
 
 - HAN Interface
- - Gateway
- - Smart Inverters
+
+  - Gateway
+  - Smart Inverters
+
 - LAN Interface
 - Environmental Sensors
- - Temperature
- - Humidity
- - Accelerometer
- - Location (GPS)
+
+  - Temperature
+  - Humidity
+  - Accelerometer
+  - Location (GPS)
+
 - Meter Register
 - Metrology Sensor
 - Provisioning Interfaces
- - Bluetooth
- - Thread
- - HAN Interface. **# Would this technically be an input?**
+
+  - Bluetooth
+  - Thread
+  - HAN Interface. **# Would this technically be an input?**
 
 GEISA Execution Environment **outputs**:
 
@@ -77,46 +83,66 @@ GEISA Execution Environment **outputs**:
 **Potential Threats and Causes**
 
 - Malicious Firmware & Apps
- - Supply Chain Attack
- - Unpatched Components
- - Compromised Vendor
- - Compromised Staff Workstation
- - Compromised Management System
+
+  - Supply Chain Attack
+  - Unpatched Components
+  - Compromised Vendor
+  - Compromised Staff Workstation
+  - Compromised Management System
+
 - Vulnerable Network Interface
- - Poor Programming Practices
- - Inadequate Testing
- - Unpatched Components
+
+  - Poor Programming Practices
+  - Inadequate Testing
+  - Unpatched Components
+
 - Broken Firmware
 - Poor Programming Practices
- - Incorrect Logic
- - Inadequate Testing
- - Unpatched Components
+
+  - Incorrect Logic
+  - Inadequate Testing
+  - Unpatched Components
+
 - Side Channel Attacks
 - Malicious Inputs
- - Forged data from Smart Inverters
- - Forged data from EVSE
- - Attack on the Provisioning Interface
+
+  - Forged data from Smart Inverters
+  - Forged data from EVSE
+  - Attack on the Provisioning Interface
+
 - Privilege Escalation
- - Unpatched Components
- - Poor system design
+
+  - Unpatched Components
+  - Poor system design
+
 - Isolation Escape
- - Unpatched Components
- - Poor system design
+
+  - Unpatched Components
+  - Poor system design
+
 - Direct Hardware Attack
- - Decap Chip
- - Access to programming interfaces
-  - Replace Firmware
-  - Retrieve and decompile firmware
- - Swap out the chip
+
+  - Decap Chip
+  - Access to programming interfaces
+
+    - Replace Firmware
+    - Retrieve and decompile firmware
+
+  - Swap out the chip
+
 - Resource Exhaustion
- - CPU
- - Memory 
- - Storage
- - HAN Communications
- - LAN Communications
+
+  - CPU
+  - Memory 
+  - Storage
+  - HAN Communications
+  - LAN Communications
+
 - Denial of Service
- - HAN Communications
- - LAN Communications
+
+  - HAN Communications
+  - LAN Communications
+
 - Peer-to-Peer Attacks
 
 **Potential Attacker Objectives**
@@ -125,7 +151,7 @@ GEISA Execution Environment **outputs**:
 - Controlling the Remote Service Switch (or other actuator)
 - Attacking devices within the Home
 - Coordinated attacks across Homes
- - Note: there are papers which demonstrate that coordinated attacks on as little as 1% of the load can cause grid instability.
+  - Note: there are papers which demonstrate that coordinated attacks on as little as 1% of the load can cause grid instability.
 - Manipulating readings (typically for theft)
 - Steal data (privacy, spying on customers etc.)
 - Obtaining Key material to impersonate the meter.
