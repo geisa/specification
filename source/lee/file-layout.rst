@@ -67,6 +67,23 @@ A skeleton filesystem MUST be populated including typical paths for binaries and
 - usr/lib
 - var
 
+A skeleton filesystem MUST be populated with typical files including at a minimum:
+
+- /etc/group
+- /etc/hostname
+- /etc/hosts (including a `localhost` entry)
+- /etc/passwd
+
+and if provided by libc implementation:
+
+- /etc/resolv.conf
+- /etc/nsswitch.conf
+- /etc/locale.conf
+- /etc/services
+- /etc/protocols
+- /etc/shells
+- /etc/timezone
+
 The following environment variables MUST be set at a minimum when invoking Applications processes:
 
 - SHELL
