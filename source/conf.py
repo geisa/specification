@@ -113,6 +113,10 @@ rst_prolog = """
     :alt: GEISA Virtual Execution Environment
     :width: 14pt
 
+.. |geisa-vee-cloud| image:: /images/geisa-vcloud.*
+    :alt: GEISA Virtual Execution Environment
+    :width: 14pt
+
 .. |geisa-api-gear| image:: /images/geisa-gear-thick.*
     :alt: GEISA Application Programming Interface
     :width: 14pt

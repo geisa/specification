@@ -42,10 +42,11 @@ both a GEISA conformant execution environment and a GEISA conformant application
 |geisa-ee-hdr|
 
 GEISA defines two different execution environments: a Linux Execution Environment |geisa-lee-tux|
-and a Virtual Execution Environmenti |geisa-vee-bot|.
+and a Virtual Execution Environmenti |geisa-vee-cloud|.
 Platforms may offer one or both of these EE.  
 While the GEISA API should be accessible from both EE, there is no expectation that code written
 for one EE will work on the other without being ported. 
+
 
 |geisa-lee-hdr|
 
@@ -76,7 +77,9 @@ The VEE used by the platform implementation is out of scope, but conformant impl
 be able to enforce the permissions and controls the GEISA specification requires, 
 and support the GEISA required APIs.
 
-GEISA VEE elements |geisa-vee-bot| are not currently shown in :numref:`geisa-architecture` above.
+GEISA VEE elements |geisa-vee-cloud| are not currently shown in :numref:`geisa-architecture` above.
+
+|geisa-pyramid|
 
 |geisa-api-hdr|
 

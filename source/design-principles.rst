@@ -33,7 +33,7 @@ The Linux Execution Environment provides a well-known open development environme
 many standard libraries and makes it easy to integrate additional technology.
 Applications written for the GEISA LEE will run on any LEE conformant device.
 
-**VEE** interoperability |geisa-vee-bot| provides a consistent virtual execution environment.
+**VEE** interoperability |geisa-vee-cloud| provides a consistent virtual execution environment.
 The Virtual Execution Environment provides a fully-isolated environment which supports the widely-used
 Java |reg| language specification.
 Applications written for the GEISA VEE will run on any VEE conformant device.
@@ -72,7 +72,7 @@ While a GEISA compliant EE may offer more,
 the minimal GEISA LEE MUST provide **256MB of RAM** and **256MB of persistent storage**
 reserved for GEISA applications |geisa-lee-tux|;
 the minimal GEISA VEE MUST provide **XX MB of RAM** and **XX MB or persistent storage**
-|geisa-vee-bot|.
+|geisa-vee-cloud|.
 
 Efficiency is critical. The GEISA EE shall provide only those services
 which are so widely required that it would be less efficient to *not* provide them.

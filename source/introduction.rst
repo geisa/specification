@@ -43,6 +43,7 @@ When this documentation notes something that is ADM related, there may be an orc
 |geisa-pyramid|
 
 |geisa-ee-hdr|
+
 While GEISA defines two specific execution environments (discussed below), ocassionaly there are requirements
 common to both.  
 
@@ -70,8 +71,8 @@ Virtual Execution Environment interoperability allows software developers to hav
 machine environment for running programs.
 VEE conformant devices provide the ability to run programs that rely on standard Java |reg| class libraries.
 
-When this specification notes something that is VEE related, there may be a coffee drinking robot icon 
-|geisa-vee-bot| to highlight it.
+When this specification notes something that is VEE related, there may be a connected cloud icon 
+|geisa-vee-cloud| to highlight it.
 
 
 |geisa-pyramid|
@@ -107,7 +108,7 @@ This specification currently addresses:
 - :doc:`base-libraries` |geisa-lee-tux|
 - :doc:`core-services` |geisa-lee-tux|
 - :doc:`app-isolation` 
-- :doc:`virtual-environment` |geisa-vee-bot|
+- :doc:`virtual-environment` |geisa-vee-cloud|
 - :doc:`app-management` |geisa-adm-baton| 
 - :doc:`api` |geisa-api-gear| 
 - :doc:`security` 
@@ -117,6 +118,6 @@ indicate what is expected from a conformant implementation.
 
 Please note that conformance 
 for each of GEISA defined aspects of interoperability (ADM |geisa-adm-baton|, 
-API |geisa-api-gear|, LEE |geisa-lee-tux| & VEE |geisa-vee-bot|) is considered independently.
+API |geisa-api-gear|, LEE |geisa-lee-tux| & VEE |geisa-vee-cloud|) is considered independently.
 
 |geisa-pyramid|
