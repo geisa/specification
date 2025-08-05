@@ -1,5 +1,5 @@
-Base Libraries
---------------
+Linux Base Libraries
+-----------------------
 
 Application isolation is assumed to be provided through containers.
 Containers are able to inherit from the host operating system.

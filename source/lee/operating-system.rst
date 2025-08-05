@@ -20,11 +20,5 @@ and no real-time features are exposed to GEISA applications.
 
 |geisa-pyramid|
 
-|geisa-vee-hdr|
-
-GEISA VEE does not specify the operating system which underlies 
-the virtual execution environment, as applications are limited to the VEE itself.
-
-|geisa-pyramid|
 
 

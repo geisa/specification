@@ -56,11 +56,11 @@ the rights the system operator permitted the application in the deployment manif
 The container runtime used by the platform implementation is out of scope, but conformant implementations 
 MUST be able to enforce the permissions and controls the GEISA specification requires.
 
-An LEE conformant GEISA implementation must provide a set of :doc:`base-libraries` and :doc:`core-services`
+An LEE conformant GEISA implementation must provide a set of :doc:`lee/base-libraries` and :doc:`lee/core-services`
 to containers running in the environment.  The goal of GEISA LEE conformance is to provide a consistent
 and efficient execution enviroment to edge applications running on the platform.  
 Platform implementers may use any GNU/Linux variant they see fit, provided it meets the requirements
-noted in :doc:`operating-system`; however, for security and efficiency reasons, implementers SHOULD NOT 
+noted in :doc:`lee/operating-system`; however, for security and efficiency reasons, implementers SHOULD NOT 
 use full general purpose GNU/Linux operating systems.  Implementers SHOULD use distributions specifically
 built for embedded enviroments and should excise any unnecessary system components.
 

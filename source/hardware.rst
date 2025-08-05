@@ -119,7 +119,7 @@ Actuators that may be provided include:
 .. [#] Future versions of the GEISA specification may require binary compatibility, though it
    is likely this will only be done in conjunction with a GEISA community reference implementation.
 
-.. [#] GEISA LEE specifically assumes a GNU/Linux environment (see :doc:`operating-system`), such that
+.. [#] GEISA LEE specifically assumes a GNU/Linux environment (see :doc:`lee/operating-system`), such that
    it is likely that the tool chain in use is open-source.  If a vendor is using a commercial tool
    chain, there is no requirement that the platform vendor provide a license; however, they MUST
    provide information regarding where third parties can purchase the necessary tool chain and

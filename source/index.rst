@@ -24,14 +24,11 @@ GEISA Specification |release|
    conformance
    hardware
 
-   operating-system
-   file-layout
-   base-libraries
-   core-services
-
-   app-isolation
    app-management
 
+   app-isolation
+
+   linux-environment
    virtual-environment
 
    api

@@ -18,7 +18,7 @@ messages and post periodic and event data to the MQTT broker is platform depende
 GEISA applications MAY interact with the GEISA MQTT broker using the MQTT client library
 that best suites their application's programming language and architecture.  MQTT
 client libraries exist for many programming languages and developers MAY make use of
-one provided by the GEISA EE |geisa-ee-globe| (see :doc:`/base-libraries`) or bundle
+one provided by the GEISA EE |geisa-ee-globe| (see :doc:`/lee/base-libraries` and :doc:`/vee/base-libraries`) or bundle
 their own with their application.
 
 GEISA API conformant platforms SHALL:

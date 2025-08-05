@@ -104,12 +104,10 @@ This specification currently addresses:
 - :doc:`system-architecture`
 - :doc:`conformance`
 - :doc:`hardware`
-- :doc:`operating-system` |geisa-lee-tux|
-- :doc:`base-libraries` |geisa-lee-tux|
-- :doc:`core-services` |geisa-lee-tux|
-- :doc:`app-isolation` 
-- :doc:`virtual-environment` |geisa-vee-cloud|
 - :doc:`app-management` |geisa-adm-baton| 
+- :doc:`app-isolation` 
+- :doc:`linux-environment` |geisa-lee-tux|
+- :doc:`virtual-environment` |geisa-vee-cloud|
 - :doc:`api` |geisa-api-gear| 
 - :doc:`security` 
 
