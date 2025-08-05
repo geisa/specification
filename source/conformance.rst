@@ -15,4 +15,4 @@ This framework is licensed under the `Apache License`_ and is available in the
 |geisa-pyramid|
 
 .. _Apache License: https://www.apache.org/licenses/LICENSE-2.0
-.. _github repository: https://github.com/orgs/geisa/repositories
+.. _github repository: |geisa-conformance-repo|

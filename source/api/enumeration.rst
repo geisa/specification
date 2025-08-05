@@ -1,70 +1,110 @@
 Platform Enumeration 
 ---------------------
 
-.. warning::
-
-  This section has NOT been updated to reflect the working group discussion
-  which occurred on 2025/6/24.
-
+|geisa-api-hdr|
 
 Different platform implementers may choose to offer different hardware
 capabilities.  With this in mind, the GEISA API provides a mechanism
 for describing or enumerating the hardware platform's capabilities.
 
-Metrology Hardware
-^^^^^^^^^^^^^^^^^^
+The Platform Enumeration data is constant and not expected to change during
+runtime. Dynamic updates and state are provided in :doc:`/api/status`.
 
-Minimal **static** metrology information:
+.. warning::
 
-- Number of Phases
-- Meter Rating
-- Meter Form
-- Base Frequency
-- Serial Number
+  There may be exceptional cases where this data does change such as provisioning
+  the device or placing it in or out a test mode.  During those events, all GEISA
+  applications MUST be restarted so they will notice the new data.
 
-Minimal **dynamic RMS values** information:
+.. note::
 
-- Voltage Reading, RMS
-- Current Reading, RMS
-- Frequency
+  Because the Platform Enumeration data is constant, the platform MUST make
+  it available via a static file placed within the EE.  This allows the GEISA
+  applications to read the data using normal file I/O calls instead of using the
+  more complicated MQTT API R/R mechanism.
 
-Minimal **dynamic waveform** information:
 
-- Voltage Reading, ADC
-- Voltage Scaling, ADC
-- Current Reading, ADC
-- Current Scaling, ADC
-- Samples/Cycle, 16, 64, 128, 256, 512, etc.
-- Resolution per sample, e.g. 16-bits
-- Wall Clock Time
-- Monotinic Time
-
-Sensor Hardware
-^^^^^^^^^^^^^^^
-
-A GEISA EE compliant platform can optionally
-provide one or more sensors.
-
-Some example sensors that may be provided include:
-
-- Temperature Sensor
-- Humidity Sensor
-- Switch Sensor
-- GPS
-
-Hardware Enumeration
-^^^^^^^^^^^^^^^^^^^^
+Hardware and Firmware
+^^^^^^^^^^^^^^^^^^^^^
 
 The GEISA EE provides an API so that GIESA compliant applications
 can query the hardware resources available:
 
-- Device Info - returns device info, e.g. meter, ev charger, etc.
-- CPU Info - return CPU info such as arch, number of cores, etc.
-- RAM Info - return memory available to GEISA EE applciation
-- Persistent Storage Info - return persistent storage info for GEISA EE application
-- Non-Persistent Storage Info - return non-persistent storage info for GEISA EE application
-- Network Info
-- Metrology Info
+- Device Type - returns device type, e.g. meter, ev charger, etc.
+- Device Info - returns manufacturer name, model, revision, serial number(s)
+- Device Firmware - returns a list of the device platform/OS firmware versions (including notable libraries and firmware)
+- Operator Info - if provisioned, the operator name, and operator serial number or device identifier
 
 
+.. note::
 
+  The platform vendor determines what information is included in the Device Firmware, however GEISA mandates it MUST include at a minimum the versions of: 1) the base host OS, and 2) the GEISA platform daemon/library.
+
+
+Application Information
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Because an Application's Deployment Manifest may differ from the Application Manifest provided by the Application Vendor, Applications MUST be able to retrieve the Deployment Manifest which includes:
+
+.. warning::
+
+  TBD: Need to add a section on Application Manifest and Deployment Manifest content.
+
+
+Metrology Hardware
+^^^^^^^^^^^^^^^^^^
+
+For Meter type devices, the platform MUST provide at a minimum:
+
+- Meter Rating/Class
+- Meter Form
+- Number of Phases and if Neutral connected
+- Nominal Phase Angle
+- Nominal Frequency
+- Nominal Phase-to-Phase and Phase-to-Neutral Voltage (when applicable)
+
+
+Sensor Hardware
+^^^^^^^^^^^^^^^
+
+A GEISA EE compliant platform can optionally provide one or more sensors.
+
+Some example sensors that may be provided include:
+
+- Temperature Sensor and Alarm
+- Humidity Sensor
+- Switch Sensor
+- Orientation or Motion/Vibration Sensor
+- GPS
+
+
+Network Hardware
+^^^^^^^^^^^^^^^^
+
+TBD
+
+
+Waveform Data
+^^^^^^^^^^^^^
+
+TBD
+
+MQTT Details
+=============
+
+- N/A.
+- Applications retreive Platform Enumeration data by reading the file `/opt/geisa/platform.binpb` within the Application container environment.
+
+API Permissions
+================
+- Application: Read-only
+
+
+Transaction Data
+=================
+
+.. warning::
+
+  Need to add refererence to content within |geisa-schemas-repo| here.
+
+|geisa-pyramid|

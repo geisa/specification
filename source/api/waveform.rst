@@ -170,8 +170,38 @@ For example, a polyphase with neutral meter with three voltage and four current 
 - Current Phase B, Time 1
 - Current Phase C, Time 1
 - Current Neutral, Time 1
- 
- 
+
+
+
+MQTT Details
+=============
+
+- QoS: 1 / Acknowledged R/R
+- Req Topic: ``geisa/api/waveform-req/<userid>``
+- Rsp Topic: ``geisa/api/waveform-rsp/<userid>``
+
+
+API Permissions
+================
+
+- Application:
+
+  - Publish: ``geisa/api/waveform-req/<userid>``
+  - Subscribe: ``geisa/api/waveform-rsp/<userid>``
+
+- Platform:
+
+  - Wildcard Subscribe: ``geisa/api/waveform-req/*``
+  - Publish: ``geisa/api/waveform-rsp/<userid>``
+
+
+Transaction Data
+=================
+
+.. warning:: 
+  
+  Need to add refererence to content within |geisa-schemas-repo| here.
+
 
 |geisa-pyramid|
 
