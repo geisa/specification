@@ -93,7 +93,7 @@ MQTT Details
 =============
 
 - N/A.
-- Applications retreive Platform Enumeration data by reading the file `/opt/geisa/platform.binpb` within the Application container environment.
+- Applications retreive Platform Enumeration data by reading the file `/etc/geisa/platform.binpb` within the Application container environment.
 
 API Permissions
 ================

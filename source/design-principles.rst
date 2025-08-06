@@ -72,7 +72,9 @@ While a GEISA compliant EE may offer more,
 the minimal GEISA LEE MUST provide **256MB of RAM** and **256MB of persistent storage**
 reserved for GEISA applications |geisa-lee-tux|;
 the minimal GEISA VEE MUST provide **XX MB of RAM** and **XX MB or persistent storage**
-|geisa-vee-cloud|.
+|geisa-vee-cloud|;
+and while hardware performance will vary considerably between platforms, GEISA EE
+SHOULD provide **50% of CPU** for GEISA applications |geisa-ee-globe|.
 
 Efficiency is critical. The GEISA EE shall provide only those services
 which are so widely required that it would be less efficient to *not* provide them.
