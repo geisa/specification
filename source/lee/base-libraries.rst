@@ -16,7 +16,7 @@ There are to major groups of libraries:
 - Other C Libraries
 
 
-C Langauge and Toolchain provided Runtime Libraries (may vary by implementation):
+C Language and Toolchain provided Runtime Libraries (may vary by implementation):
 
 - libc - Core runtime support
 - libgcc - GNU C Compiler Collection (low-level runtime support)
