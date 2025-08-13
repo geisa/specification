@@ -8,7 +8,7 @@ GEISA SHOULD use a Linux 6.x or greater kernel.
 
  .. warning::
 
-  TODO: The only technological requirement GEISA has placed on the kernel is containerision technology which has existed in much older kernel version than 6.x.  Also, many SoC and toolchain vendors are distributing 5.10, 5.4, or older kernels.  Perhaps we specify functionality not a specific version here.
+  TODO: The only technological requirement GEISA has placed on the kernel is containerization technology which has existed in much older kernel version than 6.x.  Also, many SoC and toolchain vendors are distributing 5.10, 5.4, or older kernels.  Perhaps we specify functionality not a specific version here.
 
 
 The GEISA Linux kernel must minimize the attack surface and size.
