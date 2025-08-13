@@ -1,16 +1,14 @@
 Linux Base Libraries
 -----------------------
 
-Application isolation is assumed to be provided through containers.
-Containers are able to inherit from the host operating system.
 To facilitate clean and regular updates,
 and to minimze container sizes,
 GEISA applications are encouraged
 to take advantagge of the libraries
-provided by the base GEISA environment.
+provided in the base GEISA environment.
 
 This does not prevent GEISA applications from including their own libraries
-is the GEISA environment does not provide the needed library
+if the GEISA environment does not provide the needed library.
 
 There are to major groups of libraries:
 
@@ -18,51 +16,45 @@ There are to major groups of libraries:
 - Other C Libraries
 
 
-C Langauge Runtime Libraries
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C Language and Toolchain provided Runtime Libraries (may vary by implementation):
 
 - libc - Core runtime support
 - libgcc - GNU C Compiler Collection (low-level runtime support)
 - libstdc++
-
-Other C Libraries (Minimum)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- libasyncns.so - Asynchronouse Name Service 
-- libatomic - Atomic operations
-- libcap.so - POSIC capabilities
 - libcrypt - Password hashing (MD5, SHA-255)
-- libcrypto - OpenSSL (hashing, encryption, digital signatures, random numbers, certs/keys)
 - libdl - Dynamic loading
 - libm - Math library
 - libnsl - Network Services Library
 - libpthread - POSIX Threads
 - libresolv - DNS resolution and name services
 - librt - Real-time
+- libcap - POSIC capabilities
+
+Other C Libraries (MUST):
+
+- libasyncns - Asynchronouse Name Service 
+- libatomic - Atomic operations
+- libcrypto - OpenSSL (hashing, encryption, digital signatures, random numbers, certs/keys)
 - libutil - Users, group,s pseudo-ttys (pty), etc.
+- libz - compression
+
+.. warning::
+
+  TODO: Should GEISA REQUIRE a MQTT client library?  There are too many to choose from listed at https://mqtt.org/software/
+  TODO: Should GEISA REQUIRE a protobuf client library?  See https://protobuf.dev/reference/ and https://github.com/protobuf-c/protobuf-c
 
 
-Other C Libraries (Additional)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Other C Libraries (MAY):
 
-**NOTE** Expand this list
-
-- libpcap
 - libseccomp
 - libsqlite3
 - libssl
-- libstdc++
-- libtinycbor.so
-- libz.so
-
-Also to be included:
-
-- ZeroMQ
-- MQTT
-- Dbus
-- Others
+- libtinycbor
 
 
+.. note::
 
-
+  While GEISA ADM |geisa-adm-baton| makes use of LWM2M for communication, GEISA
+  Applications are unaware of this and do not require any LWM2M client
+  libraries or knowledge.
 

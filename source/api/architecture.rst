@@ -45,7 +45,7 @@ GEISA API MQTT implementation via external network interfaces.
 
 The GEISA API MQTT implementation may only be exposed via ``localhost``
 or via virtual interfaces to GEISA app containers.  GEISA applications determine how
-to connect to the broker from data in a local configuration file `/opt/geisa/config.binpb`
+to connect to the broker from data in a local configuration file `/etc/geisa/config.binpb`
 within the Application container environment.
 
 .. Note::

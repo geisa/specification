@@ -9,7 +9,7 @@ Filesystem Mounts
 
 Each GEISA Application MUST be provisioned in its own container environment separate from other Applications.  As such, application-specific names, IDs, and other identifiers do not need to be encoded in filesystem paths within the Application environment.
 
-The GEISA platform implementation MUST provide the following virtual filesystem mounts:
+The GEISA platform implementation MUST provide the following virtual filesystem mounts within the container environment:
 
 - /
 
@@ -91,10 +91,20 @@ The following environment variables MUST be set at a minimum when invoking Appli
 - USER
 - PATH
 
+GEISA Components
+^^^^^^^^^^^^^^^^
+
+The Application needs to determine information about the environment it is
+running on and as such can expect certain GEISA specific configuration to be
+present.  As explained in :doc:`/api/architecture` and :doc:`/api/enumeration`
+these files are placed in `/etc/geisa` within the container environment.
+
+
 Base Libraries
 ^^^^^^^^^^^^^^
 
-A set of base libraries SHALL be provided in the base filesystem.  See :doc:`base-libraries` for further details.
+A set of base libraries SHALL be provided in the base filesystem.
+See :doc:`base-libraries` for further details.
 
 
 Construction of the Filesystem
@@ -102,10 +112,33 @@ Construction of the Filesystem
 
 Each Application container filesystem has different content based on the specific Application.
 
-GEISA recommends implementations construct a container filesystem using Linux `overlayfs` to reduce flash and ram waste containing:
+GEISA implementations SHOULD construct a container filesystem using Linux `overlayfs`
+to reduce flash and ram waste containing:
 
 - one or more `lower` directories with the base utilities and libraries common to all Applications
 - a `lower` directory with the Application-specific binaries, libraries, and other files provided by the Application vendor
-- a `lower` or `upper` containing generated files including the Application configuration and :doc:`/api/enumeration`.
+- a `lower` or `upper` containing generated files including the configuration files in `/etc/geisa` as well as any unix domain sockets for communication.
+
+Overlayfs allows an Application to provide their own or even replace a base
+library, fixed data, and executables as needed without having to construct a
+copy of the lower layer data in flash or ram.
+
+When an Application is upgraded, its overlayfs MUST be re-constructed and any
+non-persistent files (in `/tmp` or elsewhere) be deleted while the persistant
+files (in `/home/geisa`) MUST be preserved.
+
+.. note::
+
+  GEISA container environments SHOULD have their `/` filesystem mounted read-only
+  in the kernel to follow the principle of least privilege. This prevents
+  Applications from modifing or adding files in unexpected places and forces
+  deterministic Application behavior on each startup.
+
+  If an implementation chooses to mount `/` read-write, it MUST enforce file and
+  directory permissions appropriately as well as limit the growable size of the
+  filesystem to the same limits as the Application's Deployment Manifest specifies
+  for non-persistent storage.  In this case a seperate `/tmp` mount is unnecessary
+  and any changes outside of the persistent `/home/geisa` be non-persistent.
+
 
 |geisa-pyramid|

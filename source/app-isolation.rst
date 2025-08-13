@@ -13,7 +13,7 @@ GEISA applications shall be isolated from each other
 for the following reasons:
 
 - To ensure that one application cannot impact another application.
-- To ensure that one application cannot see the artifacts of another application.
+- To ensure that one application cannot see the artifacts, resources, or state of another application.
 
 Regardless of application isolation implementation (e.g. LXC container, systemd, VEE, etc.),
 an **authenticated appllication manifest** shall control access
@@ -49,6 +49,9 @@ GEISA isolation must meet these performance requirements:
 - Apps cannot impact the performance of other apps
 - Apps cannot impact the stability of other apps
 - Apps cannot create denial-of-service situations
+- System and non-GEISA components can have priority, but cannot consume all resources to the point of GEISA Apps starvation
+- Operators MAY choose to oversubscribe CPU resources but not RAM and storage resources
+- If oversubscribed, available resources must be fairly distributed between Apps
 
 System Control
 ^^^^^^^^^^^^^^
@@ -74,7 +77,6 @@ These permissions relate to controlling app access to the network.
 By default, apps are not given any network access.
 
 - Which network interfaces (none by default)
-- Which network ports (none by default)
 - Instantaneous Bandwidth
 - Average network volume over a period (e.g. 1 hour, 24 hours)
 - Direct versus Indirect Access
@@ -84,12 +86,12 @@ By default, apps are not given any network access.
 API Control
 ^^^^^^^^^^^
 
-These permissions relate to controlling app access to the network.
+These permissions relate to controlling app access to the platform.
 
 - Metrology Acccess (e.g. 1-second RMS, Waveforms)
 - Actuator Access (if present)
 - Sensor Access (if present)
-- Hardware Access (GPIO, I2C, SPI, etc.)
+- Hardware Access (GPIO, I2C, SPI, etc.) (**NOTE** apps should almost never have hardware access except in the cases of dedicated accelerator or specific peripherals which must be passed through or proxied into the container environment)
 - Inter-App Communication (**NOTE** perhaps hold off on app communcation until after GEISA 1.0.0)
 - Device-to-Device Communcation (**NOTE** hold off until after GEISA 1.0.0)
 
@@ -99,10 +101,10 @@ Container Resource Management
 Container resource limits shall include the following:
 
 - CPU limit (% of CPU)
-- Memory Limit (in 1K units)
-- Persistent Storage Limit (in 1K units)
-- Non-Persistent Storage Limit (in 1K units)
-- Allowed Network Bandwidth (in 1K units)
+- Memory Limit (in 1KiB units)
+- Persistent Storage Limit (in 1KiB units)
+- Non-Persistent Storage Limit (in 1KiB units)
+- Allowed Network Bandwidth and Volume (in 1Kbit and 1KiB units respectively)
 
     - Ongoing Limit Outbound
     - Ongoing Limit Inbound
@@ -120,3 +122,17 @@ Container resource limits shall include the following:
     - Level 1 - Read and Control - Utility
     - Level 2 - Read only
 
+.. note::
+
+  An Application or Deployment manifiest can be modified and re-deployed during
+  an Application upgrade or administrative change.  Changes to the resource requirements
+  SHOULD not require an Application restart, but an EE implementation MAY stop, modify,
+  and restart an Application if necessary.
+
+  All resource requirements can be changed including the persistent storage limit.  If
+  that limit is increased, an implementation MUST honor that change and provide the
+  application with a larger volume or limit without loss of persistent data.  If that
+  limit is reduced, an implementation SHOULD attempt to honor that change and reduce
+  the volume or limit, however if the Application is using more than the new limit
+  an alarm or exception SHOULD be raised to the EMS and the action MUST be aborted
+  leaving the Application running with the previous limit.
