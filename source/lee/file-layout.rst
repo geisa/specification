@@ -134,7 +134,7 @@ files (in `/home/geisa`) MUST be preserved.
   Applications from modifing or adding files in unexpected places and forces
   deterministic Application behavior on each startup.
 
-  If an implementaion chooses to mount `/` read-write, it MUST enforce file and
+  If an implementation chooses to mount `/` read-write, it MUST enforce file and
   directory permissions appropriately as well as limit the growable size of the
   filesystem to the same limits as the Application's Deployment Manifest specifies
   for non-persistent storage.  In this case a seperate `/tmp` mount is unnecessary
