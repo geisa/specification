@@ -3,25 +3,15 @@ Operating System
 
 |geisa-lee-hdr|
 
-GEISA LEE shall use Linux as the core operating system.
-GEISA SHOULD use a Linux 6.x or greater kernel.
+GEISA LEE SHALL use Linux as the core operating system.
+The LEE platform implementer SHOULD use a Linux 6.x or greater kernel. A LEE platform
+may use an older version if needed, but it MUST provide the needed application isolation
+requirements.
 
- .. warning::
-
-  TODO: The only technological requirement GEISA has placed on the kernel is containerization technology which has existed in much older kernel version than 6.x.  Also, many SoC and toolchain vendors are distributing 5.10, 5.4, or older kernels.  Perhaps we specify functionality not a specific version here.
-
-
-The GEISA Linux kernel must minimize the attack surface and size.
-This means removing all unnecessary components and extranous modules.
-Whether the GEISA Linux kernel supports loadable kernel modules
-or not is an implementation decision that is
-invisible to a GEISA application; 
-however, for security  and efficiency reasons, it is recommended that platform implementers
-limit the use of loadable modules.
-
- .. warning::
-
-  TODO: this seems out of place/scope.  loadable modules is a point concern among many security considerations a platform implementer may consider.  Move to security section or remove as out-of-scope?
+The attack surface and size of the Linux kernel and base libraries provided MUST be
+minimized. A LEE platform implementation SHOULD remove unnecessary components and
+libraries providing the application the needed functionality but not a full Linux
+distribution experience.
 
 There is no requirement for the underlying Linux kernel
 to support real-time features,
