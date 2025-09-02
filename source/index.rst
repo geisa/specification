@@ -9,6 +9,7 @@ GEISA Specification |release|
 .. toctree::
    :maxdepth: 3
    :numbered:
+   :includehidden:
    :caption: Contents:
 
    abstract
@@ -24,7 +25,7 @@ GEISA Specification |release|
    conformance
    hardware
 
-   app-management
+   adm
 
    app-isolation
 

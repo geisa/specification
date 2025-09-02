@@ -64,6 +64,8 @@ The GEISA API offers the transactions sets for the following purposes:
   Additional transaction sets may be added in future versions of the GEISA specification.
 
 .. toctree::
+   :hidden: 
+
    api/architecture
    api/enumeration
    api/status
