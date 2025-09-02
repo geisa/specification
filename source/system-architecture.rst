@@ -16,7 +16,7 @@ GEISA is focused on interoperability and security.  Where it is possible to main
 |geisa-adm-hdr|
 
 In a full implementation of the GEISA architecture, there is a GEISA Edge Management System (EMS) that 
-implements the ADM interface described in :doc:`app-management`.  The EMS implements
+implements the ADM interface described in :doc:`adm`.  The EMS implements
 a network protocol based interface and is able to use that protocol to interact with ADM interface
 conformant GEISA platform implementations.  Internal details of the EMS are beyond
 the scope of this specification.  GEISA simply requires that a conformant EMS expose the required
@@ -35,7 +35,7 @@ GEISA ADM elements |geisa-adm-baton| are shown in red in :numref:`geisa-architec
 
 |geisa-pyramid|
 
-The system operator is able to use the GEISA EMS to deploy and activate GEISA edge applications
+The system operator is able to use the GEISA EMS to deploy and activate GEISA edge pplications
 to GEISA platform implementations.  A fully conformant GEISA platform implementation will provide
 both a GEISA conformant execution environment and a GEISA conformant application programming interface.
 

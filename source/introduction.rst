@@ -104,7 +104,7 @@ This specification currently addresses:
 - :doc:`system-architecture`
 - :doc:`conformance`
 - :doc:`hardware`
-- :doc:`app-management` |geisa-adm-baton| 
+- :doc:`adm` |geisa-adm-baton| 
 - :doc:`app-isolation` 
 - :doc:`linux-environment` |geisa-lee-tux|
 - :doc:`virtual-environment` |geisa-vee-cloud|
