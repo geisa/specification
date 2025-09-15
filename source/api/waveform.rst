@@ -44,13 +44,13 @@ Data for all channels MUST be aligned to one another.  An individual sample in c
 Metadata
 ^^^^^^^^
 
-When activating a waveform stream, the platform provides the application the following metadata:
+The platform provides the application the following metadata as part of :doc:`/api/enumeration` for each offered stream:
 
 - The path to the data socket
 - The type of data: one of int16, int32, or float32
 - The number of voltage channels
 - The number of current channels
-- The total number of channels (typically the sum of 3 items above, but MAY be larger)
+- The total number of channels (typically the sum of 2 items above, but MAY be larger)
 - The sampling frequency in Hz
 - If the frames are AC cycle aligned or not
 - If data type is integer, the voltage scaling factor to convert to volts

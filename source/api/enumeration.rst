@@ -44,11 +44,7 @@ can query the hardware resources available:
 Application Information
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Because an Application's Deployment Manifest may differ from the Application Manifest provided by the Application Vendor, Applications MUST be able to retrieve the Deployment Manifest which includes:
-
-.. warning::
-
-  TBD: Need to add a section on Application Manifest and Deployment Manifest content.
+Because an Application's Deployment Manifest may differ from the Application Manifest provided by the Application Vendor, Applications MUST be able to retrieve the Deployment Manifest as described in :doc:`/adm/manifests`.
 
 
 Metrology Hardware
@@ -87,13 +83,15 @@ TBD
 Waveform Data
 ^^^^^^^^^^^^^
 
-TBD
+See Metadata section in :doc:`/api/waveform`.
+
 
 MQTT Details
 =============
 
 - N/A.
-- Applications retreive Platform Enumeration data by reading the file `/etc/geisa/platform.binpb` within the Application container environment.
+- Applications retrieve Platform Enumeration data by reading the file `/etc/geisa/platform.binpb` within the Application container environment.
+- Applications retrieve Deployment Manifest data by reading the file `/etc/geisa/manifest.json` within the Application container environment.
 
 API Permissions
 ================
