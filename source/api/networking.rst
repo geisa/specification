@@ -26,7 +26,7 @@ This type of communication is bi-directional and messages can be sent unsolicite
 IP socket based to local devices, private clouds, or public clouds
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Applications can also make use of traditional IP socket based real-time communications on devices equipped with cellular, WiFi, or other IP connectivity. Applications MUST specify the endpoints they need to communicate to (IP/Port) in their Application Manifest so that those policies can be approved by operators and implemented in the platform using firewall rules.
+Applications can also make use of traditional IP socket based real-time communications on devices equipped with cellular, Wi-Fi, or other IP connectivity. Applications MUST specify the endpoints they need to communicate to (IP/Port) in their Application Manifest so that those policies can be approved by operators and implemented in the platform using firewall rules.
 
 Applications MUST also specify the expected volume of data per day per destination class.
 
@@ -42,15 +42,15 @@ Inbound connections towards the Application are not supported in this version of
 Interface Types
 ^^^^^^^^^^^^^^^
 
-The method of connectivity that a device provides can vary from a home WiFi providing Internet connectivity, to private WiFi for partner integrations, or to a variety of operator maintained connectivity options such as shared WiFi hotspots, cellular, mesh, wired, or proprietary interfaces.
+The method of connectivity that a device provides can vary from a home Wi-Fi providing Internet connectivity, to private Wi-Fi for partner integrations, or to a variety of operator maintained connectivity options such as shared Wi-Fi hotspots, cellular, mesh, wired, or proprietary interfaces.
 
 Applications need to know which (or multiple) of these are available and online at any given time however enumerating both the technology and the allowable use cases that they can transport can become complex quickly.
 
 Example types of network interfaces:
 
-- WiFi - Home (device is client)
-- WiFi - Meter (device is AP)
-- WiFi - Operator/Partner-Hotspot (device is client)
+- Wi-Fi - Home (device is client)
+- Wi-Fi - Meter (device is AP)
+- Wi-Fi - Operator/Partner-Hotspot (device is client)
 - Cellular - Internet APN
 - Cellular - Private APN
 - Ethernet - Home
@@ -92,7 +92,7 @@ Applications may report statistics and logs to the operating environment for tro
 Volume Limits
 ^^^^^^^^^^^^^
 
-Each destination class can be metered depending on which underlying technology transports the data.  A Home WiFi would normally be considered unlimited where as a cellular connection would be metered to keep the device under a monthly volume limit.
+Each destination class can be metered depending on which underlying technology transports the data.  A Home Wi-Fi would normally be considered unlimited where as a cellular connection would be metered to keep the device under a monthly volume limit.
 
 An application developer MUST define volume limits per destination class in their Application Manifest.  These limits may be overridden by the operator at deployment time when converting the Application Manifest into a Deployment Manifest.
 
@@ -147,7 +147,7 @@ GEISA highly recommends that the Operating Environment implement a caching local
 
 The application must be able to reach DNS services from within the container environment by using standard Linux libraries (i.e.: libnss/resolvconf/etc...)
 
-DNS in a multi-tenant and multi-interface environment can get quite complex.  For example, an operator may implement their Operator Endpoints using a dedicated private TLD and configure the resolver to direct DNS lookups for that TLD over their private network where other TLDs for Internet Endpoints use a home WiFi or Internet connected Cellular.
+DNS in a multi-tenant and multi-interface environment can get quite complex.  For example, an operator may implement their Operator Endpoints using a dedicated private TLD and configure the resolver to direct DNS lookups for that TLD over their private network where other TLDs for Internet Endpoints use a home Wi-Fi or Internet connected Cellular.
 
 
 
@@ -159,7 +159,7 @@ Local Endpoint Considerations
 
   TODO: should we forgo Local endpoint connectivity for GEISA 1.0?
 
-Local Endpoints are defined to allow an Application to access local resources on a connected network.  Typically this would be for local device integration such as smart plugs, EVSE, Solar Inverter and battery storage equipment and so on.  This type of class is typically only available for devices that are connected to a home WiFi, a Meter hosted WiFi, or wired connection.
+Local Endpoints are defined to allow an Application to access local resources on a connected network.  Typically this would be for local device integration such as smart plugs, EVSE, Solar Inverter and battery storage equipment and so on.  This type of class is typically only available for devices that are connected to a home Wi-Fi, a Meter hosted Wi-Fi, or wired connection.
 
 As the IP addressing of the connected network are not known and not static between devices, the Application Manifest cannot list destination/source IP addresses for policy rules.
 
