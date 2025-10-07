@@ -32,6 +32,10 @@ The GEISA API offers the transactions sets for the following purposes:
     These are the same values that a host meter would typically share over
     a meter-to-cash protocol like ANSI C12.18/21/22 or DLMS/COSEM.
 
+- :doc:`/api/networking`
+
+    Allows applications to communicate off-device either via messaging or direct IP sockets.
+
 - :doc:`/api/waveform`
 
     Allows applications to obtain the details on the waveform data frame definition and to 
@@ -72,6 +76,7 @@ The GEISA API offers the transactions sets for the following purposes:
    api/instantaneous
    api/waveform
    api/sensors
+   api/networking
 
 |geisa-pyramid|
 

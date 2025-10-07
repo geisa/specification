@@ -42,16 +42,27 @@ GEISA vendor and operator application manifests SHALL include:
 
 GEISA vendor manifests SHALL include:
 
-- System Resources Required, including:
+- Compatibility:
 
-    - RAM in MB
-    - Storage in MB
-    - Messaging (boolean)
-    - AMI Network Interface Direct Access (boolean)
-    - HAN Network Interface Direct Access (boolean)
     - GEISA API Minimum Version
     - GEISA LEE Minimum Version (null for unsupported)
     - GEISA VEE Minimum Version (null for unsupported)
+    - Waveform Access (boolean)
+
+- System Resources Required:
+
+    - CPU usage in percent
+    - RAM in MiB
+    - Persistent Storage in MiB
+    - Non-persistent Storage in MiB
+    - Max threads/processes
+
+- Off-Device Communication
+
+    - Each application that performs off-device communication MUST specify the
+      classes, destinations, and daily volume of that communication.
+    - See :doc:`/api/networking` for details.
+    - Daily volumes are specified in KiB units, and daily messages are in message units.
 
 .. Note::
 
@@ -114,30 +125,58 @@ Here is an example of an vendor application manifest.
       "org.lfenergy.geisa.HelloWorld": {
         "author": "Some Company",
         "name": "Hello World Application",
-        "description": "Killer applications that writes 'hello world' to the log",
+        "description": "Killer application that writes 'hello world' to the log",
         "version": "1.0.0",
         "artifacts": {
-          "image": "helloworld-1.zip",
-          "hash": "00beeaeeca59f9177d88a13132f7c0686616fe728d85f20ddbd15352abd10988"
+          "image-size": 748340,
+          "uncompressed-size": 2494464,
+          "image": "helloworld-1.tgz",
+          "sha256": "00beeaeeca59f9177d88a13132f7c0686616fe728d85f20ddbd15352abd10988"
         },
-        "required resources": {
-          "RAM": 1,
-          "flash": 100,
-          "AMI": false,
-          "HAN": true,
+        "compatibility": {
           "GEISA-API": "1.0.0",
           "GEISA-LEE": "1.0.0",
           "GEISA-VEE": null
         },
-        "external dependencies": [
+        "resources": {
+          "app-cpu": 30,
+          "app-ram": 40,
+          "storage-persist": 20,
+          "storage-nonpersist": 5,
+          "threads": 50,
+          "AMI": false,
+          "HAN": true,
+          "waveform": true
+        },
+        "communication": {
+          "message": {
+            "daily-messages": 30
+          },
+          "operator": {
+            "daily-volume": 2048,
+            "outbound": [
+              "tcp:[3fff:421:32::/48]:443",
+              "udp:[3fff:421:2:661::/64]:4242",
+              "tcp:198.51.100.0/24:999"
+            ]
+          },
+          "internet": {
+            "daily-volume": 51200,
+            "outbound": [
+              "tcp:[2001:db8:44:12::/64]:443",
+              "udp:203.0.113.66:2256"
+            ]
+          }
+        },
+        "external-dependencies": [
           null
         ],
-        "default configuration": {
+        "default-configuration": {
           "knob": 36,
           "setting": "blue",
           "turbo encabulator active": true
         },
-        "default launch strategy": {
+        "default-launch-strategy": {
           "auto-restart": true,
           "max restarts": 5,
           "restart period": 60
@@ -145,6 +184,3 @@ Here is an example of an vendor application manifest.
       }
     }
   }
-
-
-
