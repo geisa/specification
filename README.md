@@ -1,6 +1,8 @@
 # specification
 The GEISA Specification
 
+The GEISA Specification is an effort by the Grid Edge Interoperability and Security Alliance to define a consistent, secure, and interoperable computing environment for embedded devices at the very edge of the electric utility grid, like electric meters and distribution automation devices, for the benefit of utilities, platform vendors, and software vendors.  If you would like to get involved, please head over to our Wiki page for details on participation (https://lfenergy.org/projects/geisa/).  Follow the onboarding link for details about participating in our community process.  You are also welcome to fork this repository and submit pull requests if you have additions or corrections you would like considered.
+
 GEISA, the Grid Edge Interoperability and Security Alliance (https://lfenergy.org/projects/geisa/) maintains its formal specification as a set of reStructured text files, which are converted to HTML via Sphinx. See https://www.sphinx-doc.org/en/master/index.html for details on Sphinx.
 
 Python venv creates a virtual environment so that Sphinx can be installed using its own separate packages and not break anything in the existing environment.  Depending on your environment, you may need to install python venv using your system package manager.
