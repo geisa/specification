@@ -9,6 +9,14 @@ SPHINXTARGETS ?= html latexpdf
 SOURCEDIR     = source
 BUILDDIR      = build
 
+# GEISA is supporting mermaid as part of the spec, but mermaid diagrams
+# are treated as independent source files to be built.  RST files should
+# reference the image.
+
+MERMAID 			= $(shell find $(SOURCEDIR) -name '*.mermaid')
+MERMAIDSVG		= $(patsubst %.mermaid, %.svg,$(MERMAID))
+MERMAIDPDF		= $(patsubst %.mermaid, %.pdf,$(MERMAID))
+
 IMAGESVG      = $(wildcard $(SOURCEDIR)/images/*.svg)
 IMAGEPDF      = $(patsubst %.svg,%.pdf,$(IMAGESVG))
 
@@ -29,11 +37,16 @@ help:
 
 clean:
 	rm -f $(IMAGEPDF)
+	rm -f $(MERMAIDSVG)
+	rm -f $(MERMAIDPDF)
 	rm -rf $(BUILDDIR)
 
-prep: $(IMAGEPDF)
+prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF)
 
 all: $(SPHINXTARGETS)
+
+%.svg: %.mermaid
+	mmdc -i $< -o $@
 
 %.pdf: %.svg
 	rsvg-convert -f=pdf -o $@ $<
