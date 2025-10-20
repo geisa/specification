@@ -11,10 +11,9 @@ about participating in our community process.  You are also welcome to fork
 this repository and submit pull requests if you have additions or corrections
 you would like considered.
 
-GEISA, the [Grid Edge Interoperability and Security Alliance] maintains its
-formal specification as a set of reStructured text files, which are converted
-to HTML via Sphinx. See https://www.sphinx-doc.org/en/master/index.html for
-details on Sphinx.
+GEISA maintains its formal specification as a set of reStructured text files,
+which are converted to HTML via Sphinx. See
+https://www.sphinx-doc.org/en/master/index.html for details on Sphinx.
 
 Python `venv` creates a virtual environment so that Sphinx can be installed using
 its own separate packages and not break anything in the existing environment.
