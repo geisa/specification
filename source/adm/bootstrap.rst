@@ -10,17 +10,39 @@ server for management:
 - Client Initiated
 - Server Initiated
 
-As noted in [LWM2M-Core] GEISA ADM conformant devices SHALL support Client
+In Factory Bootstrap, devices are provisioned during manufacturing with
+security credentials and Management Server (edge management system) information.
+Upon field installation, devices connect directly to their Management Server
+(edge management system) to perform registration.  
+
+In Client-Initiated Bootstrap, shown below in :numref:`bootstrap`, devices are
+provisioned during manufacturing with Bootstrap Server (BS) information. Upon
+field installation, devices initiate connection to the Bootstrap Server for the
+provisioning of Security credentials (object 0) and Management Server
+information.
+
+.. _bootstrap:
+.. figure:: client-bootstrap.*
+
+  Client Bootstrap
+
+As noted in [LWM2M-Core], GEISA ADM conformant devices SHALL support Client
 Initiated bootstrapping.  GESIA ADM conformant devices MAY support other
 bootstrapping methods.  For mass deployed devices, like smart meters, Factory
-Bootstrapping may be preferred by many system operators.
+Bootstrapping is usually preferred by system operators.
 
-GEISA ADM conformant devices SHALL provide accessible out-of-band
+GEISA ADM conformant devices SHALL provide an accessible out-of-band
 mechanism which allows the system operator to preprovision the URL of the CoAp
 Bootstrap-Server, the Bootstrap-Server Account credentials, and any other data
 needed to complete the boostrapping process (e.g. certificates, keys, etc.).
-GEISA ADM conformant edge management systems SHALL provide a Bootstrap-Server
-implementation.
+
+.. Note::
+
+  GEISA ADM Conformant EMS are not required to provide a Bootstrap Server.  If a
+  platform provider ships devices set to use client intiated bootstrap, it is
+  expected that they will inform the purchaser in advance or provide a bootstrap
+  server.
+
 
 .. Note::
 

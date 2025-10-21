@@ -1,0 +1,23 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+   
+    Note right of S: Read
+    S->>C: GET /3/0/0
+    C->>S: 2.05 Content<br/>GEISA Platform Provider
+    Note right of S: Write
+    S->>C: PUT /3/0/13<br/>1767225600
+    C->>S: 2.04 Changed
+    Note right of S: Execute
+    S->>C: PUT /3/0/12
+    C->>S: 2.04 Changed
+    Note right of S: Write-Attribute
+    S->>C: PUT /3/0/9?pmin=1&pmax=5&lt=5
+    C->>S: 2.04 Changed
+

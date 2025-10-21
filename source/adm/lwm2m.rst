@@ -5,16 +5,19 @@ GEISA Application & Device Management uses OMA Specworks' Lightweight M2M
 [LWM2M]_ as for application management.  Specifically,
 
 * ADM conformant platforms and Edge Management Systems (EMS) SHALL support LWM2M
-  v1.2. [LWM2M-Core]_
+  v1.1 or greater. [LWM2M-Core]_
 * ADM conformant platforms and EMS MAY support LWM2M
-  versions greater than v1.2; however, they MUST retain compatibility with
-  v1.2.
+  versions greater than v1.1; however, they MUST retain compatibility with
+  v1.1.
 * ADM conformant platforms and EMS SHALL support CoAP over UDP for
   message transport. [LWM2M-Transport]_
 * ADM conformant platforms and EMS SHALL support DTLS for CoAp security.
 * ADM conformant platforms and EMS SHALL support the Bootstrap, Registration,
   Device Management and Information Reporting interfaces.
+* ADM conformant platforms and EMS SHALL support the Mandatory resources of
+  the most recent version of the required LWM2M Objects.
 * ADM conformant EMS shall support the following LWM2M Objects
+
 
   * ID 0 -- Security
   * ID 1 -- Server

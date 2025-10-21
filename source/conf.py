@@ -148,6 +148,7 @@ html_theme_options = {
         'show_relbars': False,
         'show_relbar_bottom': True,
         'show_powered_by': False,
+        'page_width': '1200px'
         }
 
 # -- LaTex Options ------------------------------------------------------------
@@ -159,6 +160,7 @@ latex_logo = 'images/geisa-print-logo.png'
 latex_additional_files = ['latex/sphinxlatexstylepage.sty']
 latex_elements = {
         'extraclassoptions': 'openany',
+        'figure_align': 'H',
         'preamble': r'''
 \righthyphenmin=62
 \lefthyphenmin=62

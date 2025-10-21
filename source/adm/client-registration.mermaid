@@ -1,0 +1,17 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+   
+    Note over C,S: Registration 
+    C->>S: POST/rd?ep=example-client<br/></1/1>,</1/2>,</2/0>,</2/1>,</3/0>,</4/0> 
+    S->>C: 2.01 Created Location: /rd/5a3f
+    Note over C,S: Update
+    C->>S: POST/rd/5a3f?lt=60000
+    S->>C: 2.04 Changed
+

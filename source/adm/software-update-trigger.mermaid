@@ -1,0 +1,40 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+
+    Note over C,S: DTLS session established
+    rect rgb(255,255,255) 
+      S->>C: Create POST /<br/>/9/x/0 = myAppName<br/>/9/x/1 = myAppVersion
+      C-->>S: 2.01 Created
+      S->>C: Observe /9/x/7 (Update State)
+      C-->>S: 2.05 Content (Update State = Initial)
+      S->>C: Observe /9/x/12 (Activation State)
+      C-->>S: 2.05 Content (Activation State = Disabled) 
+    end
+
+    Note over C,S: PULL Software via /9/x/3 Package URI
+    rect rgb(255,255,255) 
+      S->>C: Write POST /9/x/3 = coaps://sw.example.com/myApp.bin
+      C-->>S: 2.04 Changed
+      C->>C: Update State = Download Started
+      C-->>S: Notify /9/x/7 = Download Started
+      
+      C->>S: CoAP CON GET myApp.bin
+      S-->>C: ACK 2.31 Continue (first block)
+      C->>S: CoAP CON GET myApp.bin
+      S-->>C: ACK 2.31 Continue (next block...)
+      C->>S: CoAP CON GET myApp.bin
+      S-->>C: ACK 2.05 Content (final block)
+      C->>C: Update State = Downloaded
+      C-->>S: Notify /9/x/7 = Downloaded
+      C->>C: Validate image
+      C-->>S: Notify /9/x/7 = Delivered
+    end
+

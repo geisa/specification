@@ -1,0 +1,17 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+   
+    S->>C: POST /2
+    C->>S: 2.01 Created Location: /2/3
+    S->>C: <br/>POST /2
+    C->>S: 2.01 Created Location: /2/4
+    S->>C: <br/>DELETE /2/3
+    C->>S: 2.02 Deleted
+

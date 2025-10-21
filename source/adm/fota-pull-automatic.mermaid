@@ -1,0 +1,36 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber 9
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+    participant FH as Firmware Host<br/>(HTTP/CoAP server)
+    
+    rect rgb(255,255,255) 
+      Note over C,FH: DTLS session established
+      C->>FH: CoAP CON GET fw-1.2.3.bin
+      FH-->>C: ACK 2.31 Continue (first block)
+      C->>FH: CoAP CON GET fw-1.2.3.bin
+      FH-->>C: ACK 2.31 Continue (next block)
+      C->>FH: CoAP CON GET fw-1.2.3.bin
+      FH-->>C: ACK 2.05 Content (final block)
+      C->>C: Validate image
+      C->>C: State = Downloaded
+      C-->>S: Notify /5/0/3 = Downloaded
+    end
+
+    Note over C: Automatically EXECUTE Firmware Update
+    rect rgb(235,248,255)
+    C->>C: State = Updating
+    C-->>S: Notify /5/0/3 = Updating
+    C->>C: Update Firmware
+    C->>C: /5/0/5 = Update Successful
+    C-->>S: Notify /5/0/3 = Idle
+    S->>C: GET /5/0/5 (Update)
+    C-->>S: 2.05 Content (Update Result = Success)
+    end
+

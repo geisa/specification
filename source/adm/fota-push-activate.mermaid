@@ -1,0 +1,24 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber 14
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+    
+    Note over C,S: Manually EXECUTE Firmware Update
+    rect rgb(235,248,255)
+    S->>C: POST Execute /5/0/2 (Update)
+    C-->>S: 2.04 Changed
+    C->>C: State = Updating
+    C-->>S: Notify /5/0/3 = Updating
+    C->>C: Update Firmware
+    C->>C: /5/0/5 = Update Successful
+    C-->>S: Notify /5/0/3 = Idle
+    S->>C: GET /5/0/5 (Update)
+    C-->>S: 2.05 Content (Update Result = Success)
+    end
+

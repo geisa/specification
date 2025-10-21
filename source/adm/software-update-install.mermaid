@@ -1,0 +1,22 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber 21
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+
+    Note over C,S: Manually EXECUTE Software<br/>Installation and Activation
+    rect rgb(235,248,255)
+    S->>C: POST Execute /9/x/4 (Install)
+    C-->>S: 2.04 Changed
+    C->>C: Update State = Installed
+    C-->>S: Notify /9/x/7 = Installed
+    S->>C: POST Execute /9/x/10 (Activate)
+    C-->>S: 2.04 Changed
+    C->>C: Activation State = Enabled
+    C-->>S: Notify /9/x/12 = Enabled
+    end

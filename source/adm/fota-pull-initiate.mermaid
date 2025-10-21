@@ -1,0 +1,26 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+    
+    Note over C,S: DTLS session established
+    rect rgb(240,240,240)
+    C->>S: Registration POST/rd?ep=example-client
+    S-->>C: 2.01 Created (Location: /rd/xxxx)
+    S->>C: Observe /5/0/3 (State)
+    C-->>S: 2.05 Content (State=Idle)
+    end
+
+    Note over C,S: PULL Firmware via /5/0/1 Package URI
+    rect rgb(255,255,255) 
+      S->>C: Write-Composite POST<br/>/5/0/1 = coaps://fw.example.com/fw-1.2.3.bin <br/>/5/0/14 Automatic Upgrade = True
+      C-->>S: 2.04 Changed
+      C->>C: State = Downloading
+      C-->>S: Notify /5/0/3 = Downloading
+    end

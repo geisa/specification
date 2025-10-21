@@ -1,0 +1,32 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    autonumber
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+    
+    Note over C,S: DTLS session established
+    rect rgb(240,240,240)
+    C->>S: Registration POST/rd?ep=example-client
+    S-->>C: 2.01 Created (Location: /rd/xxxx)
+    S->>C: Observe /5/0/3 (State)
+    C-->>S: 2.05 Content (State=Idle)
+    end
+
+    Note over C,S: PUSH Firmware to /5/0/0 Package
+    rect rgb(255,255,255) 
+      S->>C: PUT /5/0/0 (first block)
+      C-->>S: 2.31 Continue
+      S->>C: PUT /5/0/0 (next block)
+      C-->>S: 2.31 Continue
+      S->>C: PUT /5/0/0 (final block)
+      C-->>S: 2.04 Changed
+      C->>C: Validate image
+      C->>C: State = Downloaded
+      C-->>S: Notify /5/0/3 = Downloaded
+    end
+    

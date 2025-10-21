@@ -1,0 +1,14 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+sequenceDiagram
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M<br/>Bootstrap Server
+    
+    C->>S: Bootstrap-Request
+    S->>C: Write, Read, Delete, Discover Bootstrap
+    S->>C: Bootstrap-Finish
+
