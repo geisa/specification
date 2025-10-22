@@ -1,2 +1,5 @@
+/venv
 /build
-/source/images/*.pdf
+*.pdf
+*.svg
+!/source/images/*.svg
