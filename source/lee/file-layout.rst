@@ -96,7 +96,7 @@ GEISA Components
 
 The Application needs to determine information about the environment it is
 running on and as such can expect certain GEISA specific configuration to be
-present.  As explained in :doc:`/api/architecture` and :doc:`/api/enumeration`
+present.  As explained in :doc:`/api/architecture` and :doc:`/api/discovery`
 these files are placed in `/etc/geisa` within the container environment.
 
 

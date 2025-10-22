@@ -3,7 +3,10 @@ Platform and App Status
 
 |geisa-api-hdr|
 
-While the :doc:`/api/enumeration` data is fixed and does not change during the life of the application, the platform uses the message bus to distribute status to all running applications.  Notifications are grouped into 2 topics: application-specific or non-application-specific.
+While the :doc:`/api/discovery` data is fixed and does not change during the
+life of the application, the platform uses the message bus to distribute status
+to all running applications.  Notifications are grouped into 2 topics:
+application-specific or non-application-specific.
 
 
 Runtime Mode

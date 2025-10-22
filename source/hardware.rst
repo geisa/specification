@@ -53,7 +53,7 @@ Metrology
 GEISA specifically addresses edge computing enviroments used by electric utilities.
 It is assumed there there is a source of metrological data available on GEISA devices.
 The GEISA API |geisa-api-gear| provides a mechanism for GEISA applications to obtain
-details regarding the metrological capabilities of the device (see :doc:`api/enumeration`)
+details regarding the metrological capabilities of the device (see :doc:`api/discovery`)
 
 .. note::
 

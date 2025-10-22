@@ -44,7 +44,7 @@ Data for all channels MUST be aligned to one another.  An individual sample in c
 Metadata
 ^^^^^^^^
 
-The platform provides the application the following metadata as part of :doc:`/api/enumeration` for each offered stream:
+The platform provides the application the following metadata as part of :doc:`/api/discovery` for each offered stream:
 
 - The path to the data socket
 - The type of data: one of int16, int32, or float32

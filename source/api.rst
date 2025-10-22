@@ -10,7 +10,7 @@ application and the platform implementation.
 
 The GEISA API offers the transactions sets for the following purposes:
 
-- :doc:`/api/enumeration`
+- :doc:`/api/discovery`
 
     Provide the capabilities of platform, including the device type and platform 
     capabilities (e.g. available sensors, actuators, interfaces etc.)
@@ -71,7 +71,7 @@ The GEISA API offers the transactions sets for the following purposes:
    :hidden: 
 
    api/architecture
-   api/enumeration
+   api/discovery
    api/status
    api/instantaneous
    api/waveform
