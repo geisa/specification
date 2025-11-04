@@ -110,6 +110,10 @@ GEISA vendor manifests SHALL include:
     - Base64 Encoded Signature of the compact JSON encoding of the vendor
       application manifest.
 
+- Classification
+
+    - Impact level - the appropriate NERC CIP-002 impact level of the application.
+
 .. Note::
 
     ToDo: Add details on the signature mechanism.
@@ -180,6 +184,9 @@ Here is an example of an vendor application manifest.
           "auto-restart": true,
           "max restarts": 5,
           "restart period": 60
+        },
+        "classification": {
+          "impact-level": "HIGH|MEDIUM|LOW|NOT APPLICABLE"
         }
       }
     }
