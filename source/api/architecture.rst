@@ -94,7 +94,7 @@ While most application to platform communication is performed over the MQTT mess
 bus, there are a few exceptions:
 
 In order for an Application to establish the connection to the MQTT message bus, the
-conneciton method (host and port) and per-application credentials are provided
+connection method (host and port) and per-application credentials are provided
 out-of-band from platform to application. GEISA applications determine how to
 connect to the broker from data in a locally generated configuration file.  For GEISA
 LEE |geisa-lee-tux| this is available at the well-known location `/etc/geisa/config.binpb`
