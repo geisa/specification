@@ -99,10 +99,10 @@ See Metadata section in :doc:`/api/waveform`.
 Application Deployment Manifest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each GEISA application may retrieve it's own application deployment manifest.  This
+Each GEISA application may retrieve its own application deployment manifest.  This
 manifest is also constant and not expected to change during runtime.
 
-Like the Platform Discovery metadata, the Application Deployment Manifest may be truly static, however it is also possible that the operator of the platform changes this data at runtime on an infrequent basis.
+Like the Platform Discovery metadata, the Application Deployment Manifest may be truly static; however, it is also possible that the operator of the platform changes this data at runtime on an infrequent basis.
 
 Because Application Deployment Manifest is expected to be static, GEISA platforms MUST
 facilitate restarting a specific application if its manifest changes.
@@ -111,7 +111,7 @@ facilitate restarting a specific application if its manifest changes.
 
   Application designers should consider the impact of placing configuration-type data
   in their application manifest to minimize the occurances where an operator needs
-  to change the manifest.  Frequently updated values or paramiters should be sent
+  to change the manifest.  Frequently updated values or parameters should be sent
   over another mechanism such as the application message based communication with
   the ADM system.
 
