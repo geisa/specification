@@ -7,6 +7,8 @@ Rather than provide an interface library, and in the process potentially
 restrict which languages are suitable for use with GEISA, GEISA provides
 a message bus API.
 
+Message bus communication
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 GEISA uses `MQTT <https://mqtt.org>`_ as its message bus.  A GEISA platform SHALL
 provide a MQTT broker and daemon(s) that GEISA applications interact with.
@@ -29,33 +31,27 @@ GEISA API conformant platforms SHALL:
 - use the MQTT topics indicated for the API transactions
 - support the Protobuf definition indicated for the API transactions found at |geisa-schemas-repo|
 
-Because of the potentially very high-volumes of data involved in accesssing metrology 
-:doc:`/api/waveform`, it is handled as a special case.  
-The waveform data transaction allows applications to obtain the frame format and 
-platform specific details regarding the waveform data (e.g. sampling rate, sample resolution, etc.)
-and to request that the waveform data stream is activated (or deactivated),
-but the waveform data itself is provided as a raw-binary data structure pushed
-from the platform to any target application containers using a socket and data format
-as described in :doc:`/api/waveform`.
 
 The GEISA API is designed as an **internal** API within the platform.  
 It is not intended to be exposed to a general network environment.  
 For security reasons platform implementations MUST not expose the 
 GEISA API MQTT implementation via external network interfaces.  
 
-The GEISA API MQTT implementation may only be exposed via ``localhost``
-or via virtual interfaces to GEISA app containers.  GEISA applications determine how
-to connect to the broker from data in a local configuration file `/etc/geisa/config.binpb`
-within the Application container environment.
-
 .. Note::
 
   Platforms or applications running on a GEISA application MAY provide
   externally MQTT implementations separate from the GEISA API MQTT implementation
 
+
+Message bus connection and credentials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The GEISA API SHALL use MQTT standard port 1883. GEISA API transactions
 are not sent over external network interfaces or shared network interfaces.
 GEISA API transactions SHALL NOT require the use of TLS.
+
+The GEISA API MQTT implementation may only be exposed via ``localhost``
+or via virtual interfaces to GEISA app containers.
 
 To enable authentication, GEISA EE |geisa-ee-globe| conformant applications
 SHALL be assigned a unique user ID and token by the platform.  Applications use the
@@ -79,12 +75,39 @@ application's execution.
   requiring unwanted customizations.  It is understood that this approach is wholly
   inappropriate in a general network context.
 
+
+Message bus topics and reliability
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 API requests SHALL be sent at MQTT QoS level 1, At least once / acknowledged delivery.
 The GEISA API MQTT broker shall acknowledge API requests.
 GEISA API responses are sent at the QoS level indicated for the transaction, but
 most messages are QoS level 0, At most once / unacknowledged.  
 
 MQTT topics used by the API are listed within each section that follows.
+
+
+Non message bus communication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+While most application to platform communication is performed over the MQTT message
+bus, there are a few exceptions:
+
+In order for an Application to establish the connection to the MQTT message bus, the
+conneciton method (host and port) and per-application credentials are provided
+out-of-band from platform to application. GEISA applications determine how to
+connect to the broker from data in a locally generated configuration file.  For GEISA
+LEE |geisa-lee-tux| this is available at the well-known location `/etc/geisa/config.binpb`
+within the Application container environment.  For GEISA VEE |geisa-vee-cloud| this is
+available in a TBD method.
+
+Because of the potentially very high-volumes of data involved in accesssing metrology 
+:doc:`/api/waveform`, it is handled as a special case.  The waveform data transaction
+allows applications to obtain the frame format and platform specific details regarding
+the waveform data (e.g. sampling rate, sample resolution, etc.) and to request that the
+waveform data stream is activated (or deactivated), but the waveform data itself is
+provided as a raw-binary data structure pushed from the platform to any target
+application containers using a socket and data format as described in :doc:`/api/waveform`.
 
 |geisa-pyramid|
 
