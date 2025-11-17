@@ -28,10 +28,10 @@ facilitate restarting all applications if the platform metadata changes.
   the device or placing it in or out a test mode.  During those events, all GEISA
   applications MUST be restarted so they will notice the new data.
 
-Because the Platform Discovery metadata is expected to be constant, the GEISA
-platforms MUST make it available via a static file placed within the EE.  This
-allows the GEISA applications to read the data using normal file I/O calls
-instead of using the more complicated MQTT API Request / Response mechanism.  
+The Platform Discovery metadata is typically the first data that a GEISA
+application requires upon startup.  A GEISA applicaion may unsubscribe from the
+Platform Discovery MQTT topic once data is received as that data will not change
+during the lifetime of the GEISA application's runtime.
 
 
 Hardware and Firmware
@@ -96,18 +96,48 @@ Waveform Data
 See Metadata section in :doc:`/api/waveform`.
 
 
+Application Deployment Manifest
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each GEISA application may retrieve its own application deployment manifest.  This
+manifest is also constant and not expected to change during runtime.
+
+Like the Platform Discovery metadata, the Application Deployment Manifest may be truly static; however, it is also possible that the operator of the platform changes this data at runtime on an infrequent basis.
+
+Because Application Deployment Manifest is expected to be static, GEISA platforms MUST
+facilitate restarting a specific application if its manifest changes.
+
+.. warning::
+
+  Application designers should consider the impact of placing configuration-type data
+  in their application manifest to minimize the occurances where an operator needs
+  to change the manifest.  Frequently updated values or parameters should be sent
+  over another mechanism such as the application message based communication with
+  the ADM system.
+
+
 MQTT Details
 =============
-
-- Non Applicable.  Platform Discovery metadata is exposed through files that
-  can be read using traditional file I/O processed. 
-- Applications retrieve Platform Discovery metadata by reading the file `/etc/geisa/platform.binpb` within the Application container environment.
-- Applications retrieve Deployment Manifest data by reading the file `/etc/geisa/manifest.json` within the Application container environment.
+- QoS: 1 / Acknowledged R/R
+- Req Topic: ``geisa/api/platform-discovery-req``
+- Rsp Topic: ``geisa/api/platform-discovery-rsp``
 
 API Permissions
 ================
-- Application: Read-only
 
+- Application:
+
+  - Publish: ``geisa/api/platform-discovery-req``
+  - Subscribe: ``geisa/api/platform-discovery-rsp``
+  - Publish: ``geisa/api/app-manifest-req/<userid>``
+  - Subscribe: ``geisa/api/app-manifest-rsp/<userid>``
+
+- Platform:
+
+  - Subscribe: ``geisa/api/platform-discovery-req``
+  - Publish: ``geisa/api/platform-discovery-rsp``
+  - Wildcard Subscribe: ``geisa/api/app-manifest-req/*``
+  - Publish: ``geisa/api/app-manifest-rsp/<userid>``
 
 Transaction Data
 =================
