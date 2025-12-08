@@ -126,8 +126,8 @@ facilitate restarting a specific application if its manifest changes.
 MQTT Details
 =============
 - QoS: 1 / Acknowledged R/R
-- Req Topic: ``geisa/api/platform-discovery-req``
-- Rsp Topic: ``geisa/api/platform-discovery-rsp``
+- Req Topic: ``geisa/api/platform-discovery-req`` and ``geisa/api/app-manifest-req/<userid>``
+- Rsp Topic: ``geisa/api/platform-discovery-rsp`` and ``geisa/api/app-manifest-rsp/<userid>``
 
 API Permissions
 ================
@@ -149,8 +149,12 @@ API Permissions
 Transaction Data
 =================
 
-.. warning::
+- ``PlatformDiscovery_Req``
+- ``PlatformDiscovery_Rsp``
+- ``ApplicationManifest_Req``
+- ``ApplicationManifest_Rsp``
 
-  Need to add refererence to content within |geisa-schemas-repo| here.
+As defined in |geisa-schemas-repo|
+
 
 |geisa-pyramid|

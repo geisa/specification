@@ -88,10 +88,11 @@ The data frame is formatted as follows (example C language structure)::
      uint32_t   sequence_num;    /* unspecified starting value, incremented every frame */
      uint32_t   reserved;
      union {
-       /* variable length array of 1 of 3 data types */
+       /* variable length array of 1 of 4 data types */
        int16_t  i16[0];
        int32_t  i32[0];
        float    f32[0];
+       double   f64[0];
      } data;
    };
 
@@ -205,9 +206,10 @@ API Permissions
 Transaction Data
 =================
 
-.. warning:: 
-  
-  Need to add refererence to content within |geisa-schemas-repo| here.
+- ``Waveform_Req``
+- ``Waveform_Rsp``
+
+As defined in |geisa-schemas-repo|
 
 
 |geisa-pyramid|
