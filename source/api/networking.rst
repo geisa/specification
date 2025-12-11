@@ -39,11 +39,13 @@ Applications MUST also specify the expected volume of data per day per destinati
 
 Once a network interface is online, the Application may use outbound-initiated AF_INET/AF_INET6 sockets from within the container environment to reach the specified endpoints.
 
-Inbound connections towards the Application are not supported in this version of GEISA as inbound port mappings can conflict between applications and accepting inbound connections open the Application to additional security concerns.
+Inbound connections towards the Application are only supported for the local destination class defined below and not from other destination classes.
 
 .. note::
 
   Support for IP socket communication is NOT REQUIRED by a GEISA device, however certain applications may REQUIRE it to function and would not be compatible with those devices.  Applications can be designed to require IP socket communication or require it but fallback in a degraded functionality mode to message based communication.
+
+  Additionally, not all destination classes are REQUIRED by a GEISA device. An operator or device maker may only support a subset depending on capabilities, deployment architecture, or security policy.
 
 
 Interface Types
@@ -89,7 +91,7 @@ For each of these classes, applications have a defined volume limit for when tha
 Network State
 ^^^^^^^^^^^^^
 
-For each destination class, applications have a network state that tells the application if and how much communication is available as described in :doc:`status`.
+For each destination class, applications have a network state that tells the application if and what volume of communication is available as described in :doc:`status`.
 
 An application can request communication with more than one class of endpoint and would need a network status indicator for each class separately.  For example, it may communicate with both Internet Endpoints as well as Local Endpoints.
 
@@ -125,7 +127,7 @@ Connectivity
 
 The operating environment is responsible for providing network connectivity between each Application container environment and network interfaces.
 
-The platform is responsible for both implementing policy (by firewall and forwarding rules), and providing connectivity between these components.
+The platform is responsible for implementing policy (by firewall and forwarding rules), accounting (volume limits), and providing underlying connectivity and routing between these components.
 
 .. note::
 
@@ -162,20 +164,20 @@ DNS in a multi-tenant and multi-interface environment can get quite complex.  Fo
 Local Endpoint Considerations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning:: 
+Local Endpoints are defined to allow an Application access to local resources on a connected network.  Typically this would be for local device integration such as smart plugs, EVSE, Solar Inverter and battery storage equipment and so on.  This class is typically only available for devices that are connected to a home Wi-Fi, a Meter hosted Wi-Fi, or wired connection, for example.
 
-  TODO: should we forgo Local endpoint connectivity for GEISA 1.0?
+Unlike the operator and Internet destination classes, the local destination class allows additional functionality:
 
-Local Endpoints are defined to allow an Application to access local resources on a connected network.  Typically this would be for local device integration such as smart plugs, EVSE, Solar Inverter and battery storage equipment and so on.  This type of class is typically only available for devices that are connected to a home Wi-Fi, a Meter hosted Wi-Fi, or wired connection.
+- Inbound access, including multicast and broadcast
+- Outbound multicast and broadcast
 
-As the IP addressing of the connected network are not known and not static between devices, the Application Manifest cannot list destination/source IP addresses for policy rules.
+As the IP addressing of the connected network are not known and not static between devices, the Application Manifest cannot list destination/source IP addresses for policy rules, but instead only protocol/port and multicast groups.
 
-Many local communication devices use mDNS for discovery, directed broadcasts, multicast, or link-local addressing.  How this is implemented is TBD
+An application requesting inbound access in its manifest requires that the platform create that inbound mapping from the approprate local interface (such as a WiFi interface) into the application container environment.  When requesting a port mapping, both IPv4 and IPv6 MUST be mapped if the local interface supports both.
 
+Many common local device protocols use multicast or broadcast for discovery and registration.  Applications SHOULD be able to both send to IP multicast groups and register IP multicast groups for receipt.  If specified in the application manifiest, the platform will register those addresses on the approprate local interface and forward received packets that match both the multicast/broadcast address and the inbound protocol/port into the application container environment.
 
-
-
-
+Multiple applications MAY register the same IP multicast group at the same time, however they MUST NOT register the same protocol/port.  The platform and/or ADM system MUST arbitrate inbound protocol/port requests in each application manifest to prevent multiple applications from requesting the same inbound protoco/port combination.
 
 
 MQTT Details
