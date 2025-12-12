@@ -65,9 +65,9 @@ API Permissions
 Transaction Data
 =================
 
-.. warning:: 
-  
-  Need to add refererence to content within |geisa-schemas-repo| here.
+- ``InstantaneousQuantities``
+
+As defined in |geisa-schemas-repo|
 
 
 |geisa-pyramid|
