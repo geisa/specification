@@ -136,9 +136,9 @@ files (in `/home/geisa`) MUST be preserved.
 
 .. note::
 
-  GEISA container environments SHOULD have their `/` filesystem mounted read-only
+  GEISA EE SHOULD have their `/` filesystem mounted read-only
   in the kernel to follow the principle of least privilege. This prevents
-  Applications from modifing or adding files in unexpected places and forces
+  Applications from modifying or adding files in unexpected places and forces
   deterministic Application behavior on each startup.
 
   If an implementation chooses to mount `/` read-write, it MUST enforce file and

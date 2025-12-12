@@ -8,7 +8,7 @@
 Application Management
 ----------------------
 
-Application management is the process of deplying, activating, deactivating,
+Application management is the process of deploying, activating, deactivating,
 and decommissioning applications on a GEISA ADM compliant platform, for
 execution within an execution environment.
 
@@ -20,8 +20,8 @@ Installation and Activation of containerized edge applications running in the
 GEISA EE.  In contrast to the Firmware Update object, each instance of the
 multi-instance Software Management object represents a distinct edge
 application *Package* installed in the EE.  The format of the edge application
-Package is defined for LEE conformant |geisa-lee-tux| systems in
-:doc:`/lee/file-layout` and SHALL be composed of the following components:
+Package is defined in :doc:`/lee/file-layout` for LEE conformant |geisa-lee-tux| systems
+and SHALL be composed of the following components:
 
 *    X.509 Public Key Certificate used to verify the digital signature in the Package
 *    Digital Signature across the Edge Application Manifest and Edge Application Binary

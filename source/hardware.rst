@@ -25,15 +25,20 @@ conformance, should be realizable on:
 - One (or more) network interfaces
 - One (or more) metrology interfaces
 
-As this version of the specification does *not* require binary compatibility,
-but is limited to source-code compatibility only, platform implementers MAY 
-choose to use alternate CPUs and/or fewer resources; however, 
-platform implementers should be aware that:
+.. note::
+
+    For the LEE, as this version of the specification does *not* require binary compatibility,
+    but is limited to source-code compatibility only for LEE GEISA applications, 
+    platform implementers MAY choose to use alternate CPUs and/or fewer resources for the LEE.
+    
+Platform implementers should be aware that:
 
 - It MAY NOT be possible to implement a fully conformant (ADM, API, and EE) 
   platform on a device with fewer resources
-- If GEISA is extended to include binary compatibility in the future, ARM
-  CPUs are expected to be the exclusive target architecture for LEE |geisa-lee-tux|.
+- GEISA provides binary compatibility only with the VEE.
+  If GEISA specification is extended to include binary compatibility also for the LEE in the future, 
+  ARM CPUs are expected to be the exclusive target architecture for LEE |geisa-lee-tux|
+  (VEE GEISA applications are agnostic to underlying ISA).
 
 The vision is that the GEISA EE |geisa-ee-globe| runs on 
 a wide range of hardware platforms with various capabilities:
@@ -51,14 +56,14 @@ a wide range of hardware platforms with various capabilities:
 - Generic hardware interfaces such as GPIO, ADC, SPI, etc.
 
 Platform providers offering a GEISA EE |geisa-ee-globe| MUST provide a toolchain which allows application
-developers to compile applications written for the GEISA EE. [#]_
+developers to build applications written for the GEISA EE. [#]_
 
 
 Metrology
 ^^^^^^^^^^^^^^^^^^
 
 GEISA specifically addresses edge computing enviroments used by electric utilities.
-It is assumed there there is a source of metrological data available on GEISA devices.
+It is assumed there is a source of metrological data available on GEISA devices.
 The GEISA API |geisa-api-gear| provides a mechanism for GEISA applications to obtain
 details regarding the metrological capabilities of the device (see :doc:`api/discovery`)
 

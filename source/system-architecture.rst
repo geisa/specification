@@ -65,11 +65,11 @@ MUST be able to enforce the permissions and controls the GEISA specification req
 
 An LEE conformant GEISA implementation must provide a set of :doc:`lee/base-libraries` and :doc:`lee/core-services`
 to containers running in the environment.  The goal of GEISA LEE conformance is to provide a consistent
-and efficient execution enviroment to edge applications running on the platform.  
+and efficient execution environment to edge applications running on the platform.  
 Platform implementers may use any GNU/Linux variant they see fit, provided it meets the requirements
 noted in :doc:`lee/operating-system`; however, for security and efficiency reasons, implementers SHOULD NOT 
 use full general purpose GNU/Linux operating systems.  Implementers SHOULD use distributions specifically
-built for embedded enviroments and should excise any unnecessary system components.
+built for embedded environments and should excise any unnecessary system components.
 
 GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architecture` above.
 
@@ -77,7 +77,7 @@ GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architect
 
 |geisa-vee-hdr|
 
-VEE GEISA applications are provided VEE archives, as detailed in :doc:`virtual-environment`.
+VEE GEISA applications are provided as loadable VEE archives, as detailed in :doc:`virtual-environment`.
 A VEE conformant GEISA implementation is able to launch the archive in a VEE as necessary and grant the 
 application the rights the system operatator permitted the application in the deployment manifest.
 The VEE used by the platform implementation is out of scope, but conformant implementations MUST

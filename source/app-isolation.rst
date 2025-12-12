@@ -23,7 +23,7 @@ for the following reasons:
 - To ensure that one application cannot see the artifacts, resources, or state of another application.
 
 Regardless of application isolation implementation (e.g. LXC container, systemd, VEE, etc.),
-an **authenticated appllication manifest** shall control access
+an **authenticated application manifest** shall control access
 to the following:
 
 - Permissions
@@ -36,9 +36,9 @@ to the following:
 Permissions
 ^^^^^^^^^^^
 
-Most if not all of the bullets below are achieved by having each app in its own isolated conainer.
+Most if not all of the bullets below are achieved by having each app in its own isolated container.
 
-- Apps should run in independent processes
+- Apps should run in their own isolated and controlled environment, whether implemented as separate processes or sandboxes
 - Apps must run with least privilege
 - Apps access permissions should be deny by default
 - App-to-app communication will be denied by default 
@@ -63,11 +63,11 @@ GEISA isolation must meet these performance requirements:
 System Control
 ^^^^^^^^^^^^^^
 
-The system (the container) shall control every aspect of an GEIA app, including:
+The EE (LEE or VEE) shall control every aspect of an GESIA app, including:
 
 - CPU (how much CPU allowed)
 - Memory (how much RAM memory allowed)
-- Persistent Storage (how mush Flash storae allowed)
+- Persistent Storage (how mush Flash storage allowed)
 - Non-Persistent Storage (how much tmpfs allowed)
 - Networking (what networking interfaces and ports allowed)
 
@@ -95,17 +95,17 @@ API Control
 
 These permissions relate to controlling app access to the platform.
 
-- Metrology Acccess (e.g. 1-second RMS, Waveforms)
+- Metrology Access (e.g. 1-second RMS, Waveforms)
 - Actuator Access (if present)
 - Sensor Access (if present)
-- Hardware Access (GPIO, I2C, SPI, etc.) (**NOTE** apps should almost never have hardware access except in the cases of dedicated accelerator or specific peripherals which must be passed through or proxied into the container environment)
+- Hardware Access (GPIO, I2C, SPI, etc.) (**NOTE** apps should almost never have hardware access except in the cases of dedicated accelerator or specific peripherals which must be passed through or proxied into the EE)
 - Inter-App Communication (**NOTE** perhaps hold off on app communcation until after GEISA 1.0.0)
-- Device-to-Device Communcation (**NOTE** hold off until after GEISA 1.0.0)
+- Device-to-Device Communication (**NOTE** hold off until after GEISA 1.0.0)
 
-Container Resource Management
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EE Resource Management
+^^^^^^^^^^^^^^^^^^^^^^
 
-Container resource limits shall include the following:
+EE shall control the application's resource limits including the following:
 
 - CPU limit (% of CPU)
 - Memory Limit (in 1KiB units)
@@ -123,7 +123,7 @@ Container resource limits shall include the following:
     - LAN
     - FAN
 
-- Define Container Access Levels
+- Define Application Access Levels
 
     - Level 0 - Read and Control - Core Features - Immutable
     - Level 1 - Read and Control - Utility
