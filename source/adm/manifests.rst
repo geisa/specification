@@ -174,6 +174,24 @@ Here is an example of an vendor application manifest.
               "udp:203.0.113.66:2256"
             ]
           }
+          "local": {
+            "outbound": [
+              "tcp::9999",
+              "tcp::502"
+              "udp::51234"
+              "udp::5540"
+            ]
+            "inbound": [
+              "tcp::5540",
+              "udp::5540",
+            ]
+            "inbound-multicast": [
+              "255.255.255.255",
+              "224.0.0.251",
+              "ff02::fa",
+              "ff02::fb",
+            ]
+          }
         },
         "external-dependencies": [
           null
