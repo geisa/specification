@@ -57,4 +57,5 @@ Alternative make targets include `html` and `latexpdf` to build just those outpu
 
 To build a custom sphix target, use `SPHINXTARGETS=foo make all`.
 
+
 If you are building this documentation tree from the git repository, substitute the ```mkdir specification``` with the appropriate ```git clone``` command.
