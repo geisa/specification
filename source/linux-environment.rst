@@ -11,7 +11,7 @@ Linux Execution Environment
 |geisa-lee-hdr|
 
 The Linux Execution Environment is one of two execution environments defined
-within the GEISA specifiction.  The LEE defines requirements for platform
+within the GEISA specification.  The LEE defines requirements for platform
 implementers that ensure application developers can develop software without
 needing to customize it for each target environment.
 
