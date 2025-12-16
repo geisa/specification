@@ -8,10 +8,9 @@
 Design Principles
 -----------------
 
-The |GEISA| specification is written for constrained embedded industrial devices,
-and do not assume any hardware memory management such as Memory Management Unit.
-A constrained embedded industrial device can be made of a simple Microcontroller (Cortrex-M class core) 
-or leverage a complex Microprocessor (Cortex-A class core).
+The |GEISA| specification is written for constrained embedded industrial devices.
+A constrained embedded industrial device can be made of a simple microcontroller (Cortex-M class core) 
+or leverage a complex microprocessor (Cortex-A class core).
 These devices are expected to operate in the field without manual intervention for two decades
 or more.  While these devices have network interfaces and sensors (see :doc:`hardware`)
 they do not typically have on-board (graphical) user interfaces. 
