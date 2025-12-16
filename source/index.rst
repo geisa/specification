@@ -34,8 +34,6 @@ GEISA Specification |release|
 
    adm
 
-   app-isolation
-
    linux-environment
    virtual-environment
 

@@ -8,6 +8,9 @@
 System Architecture
 ------------------------------
 
+General Architecture
+=========================
+
 As discussed in :doc:`introduction`, the |GEISA| specification describes 
 four types of interoperability: ADM, API, LEE, and VEE.  
 These types of interoperability live in a general system context, which is shown below in
@@ -49,27 +52,36 @@ both a GEISA conformant execution environment and a GEISA conformant application
 |geisa-ee-hdr|
 
 GEISA defines two different execution environments: a Linux Execution Environment |geisa-lee-tux|
-and a Virtual Execution Environmenti |geisa-vee-cloud|.
+and a Virtual Execution Environment |geisa-vee-cloud|.
 Platforms may offer one or both of these EE.  
 While the GEISA API should be accessible from both EE, there is no expectation that code written
 for one EE will work on the other without being ported. 
 
+.. note::
+
+  It is possible, though not planned, that GEISA would support additional
+  execution environments in the future.
 
 |geisa-lee-hdr|
 
-LEE GEISA applications are provided as container images, as detailed in :doc:`app-isolation`. 
-An LEE conformant GEISA implementation is able to mount a container image and grant that container
-the rights the system operator permitted the application in the deployment manifest.
-The container runtime used by the platform implementation is out of scope, but conformant implementations 
-MUST be able to enforce the permissions and controls the GEISA specification requires.
+LEE GEISA applications are provided as container images, as detailed in
+:doc:`lee/app-isolation`.  An LEE conformant GEISA implementation is able to
+mount a container image and grant that container the rights the system operator
+permitted the application in the deployment manifest.  The container runtime
+used by the platform implementation is out of scope, but conformant
+implementations MUST be able to enforce the permissions and controls the GEISA
+specification requires.
 
-An LEE conformant GEISA implementation must provide a set of :doc:`lee/base-libraries` and :doc:`lee/core-services`
-to containers running in the environment.  The goal of GEISA LEE conformance is to provide a consistent
-and efficient execution enviroment to edge applications running on the platform.  
-Platform implementers may use any GNU/Linux variant they see fit, provided it meets the requirements
-noted in :doc:`lee/operating-system`; however, for security and efficiency reasons, implementers SHOULD NOT 
-use full general purpose GNU/Linux operating systems.  Implementers SHOULD use distributions specifically
-built for embedded enviroments and should excise any unnecessary system components.
+An LEE conformant GEISA implementation must provide a set of
+:doc:`lee/base-libraries` and :doc:`lee/core-services` to containers running in
+the environment.  The goal of GEISA LEE conformance is to provide a consistent
+and efficient execution enviroment to edge applications running on the
+platform.  Platform implementers may use any GNU/Linux variant they see fit,
+provided it meets the requirements noted in :doc:`lee/operating-system`;
+however, for security and efficiency reasons, implementers SHOULD NOT use full
+general purpose GNU/Linux operating systems.  Implementers SHOULD use
+distributions specifically built for embedded enviroments and should excise any
+unnecessary system components.
 
 GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architecture` above.
 
@@ -77,7 +89,7 @@ GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architect
 
 |geisa-vee-hdr|
 
-VEE GEISA applications are provided VEE archives, as detailed in :doc:`virtual-environment`.
+VEE GEISA applications are provided as VEE archives, as detailed in :doc:`virtual-environment`.
 A VEE conformant GEISA implementation is able to launch the archive in a VEE as necessary and grant the 
 application the rights the system operatator permitted the application in the deployment manifest.
 The VEE used by the platform implementation is out of scope, but conformant implementations MUST
@@ -105,6 +117,112 @@ SHOULD consider the security implications of the implementation and ensure they 
 both unintended abuse and deliberate attacks.
 
 GEISA API elements |geisa-api-gear| are shown in green in :numref:`geisa-architecture` above.
+
+|geisa-pyramid|
+
+
+Application Isolation
+=========================
+
+.. note::
+
+  Application Isolation is required of all GEISA execution environments.
+  This section discusses what execution environments must achieve.
+  Requirements specific to a given EE are covered in the respective EE
+  chapters.
+
+
+GEISA applications shall be isolated from each other and the core platform for
+the following reasons:
+
+- To ensure that one application cannot impact another application.
+- To ensure that one application cannot see the artifacts, resources, or state of another application.
+- To ensure that applications cannot impact the platform
+
+Because the GEISA specification defines multiple execution environments, the
+Application Isolation Implementation (AII) is expected to vary between
+execution environments and may vary from one platform to another within an
+execution environment.  Regardless of AII (e.g. LXC container, systemd, VEE,
+etc.), an **authenticated application manifest** shall control access to
+platform resources and the GEISA API.  Additionally, it shall enforce the
+principle of least-privilege.
+
+The application isolation implementation of GEISA conformant platforms shall
+ensure that:
+
+- Applications run in independent processes
+- Applications run with least privilege
+- Application access permissions are deny by default
+- Application-to-application communication are denied by default 
+- Applications cannot access other application's memory or other resources
+- Applications do not know about other applications unless explicitly informed
+- Applications cannot access the platform's local file-system
+- Applications cannot impact the performance of the platform
+- Applications cannot impact the stability of the platform
+- Applications cannot impact the performance of other applications
+- Applications cannot impact the stability of other applications
+- Applications cannot create denial-of-service situations
+- Resources are fairly distributed when oversubscribed
+
+
+Application Manifest
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The same application manifest is used across all AII.  Because of this, all AII
+SHALL support the same controls, in support of the settings defined in the
+application manifest, even if their underlying implementation is substantially
+different.  Application manifests are documented in :doc:`adm/manifests`.
+
+
+Networking Control
+^^^^^^^^^^^^^^^^^^
+
+The AII must control access to the network interface.  By default, applications are not
+given any network access.  The application manifest may indicate that a given
+application is allowed to natively access the local network interface.
+
+The AII shall control
+
+- Whether direct network access is allowed
+- Which network interfaces an application may access (none by default)
+  including HAN/LAN and FAN/WAN interfaces
+- The allowed instantaneous bandwidth an application is allowed
+- The allowed average network volume over a period an application is allowed (e.g. 1 hour, 24 hours)
+- Allowed destination addresses
+- Allowed destination ports
+
+API Control
+^^^^^^^^^^^
+
+These permissions relate to controlling application access to the GEISA API
+provided by the platform.  See :doc:`api` for details.  Each defined API shall
+have its own set of permissions.
+
+
+Container Resource Management
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Container resource limits shall include the following:
+
+- CPU limit (% of CPU)
+- Memory Limit (in 1KiB units)
+- Persistent Storage Limit (in 1KiB units)
+- Non-Persistent Storage Limit (in 1KiB units)
+
+.. note::
+
+  An Application or Deployment manifest can be modified and re-deployed during
+  an Application upgrade or administrative change.  Changes to the resource requirements
+  SHOULD not require an Application restart, but an EE implementation MAY stop, modify,
+  and restart an Application if necessary.
+
+  All resource requirements can be changed including the persistent storage limit.  If
+  that limit is increased, an implementation MUST honor that change and provide the
+  application with a larger volume or limit without loss of persistent data.  If that
+  limit is reduced, an implementation SHOULD attempt to honor that change and reduce
+  the volume or limit, however if the Application is using more than the new limit
+  an alarm or exception SHOULD be raised to the EMS and the action MUST be aborted
+  leaving the Application running with the previous limit.
 
 |geisa-pyramid|
 

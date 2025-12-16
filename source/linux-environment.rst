@@ -18,6 +18,7 @@ needing to customize it for each target environment.
 LEE conformant platforms will provide a consistent:
 
 * :doc:`lee/operating-system`
+* :doc:`lee/app-isolation`
 * :doc:`lee/base-libraries`
 * :doc:`lee/core-services`
 * :doc:`lee/file-layout`
@@ -26,6 +27,7 @@ LEE conformant platforms will provide a consistent:
   :hidden:
 
   lee/operating-system
+  lee/app-isolation
   lee/base-libraries
   lee/core-services
   lee/file-layout 

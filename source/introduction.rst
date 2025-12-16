@@ -112,7 +112,6 @@ This specification currently addresses:
 - :doc:`conformance`
 - :doc:`hardware`
 - :doc:`adm` |geisa-adm-baton| 
-- :doc:`app-isolation` 
 - :doc:`linux-environment` |geisa-lee-tux|
 - :doc:`virtual-environment` |geisa-vee-cloud|
 - :doc:`api` |geisa-api-gear| 

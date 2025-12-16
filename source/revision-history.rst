@@ -21,3 +21,5 @@ Version 0.1.4 - 2025-08-04 - Added contributions on security and API.  Updated V
 Version 0.1.5 - 2025-09-04 - Reorganized and expanded ADM section.
 
 Version 0.1.6 - 2025-10-20 - Updated ADM section with Wiki materials.
+
+Version 0.1.7 - 2025-12-16 - Reorganized App Isolation, local network access, and updated VEE details. 
