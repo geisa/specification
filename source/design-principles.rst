@@ -31,7 +31,7 @@ Interoperability
 
 As dicussed in the :doc:`introduction`, GEISA defines four types of interoperability: ADM, API, LEE & VEE. 
 GEISA does not currently provide a tool-chain or a base-platform implementation. [#]_ 
-This release of the GEISA specification defines source-code interoperability for the
+This release of the GEISA specification defines **source-code** interoperability for the
 LEE & API, **binary-code** interoperability for the VEE & API, and network interoperability for ADM.  
 Source written for the GEISA LEE should be compilable without modification,
 and without needing conditional compilation or platform specific directives.
