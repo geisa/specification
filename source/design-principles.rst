@@ -8,11 +8,13 @@
 Design Principles
 -----------------
 
-The |GEISA| specification is written for constrained embedded industrial devices.  
+The |GEISA| specification is written for constrained embedded industrial devices.
+A constrained embedded industrial device can be made of a simple microcontroller (Cortex-M class core) 
+or leverage a complex microprocessor (Cortex-A class core).
 These devices are expected to operate in the field without manual intervention for two decades
 or more.  While these devices have network interfaces and sensors (see :doc:`hardware`)
-they do not typically have user interfaces.  This device target informs the overall
-design principles of the specification.
+they do not typically have on-board (graphical) user interfaces. 
+This device target informs the overall design principles of the specification.
 
 GEISA design principles include:
 
@@ -30,9 +32,11 @@ Interoperability
 As dicussed in the :doc:`introduction`, GEISA defines four types of interoperability: ADM, API, LEE & VEE. 
 GEISA does not currently provide a tool-chain or a base-platform implementation. [#]_ 
 This release of the GEISA specification defines **source-code** interoperability for the
-API, LEE, and VEE, and network interoperability for ADM.  
-Source written for one of the GEISA EE the and GEISA API should be compilable without modification,
+LEE, VEE, & API, and network interoperability for ADM.  
+Source written for the GEISA LEE should be compilable without modification,
 and without needing conditional compilation or platform specific directives.
+Similarly, source written for the GEISA VEE should be compilable for the target virtual 
+execution environment with needing conditional compilation or platform specific directives.
 
 **LEE** interoperability |geisa-lee-tux| provides a consistent operating system environment 
 built using Linux.  
@@ -41,8 +45,8 @@ many standard libraries and makes it easy to integrate additional technology.
 Applications written for the GEISA LEE will run on any LEE conformant device.
 
 **VEE** interoperability |geisa-vee-cloud| provides a consistent virtual execution environment.
-The Virtual Execution Environment provides a fully-isolated environment which supports the widely-used
-Java |reg| language specification.
+The Virtual Execution Environment provides a fully-isolated managed code environment 
+which supports the widely-used C/C++ and Java |reg| language specifications.
 Applications written for the GEISA VEE will run on any VEE conformant device.
 
 **API** interoperability |geisa-api-gear| provides consistent 
@@ -53,13 +57,14 @@ to interoperate with conformant management systems.
 
 .. Warning::
 
-  The LEE and VEE are two different environments which are not directly compatible.
-  While it is possbible that a platform implementation would support both LEE and VEE, 
-  or that an application developer would write an app in a manner that allows it to 
-  run on both execution environments when properly packaged,
-  users will generally need to select applications which support the EE provided by their devices.
-
-
+  The LEE and VEE are two different environments. The LEE is specifically a Linux environment.
+  The VEE is agnostic to the underlying OS/RTOS, providing source-level interoperability through 
+  supporting well-known languages.
+  It is possible that a platform would support both LEE and VEE. 
+  An application developer may need to select for an app the manner (package) 
+  that allows it to run on one or both execution environments when properly packaged. 
+  Users may need to select applications according to the provided EE. 
+  
 See :doc:`system-architecture` for further discussion.
 
 .. index::
@@ -69,19 +74,28 @@ Constrained Environment
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The GEISA EE is a minimal resource environment,
-having contraints on CPU, RAM, storage, and networking. 
-See :doc:`hardware` for specific minimums that the GEISA specication 
+having constraints on CPU, RAM, storage, and networking. 
+See :doc:`hardware` for specific minimums that the GEISA specification 
 assumes.
 
 As much as possible, resources should be reserved for GEISA applications,
 not consumed by the underlying operating system.
-While a GEISA compliant EE may offer more,
-the minimal GEISA LEE MUST provide **256MB of RAM** and **256MB of persistent storage**
-reserved for GEISA applications |geisa-lee-tux|;
-the minimal GEISA VEE MUST provide **XX MB of RAM** and **XX MB or persistent storage**
-|geisa-vee-cloud|;
-and while hardware performance will vary considerably between platforms, GEISA EE
-SHOULD provide **50% of CPU** for GEISA applications |geisa-ee-globe|.
+While a GEISA-compliant EE may offer more, it MUST reserve the following 
+resources for GEISA applications:
+
+- For GEISA LEE |geisa-lee-tux|:
+
+  - **256MB of RAM**
+  - **256MB of persistent storage**
+
+- For GEISA VEE |geisa-vee-cloud|:
+
+  - **1 MB of RAM**
+  - **8 MB of Flash memory** for code storage and execution
+  - **8 MB of persistent storage**
+
+Additionally, although hardware performance will vary considerably between platforms, 
+GEISA EE SHOULD provide **50% of the CPU** for GEISA applications |geisa-ee-globe|.
 
 Efficiency is critical. The GEISA EE shall provide only those services
 which are so widely required that it would be less efficient to *not* provide them.
