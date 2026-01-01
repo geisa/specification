@@ -24,19 +24,18 @@ The GEISA Virtual Execution Environment is one of two execution environments
 defined within the GEISA specification.
 The GEISA Virtual Execution Environment definitions allows platforms
 which support running applications in a virtual execution environment,
-rather than a full operating system, to do so in an interoperable way with
-binary compatibility.
+rather than a full operating system, to do so in an interoperable way.
 VEEs are used on a variety of platforms.
-The GEISA VEE may run on top the GEISA LEE, although this is not an obligation, 
+The GEISA VEE may run on top the GEISA LEE, although this is not an obligation; 
 that is, the underlying system for a GEISA VEE can be any RTOS and not 
 necessary Linux.
 
 VEEs rely on managed-code virtual runtime (typically a virtual machine): GEISA
 VEE MUST support both multi-thread managed C/C++ and (managed) Java |reg|. 
-Other support for extended languages shall be eventually included (Kotlin, Lua,
-Rust, ECMAScript, etc.).
+Support for other languages (Kotlin, Lua, Rust, ECMAScript, etc.) may be included 
+in the future, but is not definied at this time.
 
-In this version of the GEISA spec the host operating system is Linux and the 
+In this version of the GEISA specification the host operating system is Linux and the 
 VEE SHOULD execute in user space as a process. 
 In future version, it may be possible to consider Zephyr OS, in which case the
 VEE executes as a task.
