@@ -32,11 +32,11 @@ Interoperability
 As dicussed in the :doc:`introduction`, GEISA defines four types of interoperability: ADM, API, LEE & VEE. 
 GEISA does not currently provide a tool-chain or a base-platform implementation. [#]_ 
 This release of the GEISA specification defines **source-code** interoperability for the
-LEE & API, **binary-code** interoperability for the VEE & API, and network interoperability for ADM.  
+LEE, VEE, & API, and network interoperability for ADM.  
 Source written for the GEISA LEE should be compilable without modification,
 and without needing conditional compilation or platform specific directives.
-Managed binary code for the GEISA VEE does not rely on any transformation (such as compilation), 
-and it shall be linkable at runtime without needing compilation. 
+Similarly, source written for the GEISA VEE should be compilable for the target virtual 
+execution environment with needing conditional compilation or platform specific directives.
 
 **LEE** interoperability |geisa-lee-tux| provides a consistent operating system environment 
 built using Linux.  
@@ -57,8 +57,9 @@ to interoperate with conformant management systems.
 
 .. Warning::
 
-  The LEE and VEE are two different environments: the LEE is source-based for Linux only,
-  while the the VEE is agnostic to OS/RTOS and binary-based for a multi-threaded environment. 
+  The LEE and VEE are two different environments. The LEE is specifically a Linux environment.
+  The VEE is agnostic to the underlying OS/RTOS, providing source-level interoperability through 
+  supporting well-known languages.
   It is possible that a platform would support both LEE and VEE. 
   An application developer may need to select for an app the manner (package) 
   that allows it to run on one or both execution environments when properly packaged. 
