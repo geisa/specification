@@ -10,24 +10,52 @@ Virtual Execution Environment
 
 |geisa-vee-hdr|
 
-The Virtual Execution Environment is one of two execution environments
+A Virtual Execution Environment is a multi-sandboxed applications container for
+resource-constrained embedded devices running on microcontrollers or 
+microprocessors.
+It allows devices to run multiple and mixed managed code (Java |reg| compiled 
+binary code, C/C++ compiled binary code, JavaScript code, etc.). 
+A VEE is always based on a virtual execution engine that executes inside the
+device operating system as a process or a task, thus creating an isolated 
+environment where code executes as virtual instruction independent from the 
+operating system or the processor instruction set. 
+
+The GEISA Virtual Execution Environment is one of two execution environments
 defined within the GEISA specification.
 The GEISA Virtual Execution Environment definitions allows platforms
 which support running applications in a virtual execution environment,
 rather than a full operating system, to do so in an interoperable way.
-VEEs are used on a variety of platforms.  Many rely on Java |reg| technology
-or similar virtual runtime enviroments, but support multiple programming
-languages.
+VEEs are used on a variety of platforms.
+The GEISA VEE may run on top the GEISA LEE, although this is not an obligation; 
+that is, the underlying system for a GEISA VEE can be any RTOS and not 
+necessary Linux.
+
+VEEs rely on managed-code virtual runtime (typically a virtual machine): GEISA
+VEE MUST support both multi-thread managed C/C++ and (managed) Java |reg|. 
+Support for other languages (Kotlin, Lua, Rust, ECMAScript, etc.) may be included 
+in the future, but is not definied at this time.
+
+In this version of the GEISA specification the host operating system is Linux and the 
+VEE SHOULD execute in user space as a process. 
+In future version, it may be possible to consider Zephyr OS, in which case the
+VEE executes as a task.
+
+On top of this runtime sits a multi-application kernel that manages the 
+lifecycle, scheduling, and isolation of multiple apps running concurrently. 
+Each application executes inside its own sandbox with strict memory and API
+boundaries, ensuring strong fault-containment, secure separation of logic, and
+safe coexistence of third-party or field-updatable applications on the same
+device.
 
 VEE conformant platforms will provide a consistent:
 
+* :doc:`vee/runtime`
 * :doc:`vee/base-libraries`
-* :doc:`vee/core-services`
 
 .. toctree::
   :hidden:
 
+  vee/runtime
   vee/base-libraries
-  vee/core-services
 
 |geisa-pyramid|

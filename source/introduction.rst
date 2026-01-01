@@ -23,9 +23,10 @@ Within the GEISA specification, interoperability is be broken down into four are
 * Linux Execution Environment (LEE)
 * Virtual Execution Environment (VEE)
 
-Vendor implementations of the GEISA specificiation may not support interoperability in all areas. 
-For example, it is likely that most platform vendors will support either a Linux execution environment,
-or a virtual execution environment, but not both; though there is nothing in the specification that precludes supporting both. 
+Vendor implementations of the GEISA specification may not support interoperability in all areas. 
+For example, some vendors will support either a Linux execution environment, 
+or a virtual execution environment, some vendors will support both, with a VEE running on top of a LEE.
+There is nothing in the specification that precludes supporting only one Execution Environment (LEE or VEE) or both. 
 For clarity, this specification uses icons for each aspect of interoperability 
 so it is clear which requirements apply to a given 
 type of conformance.  The icons are:
@@ -75,8 +76,11 @@ When this specification notes something that is LEE related, there may be a Tux 
 |geisa-vee-hdr|
 
 Virtual Execution Environment interoperability allows software developers to have a consistent virtual
-machine environment for running programs.
-VEE conformant devices provide the ability to run programs that rely on standard Java |reg| class libraries.
+execution environment for running programs.
+VEE conformant devices provide the ability to run programs that rely on standard Managed-code, that is, 
+code executed under the supervision of a virtual machine that provides memory management, security, and isolation. 
+The minimal supported languages for managed-code for GEISA VEE are C/C++ and Java, 
+with their respective libraries.  
 
 When this specification notes something that is VEE related, there may be a connected cloud icon 
 |geisa-vee-cloud| to highlight it.
