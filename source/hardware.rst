@@ -35,8 +35,7 @@ Platform implementers should be aware that:
 
 - It MAY NOT be possible to implement a fully conformant (ADM, API, and EE) 
   platform on a device with fewer resources
-- GEISA provides binary compatibility only with the VEE.
-  If GEISA specification is extended to include binary compatibility also for the LEE in the future, 
+- If GEISA specification is extended to include binary compatibility also for the LEE in the future, 
   ARM CPUs are expected to be the exclusive target architecture for LEE |geisa-lee-tux|
   (VEE GEISA applications are agnostic to underlying ISA).
 
