@@ -18,11 +18,13 @@
 \@ifpackageloaded{fancyhdr}{%
    \fancypagestyle{plain}{
      \fancyhf{} %Clear the footer and header
-     \fancyfoot[RE,RO]{\thepage} % Put page numbers on the right
+     \addtolength{\topmargin}{-2pt}
+     \setlength{\headheight}{15pt}
+     \fancyfoot[RE,RO]{\footnotesize \thepage} % Put page numbers on the right
      % Put copyright on the left
-     \fancyfoot[LE,LO]{\copyright 2025 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
-     \fancyhead[LE,LO]{{\py@HeaderFamily \@title}} % Title on the left
-     \fancyhead[RE,RO]{{\py@HeaderFamily \py@release}} % Release on the right
+     \fancyfoot[LE,LO]{\footnotesize \copyright 2025-2026 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
+     \fancyhead[LE,LO]{{\footnotesize \py@HeaderFamily \@title}} % Title on the left
+     \fancyhead[RE,RO]{{\footnotesize \py@HeaderFamily \py@release}} % Release on the right
      \renewcommand{\headrulewidth}{0.4pt} %Horizontal rules
      \renewcommand{\footrulewidth}{0.4pt} %Horizontal rules
    }
@@ -30,11 +32,13 @@
    % FIXME: shouldn't this have a running header with Name and Release like 'manual'?
    \fancypagestyle{normal}{
      \fancyhf{} %Clear the footer and header
-     \fancyfoot[RE,RO]{\thepage} % Put page numbers on the right
+     \addtolength{\topmargin}{-2pt}
+     \setlength{\headheight}{15pt}
+     \fancyfoot[RE,RO]{\footnotesize \thepage} % Put page numbers on the right
      % Put copyright on the left
-     \fancyfoot[LE,LO]{\copyright 2025 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
-     \fancyhead[LE,LO]{{\py@HeaderFamily \@title}} % Title on the left
-     \fancyhead[RE,RO]{{\py@HeaderFamily \py@release}} % Release on the right
+     \fancyfoot[LE,LO]{\footnotesize \copyright 2025-2026 Contributors to the Grid Edge Interoperability \& Security Alliance a Series of LF Projects, LLC}
+     \fancyhead[LE,LO]{{\footnotesize \py@HeaderFamily \@title}} % Title on the left
+     \fancyhead[RE,RO]{{\footnotesize \py@HeaderFamily \py@release}} % Release on the right
      \renewcommand{\headrulewidth}{0.4pt} %Horizontal rules
      \renewcommand{\footrulewidth}{0.4pt} %Horizontal rules
    }

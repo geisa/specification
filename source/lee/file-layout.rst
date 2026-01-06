@@ -132,7 +132,7 @@ GEISA implementations SHOULD construct a container filesystem using Linux
 - a ``lower`` directory with the Application-specific binaries, libraries, and other files provided by the Application vendor
 - a ``lower`` containing generated files including the configuration files in
   ``/etc/geisa``. *Note: ``/etc/geisa`` could also placed by the platform in the
-upper filesystem instead, though this would make it mutable.* 
+  upper filesystem instead, though this would make it mutable.* 
 - an ``upper`` containing generated files including the configuration files in
   ``/etc/geisa`` as well as any unix domain sockets for communication.
 

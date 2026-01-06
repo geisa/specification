@@ -11,7 +11,7 @@ License
 The |GEISA| specification is licensed under the 
 Community Specification License 
 (https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md).
-This license governs all contributions, including, but not limited too, copyright and patent rights.
+This license governs all contributions, including, but not limited to, copyright and patent rights.
 
 For convenience, the Community Specification License is provided below, in its entirety.
 Within this specification, the "Working Group" referenced in the license below is the 

@@ -1,6 +1,6 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
+  Copyright 2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
   This file is licensed under the Community Specification License 1.0 available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
@@ -23,3 +23,5 @@ Version 0.1.5 - 2025-09-04 - Reorganized and expanded ADM section.
 Version 0.1.6 - 2025-10-20 - Updated ADM section with Wiki materials.
 
 Version 0.1.7 - 2025-12-16 - Reorganized App Isolation, local network access, and updated VEE details. 
+
+Version 0.1.8 - 2026-01-05 - Integrated VEE submission.

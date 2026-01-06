@@ -24,7 +24,7 @@ def geisa_get_release() -> str:
     return release
 
 project = 'GEISA Specification'
-copyright = 'Copyright 2025-%Y, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
+copyright = 'Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
 author = 'Contributors to GEISA'
 release = geisa_get_release()
 html_title = 'GEISA Specification'
@@ -159,11 +159,14 @@ html_theme_options = {
 latex_logo = 'images/geisa-print-logo.png'
 latex_additional_files = ['latex/sphinxlatexstylepage.sty']
 latex_elements = {
+        'pointsize': '12pt',
         'extraclassoptions': 'openany',
         'figure_align': 'H',
+        
         'preamble': r'''
 \righthyphenmin=62
 \lefthyphenmin=62
+\protected\def\sphinxstyletheadfamily{\footnotesize}
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 % activate={true,nocompatibility} - activate protrusion and expansion
 % final - enable microtype; use "draft" to disable
@@ -171,6 +174,7 @@ latex_elements = {
 % factor=1100 - add 10% to the protrusion amount (default is 1000)
 % stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
 ''',
+        'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
 }
 
 
