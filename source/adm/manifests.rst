@@ -54,7 +54,14 @@ GEISA vendor manifests SHALL include:
     - GEISA API Minimum Version
     - GEISA LEE Minimum Version (null for unsupported)
     - GEISA VEE Minimum Version (null for unsupported)
-    - Waveform Access (boolean)
+    - Waveform Access Required (boolean)
+    - CPU Type enum of:
+
+        - ARM
+        - VEE
+        - X86
+        - RISCV
+        - X64
 
 - System Resources Required:
 
@@ -143,7 +150,8 @@ Here is an example of an vendor application manifest.
         "compatibility": {
           "GEISA-API": "1.0.0",
           "GEISA-LEE": "1.0.0",
-          "GEISA-VEE": null
+          "GEISA-VEE": null,
+          "CPU": "ARM"
         },
         "resources": {
           "app-cpu": 30,
