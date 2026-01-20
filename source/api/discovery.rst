@@ -44,7 +44,7 @@ during the lifetime of the GEISA application's runtime.
 Hardware and Firmware
 ^^^^^^^^^^^^^^^^^^^^^
 
-The GEISA EE provides an API so that GIESA compliant applications
+The GEISA EE provides an API so that GEISA compliant applications
 can query the hardware resources available:
 
 - Device Type - returns device type, e.g. meter, ev charger, etc.
