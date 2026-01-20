@@ -59,7 +59,7 @@ Glossary
     Management System.
 
    GEISA
-    `Grid Edge Interoperability and Security Alliancei
+    `Grid Edge Interoperability and Security Alliance
     <https://lfenergy.org/projects/geisa/>`_
 
    GPIO
