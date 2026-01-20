@@ -107,7 +107,7 @@ can create an implementation
 such that a GEISA conformant application
 can run on a GEISA conformant platform without modification.
 Similarly, a vendor providing a GEISA conformant management system
-should be able to management a GEISA conformant platform without modification.
+should be able to manage a GEISA conformant platform without modification.
 
 This specification currently addresses:
 
