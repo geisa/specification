@@ -44,7 +44,7 @@ A GEISA compliant implementation MUST provide at a minimum non-application-speci
 - Reboot Scheduled
 - Shutdown Scheduled
 
-When an application receives one of these updates it MAY take an action but SHALL continue operating until a seperate application shutdown request is received, if any.  The platform will send these updates peridically (at least once per minute) for as long as the condition persists.  No notification is sent for the clearing of these events.
+When an application receives one of these updates it MAY take an action but SHALL continue operating until a seperate application shutdown request is received, if any.  The platform will send these updates peridically (at least once per minute) for as long as the condition persists.  The platform SHOULD send a notification at least once after all events are cleared.
 
 
 Application Updates
@@ -67,7 +67,7 @@ A GEISA compliant implementation MUST provide at a minimum application-specific 
   - Shut down application cleanly
   - Clear PII from application memory, persistent, and non-persistent storage, if any
 
-The platform MAY send a message to the application to start a shutdown over the message bus, OR it MAY invoke the stop command described in the application manifiest.  These 2 methods are considered equivilant and the platform SHOULD invoke one or the other.  In either case, this request is advisory giving the application the ability to cleanly shutdown such as saving state or data to the persistent storage, close cloud network connections, flushing logs, and so on.  Once ready for termiantion, the application responds with a status message (if the shutdown request was made via message), or the stop command will complete (if the shutdown request was made via stop command).
+The platform MAY send a message to the application to start a shutdown over the message bus, OR it MAY invoke the stop command described in the application manifiest.  These 2 methods are considered equivilant and the platform SHOULD invoke one or the other.  In either case, this request is advisory giving the application the ability to cleanly shutdown such as saving state or data to the persistent storage, close cloud network connections, flushing logs, and so on.  Once ready for termination, the application responds with a status message (if the shutdown request was made via message), or the stop command will complete (if the shutdown request was made via stop command).
 
 
 Application Status
@@ -80,16 +80,16 @@ A GEISA compliant implementation MUST accept at a minimum application-specific m
 - Notification that an application startup is complete and now operating
 - Current application status (running, shutting down)
 - Notification that an application is shut down (due to a shutdown request) and ready for termination
-- Request from an application to termiate itself then restart
-- Request from an application to termiate itself without restart
+- Request from an application to terminate itself then restart
+- Request from an application to terminate itself without restart
 
-Upon startup of the application, it MUST send a notification to the platform that it is now operating and it's status is RUNNING. In this message, the application MAY specify if it requires the platform to implement a keepalive/watchdog mechanism.  If so, the application SHALL also send its application status periodically (at a period specified in the most recent message).  If the application does not require a keepalive/watchdog mechanism, it MAY set its timeout to infinity.
+Upon startup of the application, it MUST send a notification to the platform that it is now operating and it's status is RUNNING. In this message, the application MAY specify if it requires the platform to implement a keepalive/watchdog mechanism.  If so, the application SHALL also send its application status periodically (at a period specified in the most recent message).  If the application does not require a keepalive/watchdog mechanism, it MAY omit a timeout value.
 
 If the platform does not receive a status message within the specified timeout period it MUST take the following corrective actions:
 
 - Send a message to the application requesting its status
 - If the application does not respond within a 2nd timeout period, run the stop command specified in the application manifiest
-- If the stop command itself times out (as defined in the application manifiest), force stop the application
+- If the stop command itself times out (as defined in the application manifiest), terminate the application
 - Restart the application using the start command as defined in the application manifiest
 
 
