@@ -44,7 +44,7 @@ A GEISA compliant implementation MUST provide at a minimum non-application-speci
 - Reboot Scheduled
 - Shutdown Scheduled
 
-When an application receives one of these updates it MAY take an action but SHALL continue operating until a seperate application shutdown request is received, if any.  The platform will send these updates peridically (at least once per minute) for as long as the condition persists.  The platform SHOULD send a notification at least once after all events are cleared.
+When an application receives one of these updates it MAY take an action but SHALL continue operating until a separate application shutdown request is received, if any.  The platform will send these updates periodically (at least once per minute) for as long as the condition persists.  The platform SHOULD send a notification at least once after all events are cleared.
 
 
 Application Updates
