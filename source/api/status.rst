@@ -67,7 +67,7 @@ A GEISA compliant implementation MUST provide at a minimum application-specific 
   - Shut down application cleanly
   - Clear PII from application memory, persistent, and non-persistent storage, if any
 
-The platform MAY send a message to the application to start a shutdown over the message bus, OR it MAY invoke the stop command described in the application manifiest.  These 2 methods are considered equivilant and the platform SHOULD invoke one or the other.  In either case, this request is advisory giving the application the ability to cleanly shutdown such as saving state or data to the persistent storage, close cloud network connections, flushing logs, and so on.  Once ready for termination, the application responds with a status message (if the shutdown request was made via message), or the stop command will complete (if the shutdown request was made via stop command).
+The platform MAY send a message to the application to start a shutdown over the message bus, OR it MAY invoke the stop command described in the application manifiest.  These two methods are considered equivilant and the platform SHOULD invoke one or the other.  In either case, this request is advisory giving the application the ability to cleanly shutdown such as saving state or data to the persistent storage, close cloud network connections, flushing logs, and so on.  Once ready for termination, the application responds with a status message (if the shutdown request was made via message), or the stop command will complete (if the shutdown request was made via stop command).
 
 
 Application Status
