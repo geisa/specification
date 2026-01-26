@@ -73,7 +73,7 @@ The platform MAY send a message to the application to start a shutdown over the 
 Application Status
 ^^^^^^^^^^^^^^^^^^
 
-GEISA platforms expect to know the status and health of each application to manage their lifecycle and avilability.
+GEISA platforms expect to know the status and health of each application to manage their lifecycle and availability.
 
 A GEISA compliant implementation MUST accept at a minimum application-specific messages for:
 
@@ -83,12 +83,12 @@ A GEISA compliant implementation MUST accept at a minimum application-specific m
 - Request from an application to terminate itself then restart
 - Request from an application to terminate itself without restart
 
-Upon startup of the application, it MUST send a notification to the platform that it is now operating and it's status is RUNNING. In this message, the application MAY specify if it requires the platform to implement a keepalive/watchdog mechanism.  If so, the application SHALL also send its application status periodically (at a period specified in the most recent message).  If the application does not require a keepalive/watchdog mechanism, it MAY omit a timeout value.
+Upon startup of the application, it MUST send a notification to the platform that it is now operating and its status is RUNNING. In this message, the application MAY specify if it requires the platform to implement a keepalive/watchdog mechanism.  If so, the application SHALL also send its application status periodically (at a period specified in the most recent message).  If the application does not require a keepalive/watchdog mechanism, it MAY omit a timeout value.
 
 If the platform does not receive a status message within the specified timeout period it MUST take the following corrective actions:
 
 - Send a message to the application requesting its status
-- If the application does not respond within a 2nd timeout period, run the stop command specified in the application manifiest
+- If the application does not respond within a second timeout period, run the stop command specified in the application manifiest
 - If the stop command itself times out (as defined in the application manifiest), terminate the application
 - Restart the application using the start command as defined in the application manifiest
 
