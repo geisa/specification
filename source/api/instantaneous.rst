@@ -65,7 +65,7 @@ API Permissions
 Transaction Data
 =================
 
-- ``InstantaneousQuantities``
+- ``GeisaInstantaneousQuantities``
 
 As defined in |geisa-schemas-repo|
 

@@ -206,8 +206,8 @@ API Permissions
 Transaction Data
 =================
 
-- ``Waveform_Req``
-- ``Waveform_Rsp``
+- ``GeisaWaveform_Req``
+- ``GeisaWaveform_Rsp``
 
 As defined in |geisa-schemas-repo|
 

@@ -149,10 +149,10 @@ API Permissions
 Transaction Data
 =================
 
-- ``PlatformDiscovery_Req``
-- ``PlatformDiscovery_Rsp``
-- ``ApplicationManifest_Req``
-- ``ApplicationManifest_Rsp``
+- ``GeisaPlatformDiscovery_Req``
+- ``GeisaPlatformDiscovery_Rsp``
+- ``GeisaApplicationManifest_Req``
+- ``GeisaApplicationManifest_Rsp``
 
 As defined in |geisa-schemas-repo|
 

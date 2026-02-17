@@ -34,7 +34,7 @@ GEISA API conformant platforms SHALL:
 
 - provide an MQTT version 5 broker.
 - support all API transactions listed as mandatory within this specification
-- use `Protocol Buffers <https://protobuf.dev>`_ (edition=2023) for message payload
+- use `Protocol Buffers <https://protobuf.dev>`_ (syntax=proto3) for message payload
 - use the MQTT topics indicated for the API transactions
 - support the Protobuf definition indicated for the API transactions found at |geisa-schemas-repo|
 
