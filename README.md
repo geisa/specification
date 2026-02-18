@@ -53,9 +53,21 @@ source venv/bin/activate
 
 </pre>
 
+If you are building this documentation tree from the git repository, substitute the ```mkdir specification``` with the appropriate ```git clone``` command.
+
 Alternative make targets include `html` and `latexpdf` to build just those outputs.
 
-To build a custom sphix target, use `SPHINXTARGETS=foo make all`.
+To build a custom sphinx target, use `SPHINXTARGETS=foo make all`.
 
+NOTE: Depending on your specific distribution, you may encounter errors on the LaTex file generation at the tail end of the build missing various style files such as the following:
+<pre>
+! LaTeX Error: File `cmap.sty' not found.
+</pre>
+This and other .sty files may cause build failures in LaTex generation.  
+The quickest path to resolve this is to add the `texlive-latex-recommended` package to your system.
 
-If you are building this documentation tree from the git repository, substitute the ```mkdir specification``` with the appropriate ```git clone``` command.
+An alternate method which may save some disk space is if your system is set up with `tlmgr` for user operation, you may be able to address each missing style file in turn via:
+<pre>
+tlmgr search --file --global "cmap.sty"
+</pre>
+which will provide the texlive package providing the specified file which can then be used to install any missing individual files.
