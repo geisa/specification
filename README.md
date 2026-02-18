@@ -64,7 +64,8 @@ NOTE: Depending on your specific distribution, you may encounter errors on the L
 ! LaTeX Error: File `cmap.sty' not found.
 </pre>
 This and other .sty files may cause build failures in LaTex generation.  
-The quickest path to resolve this is to add the `texlive-latex-recommended` package to your system.
+
+The quickest path to resolve this is to add the `texlive-latex-recommended` and `texlive-latex-extra` packages to your system.
 
 An alternate method which may save some disk space is if your system is set up with `tlmgr` for user operation, you may be able to address each missing style file in turn via:
 <pre>
