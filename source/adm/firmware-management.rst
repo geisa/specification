@@ -1,12 +1,14 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 Firmware Management
-----------------------
+-------------------
 
 Firmware management is the process of updating the core operating system for an
 ADM compliant GEISA platform.
@@ -18,7 +20,7 @@ deleted by the GEISA platform client after an upgrade; only the ``/5/0/3
 State`` and ``/5/0/5 Update Result`` resources are reset after an upgrade to
 reflect the new baseline.
 
-The multi-step Firmware Update transaction typic  ally involves the EMS *Observe*
+The multi-step Firmware Update transaction typically involves the EMS *Observe*
 ``/5/0/3 State`` so that the GEISA platform client will provide asynchronous
 updates of client state changes to the EMS, after which the EMS will proceed with
 subsequent steps in the transaction.  Although it is technically possible to
@@ -36,8 +38,10 @@ following:
 Depending on EMS capabilities, LwM2M allows either of the following methods for
 firmware image distribution to the GEISA platform:
 
-*  PUSH (CoAP block-wise transfer) via *Write* of the opaque binary image to ``/5/0/0 Package``
-*  PULL via *Write* to resource ``/5/0/1 Package URI`` for the GEISA platform to download via CoAP/HTTP as soon as practical
+*  PUSH (CoAP block-wise transfer) via *Write* of the opaque binary image to 
+  ``/5/0/0 Package``
+*  PULL via *Write* to resource ``/5/0/1 Package URI`` for the GEISA platform 
+  to download via CoAP/HTTP as soon as practical
 
 
 The following sequence diagrams provide two examples of GEISA conformant
