@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -35,11 +37,13 @@ libraries and/or package dependencies will be deferred to a future release;  at
 this time, no consideration is made for the use of LwM2M object ``14 Software
 Component``.
 
-Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec permits edge app
-packages can be transferred to the EE via either of the following methods:
+Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec 
+permits edge app packages can be transferred to the EE via either of the 
+following methods:
 
 *    PUSH via *Write* of the opaque package to ``/9/x/2 Package`` 
-*    PULL via *Write* to resource ``/9/x/3 Package URI`` for the GEISA platform to download via CoAP/HTTP as soon as practical
+*    PULL via *Write* to resource ``/9/x/3 Package URI`` for the GEISA platform 
+      to download via CoAP/HTTP as soon as practical
 
 In contrast to Firmware Update, the ``Software Management object 9`` does not
 support the concept of automatic Installation or Activation.  Both operations
@@ -47,7 +51,8 @@ of Installation and Activation are manually executed by the EMS, following
 successful package download/verification and successful package install,
 respectively. 
 
-The following example demonstrates GEISA compliant edge app installation and activation:
+The following example demonstrates GEISA compliant edge app installation and 
+      activation:
 
 #.    PULL download of the edge app package from the URL set by the EMS into
       ``/9/x/3 Package URI``, shown in :numref:`software-update-trigger`.

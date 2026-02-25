@@ -1,12 +1,14 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 Bootstrapping
--------------------------
+-------------
 
 As discussed in the LWM2M core specification [LWM2M-Core]_ section 6.1, there
 are four ways to bootstrap a device so that it knows how to contact its LWM2M
@@ -17,16 +19,16 @@ server for management:
 - Client Initiated
 - Server Initiated
 
-In Factory Bootstrap, devices are provisioned during manufacturing with
+Using Factory Bootstrap, devices are provisioned during manufacturing with
 security credentials and Management Server (edge management system) information.
-Upon field installation, devices connect directly to their Management Server
-(edge management system) to perform registration.  
+Upon initial field installation, devices will automatically connect directly 
+to their Management Server (Edge Management System/EMS) to perform registration.  
 
-In Client-Initiated Bootstrap, shown below in :numref:`bootstrap`, devices are
-provisioned during manufacturing with Bootstrap Server (BS) information. Upon
-field installation, devices initiate connection to the Bootstrap Server for the
-provisioning of Security credentials (object 0) and Management Server
-information.
+Under a Client-Initiated Bootstrap, shown below in :numref:`bootstrap`, devices 
+are provisioned during manufacturing with Bootstrap Server (BS) information. 
+Upon field installation, devices initiate the connection to the Bootstrap Server 
+for the provisioning of Security credentials (object 0) and Management Server
+information (and subsequent registration).
 
 .. _bootstrap:
 .. figure:: client-bootstrap.*
