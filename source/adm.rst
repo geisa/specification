@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -12,7 +14,8 @@ Application & Device Management
 
 GEISA provides a uniform mechanism for managing edge devices and the
 applications that run on top of them.  ADM conformant devices from different
-platform vendors can be managed by a single ADM conformant edge management system.
+platform vendors can be managed by a single ADM conformant edge management 
+system.
 See :doc:`system-architecture` for more discussion of the general concept.
 
 ADM conformance devices support a set of standard transactions using OMA

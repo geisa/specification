@@ -1,14 +1,15 @@
-
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 Device Management
 -------------------------------
 
-Device management within GEISA allows system operators to track, updated,
+Device management within GEISA allows system operators to track, update,
 restart, and reset edge environments.  As discussed under :doc:`registration`,
 when a GEISA ADM conformant device starts, it registers with the GEISA Edge
 Management System (EMS).  Following the LWM2M protocol, devices will reregister
@@ -28,23 +29,36 @@ facility to perform device, application, and network management operations on
 an ADM conformant GEISA platform:
 
 
-* **Discover** – Used by a LwM2M Management Server to retrieve the list of Resources instantiated in each Object instance. Data (Resource Values) is not returned.
-* **Read** – Used by an EMS to retrieve Resource data values (e.g., sensor reading). Reading may be performed at various levels: Resource Instance, entire Resource, Object Instance, entire Object
-* **Read-Composite** – Used by an EMS to retrieve multiple Resources/Objects in single CoAP request.
+* **Discover** – Used by a LwM2M Management Server to retrieve the list of 
+  Resources instantiated in each Object instance. Data (Resource Values) is not 
+  returned.
+* **Read** – Used by an EMS to retrieve Resource data values (e.g., sensor reading). 
+  Reading may be performed at various levels: Resource Instance, entire Resource, 
+  Object Instance, entire Object
+* **Read-Composite** – Used by an EMS to retrieve multiple Resources/Objects in 
+  single CoAP request.
 * **Write** – Used by an EMS to modify Device configuration. 
 
 
-  * CoAP PUT is used to Replace the Object Instance or Resource(s) with the new values provided.
-  * CoAP POST is used for Partial Update to update the Resources with the new values provided, leaving other existing Resources unchanged.
+  * CoAP PUT is used to Replace the Object Instance or Resource(s) with the new 
+    values provided.
+  * CoAP POST is used for Partial Update to update the Resources with the new 
+    values provided, leaving other existing Resources unchanged.
 
 
-* **Write-Composite** - Used by an EMS to update multiple Resources/Objects in single CoAP request.
-* **Execute** – Used by an EMS to invoke commands on the platform (e.g., Factory Reset, Activate Edge App).
-* **Create** – Used by an EMS to create new Object Instances on the LwM2M Client of the platform.
-* **Delete** – Used by an EMS to delete Object Instances on the LwM2M Client of the platform.
-* **Write-Attributes** – Used by an EMS to set Notification triggers for an Observe of a Resource/Object (e.g., Only send a Notification every two hours, only send a Notification if the observed value has changed by more than X).
+* **Write-Composite** - Used by an EMS to update multiple Resources/Objects in 
+  single CoAP request.
+* **Execute** – Used by an EMS to invoke commands on the platform (e.g., Factory 
+  Reset, Activate Edge App).
+* **Create** – Used by an EMS to create new Object Instances on the LwM2M Client 
+  of the platform.
+* **Delete** – Used by an EMS to delete Object Instances on the LwM2M Client of 
+  the platform.
+* **Write-Attributes** – Used by an EMS to set Notification triggers for an Observe 
+  of a Resource/Object (e.g., Only send a Notification every two hours, only send 
+  a Notification if the observed value has changed by more than X).
 
-There operations are performed using the following CoAp methods:
+These operations are performed using the following CoAp methods:
 
 ================ ========================= =============================================== ==================== ==================================
 Operation        CoAp Method               Path                                            Success              Failure
