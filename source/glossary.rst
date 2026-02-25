@@ -16,10 +16,10 @@ Glossary
     Analog-to-digital converter
 
    ADM
-        Application and Device Management
+    Application and Device Management
 
    AMI
-        Advanced Metering Infrastructure
+    Advanced Metering Infrastructure
 
    API
     Applications Programming Interface
@@ -27,6 +27,15 @@ Glossary
    CoAP
     Constrained Applications Protocol
 
+   COE
+    Common Operating Environment
+    
+    The COE is the software platform specification which defines the software components, 
+    interfaces, and processes needed to implement a GEISA conformant platform.  
+    The COE is designed to be flexible and modular, allowing for a variety of implementations 
+    that can meet the needs of different use cases and environments.  The COE is intended to 
+    provide a common foundation for GEISA implementations, while also allowing for customization 
+    and innovation by implementers.
 
    DER
         Distributed Energy Resource
@@ -71,6 +80,16 @@ Glossary
    HAN
     Home Area Network
 
+   Hybrid Application Model
+     A hybrid application model in context of GEISA refers to an application 
+     which may use a combination of edge/local and cloud resources for 
+     determination of actual conditions, or additional upstream analysis on 
+     the aggregation of edge-determined conditions.  FOr example, a specific 
+     edge application may determine some specific conditions locally, but also
+     share data upstream to a cloud-based application to perform additional analysis
+     to determine if other conditions may exist, or to determine if the 
+     locally-determined conditions are part of a larger pattern of conditions.
+   
    LAN
     Local Area Network
 
