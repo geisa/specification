@@ -1,15 +1,17 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 Conformance
------------------------
+-----------
 
-The |GEISA| was established to advance interoperability within the utility industry.
-Interoperability exists in many forms.   
+The |GEISA| was established to advance interoperability within the utility 
+industry.  Interoperability exists in many forms.   
 
 To enable platform vendors, application developers, management system providers, 
 and utilities to validate whether a given system component conforms with this
