@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -18,49 +20,53 @@ they MUST accept application images.
 
 GEISA applications shall be isolated from each other for the following reasons:
 
-- To ensure that one application cannot impact another application.
-- To ensure that one application cannot see the artifacts, resources, or state
-  of another application.
+- To ensure that one application cannot impact any other application.
+- To ensure that one application cannot see the artifacts, resources, data, or 
+  state of any other application.
 
-Regardless of application isolation implementation (e.g. LXC container,
-systemd, VEE, etc.), an **authenticated application manifest** shall control
-access to all system resources.  This includes access to network interfaces,
-GEISA API calls, and hardware resources (CPU, RAM, storage).  The
-containerization system shall also control application-to-application communications.
+Regardless of the specific application isolation implementation (e.g. LXC 
+container, systemd, VEE, etc.), an **authenticated application manifest** shall 
+control access to all system resources.  This includes access to network 
+interfaces, GEISA API calls, and hardware resources (CPU, RAM, storage).  The
+containerization system shall also control application-to-application 
+communications, if any.
 
 While platforms may use any container mechanism they choose, for clarity of
-intent, this portion of the GEISA specification uses ``lxc`` for some examples.  
+intent, this portion of the GEISA specification uses ``lxc`` for various 
+examples.  
 
 
 Isolation Requirements
-========================
+======================
 
 General Requirements
-^^^^^^^^^^^^^^^^^^^^^^ 
+^^^^^^^^^^^^^^^^^^^^
 
 GEISA LEE requires that:
 
 - Applications SHALL run in independent processes
 - Applications SHALL not run as root
-- Applications access permissions SHALL be deny by default
+- Application access permissions SHALL be deny by default
 - Application-to-application communication SHALL be denied by default 
-- Applications SHALL not be able to access other apps memory or other resources
+- Applications SHALL not be able to access other applications memory or other 
+  resources
 - Applications SHALL not know about other applications unless explicitly informed
-- Applications SHALL not have access to platform file-system 
+- Applications SHALL not have access to the underlying platform file-system 
 
-GEISA LEE requires the application isolation mechanism ensure that:
+GEISA LEE requires the application isolation mechanism to ensure that:
 
 - Applications cannot impact the performance of the system
 - Applications cannot impact the stability of the system
-- Applications cannot impact the performance of other apps
-- Applications cannot impact the stability of other apps
+- Applications cannot impact the performance of other applications
+- Applications cannot impact the stability of other applications
 - Applications cannot create denial-of-service situations
-- System and non-GEISA components can have priority, but cannot consume all resources to the point of GEISA Applications starvation
+- System and non-GEISA components may have priority, but cannot consume all 
+  resources to the point of GEISA Applications starvation
 - Operators MAY choose to oversubscribe CPU resources but not RAM and storage resources
 - If oversubscribed, available resources must be fairly distributed between Apps
 
 Resource Management
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 The platform SHALL control every aspect of a GEISA applications access to
 system resources, including:
@@ -74,18 +80,18 @@ system resources, including:
 
 .. note::
 
-  Storage limits can be enforced a variety of ways, depending on the underlying
-  technologies in place.  LXC supports the ``root size`` option.  ``tmpfs``
-  supports size limits.  Quotas can be used.  It is up to the platform provider
-  to choose the appropriate technology to enforce limits.
+  Storage limits can be enforced in a variety of ways, depending on the 
+  underlying chosen technologies in place.  For example, LXC supports the ``root size`` 
+  option.  ``tmpfs`` supports size limits.  Quotas may be used.  It is up to 
+  the platform provider to choose the appropriate technology to enforce limits.
 
 Networking Control
 ^^^^^^^^^^^^^^^^^^
 
-By default, apps are not given any network access.  Applications which need
-simple communication can use the application messaging API that is built into
-the GEISA API.  Apps that need direct access to a network interface can be
-granted it.
+By default, applications are not given any network access.  Applications which 
+need relatively simple communication may use the application messaging API that 
+is part of the GEISA API.  Apps that require direct access to a network 
+interface may be granted specific permission.
 
 - Which network interfaces (none by default)
 - Instantaneous Bandwidth
@@ -105,21 +111,22 @@ the application manifest.  Please see :doc:`/api` and :doc:`/adm/manifests` for
 additional details.
 
 Container Image Requirements
-===============================
+============================
 
-Container images in GEISA are composed by combining a base image (provided by the
-platform), an application configuration image or folder (provided by the platform), an
-application image (provided by the application creator), a non-persistent tmpfs (provided by the
-platform) and a persistent file system (provided by the platform).  This
-combination is mounted as the root file system for the container.  Details of
-the contents of these file systems can be found in :doc:`/lee/file-layout`
+Container images in GEISA are composed by combining a base image (provided by 
+the platform), an application configuration image or folder (provided by the 
+platform), an application image (provided by the application creator), a 
+non-persistent tmpfs (provided by the platform) and a persistent file system 
+(provided by the platform).  This combination is mounted as the root file 
+system for the application container.  Details of the contents of these file 
+systems can be found in :doc:`/lee/file-layout`
 
 As an example of how this might be composed, consider a platform using ``lxc``
 as its container engine.  The platform has a shared base image at
-``/plaform/base/geisa-base-1.0.0.sqfs``.  It receives an application manifest for a given
-application, including the image's digital signature.  Upon receiving the
-application image through the application download process, the platform stores
-the application image in ``/platform/apps/geisa-app-1/geisa-app-1-1.0.1.sqfs``,
+``/plaform/base/geisa-base-1.0.0.sqfs``.  It receives an application manifest 
+for a given application, including the image's digital signature.  Upon 
+receiving the application image through the application download process, the 
+platform stores the application image in ``/platform/apps/geisa-app-1/geisa-app-1-1.0.1.sqfs``,
 and then validates the image against the digital signature contained in the
 manifest.  
 
@@ -132,9 +139,9 @@ in a ``/etc/geisa/config.pb`` file in an appropriate image file, stored in the
 
 To launch the application the platform will mount each of the required file
 system images.  For a system running ``lxc``, the platform might create a
-``geisa-app-1`` folder under ``/var/lib/lxc``.  Under that folder, it could create
-folders for ``base``, ``config``, ``app``, ``persistant``, ``work``, and
-``rootfs``.  For ``base``, ``config``, and ``app`` the platform could mount the
+``geisa-app-1`` folder under ``/var/lib/lxc``.  Under that folder, it could 
+create folders for ``base``, ``config``, ``app``, ``persistent``, ``work``, and
+``rootfs``.  For ``base``, ``config`` and ``app``, the platform could mount the
 respective file system images::
 
   mount -t squashfs /platform/base/geisa-base-1.0.0.squashfs /var/lxc/geisa-app-1/base
@@ -148,11 +155,9 @@ Once these images are mounted, the images can be merged using the overlayfs::
   -oupperdir=/var/lxc/geisa-app-1/persistent \
   -oworkdir=/var/lxc/geisa-app-1/work /var/lxc/geisa-app-1/rootfs
 
-The platform could then mount a ``tmpfs`` instance specific to ``geisa-app-1`` at
-``/var/lxc/geisa-app-1/rootfs/tmp``.  Launching the application could be done
-via ``lxc-start geisa-app-1`` or ``lxc-execute geisa-app-1`` depending on the
-design.
-
-
+The platform could then mount a ``tmpfs`` instance specific to ``geisa-app-1`` 
+at ``/var/lxc/geisa-app-1/rootfs/tmp``.  Launching the application could be 
+done via ``lxc-start geisa-app-1`` or ``lxc-execute geisa-app-1`` depending on 
+the design.
 
 |geisa-pyramid|
