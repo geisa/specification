@@ -8,7 +8,7 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 Application & Device Management
------------------------------------
+-------------------------------
 
 |geisa-adm-hdr|
 
@@ -54,4 +54,7 @@ to send messages to edge applications.
   adm/firmware-management
   adm/app-management
   adm/messaging
+
+|geisa-pyramid|
+
 
