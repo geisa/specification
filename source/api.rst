@@ -79,7 +79,8 @@ The GEISA API offers the transaction sets for the following purposes:
 
 .. note::
 
-  Additional transaction sets may be added in future versions of the GEISA specification.
+  Additional transaction sets may be added in future versions of the GEISA 
+  specification.
 
 .. toctree::
    :hidden: 

@@ -10,8 +10,8 @@
 Conformance
 -----------
 
-The |GEISA| was established to advance interoperability within the utility industry.
-Interoperability exists in many forms.   
+The |GEISA| was established to advance interoperability within the utility 
+industry.  Interoperability exists in many forms.   
 
 To enable platform vendors, application developers, management system providers, 
 and utilities to validate whether a given system component conforms with this

@@ -33,3 +33,6 @@ LEE conformant platforms will provide a consistent:
   lee/base-libraries
   lee/core-services
   lee/file-layout 
+
+|geisa-pyramid|
+

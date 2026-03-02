@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -9,9 +11,9 @@ References
 --------------------
 
 .. note::
-        Due to the way Sphinx Docs renders things, in the PDF version of specification, 
-        references are found in the Bibliography chapter.  We hope to correct this in 
-        a future version of the specification.
+        Due to the way Sphinx Docs renders things, in the PDF version of the 
+        specification, references are found in the Bibliography chapter.  We 
+        hope to correct this in a future version of the specification.
 
 .. [LWM2M] `OMA Lightweight M2M
    <https://www.openmobilealliance.org/specifications/lwm2m>`_

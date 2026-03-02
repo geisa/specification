@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA), a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0
+  available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -21,6 +23,9 @@ Glossary
    AMI
     Advanced Metering Infrastructure
 
+   AII
+    Application Isolation Implementation
+    
    API
     Applications Programming Interface
 
@@ -30,21 +35,23 @@ Glossary
    COE
     Common Operating Environment
     
-    The COE is the software platform specification which defines the software components, 
-    interfaces, and processes needed to implement a GEISA conformant platform.  
-    The COE is designed to be flexible and modular, allowing for a variety of implementations 
-    that can meet the needs of different use cases and environments.  The COE is intended to 
-    provide a common foundation for GEISA implementations, while also allowing for customization 
+    The COE is the software platform specification which defines the software 
+    components, interfaces, and processes needed to implement a GEISA-conformant 
+    platform.  The COE is designed to be flexible and modular, allowing for a 
+    variety of implementations that can meet the needs of different use cases 
+    and environmental constraints.  The COE is intended to provide a common 
+    foundation for GEISA implementations, while also allowing for customization 
     and innovation by implementers.
 
    DER
         Distributed Energy Resource
 
         Distributed Energy Resource is a generic term that typically includes
-        photo-voltaics coupled with a smart inverter, battery energy storage systems,
-        electric vehicles, demand response, and other dispatchable load or generation
-        available on the electric distribution network.  DER is typically owned by
-        consumers or businesses, rather than utilities or wholesale energy market participants.
+        photo-voltaics coupled with a smart inverter, battery energy storage 
+        systems, electric vehicles, demand response, and other dispatchable load 
+        or generation available on the electric distribution network.  DERs are 
+        typically owned by consumers or businesses, rather than utilities or 
+        wholesale energy market participants.
 
    FAN
     Field Area Network
@@ -86,9 +93,10 @@ Glossary
      determination of actual conditions, or additional upstream analysis on 
      the aggregation of edge-determined conditions.  FOr example, a specific 
      edge application may determine some specific conditions locally, but also
-     share data upstream to a cloud-based application to perform additional analysis
-     to determine if other conditions may exist, or to determine if the 
-     locally-determined conditions are part of a larger pattern of conditions.
+     share data upstream to a cloud-based application to perform additional 
+     analysis to determine if other conditions may exist, or to determine if 
+     the locally-determined conditions are part of a larger pattern of 
+     conditions.
    
    LAN
     Local Area Network

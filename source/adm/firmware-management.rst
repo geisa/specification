@@ -35,14 +35,14 @@ following:
 *  *Read* ``/5/0/5 Update`` Result after Notification that ``/5/0/3 State = Idle``
 
 
-Depending on EMS capabilities, LwM2M allows either of the following methods for
-firmware image distribution to the GEISA platform:
+Depending on EMS capabilities, LwM2M allows either of the following methods
+for firmware image distribution to the GEISA platform:
 
-*  PUSH (CoAP block-wise transfer) via *Write* of the opaque binary image to 
-  ``/5/0/0 Package``
-*  PULL via *Write* to resource ``/5/0/1 Package URI`` for the GEISA platform 
-  to download via CoAP/HTTP as soon as practical
+* **PUSH** (CoAP block-wise transfer) via the *Write* operation of the opaque
+  binary image to resource ``/5/0/0`` (Package)
 
+* **PULL** via the *Write* operation to resource ``/5/0/1`` (Package URI),
+  allowing the GEISA platform to download via CoAP or HTTP as soon as practical.
 
 The following sequence diagrams provide two examples of GEISA conformant
 upgrades of the platform firmware.  The first example demonstrates PUSH of the

@@ -635,3 +635,5 @@ enforcement under degraded connectivity conditions.
 These capabilities are intended to enable interoperable yet independently
 governed deployments across diverse utility environments.
 
+|geisa-pyramid|
+
