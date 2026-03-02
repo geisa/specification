@@ -71,10 +71,10 @@ Resource Management
 The platform SHALL control every aspect of a GEISA applications access to
 system resources, including:
 
-- The number of CPUs allocated (cgroups ``limits.cpu``)
-- The percentage of CPU allowed (cgroups ``limits.cpu.allowance``) 
-- The priority of the application (cgroups ``limits.cpu.priority``)
-- The maximum RAM (cgroups ``limits.memory``)
+- The number of CPUs allocated (e.g. cgroups ``limits.cpu``)
+- The percentage of CPU allowed (e.g. cgroups ``limits.cpu.allowance``) 
+- The priority of the application (e.g. cgroups ``limits.cpu.priority``)
+- The maximum RAM (e.g. cgroups ``limits.memory``)
 - Persistent Storage 
 - Non-Persistent Storage 
 
