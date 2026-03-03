@@ -12,5 +12,16 @@ Sensors
 
 |geisa-api-hdr|
 
+.. note::
+
+   **Status: Not Yet Defined**
+
+   The requirements and content for this section are not yet defined in this 
+   version of the specification. This section is reserved for future definition 
+   in a subsequent specification version.
+
+   Implementations SHALL NOT rely on any implied behavior in this section.
+
+.. TODO
 
 |geisa-pyramid|

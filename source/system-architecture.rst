@@ -8,10 +8,10 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 System Architecture
-------------------------------
+-------------------
 
 General Architecture
-=========================
+====================
 
 As discussed in :doc:`introduction`, the |GEISA| specification describes 
 four types of interoperability: ADM, API, LEE, and VEE.  

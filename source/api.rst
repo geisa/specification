@@ -56,7 +56,7 @@ The GEISA API offers the transaction sets for the following purposes:
 
 - Other Metering Data
 
-    This includes pecialized metering quantities that meters may record and 
+    This includes specialized metering quantities that meters may record and 
     that applications may request, but that are not so widely used as to be 
     included in the Instantaneous Data transaction definition.
 
