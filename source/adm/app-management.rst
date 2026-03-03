@@ -37,6 +37,8 @@ libraries and/or package dependencies will be deferred to a future release;  at
 this time, no consideration is made for the use of LwM2M object ``14 Software
 Component``.
 
+**App Installation and Activation**
+
 Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec 
 permits edge app packages can be transferred to the EE via either of the 
 following methods:
@@ -74,3 +76,35 @@ The following example demonstrates GEISA compliant edge app installation and
 .. figure:: software-update-install.*
 
     Edge App Install and Activate
+
+The Software Management object Activation state machine defines the ability to use an app but does not address 
+app execution state semantics:
+
+* When the current state is set to ACTIVE, the installed software can be used by the LwM2M Client.
+* When the current state is set to INACTIVE, the LwM2M Client MUST NOT use the installed software.
+
+**App Execution State**
+
+Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State* 
+of an edge application:
+
+===========  =========  =========  ==================================================================
+Resource ID  Operation  Data Type  Description
+===========  =========  =========  ==================================================================
+19           Execute                Start Application. Only available when Activation State = Enabled.
+20           Execute                Stop Application. Only available when Activation State = Enabled.
+21           Read       Integer     Execution Status. 0 = Stopped. 1 = Running.
+===========  =========  =========  ==================================================================
+
+**App Purge**
+
+Version 1.1 of the Software Management object adds an executable resource for an EMS to remotely purge local data 
+from an instance of an edge application installation:
+
+===========  =========  =========  =============================================================================================================
+Resource ID  Operation  Data Type  Description
+===========  =========  =========  =============================================================================================================
+22           Execute               Purge Data. Deletes existing local application data without modifying the app installation/activation states.
+===========  =========  =========  =============================================================================================================
+
+
