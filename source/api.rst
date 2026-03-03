@@ -92,6 +92,7 @@ The GEISA API offers the transaction sets for the following purposes:
    api/waveform
    api/sensors
    api/networking
+   api/api-catalog-reference
 
 |geisa-pyramid|
 
