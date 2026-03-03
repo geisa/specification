@@ -8,8 +8,8 @@
 OMA Lightweight M2M
 -------------------------------------
 
-GEISA Application & Device Management uses OMA Specworks' Lightweight M2M
-[LWM2M]_ as for application management.  Specifically,
+GEISA Application & Device Management uses the Open Mobile Alliance Lightweight M2M
+[LWM2M]_ protocol for application management.  Specifically,
 
 * ADM conformant platforms and Edge Management Systems (EMS) SHALL support LWM2M
   v1.1 or greater. [LWM2M-Core]_
@@ -37,9 +37,12 @@ GEISA Application & Device Management uses OMA Specworks' Lightweight M2M
   * ID 11 -- APN Connection Profile
   * ID 12 -- WLAN Connectivity
   * ID 13 -- Bearer Selection
-  * ID 19 -- Binary App Container
   * ID 20 -- Event Log
-  * ID 504 --Remote SIM Provisioning
+  * ID 504 -- Remote SIM Provisioning
+  * ID 3600 -- GEISA App Messaging
+  * ID 3601 -- GEISA Host Monitoring
+  * ID 3602 -- GEISA App Accounting
+  * ID 3603 -- GEISA Wi-SUN Radio Management
 
 * ADM conformant platforms shall support the following LWM2M Objects
 
@@ -49,8 +52,10 @@ GEISA Application & Device Management uses OMA Specworks' Lightweight M2M
   * ID 4 -- Connectivity Monitoring
   * ID 5 -- Firmware Update
   * ID 9 -- Software Management
-  * ID 19 -- Binary App Container
   * ID 20 -- Event Log
+  * ID 3600 -- GEISA App Messaging
+  * ID 3601 -- GEISA Host Monitoring
+  * ID 3602 -- GEISA App Accounting
 
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
   followng LWM2M Objects:
@@ -59,11 +64,15 @@ GEISA Application & Device Management uses OMA Specworks' Lightweight M2M
   * ID 11 -- APN Connection Profile
   * ID 12 -- WLAN Connectivity
   * ID 13 -- Bearer Selection
-  * ID 504 --Remote SIM Provisioning
+  * ID 504 -- Remote SIM Provisioning
 
 * ADM conformant platforms with GPS interfaces SHALL support the
   followng LWM2M Objects:
 
   * ID 6 -- Location
 
+* ADM conformant platforms with Wi-SUN interfaces SHALL support the
+  followng LWM2M Objects:
+
+  * ID 3603 -- Wi-SUN Radio Management
 

@@ -12,9 +12,43 @@ Device Management
 Device management within GEISA allows system operators to track, update,
 restart, and reset edge environments.  As discussed under :doc:`registration`,
 when a GEISA ADM conformant device starts, it registers with the GEISA Edge
-Management System (EMS).  Following the LWM2M protocol, devices will reregister
-when their registration lifetime expires.  This process allows the system
-operator to use the EMS to track the general status of the edge device fleet.
+Management System (EMS).  
+
+The Registration context allows the EMS to track the general status of the edge device fleet.
+To facilitate effective management, during Registration an ADM conformant EMS SHOULD Read or 
+Observe as appropriate all required GEISA objects advertised by the device platform, including:
+
+===========  =======================  ==================================================================
+Object ID    Object Name              Information
+===========  =======================  ==================================================================
+3            Device                   Mfg, Model, S/N, Firmware Version, System Clock, Storage, etc. 
+4            Connectivity Monitoring  IP Address, Link Quality, LwM2M Network Bearer, etc
+6            Location                 GNSS location
+10           Cellular Connectivity    3GPP connection management
+11           APN Connection Profile   APN connection management
+12           WLAN Connectivity        Wi-Fi Radio interface management
+13           Bearer Selection         LwM2M bearer selection management
+20           Event Log                System Log and App-specific Log retrieval
+504          Remote SIM Provisioning  eSIM profile management: reporting, swap, add/delete
+3601         GEISA Host Monitoring    CPU, RAM, process, context switch, file handle observability
+3602         GEISA App Accounting     System-level and App-level bandwidth usage and optional throttling
+===========  =======================  ==================================================================
+
+To avoid the overhead of full re-Registration during normal session continuance, ADM conformant 
+devices SHALL send a lightweight Registration Update prior to the expiration their Registration 
+Lifetime in order to maintain their Registration context with the server. Although not directly 
+specified in the LwM2M protocol, ADM conformant devices SHOULD send a Registration Update after 
+expiration of 50% of the Registration Lifetime, similar to the timing strategies of RFC 2131.
+Upon receipt of a Registration Update, an ADM conformant EMS SHALL restart the Lifetime expiration
+timer for the device. ADM conformant devices SHALL only perform a full re-Registration under the 
+following conditions:
+* Registration Lifetime expired
+* Client or Server loses the Registration state
+* Change of Server URI or Security Context
+* Re-Bootstrap
+* Client reachability change (IP Address, NAT binding, Endpoint name, etc.)
+ADM conformant devices that maintain their Registration state across reboots are not
+required to perform a full re-Registration after a reboot or power restoration.
 
 Device management is also used to perform platform-level firmware updates.
 Firmware updates are performed using LWM2M Object 5, Firmware Update.
@@ -22,7 +56,10 @@ Firmware updates are performed using LWM2M Object 5, Firmware Update.
 ADM conformant GEISA devices shall support device reboots as well as device
 factory resets, using LWM2M Object 3.  Factory resets of an ADM conformant
 device shall remove all installed applications and any associated application
-data.
+data. During factory reset, the EMS MAY specify management of local LDevID
+credentials by submitting an argument with the Execute /3/0/5 operation:
+* No Argument or Argument = 0 indicates that the Client MUST preserve its IDevID upon factory reset.
+* Argument = 1 indicates that the Client MUST preserve both IDevID and LDevID(s) upon factory reset.
 
 The LwM2M Device Management and Service Enablement interface exposes the
 facility to perform device, application, and network management operations on

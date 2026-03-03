@@ -1,7 +1,9 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available at:
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability & 
+  Security Alliance (GEISA) a Series of LF Projects, LLC  
+  This file is licensed under the Community Specification License 1.0 available
+   at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
@@ -17,7 +19,7 @@ applications have a `recipe
 `manifest <https://learn.microsoft.com/en-us/azure/iot-central/core/howto-manage-deployment-manifests-with-rest-api>`_,
 or other set of metadata describing the requirements and dependencies.
 
-GEISA handled application meta-data through by defining two manifests for each
+GEISA handles application meta-data by defining two manifests for each
 application: a vendor manifest and an operator manifest.  
 
 The vendor application manifest provides information about the application to
@@ -90,8 +92,8 @@ GEISA vendor manifests SHALL include:
     - GEISA does not provide a mechanism for loading arbitrary packages.  The
       external dependencies element in the manifest is used exclusively to
       indicate that one application depends on another.
-    - Vendor assigned Application ID of the application this application
-      depends on.
+    - Vendor-assigned Application ID of the application this application
+      depends on.  
 
 - Default Application Configuration
 
