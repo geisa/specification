@@ -7,6 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. _api-platform-status:
+
 Platform and App Status
 -----------------------
 
@@ -130,7 +132,6 @@ period it MUST take the following corrective actions:
   terminate the application
 - Restart the application using the start command as defined in the application 
   manifest
-
 
 
 Connectivity Updates
