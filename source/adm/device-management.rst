@@ -15,7 +15,7 @@ when a GEISA ADM conformant device starts, it registers with the GEISA Edge
 Management System (EMS).  
 
 The Registration context allows the EMS to track the general status of the edge device fleet.
-To facilitate effective management, during Registration an ADM conformant EMS SHOULD Read or 
+To facilitate effective management, during Registration an ADM conformant EMS SHALL Read or 
 Observe as appropriate all required GEISA objects advertised by the device platform, including:
 
 ===========  =======================  ==================================================================
@@ -30,6 +30,7 @@ Object ID    Object Name              Information
 13           Bearer Selection         LwM2M bearer selection management
 20           Event Log                System Log and App-specific Log retrieval
 504          Remote SIM Provisioning  eSIM profile management: reporting, swap, add/delete
+3600         GEISA App Messaging      App data reporting on the uplink, App config on the downlink
 3601         GEISA Host Monitoring    CPU, RAM, process, context switch, file handle observability
 3602         GEISA App Accounting     System-level and App-level bandwidth usage and optional throttling
 ===========  =======================  ==================================================================
@@ -42,11 +43,13 @@ expiration of 50% of the Registration Lifetime, similar to the timing strategies
 Upon receipt of a Registration Update, an ADM conformant EMS SHALL restart the Lifetime expiration
 timer for the device. ADM conformant devices SHALL only perform a full re-Registration under the 
 following conditions:
+
 * Registration Lifetime expired
 * Client or Server loses the Registration state
 * Change of Server URI or Security Context
 * Re-Bootstrap
 * Client reachability change (IP Address, NAT binding, Endpoint name, etc.)
+
 ADM conformant devices that maintain their Registration state across reboots are not
 required to perform a full re-Registration after a reboot or power restoration.
 
@@ -58,6 +61,7 @@ factory resets, using LWM2M Object 3.  Factory resets of an ADM conformant
 device shall remove all installed applications and any associated application
 data. During factory reset, the EMS MAY specify management of local LDevID
 credentials by submitting an argument with the Execute /3/0/5 operation:
+
 * No Argument or Argument = 0 indicates that the Client MUST preserve its IDevID upon factory reset.
 * Argument = 1 indicates that the Client MUST preserve both IDevID and LDevID(s) upon factory reset.
 
