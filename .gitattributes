@@ -1,0 +1,5 @@
+# The GEISA Specification is a documentation project
+# adding .rst and .svg files as detectable allows linguist to properly 
+# characterize the project.
+*.rst linguist-detectable
+*.svg linguist-detectable
