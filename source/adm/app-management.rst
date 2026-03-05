@@ -51,7 +51,11 @@ In contrast to Firmware Update, the ``Software Management object 9`` does not
 support the concept of automatic Installation or Activation.  Both operations
 of Installation and Activation are manually executed by the EMS, following
 successful package download/verification and successful package install,
-respectively. 
+respectively.
+
+During creation of an ``Software Management object 9`` instance to install an edge app,
+an ADM conformant EMS SHALL use the AppID as the object 9 instance number, in order to
+simplify subsequent app management operations (start, stop, purge, etc.).
 
 The following example demonstrates GEISA compliant edge app installation and 
       activation:
