@@ -1,0 +1,34 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+%%
+%%  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
+%%  This file is licensed under the Community Specification License 1.0 available at:
+%%  https://github.com/geisa/specification/blob/main/LICENSE.md or
+%%  https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+%%
+%%
+
+%%{init: { 'sequence': { 'actorMargin': 300 } } }%%
+%%{init: { 'sequence': { 'noteMargin': 20 } } }%%
+
+sequenceDiagram
+    autonumber
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+
+    Note over C,S: DTLS Session                
+    S->>C: GET /3600/x/1 <br/>(Observe: 0)
+    C-->>S: 2.05 Content
+    
+    C->>C: <br/><br/>App Writes (data)<br/> to GEISA API
+    C-->>S: 2.05 Content<br/>Notification (data)
+
+    C->>C: <br/><br/>App Writes (data2)<br/> to GEISA API
+    C-->>S: 2.05 Content<br/>Notification (data2)
+
+    C->>C: <br/><br/>App Writes (data3)<br/> to GEISA API
+    C-->>S: 2.05 Content<br/>Notification (data3)
