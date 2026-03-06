@@ -26,10 +26,14 @@ sequenceDiagram
     C-->>S: 2.05 Content
     
     A->>C: <br/><br/>App Publishes (data) to GEISA API
+    C-->>A: PUBACK
     C-->>S: 2.05 Content<br/>Notification (data)
 
     A->>C: <br/><br/>App Publishes (data2) to GEISA API
+    C-->>A: PUBACK
     C-->>S: 2.05 Content<br/>Notification (data2)
 
     A->>C: <br/><br/>App Publishes (data3) to GEISA API
+    C-->>A: PUBACK
     C-->>S: 2.05 Content<br/>Notification (data3)
+
