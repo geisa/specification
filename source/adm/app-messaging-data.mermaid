@@ -1,0 +1,39 @@
+---
+config:
+  look: classic
+  theme: neutral
+---
+
+%%
+%%  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
+%%  This file is licensed under the Community Specification License 1.0 available at:
+%%  https://github.com/geisa/specification/blob/main/LICENSE.md or
+%%  https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+%%
+%%
+
+%%{init: { 'sequence': { 'actorMargin': 40 } } }%%
+
+sequenceDiagram
+    autonumber
+    participant A as Edge App
+    participant C as LwM2M Client<br/>(GEISA Platform)
+    participant S as LwM2M Server<br/>(GEISA EMS)
+
+    Note over A,C: GEISA MQTT API
+    Note over C,S: LwM2M / DTLS                
+    S->>C: GET Read /3600/x/1 (Observe: 0)
+    C-->>S: 2.05 Content
+    
+    A->>C: <br/><br/>App Publishes (data) to GEISA API
+    C-->>A: PUBACK
+    C-->>S: 2.05 Content<br/>Notification (data)
+
+    A->>C: <br/><br/>App Publishes (data2) to GEISA API
+    C-->>A: PUBACK
+    C-->>S: 2.05 Content<br/>Notification (data2)
+
+    A->>C: <br/><br/>App Publishes (data3) to GEISA API
+    C-->>A: PUBACK
+    C-->>S: 2.05 Content<br/>Notification (data3)
+

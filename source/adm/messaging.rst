@@ -30,3 +30,11 @@ Resource ID  Name              Operation  Data Type  Description
 3            Message Desc      ReadWrite  Integer    Description: 0=AppConfiguration, 1=AppData
 4050         AppID             ReadWrite  Integer    ID of the edge app using this object instance.
 ===========  ================  =========  =========  ==================================================================
+
+.. figure:: app-messaging-data.*
+
+Edge App Data Reporting 
+
+.. figure:: app-messaging-config.*
+
+Edge App Configuration
