@@ -3,3 +3,4 @@
 # characterize the project.
 *.rst linguist-detectable
 *.svg linguist-detectable
+*.rst text eol=lf
