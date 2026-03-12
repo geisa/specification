@@ -54,18 +54,18 @@ Additional device types may be defined in the future.
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
-- Topic: ``geisa/api/instantaneous-data``
+- Topic: ``geisa/api/instantaneous/data``
 
 API Permissions
 ===============
 
 - Application:
 
-  - Subscribe: ``geisa/api/instantaneous-data``
+  - Subscribe: ``geisa/api/instantaneous/data``
 
 - Platform:
 
-  - Publish: ``geisa/api/instantaneous-data``
+  - Publish: ``geisa/api/instantaneous/data``
 
 
 Transaction Data

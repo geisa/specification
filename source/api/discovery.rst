@@ -154,25 +154,25 @@ a manifest changes.
 MQTT Details
 ============
 - QoS: 1 / Acknowledged R/R
-- Req Topic: ``geisa/api/platform-discovery-req`` and ``geisa/api/app-manifest-req/<userid>``
-- Rsp Topic: ``geisa/api/platform-discovery-rsp`` and ``geisa/api/app-manifest-rsp/<userid>``
+- Req Topic: ``geisa/api/platform/discovery/req/<userid>`` and ``geisa/api/app/manifest/req/<userid>``
+- Rsp Topic: ``geisa/api/platform/discovery/rsp/<userid>`` and ``geisa/api/app/manifest/rsp/<userid>``
 
 API Permissions
 ===============
 
 - Application:
 
-  - Publish: ``geisa/api/platform-discovery-req``
-  - Subscribe: ``geisa/api/platform-discovery-rsp``
-  - Publish: ``geisa/api/app-manifest-req/<userid>``
-  - Subscribe: ``geisa/api/app-manifest-rsp/<userid>``
+  - Publish: ``geisa/api/platform/discovery/req/<userid>``
+  - Subscribe: ``geisa/api/platform/discovery/rsp/<userid>``
+  - Publish: ``geisa/api/app/manifest/req/<userid>``
+  - Subscribe: ``geisa/api/app/manifest/rsp/<userid>``
 
 - Platform:
 
-  - Subscribe: ``geisa/api/platform-discovery-req``
-  - Publish: ``geisa/api/platform-discovery-rsp``
-  - Wildcard Subscribe: ``geisa/api/app-manifest-req/*``
-  - Publish: ``geisa/api/app-manifest-rsp/<userid>``
+  - Subscribe: ``geisa/api/platform/discovery/req/<userid>``
+  - Publish: ``geisa/api/platform/discovery/rsp/<userid>``
+  - Wildcard Subscribe: ``geisa/api/app/manifest/req/#``
+  - Publish: ``geisa/api/app/manifest/rsp/<userid>``
 
 Transaction Data
 ================

@@ -208,8 +208,8 @@ MQTT Details
 ============
 
 - QoS: 1 / Acknowledged R/R
-- Req Topic: ``geisa/api/waveform-req/<userid>``
-- Rsp Topic: ``geisa/api/waveform-rsp/<userid>``
+- Req Topic: ``geisa/api/waveform/req/<userid>``
+- Rsp Topic: ``geisa/api/waveform/rsp/<userid>``
 
 
 API Permissions
@@ -217,13 +217,13 @@ API Permissions
 
 - Application:
 
-  - Publish: ``geisa/api/waveform-req/<userid>``
-  - Subscribe: ``geisa/api/waveform-rsp/<userid>``
+  - Publish: ``geisa/api/waveform/req/<userid>``
+  - Subscribe: ``geisa/api/waveform/rsp/<userid>``
 
 - Platform:
 
-  - Wildcard Subscribe: ``geisa/api/waveform-req/*``
-  - Publish: ``geisa/api/waveform-rsp/<userid>``
+  - Wildcard Subscribe: ``geisa/api/waveform/req/#``
+  - Publish: ``geisa/api/waveform/rsp/<userid>``
 
 
 Transaction Data

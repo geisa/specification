@@ -199,24 +199,24 @@ notifications for:
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
-- Topic: ``geisa/api/platform-status``
-- Topic: ``geisa/api/platform-app-status/<userid>``
-- Topic: ``geisa/api/app-platform-status/<userid>``
+- Topic: ``geisa/api/platform/status``
+- Topic: ``geisa/api/platform/app/status/<userid>``
+- Topic: ``geisa/api/app/platform/status/<userid>``
 
 API Permissions
 ===============
 
 - Application:
 
-  - Subscribe: ``geisa/api/platform-status``
-  - Subscribe: ``geisa/api/platform-app-status/<userid>``
-  - Publish: ``geisa/api/app-platform-status/<userid>``
+  - Subscribe: ``geisa/api/platform/status``
+  - Subscribe: ``geisa/api/platform/app/status/<userid>``
+  - Publish: ``geisa/api/app/platform/status/<userid>``
 
 - Platform:
 
-  - Publish: ``geisa/api/platform-status``
-  - Publish: ``geisa/api/platform-app-status/<userid>``
-  - Subscribe: ``geisa/api/app-platform-status/*``
+  - Publish: ``geisa/api/platform/status``
+  - Publish: ``geisa/api/platform/app/status/<userid>``
+  - Subscribe: ``geisa/api/app/platform/status/*``
 
 
 Transaction Data
