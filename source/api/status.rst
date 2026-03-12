@@ -216,7 +216,7 @@ API Permissions
 
   - Publish: ``geisa/api/platform/status``
   - Publish: ``geisa/api/platform/app/status/<userid>``
-  - Subscribe: ``geisa/api/app/platform/status/*``
+  - Subscribe: ``geisa/api/app/platform/status/#``
 
 
 Transaction Data
