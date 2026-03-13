@@ -295,8 +295,8 @@ MQTT Details
 ============
 
 - QoS: 1 / Acknowledged R/R
-- Req Topic: ``geisa/api/message-req/<userid>``
-- Rsp Topic: ``geisa/api/message-rsp/<userid>``
+- Req Topic: ``geisa/api/message/req/<userid>``
+- Rsp Topic: ``geisa/api/message/rsp/<userid>``
 
 
 API Permissions
@@ -304,13 +304,13 @@ API Permissions
 
 - Application:
 
-  - Publish: ``geisa/api/message-req/<userid>``
-  - Subscribe: ``geisa/api/message-rsp/<userid>``
+  - Publish: ``geisa/api/message/req/<userid>``
+  - Subscribe: ``geisa/api/message/rsp/<userid>``
 
 - Platform:
 
-  - Wildcard Subscribe: ``geisa/api/message-req/*``
-  - Publish: ``geisa/api/message-rsp/<userid>``
+  - Wildcard Subscribe: ``geisa/api/message/req/#``
+  - Publish: ``geisa/api/message/rsp/<userid>``
 
 
 Transaction Data
