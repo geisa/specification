@@ -57,13 +57,21 @@ GEISA vendor manifests SHALL include:
     - GEISA LEE Minimum Version (null for unsupported)
     - GEISA VEE Minimum Version (null for unsupported)
     - Waveform Access Required (boolean)
-    - CPU Type enum of:
+    - For LEE, CPU Type string as returned by the Linux arch command:
 
-        - ARM
-        - RISCV
-        - VEE
-        - X64
-        - X86
+        - ARM 32-bit: armv7l, armv6l
+        - ARM 64-bit: aarch64
+        - RISC-V 32-bit: riscv32
+        - RISC-V 64-bit: riscv64
+        - x86 32-bit: i686
+        - X86 64-bit: x86_64, amd64
+
+    - For VEE, CPU Type string represents the JVM version:
+
+        - Java 8: java8
+        - Java 11: java11
+        - Java 17: java17
+        - Java 21: java21
 
 - System Resources Required:
 
