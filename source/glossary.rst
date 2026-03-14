@@ -53,6 +53,9 @@ Glossary
         typically owned by consumers or businesses, rather than utilities or 
         wholesale energy market participants.
 
+   DTLS
+    Data Transport Layer Security
+
    FAN
     Field Area Network
 
@@ -91,27 +94,32 @@ Glossary
      A hybrid application model in context of GEISA refers to an application 
      which may use a combination of edge/local and cloud resources for 
      determination of actual conditions, or additional upstream analysis on 
-     the aggregation of edge-determined conditions.  FOr example, a specific 
+     the aggregation of edge-determined conditions.  For example, a specific 
      edge application may determine some specific conditions locally, but also
      share data upstream to a cloud-based application to perform additional 
      analysis to determine if other conditions may exist, or to determine if 
      the locally-determined conditions are part of a larger pattern of 
      conditions.
-   
-   LAN
-    Local Area Network
+
+    LAN
+     Local Area Network
 
    LEE
     Linux Execution Environment
+
+   LwM2M
+    Lightweight Machine-to-Machine
 
    MQTT
     `MQTT <https://en.wikipedia.org/wiki/MQTT>`_ 
     is a light-weight publish and subscribe protocol formerly
     known as Message Queueing Telemetry Transport. 
 
-
    OS
     Operating System
+
+   PKI
+    Public Key Infrastructure
 
    Platform Implementation
     A combination of hardware and software which provides one or more
