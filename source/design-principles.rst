@@ -82,6 +82,40 @@ Similarly, source written for the GEISA VEE should be compilable for the target
 virtual execution environment with needing conditional compilation or 
 platform-specific directives.
 
+As an example, shown below is a "do-nothing" C source code program that should
+compile using any GEISA LEE toolchain,
+producing an executable that runs on any GEISA LEE.
+
+.. code-block:: c
+
+   #include <stdio.h>
+   #include <unistd.h>
+
+   int main(int argc, char *argv[]) {
+        while(1) {
+	    sleep(60); // sleep for 60 seconds
+        }
+        return 0;
+    }
+
+As another example, shown below is a "do-nothing" Java source code program that should
+compile using any GEISA VEE toolchain,
+producing an executable that runs on any GEISA VEE.
+
+.. code-block:: java
+
+ public class GeisaHello {
+    public static void main(String[] args) {
+        while (true) {
+            try {
+                Thread.sleep(60000); // sleep for 60 seconds (60,000 milliseconds)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+ }
+
 .. Warning::
 
   The LEE and VEE are two different environments. The LEE is specifically a 
