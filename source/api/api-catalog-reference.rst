@@ -40,17 +40,17 @@ API Topic and Permission Catalog
 +======================================================+===============================================+============+===================+==================+==================================+==============+
 | :doc:`Discovery <../api/discovery>`                  |                                               |            |                   |                  |                                  |              |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
-|                                                      | ``geisa/api/platform/discovery/req/<userid>``          | Application| Publish           | App → Platform   | ``GeisaPlatformDiscovery_Req``   | Request      |
+|                                                      | ``geisa/api/platform/discovery/req/<userid>`` | Application| Publish           | App → Platform   | ``GeisaPlatformDiscovery_Req``   | Request      |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
-|                                                      | ``geisa/api/platform/discovery/rsp/<userid>``          | Application| Subscribe         | Platform → App   | ``GeisaPlatformDiscovery_Rsp``   | Response     |
+|                                                      | ``geisa/api/platform/discovery/rsp/<userid>`` | Application| Subscribe         | Platform → App   | ``GeisaPlatformDiscovery_Rsp``   | Response     |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
 |                                                      | ``geisa/api/app/manifest/req/<userid>``       | Application| Publish           | App → Platform   | ``GeisaApplicationManifest_Req`` | Request      |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
 |                                                      | ``geisa/api/app/manifest/rsp/<userid>``       | Application| Subscribe         | Platform → App   | ``GeisaApplicationManifest_Rsp`` | Response     |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
-|                                                      | ``geisa/api/platform/discovery/req/#``          | Platform   | Wildcard Subscribe         | App → Platform   | ``GeisaPlatformDiscovery_Req``   | Request      |
+|                                                      | ``geisa/api/platform/discovery/req/#``        | Platform   | Wildcard Subscribe| App → Platform   | ``GeisaPlatformDiscovery_Req``   | Request      |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
-|                                                      | ``geisa/api/platform/discovery/rsp/<userid>``          | Platform   | Publish           | Platform → App   | ``GeisaPlatformDiscovery_Rsp``   | Response     |
+|                                                      | ``geisa/api/platform/discovery/rsp/<userid>`` | Platform   | Publish           | Platform → App   | ``GeisaPlatformDiscovery_Rsp``   | Response     |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
 |                                                      | ``geisa/api/app/manifest/req/#``              | Platform   | Wildcard Subscribe| App → Platform   | ``GeisaApplicationManifest_Req`` | Request      |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
@@ -68,7 +68,7 @@ API Topic and Permission Catalog
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
 |                                                      | ``geisa/api/platform/app/status/<userid>``    | Platform   | Publish           | Platform → App   |                                  |              |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
-|                                                      | ``geisa/api/app/platform/status/#``           | Platform   | Wildcard Subscribe         | App → Platform   |                                  |              |
+|                                                      | ``geisa/api/app/platform/status/#``           | Platform   | Wildcard Subscribe| App → Platform   |                                  |              |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
 | :doc:`Networking <../api/networking>`                |                                               |            |                   |                  |                                  |              |
 +------------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+----------------------------------+--------------+
