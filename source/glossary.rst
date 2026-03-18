@@ -25,7 +25,7 @@ Glossary
 
    AII
     Application Isolation Implementation
-    
+
    API
     Applications Programming Interface
 
@@ -34,23 +34,23 @@ Glossary
 
    COE
     Common Operating Environment
-    
-    The COE is the software platform specification which defines the software 
-    components, interfaces, and processes needed to implement a GEISA-conformant 
-    platform.  The COE is designed to be flexible and modular, allowing for a 
-    variety of implementations that can meet the needs of different use cases 
-    and environmental constraints.  The COE is intended to provide a common 
-    foundation for GEISA implementations, while also allowing for customization 
+
+    The COE is the software platform specification which defines the software
+    components, interfaces, and processes needed to implement a GEISA-conformant
+    platform.  The COE is designed to be flexible and modular, allowing for a
+    variety of implementations that can meet the needs of different use cases
+    and environmental constraints.  The COE is intended to provide a common
+    foundation for GEISA implementations, while also allowing for customization
     and innovation by implementers.
 
    DER
         Distributed Energy Resource
 
         Distributed Energy Resource is a generic term that typically includes
-        photo-voltaics coupled with a smart inverter, battery energy storage 
-        systems, electric vehicles, demand response, and other dispatchable load 
-        or generation available on the electric distribution network.  DERs are 
-        typically owned by consumers or businesses, rather than utilities or 
+        photo-voltaics coupled with a smart inverter, battery energy storage
+        systems, electric vehicles, demand response, and other dispatchable load
+        or generation available on the electric distribution network.  DERs are
+        typically owned by consumers or businesses, rather than utilities or
         wholesale energy market participants.
 
    DTLS
@@ -73,8 +73,8 @@ Glossary
 
     Note: with the electric utility industry, EMS often means
     *Energy* Management System.  Similarly, within the network management
-    system EMS often means *Element* Management System.  
-    Within this specification EMS is used exclusively for Edge 
+    system EMS often means *Element* Management System.
+    Within this specification EMS is used exclusively for Edge
     Management System.
 
    GEISA
@@ -91,14 +91,14 @@ Glossary
     Home Area Network
 
    Hybrid Application Model
-     A hybrid application model in context of GEISA refers to an application 
-     which may use a combination of edge/local and cloud resources for 
-     determination of actual conditions, or additional upstream analysis on 
-     the aggregation of edge-determined conditions.  For example, a specific 
+     A hybrid application model in context of GEISA refers to an application
+     which may use a combination of edge/local and cloud resources for
+     determination of actual conditions, or additional upstream analysis on
+     the aggregation of edge-determined conditions.  For example, a specific
      edge application may determine some specific conditions locally, but also
-     share data upstream to a cloud-based application to perform additional 
-     analysis to determine if other conditions may exist, or to determine if 
-     the locally-determined conditions are part of a larger pattern of 
+     share data upstream to a cloud-based application to perform additional
+     analysis to determine if other conditions may exist, or to determine if
+     the locally-determined conditions are part of a larger pattern of
      conditions.
 
     LAN
@@ -111,9 +111,9 @@ Glossary
     Lightweight Machine-to-Machine
 
    MQTT
-    `MQTT <https://en.wikipedia.org/wiki/MQTT>`_ 
+    `MQTT <https://en.wikipedia.org/wiki/MQTT>`_
     is a light-weight publish and subscribe protocol formerly
-    known as Message Queueing Telemetry Transport. 
+    known as Message Queueing Telemetry Transport.
 
    OS
     Operating System
@@ -126,7 +126,7 @@ Glossary
     GEISA conformant interfaces (ADM, API, EE).
 
    POSIX
-    `Portable Operating System Interface 
+    `Portable Operating System Interface
     <https://en.wikipedia.org/wiki/POSIX>`_
 
    RMS
@@ -134,7 +134,23 @@ Glossary
 
    SPI
     Serial Peripheral Interface
- 
+
+   userid
+    In context of GEISA MQTT APIs, this is a platform-local unique identifier
+    assigned to a deployed GEISA application instance o nthat local device.  It
+    is used for topic routing and message correlation within a device.
+    Implementations may map this identifier to underlying platform or application
+    constructs such as application manifest details, container identities, or
+    other information in order to ensure locall uniqueness.
+
+    The userid is unique within the scope of a device but is not required to be
+    globally unique (as of this specification version) and does not represent
+    a human user.
+
+    In this version of GEISA, platforms are not required to support concurrent
+    execution of multiple instances of the same application version on a single
+    device.  Future revisions may expand this behavior.
+
    VEE
     Virtual Execution Environment
 
