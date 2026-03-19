@@ -11,7 +11,10 @@ Security
 --------
 Security is fundamental to the GEISA specification, so much so that it is
 included in the name itself: Grid Edge Interoperability and **Security**
-Alliance.
+Alliance. This specification was developed with prevailing security and privacy 
+design principles in mind, such as NIST 800-53, CCPA and NERC CIP standards, and enables 
+implementers to incorporate security controls appropriate to their operational contexts
+and needs.
 
 Security in GEISA exists to enable trusted interoperability across independently
 developed hardware, software, and operational domains without requiring a single
