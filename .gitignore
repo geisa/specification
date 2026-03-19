@@ -3,3 +3,9 @@
 *.pdf
 *.svg
 !/source/images/*.svg
+node_modules
+.vscode/
+.nvmrc
+.markdownlint.json
+package.json
+package-lock.json
