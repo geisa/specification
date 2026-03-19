@@ -20,24 +20,24 @@ implementation.
 
 :doc:`api/api-catalog-reference` provides a simple catalog of all current APIs.
 
-The GEISA API offers the transaction sets for the following purposes:
+The GEISA API defines APIs for the following purposes:
 
 - :doc:`/api/discovery`
 
-    Provides the capabilities of the platform, including the device type and
-    capabilities (e.g. available sensors, actuators, interfaces, etc.)
+   Provides platform capabilities, including device type and available features
+   (e.g., sensors, actuators, interfaces), etc.
 
 - :doc:`/api/status`
 
-    Provides the current status of the platform, including meter mode (normal,
-    test, alt), communications status, power status (powered, outage), and
-    resource availability.
+    Provides the current status of the platform, including runtime mode (e.g.
+    Manufacturing, Unprovisioned, Normal, Test), communications status, power
+    status (powered, outage), and resource availability.
 
 - :doc:`/api/instantaneous`
 
-    Provides streaming one second (or better) metrology data for applications
-    that need to continuously monitor conditions, without consuming and
-    analyzing waveform data directly.
+    Provides streaming metrology data at one-second intervals or better for
+    applications that need to continuously monitor conditions, without
+    consuming and analyzing waveform data directly.
 
 - Billing Data
 
@@ -46,10 +46,15 @@ The GEISA API offers the transaction sets for the following purposes:
     typically share over a meter-to-cash protocol like ANSI C12.18/21/22 or
     DLMS/COSEM.
 
+.. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
+
+
 - :doc:`/api/networking`
 
-    Allows applications to communicate off-device either via messaging or
-    direct IP sockets.
+    Allows applications to communicate off-device via messaging or direct IP
+     sockets.
 
 - :doc:`/api/waveform`
 
@@ -62,11 +67,20 @@ The GEISA API offers the transaction sets for the following purposes:
     that applications may request, but that are not so widely used as to be
     included in the Instantaneous Data transaction definition.
 
+    .. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
+
 - Actuator Status & Control
 
     Allows applications to query the status of actuators, such as a remote
     disconnect switch, secondary contactor, and auxiliary relays, and, if
     permitted by the application deployment manifest, control them.
+
+    .. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
+
 
 - :doc:`/api/sensors`
 
@@ -75,9 +89,21 @@ The GEISA API offers the transaction sets for the following purposes:
     only; sensors are device/platform specific and other sensors may exist on
     a particular platform.
 
+    .. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
+
 - Event Data
 
+    .. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
+
 - System Messaging
+
+.. note::
+       Reserved for expansion and definition in a future version of the
+       specification.
 
 .. note::
 
