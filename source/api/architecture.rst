@@ -111,8 +111,16 @@ how to connect to the broker from data contained in a locally generated
 configuration file.
 
 For GEISA LEE |geisa-lee-tux|, this information SHALL be available at the
-well-known location ``/etc/geisa/config.binpb`` within the Application
+well-known location ``/etc/geisa/mqtt.conf`` within the Application
 container environment.
+
+.. code-block:: console
+
+        $ cat /etc/geisa/mqtt.conf
+        HOST=localhost
+        PORT=1883
+        USERID=myuserid
+        PASSWORD=mypassword
 
 For GEISA VEE |geisa-vee-cloud|, this information SHALL be made available to
 the Application by the platform. The specific mechanism by which it is exposed
