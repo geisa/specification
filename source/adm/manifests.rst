@@ -71,6 +71,7 @@ GEISA vendor manifests SHALL include:
         - glibc
         - musl
         - uClibc
+        - uClibc-ng
 
     - For VEE, a string of the JVM version:
 
