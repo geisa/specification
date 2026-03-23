@@ -20,6 +20,15 @@ MERMAIDPDF		= $(patsubst %.mermaid, %.pdf,$(MERMAID))
 IMAGESVG      = $(wildcard $(SOURCEDIR)/images/*.svg)
 IMAGEPDF      = $(patsubst %.svg,%.pdf,$(IMAGESVG))
 
+# To solve mermaid issue when building on
+# RPi aarch system system
+ARCH := $(shell uname -m)
+MMDC_FLAGS :=
+ifeq ($(ARCH),aarch64)
+MMDC_FLAGS += --puppeteerConfigFile puppeteer-config.json
+endif
+
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@echo "GEISA Specification targets:"
@@ -46,7 +55,7 @@ prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF)
 all: $(SPHINXTARGETS)
 
 %.svg: %.mermaid
-	mmdc -i $< -o $@
+	mmdc $(MMDC_FLAGS) -i $< -o $@
 
 %.pdf: %.svg
 	rsvg-convert -f=pdf -o $@ $<
