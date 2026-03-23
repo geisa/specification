@@ -105,7 +105,7 @@ API Control
 
 Access to the GEISA API is controlled via MQTT permissions.  The platform will
 assign a userid and password (provided to the application in its unique
-``/etc/geisa/config.binpb`` file) that the application will use to connect to
+``/etc/geisa/mqtt.conf`` file) that the application will use to connect to
 the message bus.  That user will be restricted according to the permissions in
 the application manifest.  Please see :doc:`/api` and :doc:`/adm/manifests` for
 additional details.
@@ -133,8 +133,8 @@ manifest.
 Based on the permissions specified in the manifest, the platform creates the
 necessary MQTT user for the application, granting that user access to the
 necessary APIs allowed in the manifest.  It stores this the application's user
-credentials in ``/platform/apps/geisa-app-1/config/etc/geisa/config.binpb`` or
-in a ``/etc/geisa/config.pb`` file in an appropriate image file, stored in the
+credentials in ``/platform/apps/geisa-app-1/config/etc/geisa/mqtt.conf`` or
+in a ``/etc/geisa/mqtt.conf`` file in an appropriate image file, stored in the
 ``/platform/apps/geisa-app-1`` directory.
 
 To launch the application the platform will mount each of the required file
