@@ -15,10 +15,10 @@ GEISA maintains its formal specification as a set of reStructured text files,
 which are converted to HTML via Sphinx. See
 https://www.sphinx-doc.org/en/master/index.html for details on Sphinx.
 
-Python `venv` creates a virtual environment so that Sphinx can be installed using
-its own separate packages and not break anything in the existing environment.
-Depending on your environment, you may need to install python `venv` using your
-system package manager.
+Python `venv` creates a virtual environment so that Sphinx can be installed  
+using its own separate packages and not break anything in the existing  
+environment.  Depending on your environment, you may need to install python  
+`venv` using your system package manager.
 
 The GEISA spec also supports Mermaid diagrams.  To ensure a consistent build
 process, the build scripts rely on `mmdc` and Mermaid being installed locally.
@@ -53,22 +53,32 @@ source venv/bin/activate
 
 </pre>
 
-If you are building this documentation tree from the git repository, substitute the ```mkdir specification``` with the appropriate ```git clone``` command.
+If you are building this documentation tree from the git repository,  
+substitute the ```mkdir specification``` with the appropriate  
+```git clone``` command.
 
-Alternative make targets include `html` and `latexpdf` to build just those outputs.
+Alternative make targets include `html` and `latexpdf` to build just those  
+outputs.
 
 To build a custom sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Depending on your specific distribution, you may encounter errors on the LaTex file generation at the tail end of the build missing various style files such as the following:
+NOTE: Depending on your specific distribution, you may encounter errors on the  
+LaTex file generation at the tail end of the build missing various style files 
+such as the following:
+
 <pre>
 ! LaTeX Error: File `cmap.sty' not found.
 </pre>
+
 This and other .sty files may cause build failures in LaTex generation.  
 
 The quickest path to resolve this is to add the `texlive-latex-recommended` and `texlive-latex-extra` packages to your system.
 
-An alternate method which may save some disk space is if your system is set up with `tlmgr` for user operation, you may be able to address each missing style file in turn via:
+An alternate method which may save some disk space is if your system is set up  
+to be used with `tlmgr` for user operation, you may be able to address each 
+missing style file in turn via:
 <pre>
 tlmgr search --file --global "cmap.sty"
 </pre>
-which will provide the texlive package providing the specified file which can then be used to install any missing individual files.
+which will provide the texlive package providing the specified file which can 
+then be used to install any missing individual files.
