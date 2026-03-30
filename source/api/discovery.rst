@@ -139,6 +139,15 @@ Network Hardware
    Implementations SHALL NOT assume any behavior, interface, or data structure
    beyond what is explicitly defined elsewhere in this specification.
 
+Waveform Discovery
+------------------
+
+Platform Discovery describes available waveform streams and their
+characteristics. Platforms that support waveform data SHALL expose a baseline 
+waveform stream with the identifier ``waveform-full``.  Discovery SHALL 
+include only static or semi-static metadata.
+Runtime access details and application-specific state are not included here and
+are defined by the Waveform Data API.
 
 Waveform Data
 ^^^^^^^^^^^^^

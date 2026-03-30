@@ -241,14 +241,13 @@ Transaction Data
 
 As defined in |geisa-schemas-repo|
 
-
-|geisa-pyramid|
-
+References
+==========
 
 .. [#ansiforms] ANSI defines a series of standard meter "forms" for the North
-   American market in the `ANSI C12.1 standard
-   <https://webstore.ansi.org/standards/nema/ansic122024>`__.
+   American market in the ANSI C12.1 standard
+   (`Code for Electricity Metering <https://webstore.ansi.org/standards/nema/ansic122024>`__).
+
    Each form has specific physical and electrical characteristics.
-   Readers may find the summary published by the Great Lakes Electric Meter
-   School helpful:
-   https://glems.org/wp-content/uploads/2021/02/Wiring-Diagrams_Website-Revised.pdf
+   
+|geisa-pyramid|
