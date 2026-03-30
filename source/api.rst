@@ -58,8 +58,8 @@ The GEISA API defines APIs for the following purposes:
 
 - :doc:`/api/waveform`
 
-    Allows applications to obtain the details on the waveform data frame
-    definition and to activate or deactivate waveform data streaming.
+    Allows applications to obtain waveform frame metadata and to subscribe or
+    unsubscribe to waveform data streams.
 
 - Other Metering Data
 
