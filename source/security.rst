@@ -164,15 +164,17 @@ framework that evolves alongside the threat landscape. It provides implementers
 with a baseline set of threats to consider when evaluating their specific
 implementations.
 
-Implementers SHOULD extend this model to reflect their operational context, inclusive of but not limited to, their deployment, regulatory,
-and operational environments and identify additional threats applicable to
-their specific circumstances.
+Implementers SHOULD extend this model to reflect their operational context, 
+inclusive of but not limited to, their deployment, regulatory,and operational
+ environments and identify additional threats applicable to their specific 
+ circumstances.
 
 Unlike traditional IT systems, compromise of grid-edge devices and resources may
 create direct reliability impacts to the electrical grid or to individual
-service locations. Therefore, prioritizing a defense-in-depth approach is essential. Additionally, the
-potential for physical access to grid-edge devices creates a need for robust
-physical security controls and/or tamper resistance.
+service locations. Therefore, prioritizing a defense-in-depth approach is 
+essential. Additionally, the potential for physical access to grid-edge 
+devices creates a need for robust physical security controls and/or tamper 
+resistance.
 
 The GEISA specification is designed to enable implementers to meet these needs
 through the design of the COE and the control levers it provides to enforce
@@ -280,7 +282,8 @@ This includes, but is not limited to:
 * Runtime enforcement of operator-defined behavioral constraints, including the
   ability to detect, limit, or terminate workloads that violate policy or exceed
   authorized resource or communication profiles.
-* Revocation of trust relationships when software is no longer authorized for execution within the COE (e.g. due to compromise, policy change, or end of life).
+* Revocation of trust relationships when software is no longer authorized for 
+execution within the COE (e.g. due to compromise, policy change, or end of life).
 
 This model ensures that compromise of any single lifecycle component does not
 result in implicit trust of software or actions elsewhere in the system and helps 
