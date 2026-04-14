@@ -283,7 +283,7 @@ This includes, but is not limited to:
   ability to detect, limit, or terminate workloads that violate policy or exceed
   authorized resource or communication profiles.
 * Revocation of trust relationships when software is no longer authorized for 
-execution within the COE (e.g. due to compromise, policy change, or end of life).
+  execution within the COE (e.g. due to compromise, policy change, or end of life).
 
 This model ensures that compromise of any single lifecycle component does not
 result in implicit trust of software or actions elsewhere in the system and helps 
