@@ -165,9 +165,9 @@ with a baseline set of threats to consider when evaluating their specific
 implementations.
 
 Implementers SHOULD extend this model to reflect their operational context, 
-inclusive of but not limited to, their deployment, regulatory,and operational
- environments and identify additional threats applicable to their specific 
- circumstances.
+inclusive of, but not limited to, their deployment, regulatory, and operational
+environments and identify additional threats applicable to their specific 
+circumstances.
 
 Unlike traditional IT systems, compromise of grid-edge devices and resources may
 create direct reliability impacts to the electrical grid or to individual
