@@ -93,6 +93,15 @@ intentionally implementation-agnostic so that conformant solutions may adapt to
 evolving technologies, regulatory landscapes, and operational priorities while
 maintaining interoperability.
 
+GEISA also recognizes that Implementers and Operators adopting the 
+specification may have varying definitions of data classification and policy
+statements surrounding those classifications. The specification is designed 
+to allow for the application of policy and controls appropriate to a variety 
+of needs and requirements. As such, it and does not mandate specific 
+classifications or associated controls. Instead, GEISA makes capabilities 
+available to Implementers and Operators such that they may apply their own 
+classifications and controls as needed to meet their requirements.
+
 GEISA Responsibilities
 ~~~~~~~~~~~~~~~~~~~~~~
 ..
