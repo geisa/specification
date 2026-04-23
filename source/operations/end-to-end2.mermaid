@@ -1,0 +1,75 @@
+flowchart TB
+
+    classDef role fill:#d9e8fb,stroke:#4f81bd,stroke-width:1px,color:#000000;
+    classDef system fill:#f2f2f2,stroke:#666666,stroke-width:1px,color:#000000;
+
+    subgraph SUPPLY[Supply and Ecosystem Roles]
+        direction LR
+        HP[Hardware Provider]
+        PP[Platform Provider]
+        AP[Application Publisher]
+        AC[Optional Application Certifier]
+    end
+
+    subgraph ADMSET[ADM Pillar / Capabilities]
+        direction TB
+        SO[System Operator]
+
+        subgraph EMSBOX[Edge Management System]
+            direction TB
+            LWMS[LwM2M Server]
+        end
+    end
+
+    subgraph EDGE[Edge Device]
+        direction TB
+
+        subgraph PLATFORM[GEISA Platform]
+            direction TB
+
+            API[GEISA API]
+
+            subgraph EE[Execution Environment]
+                direction LR
+
+                subgraph LEEBOX[LEE]
+                    direction TB
+                    APPL[Edge Application]
+                end
+
+                subgraph VEEBOX[VEE]
+                    direction TB
+                    APPV[Edge Application]
+                end
+            end
+
+            subgraph EMABOX[EMA]
+                direction TB
+                LWMC[LwM2M Client]
+            end
+        end
+    end
+
+    UOPS[Utility Operations, Analytics and Third-Party Systems]
+    DL[Data Lake]
+
+    class HP,PP,AP,AC,SO role;
+    class LWMS,API,APPL,APPV,LWMC,UOPS,DL system;
+
+    HP -->|base hardware modules and supplier certificate| SO
+    PP -->|platform software platform artifacts and supplier certificate| SO
+    AP -->|application image vendor manifest and publisher certificate| SO
+    AC -.->|certifier certificate certification status and record| SO
+
+    SO -->|approval, policy, deployment authorization| LWMS
+
+    LWMS -->|onboarding registration lifecycle deployment activation updates| LWMC
+
+    EMABOX <--> API
+    APPL <--> API
+    APPV <--> API
+
+    EMABOX --- EE
+
+    EMABOX -->|Application alerts, data, status, and reporting data| UOPS
+    EMABOX -->|Application alerts, data, status, and reporting data| DL

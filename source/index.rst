@@ -30,6 +30,7 @@ GEISA Specification |release|
    glossary
     
    design-principles
+   operations
    system-architecture
    conformance
    hardware
