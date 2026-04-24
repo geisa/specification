@@ -62,7 +62,7 @@ support for unknown or future sensors without defining a separate GEISA API for
 every sensor class.
 
 Sensor Discovery Model
-----------------------
+======================
 
 This specification defines GEISA sensor types for interoperability.
 Platforms shall use a GEISA-defined sensor type whenever an applicable
@@ -252,9 +252,6 @@ includes:
 
 - ``status`` (required): ``GeisaStatus`` result status
 - ``readings`` (required): zero or more ``GeisaSensorReading`` entries
-
---------------
-
 
 Example Sensor Types
 ~~~~~~~~~~~~~~~~~~~~

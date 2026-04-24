@@ -77,21 +77,12 @@ The GEISA API defines APIs for the following purposes:
     disconnect switch, secondary contactor, and auxiliary relays, and, if
     permitted by the application deployment manifest, control them.
 
-    .. note::
-       Reserved for expansion and definition in a future version of the
-       specification.
-
-
 - :doc:`/api/sensors`
 
     Exposes sensor data such as temperature, humidity, location, seismic data,
     vibration, acceleration, and light / solar radiation.  These are examples
     only; sensors are device/platform specific and other sensors may exist on
     a particular platform.
-
-    .. note::
-       Reserved for expansion and definition in a future version of the
-       specification.
 
 - Event Data
 
