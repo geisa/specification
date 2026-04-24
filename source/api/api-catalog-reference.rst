@@ -85,7 +85,7 @@ API Topic and Permission Catalog
 |                                                  | ``geisa/api/message/req/#``                   | Platform   | Wildcard Subscribe| App → Platform   |                                           |              |
 +--------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+-------------------------------------------+--------------+
 |                                                  | ``geisa/api/message/rsp/<userid>``            | Platform   | Publish           | Platform → App   |                                           |              |
-+------------------------------------------------------+-----------------------------------------------+--------+-------------------+------------------+-------------------------------------------+--------------+
++--------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+-------------------------------------------+--------------+
 | :doc:`Instantaneous Data <../api/instantaneous>` |                                               |            |                   |                  |                                           |              |
 +--------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+-------------------------------------------+--------------+
 |                                                  | ``geisa/api/instantaneous/data``              | Application| Subscribe         | Platform → App   | ``GeisaInstantaneousQuantities``          | Broadcast    |
@@ -117,5 +117,26 @@ API Topic and Permission Catalog
 |                                                  | ``geisa/api/sensor-rsp/<userid>``             | Platform   | Publish           | Platform → App   | ``GeisaSensorReadings_Rsp``               | Response     |
 +--------------------------------------------------+-----------------------------------------------+------------+-------------------+------------------+-------------------------------------------+--------------+
 
+Sensor Payload Notes
+~~~~~~~~~~~~~~~~~~~~
+
+Sensor descriptors are represented by ``GeisaSensorDescriptor`` and are
+exposed through Platform Discovery rather than Sensor runtime topics.
+
+Published sensor readings use ``GeisaSensorReading``. Each reading
+contains ``sensor_id``, ``timestamp_ms``, and one or more
+``GeisaSensorValue`` entries in the repeated ``values`` field.
+
+A sensor reading may contain multiple values. Each value is represented
+by one ``GeisaSensorValue`` entry, and each entry contains exactly one
+scalar field: ``double_value``, ``int64_value``, ``bool_value``, or
+``string_value``.
+
+Explicit read requests use ``GeisaSensorReadings_Req`` with a repeated
+``sensor_id`` field. Explicit read responses use
+``GeisaSensorReadings_Rsp`` with ``status`` and repeated ``readings``
+fields.
+
 |geisa-pyramid|
+
 
