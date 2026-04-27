@@ -7,5 +7,6 @@ node_modules
 .vscode/
 .nvmrc
 .markdownlint.json
+.markdownlintignore
 package.json
 package-lock.json
