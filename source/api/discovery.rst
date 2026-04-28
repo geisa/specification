@@ -33,6 +33,10 @@ After receiving this data, an application MAY unsubscribe from the Platform
 Discovery response topic for the remainder of that execution instance, as the
 data is not expected to change during runtime.
 
+Applications MUST re-run Platform Discovery on each startup; if platform
+capabilities change, the platform will restart applications so they retrieve
+an updated snapshot during startup.
+
 Dynamic updates and state are provided in :doc:`/api/status`.
 
 Platform Discovery metadata may be truly static, where a platform implementer
@@ -125,20 +129,32 @@ Some example sensors that may be provided include:
 Note this list is not exhaustive, and specific sensor types and accuracy will
 be device-dependent.
 
+Platform Discovery MAY include a list of available sensor descriptors so that
+applications can enumerate which sensors exist on the platform at startup.
+Runtime sensor readings and application-directed sensor queries are defined by
+the Sensors API (:doc:`/api/sensors`).
+
 Network Hardware
 ^^^^^^^^^^^^^^^^
 
 .. admonition:: Status: Reserved for Future Definition
    :class: tbd-section
 
-   This section is intentionally incomplete as of this version of the GEISA
-   specification. The requirements and definitions associated with this section
-   remain under review and will be defined in a future revision of this
-   specification.
-
-   Implementations SHALL NOT assume any behavior, interface, or data structure
+   Network hardware discovery remains reserved for future definition.
+   Implementations SHALL NOT assume behavior, interface, or data structure
    beyond what is explicitly defined elsewhere in this specification.
 
+Waveform Discovery
+------------------
+
+Platform Discovery describes available waveform streams and their
+characteristics. Platforms that support waveform data SHALL expose a baseline
+waveform stream with the identifier ``waveform-base``. Discovery SHALL include
+only static or semi-static metadata. Applications SHALL use waveform metadata
+to interpret a stream and SHALL NOT infer stream characteristics by parsing the
+stream identifier.
+Runtime access details and application-specific state are not included here and
+are defined by the Waveform Data API.
 
 Waveform Data
 ^^^^^^^^^^^^^
@@ -197,7 +213,7 @@ API Permissions
 
 - Platform:
 
-  - Subscribe: ``geisa/api/platform/discovery/req/<userid>``
+  - Wildcard Subscribe: ``geisa/api/platform/discovery/req/#``
   - Publish: ``geisa/api/platform/discovery/rsp/<userid>``
   - Wildcard Subscribe: ``geisa/api/app/manifest/req/#``
   - Publish: ``geisa/api/app/manifest/rsp/<userid>``
