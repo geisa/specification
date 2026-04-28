@@ -127,7 +127,7 @@ API Topic and Permission Catalog
      - Publish
      - App → Platform
      - ``GeisaAppToPlatformStatus``
-     - 
+     - Directed
    * -
      - ``geisa/api/platform/status``
      - Platform
@@ -154,29 +154,29 @@ API Topic and Permission Catalog
      - Application
      - Publish
      - App → Platform
-     - 
-     - 
+     - TBD
+     - TBD
    * -
      - ``geisa/api/message/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
-     - 
-     - 
+     - TBD
+     - TBD
    * -
      - ``geisa/api/message/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
-     - 
-     - 
+     - TBD
+     - TBD
    * -
      - ``geisa/api/message/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
-     - 
-     - 
+     - TBD
+     - TBD
    * - :doc:`Instantaneous Data <../api/instantaneous>`
      - ``geisa/api/instantaneous/data``
      - Application

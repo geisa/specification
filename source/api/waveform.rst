@@ -67,19 +67,40 @@ samples in other channels (i.e., 2, 3, etc.) were.
 Metadata
 ^^^^^^^^
 
-The platform provides the application the following metadata as part of
-:doc:`/api/discovery` for each offered stream:
+Platform Discovery (:doc:`/api/discovery`) describes available waveform
+streams and their static or semi-static characteristics. The metadata below
+is provided via Platform Discovery except for application-specific runtime
+access details (e.g., socket path), which are returned in the Waveform
+activation response.
 
-- The path to the data socket
-- The type of data: one of int16, int32, or float32
+- The path to the data socket (returned in the Waveform activation response; not part of Platform Discovery)
+- The type of data: one of int16, int32, float32, or float64
 - The number of voltage channels
 - The number of current channels
 - The total number of channels (typically the sum of 2 items above, but MAY be larger)
 - The sampling frequency in Hz
-- If the frames are AC cycle aligned or not
+  ``sample-rate-hz`` is the authoritative samples-per-second value.
+  ``samples-per-cycle`` is a nominal descriptor and applications SHALL
+  interpret it together with the stream alignment fields and platform
+  metadata.
+- If the frames are AC cycle aligned or not (see Alignment Definitions below)
 - If data type is integer, the voltage scaling factor to convert to volts
 - If data type is integer, the current scaling factor to convert to amps
 - The expected data frame frequency (ex: 200msec)
+
+Alignment Definitions
+^^^^^^^^^^^^^^^^^^^^^
+
+A waveform stream is *cycle-aligned* when each frame contains an integer number
+of nominal AC cycles.
+
+A waveform stream is *zero-crossing-aligned* when frame boundaries are aligned
+to a phase reference, typically the Phase A voltage zero crossing on polyphase
+devices.
+
+A stream MAY be cycle-aligned without being zero-crossing-aligned.
+Zero-crossing-aligned implies a phase-reference boundary, while cycle-aligned
+only describes frame duration.
 
 
 Data Format
@@ -93,6 +114,8 @@ a path provided in the activation API response.
 ``SOCK_SEQPACKET`` type sockets provide the application in-order delivery of
 data that honors message boundaries and provide the sender connection-oriented
 semantics.
+Each socket message SHALL contain exactly one complete waveform frame; partial
+frames SHALL NOT be transmitted.
 
 The sending process in the platform constructs data frames and sends them over
 this socket without serialization/deserialization. The process is suitable for
@@ -114,13 +137,17 @@ The data frame is formatted as follows (example C language structure)::
      } data;
    };
 
+The starting value is unspecified and the sequence number MAY reset on platform
+restart or when an application re-subscribes. Applications SHALL tolerate
+resets and gaps.
+
 Notably absent from the data frame is the :ref:`waveform_metadata` listed above
 as well as the frame length which is obtained from the ``recv()`` or similar
 syscall.
 
 The ``timestamp`` field MUST be the timestamp for the first sample in the frame.
 
-The ``data`` union represents a variable length array of one of the three
+The ``data`` union represents a variable length array of one of the four
 supported data types.  The array size is computed as
 ``sample_count * total_channel_count``.
 
@@ -249,5 +276,5 @@ References
    (`Code for Electricity Metering <https://webstore.ansi.org/standards/nema/ansic122024>`__).
 
    Each form has specific physical and electrical characteristics.
-   
+
 |geisa-pyramid|
