@@ -219,19 +219,19 @@ At a minimum, each frame SHALL include:
 The native socket frame is not a protobuf message. The following C structure is
 an illustrative native layout for the frame header and typed sample payload::
 
-struct geisa_waveform_frame
-{
-  int64_t    timestamp_ns;    /* first sample time, ns since UNIX epoch UTC */
-  uint32_t   sequence_num;    /* unspecified starting value */
-  uint32_t   reserved;
-  union {
-    /* variable length array of one sample type */
-    int16_t  i16[0];
-    int32_t  i32[0];
-    float    f32[0];
-    double   f64[0];
-  } data;
-};
+   struct geisa_waveform_frame
+   {
+     int64_t    timestamp_ns;    /* first sample time, ns since UNIX epoch UTC */
+     uint32_t   sequence_num;    /* unspecified starting value */
+     uint32_t   reserved;
+     union {
+       /* variable length array of one sample type */
+       int16_t  i16[0];
+       int32_t  i32[0];
+       float    f32[0];
+       double   f64[0];
+     } data;
+   };
 
 The timestamp SHALL represent the time associated with the first sample in the
 frame and SHALL be expressed as a signed 64-bit integer in nanoseconds since the

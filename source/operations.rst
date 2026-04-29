@@ -14,13 +14,13 @@ systems, artifacts, and interoperability areas relate to each other end
 to end.
 
 It is intended to help readers understand the overall system context
-before moving into the more detailed materials in
+before moving into the more detailed materials covered elsewhere such as
 :doc:`system-architecture`, :doc:`adm`, :doc:`linux-environment`,
 :doc:`virtual-environment`, :doc:`api`, and :doc:`security`.
 
 .. note::
 
-   This chapter is explanatory in nature. Detailed protocol, payload,
+   This chapter is explanatory in nature. Detailed protocols, APIs, payloads,
    lifecycle, and security requirements are defined in the relevant
    chapters of this specification.
 
@@ -31,12 +31,12 @@ GEISA is intended to support end-to-end interoperability across the
 lifecycle of utility edge platforms, edge applications, and other
 upstream systems. In practice, the overall system can be difficult to
 understand when viewed only through one protocol, one component, or
-one's specific organizational responsibilities.
+one's own specific organizational responsibilities.
 
 This chapter reframes the system in terms of GEISA roles and major
 operational interactions. It is intended to clarify how the management
 plane, execution environments, application interfaces, trust decisions,
-and operational reporting concerns fit together at a system level.
+and operational reporting concerns all fit together at a system level.
 
 The operational view in this chapter complements the interoperability
 goals described in :doc:`introduction` and the general architectural
@@ -52,35 +52,41 @@ implementations.
 
 For example, a device manufacturer may also provide managed services and,
 in a particular deployment, may act in the role of Platform Provider,
-EMS provider, or System Operator. In GEISA, responsibilities and
+EMS Provider, or System Operator. In GEISA, responsibilities and
 decision authority are tied to the role being performed in the relevant
 interaction, regardless of the type of organization with specific role
 responsibilities. However, there is one notable callout: the utility is
 expected to often be the one driving the underlying operational
 decisions, even in cases where another organization is performing the
-day-to-day operational duties.
+day-to-day operational duties on their behalf.
 
 The principal roles used in this operational view are:
 
-- System Operator
+- :term:`System Operator`
 
   The role responsible for approving, configuring, authorizing,
-  deploying, and operating GEISA-managed devices and applications in a
-  target environment.
+  deploying, and operating GEISA-managed devices and applications  
+  within a specific operating environment in accordance with agreed-on
+  policies.  The Operator effectively runs the day-to-day systems, although
+  they may be beholden to another organization such as the Utility to 
+  dictate actual policies to be followed.
 
-- Platform Provider
+- :term:`Platform Provider`
 
   The role responsible for supplying the platform hardware, platform
   software, and associated platform trust material where applicable.
+  This may be a single provider or a Hardware Provider may be separate.
+  In terms of GEISA, Platform Provider generally is noting the provider
+  of the system software that is GEISA-conformant.
 
-- Edge Application
+- :term:`Edge Application`
 
   A workload running within a GEISA execution environment and using
-  GEISA platform services and the GEISA :term:`API`.
+  GEISA platform services and the GEISA :doc:`api`.
 
 - ADM / Application and Device Management
 
-  ADM is the GEISA pillar for application and device management. It
+  :term:`ADM` is the GEISA pillar for :doc:`adm`. It
   spans the capabilities required for application ingestion, operator
   approval for deployment, deployment, activation, deactivation,
   updates, and broader lifecycle management of both the platform and
@@ -99,15 +105,15 @@ The principal roles used in this operational view are:
 - :term:`EMA`
 
   The platform-side management function that implements the required ADM
-  support on a GEISA platform.
+  support on a GEISA platform on edge devices.
 
-- Application Publisher / Application Vendor
+- :term:`Application Publisher` / :term:`Application Vendor`
 
   The role responsible for producing and signing an application artifact
   and supplying its vendor manifest and associated publisher trust
   material.
 
-- Application Certifier
+- :term:`Application Certifier`
 
   An optional (as of this version of the specification) role that may
   independently assess, test, or countersign application artifacts as
@@ -119,9 +125,11 @@ The principal roles used in this operational view are:
 
 The following terms are also important to this chapter:
 
-- :term:`ADM`, :term:`API`, :term:`LEE`, and :term:`VEE` are GEISA
-  interoperability areas and components covered in detail in their
-  respective sections.
+- :term:`ADM` and :term:`API` are GEISA interoperability areas and
+  components covered in detail in :doc:`adm` and :doc:`api`.
+
+- :term:`LEE` and :term:`VEE` are GEISA execution environments covered
+  in detail in :doc:`linux-environment` and :doc:`virtual-environment`.
 
 - :term:`Platform Implementation` describes the realized combination of
   hardware and software that provides one or more GEISA-conformant
@@ -162,26 +170,14 @@ This figure is intentionally high-level. It is provided to help readers
 understand how the principal GEISA roles, systems, and interoperability
 areas relate end to end.
 
-.. figure:: operations/end-to-end.*
-   :alt: High-level GEISA operational context with LwM2M and additional EMS capabilities or cooperating components
+.. figure:: operations/end-to-end2.*
+   :alt: High-level GEISA operational context
    :align: center
 
-   High-level GEISA operational context showing one architectural option
-   in which LwM2M is used as the required interoperable ADM transport and
-   control substrate, while additional EMS-side and/or operator-side
-   capabilities or cooperating components may participate in
-   application intake, behavioral governance, operational alerting,
-   reporting, analytics, certification handling, or other workflows.
-
-.. figure:: operations/end-to-end-lwm2m-only.*
-   :alt: High-level GEISA operational context using an LwM2M-only upstream EMS posture
-   :align: center
-
-   High-level GEISA operational context showing an alternative
-   discussion model in which the EMS and the LwM2M client/server
-   relationship are treated as the sole authoritative upstream
-   operational path, with other systems consuming information exposed by
-   or through that path.
+   High-level GEISA operational context showing how principal roles,
+   platform-side and off-device management functions, execution
+   environments, and utility or enterprise interaction points relate
+   end to end.
 
 .. figure:: operations/reference-app-lifecycle.*
    :alt: High-level GEISA application lifecycle reference flow
@@ -190,143 +186,23 @@ areas relate end to end.
    Reference application lifecycle flow retained for comparison and
    discussion.
 
-Operational Capability Discussion
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Operational Capability
+^^^^^^^^^^^^^^^^^^^^^^
 
-This section frames an active architectural discussion within GEISA
-regarding the extent to which the required LwM2M client and server
-relationship is, by itself, sufficient to realize the operational
-capabilities expected of a GEISA Edge Management System and associated
+This chapter is explanatory and does not add or alter specific
+requirements detailed elsewhere in this specification. In particular,
+:doc:`adm` continues to define required interoperable ADM behaviors and
+transactions.
+
+Operational capability includes management, lifecycle, deployment,
+visibility, reporting, and integration concerns across platform and
 operator workflows.
 
-This discussion is explanatory and does not, by itself, change the
-normative requirements defined elsewhere in this specification. In
-particular, :doc:`adm` continues to define the required interoperable ADM
-behaviors and transactions, while :doc:`api` and :doc:`security` define
-the relevant application-facing, off-device communication, isolation,
-policy-control, and resilience mechanisms.
+Further architectural discussion material is maintained outside this
+main draft for working review.
 
-Option A: LwM2M is sufficient for ADM / EMS capabilities
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. figure:: operations/end-to-end-lwm2m-only.*
-   :alt: High-level GEISA operational context using an LwM2M-only upstream EMS posture
-   :align: center
-
-   High-level GEISA operational context showing this Option A discussion
-   model in which the EMS and the LwM2M client/server relationship are
-   treated as the sole authoritative upstream operational path, with
-   other systems consuming information exposed by or through that path.
-
-Under this architectural view, the EMS and its LwM2M server/client
-relationship are treated as the sole authoritative upstream operational
-path, even if the EMS later integrates with or forwards information to
-other systems.
-
-In this model, platform onboarding, lifecycle control, software and
-firmware management, application messaging, runtime visibility, policy
-reporting, and most or all EMS-facing operational behaviors are treated
-as realizable through the LwM2M-centered management path and closely
-related EMS functions.
-
-This option is best aligned with procurement simplicity, baseline
-interoperability, easier adoption, and easier implementation,
-particularly for Platform Providers and for operators integrating around
-a well-known management interface.
-
-However, this option can materially reduce urgent operator awareness
-during FAN impairment, including awareness of critical application
-alerts and Platform-originated behavioral events. In practical terms, if
-urgent information must effectively round-trip only through the EMS and
-the primary FAN path, the operator may incorrectly believe the fleet is
-healthy, critical field conditions may be under-reported, and triage or
-corrective action may be delayed.
-
-This concern is especially important for cases in which edge
-applications are deployed specifically to provide emergency, safety, or
-high-value situational awareness. For example, during a storm, a
-tree-impact, wildfire, or similar safety-relevant application may need
-to emit an alert immediately even if the FAN path is impaired.
-Likewise, if the platform disables that application because of repeated
-restart failure, a critical policy violation, or a signature or hash
-mismatch suggesting attempted malicious injection, operator awareness of
-that disablement is itself urgent. Otherwise, the operator may not know
-that either the underlying event or the loss of that application's
-visibility path has occurred.
-
-Option A also does not eliminate the need for meaningful local platform
-logic. Restart suppression, throttling, stop or disable decisions,
-policy enforcement, and similar controls still have to exist locally on
-the platform. Choosing an LwM2M-only EMS posture mainly constrains how
-those outcomes are surfaced upstream.
-
-Option B: LwM2M plus additional EMS capabilities and/or components
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. figure:: operations/end-to-end.*
-   :alt: High-level GEISA operational context with LwM2M and additional EMS 
-     capabilities or cooperating components
-   :align: center
-
-   High-level GEISA operational context showing this Option B discussion
-   model in which LwM2M is used as the required interoperable ADM
-   transport and control substrate, while additional EMS-side and/or
-   operator-side capabilities or cooperating components may participate
-   in application intake, behavioral governance, operational alerting,
-   reporting, analytics, certification handling, or other workflows.
-
-
-Under this architectural view, LwM2M remains the required interoperable
-ADM transport and control substrate, but it is not treated as the sole
-expression of all operational capability.
-
-In this model, GEISA still relies on the required LwM2M-based ADM path
-for onboarding, registration, lifecycle control, deployment,
-activation and deactivation, and related management behavior. However,
-operator-facing and platform-originated operational capabilities may
-also include additional EMS-side and/or operator-side capabilities for:
-
-- urgent alert routing;
-- Platform-originated behavioral event reporting and enforcement
-  visibility;
-- persistence and deferred forwarding when connectivity is impaired;
-- certification record handling;
-- analytics and fleet-level visibility; and
-- integration with enterprise systems, ingestion pipelines, message
-  buses, or similar upstream systems.
-
-Under this option, the EMS remains the management authority, but urgent
-application alerts and urgent Platform-originated behavioral events may
-also be forwarded to agreed ingestion or integration paths when operator
-policy permits. Operator policy SHOULD strongly consider allowing
-critical application alerts and critical Platform-originated behavioral
-events to use any permitted available communications path, because loss
-of the primary FAN and EMS path may coincide with the very emergency
-conditions the applications were deployed to detect.
-
-This option more directly reflects deployments in which the platform
-continues local enforcement even when the primary upstream management
-path is impaired, persists urgent or routine events locally as needed,
-and forwards them upstream as soon as feasible over an available
-permitted path.
-
-The primary benefit of this option is improved resilience, timeliness,
-and operational truth for the System Operator. It also better supports
-shorter field-trial and emergency triage cycles for application
-developers and publishers, and more cleanly separates application
-behavior from platform enforcement outcomes for does-no-harm style
-certification.
-
-The primary detriment of this option is increased policy, integration,
-and implementation work. The System Operator may need to define and
-govern another layer of policy, access, filtering, and ingestion rules.
-The Platform Provider may need to support more than "just set up the
-LwM2M server and client" behavior. Some certification programs may also
-need to account for more than one upstream evidence path depending on
-how the deployment is realized.
-
-Reporting model discussion
-"""""""""""""""""""""""""
+Reporting Model
+^^^^^^^^^^^^^^^
 
 For purposes of this operational discussion, it is useful to distinguish
 three broad reporting classes:
@@ -336,6 +212,14 @@ three broad reporting classes:
   Near-real-time when feasible. These are application-originated alerts
   or condition notifications for which delayed awareness may materially
   reduce operator usefulness.
+
+- Application data
+
+  This is data generated by the Applications for their systemic use and
+  consumption, but is not necessarily as time-critical as Application Alerts.
+  These may be structured to be pushed on a periodic schedule, pulled
+  periodically in a manner agreed to by the Utility and relevant Platform
+  Provider and/or Application Publishers.
 
 - Platform-originated behavioral events
 
@@ -348,13 +232,14 @@ three broad reporting classes:
 
 - Routine operational reporting
 
-  Slower and/or batched as appropriate. These are lower-urgency
+  Slower and/or batched as appropriate. These include lower-urgency
   operational data intended primarily for visibility, trending, support,
-  audit, or planning.
+  audits, or planning.
 
 This model is intended to preserve an important distinction between what
 the application says, what the platform says about the application, and
-what the platform or operator may do because of that behavior.
+what the platform or operator may do as a result of that behavior and 
+data.
 
 Device Onboarding and Management Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -368,10 +253,11 @@ trust establishment, registration, and subsequent lifecycle management.
    :alt: High-level GEISA operational context
    :align: center
 
-   Reference application approval, deployment, and optional
-   certification flow retained for comparison and discussion.
+   Reference device onboarding and management establishment flow
+   retained for comparison and discussion.
 
-See :doc:`operations/device-onboarding`.
+Additional detailed device onboarding workflows and requirements may be added 
+in a future revision of the specification.
 
 Application Approval and Deployment Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -387,7 +273,8 @@ identity, compatibility, defaults, and requested resources are inputs to
 the deployment decision, but the final approved deployment parameters
 remain under operator control.
 
-See :doc:`operations/application-approval-deployment`.
+Additional detailed application approval and deployment workflows and 
+requirements may be added in a future revision of the specification.
 
 Application Activation and Runtime Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -398,7 +285,8 @@ environment. During runtime, the platform and EMS provide visibility
 into application and platform state, including activation state,
 execution state, status, and other operationally relevant data.
 
-See :doc:`operations/application-activation-runtime`.
+Additional detailed application activation and state information  
+requirements may be added in a future revision of the specification.
 
 Operational Reporting and Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -416,7 +304,7 @@ outputs. A GEISA application may emit condition or data messages through
 the GEISA messaging and off-device communication paths, but those
 messages represent application behavior or detected conditions rather
 than the broader operational reporting model for the platform or managed
-fleet.
+fleet of devices.
 
 For clarity, the broader operational reporting model may itself include
 both urgent and routine elements. In general:
@@ -473,7 +361,8 @@ Examples of reporting categories to consider include:
   Install counts, usage counts, or similar license-related visibility as
   applicable to the deployment or application business model.
 
-See :doc:`operations/reporting-and-visibility`.
+Detailed operational reporting and visibility workflow material may be
+added in a future revision of this chapter.
 
 Utility and Enterprise Interaction Points
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -484,29 +373,20 @@ with utility or enterprise systems responsible for fleet operations,
 metering operations, analytics, customer or service workflows, and other
 business processes.
 
-See :doc:`operations/utility-enterprise-interaction`.
+Detailed utility and enterprise integration workflow material may be
+added in a future revision of this chapter.
 
-Deferred Areas
-^^^^^^^^^^^^^^
-
-This chapter is intended to establish the operational frame for the
-GEISA system. Additional operational detail is expected to be added over
-time.
-
-Examples of areas that may be expanded in a subsequent version of the
-specification include detailed application certification workflows,
-richer operator-side discovery or notification of newly available
-applications, enterprise integration patterns, meter-specific lifecycle
-workflows such as meter swap or move-in and move-out support, more
-detailed operational reporting and visibility models, and more explicit
-event taxonomies for application alerts and Platform-originated
-behavioral events.
-
-Certification discussion
-^^^^^^^^^^^^^^^^^^^^^^^^
+Application Certification
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This chapter distinguishes between two broad certification models that
-may be relevant to GEISA application ecosystems.
+may be relevant to GEISA application ecosystems.  The industry continues 
+to evolve and this may be expanded in a future revision.  Costs as well as
+capabilities of individual providers able to be located to perform this 
+function as a Utility may desire may also come into play.
+
+Regardless, there are two broad types of certification we will consider at
+this time.
 
 - Does no harm certification
 
@@ -525,25 +405,44 @@ may be relevant to GEISA application ecosystems.
   hash mismatch events, and related Platform-originated behavioral
   events.
 
-- Does what is promised certification
+- Deeper Certification an Application 'does as promised'
 
   This model focuses more directly on validating whether an application
-  satisfies a deeper functional or performance claim set, such as
+  satisfies a deeper specific functional and/or performance claim, such as
   analytics accuracy, condition-detection fidelity, expected true or
   false positive rates, interoperability with specific external devices,
-  or similar claims. This may be substantially more complex and
+  or similar claims. 
+  
+  This type of certification may be substantially more complex and
   expensive, particularly for applications that make use of local AI
   inferencing, hybrid edge/cloud processing, behind-the-meter
   integrations, or other advanced workflows.
 
-  This model may also require access to evidence, methods, or validation
+  This model may also require access to details, methods, or validation
   detail that some publishers may consider sensitive or proprietary.
 
+
 As of this version of the specification, GEISA does not define a
-normative certification program or require either model. However, it is
-useful to distinguish these models explicitly because they address
-different operator, certifier, publisher, and ecosystem concerns. In the
-near term, GEISA may more naturally support does-no-harm style
-certification than exhaustive functional-claim certification. A third
-party or industry program may choose to offer one or both forms of
-assessment in the future.
+singular or specific certification program or require either model.
+However, it is useful to distinguish these models explicitly because
+they address different operator, certifier, publisher, and ecosystem
+concerns. In the near term, GEISA or GEISA-conformant systems may more
+naturally support does-no-harm style certification than exhaustive
+functional-claim certification, although Platform Providers and
+Operators should consider if a given Platform provides enough
+capabilities to support both types of Certification.
+
+Deferred
+^^^^^^^^
+This chapter is intended to establish the operational frame for the
+GEISA system. Additional operational detail is expected to be added over
+time.
+
+Examples of areas that may be expanded in a subsequent version of the
+specification include detailed application certification workflows,
+richer operator-side discovery or notification of newly available
+applications, enterprise integration patterns, meter-specific lifecycle
+workflows such as meter swap or move-in and move-out support, more
+detailed operational reporting and visibility models, and more explicit
+event taxonomies for application alerts and Platform-originated
+behavioral events.
