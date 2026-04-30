@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant D as Edge Device
+    participant E as Edge Management System
+    participant O as System Operator
+    participant A as Application Publisher
+    participant C as Optional Application Certifier
+
+    Note over O,E: Operator approval and deployment preparation
+    O->>E: Import publisher certificate
+    O->>E: Import application image
+    O->>E: Import certification record
+    E->>E: Verify publisher signature
+    E->>E: Verify certification record
+    E->>E: Apply operator policy
+    E->>E: Create deployment manifest
+    E->>E: Sign deployment manifest
+
+    O->>E: Deploy application and manifest
+    E->>D: Transfer application and manifest
+    D->>D: Verify application image hash
+    D->>D: Verify operator authorization
+    D->>D: Verify local trust requirements
+    D->>D: Install application
+
+    Note over O,D: Application activation
+    O->>E: Activate application
+    E->>D: Activate application
+    D->>D: Launch application
+    D->>D: Record application logs
+    D-->>E: Report application status

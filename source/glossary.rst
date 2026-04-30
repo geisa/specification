@@ -14,7 +14,6 @@ Glossary
 
    ADC
     Analog-to-digital conversion
-
     Analog-to-digital converter
 
    ADM
@@ -28,6 +27,26 @@ Glossary
 
    API
     Applications Programming Interface
+
+   Application Certifier
+    An organization acting in this role that may independently assess, test, 
+    and/or countersign application artifacts for validation of behaviors 
+    prior to deployment.  Optional in context of this version of the 
+    Specification.
+
+   Application Deployment Manifest
+    Operator-approved deployment manifest that defines effective
+    application deployment parameters for an Application for a target 
+    environment.
+
+   Application Publisher
+    Organization or entity providing one or more Applications for Operator 
+    Testing, Deployment or Certification. Provides a signed package, vendor 
+    application manifest and associated collaterals.
+
+   Application Vendor
+    Role responsible for application production and publication
+    responsibilities in a GEISA workflow.
 
    CoAP
     Constrained Applications Protocol
@@ -44,38 +63,46 @@ Glossary
     and innovation by implementers.
 
    DER
-        Distributed Energy Resource
+    Distributed Energy Resource
 
-        Distributed Energy Resource is a generic term that typically includes
-        photo-voltaics coupled with a smart inverter, battery energy storage
-        systems, electric vehicles, demand response, and other dispatchable load
-        or generation available on the electric distribution network.  DERs are
-        typically owned by consumers or businesses, rather than utilities or
-        wholesale energy market participants.
+    Distributed Energy Resource is a generic term that typically includes
+    photo-voltaics coupled with a smart inverter, battery energy storage
+    systems, electric vehicles, demand response, and other dispatchable load
+    or generation available on the electric distribution network.  DERs are
+    typically owned by consumers or businesses, rather than utilities or
+    wholesale energy market participants.
 
    DTLS
     Data Transport Layer Security
 
    FAN
-    Field Area Network
+    Field Area Network, generally owned/operated by the Utility or Operator.
+    Sometimes referred to as AMI network.
 
    EE
-    Execution Environment
+    Execution Environment - one of LEE (Linux Execution Environment) or VEE
+    (Virtual Execution Environment) which Edge Applications run on.
 
    EMA
     Edge Management Agent
 
     The EMA is the logical component of a GEISA ADM conformant platform
-    which implements ADM support.
+    which implements ADM capabilities on the edge device(s).
 
    EMS
-    Edge Management System
+    Edge Management System - the overall system implementing the set of
+    capabilities of the ADM Pillar, which will include the LwM2M server and
+    client typically but may also include other software and/or capabilities.
 
     Note: with the electric utility industry, EMS often means
     *Energy* Management System.  Similarly, within the network management
     system EMS often means *Element* Management System.
     Within this specification EMS is used exclusively for Edge
     Management System.
+
+   Edge Application
+    Workload running within a GEISA execution environment using
+    GEISA platform services and API interfaces.
 
    GEISA
     `Grid Edge Interoperability and Security Alliance
@@ -101,8 +128,8 @@ Glossary
      the locally-determined conditions are part of a larger pattern of
      conditions.
 
-    LAN
-     Local Area Network
+   LAN
+    Local Area Network
 
    LEE
     Linux Execution Environment
@@ -117,6 +144,10 @@ Glossary
 
    OS
     Operating System
+
+   Platform Provider
+    Role responsible for supplying platform hardware, platform software,
+    and associated platform trust material where applicable.
 
    PKI
     Public Key Infrastructure
@@ -135,25 +166,32 @@ Glossary
    SPI
     Serial Peripheral Interface
 
+   System Operator
+    Role with deployment-environment authority for approving,
+    configuring, authorizing, deploying, and operating GEISA-managed
+    devices and applications.
+
+   Vendor Application Manifest
+    Publisher-supplied application manifest provided with an application
+    artifact as input to operator deployment decisions.
+
    userid
     In context of GEISA MQTT APIs, this is a platform-local unique identifier
-    assigned to a deployed GEISA application instance o nthat local device.  It
+    assigned to a deployed GEISA application instance on that local device.  It
     is used for topic routing and message correlation within a device.
     Implementations may map this identifier to underlying platform or application
     constructs such as application manifest details, container identities, or
-    other information in order to ensure locall uniqueness.
+    other information in order to ensure local uniqueness.
 
     The userid is unique within the scope of a device but is not required to be
     globally unique (as of this specification version) and does not represent
     a human user.
 
-    In this version of GEISA, platforms are not required to support concurrent
-    execution of multiple instances of the same application version on a single
-    device.  Future revisions may expand this behavior.
+    In this version of the GEISA specification, platforms are not required to 
+    support concurrent execution of multiple instances of the same application 
+    version on a single device.  Future revisions may expand this behavior.
 
    VEE
     Virtual Execution Environment
 
 |geisa-pyramid|
-
-

@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant D as Edge Device
+    participant E as Edge Management System
+    participant O as System Operator
+    participant P as Platform Provider
+
+    Note over O,P: Device acquisition and preparation
+    O->>P: Acquire devices
+    P-->>O: Provide platform certificate
+    P-->>O: Provide devices
+    P-->>O: Provide device metadata
+
+    Note over O,E: Operator import and deployment preparation
+    O->>E: Import platform certificate
+    O->>E: Import device metadata
+    O->>O: Deploy devices in field
+
+    Note over D,D: Device startup and network attachment
+    D->>D: Connect to network
+    D->>D: Register to network
+
+    Note over D,E: Device onboarding and management establishment
+    D->>E: Initiate registration with EMS
+    D->>E: Present factory credentials
+    E->>E: Verify device identity
+    E-->>D: Issue system credentials
+    D->>E: Complete registration
+    D-->>E: Report device status as needed
