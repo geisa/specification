@@ -1,0 +1,27 @@
+sequenceDiagram
+    participant O as System Operator
+    participant A as Application Publisher
+    participant C as Optional Application Certifier
+
+    Note over A,C: Optional application certification activity
+    A->>C: Provide publisher certificate
+    A->>C: Submit application image
+    C->>C: Verify publisher signature
+    C->>C: Perform security review
+    C->>C: Perform compatibility testing
+    C-->>A: Return certification status
+    C->>C: Countersign application
+    C->>C: Publish certification record
+
+    Note over O,C: Optional certifier relationship
+    O->>C: Establish relationship
+    C-->>O: Provide certifier certificate
+
+    Note over O,A: Application acquisition and review
+    O->>A: Acquire application
+    A-->>O: Provide publisher certificate
+    A-->>O: Provide application image
+    O->>C: Request certification record
+    C-->>O: Provide certification record
+
+    
