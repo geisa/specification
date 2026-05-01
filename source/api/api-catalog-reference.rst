@@ -32,6 +32,12 @@ defined by:
 - References to relevant sections of the GEISA specification that define
   relevant behavior and constraints
 
+.. note::
+   In the event of a conflict between this API catalog and the specific
+   description in each API reference section, the API reference section SHALL 
+   prevail.
+
+
 API Topic and Permission Catalog
 --------------------------------
 

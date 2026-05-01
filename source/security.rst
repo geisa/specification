@@ -384,7 +384,7 @@ configurations.
 |                            | elevated trust.                             |                              |
 +----------------------------+---------------------------------------------+------------------------------+
 | Sensors                    | Data originating from instrumentation whose | Metrology, temperature,      |
-|                            | acquisition and integrity are governed by   | accelerometer, GPS, other    |
+|                            | acquisition and integrity are governed by   | accelerometer, GNSS, other   |
 |                            | the COE device itself.                      | directly-attached sensors    |
 +----------------------------+---------------------------------------------+------------------------------+
 | Customer Networks          | Communications over networks not managed    | Home/Business Wi-Fi, HAN,    |

@@ -96,7 +96,7 @@ application's perspective.
 A shutdown request delivered via the message bus is advisory, allowing the
 application to perform an orderly shutdown (e.g., persist state, close
 connections, flush logs). The platform remains responsible for enforcing
-termination using the configured stop and termination behavior if the
+termination using the defined stop and termination behavior if the
 application does not complete shutdown within the allowed time.
 
 Timestamps
@@ -127,11 +127,11 @@ messages for:
 - Request from an application to terminate itself then restart
 - Request from an application to terminate itself without restart
 
-Upon startup of the application, it MUST send a notification to the platform
-that it is now operating and its status is RUNNING. In this message, the
-application MAY indicate whether it expects the platform to provide a
-keepalive/watchdog mechanism.  If so, the application SHALL also send its
-application status periodically (at a period specified in the most recent
+Upon startup of an application, the application MUST send a notification to 
+the platform that it is now operating and its status is RUNNING. In this 
+message, the application MAY indicate whether it expects the platform to 
+provide a keepalive/watchdog mechanism.  If so, the application SHALL also 
+send its application status periodically (at a period specified in the most recent
 message).  If the application does not require a keepalive/watchdog mechanism,
 it MAY omit a timeout value.
 
