@@ -32,8 +32,8 @@ Applications are not expected to infer electrical topology, meter form, or
 device classification from waveform stream identifiers. Stream identifiers are
 used to select among the waveform streams offered by the platform. Device Type,
 metrology hardware characteristics, meter form, number of phases, nominal
-frequency, and similar platform-wide details are provided through Platform
-Discovery.
+frequency, and similar platform-wide details are provided through 
+:doc:`/api/discovery`,
 
 Baseline Stream Requirement
 ---------------------------
@@ -44,7 +44,8 @@ with the identifier ``waveform-base``.
 The ``waveform-base`` stream represents the baseline interoperable waveform
 stream for GEISA applications. Platforms MAY expose additional waveform streams
 with different identifiers to provide alternate representations such as reduced,
-decimated, filtered, or otherwise specialized waveform data.
+decimated, filtered, ultra-high frequency, raw, or otherwise specialized 
+waveform data.
 
 Applications SHALL use waveform metadata to determine stream characteristics.
 Applications SHALL NOT infer waveform structure or platform characteristics by
@@ -59,17 +60,18 @@ Device Capabilities
 -------------------
 
 A platform MAY provide zero or more waveform streams. When waveform data is
-supported, Platform Discovery SHALL indicate the presence of waveform support
+supported, :doc:`/api/discovery` SHALL indicate the presence of waveform support
 and SHALL expose the descriptor metadata for each available waveform stream.
 
 A waveform stream descriptor SHALL include:
 
 - A platform-defined ``stream-id``.
 - Optional human-readable ``name`` and ``description`` fields.
-- The waveform ``sample-type``.
-- The number of voltage channels present in each sample time step.
-- The number of current channels present in each sample time step.
-- The total number of channels present in each sample time step. This SHALL
+- The waveform ``sample-type`` one of ``int16``, ``int32``, ``float32``, 
+  or ``float64``.
+- The number of voltage channels present in each sample index.
+- The number of current channels present in each sample index.
+- The total number of channels present in each sample index. This SHALL
   equal voltage-channel-count plus current-channel-count.
 - The waveform ``sample-rate-hz``.
 - The waveform ``samples-per-cycle`` when applicable.
@@ -81,23 +83,16 @@ A waveform stream descriptor SHALL include:
 
 Platforms that provide waveform data SHALL provide, at a minimum:
 
-- 128 samples per nominal AC cycle where AC cycle semantics apply.
-- 16-bit sample resolution.
+- 128 or more samples per nominal AC cycle where AC cycle semantics apply.
+- 16-bit or more sample resolution.
 - Frame delivery at least every 200 ms for the baseline stream.
-- Metadata indicating whether the stream is cycle-aligned and whether it is
-  zero-crossing-aligned.
 - For zero-crossing-aligned polyphase data, alignment to the Phase A voltage
   zero crossing.
-
-Platforms MAY offer alternate sample rates, resolutions, filters, channel
-counts, or specialized waveform views as additional streams. For convenience,
-binary multiples for samples per cycle are preferred but not required, such as
-128, 256, 512, and 16,384 samples per cycle.
 
 Different devices will have different numbers of capture channels, each
 typically sampling a single voltage or current input. The total number of
 channels and how those channels are assigned may not be known at application
-build time and are discoverable through Platform Discovery metadata.
+build time and are discoverable through :doc:`/api/discovery` metadata.
 
 Data for all channels in a frame SHALL be time-aligned to one another. An
 individual sample in one channel SHALL have been sampled at the same time as
@@ -109,36 +104,14 @@ the corresponding samples in other channels for that sample index.
    they support multiple capture frequencies, channel counts, filters, or
    alternate waveform views. In this case, an application MAY subscribe to one
    or more streams as permitted by the platform and application deployment
-   policy.
+   manifest.
 
-Platform Discovery SHALL expose only static or semi-static waveform descriptor
-metadata. Runtime access handles such as socket paths SHALL NOT be included in
-Platform Discovery.
+:doc:`/api/discovery` SHALL expose only static waveform descriptor metadata. 
+Runtime access handles such as socket paths SHALL NOT be included in
+:doc:`/api/discovery`.
 
-Metadata
---------
-
-Platform Discovery (:doc:`/api/discovery`) describes available waveform
-streams and their static or semi-static characteristics. This includes, for each
-offered stream:
-
-- The waveform stream identifier.
-- Optional stream ``name`` and ``description`` values.
-- The type of data: one of ``int16``, ``int32``, ``float32``, or ``float64``.
-- The number of voltage channels.
-- The number of current channels.
-- The total number of channels.
-- The sampling frequency in hertz.
-- Whether frames are AC cycle aligned.
-- Whether frames are zero-crossing aligned.
-- Integer voltage and current scaling factors, when applicable.
-- The expected data frame period.
-
-Runtime access details, including the per-application socket path, are not part
-of Platform Discovery and are returned by the Waveform request/response path.
-
-The Waveform request/response path is used for runtime access control and
-runtime decode metadata.
+API Request Response
+--------------------
 
 A waveform request includes:
 
@@ -155,16 +128,12 @@ A waveform response includes:
   application is subscribed.
 - The waveform metadata needed to decode the returned frames.
 
-The waveform response intentionally repeats metadata that may also be available
-through Platform Discovery. This duplication is by design so that an authorized
-application can immediately validate and decode waveform frames received on the
-returned per-application socket without requiring a separate discovery
-transaction.
-
 A waveform subscribe request does not imply that an application controls the
 underlying platform metrology hardware or the global lifecycle of waveform
 capture. Rather, the request asks the platform to grant or deny access to a
-waveform stream for the requesting application instance.
+waveform stream for the requesting application instance.  Multiple applications 
+MAY consume waveform data simultaneously without interference or placing the 
+metrology hardware in a special operating mode.
 
 Per-Application Socket
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -205,7 +174,8 @@ be treated as static platform discovery metadata.
 ``SOCK_SEQPACKET`` type sockets provide the application in-order delivery of
 data that honors message boundaries and provide the sender connection-oriented
 semantics. Each socket message SHALL contain exactly one complete waveform
-frame. Partial frames SHALL NOT be transmitted.
+frame. Partial frames SHALL NOT be transmitted.  A data payload frame MAY or 
+MAY not correspond to one or multiple AC cycles depending on the metadata.
 
 Each frame SHALL provide sufficient information for an application to safely
 consume and interpret the delivered samples without vendor-specific knowledge.
@@ -214,10 +184,12 @@ At a minimum, each frame SHALL include:
 
 - A timestamp
 - A sequence number
-- A sample payload
+- A payload with multiple sample indexes each with multiple channels
 
 The native socket frame is not a protobuf message. The following C structure is
-an illustrative native layout for the frame header and typed sample payload::
+an illustrative native layout for the frame header and typed sample payload:
+
+.. code-block:: c
 
    struct geisa_waveform_frame
    {
@@ -233,52 +205,50 @@ an illustrative native layout for the frame header and typed sample payload::
      } data;
    };
 
-The timestamp SHALL represent the time associated with the first sample in the
+The timestamp SHALL represent the time associated with the first sample index in the
 frame and SHALL be expressed as a signed 64-bit integer in nanoseconds since the
 UNIX epoch (UTC). This defines the timestamp representation and does not imply
 that the platform clock is accurate to one nanosecond. Timestamp accuracy is
 platform-dependent.
 
-A monotonically increasing sequence number SHALL be included to allow detection
-of dropped or out-of-order frames. The starting value is unspecified and the
-sequence number MAY reset on platform restart or when an application
-re-subscribes. Applications SHALL tolerate resets and gaps.
-
-The waveform sample encoding SHALL be one of:
-
-- ``int16``
-- ``int32``
-- ``float32``
-- ``float64``
+A monotonically increasing and wrapping sequence number SHALL be included to 
+allow detection of dropped or out-of-order frames. The starting value is 
+unspecified and the sequence number MAY reset on platform restart or when 
+an application re-subscribes. Applications SHALL tolerate resets and gaps.
 
 The sample payload SHALL be encoded using the ``sample-type`` defined in the
-waveform metadata. The sample payload size is computed as
-``sample_count * total_channel_count`` values.
+waveform metadata.
 
-Samples SHALL be packed in channel-interleaved order per time step. For each
+The number of sample indexes per frame are determined by the socket's read 
+metadata, subtracting the 16 byte header, and dividing by the 
+``total_channel_count`` and size of each sample (2, 4, or 8 bytes).  For example, 
+if ``total_channel_count`` is 6, ``sample-type`` is ``int16``, and the socket 
+read returned a frame of 18448 bytes, the frame contains (18448-16)/6/2=1536 
+indexes.
+
+Samples SHALL be packed in channel-interleaved order per index. For each
 sample index, all channel values SHALL be present, and channel ordering SHALL be
 stable and consistent for a given stream.
 
-Samples within the data array SHALL be ordered by sample time step. Within
-each time step, voltage channels are listed first, followed by current channels,
+Within each time step, voltage channels are listed first, followed by current channels,
 using the stable channel ordering described by the stream metadata:
 
-- Time 0
+- Time index 0
 
   - All voltage channels
   - All current channels
 
-- Time 1
+- Time index 1
 
   - All voltage channels
   - All current channels
 
-- Time 2
+- Time index 2
 
   - All voltage channels
   - All current channels
 
-- ... continuing for any additional time samples in the frame
+- ... continuing for any additional time index in the frame
 
 A standard split phase 2S [#ansiforms]_ meter with one voltage and two current
 channels (three total channels) would report its data as follows:
@@ -336,7 +306,8 @@ channels (seven total channels) would report its data as follows:
 - Current Phase C, Time 1
 - Current Neutral, Time 1
 
-All multi-byte numeric values SHALL be encoded using little-endian byte order.
+All multi-byte integer values SHALL be encoded using host byte order and float 
+values are IEEE 754 encoded.
 
 For integer sample formats (``int16``, ``int32``), scaling factors SHALL be
 applied as defined by the ``voltage-scale`` and ``current-scale`` metadata

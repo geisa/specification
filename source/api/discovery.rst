@@ -22,16 +22,17 @@ platform offers in order to potentially adjust behavior, or just for logging
 and awareness purposes.
 
 The Platform Discovery data is typically constant and is not expected to
-change during an application's runtime execution.  It MUST be retrieved
+change during an application's runtime execution.  It MAY be retrieved
 by a GEISA application during startup after the application becomes
 operational.  Although the Platform Discovery content is platform-wide rather than
 application-specific, it is retrieved using application-instance request/response
 topics so that each running application instance can obtain the current
-discovery snapshot for its device.
+discovery snapshot for its device without broadcasting responses to other 
+applications that may still be subscribed.
 
 After receiving this data, an application MAY unsubscribe from the Platform
 Discovery response topic for the remainder of that execution instance, as the
-data is not expected to change during runtime.
+data will not change during runtime.
 
 Applications MUST re-run Platform Discovery on each startup; if platform
 capabilities change, the platform will restart applications so they retrieve
@@ -51,24 +52,14 @@ scope of GEISA.  However, because platform metadata is expected to be static,
 GEISA platforms MUST facilitate restarting all running applications in the event
 that the platform metadata changes; applications will be shut down by the platform
 and subsequently started with the updated Platform Discovery responses, so on startup
-applications are again aware of any changes/current platform capbilities.
-
-.. warning::
-
-  There may be exceptional cases where this data does change such as
-  provisioning the device or placing it in or out of a test or development mode.
-  During those events, all GEISA applications MUST be restarted so they will
-  be made aware of any new platform data changes.  In this case, the platform
-  environment is the one managing the shutdowns and subsequent application start.
-
+applications are again aware of any changes/current platform capabilities.
 
 
 Hardware, Firmware, and Platform Software
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The GEISA EE provides an API so that GEISA compliant applications are able to
-query the realized hardware and software environment available on the device as
-follows:
+The Platform Discovery API includes the following data so applications are able to
+determine the realized hardware and software environment available on the device:
 
 - Device Type - returns the type of the device or module, e.g. electric meter,
   EV charger, etc.
@@ -124,7 +115,7 @@ Some example sensors that may be provided include:
 - Humidity Sensor
 - Switch Sensor
 - Orientation or Motion/Vibration Sensor
-- GPS
+- GNSS
 
 Note this list is not exhaustive, and specific sensor types and accuracy will
 be device-dependent.
@@ -141,25 +132,26 @@ Network Hardware
    :class: tbd-section
 
    Network hardware discovery remains reserved for future definition.
+
    Implementations SHALL NOT assume behavior, interface, or data structure
    beyond what is explicitly defined elsewhere in this specification.
 
+   The Application SHALL assume that network permissions and volume restrictions 
+   described in it's Deployment Manifest are valid and realizable on the device 
+
 Waveform Discovery
-------------------
+^^^^^^^^^^^^^^^^^^
 
-Platform Discovery describes available waveform streams and their
+Platform Discovery describes the available waveform streams and their
 characteristics. Platforms that support waveform data SHALL expose a baseline
-waveform stream with the identifier ``waveform-base``. Discovery SHALL include
-only static or semi-static metadata. Applications SHALL use waveform metadata
-to interpret a stream and SHALL NOT infer stream characteristics by parsing the
-stream identifier.
-Runtime access details and application-specific state are not included here and
-are defined by the Waveform Data API.
+waveform stream with the identifier ``waveform-base``.
 
-Waveform Data
-^^^^^^^^^^^^^
+Discovery SHALL include only static metadata. Applications SHALL use waveform 
+metadata to interpret a stream and SHALL NOT infer stream characteristics by 
+parsing the stream identifier.
 
-See Metadata section in :doc:`/api/waveform`.
+Runtime access details and application-specific state are defined by 
+the :doc:`/api/waveform` API.
 
 
 Application Deployment Manifest

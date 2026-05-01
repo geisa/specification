@@ -30,9 +30,10 @@ Within the GEISA specification, interoperability is be broken down into four are
 Vendor implementations of the GEISA specification may not support 
 interoperability in all areas. For example, some vendors may support either a 
 Linux execution environment (LEE), or a virtual execution environment (VEE), 
-while other vendors may choose to support both, with a VEE running on top of a 
-LEE.  There is nothing in the specification that precludes supporting only one 
-type of Execution Environment (LEE or VEE) or supporting both.  
+while other vendors may choose to support both, with a VEE running on top of or 
+along side of a LEE environment.  There is nothing in the specification that 
+precludes supporting only one type of Execution Environment (LEE or VEE) or 
+supporting both.
 
 For clarity, this specification uses icons for each aspect of interoperability 
 so it is clear which requirements apply to a given 
@@ -72,9 +73,10 @@ When this specification discusses execution environments in general, there may
 
 Linux Execution Environment interoperability allows software developers to have 
 a consistent embedded Linux environment for running programs.  LEE-conformant 
-devices provide a standard set of base libraries, a consistent filesystem 
-layout, and other details which ensure application developers do not have to 
-manage variations across differentplatform implementations.
+devices provide an isolated per-application execution environment containing a 
+standard set of base libraries, a consistent filesystem layout, and other 
+details which ensure application developers do not have to manage variations 
+across differentplatform implementations.
 
 When this specification notes something that is LEE related, there may be a Tux 
 icon |geisa-lee-tux| to highlight it.
@@ -129,7 +131,7 @@ This specification currently addresses:
 - :doc:`api` |geisa-api-gear| 
 - :doc:`security` 
 
-This specification follows [RFC2119]_ conventions, using "MUST", "MAY", and 
+This specification follows [RFC2119]_ conventions, such as "MUST", "MAY", and 
 "SHOULD" to indicate what is expected from a conformant implementation.  
 
 Please note that conformance for each of GEISA defined aspects of 

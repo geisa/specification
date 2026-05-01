@@ -24,13 +24,14 @@ application: a vendor manifest and an operator manifest.
 
 The vendor application manifest provides information about the application to
 the operator and the edge management system, including any external
-dependencies and minimum resouce requirements.  The vendor manifest is used by
+dependencies and minimum resource requirements.  The vendor manifest is used by
 a GEISA ADM conformant edge management system to inform the operator about the
 application and to facilitate the secure import of the application.  
 
-The operator application manifest provides information to the execution
-environment as to what resources the system operator has allocated to the
-application.
+The operator application manifest is based on the vendor application manifest 
+allowing the operator to customize and tune the application permissions and 
+resource allocations to match their execution environment, intended use case,
+and security requirements prior to deployment to the execution environment.  
 
 GEISA vendor and operator application manifests SHALL include:
 
@@ -84,9 +85,9 @@ GEISA vendor manifests SHALL include:
 - System Resources Required:
 
     - CPU usage in percent
-    - RAM in MiB
-    - Persistent Storage in MiB
-    - Non-persistent Storage in MiB
+    - RAM in KiB
+    - Persistent Storage in KiB
+    - Non-persistent Storage in KiB
     - Max threads/processes
 
 - Off-Device Communication
@@ -94,7 +95,7 @@ GEISA vendor manifests SHALL include:
     - Each application that performs off-device communication MUST specify the
       classes, destinations, and daily volume of that communication.
     - See :doc:`/api/networking` for details.
-    - Daily volumes are specified in KiB units, and daily messages are in message units.
+    - Daily volumes are specified in Byte units, and daily messages are in message units.
 
 .. Note::
 
@@ -104,7 +105,8 @@ GEISA vendor manifests SHALL include:
 - External Dependencies
 
     - GEISA applications should be as self-contained as possible, with all
-      necessary dependencies contained with the application artifacts
+      necessary dependencies except for the base libraries provided by the EE 
+      contained with the application artifacts.
     - GEISA does not provide a mechanism for loading arbitrary packages.  The
       external dependencies element in the manifest is used exclusively to
       indicate that one application depends on another.

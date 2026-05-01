@@ -12,8 +12,9 @@ Design Principles
 
 The |GEISA| specification is written for constrained resource embedded 
 industrial devices. A constrained embedded industrial device may consist of a 
-simple microcontroller (e.g. Cortex-M class core) or leverage a more complex 
-microprocessor (e.g. Cortex-A class core).
+simple microcontroller (e.g. Cortex-M class core), a more complex 
+microprocessor (e.g. Cortex-A class core), or a heterogeneous or modular 
+environment with both.
 
 These devices are expected to operate in the field without manual intervention 
 for prolonged periods of time; often two decades or longer.  While these 
@@ -127,7 +128,7 @@ producing an executable that runs on any GEISA VEE.
   It is possible that a platform may support both LEE and VEE. In this case, 
   an application developer may need to determine the proper methods that 
   allows it to run on one or both execution environments when properly packaged. 
-  Users may need to select applications according to the provided EE. 
+  System operators may need to select applications according to the provided EE. 
   
 See :doc:`system-architecture` for further discussion.
 
