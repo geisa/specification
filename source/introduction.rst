@@ -76,7 +76,7 @@ a consistent embedded Linux environment for running programs.  LEE-conformant
 devices provide an isolated per-application execution environment containing a 
 standard set of base libraries, a consistent filesystem layout, and other 
 details which ensure application developers do not have to manage variations 
-across differentplatform implementations.
+across different platform implementations.
 
 When this specification notes something that is LEE related, there may be a Tux 
 icon |geisa-lee-tux| to highlight it.
