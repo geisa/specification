@@ -50,7 +50,7 @@ IP socket based to local devices, private clouds, or public clouds
 Applications can also make use of traditional IP socket based real-time
 communications on devices equipped with cellular, Wi-Fi, or other IP connectivity.
 Applications MUST specify the endpoints they need to communicate to (IP/Port)
-in their Application Manifest so that those policies can be approved by operators
+in their Application Deployment Manifest so that those policies can be approved by operators
 and implemented in the platform using firewall rules.
 
 Applications MUST also specify the expected volume of data per day per
@@ -153,8 +153,8 @@ whereas a cellular connection would be metered in order to keep the device under
 monthly volume limit.
 
 An application developer MUST define volume limits per destination class in their
-Application Manifest.  These limits may be overridden by the operator at deployment
-time when converting the Application Manifest into a Deployment Manifest.
+Application Vendor Manifest.  These limits may be overridden by the operator at deployment
+time when converting the Application Vendor Manifest into a Deployment Manifest.
 
 These volume limits are specified as a per day (24 hour period) limit in bytes.
 Both transmit and receive data counts toward the application's limit.  The operator

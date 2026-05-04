@@ -90,7 +90,8 @@ specification requires.
 
 An LEE-conformant GEISA implementation must provide a set of
 :doc:`lee/base-libraries` and :doc:`lee/core-services` to containers running in
-the environment.  The goal of GEISA LEE conformance is to provide a consistent
+the environment to minimize the size of each provided application container 
+image.  The goal of GEISA LEE conformance is to provide a consistent
 and efficient execution environment to edge applications running on the 
 platform.  Platform implementers may use any GNU/Linux variant they see fit,
 provided it meets the requirements noted in :doc:`lee/operating-system`;
@@ -163,7 +164,7 @@ platform for the following reasons:
 - To ensure that one application cannot impact another application.
 
 - To ensure that one application cannot see the artifacts, resources,
-  data, or state of another application.
+  data, state, or existence of another application.
 
 - To ensure that applications cannot impact the platform or workloads
   outside of the GEISA implementation.
@@ -220,11 +221,9 @@ The AII shall control:
 - The allowed instantaneous bandwidth an application may use.
 
 - The allowed average network volume an application may use over a
-  defined period (e.g., 1 hour or 24 hours).
+  daily period (e.g., 24 hours).
 
-- Allowed destination addresses.
-
-- Allowed destination ports.
+- Allowed destination peers (IP/proto/port).
 
 API Control
 ^^^^^^^^^^^
@@ -251,14 +250,13 @@ Container resource limits shall include the following:
   requirements SHOULD not require an Application restart, but an EE 
   implementation MAY stop, modify, and restart an Application if necessary.
 
-  All resource requirements can be changed including the persistent storage 
-  limit.  If that limit is increased, an implementation MUST honor that change 
-  and provide the application with a larger volume or limit without loss of 
+  If the persistent storage limit is increased, an implementation MUST honor that change 
+  and provide the application with a larger volume or limit without loss of existing 
   persistent data.  If that limit is reduced, an implementation SHOULD attempt 
   to honor that change and reduce the volume or limit, however if the Application 
   is using more than the new limit an alarm or exception SHOULD be raised to 
   the EMS and the action MUST be aborted, leaving the Application running with 
-  the previous limit.
+  the previous manifest.
 
 |geisa-pyramid|
 

@@ -58,7 +58,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3602 -- GEISA App Accounting
 
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
-  followng LWM2M Objects:
+  following LWM2M Objects:
 
   * ID 10 -- Cellular Network Connectivity
   * ID 11 -- APN Connection Profile
@@ -66,13 +66,13 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 13 -- Bearer Selection
   * ID 504 -- Remote SIM Provisioning
 
-* ADM conformant platforms with GPS interfaces SHALL support the
-  followng LWM2M Objects:
+* ADM conformant platforms with GNSS interfaces SHALL support the
+  following LWM2M Objects:
 
   * ID 6 -- Location
 
 * ADM conformant platforms with Wi-SUN interfaces SHALL support the
-  followng LWM2M Objects:
+  following LWM2M Objects:
 
   * ID 3603 -- Wi-SUN Radio Management
 

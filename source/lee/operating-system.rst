@@ -31,7 +31,7 @@ Applications, however, do specify their needed CPU and memory resource
 requirements in their Application manifests and operators SHOULD consider the 
 finite resources available when deploying Applications.  Applications SHOULD 
 receive, over time, their resource allotment and not be starved to the point 
-where metrological and waveform data is lost.
+where metrological and waveform data is significantly delayed or lost.
 
 |geisa-pyramid|
 

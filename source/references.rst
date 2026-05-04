@@ -11,8 +11,8 @@ References
 --------------------
 
 .. note::
-        Due to the way Sphinx Docs renders things, in the PDF version of the 
-        specification, references are found in the Bibliography chapter.  We 
+        Due to the way the PDF version of the specification is rendered, 
+        references are found in the Bibliography chapter.  We 
         hope to correct this in a future version of the specification.
 
 .. [LWM2M] `OMA Lightweight M2M

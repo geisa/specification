@@ -107,8 +107,7 @@ message bus, there are a few exceptions:
 In order for an Application to establish a connection to the MQTT message
 bus, the connection method (host and port) and per-application credentials are
 provided out-of-band from platform to application. GEISA applications determine
-how to connect to the broker from data contained in a locally generated
-configuration file.
+how to connect to the broker from this data.
 
 For GEISA LEE |geisa-lee-tux|, this information SHALL be available at the
 well-known location ``/etc/geisa/mqtt.conf`` within the Application
@@ -120,14 +119,21 @@ container environment.
         HOST=localhost
         PORT=1883
         USERID=myuserid
-        PASSWORD=mypassword
+        PASSWORD=mytoken
+
+.. Note::
+
+  As a reminder, each LEE application is run within its own isolated environment 
+  enabling this data to be placed within a fixed well-known location and remain 
+  unencrypted accessible only to a single instance of a single application.
+
 
 For GEISA VEE |geisa-vee-cloud|, this information SHALL be made available to
 the Application by the platform. The specific mechanism by which it is exposed
 is not defined and remains TBD in this version of the specification.
 
 Because of the potentially very high-volumes of data involved in accessing 
-metrology doc:`/api/waveform`, it is intentionally handled as a special case.  
+metrology :doc:`/api/waveform`, it is intentionally handled as a special case.  
 The waveform data transaction allows applications to obtain the frame format 
 and platform specific details regarding the waveform data (e.g. sampling rate, 
 sample resolution, etc.) and to request that the waveform data stream is 

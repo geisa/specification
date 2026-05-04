@@ -45,7 +45,7 @@ The GEISA API defines APIs for the following purposes:
     :doc:`/api/instantaneous`. A dedicated billing/metered quantities
     transaction set is reserved for a future version of the specification.
 
-.. note::
+    .. note::
        Reserved for expansion and definition in a future version of the
        specification.
 
@@ -53,7 +53,7 @@ The GEISA API defines APIs for the following purposes:
 - :doc:`/api/networking`
 
     Allows applications to communicate off-device via messaging or direct IP
-     sockets.
+    sockets.
 
 - :doc:`/api/waveform`
 
@@ -91,7 +91,7 @@ The GEISA API defines APIs for the following purposes:
 
 - System Messaging
 
-.. note::
+    .. note::
        Reserved for expansion and definition in a future version of the
        specification.
 
@@ -103,8 +103,8 @@ The GEISA API defines APIs for the following purposes:
 .. toctree::
    :hidden:
 
-   api/api-catalog-reference
    api/architecture
+   api/api-catalog-reference
    api/discovery
    api/status
    api/instantaneous

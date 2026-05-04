@@ -92,9 +92,9 @@ interval values.
 Metrological hardware may also be able to provide waveform data.  See 
 :doc:`api/waveform` for additional details.  
 
-When waveform data is provided, at a miminum, it SHALL provide:
+When waveform data is provided, at a mininum, it SHALL provide:
 
-- 128 samples per cycle (7.68 kHz at 60 Hz AC frequency)
+- 128 samples per cycle (7.68 kHz at 60 Hz or 6.4 kHz at 50 Hz AC frequencies)
 - 16 bits per sample
 
 Platforms may provide higher sampling rates (e.g. 128, 256, 512, 16,384 samples 
@@ -117,7 +117,7 @@ Examples of sensors that may be provided include:
 - Temperature Sensor
 - Humidity Sensor
 - Switch Sensor
-- GPS
+- GNSS Location
 - Vibration / accelerometer
 
 Actuators
@@ -151,7 +151,5 @@ Examples of actuators that may be provided include:
    lack a ground reference and thus may be unable to provide voltage data.  
    Similarly, some devices may lack a current sensor and may thus be limited 
    to voltage only.  Electric meters are expected to be able to provide both.
-
-|geisa-pyramid|
 
 
