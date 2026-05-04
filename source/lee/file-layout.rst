@@ -31,8 +31,8 @@ mounts within the container environment:
 
   - a filesystem containing base binaries, libraries, the application and other 
     files and directories not specifically listed below.  It MUST be 
-    either mounted read-only or the application lack write permission to all 
-    items within except as explained below
+    either mounted read-only, or the application MUST lack write permission to all 
+    items within the filesystem except as explained below.
 
 - /proc
 
