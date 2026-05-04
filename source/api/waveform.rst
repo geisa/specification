@@ -230,7 +230,7 @@ Samples SHALL be packed in channel-interleaved order per index. For each
 sample index, all channel values SHALL be present, and channel ordering SHALL be
 stable and consistent for a given stream.
 
-Within each time step, voltage channels are listed first, followed by current channels,
+Within each index, voltage channels are listed first, followed by current channels,
 using the stable channel ordering described by the stream metadata:
 
 - Time index 0

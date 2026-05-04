@@ -22,7 +22,7 @@ platform offers in order to potentially adjust behavior, or just for logging
 and awareness purposes.
 
 The Platform Discovery data is typically constant and is not expected to
-change during an application's runtime execution.  It MAY be retrieved
+change during an application's runtime execution.  It SHOULD be retrieved
 by a GEISA application during startup after the application becomes
 operational.  Although the Platform Discovery content is platform-wide rather than
 application-specific, it is retrieved using application-instance request/response
