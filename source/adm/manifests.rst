@@ -105,7 +105,7 @@ GEISA vendor manifests SHALL include:
 - External Dependencies
 
     - GEISA applications should be as self-contained as possible, with all
-      necessary dependencies, except for the base libraries, provided by the EE 
+      necessary dependencies, except for the base libraries provided by the EE, 
       contained with the application artifacts.
     - GEISA does not provide a mechanism for loading arbitrary packages.  The
       external dependencies element in the manifest is used exclusively to
