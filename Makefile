@@ -9,16 +9,20 @@ SPHINXTARGETS ?= html latexpdf
 SOURCEDIR     = source
 BUILDDIR      = build
 
-# GEISA is supporting mermaid as part of the spec, but mermaid diagrams
-# are treated as independent source files to be built.  RST files should
-# reference the image.
+# GEISA is supporting mermaid and drawio diagrams as part of the spec, but
+# these diagrams are treated as independent source files to be built.  RST
+# files should reference the image.
 
-MERMAID 			= $(shell find $(SOURCEDIR) -name '*.mermaid')
+MERMAID 		= $(shell find $(SOURCEDIR) -name '*.mermaid')
 MERMAIDSVG		= $(patsubst %.mermaid, %.svg,$(MERMAID))
 MERMAIDPDF		= $(patsubst %.mermaid, %.pdf,$(MERMAID))
 
-IMAGESVG      = $(wildcard $(SOURCEDIR)/images/*.svg)
-IMAGEPDF      = $(patsubst %.svg,%.pdf,$(IMAGESVG))
+DRAWIO        	= $(shell find $(SOURCEDIR) -name '*.drawio')
+DRAWIOSVG     	= $(patsubst %.drawio, %.svg,$(DRAWIO))
+DRAWIOPDF     	= $(patsubst %.drawio, %.pdf,$(DRAWIO))
+
+IMAGESVG      	= $(wildcard $(SOURCEDIR)/images/*.svg)
+IMAGEPDF      	= $(patsubst %.svg,%.pdf,$(IMAGESVG))
 
 # To solve mermaid issue when building on
 # RPi aarch system system
@@ -48,14 +52,22 @@ clean:
 	rm -f $(IMAGEPDF)
 	rm -f $(MERMAIDSVG)
 	rm -f $(MERMAIDPDF)
+	rm -f $(DRAWIOSVG)
+	rm -f $(DRAWIOPDF)
 	rm -rf $(BUILDDIR)
 
-prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF)
+prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF)
 
 all: $(SPHINXTARGETS)
 
 %.svg: %.mermaid
 	mmdc $(MMDC_FLAGS) -i $< -o $@
+
+%.svg: %.drawio
+	drawio --export --crop --format svg --output $@ $<
+
+%.pdf: %.drawio
+	drawio --export --crop --format pdf --output $@ $<
 
 %.pdf: %.svg
 	rsvg-convert -f=pdf -o $@ $<

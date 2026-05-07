@@ -24,8 +24,13 @@ using its own separate packages and not break anything in the existing
 environment. Depending on your environment, you may need to install python
 `venv` using your system package manager.
 
-The GEISA spec also supports Mermaid diagrams. To ensure a consistent build
-process, the build scripts rely on `mmdc` and Mermaid being installed locally.
+The GEISA spec also supports generated diagrams. Mermaid is used for sequence
+diagrams and other simple generated diagrams. diagrams.net/draw.io is used for
+selected layout-sensitive architecture and similar diagrams.
+
+To ensure a consistent build process, the build scripts rely on `mmdc` for
+Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
+
 `mmdc` can be downloaded from
 [the Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli), or
 installed using `npm`.
@@ -35,6 +40,45 @@ requires it, so `npm install -g @mermaid-js/mermaid-cli` should automatically
 install it. Please note that the `node.js` and `npm` that come with your Linux
 distribution may be hopelessly out of date. You will likely need to update
 them to successfully install `mmdc`.
+
+diagrams.net/draw.io is not installed through the Python virtual environment
+and does not have an official npm package equivalent to Mermaid CLI at this
+time. Install draw.io Desktop using the package appropriate for your operating
+system, and ensure the `drawio` command is available on `PATH`.
+
+For Linux, use the official draw.io Desktop package for your distribution
+(`.deb`, `.rpm`, or AppImage), or another trusted system package source. If
+using an AppImage, create a wrapper or symlink named `drawio` somewhere in
+`PATH`.
+
+For example, on Ubuntu or another Debian-based distribution, download the
+official draw.io Desktop `.deb` package, then install it with:
+
+<pre>
+$ sudo apt install ./drawio-amd64-&lt;version&gt;.deb
+$ drawio --help
+</pre>
+
+Replace `&lt;version&gt;` with the appropriate version string from the
+downloaded package name.
+
+For macOS or others, install the official draw.io/diagrams.net Desktop
+application directly. If it does not provide a `drawio` command on `PATH`,
+create a user-local wrapper or symlink to the application binary.
+For example:
+
+<pre>
+mkdir -p "$HOME/bin"
+ln -s "/Applications/draw.io.app/Contents/MacOS/draw.io" "$HOME/bin/drawio"
+export PATH="$HOME/bin:$PATH"
+drawio --help
+</pre>
+
+Depending on the installed application name, the macOS binary may instead be:
+
+<pre>
+/Applications/diagrams.net.app/Contents/MacOS/diagrams.net
+</pre>
 
 Here are the steps that were used from a posix environment (note, `node.js`
 and `npm` updates are not shown):
