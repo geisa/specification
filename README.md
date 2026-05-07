@@ -49,7 +49,8 @@ system, and ensure the `drawio` command is available on `PATH`.
 For Linux, use the official draw.io Desktop package for your distribution
 (`.deb`, `.rpm`, or AppImage), or another trusted system package source. If
 using an AppImage, create a wrapper or symlink named `drawio` somewhere in
-`PATH`.
+`PATH`.  Information on the draw.io Desktop Package may be found
+[here](https://www.drawio.com/doc/faq/offline) .
 
 For example, on Ubuntu or another Debian-based distribution, download the
 official draw.io Desktop `.deb` package, then install it with:
@@ -61,6 +62,43 @@ $ drawio --help
 
 Replace `&lt;version&gt;` with the appropriate version string from the
 downloaded package name.
+
+If you prefer to do a single-user install without modifying system packages,
+download the official draw.io Desktop AppImage release instead. Place it under
+a user-local directory, make it executable, and create a wrapper named `drawio`
+somewhere in your user `PATH`:
+
+<pre>
+$ mkdir -p "$HOME/.local/opt/drawio" "$HOME/.local/bin"
+$ cp drawio-x86_64-&lt;version&gt;.AppImage "$HOME/.local/opt/drawio/"
+$ chmod +x "$HOME/.local/opt/drawio/drawio-x86_64-&lt;version&gt;.AppImage"
+$ cat > "$HOME/.local/bin/drawio" <<'EOF'
+#!/usr/bin/env bash
+exec "$HOME/.local/opt/drawio/drawio-x86_64-&lt;version&gt;.AppImage" "$@"
+EOF
+$ chmod +x "$HOME/.local/bin/drawio"
+$ export PATH="$HOME/.local/bin:$PATH"
+$ drawio --help
+</pre>
+
+If `$HOME/.local/bin` is not already in your shell startup `PATH`, add it to
+your shell profile before building the specification (or use an existing
+user-level bin path already existing).
+
+Some Linux systems may not have FUSE configured for AppImage execution. If the
+AppImage does not run directly, extract it and update the wrapper to call the
+extracted `AppRun` binary:
+
+<pre>
+$ cd "$HOME/.local/opt/drawio"
+$ ./drawio-x86_64-&lt;version&gt;.AppImage --appimage-extract
+$ cat > "$HOME/.local/bin/drawio" <<'EOF'
+#!/usr/bin/env bash
+exec "$HOME/.local/opt/drawio/squashfs-root/AppRun" "$@"
+EOF
+$ chmod +x "$HOME/.local/bin/drawio"
+$ drawio --help
+</pre>
 
 For macOS or others, install the official draw.io/diagrams.net Desktop
 application directly. If it does not provide a `drawio` command on `PATH`,
