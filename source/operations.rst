@@ -171,7 +171,7 @@ This figure is intentionally high-level. It is provided to help readers
 understand how the principal GEISA roles, systems, and interoperability
 areas relate end to end.
 
-.. figure:: operations/end-to-end-lwm2m-only.*
+.. figure:: operations/end-to-end-highlevel.*
    :alt: LwM2M only version
    :align: center
 
