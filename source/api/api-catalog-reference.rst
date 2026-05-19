@@ -156,33 +156,61 @@ API Topic and Permission Catalog
      - ``GeisaAppToPlatformStatus``
      - Directed
    * - :doc:`Networking <../api/networking>`
-     - ``geisa/api/message/req/<userid>``
+     - ``geisa/api/message/upstream/req/<userid>``
      - Application
      - Publish
      - App → Platform
-     - TBD
-     - TBD
+     - ``GeisaAppMessage_Req``
+     - Request
    * -
-     - ``geisa/api/message/rsp/<userid>``
+     - ``geisa/api/message/upstream/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
-     - TBD
-     - TBD
+     - ``GeisaAppMessage_Rsp``
+     - Response
    * -
-     - ``geisa/api/message/req/#``
+     - ``geisa/api/message/downstream/req/<userid>``
+     - Application
+     - Subscribe
+     - Platform → App
+     - ``GeisaAppMessage_Req``
+     - Request
+   * -
+     - ``geisa/api/message/downstream/rsp/<userid>``
+     - Application
+     - Publish
+     - App → Platform
+     - ``GeisaAppMessage_Rsp``
+     - Response
+   * -
+     - ``geisa/api/message/upstream/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
-     - TBD
-     - TBD
+     - ``GeisaAppMessage_Req``
+     - Request
    * -
-     - ``geisa/api/message/rsp/<userid>``
+     - ``geisa/api/message/upstream/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
-     - TBD
-     - TBD
+     - ``GeisaAppMessage_Rsp``
+     - Response
+   * -
+     - ``geisa/api/message/downstream/req/<userid>``
+     - Platform
+     - Publish
+     - Platform → App
+     - ``GeisaAppMessage_Req``
+     - Request
+   * -
+     - ``geisa/api/message/downstream/rsp/#``
+     - Platform
+     - Wildcard Subscribe
+     - App → Platform
+     - ``GeisaAppMessage_Rsp``
+     - Response
    * - :doc:`Instantaneous Data <../api/instantaneous>`
      - ``geisa/api/instantaneous/data``
      - Application
