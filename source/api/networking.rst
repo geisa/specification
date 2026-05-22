@@ -25,16 +25,31 @@ Message-based via LwM2M
 This type of communication is available on every device with :doc:`/adm` and uses
 the administrative LwM2M connection for transport.
 
-Delivery of messages under some circumstances may be significantly delayed or
-lost. The :doc:`/adm` is responsible for queuing these messages and acknowedging
-back to the Application if and when they are delivered.
+This type of communication is bi-directional and messages may be sent unsolicited
+by either side.  Messages can be sent from the application (upstream) and to the
+application (downstream).
 
 Applications use the message bus to send and receive these messages to/from the
 platform which in turn makes use of LwM2M to transport them.  The applications
 themselves are unaware of any LwM2M details.
 
-This type of communication is bi-directional and messages may be sent unsolicited
-by either side.
+Delivery of messages under some circumstances may be significantly delayed or
+lost. The :doc:`/adm` is responsible for queuing these messages in both directions.
+
+For upstream messages, the queue contents may be long-lived due to delivery delays
+or network outages.  The messages in the queue SHALL be persistent across device
+reboots, power cycles, or application restarts, and if undeliverable beyond a
+timeout period a failure status is reported to the sender.
+
+For downstream messages, the queue contents are usually short-lived if the
+application is running.  If an application is not running, or does not acknoledge
+the message delivery over the message bus the :doc:`/adm` is still responsible
+for queuing these messages and if undeliverable beyond a timeout period a failure
+status is reported to the sender.
+
+If an application is uninstalled while its messages are in the queue, a delivery
+failure status SHALL be sent back upstream for each queued downstream message,
+and the queue then purged.
 
 .. note::
 
@@ -293,8 +308,10 @@ MQTT Details
 ============
 
 - QoS: 1 / Acknowledged R/R
-- Req Topic: ``geisa/api/message/req/<userid>``
-- Rsp Topic: ``geisa/api/message/rsp/<userid>``
+- Req Topic: ``geisa/api/message/upstream/req/<userid>``
+- Rsp Topic: ``geisa/api/message/upstream/rsp/<userid>``
+- Req Topic: ``geisa/api/message/downstream/req/<userid>``
+- Rsp Topic: ``geisa/api/message/downstream/rsp/<userid>``
 
 .. note::
 
@@ -308,13 +325,17 @@ API Permissions
 
 - Application:
 
-  - Publish: ``geisa/api/message/req/<userid>``
-  - Subscribe: ``geisa/api/message/rsp/<userid>``
+  - Publish: ``geisa/api/message/upstream/req/<userid>``
+  - Publish: ``geisa/api/message/downstream/rsp/<userid>``
+  - Subscribe: ``geisa/api/message/upstream/rsp/<userid>``
+  - Subscribe: ``geisa/api/message/downstream/req/<userid>``
 
 - Platform:
 
-  - Wildcard Subscribe: ``geisa/api/message/req/#``
-  - Publish: ``geisa/api/message/rsp/<userid>``
+  - Wildcard Subscribe: ``geisa/api/message/upstream/req/#``
+  - Wildcard Subscribe: ``geisa/api/message/downstream/rsp/#``
+  - Publish: ``geisa/api/message/upstream/rsp/<userid>``
+  - Publish: ``geisa/api/message/downstream/req/<userid>``
 
 
 Transaction Data
