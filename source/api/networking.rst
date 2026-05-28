@@ -20,11 +20,14 @@ Message based, and IP socket based.
 
 GEISA distinguishes between platform-mediated message-based communication
 and application-managed IP socket communication. These are separate
-communication mechanisms. IP socket communication is not a transport
-selection option within GEISA app-message request and response payloads.
-Applications that require both mechanisms must request both in their
-manifest, and platforms enforce each according to the approved deployment
-policy.
+communication mechanisms. Applications do not use GEISA app-message
+request and response payloads to perform IP socket communication. For
+ADM-conformant platforms, app-message transport uses the GEISA ADM LwM2M over
+CoAP path, carried by platform-controlled IP communication outside of the
+application execution environment. Applications remain unaware of those ADM
+transport details.  Applications that require both mechanisms must request both
+in their manifest, and platforms enforce each according to the approved 
+deployment policy.
 
 
 Message-based via LwM2M
@@ -49,38 +52,47 @@ or network outages.  The messages in the queue SHALL be persistent across device
 reboots, power cycles, or application restarts, and if undeliverable beyond a
 timeout period a failure status is reported to the sender.
 
-Message queue persistence, retention, retry behavior, and recovery pacing
-are platform-managed behaviors subject to operator policy. Platforms
-SHOULD avoid creating a burst of delayed traffic when connectivity is
-restored. Appropriate mechanisms may include message expiration, priority
-handling, backoff, rate limiting, queue limits, or other
-platform-controlled delivery controls.
+.. note::
+
+   Message queue persistence, retention, retry behavior, and recovery pacing
+   are platform-managed behaviors subject to operator policy. This version of
+   the specification does not define interoperable configuration mechanisms for
+   these behaviors. Future versions may define standard configuration and
+   observability mechanisms for platform-managed message queues.
+
+Platforms SHOULD avoid creating a burst of delayed traffic when connectivity
+is restored. Appropriate mechanisms may include message expiration, priority
+handling, backoff, rate limiting, queue limits, or other platform-controlled
+delivery controls.
 
 A message-specific time-to-live value, when present, indicates the
 sender's requested maximum useful lifetime for that message. The platform
 MAY apply an implementation-defined maximum queued-message retention
-period and SHOULD expire the message when the applicable time-to-live or
-retention period is reached.
+period and SHOULD expire the message when either the applicable time-to-live
+or retention period is reached.
 
-This version of the specification does not define an interoperable
-operator override mechanism for storm conditions, network congestion, FAN
-outages, or other traffic management events. Such controls may exist as
-platform-specific or operator-specific capabilities and may be defined in
-a future version of this specification.
+.. note::
+
+   This version of the specification does not define an interoperable operator
+   override mechanism for storm conditions, network congestion, FAN outages, or
+   other traffic management events. Such controls may exist as
+   platform-specific or operator-specific capabilities and may be defined in a
+   future version of this specification.
 
 This version of the specification does not mandate fallback or transfer of
 queued messages across destination classes or communication mechanisms.
 For example, a platform is not required to transfer queued message-based
-communication to an IP socket communication path, or to transfer failed IP
-socket communication to message-based communication. Applications that
-require cross-mechanism fallback are responsible for implementing that
-behavior within the permissions approved by the deployment policy.
+communication to an application IP socket communication path, or to
+transfer failed application IP socket communication to message-based
+communication. Applications that require cross-mechanism fallback are
+responsible for implementing that behavior within the permissions approved
+by the deployment policy.
 
 For downstream messages, the queue contents are usually short-lived if the
-application is running.  If an application is not running, or does not acknoledge
-the message delivery over the message bus the :doc:`/adm` is still responsible
-for queuing these messages and if undeliverable beyond a timeout period a failure
-status is reported to the sender.
+application is running. If an application is not running, or does not
+acknowledge message delivery over the message bus, the :doc:`/adm` is still
+responsible for queuing these messages and, if undeliverable beyond a timeout
+period, reporting a failure status to the sender.
 
 If an application is uninstalled while its messages are in the queue, a delivery
 failure status SHALL be sent back upstream for each queued downstream message,
@@ -100,8 +112,8 @@ IP socket based to local devices, private clouds, or public clouds
 Applications can also make use of traditional IP socket based real-time
 communications on devices equipped with cellular, Wi-Fi, or other IP connectivity.
 Applications MUST specify the endpoints they need to communicate to (IP/Port)
-in their Application Deployment Manifest so that those policies can be approved by operators
-and implemented in the platform using firewall rules.
+in their Application Deployment Manifest so that those policies can be approved
+ by operators and implemented in the platform using firewall rules.
 
 Applications MUST also specify the expected volume of data per day per
 destination class.
@@ -120,26 +132,37 @@ platform-controlled mechanisms, provided the Application can use standard
 socket APIs from within its execution environment and the approved policy
 is enforced.
 
-Where a platform satisfies approved IP socket communication through
-proxying, NAT, forwarding, or shared upstream connectivity, the Application
-and operator remain responsible for the applicable application-layer
-security and trust behavior. See Security considerations below.
-
+Approved IP socket communication may be satisfied through proxying, NAT,
+forwarding, or shared upstream connectivity. Regardless of the platform
+mechanism used, the Application remains responsible for its application-layer
+security behavior. The operator remains responsible for the deployment policy,
+operator-managed trust configuration, and operation of operator-managed
+platform and EMS components. See Security considerations below.
 
 Inbound connections towards the Application are only supported for the local
 destination class defined below and disallowed from other destination classes.
 
 .. note::
 
-  Support for IP socket communication is NOT REQUIRED by a GEISA device; however
-  certain applications may REQUIRE it to function and would not be compatible
-  with those devices.  Applications can be designed to require IP socket 
-  communication or, if it is not available, fall back to message-based 
+  Application-visible IP socket communication from within the Application
+  execution environment is NOT REQUIRED by every GEISA device. ADM-conformant
+  platforms still require IP connectivity for the ADM LwM2M over CoAP path, but
+  that platform-managed IP connectivity is distinct from Application-managed IP
+  socket access. Applications can be designed to require IP socket
+  communication or, if it is not available, fall back to message-based
   communication functionality.
 
   Additionally, not all destination classes are REQUIRED by a GEISA device. An
   operator or device manufacturer may only support a subset depending on
-  capabilities, deployment architecture, or security policy.
+  capabilities, deployment architecture, or security policy. The availability
+  of an approved application IP communication path is not guaranteed.
+  Applications may encounter intermittent or prolonged outages, or may run on
+  devices where some or all destination classes are not provisioned.
+  Applications approved for IP socket communication SHOULD be designed to
+  handle these conditions, operate in a degraded mode where appropriate, avoid
+  producing excessive alarms or logs, and fall back to message-based
+  communication only when that behavior is implemented by the application and
+  allowed by deployment policy.
 
 
 Interface Types
@@ -197,7 +220,8 @@ Network State
 ^^^^^^^^^^^^^
 
 For each destination class, applications have a network state that informs the
-application if and what volume of communication is available as described in :doc:`status`.
+application if and what volume of communication is available as described in
+:doc:`status`.
 
 An application can request communication with more than one class of endpoint
 and would need a network status indicator for each class separately.  For
@@ -205,9 +229,9 @@ example, it may communicate with both Internet Endpoints as well as Local
 Endpoints.
 
 Applications may observe a mismatch between reported network state and their
-own communication attempts. This version of the GEISA specification does not 
-define a dedicated application-to-platform diagnostic reporting mechanism 
-at this time.  Implementations MAY expose troubleshooting, logging, or diagnostic
+own communication attempts. This version of the GEISA specification does not
+define a dedicated application-to-platform diagnostic reporting mechanism.
+Implementations MAY expose troubleshooting, logging, or diagnostic
 reporting through implementation-specific mechanisms or through future GEISA
 status, logging, or messaging extensions.
 
@@ -220,9 +244,10 @@ transports the data.  A Home Wi-Fi network would normally be considered unlimite
 whereas a cellular connection would be metered in order to keep the device under a
 monthly volume limit.
 
-An application developer MUST define volume limits per destination class in their
-Application Vendor Manifest.  These limits may be overridden by the operator at deployment
-time when converting the Application Vendor Manifest into a Deployment Manifest.
+An application developer MUST define volume limits per destination class in
+their Application Vendor Manifest.  These limits may be overridden by the
+operator at deployment time when converting the Application Vendor Manifest
+into a Deployment Manifest.
 
 These volume limits are specified as a per day (24 hour period) limit in
 bytes. For interoperability, application-visible volume accounting is based
@@ -237,9 +262,11 @@ separately measure or estimate interface-level bytes, including protocol
 and lower-layer overhead, for operator visibility, network planning,
 analysis, audit, and subsequent adjustment of limits.
 
-The operator may define a daily rollover mechanism and a reset period (ex:
-day of the month). The application obtains the remaining volume limits and
-when the next reset occurs via :doc:`/api/status`.
+The daily rollover mechanism and reset period are deployment and platform
+policy. This version of the specification does not define an
+application-visible transaction for configuring those policy values. The
+application obtains the remaining volume limits and the next reset time via
+:doc:`/api/status`.
 
 If an application exhausts its metered volume quota for one or more
 destination classes, the policy for those classes remains *metered* and
@@ -270,13 +297,23 @@ the same security, queuing, retry, or store-and-forward behavior as
 GEISA message-based communication unless those behaviors are explicitly
 provided by the application protocol or deployment environment.
 
-When a platform uses proxying or shared upstream connectivity, application
-layer security remains the responsibility of the relevant communication
-design. A network-layer proxy, NAT, or tunnel can preserve end-to-end
-application TLS. If a platform or operator service terminates,
-rewrites, or re-originates application-layer security, that behavior must
-be explicitly supported by the application, its configured trust material,
-and the operator's deployment policy.
+When a platform uses proxying, forwarding, NAT, tunneling, or shared
+upstream connectivity, application-layer security remains the
+responsibility of the relevant communication design. Network-layer
+mediation can preserve end-to-end application TLS or mTLS semantics.
+Applications MAY use certificate pinning, client authentication, or other
+application-layer trust mechanisms where supported by their protocol.
+
+.. note::
+
+  This version of the specification does not define an interoperable mechanism
+  for an Application vendor to declare whether TLS inspection, explicit
+  proxying, or operator-mediated re-origination of application-layer security is
+  supported. Operators and platform implementations that use such mechanisms
+  are responsible for ensuring that the behavior is compatible with the
+  Application, its configured trust material, and the deployment policy. A
+  future version may define manifest fields or policy controls for this
+  behavior.
 
 Connectivity
 ^^^^^^^^^^^^
@@ -367,7 +404,7 @@ between devices, the Application Manifest cannot list destination/source IP
 addresses for policy rules, but instead only protocol/port and multicast groups.
 
 An application requesting inbound access in its manifest requires that the
-platform create that inbound mapping from the approprate local interface (such
+platform create that inbound mapping from the appropriate local interface (such
 as a WiFi interface) into the application container environment.  When
 requesting a port mapping, both IPv4 and IPv6 MUST be mapped if the local
 interface supports both.
@@ -375,7 +412,7 @@ interface supports both.
 Many common local device protocols use multicast or broadcast for discovery and
 registration.  Applications SHOULD be able to both send to IP multicast groups
 and register IP multicast groups for receipt.  If specified in the application
-manifiest, the platform will register those addresses on the approprate local
+manifest, the platform will register those addresses on the appropriate local
 interface and forward received packets that match both the multicast/broadcast
 address and the inbound protocol/port into the application container environment.
 

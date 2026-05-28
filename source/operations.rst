@@ -221,7 +221,7 @@ trust establishment, registration, and subsequent lifecycle management.
    Reference device onboarding and management establishment flow
    retained for comparison and discussion.
 
-Additional detailed device onboarding workflows and requirements may be added 
+Additional detailed device onboarding workflows and requirements may be added
 in a future revision of the specification.
 
 Application Approval and Deployment Overview
@@ -263,6 +263,11 @@ outage behavior, inbound exposure, fleet network capacity, and operational
 visibility. Inbound IP socket communication generally presents higher
 operational and security risk than outbound-initiated communication and
 may be limited to local endpoint use cases or denied by operator policy.
+This version of the specification does not define interoperable support for
+application-hosted listeners reachable from upstream operator networks or for
+peer-to-peer application communication over the AMI network. Those use cases
+may be considered in a future version if driven by operator or application
+requirements.
 
 Platform-originated reporting should provide timely operator visibility
 into denied access attempts, quota limits reached, unexpected egress attempts,
