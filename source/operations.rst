@@ -241,6 +241,36 @@ remain under operator control.
 Additional detailed application approval and deployment workflows and 
 requirements may be added in a future revision of the specification.
 
+Off-Device Communication Approval
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Applications may request message-based communication, IP socket
+communication, or both. Operationally, these requests are inputs to the
+deployment decision and do not entitle an Application to unmanaged network
+access. The System Operator determines whether requested communication is
+approved for the target deployment environment.
+
+Direct IP socket communication should be reviewed as a distinct operational
+and security decision. Operators may choose to deny direct IP communication
+by default, approve it only for selected applications or destination
+classes, restrict it to operator-controlled endpoints, or require the
+platform to mediate approved traffic through routing, NAT, firewalling,
+forwarding, transparent proxying, or shared upstream connections.
+
+The approval review should consider endpoint ownership, protocol and port
+scope, certificate and trust behavior, expected data volume, retry behavior,
+outage behavior, inbound exposure, fleet network capacity, and operational
+visibility. Inbound IP socket communication generally presents higher
+operational and security risk than outbound-initiated communication and
+may be limited to local endpoint use cases or denied by operator policy.
+
+Platform-originated reporting should provide timely operator visibility
+into denied access attempts, quota limits reached, unexpected egress attempts,
+proxy or forwarding failures, and other communication policy violations.
+The reporting mechanism may be defined by ADM/EMS behavior, platform event
+reporting, event logs, app accounting, or future GEISA operational event
+extensions.
+
 Application Activation and Runtime Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

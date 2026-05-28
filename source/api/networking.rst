@@ -18,6 +18,14 @@ Off-Device Communication
 GEISA allows applications to make use of 2 types of off-device communications:
 Message based, and IP socket based.
 
+GEISA distinguishes between platform-mediated message-based communication
+and application-managed IP socket communication. These are separate
+communication mechanisms. IP socket communication is not a transport
+selection option within GEISA app-message request and response payloads.
+Applications that require both mechanisms must request both in their
+manifest, and platforms enforce each according to the approved deployment
+policy.
+
 
 Message-based via LwM2M
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -40,6 +48,33 @@ For upstream messages, the queue contents may be long-lived due to delivery dela
 or network outages.  The messages in the queue SHALL be persistent across device
 reboots, power cycles, or application restarts, and if undeliverable beyond a
 timeout period a failure status is reported to the sender.
+
+Message queue persistence, retention, retry behavior, and recovery pacing
+are platform-managed behaviors subject to operator policy. Platforms
+SHOULD avoid creating a burst of delayed traffic when connectivity is
+restored. Appropriate mechanisms may include message expiration, priority
+handling, backoff, rate limiting, queue limits, or other
+platform-controlled delivery controls.
+
+A message-specific time-to-live value, when present, indicates the
+sender's requested maximum useful lifetime for that message. The platform
+MAY apply an implementation-defined maximum queued-message retention
+period and SHOULD expire the message when the applicable time-to-live or
+retention period is reached.
+
+This version of the specification does not define an interoperable
+operator override mechanism for storm conditions, network congestion, FAN
+outages, or other traffic management events. Such controls may exist as
+platform-specific or operator-specific capabilities and may be defined in
+a future version of this specification.
+
+This version of the specification does not mandate fallback or transfer of
+queued messages across destination classes or communication mechanisms.
+For example, a platform is not required to transfer queued message-based
+communication to an IP socket communication path, or to transfer failed IP
+socket communication to message-based communication. Applications that
+require cross-mechanism fallback are responsible for implementing that
+behavior within the permissions approved by the deployment policy.
 
 For downstream messages, the queue contents are usually short-lived if the
 application is running.  If an application is not running, or does not acknoledge
@@ -75,6 +110,22 @@ Once a network interface is online, the Application may use outbound-initiated
 AF_INET/AF_INET6 sockets from within the container environment to reach the
 specified endpoints.
 
+Approval of IP socket communication does not imply unmanaged or
+application-selected network reachability. The System Operator remains
+authoritative for which destination classes, endpoints, protocols, ports,
+and volumes are allowed. Platform implementations MAY satisfy approved IP
+socket communication using direct routing, NAT, firewall rules,
+forwarding, transparent proxies, shared upstream connections, or other
+platform-controlled mechanisms, provided the Application can use standard
+socket APIs from within its execution environment and the approved policy
+is enforced.
+
+Where a platform satisfies approved IP socket communication through
+proxying, NAT, forwarding, or shared upstream connectivity, the Application
+and operator remain responsible for the applicable application-layer
+security and trust behavior. See Security considerations below.
+
+
 Inbound connections towards the Application are only supported for the local
 destination class defined below and disallowed from other destination classes.
 
@@ -82,9 +133,9 @@ destination class defined below and disallowed from other destination classes.
 
   Support for IP socket communication is NOT REQUIRED by a GEISA device; however
   certain applications may REQUIRE it to function and would not be compatible
-  with those devices.  Applications can be designed to require IP socket
-  communication or if not available, fall back in a degraded functionality
-  mode to message-based communication.
+  with those devices.  Applications can be designed to require IP socket 
+  communication or, if it is not available, fall back to message-based 
+  communication functionality.
 
   Additionally, not all destination classes are REQUIRED by a GEISA device. An
   operator or device manufacturer may only support a subset depending on
@@ -126,10 +177,10 @@ Other network interfaces that may be available (but out of scope of
 Destination Classes
 ^^^^^^^^^^^^^^^^^^^
 
-The device may have zero, one, or multiple interfaces online at any given time.
-Applications are not required to know these details but instead only need to
-know if their desired endpoints are reachable and what volume limits are in
-place.
+The device may have zero, one, or multiple interfaces online at any given
+time. Applications are not required to know these details but instead only
+need to know if their desired endpoints are accessible under the approved
+deployment policy and what volume limits are in place.
 
 Each endpoint an application defines falls into one of these categories:
 
@@ -153,10 +204,12 @@ and would need a network status indicator for each class separately.  For
 example, it may communicate with both Internet Endpoints as well as Local
 Endpoints.
 
-Applications may report statistics and logs to the operating environment for
-troubleshooting and logging.  For example, if the operating environment has
-reported that Internet Endpoints should be reachable but the Application cannot
-reach them, it may report this error.
+Applications may observe a mismatch between reported network state and their
+own communication attempts. This version of the GEISA specification does not 
+define a dedicated application-to-platform diagnostic reporting mechanism 
+at this time.  Implementations MAY expose troubleshooting, logging, or diagnostic
+reporting through implementation-specific mechanisms or through future GEISA
+status, logging, or messaging extensions.
 
 
 Volume Limits
@@ -171,23 +224,33 @@ An application developer MUST define volume limits per destination class in thei
 Application Vendor Manifest.  These limits may be overridden by the operator at deployment
 time when converting the Application Vendor Manifest into a Deployment Manifest.
 
-These volume limits are specified as a per day (24 hour period) limit in bytes.
-Both transmit and receive data counts toward the application's limit.  The operator
-may define a daily rollover mechanism, and a reset period (ex: day of the month).
-GEISA does not define if or how header and encapsulation bytes count towards
-volume limits.
+These volume limits are specified as a per day (24 hour period) limit in
+bytes. For interoperability, application-visible volume accounting is based
+on application payload bytes. For IP socket communication, this is measured
+at the application socket boundary. For message-based communication, this
+is measured at the GEISA app-message payload boundary. Both transmit and
+receive application payload bytes count toward the application's limit.
 
-The application obtains the remaining volume limits and when the next reset occurs
-via :doc:`/api/status`.
+Operators may account for expected protocol, security, encapsulation,
+tunnel, or lower-layer overhead when setting limits. The platform MAY
+separately measure or estimate interface-level bytes, including protocol
+and lower-layer overhead, for operator visibility, network planning,
+analysis, audit, and subsequent adjustment of limits.
 
-If an application exhausts its volume quota for one or more destination classes,
-it will be sent a network state update with the volume field set to *zero* for
-those classes.  When this condition is cleared (on the next day or reset period),
-the application will be sent another network status update returning the volume
-field to *metered*
+The operator may define a daily rollover mechanism and a reset period (ex:
+day of the month). The application obtains the remaining volume limits and
+when the next reset occurs via :doc:`/api/status`.
 
-Volume limits do not apply to destination classes when the volume field set to
-*unlimited*.
+If an application exhausts its metered volume quota for one or more
+destination classes, the policy for those classes remains *metered* and
+the remaining metered byte count is reported as zero until the next reset
+or operator adjustment. Exhaustion of a metered quota does not change the
+policy to *zero*.
+
+The *zero* policy indicates that the Application currently has no usable
+allocation for that destination class, such as where access is not approved
+by deployment policy. Volume limits do not apply to destination classes
+when the policy is *unlimited*.
 
 
 Security considerations
@@ -202,6 +265,18 @@ For IP socket based communications, the application is responsible for encryptio
 and authentication of data passed between the device and its endpoints where
 needed.
 
+Applications MUST NOT assume that approved IP socket communication provides
+the same security, queuing, retry, or store-and-forward behavior as
+GEISA message-based communication unless those behaviors are explicitly
+provided by the application protocol or deployment environment.
+
+When a platform uses proxying or shared upstream connectivity, application
+layer security remains the responsibility of the relevant communication
+design. A network-layer proxy, NAT, or tunnel can preserve end-to-end
+application TLS. If a platform or operator service terminates,
+rewrites, or re-originates application-layer security, that behavior must
+be explicitly supported by the application, its configured trust material,
+and the operator's deployment policy.
 
 Connectivity
 ^^^^^^^^^^^^
@@ -226,6 +301,13 @@ routing between these components.
 The operating environment MUST provide a local lo interface within the container
 environment for each application. The local lo interface must be up and configured
 with both 127.0.0.1 and ::1 addresses.
+
+The apparent address, route, or connection path visible to an Application
+inside its container environment is not required to correspond one-to-one
+with the physical interface, upstream session, or operator network path
+used by the platform. Applications should treat the socket interface as
+the approved local execution-environment abstraction and rely on Platform
+and App Status for communication availability and quota state.
 
 
 Policy Rules
