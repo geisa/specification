@@ -50,7 +50,8 @@ For Linux, use the official draw.io Desktop package for your distribution
 (`.deb`, `.rpm`, or AppImage), or another trusted system package source. If
 using an AppImage, create a wrapper or symlink named `drawio` somewhere in
 `PATH`.  Information on the draw.io Desktop Package may be found
-[here](https://www.drawio.com/doc/faq/offline) .
+[in the draw.io installation
+documentation](https://www.drawio.com/doc/faq/offline) .
 
 For example, on Ubuntu or another Debian-based distribution, download the
 official draw.io Desktop `.deb` package, then install it with:
