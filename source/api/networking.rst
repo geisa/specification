@@ -246,7 +246,7 @@ monthly volume limit.
 
 An application developer MUST define volume limits per destination class in
 their Vendor Application Manifest.  These limits may be overridden by the
-operator at deployment time when converting the Application Vendor Manifest
+operator at deployment time when converting the Vendor Application Manifest
 into a Deployment Manifest.
 
 These volume limits are specified as a per day (24 hour period) limit in
