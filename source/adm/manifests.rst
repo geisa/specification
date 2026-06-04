@@ -102,6 +102,13 @@ GEISA vendor manifests SHALL include:
   Application messaging is provided through the API and does not require direct
   access to a network interface.
 
+.. Note::
+
+   Requests for IP socket communication in a vendor manifest are subject to
+   operator approval in the deployment manifest. Operators may approve,
+   narrow, replace, or deny requested destination classes, endpoints, ports,
+   and volume limits according to deployment policy.
+
 - External Dependencies
 
     - GEISA applications should be as self-contained as possible, with all
