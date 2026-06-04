@@ -245,7 +245,7 @@ whereas a cellular connection would be metered in order to keep the device under
 monthly volume limit.
 
 An application developer MUST define volume limits per destination class in
-their Application Vendor Manifest.  These limits may be overridden by the
+their Vendor Application Manifest.  These limits may be overridden by the
 operator at deployment time when converting the Application Vendor Manifest
 into a Deployment Manifest.
 
