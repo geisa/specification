@@ -70,11 +70,11 @@ The GEISA API defines APIs for the following purposes:
        Reserved for expansion and definition in a future version of the
        specification.
 
-- Actuator Status & Control
+- :doc:`/api/actuators`
 
-    Allows applications to query the status of actuators, such as a remote
-    disconnect switch, secondary contactor, and auxiliary relays, and, if
-    permitted by the application deployment manifest, control them.
+    Allows authorized applications to query actuator status and request
+    actuator control for platform-exposed actuators such as service switches,
+    DER switches, and load-control relays.
 
 - :doc:`/api/sensors`
 
@@ -109,6 +109,7 @@ The GEISA API defines APIs for the following purposes:
    api/status
    api/instantaneous
    api/waveform
+   api/actuators
    api/sensors
    api/networking
 

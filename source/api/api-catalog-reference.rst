@@ -253,6 +253,62 @@ API Topic and Permission Catalog
      - Platform → App
      - ``GeisaWaveform_Rsp``
      - Response
+   * - :doc:`Actuator Status & Control <../api/actuators>`
+     - ``geisa/api/actuator/get/req/<userid>``
+     - Application
+     - Publish
+     - App → Platform
+     - ``GeisaActuatorGet_Req``
+     - Request
+   * -
+     - ``geisa/api/actuator/get/rsp/<userid>``
+     - Application
+     - Subscribe
+     - Platform → App
+     - ``GeisaActuatorGet_Rsp``
+     - Response
+   * -
+     - ``geisa/api/actuator/set/req/<userid>``
+     - Application
+     - Publish
+     - App → Platform
+     - ``GeisaActuatorSet_Req``
+     - Request
+   * -
+     - ``geisa/api/actuator/set/rsp/<userid>``
+     - Application
+     - Subscribe
+     - Platform → App
+     - ``GeisaActuatorSet_Rsp``
+     - Response
+   * -
+     - ``geisa/api/actuator/get/req/#``
+     - Platform
+     - Wildcard Subscribe
+     - App → Platform
+     - ``GeisaActuatorGet_Req``
+     - Request
+   * -
+     - ``geisa/api/actuator/get/rsp/<userid>``
+     - Platform
+     - Publish
+     - Platform → App
+     - ``GeisaActuatorGet_Rsp``
+     - Response
+   * -
+     - ``geisa/api/actuator/set/req/#``
+     - Platform
+     - Wildcard Subscribe
+     - App → Platform
+     - ``GeisaActuatorSet_Req``
+     - Request
+   * -
+     - ``geisa/api/actuator/set/rsp/<userid>``
+     - Platform
+     - Publish
+     - Platform → App
+     - ``GeisaActuatorSet_Rsp``
+     - Response
    * - :doc:`Sensors <../api/sensors>`
      - ``geisa/api/sensor``
      - Application
@@ -295,5 +351,10 @@ API Topic and Permission Catalog
      - Platform → App
      - ``GeisaSensorReadings_Rsp``
      - Response
+
+Actuator payloads are defined by ``GeisaActuatorGet_Req``,
+``GeisaActuatorGet_Rsp``, ``GeisaActuatorSet_Req``, and
+``GeisaActuatorSet_Rsp``. Status and control are permission-gated.
+Actuator support and target availability are platform-specific.
 
 |geisa-pyramid|
