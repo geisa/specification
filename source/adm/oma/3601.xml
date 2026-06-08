@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE INFORMATION
+
+OMA Permanent Document
+   File: TBD
+   Path: 
+
+OMNA LwM2M Registry
+   File: 3601.xml
+   Path: https://github.com/OpenMobileAlliance/lwm2m-registry
+   
+
+NORMATIVE INFORMATION
+
+  Information about this file can be found in the latest revision of
+
+  TBD
+
+  This is available at http://www.openmobilealliance.org/
+
+  Send comments to https://github.com/OpenMobileAlliance/OMA_LwM2M_for_Developers/issues
+
+CHANGE HISTORY
+
+See https://github.com/OpenMobileAlliance/app_messaging
+
+LEGAL DISCLAIMER
+
+Copyright 2019-2026 Open Mobile Alliance.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+The above license is used as a license under copyright only. Please
+reference the OMA IPR Policy for patent licensing terms:
+https://www.omaspecworks.org/about/intellectual-property-rights/
+
+-->
+<LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
+  <Object ObjectType="MODefinition">
+    <Name>HostMonitoring</Name>
+    <Description1><![CDATA[This LwM2M Object provides a facility for monitoring resource utilization of a GEISA edge environment.]]></Description1>
+    <ObjectID>3601</ObjectID>
+    <ObjectURN>urn:oma:lwm2m:ext:3601</ObjectURN>
+    <LWM2MVersion>1.1</LWM2MVersion>
+    <ObjectVersion>1.0</ObjectVersion>
+    <MultipleInstances>Single</MultipleInstances>
+    <Mandatory>Optional</Mandatory>
+    <Resources>
+      <Item ID="0">
+        <Name>Uptime</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>4 bytes</RangeEnumeration>
+        <Units>s</Units>
+        <Description><![CDATA[Duration since last boot in integer seconds.]]></Description>
+      </Item>
+      <Item ID="1">
+        <Name>CPU Cores</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>1 bytes</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[Number of CPU Cores.]]></Description>
+      </Item>
+      <Item ID="2">
+        <Name>CPU Load</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[Scaled integer value representing the CPU centi-load (Load = Value / 100) averaged over the last 1 minute.]]></Description>
+      </Item>
+      <Item ID="3">
+        <Name>CPU Usage</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>%</Units>
+        <Description><![CDATA[Scaled integer value representing deci-percentage (Usage = Value / 10) of current CPU utilization (user+system time).]]></Description>
+      </Item>
+      <Item ID="4">
+        <Name>RAM Total</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Total physical RAM in bytes.]]></Description>
+      </Item>
+      <Item ID="5">
+        <Name>RAM Available</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Total Available RAM (free + reclaimable) in bytes that can be used without swapping.]]></Description>
+      </Item>
+      <Item ID="6">
+        <Name>Processes Running</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[Number of runnable tasks, useful to detect CPU contention and scheduler saturation.]]></Description>
+      </Item>
+      <Item ID="7">
+        <Name>Processes Blocked</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[Number of tasks blocked waiting on I/O. Sustained non-zero values can indicate I/O stalls, deadlocks or driver/storage issues.]]></Description>
+      </Item>
+      <Item ID="8">
+        <Name>Context Switches</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[Number of context swicthes per second, useful to detect thread thrashing, lock contention, excessive interrupts, or scheduling overhead.]]></Description>
+      </Item>
+      <Item ID="9">
+        <Name>File Handles Used</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>%</Units>
+        <Description><![CDATA[Scaled integer file handle utilization in centi-percent of limit: used_int = (open / max) * 10000. used_pct = used_int / 100.
+          					Useful to detect file descriptor leaks, socket leaks, network connection storms, or misbehaving applications.]]></Description>
+      </Item>
+      <Item ID="10">
+        <Name>Storage Devices</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Storage device inventory for the host or device. Each Resource Instance identifies one storage device. Where related storage resources are also multiple-instance resources, the same Resource Instance index refers to the same storage device.]]></Description>
+      </Item>
+      <Item ID="11">
+        <Name>Storage Partitions</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Storage partition inventory for the host or device. Each Resource Instance identifies one storage partition. Where related storage resources are also multiple-instance resources, the same Resource Instance index refers to the same storage partition.]]></Description>
+      </Item>
+      <Item ID="12">
+        <Name>Storage Partition Available Space</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Available space in bytes for the monitored storage partition scope.]]></Description>
+      </Item>
+      <Item ID="13">
+        <Name>Storage Available</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Total Available Storage (free + reclaimable) in bytes.]]></Description>
+      </Item>
+      <Item ID="14">
+        <Name>Network Devices</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Network interface or device inventory for the host or device. Each Resource Instance identifies one network interface or device. Where related network resources are also multiple-instance resources, the same Resource Instance index refers to the same network interface or device.]]></Description>
+      </Item>
+      <Item ID="15">
+        <Name>Network Device Type</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Type of the network interface or device. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.]]></Description>
+      </Item>
+      <Item ID="16">
+        <Name>Network Device Capacity</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Capacity of the network interface or device. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.]]></Description>
+      </Item>
+      <Item ID="17">
+        <Name>Network Device Load</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Multiple</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[Average load of the network interface or device. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.]]></Description>
+      </Item>
+    </Resources>
+    <Description2><![CDATA[]]></Description2>
+  </Object>
+</LWM2M>
