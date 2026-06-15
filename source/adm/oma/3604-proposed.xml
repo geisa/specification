@@ -15,7 +15,7 @@ Each Object Instance represents the platform's view of one installed or running 
     <Mandatory>Optional</Mandatory>
     <Resources>
       <Item ID="0">
-        <Name>GEISA Application ID</Name>
+        <Name>Application Package ID</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
@@ -23,11 +23,11 @@ Each Object Instance represents the platform's view of one installed or running 
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-GEISA application identifier from the application manifest, using reverse DNS notation. This value identifies the application, not necessarily a unique runtime execution.
+Reverse-DNS or package-style application identifier from the application manifest or platform catalog. This value identifies the application package for display, logs, and correlation, but it is not the OMA numeric AppID.
 ]]></Description>
       </Item>
       <Item ID="1">
-        <Name>Runtime User ID</Name>
+        <Name>Application Instance ID</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
@@ -35,19 +35,7 @@ GEISA application identifier from the application manifest, using reverse DNS no
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Platform-local runtime identifier assigned to the deployed GEISA application instance for API topic routing, credential mapping, or local execution identity. This value is unique within the scope of the device.
-]]></Description>
-      </Item>
-      <Item ID="2">
-        <Name>Numeric AppID</Name>
-        <Operations>R</Operations>
-        <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
-        <RangeEnumeration/>
-        <Units/>
-        <Description><![CDATA[
-Platform-local numeric application identifier used by GEISA LwM2M objects that require numeric application identity. The platform SHALL maintain a stable mapping between this value, GEISA Application ID, Runtime User ID, and related object instances.
+Platform-local application instance identifier that distinguishes multiple instances of the same application on the same platform. This value is not guaranteed globally unique by itself. Upstream or global correlation uses endpoint or platform identity together with application identity, and this instance identity where needed.
 ]]></Description>
       </Item>
       <Item ID="3">
@@ -59,7 +47,7 @@ Platform-local numeric application identifier used by GEISA LwM2M objects that r
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Object link to the LwM2M Software Management Object instance representing the installed application package.
+Optional object link to the corresponding /9 Software Management instance for the same application or application instance. This resource is used for software or package lifecycle correlation.
 ]]></Description>
       </Item>
       <Item ID="4">
@@ -71,7 +59,7 @@ Object link to the LwM2M Software Management Object instance representing the in
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Object links to GEISA App Accounting object instances associated with this application.
+Object link or links to /3602 AppAccounting instance(s) for the same application or application instance. In simple deployments, this may align by object instance index, for example /3604/<n>/4 -> /3602/<n>.
 ]]></Description>
       </Item>
       <Item ID="5">
@@ -553,6 +541,18 @@ Request that the platform obtain or refresh application status. The platform MAY
         <Units/>
         <Description><![CDATA[
 Request that the platform ask the application to shut down cleanly. This operation is advisory and does not replace platform lifecycle enforcement through Software Management or platform execution control.
+]]></Description>
+      </Item>
+      <Item ID="4050">
+        <Name>AppID</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>2 bytes</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[
+A local-scope numeric application identifier for distinguishing edge applications within an endpoint, platform, or deployment context. This value is not globally unique by itself. Upstream or cross-platform correlation uses endpoint or platform identity together with this AppID, and Application Instance ID where multiple instances are possible.
 ]]></Description>
       </Item>
     </Resources>
