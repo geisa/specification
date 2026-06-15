@@ -46,7 +46,12 @@ LEGAL DISCLAIMER
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>Quality of Service</Name>
-    <Description1><![CDATA[This LwM2M Object provides Quality of Service (QoS) configuration and monitoring for the LwM2M Device's network bearers. It allows the LwM2M Server to read and configure QoS parameters such as traffic class, bitrates, packet delay budget, packet error rate, and DSCP markings.]]></Description1>
+    <Description1><![CDATA[
+This LwM2M Object provides Quality of Service (QoS) configuration and
+monitoring for the LwM2M Device's network bearers. It allows the LwM2M Server
+to read and configure QoS parameters such as traffic class, bitrates, packet
+delay budget, packet error rate, and DSCP markings.
+]]></Description1>
     <ObjectID>10540</ObjectID>
     <ObjectURN>urn:oma:lwm2m:x:10540</ObjectURN>
     <LWM2MVersion>1.1</LWM2MVersion>
@@ -62,7 +67,9 @@ LEGAL DISCLAIMER
         <Type>String</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[A human-readable name or label identifying this QoS profile instance.]]></Description>
+        <Description><![CDATA[
+A human-readable name or label identifying this QoS profile instance.
+]]></Description>
       </Item>
       <Item ID="1">
         <Name>QoS Class Identifier</Name>
@@ -72,7 +79,11 @@ LEGAL DISCLAIMER
         <Type>Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[QoS Class Identifier (QCI) for LTE or 5G QoS Identifier (5QI) for NR bearers. Standardized values are defined in 3GPP TS 23.203 (QCI) and 3GPP TS 23.501 (5QI). A value of 0 indicates that no specific QCI/5QI is assigned.]]></Description>
+        <Description><![CDATA[
+QoS Class Identifier (QCI) for LTE or 5G QoS Identifier (5QI) for NR bearers.
+Standardized values are defined in 3GPP TS 23.203 (QCI) and 3GPP TS 23.501
+(5QI). A value of 0 indicates that no specific QCI/5QI is assigned.
+]]></Description>
       </Item>
       <Item ID="2">
         <Name>Traffic Priority</Name>
@@ -82,11 +93,13 @@ LEGAL DISCLAIMER
         <Type>Integer</Type>
         <RangeEnumeration>0..7</RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Traffic priority level for this bearer or flow. Higher values indicate higher priority.
+        <Description><![CDATA[
+Traffic priority level for this bearer or flow. Higher values indicate higher priority.
 0: Best effort (lowest priority)
 1..6: Increasing priority levels
 7: Highest priority
-This value is used to differentiate traffic flows when scheduling resources.]]></Description>
+This value is used to differentiate traffic flows when scheduling resources.
+]]></Description>
       </Item>
       <Item ID="3">
         <Name>Maximum Bitrate Uplink</Name>
@@ -96,7 +109,11 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[Maximum bitrate (MBR) in the uplink direction for this bearer or flow, expressed in bits per second. A value of 0 indicates no restriction is applied.]]></Description>
+        <Description><![CDATA[
+Maximum bitrate (MBR) in the uplink direction for this bearer or flow,
+expressed in bits per second. A value of 0 indicates no restriction is
+applied.
+]]></Description>
       </Item>
       <Item ID="4">
         <Name>Maximum Bitrate Downlink</Name>
@@ -106,7 +123,11 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[Maximum bitrate (MBR) in the downlink direction for this bearer or flow, expressed in bits per second. A value of 0 indicates no restriction is applied.]]></Description>
+        <Description><![CDATA[
+Maximum bitrate (MBR) in the downlink direction for this bearer or flow,
+expressed in bits per second. A value of 0 indicates no restriction is
+applied.
+]]></Description>
       </Item>
       <Item ID="5">
         <Name>Guaranteed Bitrate Uplink</Name>
@@ -116,7 +137,11 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[Guaranteed bitrate (GBR) in the uplink direction for this bearer or flow, expressed in bits per second. Applicable only for GBR bearers. A value of 0 indicates a non-GBR bearer.]]></Description>
+        <Description><![CDATA[
+Guaranteed bitrate (GBR) in the uplink direction for this bearer or flow,
+expressed in bits per second. Applicable only for GBR bearers. A value of 0
+indicates a non-GBR bearer.
+]]></Description>
       </Item>
       <Item ID="6">
         <Name>Guaranteed Bitrate Downlink</Name>
@@ -126,7 +151,11 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[Guaranteed bitrate (GBR) in the downlink direction for this bearer or flow, expressed in bits per second. Applicable only for GBR bearers. A value of 0 indicates a non-GBR bearer.]]></Description>
+        <Description><![CDATA[
+Guaranteed bitrate (GBR) in the downlink direction for this bearer or flow,
+expressed in bits per second. Applicable only for GBR bearers. A value of 0
+indicates a non-GBR bearer.
+]]></Description>
       </Item>
       <Item ID="7">
         <Name>Packet Delay Budget</Name>
@@ -136,7 +165,11 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>ms</Units>
-        <Description><![CDATA[The Packet Delay Budget (PDB) defines an upper bound for the time that a packet may be delayed between the UE and the PDCP layer of the eNB/gNB, expressed in milliseconds. A value of 0 indicates no PDB is configured.]]></Description>
+        <Description><![CDATA[
+The Packet Delay Budget (PDB) defines an upper bound for the time that a
+packet may be delayed between the UE and the PDCP layer of the eNB/gNB,
+expressed in milliseconds. A value of 0 indicates no PDB is configured.
+]]></Description>
       </Item>
       <Item ID="8">
         <Name>Packet Error Rate</Name>
@@ -146,7 +179,13 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Float</Type>
         <RangeEnumeration>0..1</RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[The Packet Error Rate (PER) defines an upper bound for the rate of packets that have been processed by the sender of a link layer protocol but not received by the receiver of that protocol, expressed as a value between 0 and 1 (e.g. 0.001 for 10^-3). A value of 0 indicates no PER requirement is configured.]]></Description>
+        <Description><![CDATA[
+The Packet Error Rate (PER) defines an upper bound for the rate of packets
+that have been processed by the sender of a link layer protocol but not
+received by the receiver of that protocol, expressed as a value between 0 and
+1 (e.g. 0.001 for 10^-3). A value of 0 indicates no PER requirement is
+configured.
+]]></Description>
       </Item>
       <Item ID="9">
         <Name>DSCP Marking</Name>
@@ -156,11 +195,13 @@ This value is used to differentiate traffic flows when scheduling resources.]]><
         <Type>Integer</Type>
         <RangeEnumeration>0..63</RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Differentiated Services Code Point (DSCP) value to be applied to IP packets belonging to this QoS flow, as defined in RFC 2474. The 6-bit DSCP value ranges from 0 to 63. Common values include:
-0 (000000): Best Effort (BE)
-10 (001010): AF11
-46 (101110): Expedited Forwarding (EF)
-A value of 0 indicates Best Effort forwarding.]]></Description>
+        <Description><![CDATA[
+Differentiated Services Code Point (DSCP) value to be applied to IP packets
+belonging to this QoS flow, as defined in RFC 2474. The 6-bit DSCP value
+ranges from 0 to 63. Common values include: 0 (000000): Best Effort (BE) 10
+(001010): AF11 46 (101110): Expedited Forwarding (EF) A value of 0 indicates
+Best Effort forwarding.
+]]></Description>
       </Item>
       <Item ID="10">
         <Name>Allocation and Retention Priority</Name>
@@ -170,7 +211,13 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Integer</Type>
         <RangeEnumeration>1..15</RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Allocation and Retention Priority (ARP) value as defined in 3GPP TS 23.203. The ARP is used to decide whether a bearer establishment or modification request can be accepted, and also for deciding which bearers to discard in case of resource limitations. Lower values indicate higher priority (1 = highest, 15 = lowest).]]></Description>
+        <Description><![CDATA[
+Allocation and Retention Priority (ARP) value as defined in 3GPP TS 23.203.
+The ARP is used to decide whether a bearer establishment or modification
+request can be accepted, and also for deciding which bearers to discard in
+case of resource limitations. Lower values indicate higher priority (1 =
+highest, 15 = lowest).
+]]></Description>
       </Item>
       <Item ID="11">
         <Name>Preemption Capability</Name>
@@ -180,7 +227,12 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Boolean</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Indicates whether a service data flow may get resources that were already assigned to another service data flow with a lower ARP priority level. True = the bearer may preempt resources from a lower-priority bearer. False = the bearer shall not preempt resources from lower-priority bearers.]]></Description>
+        <Description><![CDATA[
+Indicates whether a service data flow may get resources that were already
+assigned to another service data flow with a lower ARP priority level. True =
+the bearer may preempt resources from a lower-priority bearer. False = the
+bearer shall not preempt resources from lower-priority bearers.
+]]></Description>
       </Item>
       <Item ID="12">
         <Name>Preemption Vulnerability</Name>
@@ -190,7 +242,12 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Boolean</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Indicates whether a service data flow may lose the resources assigned to it in order to admit a service data flow with a higher ARP priority level. True = resources assigned to this bearer may be preempted by a higher-priority bearer. False = resources shall not be preempted.]]></Description>
+        <Description><![CDATA[
+Indicates whether a service data flow may lose the resources assigned to it in
+order to admit a service data flow with a higher ARP priority level. True =
+resources assigned to this bearer may be preempted by a higher-priority
+bearer. False = resources shall not be preempted.
+]]></Description>
       </Item>
       <Item ID="13">
         <Name>QoS Monitoring Enabled</Name>
@@ -200,7 +257,11 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Boolean</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units></Units>
-        <Description><![CDATA[Indicates whether QoS monitoring is currently active for this object instance. When set to True, the device should collect and report QoS metrics. When set to False, monitoring is disabled.]]></Description>
+        <Description><![CDATA[
+Indicates whether QoS monitoring is currently active for this object instance.
+When set to True, the device should collect and report QoS metrics. When set
+to False, monitoring is disabled.
+]]></Description>
       </Item>
       <Item ID="14">
         <Name>Measured Uplink Throughput</Name>
@@ -210,7 +271,10 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[The current measured uplink throughput for this QoS flow, expressed in bits per second. This is a read-only, observed value reported by the device.]]></Description>
+        <Description><![CDATA[
+The current measured uplink throughput for this QoS flow, expressed in bits
+per second. This is a read-only, observed value reported by the device.
+]]></Description>
       </Item>
       <Item ID="15">
         <Name>Measured Downlink Throughput</Name>
@@ -220,7 +284,10 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>bit/s</Units>
-        <Description><![CDATA[The current measured downlink throughput for this QoS flow, expressed in bits per second. This is a read-only, observed value reported by the device.]]></Description>
+        <Description><![CDATA[
+The current measured downlink throughput for this QoS flow, expressed in bits
+per second. This is a read-only, observed value reported by the device.
+]]></Description>
       </Item>
       <Item ID="16">
         <Name>Measured Round-Trip Delay</Name>
@@ -230,9 +297,15 @@ A value of 0 indicates Best Effort forwarding.]]></Description>
         <Type>Integer</Type>
         <RangeEnumeration></RangeEnumeration>
         <Units>ms</Units>
-        <Description><![CDATA[The current measured round-trip delay (RTD) for this QoS flow, expressed in milliseconds. This is a read-only, observed value reported by the device.]]></Description>
+        <Description><![CDATA[
+The current measured round-trip delay (RTD) for this QoS flow, expressed in
+milliseconds. This is a read-only, observed value reported by the device.
+]]></Description>
       </Item>
     </Resources>
-    <Description2><![CDATA[Multiple instances of this object may be used to represent different QoS profiles or bearers active on the device simultaneously.]]></Description2>
+    <Description2><![CDATA[
+Multiple instances of this object may be used to represent different QoS
+profiles or bearers active on the device simultaneously.
+]]></Description2>
   </Object>
 </LWM2M>

@@ -1,4 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE INFORMATION
+
+OMA Permanent Document
+   File: TBD
+   Path:
+
+OMNA LwM2M Registry
+   File: 3604.xml
+   Path: https://github.com/OpenMobileAlliance/lwm2m-registry
+
+NORMATIVE INFORMATION
+
+  Information about this file can be found in the latest revision of
+
+  TBD
+
+  This is available at http://www.openmobilealliance.org/
+
+  Send comments to https://github.com/OpenMobileAlliance/OMA_LwM2M_for_Developers/issues
+
+CHANGE HISTORY
+
+See TBD
+
+LEGAL DISCLAIMER
+
+Copyright 2019-2026 Open Mobile Alliance.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+The above license is used as a license under copyright only. Please
+reference the OMA IPR Policy for patent licensing terms:
+https://www.omaspecworks.org/about/intellectual-property-rights/
+
+-->
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>AppMonitoring</Name>
@@ -199,8 +259,12 @@ Short platform-generated reason associated with the current Health State.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the current or most recent application runtime execution started,
- when available from the platform.
+Time at which the current or most recent application runtime execution
+started, when available from the platform. The value is encoded as LwM2M
+Time using Unix epoch seconds. The encoded value does not carry timezone
+metadata. Platform-local interpretation uses /3/0/15 Timezone, with
+fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more
+specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="12">
@@ -213,7 +277,11 @@ Time at which the current or most recent application runtime execution started,
         <Units/>
         <Description><![CDATA[
 Time at which the platform most recently received, generated, or refreshed
-application runtime status for this application instance.
+application runtime status for this application instance. The value is
+encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
+carry timezone metadata. Platform-local interpretation uses /3/0/15
+Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
+unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="13">
@@ -225,7 +293,11 @@ application runtime status for this application instance.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the application most recently exited or was terminated.
+Time at which the application most recently exited or was terminated. The
+value is encoded as LwM2M Time using Unix epoch seconds. The encoded value
+does not carry timezone metadata. Platform-local interpretation uses /3/0/15
+Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
+unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="14">
@@ -517,7 +589,11 @@ Most recent platform action taken for this application instance.
         <Units/>
         <Description><![CDATA[
 Time at which the platform most recently took an action for this application
-instance.
+instance. The value is encoded as LwM2M Time using Unix epoch seconds. The
+encoded value does not carry timezone metadata. Platform-local
+interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset
+when Timezone is unavailable, unless a more specific ADM or EMS policy
+applies.
 ]]></Description>
       </Item>
       <Item ID="35">
@@ -542,8 +618,12 @@ crash, and watchdog-miss current-period metrics in this object instance.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Start time for the active monitoring period used by current-period counters and
-windowed metrics.
+Start time for the active monitoring period used by current-period counters
+and windowed metrics. The value is encoded as LwM2M Time using Unix epoch
+seconds. The encoded value does not carry timezone metadata. Platform-local
+interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset
+when Timezone is unavailable, unless a more specific ADM or EMS policy
+applies.
 ]]></Description>
       </Item>
       <Item ID="37">
@@ -556,7 +636,11 @@ windowed metrics.
         <Units/>
         <Description><![CDATA[
 Time at which the platform most recently refreshed or updated this
-AppMonitoring object snapshot for the application instance.
+AppMonitoring object snapshot for the application instance. The value is
+encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
+carry timezone metadata. Platform-local interpretation uses /3/0/15
+Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
+unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="38">

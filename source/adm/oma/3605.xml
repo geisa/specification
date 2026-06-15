@@ -1,4 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+FILE INFORMATION
+
+OMA Permanent Document
+   File: TBD
+   Path:
+
+OMNA LwM2M Registry
+   File: 3605.xml
+   Path: https://github.com/OpenMobileAlliance/lwm2m-registry
+
+NORMATIVE INFORMATION
+
+  Information about this file can be found in the latest revision of
+
+  TBD
+
+  This is available at http://www.openmobilealliance.org/
+
+  Send comments to https://github.com/OpenMobileAlliance/OMA_LwM2M_for_Developers/issues
+
+CHANGE HISTORY
+
+See TBD
+
+LEGAL DISCLAIMER
+
+Copyright 2019-2026 Open Mobile Alliance.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived
+from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+The above license is used as a license under copyright only. Please
+reference the OMA IPR Policy for patent licensing terms:
+https://www.omaspecworks.org/about/intellectual-property-rights/
+
+-->
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>PlatformMonitoring</Name>
@@ -140,11 +200,11 @@ Short platform-generated reason associated with the current Component Health Sta
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time at which the Component Health State most recently changed. The value
-	is encoded as LwM2M Time using Unix epoch seconds. The encoded value does
-	not carry timezone metadata. Platform-local interpretation uses /3/0/15
-	Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
-	unless a more specific ADM or EMS policy applies.
+    Time at which the Component Health State most recently changed. The value
+    is encoded as LwM2M Time using Unix epoch seconds. The encoded value does
+    not carry timezone metadata. Platform-local interpretation uses /3/0/15
+    Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
+    unless a more specific ADM or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="7">
@@ -156,12 +216,12 @@ Short platform-generated reason associated with the current Component Health Sta
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time at which the current or most recent execution of the component started,
-	when available from the platform. The value is encoded as LwM2M Time using
-	Unix epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Time at which the current or most recent execution of the component started,
+    when available from the platform. The value is encoded as LwM2M Time using
+    Unix epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="8">
@@ -198,12 +258,12 @@ health evaluation for this component.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Start time for the active monitoring period used by current-period counters
-	and derived health state. The value is encoded as LwM2M Time using Unix
-	epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Start time for the active monitoring period used by current-period counters
+    and derived health state. The value is encoded as LwM2M Time using Unix
+    epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="11">
@@ -215,12 +275,12 @@ health evaluation for this component.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time at which the platform most recently refreshed, generated, or updated the
-	monitoring snapshot represented by this object instance. The value is encoded
-	as LwM2M Time using Unix epoch seconds. The encoded value does not carry
-	timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with
-	fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more
-	specific ADM or EMS policy applies.
+    Time at which the platform most recently refreshed, generated, or updated the
+    monitoring snapshot represented by this object instance. The value is encoded
+    as LwM2M Time using Unix epoch seconds. The encoded value does not carry
+    timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with
+    fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more
+    specific ADM or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="12">
@@ -256,11 +316,11 @@ EMA, LwM2M client, or aggregate GEISA Platform scope.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time of the most recent successful LwM2M registration, when known. The value
-	is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
-	carry timezone metadata. Platform-local interpretation uses /3/0/15
-	Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
-	unless a more specific ADM or EMS policy applies.
+    Time of the most recent successful LwM2M registration, when known. The value
+    is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
+    carry timezone metadata. Platform-local interpretation uses /3/0/15
+    Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
+    unless a more specific ADM or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="14">
@@ -272,11 +332,11 @@ EMA, LwM2M client, or aggregate GEISA Platform scope.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time of the most recent successful LwM2M registration update, when known.
-	The value is encoded as LwM2M Time using Unix epoch seconds. The encoded
-	value does not carry timezone metadata. Platform-local interpretation uses
-	/3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
-	unavailable, unless a more specific ADM or EMS policy applies.
+    Time of the most recent successful LwM2M registration update, when known.
+    The value is encoded as LwM2M Time using Unix epoch seconds. The encoded
+    value does not carry timezone metadata. Platform-local interpretation uses
+    /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
+    unavailable, unless a more specific ADM or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="15">
@@ -343,13 +403,13 @@ Current upstream communication state for GEISA Platform reporting.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Timestamp of the most recent successful upstream send, handoff, delivery, or
-	communication observed or retained by the platform for this component,
-	function, or path, when available. The value is encoded as LwM2M Time using
-	Unix epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Timestamp of the most recent successful upstream send, handoff, delivery, or
+    communication observed or retained by the platform for this component,
+    function, or path, when available. The value is encoded as LwM2M Time using
+    Unix epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="19">
@@ -361,13 +421,13 @@ Current upstream communication state for GEISA Platform reporting.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Timestamp of the most recent upstream send, handoff, delivery, or
-	communication error observed or retained by the platform for this component,
-	function, or path, when available. The value is encoded as LwM2M Time using
-	Unix epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Timestamp of the most recent upstream send, handoff, delivery, or
+    communication error observed or retained by the platform for this component,
+    function, or path, when available. The value is encoded as LwM2M Time using
+    Unix epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="20">
@@ -491,12 +551,12 @@ Total bytes currently queued or spooled for upstream GEISA Platform delivery.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Timestamp of the oldest pending upstream or platform message in the monitored
-	queue or path when one exists. The value is encoded as LwM2M Time using Unix
-	epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Timestamp of the oldest pending upstream or platform message in the monitored
+    queue or path when one exists. The value is encoded as LwM2M Time using Unix
+    epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="29">
@@ -659,12 +719,12 @@ exists.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-	Time at which this component most recently wrote or caused a durable event
-	or log record to be written. The value is encoded as LwM2M Time using Unix
-	epoch seconds. The encoded value does not carry timezone metadata.
-	Platform-local interpretation uses /3/0/15 Timezone, with fallback to
-	/3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
-	or EMS policy applies.
+    Time at which this component most recently wrote or caused a durable event
+    or log record to be written. The value is encoded as LwM2M Time using Unix
+    epoch seconds. The encoded value does not carry timezone metadata.
+    Platform-local interpretation uses /3/0/15 Timezone, with fallback to
+    /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM
+    or EMS policy applies.
      ]]></Description>
       </Item>
       <Item ID="39">

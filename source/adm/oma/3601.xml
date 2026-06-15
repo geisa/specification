@@ -4,12 +4,12 @@ FILE INFORMATION
 
 OMA Permanent Document
    File: TBD
-   Path: 
+   Path:
 
 OMNA LwM2M Registry
    File: 3601.xml
    Path: https://github.com/OpenMobileAlliance/lwm2m-registry
-   
+
 
 NORMATIVE INFORMATION
 
@@ -63,7 +63,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>HostMonitoring</Name>
-    <Description1><![CDATA[This LwM2M Object provides a facility for monitoring resource utilization of a host or device.]]></Description1>
+    <Description1><![CDATA[
+This LwM2M Object provides a facility for monitoring resource utilization of a
+host or device.
+]]></Description1>
     <ObjectID>3601</ObjectID>
     <ObjectURN>urn:oma:lwm2m:ext:3601</ObjectURN>
     <LWM2MVersion>1.1</LWM2MVersion>
@@ -79,7 +82,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration>4 bytes</RangeEnumeration>
         <Units>s</Units>
-        <Description><![CDATA[Duration since the last boot, in integer seconds.]]></Description>
+        <Description><![CDATA[
+Duration since the last boot, in integer seconds.
+]]></Description>
       </Item>
       <Item ID="1">
         <Name>CPU Architecture</Name>
@@ -89,7 +94,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[CPU architecture reported by the host, such as arm64, x86_64, or another platform architecture label.]]></Description>
+        <Description><![CDATA[
+CPU architecture reported by the host, such as arm64, x86_64, or another
+platform architecture label.
+]]></Description>
       </Item>
       <Item ID="2">
         <Name>Processor Model</Name>
@@ -99,7 +107,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Processor model or CPU model string reported by the host.]]></Description>
+        <Description><![CDATA[
+Processor model or CPU model string reported by the host.
+]]></Description>
       </Item>
       <Item ID="3">
         <Name>CPU Current Frequency</Name>
@@ -109,7 +119,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>kHz</Units>
-        <Description><![CDATA[Current CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.]]></Description>
+        <Description><![CDATA[
+Current CPU frequency reported by the host for the monitored CPU or aggregate
+CPU reporting scope.
+]]></Description>
       </Item>
       <Item ID="4">
         <Name>CPU Minimum Frequency</Name>
@@ -119,7 +132,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>kHz</Units>
-        <Description><![CDATA[Minimum CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.]]></Description>
+        <Description><![CDATA[
+Minimum CPU frequency reported by the host for the monitored CPU or aggregate
+CPU reporting scope.
+]]></Description>
       </Item>
       <Item ID="5">
         <Name>CPU Maximum Frequency</Name>
@@ -129,7 +145,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>kHz</Units>
-        <Description><![CDATA[Maximum CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.]]></Description>
+        <Description><![CDATA[
+Maximum CPU frequency reported by the host for the monitored CPU or aggregate
+CPU reporting scope.
+]]></Description>
       </Item>
       <Item ID="6">
         <Name>CPU Count</Name>
@@ -139,7 +158,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration>1 bytes</RangeEnumeration>
         <Units/>
-        <Description><![CDATA[Number of CPU cores or logical processors available to the host or device.]]></Description>
+        <Description><![CDATA[
+Number of CPU cores or logical processors available to the host or device.
+]]></Description>
       </Item>
       <Item ID="7">
         <Name>CPU Load</Name>
@@ -149,7 +170,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[One-minute CPU load average multiplied by 100. This is a scheduler-pressure metric, not CPU utilization percent, and it should not be confused with CPU Usage.]]></Description>
+        <Description><![CDATA[
+One-minute CPU load average multiplied by 100. This is a scheduler-pressure
+metric, not CPU utilization percent, and it should not be confused with CPU
+Usage.
+]]></Description>
       </Item>
       <Item ID="8">
         <Name>CPU Usage</Name>
@@ -159,7 +184,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>%</Units>
-        <Description><![CDATA[Short-interval CPU utilization sample in deci-percent. This is a sampled utilization value, not the same concept as CPU Load. Divide by 10 to obtain percent usage.]]></Description>
+        <Description><![CDATA[
+Short-interval CPU utilization sample in deci-percent. This is a sampled
+utilization value, not the same concept as CPU Load. Divide by 10 to obtain
+percent usage.
+]]></Description>
       </Item>
       <Item ID="9">
         <Name>Memory Total</Name>
@@ -169,7 +198,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
-        <Description><![CDATA[Total physical memory in bytes.]]></Description>
+        <Description><![CDATA[
+Total physical memory in bytes.
+]]></Description>
       </Item>
       <Item ID="10">
         <Name>Memory Available</Name>
@@ -179,7 +210,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
-        <Description><![CDATA[Available memory in bytes that can be used without swapping.]]></Description>
+        <Description><![CDATA[
+Available memory in bytes that can be used without swapping.
+]]></Description>
       </Item>
       <Item ID="11">
         <Name>Processes Running</Name>
@@ -189,7 +222,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Number of currently observed running processes or process entries on the host. This is a host process-count indicator, not a CPU run-queue or runnable-task metric.]]></Description>
+        <Description><![CDATA[
+Number of currently observed running processes or process entries on the host.
+This is a host process-count indicator, not a CPU run-queue or runnable-task
+metric.
+]]></Description>
       </Item>
       <Item ID="12">
         <Name>Threads Running</Name>
@@ -199,7 +236,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Number of currently observed running threads.]]></Description>
+        <Description><![CDATA[
+Number of currently observed running threads.
+]]></Description>
       </Item>
       <Item ID="13">
         <Name>Context Switches</Name>
@@ -209,7 +248,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Number of context switches per second.]]></Description>
+        <Description><![CDATA[
+Number of context switches per second.
+]]></Description>
       </Item>
       <Item ID="14">
         <Name>Interrupts</Name>
@@ -219,7 +260,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Number of interrupts per second.]]></Description>
+        <Description><![CDATA[
+Number of interrupts per second.
+]]></Description>
       </Item>
       <Item ID="15">
         <Name>Total Storage Capacity</Name>
@@ -229,7 +272,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
-        <Description><![CDATA[Total storage capacity visible to or managed by the host or monitoring scope, in bytes.]]></Description>
+        <Description><![CDATA[
+Total storage capacity visible to or managed by the host or monitoring scope,
+in bytes.
+]]></Description>
       </Item>
       <Item ID="16">
         <Name>Storage Devices</Name>
@@ -239,7 +285,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Storage device identifiers or labels for the host or device. Each Resource Instance identifies one included storage device.]]></Description>
+        <Description><![CDATA[
+Storage device identifiers or labels for the host or device. Each Resource
+Instance identifies one included storage device.
+]]></Description>
       </Item>
       <Item ID="17">
         <Name>Storage Partitions</Name>
@@ -249,7 +298,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Storage partition identifiers, paths, mount points, or labels. The same Resource Instance index refers to the same storage partition as Storage Partition Available Space.]]></Description>
+        <Description><![CDATA[
+Storage partition identifiers, paths, mount points, or labels. The same
+Resource Instance index refers to the same storage partition as Storage
+Partition Available Space.
+]]></Description>
       </Item>
       <Item ID="18">
         <Name>Storage Partition Available Space</Name>
@@ -259,7 +312,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
-        <Description><![CDATA[Available space for the corresponding storage partition or partitions, in bytes. The same Resource Instance index refers to the same partition identified by Storage Partitions.]]></Description>
+        <Description><![CDATA[
+Available space for the corresponding storage partition or partitions, in
+bytes. The same Resource Instance index refers to the same partition
+identified by Storage Partitions.
+]]></Description>
       </Item>
       <Item ID="19">
         <Name>Network Devices</Name>
@@ -269,7 +326,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Network device or interface identifiers or labels for the host or device. Each Resource Instance identifies one included network interface or device.]]></Description>
+        <Description><![CDATA[
+Network device or interface identifiers or labels for the host or device. Each
+Resource Instance identifies one included network interface or device.
+]]></Description>
       </Item>
       <Item ID="20">
         <Name>Network Device Type</Name>
@@ -279,7 +339,10 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Type of each included network interface or device, such as ethernet, wifi, virtual, loopback, or unknown.]]></Description>
+        <Description><![CDATA[
+Type of each included network interface or device, such as ethernet, wifi,
+virtual, loopback, or unknown.
+]]></Description>
       </Item>
       <Item ID="21">
         <Name>Network Device Capacity</Name>
@@ -289,7 +352,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bit/s</Units>
-        <Description><![CDATA[Link or interface capacity for each included network interface or device, expressed in bits per second. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.]]></Description>
+        <Description><![CDATA[
+Link or interface capacity for each included network interface or device,
+expressed in bits per second. The same Resource Instance index refers to the
+same network interface or device identified by the Network Devices resource.
+]]></Description>
       </Item>
       <Item ID="22">
         <Name>Network Device Traffic Bytes</Name>
@@ -299,9 +366,16 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
-        <Description><![CDATA[Cumulative received plus transmitted byte counter, in bytes, for the included network interface. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource. This is observed traffic volume, not link utilization percentage or rate.]]></Description>
+        <Description><![CDATA[
+Cumulative received plus transmitted byte counter, in bytes, for the included
+network interface. The same Resource Instance index refers to the same network
+interface or device identified by the Network Devices resource. This is
+observed traffic volume, not link utilization percentage or rate.
+]]></Description>
       </Item>
     </Resources>
-    <Description2><![CDATA[]]></Description2>
+    <Description2><![CDATA[
+
+]]></Description2>
   </Object>
 </LWM2M>
