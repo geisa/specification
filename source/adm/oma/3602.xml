@@ -63,7 +63,7 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
     <Name>AppAccounting</Name>
-    <Description1><![CDATA[This LwM2M Object provides operations-facing application accounting and policy summary state for an application or application accounting scope. It exposes current-period usage counters, quotas and limits, throttle, block, or disabled state, selected enforcement evidence, operator or EMS/ADM action resources, and application or accounting-scope operational monitoring.
+    <Description1><![CDATA[This LwM2M Object provides operations-facing application accounting and policy summary state for an application or application accounting scope. It exposes current-period usage counters, quotas and limits, throttle, block, or disabled state, selected enforcement evidence, operator or EMS/ADM action resources, and application or accounting-scope operational monitoring. Multiple AppAccounting object instances may exist for the same AppID, Accounting Class, and Accounting Scope to expose different accounting windows such as configured collection period, daily, since-reboot, rolling-window, lifetime, or operator-defined accounting. Usage counters remain relevant even when the effective policy is unlimited; unlimited policy means no active quota exhaustion is expected, not that observed usage is irrelevant.
 
 Detailed behavioral application issues, platform-detected anomalies, configuration-state problems, platform health signals, and policy evaluation details are surfaced through platform messaging, platform monitoring or configuration resources, and durable event, log, or message history where supported. This object may expose selected summary state derived from those sources for ease of operations monitoring, but it is not the definitive source for all application behavioral detail.]]></Description1>
     <ObjectID>3602</ObjectID>
@@ -81,7 +81,7 @@ Detailed behavioral application issues, platform-detected anomalies, configurati
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[A string in RFC 5545 Recurrence Rule (RRule) format defining the active accounting collection period for this object instance (e.g., "RRULE:FREQ=MINUTELY;INTERVAL=60"). Counters are interpreted within the active collection period and reset or roll over according to the accounting policy or profile.]]></Description>
+        <Description><![CDATA[A string in RFC 5545 Recurrence Rule (RRule) format defining the configured recurring accounting period when the Accounting Window Type represents a configured or recurring period (e.g., "RRULE:FREQ=MINUTELY;INTERVAL=60"). Counters are interpreted within the active collection period and reset or roll over according to the accounting policy or profile. For non-recurring windows such as Since reboot or Lifetime, Period Start Time identifies the beginning of the accounting window and Next Reset Time may be unavailable.]]></Description>
       </Item>
       <Item ID="1">
         <Name>Maximum Bytes</Name>
@@ -366,7 +366,7 @@ This resource defines the scope boundary for the counters, limits, quota state, 
         <Type>Time</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Start time for the active collection period represented by the counters in this accounting instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Device-local accounting period boundaries are interpreted using /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS accounting policy applies.]]></Description>
+        <Description><![CDATA[Start time for the active collection period represented by the counters in this accounting instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Device-local accounting period boundaries are interpreted using /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS accounting policy applies. For non-recurring windows such as Since reboot or Lifetime, this resource identifies the beginning of the accounting window.]]></Description>
       </Item>
       <Item ID="24">
         <Name>Next Reset Time</Name>
@@ -376,7 +376,7 @@ This resource defines the scope boundary for the counters, limits, quota state, 
         <Type>Time</Type>
         <RangeEnumeration/>
         <Units/>
-        <Description><![CDATA[Time at which current-period counters and remaining quota values are expected to reset for this accounting instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Device-local accounting period boundaries are interpreted using /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS accounting policy applies.]]></Description>
+        <Description><![CDATA[Time at which current-period counters and remaining quota values are expected to reset for this accounting instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Device-local accounting period boundaries are interpreted using /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS accounting policy applies. For non-recurring windows such as Since reboot or Lifetime, this resource may be unavailable.]]></Description>
       </Item>
       <Item ID="25">
         <Name>Last Update Timestamp</Name>
@@ -457,6 +457,25 @@ This resource defines the scope boundary for the counters, limits, quota state, 
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[Remove an explicit communication block for the communication covered by this accounting instance and scope. This operation remains distinct from Stop Throttling and applies only to the communication represented by this accounting instance unless the accounting scope explicitly covers a broader boundary. Platforms may deny this operation or leave it unsupported according to operator policy, authorization, implementation profile, or lack of an accounting or enforcement path.]]></Description>
+      </Item>
+      <Item ID="33">
+        <Name>Accounting Window Type</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Integer</Type>
+        <RangeEnumeration>0..255</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[Identifies the accounting window represented by this AppAccounting object instance. Multiple AppAccounting instances may exist for the same AppID, Accounting Class, and Accounting Scope to expose different accounting windows such as configured collection period, daily, since-reboot, rolling-window, lifetime, or operator-defined accounting.
+0 = Unspecified
+1 = Configured collection period
+2 = Daily
+3 = Since reboot
+4 = Rolling window
+5 = Lifetime
+6 = Operator-defined
+7..127 = Reserved for future GEISA-defined accounting window types
+128..255 = Reserved for vendor-specific or operator-specific accounting window types]]></Description>
       </Item>
       <Item ID="4050">
         <Name>AppID</Name>
