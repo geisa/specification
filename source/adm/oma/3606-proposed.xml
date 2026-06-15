@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LWM2M xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.openmobilealliance.org/tech/profiles/LWM2M-v1_1.xsd">
   <Object ObjectType="MODefinition">
-    <Name>GEISAPlatformConfiguration</Name>
+    <Name>PlatformConfiguration</Name>
     <Description1><![CDATA[
-This LwM2M Object configures GEISA Platform behavior for local monitoring, reporting, logging, queueing, and app-message handling.
+This LwM2M Object configures GEISA Platform behavior for local monitoring,
+reporting, logging, queueing, and app-message handling.
 
-This Object is single-instance per edge device. It represents desired and effective behavior of the GEISA Platform for one edge device and is intended for operator or EMS-visible configuration state rather than current operational health.
+This Object is single-instance per edge device. It represents desired and
+effective behavior of the GEISA Platform for one edge device and is intended
+for operator or EMS-visible configuration state rather than current
+operational health.
 
-This Object does not replace native LwM2M configuration for firmware, application lifecycle, cellular, APN, WLAN, bearer selection, remote SIM, or QoS. It does not carry app-domain configuration payloads; app-domain configuration uses the GEISA App Messaging Object. It does not report current platform health; the GEISA Platform Monitoring Object reports current platform health, state, and counters. It does not store durable logs or event records; those remain in the Event Log Object.
+This Object does not replace native LwM2M configuration for firmware,
+application lifecycle, cellular, APN, WLAN, bearer selection, remote SIM, or
+QoS. It does not carry app-domain configuration payloads; app-domain
+configuration uses the GEISA App Messaging Object. It does not report current
+platform health; the GEISA Platform Monitoring Object reports current platform
+health, state, and counters. It does not store durable logs or event records;
+those remain in the Event Log Object.
 ]]></Description1>
     <ObjectID>3606</ObjectID>
     <ObjectURN>urn:oma:lwm2m:ext:3606</ObjectURN>
@@ -25,7 +35,9 @@ This Object does not replace native LwM2M configuration for firmware, applicatio
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Platform-generated revision identifier for the current GEISA Platform configuration set represented by this Object Instance. This value is intended for audit, synchronization, and troubleshooting.
+Platform-generated revision identifier for the current GEISA Platform
+configuration set represented by this Object Instance. This value is intended
+for audit, synchronization, and troubleshooting.
 ]]></Description>
       </Item>
       <Item ID="1">
@@ -59,7 +71,11 @@ Current state of desired versus effective GEISA Platform configuration.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the desired GEISA Platform configuration was most recently updated.
+Time at which the desired GEISA Platform configuration was most recently
+updated. The value is encoded as LwM2M Time using Unix epoch seconds. The
+encoded value does not carry timezone metadata. Platform-local interpretation
+uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
+unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="3">
@@ -71,7 +87,11 @@ Time at which the desired GEISA Platform configuration was most recently updated
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the effective GEISA Platform configuration was most recently updated.
+Time at which the effective GEISA Platform configuration was most recently
+updated. The value is encoded as LwM2M Time using Unix epoch seconds. The
+encoded value does not carry timezone metadata. Platform-local interpretation
+uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
+unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="4">
@@ -83,7 +103,12 @@ Time at which the effective GEISA Platform configuration was most recently updat
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the platform most recently rejected a desired configuration value or configuration set.
+Time at which the platform most recently rejected a desired configuration
+value or configuration set. The value is encoded as LwM2M Time using Unix
+epoch seconds. The encoded value does not carry timezone metadata.
+Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14
+UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS
+policy applies.
 ]]></Description>
       </Item>
       <Item ID="5">
@@ -120,7 +145,8 @@ Reason for the most recent configuration rejection.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Short platform-generated detail associated with the most recent configuration rejection.
+Short platform-generated detail associated with the most recent configuration
+rejection.
 ]]></Description>
       </Item>
       <Item ID="7">
@@ -132,7 +158,8 @@ Short platform-generated detail associated with the most recent configuration re
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default sampling period in seconds used when a more specific GEISA Platform sampling period is not configured.
+Desired default sampling period in seconds used when a more specific GEISA
+Platform sampling period is not configured.
 ]]></Description>
       </Item>
       <Item ID="8">
@@ -144,7 +171,8 @@ Desired default sampling period in seconds used when a more specific GEISA Platf
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default sampling period in seconds currently used when a more specific GEISA Platform sampling period is not configured.
+Effective default sampling period in seconds currently used when a more
+specific GEISA Platform sampling period is not configured.
 ]]></Description>
       </Item>
       <Item ID="9">
@@ -156,7 +184,8 @@ Effective default sampling period in seconds currently used when a more specific
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for host or device resource monitoring associated with GEISA platform behavior.
+Desired sampling period in seconds for host or device resource monitoring
+associated with GEISA platform behavior.
 ]]></Description>
       </Item>
       <Item ID="10">
@@ -168,7 +197,8 @@ Desired sampling period in seconds for host or device resource monitoring associ
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for host or device resource monitoring associated with GEISA platform behavior.
+Effective sampling period in seconds currently used for host or device
+resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
       <Item ID="11">
@@ -180,7 +210,8 @@ Effective sampling period in seconds currently used for host or device resource 
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for GEISA Platform monitoring and internal platform state collection.
+Desired sampling period in seconds for GEISA Platform monitoring and internal
+platform state collection.
 ]]></Description>
       </Item>
       <Item ID="12">
@@ -192,7 +223,8 @@ Desired sampling period in seconds for GEISA Platform monitoring and internal pl
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA Platform monitoring and internal platform state collection.
+Effective sampling period in seconds currently used for GEISA Platform
+monitoring and internal platform state collection.
 ]]></Description>
       </Item>
       <Item ID="13">
@@ -216,7 +248,8 @@ Desired sampling period in seconds for GEISA App Monitoring data collection.
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA App Monitoring data collection.
+Effective sampling period in seconds currently used for GEISA App Monitoring
+data collection.
 ]]></Description>
       </Item>
       <Item ID="15">
@@ -240,7 +273,8 @@ Desired sampling period in seconds for GEISA App Accounting data collection.
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA App Accounting data collection.
+Effective sampling period in seconds currently used for GEISA App Accounting
+data collection.
 ]]></Description>
       </Item>
       <Item ID="17">
@@ -252,7 +286,8 @@ Effective sampling period in seconds currently used for GEISA App Accounting dat
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default monitoring window in seconds used when a more specific GEISA Platform monitoring window is not configured.
+Desired default monitoring window in seconds used when a more specific GEISA
+Platform monitoring window is not configured.
 ]]></Description>
       </Item>
       <Item ID="18">
@@ -264,7 +299,8 @@ Desired default monitoring window in seconds used when a more specific GEISA Pla
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default monitoring window in seconds currently used when a more specific GEISA Platform monitoring window is not configured.
+Effective default monitoring window in seconds currently used when a more
+specific GEISA Platform monitoring window is not configured.
 ]]></Description>
       </Item>
       <Item ID="19">
@@ -276,7 +312,8 @@ Effective default monitoring window in seconds currently used when a more specif
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for host or device resource monitoring associated with GEISA platform behavior.
+Desired monitoring window in seconds for host or device resource monitoring
+associated with GEISA platform behavior.
 ]]></Description>
       </Item>
       <Item ID="20">
@@ -288,7 +325,8 @@ Desired monitoring window in seconds for host or device resource monitoring asso
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for host or device resource monitoring associated with GEISA platform behavior.
+Effective monitoring window in seconds currently used for host or device
+resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
       <Item ID="21">
@@ -300,7 +338,8 @@ Effective monitoring window in seconds currently used for host or device resourc
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for GEISA Platform monitoring and derived platform state evaluation.
+Desired monitoring window in seconds for GEISA Platform monitoring and derived
+platform state evaluation.
 ]]></Description>
       </Item>
       <Item ID="22">
@@ -312,7 +351,8 @@ Desired monitoring window in seconds for GEISA Platform monitoring and derived p
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for GEISA Platform monitoring and derived platform state evaluation.
+Effective monitoring window in seconds currently used for GEISA Platform
+monitoring and derived platform state evaluation.
 ]]></Description>
       </Item>
       <Item ID="23">
@@ -324,7 +364,8 @@ Effective monitoring window in seconds currently used for GEISA Platform monitor
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for GEISA App Monitoring aggregation and derived state evaluation.
+Desired monitoring window in seconds for GEISA App Monitoring aggregation and
+derived state evaluation.
 ]]></Description>
       </Item>
       <Item ID="24">
@@ -336,7 +377,8 @@ Desired monitoring window in seconds for GEISA App Monitoring aggregation and de
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for GEISA App Monitoring aggregation and derived state evaluation.
+Effective monitoring window in seconds currently used for GEISA App Monitoring
+aggregation and derived state evaluation.
 ]]></Description>
       </Item>
       <Item ID="25">
@@ -390,7 +432,8 @@ Effective minimum severity threshold currently used for upstream reporting.
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired suppression period in seconds used to limit repeated reporting of equivalent events or alarms.
+Desired suppression period in seconds used to limit repeated reporting of
+equivalent events or alarms.
 ]]></Description>
       </Item>
       <Item ID="28">
@@ -402,7 +445,8 @@ Desired suppression period in seconds used to limit repeated reporting of equiva
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective suppression period in seconds currently used to limit repeated reporting of equivalent events or alarms.
+Effective suppression period in seconds currently used to limit repeated
+reporting of equivalent events or alarms.
 ]]></Description>
       </Item>
       <Item ID="29">
@@ -414,7 +458,8 @@ Effective suppression period in seconds currently used to limit repeated reporti
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether clear or recovery events should be reported upstream when a previously reported condition returns to normal.
+Desired setting indicating whether clear or recovery events should be reported
+upstream when a previously reported condition returns to normal.
 ]]></Description>
       </Item>
       <Item ID="30">
@@ -426,7 +471,8 @@ Desired setting indicating whether clear or recovery events should be reported u
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether clear or recovery events are reported upstream when a previously reported condition returns to normal.
+Effective setting currently used to determine whether clear or recovery events
+are reported upstream when a previously reported condition returns to normal.
 ]]></Description>
       </Item>
       <Item ID="31">
@@ -438,7 +484,8 @@ Effective setting currently used to determine whether clear or recovery events a
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired duration in seconds that a condition should remain clear before the platform reports a clear or recovery event.
+Desired duration in seconds that a condition should remain clear before the
+platform reports a clear or recovery event.
 ]]></Description>
       </Item>
       <Item ID="32">
@@ -450,7 +497,8 @@ Desired duration in seconds that a condition should remain clear before the plat
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective duration in seconds currently used before the platform reports a clear or recovery event.
+Effective duration in seconds currently used before the platform reports a
+clear or recovery event.
 ]]></Description>
       </Item>
       <Item ID="33">
@@ -462,7 +510,8 @@ Effective duration in seconds currently used before the platform reports a clear
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Desired default reporting priority used when a more specific message or event priority is not supplied.
+Desired default reporting priority used when a more specific message or event
+priority is not supplied.
 
 0 = Unknown
 1 = Urgent
@@ -482,7 +531,8 @@ Desired default reporting priority used when a more specific message or event pr
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective default reporting priority currently used when a more specific message or event priority is not supplied.
+Effective default reporting priority currently used when a more specific
+message or event priority is not supplied.
 
 0 = Unknown
 1 = Urgent
@@ -546,7 +596,8 @@ Effective log level currently used for GEISA Platform services and components.
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Desired default log level applied to GEISA applications when a more specific application log configuration is not provided.
+Desired default log level applied to GEISA applications when a more specific
+application log configuration is not provided.
 
 0 = Unknown
 1 = Off
@@ -568,7 +619,8 @@ Desired default log level applied to GEISA applications when a more specific app
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective default log level currently applied to GEISA applications when a more specific application log configuration is not provided.
+Effective default log level currently applied to GEISA applications when a
+more specific application log configuration is not provided.
 
 0 = Unknown
 1 = Off
@@ -590,7 +642,9 @@ Effective default log level currently applied to GEISA applications when a more 
         <RangeEnumeration/>
         <Units>entries</Units>
         <Description><![CDATA[
-Desired maximum retained event or log record count for GEISA-managed durable event storage.
+Desired maximum retained event or log record count for GEISA-managed durable
+event storage. A value of 0 indicates that no count limit is configured or
+that retention is unlimited according to platform policy.
 ]]></Description>
       </Item>
       <Item ID="40">
@@ -602,7 +656,10 @@ Desired maximum retained event or log record count for GEISA-managed durable eve
         <RangeEnumeration/>
         <Units>entries</Units>
         <Description><![CDATA[
-Effective maximum retained event or log record count currently used for GEISA-managed durable event storage.
+Effective maximum retained event or log record count currently used for
+GEISA-managed durable event storage. A value of 0 indicates that no count
+limit is configured or that retention is unlimited according to platform
+policy.
 ]]></Description>
       </Item>
       <Item ID="41">
@@ -614,7 +671,8 @@ Effective maximum retained event or log record count currently used for GEISA-ma
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether audit logging is enabled for GEISA Platform administrative or security-relevant actions.
+Desired setting indicating whether audit logging is enabled for GEISA Platform
+administrative or security-relevant actions.
 ]]></Description>
       </Item>
       <Item ID="42">
@@ -626,7 +684,8 @@ Desired setting indicating whether audit logging is enabled for GEISA Platform a
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether audit logging is enabled for GEISA Platform administrative or security-relevant actions.
+Effective setting currently used to determine whether audit logging is enabled
+for GEISA Platform administrative or security-relevant actions.
 ]]></Description>
       </Item>
       <Item ID="43">
@@ -638,7 +697,9 @@ Effective setting currently used to determine whether audit logging is enabled f
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether the GEISA Platform should buffer outbound upstream messages in a queue or spool when immediate transmission is not possible or not preferred.
+Desired setting indicating whether the GEISA Platform should buffer outbound
+upstream messages in a queue or spool when immediate transmission is not
+possible or not preferred.
 ]]></Description>
       </Item>
       <Item ID="44">
@@ -650,7 +711,8 @@ Desired setting indicating whether the GEISA Platform should buffer outbound ups
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether the GEISA Platform buffers outbound upstream messages in a queue or spool.
+Effective setting currently used to determine whether the GEISA Platform
+buffers outbound upstream messages in a queue or spool.
 ]]></Description>
       </Item>
       <Item ID="45">
@@ -662,7 +724,8 @@ Effective setting currently used to determine whether the GEISA Platform buffers
         <RangeEnumeration/>
         <Units>messages</Units>
         <Description><![CDATA[
-Desired maximum number of messages that the upstream queue or spool should retain.
+Desired maximum number of messages that the upstream queue or spool should
+retain.
 ]]></Description>
       </Item>
       <Item ID="46">
@@ -674,7 +737,8 @@ Desired maximum number of messages that the upstream queue or spool should retai
         <RangeEnumeration/>
         <Units>messages</Units>
         <Description><![CDATA[
-Effective maximum number of messages currently retained by the upstream queue or spool.
+Effective maximum number of messages currently retained by the upstream queue
+or spool.
 ]]></Description>
       </Item>
       <Item ID="47">
@@ -686,7 +750,8 @@ Effective maximum number of messages currently retained by the upstream queue or
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Desired maximum queued or spooled payload volume in bytes for upstream buffering.
+Desired maximum queued or spooled payload volume in bytes for upstream
+buffering.
 ]]></Description>
       </Item>
       <Item ID="48">
@@ -698,7 +763,8 @@ Desired maximum queued or spooled payload volume in bytes for upstream buffering
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Effective maximum queued or spooled payload volume in bytes currently used for upstream buffering.
+Effective maximum queued or spooled payload volume in bytes currently used for
+upstream buffering.
 ]]></Description>
       </Item>
       <Item ID="49">
@@ -710,7 +776,8 @@ Effective maximum queued or spooled payload volume in bytes currently used for u
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default time-to-live in seconds for messages buffered or handled by the GEISA Platform when a more specific TTL is not provided.
+Desired default time-to-live in seconds for messages buffered or handled by
+the GEISA Platform when a more specific TTL is not provided.
 ]]></Description>
       </Item>
       <Item ID="50">
@@ -722,7 +789,8 @@ Desired default time-to-live in seconds for messages buffered or handled by the 
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default time-to-live in seconds currently used for messages buffered or handled by the GEISA Platform when a more specific TTL is not provided.
+Effective default time-to-live in seconds currently used for messages buffered
+or handled by the GEISA Platform when a more specific TTL is not provided.
 ]]></Description>
       </Item>
       <Item ID="51">
@@ -755,7 +823,8 @@ Desired queue or spool drop policy used when buffering limits are reached.
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective queue or spool drop policy currently used when buffering limits are reached.
+Effective queue or spool drop policy currently used when buffering limits are
+reached.
 
 0 = Unknown
 1 = Reject new messages
@@ -776,7 +845,8 @@ Effective queue or spool drop policy currently used when buffering limits are re
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether the GEISA Platform should coalesce eligible upstream messages before transmission or storage.
+Desired setting indicating whether the GEISA Platform should coalesce eligible
+upstream messages before transmission or storage.
 ]]></Description>
       </Item>
       <Item ID="54">
@@ -788,7 +858,8 @@ Desired setting indicating whether the GEISA Platform should coalesce eligible u
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether the GEISA Platform coalesces eligible upstream messages before transmission or storage.
+Effective setting currently used to determine whether the GEISA Platform
+coalesces eligible upstream messages before transmission or storage.
 ]]></Description>
       </Item>
       <Item ID="55">
@@ -840,7 +911,9 @@ Effective message coalescing policy currently used by the GEISA Platform.
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Desired maximum GEISA application message payload size in bytes accepted by the platform before local rejection, truncation, or alternate handling according to platform policy.
+Desired maximum GEISA application message payload size in bytes accepted by
+the platform before local rejection, truncation, or alternate handling
+according to platform policy.
 ]]></Description>
       </Item>
       <Item ID="58">
@@ -852,7 +925,9 @@ Desired maximum GEISA application message payload size in bytes accepted by the 
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Effective maximum GEISA application message payload size in bytes currently accepted by the platform before local rejection, truncation, or alternate handling according to platform policy.
+Effective maximum GEISA application message payload size in bytes currently
+accepted by the platform before local rejection, truncation, or alternate
+handling according to platform policy.
 ]]></Description>
       </Item>
       <Item ID="59">
@@ -864,7 +939,9 @@ Effective maximum GEISA application message payload size in bytes currently acce
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired platform-defined policy identifier used to map, adjust, or constrain GEISA application message priorities before local handling or upstream reporting.
+Desired platform-defined policy identifier used to map, adjust, or constrain
+GEISA application message priorities before local handling or upstream
+reporting.
 ]]></Description>
       </Item>
       <Item ID="60">
@@ -876,7 +953,9 @@ Desired platform-defined policy identifier used to map, adjust, or constrain GEI
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective platform-defined policy identifier currently used to map, adjust, or constrain GEISA application message priorities before local handling or upstream reporting.
+Effective platform-defined policy identifier currently used to map, adjust, or
+constrain GEISA application message priorities before local handling or
+upstream reporting.
 ]]></Description>
       </Item>
       <Item ID="61">
@@ -888,7 +967,8 @@ Effective platform-defined policy identifier currently used to map, adjust, or c
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired version or identifier of the platform-defined GEISA application message routing policy.
+Desired version or identifier of the platform-defined GEISA application
+message routing policy.
 ]]></Description>
       </Item>
       <Item ID="62">
@@ -900,7 +980,8 @@ Desired version or identifier of the platform-defined GEISA application message 
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective version or identifier of the platform-defined GEISA application message routing policy currently used by the platform.
+Effective version or identifier of the platform-defined GEISA application
+message routing policy currently used by the platform.
 ]]></Description>
       </Item>
       <Item ID="63">
@@ -912,7 +993,9 @@ Effective version or identifier of the platform-defined GEISA application messag
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired reference or identifier for the QoS policy associated with GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in Object 10540 and related network or bearer objects.
+Desired reference or identifier for the QoS policy associated with GEISA
+Platform behavior. Detailed bearer or flow QoS configuration remains in Object
+10540 and related network or bearer objects.
 ]]></Description>
       </Item>
       <Item ID="64">
@@ -924,7 +1007,9 @@ Desired reference or identifier for the QoS policy associated with GEISA Platfor
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective reference or identifier for the QoS policy currently associated with GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in Object 10540 and related network or bearer objects.
+Effective reference or identifier for the QoS policy currently associated with
+GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in
+Object 10540 and related network or bearer objects.
 ]]></Description>
       </Item>
     </Resources>
