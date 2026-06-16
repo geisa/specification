@@ -64,8 +64,7 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
   <Object ObjectType="MODefinition">
     <Name>HostMonitoring</Name>
     <Description1><![CDATA[
-This LwM2M Object provides a facility for monitoring resource utilization of a
-host or device.
+This LwM2M Object provides a facility for monitoring resource utilization of a host or device.
 ]]></Description1>
     <ObjectID>3601</ObjectID>
     <ObjectURN>urn:oma:lwm2m:ext:3601</ObjectURN>
@@ -95,8 +94,7 @@ Duration since the last boot, in integer seconds.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-CPU architecture reported by the host, such as arm64, x86_64, or another
-platform architecture label.
+CPU architecture reported by the host, such as arm64, x86_64, or another platform architecture label.
 ]]></Description>
       </Item>
       <Item ID="2">
@@ -120,8 +118,7 @@ Processor model or CPU model string reported by the host.
         <RangeEnumeration/>
         <Units>kHz</Units>
         <Description><![CDATA[
-Current CPU frequency reported by the host for the monitored CPU or aggregate
-CPU reporting scope.
+Current CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.
 ]]></Description>
       </Item>
       <Item ID="4">
@@ -133,8 +130,7 @@ CPU reporting scope.
         <RangeEnumeration/>
         <Units>kHz</Units>
         <Description><![CDATA[
-Minimum CPU frequency reported by the host for the monitored CPU or aggregate
-CPU reporting scope.
+Minimum CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.
 ]]></Description>
       </Item>
       <Item ID="5">
@@ -146,8 +142,7 @@ CPU reporting scope.
         <RangeEnumeration/>
         <Units>kHz</Units>
         <Description><![CDATA[
-Maximum CPU frequency reported by the host for the monitored CPU or aggregate
-CPU reporting scope.
+Maximum CPU frequency reported by the host for the monitored CPU or aggregate CPU reporting scope.
 ]]></Description>
       </Item>
       <Item ID="6">
@@ -171,9 +166,7 @@ Number of CPU cores or logical processors available to the host or device.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-One-minute CPU load average multiplied by 100. This is a scheduler-pressure
-metric, not CPU utilization percent, and it should not be confused with CPU
-Usage.
+One-minute CPU load average multiplied by 100. This is a scheduler-pressure metric, not CPU utilization percent, and it should not be confused with CPU Usage.
 ]]></Description>
       </Item>
       <Item ID="8">
@@ -185,9 +178,7 @@ Usage.
         <RangeEnumeration/>
         <Units>%</Units>
         <Description><![CDATA[
-Short-interval CPU utilization sample in deci-percent. This is a sampled
-utilization value, not the same concept as CPU Load. Divide by 10 to obtain
-percent usage.
+Short-interval CPU utilization sample in deci-percent. This is a sampled utilization value, not the same concept as CPU Load. Divide by 10 to obtain percent usage.
 ]]></Description>
       </Item>
       <Item ID="9">
@@ -223,9 +214,7 @@ Available memory in bytes that can be used without swapping.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Number of currently observed running processes or process entries on the host.
-This is a host process-count indicator, not a CPU run-queue or runnable-task
-metric.
+Number of currently observed running processes or process entries on the host. This is a host process-count indicator, not a CPU run-queue or runnable-task metric.
 ]]></Description>
       </Item>
       <Item ID="12">
@@ -273,8 +262,7 @@ Number of interrupts per second.
         <RangeEnumeration/>
         <Units>B</Units>
         <Description><![CDATA[
-Total storage capacity visible to or managed by the host or monitoring scope,
-in bytes.
+Total storage capacity visible to or managed by the host or monitoring scope, in bytes.
 ]]></Description>
       </Item>
       <Item ID="16">
@@ -286,8 +274,7 @@ in bytes.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Storage device identifiers or labels for the host or device. Each Resource
-Instance identifies one included storage device.
+Storage device identifiers or labels for the host or device. Each Resource Instance identifies one included storage device.
 ]]></Description>
       </Item>
       <Item ID="17">
@@ -299,9 +286,7 @@ Instance identifies one included storage device.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Storage partition identifiers, paths, mount points, or labels. The same
-Resource Instance index refers to the same storage partition as Storage
-Partition Available Space.
+Storage partition identifiers, paths, mount points, or labels. The same Resource Instance index refers to the same storage partition as Storage Partition Available Space.
 ]]></Description>
       </Item>
       <Item ID="18">
@@ -313,9 +298,7 @@ Partition Available Space.
         <RangeEnumeration/>
         <Units>B</Units>
         <Description><![CDATA[
-Available space for the corresponding storage partition or partitions, in
-bytes. The same Resource Instance index refers to the same partition
-identified by Storage Partitions.
+Available space for the corresponding storage partition or partitions, in bytes. The same Resource Instance index refers to the same partition identified by Storage Partitions.
 ]]></Description>
       </Item>
       <Item ID="19">
@@ -327,8 +310,7 @@ identified by Storage Partitions.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Network device or interface identifiers or labels for the host or device. Each
-Resource Instance identifies one included network interface or device.
+Network device or interface identifiers or labels for the host or device. Each Resource Instance identifies one included network interface or device.
 ]]></Description>
       </Item>
       <Item ID="20">
@@ -340,8 +322,7 @@ Resource Instance identifies one included network interface or device.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Type of each included network interface or device, such as ethernet, wifi,
-virtual, loopback, or unknown.
+Type of each included network interface or device, such as ethernet, wifi, virtual, loopback, or unknown.
 ]]></Description>
       </Item>
       <Item ID="21">
@@ -353,9 +334,7 @@ virtual, loopback, or unknown.
         <RangeEnumeration/>
         <Units>bit/s</Units>
         <Description><![CDATA[
-Link or interface capacity for each included network interface or device,
-expressed in bits per second. The same Resource Instance index refers to the
-same network interface or device identified by the Network Devices resource.
+Link or interface capacity for each included network interface or device, expressed in bits per second. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.
 ]]></Description>
       </Item>
       <Item ID="22">
@@ -367,10 +346,7 @@ same network interface or device identified by the Network Devices resource.
         <RangeEnumeration/>
         <Units>B</Units>
         <Description><![CDATA[
-Cumulative received plus transmitted byte counter, in bytes, for the included
-network interface. The same Resource Instance index refers to the same network
-interface or device identified by the Network Devices resource. This is
-observed traffic volume, not link utilization percentage or rate.
+Cumulative received plus transmitted byte counter, in bytes, for the included network interface. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource. This is observed traffic volume, not link utilization percentage or rate.
 ]]></Description>
       </Item>
     </Resources>

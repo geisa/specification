@@ -65,12 +65,9 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
     <Description1><![CDATA[
 This LwM2M Object provides app-scoped runtime monitoring and health visibility.
 
-Each Object Instance represents the platform view of one installed or running
-application instance. This Object provides application operational health,
-lifecycle visibility, resource consumption, restart behavior, watchdog state,
-and platform actions. Accounting, quota, throttle, block, disabled, and
-accounting-window state are represented by linked /3602 AppAccounting instances,
-not duplicated in /3604.
+Each Object Instance represents the platform view of one installed or running application instance. This Object provides application operational health, lifecycle visibility, resource consumption, restart behavior, watchdog state, and platform actions.
+
+Accounting, quota, throttle, block, disabled, and accounting-window state are represented by linked /3602 AppAccounting instances, not duplicated in /3604.
 ]]></Description1>
     <ObjectID>3604</ObjectID>
     <ObjectURN>urn:oma:lwm2m:ext:3604</ObjectURN>
@@ -88,10 +85,7 @@ not duplicated in /3604.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Reverse-DNS or package-style application identifier from the application
-manifest or platform catalog. This value identifies the application package
-andfor operator display, logs, and correlation. It is not a unique runtime
-application instance identifier.
+Reverse-DNS or package-style application identifier from the application manifest or platform catalog. This value identifies the application package andfor operator display, logs, and correlation. It is not a unique runtime application instance identifier.
 ]]></Description>
       </Item>
       <Item ID="1">
@@ -103,11 +97,7 @@ application instance identifier.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Platform-local application instance identifier assigned by the platform or
-registry. This value distinguishes multiple deployed or running instances of
-the same package on the same platform.  It is not globally unique by itself;
-upstream correlation requires endpoint or platform identity and, where needed,
- AppID or application-instance context.
+Platform-local application instance identifier assigned by the platform or registry. This value distinguishes multiple deployed or running instances of the same package on the same platform.  It is not globally unique by itself; upstream correlation requires endpoint or platform identity and, where needed, AppID or application-instance context.
 ]]></Description>
       </Item>
       <Item ID="3">
@@ -119,9 +109,7 @@ upstream correlation requires endpoint or platform identity and, where needed,
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Optional object link to the corresponding /9 Software Management instance for
-the installed application package or package lifecycle correlation. This
-resource does not replace AppID or Application Instance ID.
+Optional object link to the corresponding /9 Software Management instance for the installed application package or package lifecycle correlation. This resource does not replace AppID or Application Instance ID.
 ]]></Description>
       </Item>
       <Item ID="4">
@@ -133,12 +121,7 @@ resource does not replace AppID or Application Instance ID.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-One or more object links to /3602 AppAccounting instance(s) associated with
-this application or application instance. Multiple /3602 instances may exist
-for different accounting classes, scopes, or accounting windows such as daily,
-since-reboot, rolling-window, lifetime, or operator-defined accounting.
-/3602 owns accounting counters, quota, throttle, block, disabled, and
-accounting-window state.
+One or more object links to /3602 AppAccounting instance(s) associated with this application or application instance. Multiple /3602 instances may exist for different accounting classes, scopes, or accounting windows such as daily, since-reboot, rolling-window, lifetime, or operator-defined accounting. /3602 owns accounting counters, quota, throttle, block, disabled, and accounting-window state.
 ]]></Description>
       </Item>
       <Item ID="5">
@@ -150,8 +133,7 @@ accounting-window state.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Human-readable application name from the application manifest or platform
-application catalog.
+Human-readable application name from the application manifest or platform application catalog.
 ]]></Description>
       </Item>
       <Item ID="6">
@@ -163,8 +145,7 @@ application catalog.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Application version from the application manifest or platform application
-catalog.
+Application version from the application manifest or platform application catalog.
 ]]></Description>
       </Item>
       <Item ID="7">
@@ -209,8 +190,7 @@ Platform lifecycle state for this application instance.
 9..127 = Reserved for future GEISA-defined lifecycle states
 128..255 = Reserved for vendor-specific or operator-specific lifecycle states
 
-This state is the platform's operational view and does not replace Software
-Management state.
+This state is the platform's operational view and does not replace Software Management state.
 ]]></Description>
       </Item>
       <Item ID="9">
@@ -234,8 +214,7 @@ Current health summary for this application instance.
 7..127 = Reserved for future GEISA-defined health states
 128..255 = Reserved for vendor-specific or operator-specific health states
 
-Health State is a summary. Detailed events, alarms, or log records SHOULD be
-reported through the GEISA message, event, alarm, or log mechanisms.
+Health State is a summary. Detailed events, alarms, or log records SHOULD be reported through the GEISA message, event, alarm, or log mechanisms.
 ]]></Description>
       </Item>
       <Item ID="10">
@@ -259,12 +238,7 @@ Short platform-generated reason associated with the current Health State.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the current or most recent application runtime execution
-started, when available from the platform. The value is encoded as LwM2M
-Time using Unix epoch seconds. The encoded value does not carry timezone
-metadata. Platform-local interpretation uses /3/0/15 Timezone, with
-fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more
-specific ADM or EMS policy applies.
+Time at which the current or most recent application runtime execution started, when available from the platform. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="12">
@@ -276,12 +250,7 @@ specific ADM or EMS policy applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the platform most recently received, generated, or refreshed
-application runtime status for this application instance. The value is
-encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
-carry timezone metadata. Platform-local interpretation uses /3/0/15
-Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
-unless a more specific ADM or EMS policy applies.
+Time at which the platform most recently received, generated, or refreshed application runtime status for this application instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="13">
@@ -293,11 +262,7 @@ unless a more specific ADM or EMS policy applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the application most recently exited or was terminated. The
-value is encoded as LwM2M Time using Unix epoch seconds. The encoded value
-does not carry timezone metadata. Platform-local interpretation uses /3/0/15
-Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
-unless a more specific ADM or EMS policy applies.
+Time at which the application most recently exited or was terminated. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="14">
@@ -330,7 +295,7 @@ Reason for the most recent application exit.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>restarts</Units>
         <Description><![CDATA[
@@ -342,12 +307,11 @@ Number of application restarts during the current platform-defined monitoring pe
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>restarts</Units>
         <Description><![CDATA[
-Number of application restarts observed across the lifetime of this application
-installation, subject to platform persistence policy.
+Number of application restarts observed across the lifetime of this application installation, subject to platform persistence policy.
 ]]></Description>
       </Item>
       <Item ID="17">
@@ -355,12 +319,11 @@ installation, subject to platform persistence policy.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>crashes</Units>
         <Description><![CDATA[
-Number of abnormal application exits during the current platform-defined
-monitoring period.
+Number of abnormal application exits during the current platform-defined monitoring period.
 ]]></Description>
       </Item>
       <Item ID="18">
@@ -372,8 +335,7 @@ monitoring period.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Indicates whether the platform is applying an application keepalive or watchdog
-policy to this application instance.
+Indicates whether the platform is applying an application keepalive or watchdog policy to this application instance.
 ]]></Description>
       </Item>
       <Item ID="19">
@@ -397,8 +359,7 @@ Current watchdog timeout in seconds for this application instance.
         <RangeEnumeration/>
         <Units>events</Units>
         <Description><![CDATA[
-Number of missed application watchdog or keepalive intervals during the current
-platform-defined monitoring period.
+Number of missed application watchdog or keepalive intervals during the current platform-defined monitoring period.
 ]]></Description>
       </Item>
       <Item ID="21">
@@ -410,9 +371,7 @@ platform-defined monitoring period.
         <RangeEnumeration>0..100</RangeEnumeration>
         <Units>%</Units>
         <Description><![CDATA[
-Current or recent CPU utilization estimate for this application instance,
-reported as a percentage of the CPU allocation or platform basis defined by
-the platform. This is a bounded estimate, not a perfect platform-wide truth.
+Current or recent CPU utilization estimate for this application instance, reported as a percentage of the CPU allocation or platform basis defined by the platform. This is a bounded estimate, not a perfect platform-wide truth.
 ]]></Description>
       </Item>
       <Item ID="22">
@@ -424,8 +383,7 @@ the platform. This is a bounded estimate, not a perfect platform-wide truth.
         <RangeEnumeration>0..100</RangeEnumeration>
         <Units>%</Units>
         <Description><![CDATA[
-Average CPU utilization for this application instance over the platform-defined
-monitoring window.
+Average CPU utilization for this application instance over the platform-defined monitoring window.
 ]]></Description>
       </Item>
       <Item ID="23">
@@ -437,8 +395,7 @@ monitoring window.
         <RangeEnumeration>0..100</RangeEnumeration>
         <Units>%</Units>
         <Description><![CDATA[
-Peak CPU utilization for this application instance over the platform-defined
-monitoring window.
+Peak CPU utilization for this application instance over the platform-defined monitoring window.
 ]]></Description>
       </Item>
       <Item ID="24">
@@ -446,12 +403,11 @@ monitoring window.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Current memory used by this application instance, such as resident memory of
-the representative runtime process when that is the platform measurement basis.
+Current memory used by this application instance, such as resident memory of the representative runtime process when that is the platform measurement basis.
 ]]></Description>
       </Item>
       <Item ID="25">
@@ -459,12 +415,11 @@ the representative runtime process when that is the platform measurement basis.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Peak memory used by this application instance over the platform-defined
-monitoring window.
+Peak memory used by this application instance over the platform-defined monitoring window.
 ]]></Description>
       </Item>
       <Item ID="26">
@@ -472,7 +427,7 @@ monitoring window.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
@@ -484,7 +439,7 @@ Memory limit currently enforced for this application instance.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
@@ -508,7 +463,7 @@ Persistent storage limit currently enforced for this application instance.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
@@ -520,7 +475,7 @@ Non-persistent storage currently used by this application instance.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
@@ -532,12 +487,11 @@ Non-persistent storage limit currently enforced for this application instance.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>threads</Units>
         <Description><![CDATA[
-Current thread count associated with this application instance or representative
- runtime process, when the execution environment exposes that information.
+Current thread count associated with this application instance or representative runtime process, when the execution environment exposes that information.
 ]]></Description>
       </Item>
       <Item ID="32">
@@ -545,13 +499,11 @@ Current thread count associated with this application instance or representative
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>processes</Units>
         <Description><![CDATA[
-Current number of observed processes associated with this application instance,
-including directly associated child processes when exposed by the execution
-environment.
+Current number of observed processes associated with this application instance, including directly associated child processes when exposed by the execution environment.
 ]]></Description>
       </Item>
       <Item ID="33">
@@ -588,12 +540,7 @@ Most recent platform action taken for this application instance.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the platform most recently took an action for this application
-instance. The value is encoded as LwM2M Time using Unix epoch seconds. The
-encoded value does not carry timezone metadata. Platform-local
-interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset
-when Timezone is unavailable, unless a more specific ADM or EMS policy
-applies.
+Time at which the platform most recently took an action for this application instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="35">
@@ -605,8 +552,7 @@ applies.
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Platform-defined monitoring window in seconds used for average, peak, restart,
-crash, and watchdog-miss current-period metrics in this object instance.
+Platform-defined monitoring window in seconds used for average, peak, restart, crash, and watchdog-miss current-period metrics in this object instance.
 ]]></Description>
       </Item>
       <Item ID="36">
@@ -618,12 +564,7 @@ crash, and watchdog-miss current-period metrics in this object instance.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Start time for the active monitoring period used by current-period counters
-and windowed metrics. The value is encoded as LwM2M Time using Unix epoch
-seconds. The encoded value does not carry timezone metadata. Platform-local
-interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset
-when Timezone is unavailable, unless a more specific ADM or EMS policy
-applies.
+Start time for the active monitoring period used by current-period counters and windowed metrics. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="37">
@@ -635,12 +576,7 @@ applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the platform most recently refreshed or updated this
-AppMonitoring object snapshot for the application instance. The value is
-encoded as LwM2M Time using Unix epoch seconds. The encoded value does not
-carry timezone metadata. Platform-local interpretation uses /3/0/15
-Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable,
-unless a more specific ADM or EMS policy applies.
+Time at which the platform most recently refreshed or updated this AppMonitoring object snapshot for the application instance. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="38">
@@ -652,9 +588,7 @@ unless a more specific ADM or EMS policy applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Request that the platform obtain or refresh application status. The platform
-MAY satisfy this by using local runtime state, by requesting status from the
-application, or both.
+Request that the platform obtain or refresh application status. The platform MAY satisfy this by using local runtime state, by requesting status from the application, or both.
 ]]></Description>
       </Item>
       <Item ID="39">
@@ -666,9 +600,7 @@ application, or both.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Request that the platform ask the application to shut down cleanly. This
-operation is advisory and does not replace platform lifecycle enforcement
-through Software Management or platform execution control.
+Request that the platform ask the application to shut down cleanly. This operation is advisory and does not replace platform lifecycle enforcement through Software Management or platform execution control.
 ]]></Description>
       </Item>
       <Item ID="4050">
@@ -680,14 +612,12 @@ through Software Management or platform execution control.
         <RangeEnumeration>2 bytes</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-A local-scope numeric application identifier for distinguishing applications
-within an endpoint, platform, or deployment context. This value is not globally
-unique by itself. Upstream correlation requires endpoint or platform
-identity plus this AppID, and application-instance context where multiple local
- instances are possible.
+A local-scope numeric application identifier for distinguishing applications within an endpoint, platform, or deployment context. This value is not globally unique by itself. Upstream correlation requires endpoint or platform identity plus this AppID, and application-instance context where multiple local instances are possible.
 ]]></Description>
       </Item>
     </Resources>
-    <Description2><![CDATA[]]></Description2>
+    <Description2><![CDATA[
+
+]]></Description2>
   </Object>
 </LWM2M>

@@ -63,21 +63,11 @@ https://www.omaspecworks.org/about/intellectual-property-rights/
   <Object ObjectType="MODefinition">
     <Name>PlatformConfiguration</Name>
     <Description1><![CDATA[
-This LwM2M Object configures GEISA Platform behavior for local monitoring,
-reporting, logging, queueing, and app-message handling.
+This LwM2M Object configures GEISA Platform behavior for local monitoring, reporting, logging, queueing, and app-message handling.
 
-This Object is single-instance per edge device. It represents desired and
-effective behavior of the GEISA Platform for one edge device and is intended
-for operator or EMS-visible configuration state rather than current
-operational health.
+This Object is single-instance per edge device. It represents desired and effective behavior of the GEISA Platform for one edge device and is intended for operator or EMS-visible configuration state rather than current operational health.
 
-This Object does not replace native LwM2M configuration for firmware,
-application lifecycle, cellular, APN, WLAN, bearer selection, remote SIM, or
-QoS. It does not carry app-domain configuration payloads; app-domain
-configuration uses the GEISA App Messaging Object. It does not report current
-platform health; the GEISA Platform Monitoring Object reports current platform
-health, state, and counters. It does not store durable logs or event records;
-those remain in the Event Log Object.
+This Object does not replace native LwM2M configuration for firmware, application lifecycle, cellular, APN, WLAN, bearer selection, remote SIM, or QoS. It does not carry app-domain configuration payloads; app-domain configuration uses the GEISA App Messaging Object. It does not report current platform health; the GEISA Platform Monitoring Object reports current platform health, state, and counters. It does not store durable logs or event records; those remain in the Event Log Object.
 ]]></Description1>
     <ObjectID>3606</ObjectID>
     <ObjectURN>urn:oma:lwm2m:ext:3606</ObjectURN>
@@ -95,9 +85,7 @@ those remain in the Event Log Object.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Platform-generated revision identifier for the current GEISA Platform
-configuration set represented by this Object Instance. This value is intended
-for audit, synchronization, and troubleshooting.
+Platform-generated revision identifier for the current GEISA Platform configuration set represented by this Object Instance. This value is intended for audit, synchronization, and troubleshooting.
 ]]></Description>
       </Item>
       <Item ID="1">
@@ -105,14 +93,13 @@ for audit, synchronization, and troubleshooting.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Mandatory</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Current state of desired versus effective GEISA Platform configuration.
-
+Current relationship between the desired GEISA Platform configuration and the effective configuration currently exposed by the platform.
 0 = Unknown
-1 = Effective matches desired
+1 = Effective configuration matches desired configuration
 2 = Pending application
 3 = Partially applied
 4 = Desired value adjusted by platform policy
@@ -131,11 +118,7 @@ Current state of desired versus effective GEISA Platform configuration.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the desired GEISA Platform configuration was most recently
-updated. The value is encoded as LwM2M Time using Unix epoch seconds. The
-encoded value does not carry timezone metadata. Platform-local interpretation
-uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
-unavailable, unless a more specific ADM or EMS policy applies.
+Time at which the desired GEISA Platform configuration was most recently requested, received, or revised. This timestamp reflects the desired configuration input, not necessarily the time at which the configuration became effective. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. When the timestamp is presented or interpreted in platform-local operational context, use /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="3">
@@ -147,11 +130,7 @@ unavailable, unless a more specific ADM or EMS policy applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the effective GEISA Platform configuration was most recently
-updated. The value is encoded as LwM2M Time using Unix epoch seconds. The
-encoded value does not carry timezone metadata. Platform-local interpretation
-uses /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is
-unavailable, unless a more specific ADM or EMS policy applies.
+The last time at which the effective GEISA Platform configuration was updated. This timestamp reflects when the platform accepted, normalized, or applied configuration values into the effective configuration exposed by this object. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. When the timestamp is presented or interpreted in platform-local operational context, use /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="4">
@@ -163,12 +142,7 @@ unavailable, unless a more specific ADM or EMS policy applies.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Time at which the platform most recently rejected a desired configuration
-value or configuration set. The value is encoded as LwM2M Time using Unix
-epoch seconds. The encoded value does not carry timezone metadata.
-Platform-local interpretation uses /3/0/15 Timezone, with fallback to /3/0/14
-UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS
-policy applies.
+Time at which a desired GEISA Platform configuration was most recently rejected. This timestamp reflects the rejection decision time, not the time at which the desired configuration was originally requested. The value is encoded as LwM2M Time using Unix epoch seconds. The encoded value does not carry timezone metadata. When the timestamp is presented or interpreted in platform-local operational context, use /3/0/15 Timezone, with fallback to /3/0/14 UTC Offset when Timezone is unavailable, unless a more specific ADM or EMS policy applies.
 ]]></Description>
       </Item>
       <Item ID="5">
@@ -176,7 +150,7 @@ policy applies.
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -205,248 +179,243 @@ Reason for the most recent configuration rejection.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Short platform-generated detail associated with the most recent configuration
-rejection.
+Short platform-generated detail associated with the most recent configuration rejection.
 ]]></Description>
       </Item>
-      <Item ID="7">
+      <Item ID="10">
         <Name>Desired Default Sampling Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default sampling period in seconds used when a more specific GEISA
-Platform sampling period is not configured.
+Desired platform-side sampling or update cadence in seconds used when a more specific GEISA Platform cadence is not configured.
+
+This value controls how often the platform collects, refreshes, computes, or reports this class of operational data. It does not require the monitored OMA object to carry its own interval.
 ]]></Description>
       </Item>
-      <Item ID="8">
+      <Item ID="11">
         <Name>Effective Default Sampling Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default sampling period in seconds currently used when a more
-specific GEISA Platform sampling period is not configured.
+Effective platform-side sampling or update cadence in seconds currently used when a more specific GEISA Platform cadence is not configured.
+
+This value controls how often the platform collects, refreshes, computes, or reports this class of operational data. It does not require the monitored OMA object to carry its own interval.
 ]]></Description>
       </Item>
-      <Item ID="9">
+      <Item ID="12">
         <Name>Desired Host Sampling Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for host or device resource monitoring
-associated with GEISA platform behavior.
+Desired platform-side sampling or update cadence in seconds for host or device resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
-      <Item ID="10">
+      <Item ID="13">
         <Name>Effective Host Sampling Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for host or device
-resource monitoring associated with GEISA platform behavior.
+Effective platform-side sampling or update cadence in seconds currently used for host or device resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
-      <Item ID="11">
+      <Item ID="14">
         <Name>Desired Platform Sampling Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for GEISA Platform monitoring and internal
-platform state collection.
+Desired platform-side sampling or update cadence in seconds for GEISA Platform monitoring and internal platform state collection.
 ]]></Description>
       </Item>
-      <Item ID="12">
+      <Item ID="15">
         <Name>Effective Platform Sampling Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA Platform
-monitoring and internal platform state collection.
+Effective platform-side sampling or update cadence in seconds currently used for GEISA Platform monitoring and internal platform state collection.
 ]]></Description>
       </Item>
-      <Item ID="13">
+      <Item ID="16">
         <Name>Desired App Monitoring Sampling Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for GEISA App Monitoring data collection.
+Desired platform-side sampling or update cadence in seconds for GEISA App Monitoring data collection.
 ]]></Description>
       </Item>
-      <Item ID="14">
+      <Item ID="17">
         <Name>Effective App Monitoring Sampling Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA App Monitoring
-data collection.
+Effective platform-side sampling or update cadence in seconds currently used for GEISA App Monitoring data collection.
 ]]></Description>
       </Item>
-      <Item ID="15">
+      <Item ID="18">
         <Name>Desired App Accounting Sampling Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired sampling period in seconds for GEISA App Accounting data collection.
+Desired platform-side sampling or update cadence in seconds for GEISA App Accounting data collection and refresh.
+
+This cadence controls how often accounting state is collected, recomputed, or reported. It is distinct from the app accounting collection period represented by resources 90 and 91 in this object.
 ]]></Description>
       </Item>
-      <Item ID="16">
+      <Item ID="19">
         <Name>Effective App Accounting Sampling Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective sampling period in seconds currently used for GEISA App Accounting
-data collection.
+Effective platform-side sampling or update cadence in seconds currently used for GEISA App Accounting data collection and refresh.
+
+This cadence controls how often accounting state is collected, recomputed, or reported. It is distinct from the app accounting collection period represented by resources 90 and 91 in this object.
 ]]></Description>
       </Item>
-      <Item ID="17">
+      <Item ID="20">
         <Name>Desired Default Monitoring Window</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default monitoring window in seconds used when a more specific GEISA
-Platform monitoring window is not configured.
+Desired aggregation or evaluation window in seconds used when a more specific GEISA Platform monitoring window is not configured.
+
+This window controls over what duration samples are evaluated for derived values, alerting, health, or upstream update decisions.
 ]]></Description>
       </Item>
-      <Item ID="18">
+      <Item ID="21">
         <Name>Effective Default Monitoring Window</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default monitoring window in seconds currently used when a more
-specific GEISA Platform monitoring window is not configured.
+Effective aggregation or evaluation window in seconds currently used when a more specific GEISA Platform monitoring window is not configured.
+
+This window controls over what duration samples are evaluated for derived values, alerting, health, or upstream update decisions.
 ]]></Description>
       </Item>
-      <Item ID="19">
+      <Item ID="22">
         <Name>Desired Host Monitoring Window</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for host or device resource monitoring
-associated with GEISA platform behavior.
+Desired aggregation or evaluation window in seconds for host or device resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
-      <Item ID="20">
+      <Item ID="23">
         <Name>Effective Host Monitoring Window</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for host or device
-resource monitoring associated with GEISA platform behavior.
+Effective aggregation or evaluation window in seconds currently used for host or device resource monitoring associated with GEISA platform behavior.
 ]]></Description>
       </Item>
-      <Item ID="21">
+      <Item ID="24">
         <Name>Desired Platform Monitoring Window</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for GEISA Platform monitoring and derived
-platform state evaluation.
+Desired aggregation or evaluation window in seconds for GEISA Platform monitoring and derived platform state evaluation.
 ]]></Description>
       </Item>
-      <Item ID="22">
+      <Item ID="25">
         <Name>Effective Platform Monitoring Window</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for GEISA Platform
-monitoring and derived platform state evaluation.
+Effective aggregation or evaluation window in seconds currently used for GEISA Platform monitoring and derived platform state evaluation.
 ]]></Description>
       </Item>
-      <Item ID="23">
+      <Item ID="26">
         <Name>Desired App Monitoring Window</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired monitoring window in seconds for GEISA App Monitoring aggregation and
-derived state evaluation.
+Desired aggregation or evaluation window in seconds for GEISA App Monitoring aggregation and derived state evaluation.
 ]]></Description>
       </Item>
-      <Item ID="24">
+      <Item ID="27">
         <Name>Effective App Monitoring Window</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective monitoring window in seconds currently used for GEISA App Monitoring
-aggregation and derived state evaluation.
+Effective aggregation or evaluation window in seconds currently used for GEISA App Monitoring aggregation and derived state evaluation.
 ]]></Description>
       </Item>
-      <Item ID="25">
+      <Item ID="30">
         <Name>Desired Minimum Upstream Severity</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -462,12 +431,12 @@ Desired minimum severity threshold for upstream reporting.
 128..255 = Reserved for vendor-specific or operator-specific severities
 ]]></Description>
       </Item>
-      <Item ID="26">
+      <Item ID="31">
         <Name>Effective Minimum Upstream Severity</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -483,34 +452,32 @@ Effective minimum severity threshold currently used for upstream reporting.
 128..255 = Reserved for vendor-specific or operator-specific severities
 ]]></Description>
       </Item>
-      <Item ID="27">
+      <Item ID="32">
         <Name>Desired Event Suppression Period</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired suppression period in seconds used to limit repeated reporting of
-equivalent events or alarms.
+Desired suppression period in seconds used to limit repeated reporting of equivalent events or alarms.
 ]]></Description>
       </Item>
-      <Item ID="28">
+      <Item ID="33">
         <Name>Effective Event Suppression Period</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective suppression period in seconds currently used to limit repeated
-reporting of equivalent events or alarms.
+Effective suppression period in seconds currently used to limit repeated reporting of equivalent events or alarms.
 ]]></Description>
       </Item>
-      <Item ID="29">
-        <Name>Desired Clear Event Reporting Enabled</Name>
+      <Item ID="34">
+        <Name>Desired Clear/Recovery Reporting Enabled</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -518,12 +485,11 @@ reporting of equivalent events or alarms.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether clear or recovery events should be reported
-upstream when a previously reported condition returns to normal.
+Desired setting indicating whether clear or recovery events should be reported upstream when a previously reported condition returns to normal.
 ]]></Description>
       </Item>
-      <Item ID="30">
-        <Name>Effective Clear Event Reporting Enabled</Name>
+      <Item ID="35">
+        <Name>Effective Clear/Recovery Reporting Enabled</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -531,47 +497,43 @@ upstream when a previously reported condition returns to normal.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether clear or recovery events
-are reported upstream when a previously reported condition returns to normal.
+Effective setting currently used to determine whether clear or recovery events are reported upstream when a previously reported condition returns to normal.
 ]]></Description>
       </Item>
-      <Item ID="31">
+      <Item ID="36">
         <Name>Desired Clear Condition Duration</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired duration in seconds that a condition should remain clear before the
-platform reports a clear or recovery event.
+Desired duration in seconds that a condition should remain clear before the platform reports a clear or recovery event.
 ]]></Description>
       </Item>
-      <Item ID="32">
+      <Item ID="37">
         <Name>Effective Clear Condition Duration</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective duration in seconds currently used before the platform reports a
-clear or recovery event.
+Effective duration in seconds currently used before the platform reports a clear or recovery event.
 ]]></Description>
       </Item>
-      <Item ID="33">
+      <Item ID="38">
         <Name>Desired Default Reporting Priority</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Desired default reporting priority used when a more specific message or event
-priority is not supplied.
+Desired default reporting priority used when a more specific message or event priority is not supplied.
 
 0 = Unknown
 1 = Urgent
@@ -582,17 +544,16 @@ priority is not supplied.
 128..255 = Reserved for vendor-specific or operator-specific priorities
 ]]></Description>
       </Item>
-      <Item ID="34">
+      <Item ID="39">
         <Name>Effective Default Reporting Priority</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective default reporting priority currently used when a more specific
-message or event priority is not supplied.
+Effective default reporting priority currently used when a more specific message or event priority is not supplied.
 
 0 = Unknown
 1 = Urgent
@@ -603,12 +564,12 @@ message or event priority is not supplied.
 128..255 = Reserved for vendor-specific or operator-specific priorities
 ]]></Description>
       </Item>
-      <Item ID="35">
+      <Item ID="40">
         <Name>Desired Platform Log Level</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -625,12 +586,12 @@ Desired log level for GEISA Platform services and components.
 128..255 = Reserved for vendor-specific or operator-specific log levels
 ]]></Description>
       </Item>
-      <Item ID="36">
+      <Item ID="41">
         <Name>Effective Platform Log Level</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -647,17 +608,16 @@ Effective log level currently used for GEISA Platform services and components.
 128..255 = Reserved for vendor-specific or operator-specific log levels
 ]]></Description>
       </Item>
-      <Item ID="37">
+      <Item ID="42">
         <Name>Desired App Log Level Default</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Desired default log level applied to GEISA applications when a more specific
-application log configuration is not provided.
+Desired default log level applied to GEISA applications when a more specific application log configuration is not provided.
 
 0 = Unknown
 1 = Off
@@ -670,17 +630,16 @@ application log configuration is not provided.
 128..255 = Reserved for vendor-specific or operator-specific log levels
 ]]></Description>
       </Item>
-      <Item ID="38">
+      <Item ID="43">
         <Name>Effective App Log Level Default</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective default log level currently applied to GEISA applications when a
-more specific application log configuration is not provided.
+Effective default log level currently applied to GEISA applications when a more specific application log configuration is not provided.
 
 0 = Unknown
 1 = Off
@@ -693,36 +652,31 @@ more specific application log configuration is not provided.
 128..255 = Reserved for vendor-specific or operator-specific log levels
 ]]></Description>
       </Item>
-      <Item ID="39">
+      <Item ID="44">
         <Name>Desired Event Log Retention Count</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>entries</Units>
         <Description><![CDATA[
-Desired maximum retained event or log record count for GEISA-managed durable
-event storage. A value of 0 indicates that no count limit is configured or
-that retention is unlimited according to platform policy.
+Desired maximum retained event or log record count for GEISA-managed durable event storage. A value of 0 indicates that no count limit is configured or that retention is unlimited according to platform policy.
 ]]></Description>
       </Item>
-      <Item ID="40">
+      <Item ID="45">
         <Name>Effective Event Log Retention Count</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>entries</Units>
         <Description><![CDATA[
-Effective maximum retained event or log record count currently used for
-GEISA-managed durable event storage. A value of 0 indicates that no count
-limit is configured or that retention is unlimited according to platform
-policy.
+Effective maximum retained event or log record count currently used for GEISA-managed durable event storage. A value of 0 indicates that no count limit is configured or that retention is unlimited according to platform policy.
 ]]></Description>
       </Item>
-      <Item ID="41">
+      <Item ID="46">
         <Name>Desired Audit Logging Enabled</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -731,11 +685,10 @@ policy.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether audit logging is enabled for GEISA Platform
-administrative or security-relevant actions.
+Desired setting indicating whether audit logging is enabled for GEISA Platform administrative or security-relevant actions.
 ]]></Description>
       </Item>
-      <Item ID="42">
+      <Item ID="47">
         <Name>Effective Audit Logging Enabled</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -744,11 +697,148 @@ administrative or security-relevant actions.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether audit logging is enabled
-for GEISA Platform administrative or security-relevant actions.
+Effective setting currently used to determine whether audit logging is enabled for GEISA Platform administrative or security-relevant actions.
 ]]></Description>
       </Item>
-      <Item ID="43">
+      <Item ID="48">
+        <Name>Desired Remote Logging Enabled</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Boolean</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired flag indicating whether platform-side remote logging is enabled.
+]]></Description>
+      </Item>
+      <Item ID="49">
+        <Name>Effective Remote Logging Enabled</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Boolean</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective flag indicating whether platform-side remote logging is enabled.
+]]></Description>
+      </Item>
+      <Item ID="50">
+        <Name>Desired Remote Log Server</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired URI of the remote log collector or event sink used by platform remote logging.
+]]></Description>
+      </Item>
+      <Item ID="51">
+        <Name>Effective Remote Log Server</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective URI of the remote log collector or event sink used by platform remote logging.
+]]></Description>
+      </Item>
+      <Item ID="52">
+        <Name>Desired Remote Log Severity Threshold</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>0..7</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[
+Desired minimum severity threshold for remote logging.
+
+0 = Emergency
+1 = Alert
+2 = Critical
+3 = Error
+4 = Warning
+5 = Notice
+6 = Informational
+7 = Debug
+]]></Description>
+      </Item>
+      <Item ID="53">
+        <Name>Effective Remote Log Severity Threshold</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>0..7</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[
+Effective minimum severity threshold for remote logging.
+
+0 = Emergency
+1 = Alert
+2 = Critical
+3 = Error
+4 = Warning
+5 = Notice
+6 = Informational
+7 = Debug
+]]></Description>
+      </Item>
+      <Item ID="54">
+        <Name>Desired Remote Log Policy Reference</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired reference or identifier for the remote logging policy currently associated with the platform.
+]]></Description>
+      </Item>
+      <Item ID="55">
+        <Name>Effective Remote Log Policy Reference</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective reference or identifier for the remote logging policy currently associated with the platform.
+]]></Description>
+      </Item>
+      <Item ID="56">
+        <Name>Desired Remote Log Transport Security Profile</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired transport security profile used for platform remote logging.
+]]></Description>
+      </Item>
+      <Item ID="57">
+        <Name>Effective Remote Log Transport Security Profile</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective transport security profile used for platform remote logging.
+]]></Description>
+      </Item>
+      <Item ID="60">
         <Name>Desired Upstream Queue Enabled</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -757,12 +847,10 @@ for GEISA Platform administrative or security-relevant actions.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether the GEISA Platform should buffer outbound
-upstream messages in a queue or spool when immediate transmission is not
-possible or not preferred.
+Desired setting indicating whether the GEISA Platform should buffer outbound upstream messages in a queue or spool when immediate transmission is not possible or not preferred.
 ]]></Description>
       </Item>
-      <Item ID="44">
+      <Item ID="61">
         <Name>Effective Upstream Queue Enabled</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -771,94 +859,87 @@ possible or not preferred.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether the GEISA Platform
-buffers outbound upstream messages in a queue or spool.
+Effective setting currently used to determine whether the GEISA Platform buffers outbound upstream messages in a queue or spool.
 ]]></Description>
       </Item>
-      <Item ID="45">
+      <Item ID="62">
         <Name>Desired Max Queued Messages</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>messages</Units>
         <Description><![CDATA[
-Desired maximum number of messages that the upstream queue or spool should
-retain.
+Desired maximum number of messages that the upstream queue or spool should retain.
 ]]></Description>
       </Item>
-      <Item ID="46">
+      <Item ID="63">
         <Name>Effective Max Queued Messages</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>messages</Units>
         <Description><![CDATA[
-Effective maximum number of messages currently retained by the upstream queue
-or spool.
+Effective maximum number of messages currently retained by the upstream queue or spool.
 ]]></Description>
       </Item>
-      <Item ID="47">
+      <Item ID="64">
         <Name>Desired Max Queued Bytes</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Desired maximum queued or spooled payload volume in bytes for upstream
-buffering.
+Desired maximum queued or spooled payload volume in bytes for upstream buffering.
 ]]></Description>
       </Item>
-      <Item ID="48">
+      <Item ID="65">
         <Name>Effective Max Queued Bytes</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Effective maximum queued or spooled payload volume in bytes currently used for
-upstream buffering.
+Effective maximum queued or spooled payload volume in bytes currently used for upstream buffering.
 ]]></Description>
       </Item>
-      <Item ID="49">
-        <Name>Desired Default Message TTL</Name>
+      <Item ID="66">
+        <Name>Desired Queue TTL</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Desired default time-to-live in seconds for messages buffered or handled by
-the GEISA Platform when a more specific TTL is not provided.
+Desired time-to-live in seconds for queued or spooled messages before expiration. This value applies to messages retained in the platform queue or spool and may be derived from, or constrained by, the platform default message TTL when a more specific queue policy is not configured.
 ]]></Description>
       </Item>
-      <Item ID="50">
-        <Name>Effective Default Message TTL</Name>
+      <Item ID="67">
+        <Name>Effective Queue TTL</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>s</Units>
         <Description><![CDATA[
-Effective default time-to-live in seconds currently used for messages buffered
-or handled by the GEISA Platform when a more specific TTL is not provided.
+Effective time-to-live in seconds currently used for queued or spooled messages before expiration. This value reflects the platform-accepted queue or spool TTL after validation, policy limits, fallback handling, or default message TTL constraints have been applied.
 ]]></Description>
       </Item>
-      <Item ID="51">
+      <Item ID="68">
         <Name>Desired Queue Drop Policy</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
@@ -874,17 +955,16 @@ Desired queue or spool drop policy used when buffering limits are reached.
 128..255 = Reserved for vendor-specific or operator-specific drop policies
 ]]></Description>
       </Item>
-      <Item ID="52">
+      <Item ID="69">
         <Name>Effective Queue Drop Policy</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective queue or spool drop policy currently used when buffering limits are
-reached.
+Effective queue or spool drop policy currently used when buffering limits are reached.
 
 0 = Unknown
 1 = Reject new messages
@@ -896,8 +976,8 @@ reached.
 128..255 = Reserved for vendor-specific or operator-specific drop policies
 ]]></Description>
       </Item>
-      <Item ID="53">
-        <Name>Desired Coalescing Enabled</Name>
+      <Item ID="70">
+        <Name>Desired Queue Coalescing Enabled</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -905,12 +985,11 @@ reached.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired setting indicating whether the GEISA Platform should coalesce eligible
-upstream messages before transmission or storage.
+Desired setting indicating whether the GEISA Platform may collapse eligible queued upstream messages before transmission or storage. When enabled, the platform can reduce redundant or stale queued updates according to the configured queue coalescing policy, such as keeping the latest state update while preserving events or alarms that must be delivered individually.
 ]]></Description>
       </Item>
-      <Item ID="54">
-        <Name>Effective Coalescing Enabled</Name>
+      <Item ID="71">
+        <Name>Effective Queue Coalescing Enabled</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -918,20 +997,19 @@ upstream messages before transmission or storage.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective setting currently used to determine whether the GEISA Platform
-coalesces eligible upstream messages before transmission or storage.
+Effective setting indicating whether the GEISA Platform is currently allowed to collapse eligible queued upstream messages before transmission or storage. This value reflects the platform-accepted behavior after validation, policy limits, or fallback handling have been applied.
 ]]></Description>
       </Item>
-      <Item ID="55">
-        <Name>Desired Coalescing Policy</Name>
+      <Item ID="72">
+        <Name>Desired Queue Coalescing Policy</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Desired message coalescing policy.
+Desired policy for how the GEISA Platform should collapse eligible queued upstream messages when queue coalescing is enabled. The policy determines which queued messages may be combined, replaced, summarized, or preserved.
 
 0 = Unknown
 1 = Disabled
@@ -939,19 +1017,20 @@ Desired message coalescing policy.
 3 = By app, message type, and subject
 4 = By explicit coalescing key
 5..127 = Reserved for future GEISA-defined coalescing policies
-128..255 = Reserved for vendor-specific or operator-specific coalescing policies
+128..255 = Reserved for vendor-specific or operator-specific
+coalescing policies
 ]]></Description>
       </Item>
-      <Item ID="56">
-        <Name>Effective Coalescing Policy</Name>
+      <Item ID="73">
+        <Name>Effective Queue Coalescing Policy</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-Effective message coalescing policy currently used by the GEISA Platform.
+Effective policy used by the GEISA Platform to collapse eligible queued upstream messages when queue coalescing is enabled. This value reflects the platform-accepted policy after validation, policy limits, or fallback handling have been applied.
 
 0 = Unknown
 1 = Disabled
@@ -959,39 +1038,60 @@ Effective message coalescing policy currently used by the GEISA Platform.
 3 = By app, message type, and subject
 4 = By explicit coalescing key
 5..127 = Reserved for future GEISA-defined coalescing policies
-128..255 = Reserved for vendor-specific or operator-specific coalescing policies
+128..255 = Reserved for vendor-specific or operator-specific
+coalescing policies
 ]]></Description>
       </Item>
-      <Item ID="57">
+      <Item ID="74">
+        <Name>Desired Default Message TTL</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Desired default time-to-live in seconds for messages buffered or handled by the GEISA Platform when a more specific TTL is not provided.
+]]></Description>
+      </Item>
+      <Item ID="75">
+        <Name>Effective Default Message TTL</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Effective default time-to-live in seconds currently used for messages buffered or handled by the GEISA Platform when a more specific TTL is not provided.
+]]></Description>
+      </Item>
+      <Item ID="76">
         <Name>Desired Max App Message Payload Size</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Desired maximum GEISA application message payload size in bytes accepted by
-the platform before local rejection, truncation, or alternate handling
-according to platform policy.
+Desired maximum GEISA application message payload size in bytes accepted by the platform before local rejection, truncation, or alternate handling according to platform policy.
 ]]></Description>
       </Item>
-      <Item ID="58">
+      <Item ID="77">
         <Name>Effective Max App Message Payload Size</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
-        <Type>Integer</Type>
+        <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>bytes</Units>
         <Description><![CDATA[
-Effective maximum GEISA application message payload size in bytes currently
-accepted by the platform before local rejection, truncation, or alternate
-handling according to platform policy.
+Effective maximum GEISA application message payload size in bytes currently accepted by the platform before local rejection, truncation, or alternate handling according to platform policy.
 ]]></Description>
       </Item>
-      <Item ID="59">
-        <Name>Desired App Message Priority Policy</Name>
+      <Item ID="78">
+        <Name>Desired App Message Priority Policy Reference</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -999,13 +1099,11 @@ handling according to platform policy.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired platform-defined policy identifier used to map, adjust, or constrain
-GEISA application message priorities before local handling or upstream
-reporting.
+Desired platform-defined policy reference currently used to map, adjust, or constrain GEISA application message priorities before local handling or upstream reporting. The reference may identify a local policy name, policy version, URI, or other operator-defined policy identifier.
 ]]></Description>
       </Item>
-      <Item ID="60">
-        <Name>Effective App Message Priority Policy</Name>
+      <Item ID="79">
+        <Name>Effective App Message Priority Policy Reference</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -1013,13 +1111,11 @@ reporting.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective platform-defined policy identifier currently used to map, adjust, or
-constrain GEISA application message priorities before local handling or
-upstream reporting.
+Effective platform-defined policy reference currently used to map, adjust, or constrain GEISA application message priorities before local handling or upstream reporting. The reference may identify a local policy name, policy version, URI, or other operator-defined policy identifier.
 ]]></Description>
       </Item>
-      <Item ID="61">
-        <Name>Desired App Message Routing Policy Version</Name>
+      <Item ID="80">
+        <Name>Desired App Message Routing Policy Reference</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -1027,12 +1123,11 @@ upstream reporting.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired version or identifier of the platform-defined GEISA application
-message routing policy.
+Desired platform-defined policy reference used to select how GEISA application messages are routed, constrained, or handled before local processing or upstream reporting. The reference may identify a local policy name, policy version, URI, or other operator-defined policy identifier.
 ]]></Description>
       </Item>
-      <Item ID="62">
-        <Name>Effective App Message Routing Policy Version</Name>
+      <Item ID="81">
+        <Name>Effective App Message Routing Policy Reference</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
         <Mandatory>Optional</Mandatory>
@@ -1040,11 +1135,10 @@ message routing policy.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective version or identifier of the platform-defined GEISA application
-message routing policy currently used by the platform.
+Effective platform-defined policy reference currently used to route, constrain, or handle GEISA application messages before local processing or upstream reporting. The reference may identify a local policy name, policy version, URI, or other operator-defined policy identifier.
 ]]></Description>
       </Item>
-      <Item ID="63">
+      <Item ID="82">
         <Name>Desired QoS Policy Reference</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -1053,12 +1147,10 @@ message routing policy currently used by the platform.
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Desired reference or identifier for the QoS policy associated with GEISA
-Platform behavior. Detailed bearer or flow QoS configuration remains in Object
-10540 and related network or bearer objects.
+Desired reference or identifier for the QoS policy associated with GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in Object 10540 and related network or bearer objects.
 ]]></Description>
       </Item>
-      <Item ID="64">
+      <Item ID="83">
         <Name>Effective QoS Policy Reference</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
@@ -1067,12 +1159,341 @@ Platform behavior. Detailed bearer or flow QoS configuration remains in Object
         <RangeEnumeration/>
         <Units/>
         <Description><![CDATA[
-Effective reference or identifier for the QoS policy currently associated with
-GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in
-Object 10540 and related network or bearer objects.
+Effective reference or identifier for the QoS policy currently associated with GEISA Platform behavior. Detailed bearer or flow QoS configuration remains in Object 10540 and related network or bearer objects.
 ]]></Description>
       </Item>
+      <Item ID="90">
+        <Name>Desired App Accounting Collection Period</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Desired accounting collection period in seconds used to represent the app accounting counter window for the platform.
+]]></Description>
+      </Item>
+      <Item ID="91">
+        <Name>Effective App Accounting Collection Period</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Effective accounting collection period in seconds currently used to represent the app accounting counter window for the platform.
+]]></Description>
+      </Item>
+      <Item ID="92">
+        <Name>Desired App Accounting Window Types</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired bitmask of supported app accounting window types.
+
+0 = Unspecified / implementation default
+1 = Configured collection period
+2 = Daily
+4 = Since reboot
+8 = Rolling window
+16 = Lifetime
+32 = Operator-defined
+Higher powers of two are reserved for future window types.
+]]></Description>
+      </Item>
+      <Item ID="93">
+        <Name>Effective App Accounting Window Types</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective bitmask of supported app accounting window types.
+
+0 = Unspecified / implementation default
+1 = Configured collection period
+2 = Daily
+4 = Since reboot
+8 = Rolling window
+16 = Lifetime
+32 = Operator-defined
+Higher powers of two are reserved for future window type expansion.
+]]></Description>
+      </Item>
+      <Item ID="94">
+        <Name>Desired App Accounting Rolling Window Duration</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Desired rolling-window duration in seconds for app accounting.
+]]></Description>
+      </Item>
+      <Item ID="95">
+        <Name>Effective App Accounting Rolling Window Duration</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Effective rolling-window duration in seconds currently used for app accounting.
+]]></Description>
+      </Item>
+      <Item ID="96">
+        <Name>Desired App Accounting Retention Count</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>count</Units>
+        <Description><![CDATA[
+Desired retained history count for app accounting window instances or snapshots.
+]]></Description>
+      </Item>
+      <Item ID="97">
+        <Name>Effective App Accounting Retention Count</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>count</Units>
+        <Description><![CDATA[
+Effective retained history count for app accounting window instances or snapshots.
+]]></Description>
+      </Item>
+      <Item ID="98">
+        <Name>Desired App Accounting Policy Reference</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired reference or identifier for the app accounting policy currently associated with the platform.
+]]></Description>
+      </Item>
+      <Item ID="99">
+        <Name>Effective App Accounting Policy Reference</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective reference or identifier for the app accounting policy currently associated with the platform.
+]]></Description>
+      </Item>
+      <Item ID="100">
+        <Name>Per-App Accounting Overrides Enabled</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Boolean</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired flag indicating whether per-app accounting policy overrides are permitted in future runtime behavior.
+]]></Description>
+      </Item>
+      <Item ID="101">
+        <Name>Effective Per-App Accounting Overrides Enabled</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Boolean</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective flag indicating whether per-app accounting policy overrides are permitted in future runtime behavior.
+]]></Description>
+      </Item>
+      <Item ID="110">
+        <Name>Desired Default App Accounting Maximum Bytes</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>bytes</Units>
+        <Description><![CDATA[
+Desired maximum bytes allowed during the accounting collection period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="111">
+        <Name>Effective Default App Accounting Maximum Bytes</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>bytes</Units>
+        <Description><![CDATA[
+Effective maximum bytes currently allowed during the accounting collection period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="112">
+        <Name>Desired Default App Accounting Message Limit</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>messages</Units>
+        <Description><![CDATA[
+Desired maximum number of messages allowed during the accounting collection period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="113">
+        <Name>Effective Default App Accounting Message Limit</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>messages</Units>
+        <Description><![CDATA[
+Effective maximum number of messages currently allowed during the accounting collection period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="114">
+        <Name>Desired Default App Accounting Throttle Message Limit</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>messages</Units>
+        <Description><![CDATA[
+Desired message limit used by throttling policy during the throttle period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="115">
+        <Name>Effective Default App Accounting Throttle Message Limit</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>messages</Units>
+        <Description><![CDATA[
+Effective message limit currently used by throttling policy during the throttle period. A value of zero means unlimited.
+]]></Description>
+      </Item>
+      <Item ID="116">
+        <Name>Desired Default App Accounting Throttle Period</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Desired throttle period in seconds. A value of zero disables the throttle period.
+]]></Description>
+      </Item>
+      <Item ID="117">
+        <Name>Effective Default App Accounting Throttle Period</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>s</Units>
+        <Description><![CDATA[
+Effective throttle period in seconds. A value of zero disables the throttle period.
+]]></Description>
+      </Item>
+      <Item ID="118">
+        <Name>Desired Quota Exhaustion Action</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>0..255</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[
+Desired local platform action to take when an accounting quota or limit is exhausted. Upstream ADM/EMS may observe, alert, or enforce related behavior, but this value describes the local platform action only.
+
+0 = Unknown
+1 = No local enforcement
+2 = Report only
+3 = Degrade priority
+4 = Throttle
+5 = Reject new work
+6 = Drop new work
+7 = Block communication
+8..127 = Reserved for future GEISA-defined actions
+128..255 = Reserved for vendor-specific or operator-specific actions
+]]></Description>
+      </Item>
+      <Item ID="119">
+        <Name>Effective Quota Exhaustion Action</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration>0..255</RangeEnumeration>
+        <Units/>
+        <Description><![CDATA[
+Effective local platform action currently taken when an accounting quota or limit is exhausted. Upstream ADM/EMS may observe, alert, or enforce related behavior, but this value describes the effective local platform action only.
+
+0 = Unknown
+1 = No local enforcement
+2 = Report only
+3 = Degrade priority
+4 = Throttle
+5 = Reject new work
+6 = Drop new work
+7 = Block communication
+8..127 = Reserved for future GEISA-defined actions
+128..255 = Reserved for vendor-specific or operator-specific actions
+]]></Description>
+      </Item>
+      <Item ID="120">
+        <Name>Desired Accounting Enforcement Policy Reference</Name>
+        <Operations>RW</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Desired reference or identifier for the accounting enforcement policy currently associated with the platform.
+]]></Description>
+      </Item>
+      <Item ID="121">
+        <Name>Effective Accounting Enforcement Policy Reference</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Optional</Mandatory>
+        <Type>String</Type>
+        <RangeEnumeration/>
+        <Units/>
+        <Description><![CDATA[
+Effective reference or identifier for the accounting enforcement policy currently associated with the platform.
+]]></Description>
+      </Item>
+
     </Resources>
-    <Description2><![CDATA[]]></Description2>
+    <Description2><![CDATA[
+
+]]></Description2>
   </Object>
 </LWM2M>
