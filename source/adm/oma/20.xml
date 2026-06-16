@@ -160,8 +160,8 @@ Read Access on that Resource returns the Data Collection associated to the curre
         <RangeEnumeration>255</RangeEnumeration>
         <Units/>
         <Description><![CDATA[
-When set by the Server, this Resource indicates to the Client, what is the Server preferred data format to use when the LogData Resource is returned . when retrieved by the Server, this Resource indicates which specific data format is used when the LogData Resource is returned to the Server
-0  or Resource not present : no specific data format (sequence of bytes)
+When set by the Server, this Resource indicates to the Client, what is the Server preferred data format to use when the LogData Resource is returned. When retrieved by the Server, this Resource indicates which specific data format is used when the LogData Resource is returned to the Server
+0 or Resource not present : no specific data format (sequence of bytes)
 1 : OMA-LwM2M TLV format (only container for logs; does not define any semantics for the logs themselve)
 2 : OMA-LwM2M JSON format (only container for logs; does not define any semantics for the logs themselve)
 3 : OMA-LwM2M CBOR format (only container for logs; does not define any semantics for the logs themselve)
