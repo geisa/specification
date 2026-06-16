@@ -177,7 +177,11 @@ The Packet Error Rate (PER) defines an upper bound for the rate of packets that 
         <RangeEnumeration>0..63</RangeEnumeration>
         <Units></Units>
         <Description><![CDATA[
-Differentiated Services Code Point (DSCP) value to be applied to IP packets belonging to this QoS flow, as defined in RFC 2474. The 6-bit DSCP value ranges from 0 to 63. Common values include: 0 (000000): Best Effort (BE) 10 (001010): AF11 46 (101110): Expedited Forwarding (EF) A value of 0 indicates Best Effort forwarding.
+Differentiated Services Code Point (DSCP) value to be applied to IP packets belonging to this QoS flow, as defined in RFC 2474. The 6-bit DSCP value ranges from 0 to 63. Common values include: 
+0  (000000): Default Forwarding (DF); 
+10 (001010): Assured Forwarding (AF11); 
+46 (101110): Expedited Forwarding (EF); 
+A value of 0 indicates default (best effort) forwarding.
 ]]></Description>
       </Item>
       <Item ID="10">
