@@ -27,7 +27,8 @@ See https://github.com/OpenMobileAlliance/app_messaging
 
 LEGAL DISCLAIMER
 
-Copyright 2019-2026 Open Mobile Alliance.
+Copyright 2026, Contributors to the Grid Edge Interoperability &
+Security Alliance (GEISA), a Series of LF Projects, LLC
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
@@ -161,7 +162,7 @@ Number of CPU cores or logical processors available to the host or device.
         <Name>CPU Load</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units/>
@@ -185,7 +186,7 @@ Short-interval CPU utilization sample in deci-percent. This is a sampled utiliza
         <Name>Memory Total</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
@@ -197,7 +198,7 @@ Total physical memory in bytes.
         <Name>Memory Available</Name>
         <Operations>R</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
@@ -266,6 +267,42 @@ Total storage capacity visible to or managed by the host or monitoring scope, in
 ]]></Description>
       </Item>
       <Item ID="16">
+        <Name>Total Storage Used</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[
+Total amount of storage currently used on the host.
+]]></Description>
+      </Item>
+      <Item ID="17">
+        <Name>App Storage Capacity</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[
+Total storage capacity allocated or available for hosted applications on this platform. This represents the total application storage allocation or partition capacity, not the portion currently used.
+]]></Description>
+      </Item>
+      <Item ID="18">
+        <Name>App Storage Used</Name>
+        <Operations>R</Operations>
+        <MultipleInstances>Single</MultipleInstances>
+        <Mandatory>Mandatory</Mandatory>
+        <Type>Unsigned Integer</Type>
+        <RangeEnumeration/>
+        <Units>B</Units>
+        <Description><![CDATA[
+Amount of the application storage capacity currently used by hosted applications.
+]]></Description>
+      </Item>
+      <Item ID="19">
         <Name>Storage Devices</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
@@ -277,7 +314,7 @@ Total storage capacity visible to or managed by the host or monitoring scope, in
 Storage device identifiers or labels for the host or device. Each Resource Instance identifies one included storage device.
 ]]></Description>
       </Item>
-      <Item ID="17">
+      <Item ID="20">
         <Name>Storage Partitions</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
@@ -289,7 +326,7 @@ Storage device identifiers or labels for the host or device. Each Resource Insta
 Storage partition identifiers, paths, mount points, or labels. The same Resource Instance index refers to the same storage partition as Storage Partition Available Space.
 ]]></Description>
       </Item>
-      <Item ID="18">
+      <Item ID="21">
         <Name>Storage Partition Available Space</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
@@ -301,11 +338,11 @@ Storage partition identifiers, paths, mount points, or labels. The same Resource
 Available space for the corresponding storage partition or partitions, in bytes. The same Resource Instance index refers to the same partition identified by Storage Partitions.
 ]]></Description>
       </Item>
-      <Item ID="19">
+      <Item ID="22">
         <Name>Network Devices</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>String</Type>
         <RangeEnumeration/>
         <Units/>
@@ -313,7 +350,7 @@ Available space for the corresponding storage partition or partitions, in bytes.
 Network device or interface identifiers or labels for the host or device. Each Resource Instance identifies one included network interface or device.
 ]]></Description>
       </Item>
-      <Item ID="20">
+      <Item ID="23">
         <Name>Network Device Type</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
@@ -325,7 +362,7 @@ Network device or interface identifiers or labels for the host or device. Each R
 Type of each included network interface or device, such as ethernet, wifi, virtual, loopback, or unknown.
 ]]></Description>
       </Item>
-      <Item ID="21">
+      <Item ID="24">
         <Name>Network Device Capacity</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
@@ -337,11 +374,11 @@ Type of each included network interface or device, such as ethernet, wifi, virtu
 Link or interface capacity for each included network interface or device, expressed in bits per second. The same Resource Instance index refers to the same network interface or device identified by the Network Devices resource.
 ]]></Description>
       </Item>
-      <Item ID="22">
+      <Item ID="25">
         <Name>Network Device Traffic Bytes</Name>
         <Operations>R</Operations>
         <MultipleInstances>Multiple</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Unsigned Integer</Type>
         <RangeEnumeration/>
         <Units>B</Units>
