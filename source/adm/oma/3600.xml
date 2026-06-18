@@ -108,7 +108,7 @@ Client to Server message. Readable client-to-server message payload or current a
         <Name>Message Priority</Name>
         <Operations>RW</Operations>
         <MultipleInstances>Single</MultipleInstances>
-        <Mandatory>Optional</Mandatory>
+        <Mandatory>Mandatory</Mandatory>
         <Type>Unsigned Integer</Type>
         <RangeEnumeration>0..255</RangeEnumeration>
         <Units/>
@@ -132,7 +132,7 @@ priority values when competing messages are otherwise eligible for delivery.
 5-100: Reserved for future GEISA use.
 101-254: Reserved for proprietary use.
 255: Reserved.
-]]></Description> 
+]]></Description>
       </Item>
       <Item ID="3">
         <Name>Message Type</Name>
