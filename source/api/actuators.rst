@@ -84,6 +84,8 @@ status after a request when confirmation of state is required or desired.
 MQTT Details
 ------------
 
+QoS: 1 / Acknowledged R/R
+
 Get:
 
 - request: ``geisa/api/actuator/get/req/<userid>``
