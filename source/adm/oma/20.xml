@@ -65,7 +65,7 @@ The Resources of that Object are based on the OMA LwM2M set of reusable Resource
     <ObjectID>20</ObjectID>
     <ObjectURN>urn:oma:lwm2m:oma:20:3.0</ObjectURN>
     <LWM2MVersion>1.1</LWM2MVersion>
-    <ObjectVersion>3.0</ObjectVersion>
+    <ObjectVersion>3.2</ObjectVersion>
     <MultipleInstances>Multiple</MultipleInstances>
     <Mandatory>Optional</Mandatory>
     <Resources>
@@ -102,7 +102,7 @@ Defines the Log Event Class:
 Actions:
 a) Start data collection(DC)
 b) LogStatus is set to 0 (running)
-c) DC is emptied (default) or extended according arg'0' value
+c) DC is emptied (default) or extended according to arg'0' value
 Arguments definitions are described in the table below.
 ]]></Description>
       </Item>
