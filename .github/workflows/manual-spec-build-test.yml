@@ -1,0 +1,120 @@
+name: Manual specification build test
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_target:
+        description: "Make target to run"
+        required: true
+        default: "clean all"
+        type: choice
+        options:
+          - "clean all"
+          - "all"
+          - "html"
+          - "latexpdf"
+          - "prep"
+
+jobs:
+  build:
+    name: Build GEISA specification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show repository state
+        run: |
+          git status --short
+          git rev-parse --short HEAD
+          git describe --tags --always --dirty || true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            curl \
+            python3-venv \
+            npm \
+            latexmk \
+            librsvg2-bin \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            xvfb
+
+      - name: Install Mermaid CLI
+        run: |
+          sudo npm install -g @mermaid-js/mermaid-cli
+          command -v mmdc
+          mmdc --version
+
+      - name: Install draw.io Desktop
+        run: |
+          DRAWIO_VERSION="26.0.16"
+          curl -L -o /tmp/drawio.deb \
+            "https://github.com/jgraph/drawio-desktop/releases/download/v${DRAWIO_VERSION}/drawio-amd64-${DRAWIO_VERSION}.deb"
+          sudo apt-get install -y /tmp/drawio.deb
+          command -v drawio
+          xvfb-run -a drawio --version || true
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m venv venv
+          . venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install \
+            GitPython \
+            sphinx \
+            sphinxcontrib-svg2pdfconverter
+
+      - name: Show build tools
+        run: |
+          . venv/bin/activate
+          python --version
+          sphinx-build --version
+          latexmk -version | head -20
+          rsvg-convert --version
+          mmdc --version
+          xvfb-run -a drawio --version || true
+
+      - name: Build
+        run: |
+          . venv/bin/activate
+          xvfb-run -a make ${{ inputs.build_target }}
+
+      - name: List build output
+        if: always()
+        run: |
+          find build -maxdepth 3 -type f | sort || true
+
+      - name: Upload HTML artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geisa-spec-html
+          path: build/html/**
+          if-no-files-found: ignore
+
+      - name: Upload PDF artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geisa-spec-pdf
+          path: build/latex/*.pdf
+          if-no-files-found: ignore
+
+      - name: Upload LaTeX logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: geisa-spec-latex-logs
+          path: |
+            build/latex/*.log
+            build/latex/*.fls
+            build/latex/*.fdb_latexmk
+          if-no-files-found: ignore
