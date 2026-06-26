@@ -50,13 +50,13 @@ jobs:
             xvfb
 
       - name: Install Mermaid CLI
-            run: |
-              sudo npm install -g @mermaid-js/mermaid-cli
-              command -v mmdc
-              mmdc --version
-              export PUPPETEER_CACHE_DIR="$HOME/.cache/puppeteer"
-              npx puppeteer browsers install chrome-headless-shell
-              find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
+        run: |
+          sudo npm install -g @mermaid-js/mermaid-cli
+          command -v mmdc
+          mmdc --version
+          export PUPPETEER_CACHE_DIR="$HOME/.cache/puppeteer"
+          npx puppeteer browsers install chrome-headless-shell
+          find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
 
       - name: Install draw.io Desktop
         run: |
