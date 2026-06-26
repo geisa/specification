@@ -82,8 +82,17 @@ jobs:
           curl -L -o /tmp/drawio.deb \
             "https://github.com/jgraph/drawio-desktop/releases/download/v${DRAWIO_VERSION}/drawio-amd64-${DRAWIO_VERSION}.deb"
           sudo apt-get install -y /tmp/drawio.deb
-          command -v drawio
-          xvfb-run -a drawio --version || true
+
+          REAL_DRAWIO="$(command -v drawio)"
+          mkdir -p "$GITHUB_WORKSPACE/.github/bin"
+          cat > "$GITHUB_WORKSPACE/.github/bin/drawio" <<EOF
+          #!/usr/bin/env bash
+          exec "$REAL_DRAWIO" --no-sandbox "\$@"
+          EOF
+          chmod +x "$GITHUB_WORKSPACE/.github/bin/drawio"
+
+          echo "$GITHUB_WORKSPACE/.github/bin" >> "$GITHUB_PATH"
+          xvfb-run -a "$GITHUB_WORKSPACE/.github/bin/drawio" --version || true
 
       - name: Install Python dependencies
         run: |
