@@ -26,7 +26,7 @@ ADM-conformant platforms, app-message transport uses the GEISA ADM LwM2M over
 CoAP path, carried by platform-controlled IP communication outside of the
 application execution environment. Applications remain unaware of those ADM
 transport details.  Applications that require both mechanisms must request both
-in their manifest, and platforms enforce each according to the approved 
+in their manifest, and platforms enforce each according to the approved
 deployment policy.
 
 
@@ -113,7 +113,7 @@ Applications can also make use of traditional IP socket based real-time
 communications on devices equipped with cellular, Wi-Fi, or other IP connectivity.
 Applications MUST specify the endpoints they need to communicate to (IP/Port)
 in their Application Deployment Manifest so that those policies can be approved
- by operators and implemented in the platform using firewall rules.
+by operators and implemented in the platform using firewall rules.
 
 Applications MUST also specify the expected volume of data per day per
 destination class.
