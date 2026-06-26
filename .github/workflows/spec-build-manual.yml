@@ -1,6 +1,6 @@
-name: Manual specification build test
+name: Manual specification build
 
-on:
+"on":
   workflow_dispatch:
     inputs:
       build_target:
@@ -50,8 +50,28 @@ jobs:
       - name: Install Mermaid CLI
         run: |
           sudo npm install -g @mermaid-js/mermaid-cli
-          command -v mmdc
-          mmdc --version
+          REAL_MMDC="$(command -v mmdc)"
+          "$REAL_MMDC" --version
+
+          export PUPPETEER_CACHE_DIR="$HOME/.cache/puppeteer"
+          npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
+          find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
+
+          cat > "$GITHUB_WORKSPACE/puppeteer-config.json" <<'JSON'
+          {
+            "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+          }
+          JSON
+
+          mkdir -p "$GITHUB_WORKSPACE/.github/bin"
+          cat > "$GITHUB_WORKSPACE/.github/bin/mmdc" <<EOF
+          #!/usr/bin/env bash
+          exec "$REAL_MMDC" -p "$GITHUB_WORKSPACE/puppeteer-config.json" "\$@"
+          EOF
+          chmod +x "$GITHUB_WORKSPACE/.github/bin/mmdc"
+
+          echo "$GITHUB_WORKSPACE/.github/bin" >> "$GITHUB_PATH"
+          "$GITHUB_WORKSPACE/.github/bin/mmdc" --version
 
       - name: Install draw.io Desktop
         run: |
@@ -59,8 +79,17 @@ jobs:
           curl -L -o /tmp/drawio.deb \
             "https://github.com/jgraph/drawio-desktop/releases/download/v${DRAWIO_VERSION}/drawio-amd64-${DRAWIO_VERSION}.deb"
           sudo apt-get install -y /tmp/drawio.deb
-          command -v drawio
-          xvfb-run -a drawio --version || true
+
+          REAL_DRAWIO="$(command -v drawio)"
+          mkdir -p "$GITHUB_WORKSPACE/.github/bin"
+          cat > "$GITHUB_WORKSPACE/.github/bin/drawio" <<EOF
+          #!/usr/bin/env bash
+          exec "$REAL_DRAWIO" --no-sandbox "\$@"
+          EOF
+          chmod +x "$GITHUB_WORKSPACE/.github/bin/drawio"
+
+          echo "$GITHUB_WORKSPACE/.github/bin" >> "$GITHUB_PATH"
+          xvfb-run -a "$GITHUB_WORKSPACE/.github/bin/drawio" --version || true
 
       - name: Install Python dependencies
         run: |
@@ -85,7 +114,7 @@ jobs:
       - name: Build
         run: |
           . venv/bin/activate
-          xvfb-run -a make ${{ inputs.build_target }}
+          xvfb-run -a make ${{ inputs.build_target || 'clean all' }}
 
       - name: List build output
         if: always()
@@ -96,7 +125,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-html
+          name: geisa-specification-html
           path: build/html/**
           if-no-files-found: ignore
 
@@ -104,7 +133,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-pdf
+          name: geisa-specification-pdf
           path: build/latex/*.pdf
           if-no-files-found: ignore
 
@@ -112,7 +141,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-latex-logs
+          name: geisa-specification-latex-logs
           path: |
             build/latex/*.log
             build/latex/*.fls
