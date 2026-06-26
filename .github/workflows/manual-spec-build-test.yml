@@ -56,6 +56,12 @@ jobs:
           command -v mmdc
           mmdc --version
           export PUPPETEER_CACHE_DIR="$HOME/.cache/puppeteer"
+          cat > puppeteer-config.json <<'JSON'
+          {
+            "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+          }
+          JSON
+          export PUPPETEER_CONFIG_FILE="$PWD/puppeteer-config.json"
           npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
           find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
 
