@@ -53,17 +53,28 @@ jobs:
       - name: Install Mermaid CLI
         run: |
           sudo npm install -g @mermaid-js/mermaid-cli
-          command -v mmdc
-          mmdc --version
+          REAL_MMDC="$(command -v mmdc)"
+          "$REAL_MMDC" --version
+
           export PUPPETEER_CACHE_DIR="$HOME/.cache/puppeteer"
-          cat > puppeteer-config.json <<'JSON'
+          npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
+          find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
+
+          cat > "$GITHUB_WORKSPACE/puppeteer-config.json" <<'JSON'
           {
             "args": ["--no-sandbox", "--disable-setuid-sandbox"]
           }
           JSON
-          export PUPPETEER_CONFIG_FILE="$PWD/puppeteer-config.json"
-          npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
-          find "$HOME/.cache/puppeteer" -maxdepth 4 -type f -perm -111 | sort | head -50
+
+          mkdir -p "$GITHUB_WORKSPACE/.github/bin"
+          cat > "$GITHUB_WORKSPACE/.github/bin/mmdc" <<EOF
+          #!/usr/bin/env bash
+          exec "$REAL_MMDC" -p "$GITHUB_WORKSPACE/puppeteer-config.json" "\$@"
+          EOF
+          chmod +x "$GITHUB_WORKSPACE/.github/bin/mmdc"
+
+          echo "$GITHUB_WORKSPACE/.github/bin" >> "$GITHUB_PATH"
+          "$GITHUB_WORKSPACE/.github/bin/mmdc" --version
 
       - name: Install draw.io Desktop
         run: |
