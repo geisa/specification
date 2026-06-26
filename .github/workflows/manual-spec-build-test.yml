@@ -1,20 +1,22 @@
 name: Manual specification build test
 
 on:
-  workflow_dispatch:
-    inputs:
-      build_target:
-        description: "Make target to run"
-        required: true
-        default: "clean all"
-        type: choice
-        options:
-          - "clean all"
-          - "all"
-          - "html"
-          - "latexpdf"
-          - "prep"
-
+workflow_dispatch:
+  inputs:
+    build_target:
+      description: "Make target to run"
+      required: true
+      default: "clean all"
+      type: choice
+      options:
+        - "clean all"
+        - "all"
+        - "html"
+        - "latexpdf"
+        - "prep"
+push:
+  branches:
+    - ci-manual-spec-build-chrome-fix
 jobs:
   build:
     name: Build GEISA specification
