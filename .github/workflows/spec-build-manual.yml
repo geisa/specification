@@ -1,4 +1,4 @@
-name: Manual specification build test
+name: Manual specification build
 
 "on":
   workflow_dispatch:
@@ -125,7 +125,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-html
+          name: geisa-specification-html
           path: build/html/**
           if-no-files-found: ignore
 
@@ -133,7 +133,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-pdf
+          name: geisa-specification-pdf
           path: build/latex/*.pdf
           if-no-files-found: ignore
 
@@ -141,7 +141,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: geisa-spec-latex-logs
+          name: geisa-specification-latex-logs
           path: |
             build/latex/*.log
             build/latex/*.fls
