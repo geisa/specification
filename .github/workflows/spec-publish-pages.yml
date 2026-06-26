@@ -1,0 +1,406 @@
+# Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC.
+# This file is licensed under the Community Specification License 1.0 available at:
+# https://github.com/geisa/specification/blob/main/LICENSE.md or
+# https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+
+name: Publish specification site
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-specification-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build specification site
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            fonts-font-awesome \
+            graphviz \
+            latexmk \
+            librsvg2-bin \
+            make \
+            python3-pip \
+            texlive-fonts-recommended \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-plain-generic \
+            texlive-xetex \
+            xfonts-75dpi \
+            xfonts-base \
+            xvfb
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Install Mermaid CLI with sandbox wrapper
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+
+          REAL_MMDC="$(command -v mmdc)"
+          echo "REAL_MMDC=${REAL_MMDC}" >> "${GITHUB_ENV}"
+
+          npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
+
+          mkdir -p "${GITHUB_WORKSPACE}/.github/bin"
+          cat > "${GITHUB_WORKSPACE}/.github/bin/puppeteer-config.json" <<'JSON'
+          {
+            "args": [
+              "--no-sandbox",
+              "--disable-setuid-sandbox"
+            ]
+          }
+          JSON
+
+          cat > "${GITHUB_WORKSPACE}/.github/bin/mmdc" <<'SH'
+          #!/usr/bin/env sh
+          exec "$REAL_MMDC" -p "$GITHUB_WORKSPACE/.github/bin/puppeteer-config.json" "$@"
+          SH
+
+          chmod +x "${GITHUB_WORKSPACE}/.github/bin/mmdc"
+          echo "${GITHUB_WORKSPACE}/.github/bin" >> "${GITHUB_PATH}"
+
+      - name: Install draw.io with sandbox wrapper
+        run: |
+          curl -fsSL -o /tmp/drawio.deb \
+            https://github.com/jgraph/drawio-desktop/releases/download/v28.0.6/drawio-amd64-28.0.6.deb
+
+          sudo apt-get install -y /tmp/drawio.deb
+
+          REAL_DRAWIO="$(command -v drawio)"
+          echo "REAL_DRAWIO=${REAL_DRAWIO}" >> "${GITHUB_ENV}"
+
+          mkdir -p "${GITHUB_WORKSPACE}/.github/bin"
+          cat > "${GITHUB_WORKSPACE}/.github/bin/drawio" <<'SH'
+          #!/usr/bin/env sh
+          exec "$REAL_DRAWIO" --no-sandbox "$@"
+          SH
+
+          chmod +x "${GITHUB_WORKSPACE}/.github/bin/drawio"
+          echo "${GITHUB_WORKSPACE}/.github/bin" >> "${GITHUB_PATH}"
+
+      - name: Build specification
+        run: |
+          xvfb-run -a make clean all
+
+      - name: Stage specification site
+        run: |
+          test -d build/html
+          test -s build/latex/geisaspecification.pdf
+
+          rm -rf build/pages
+          mkdir -p build/pages/latest
+          mkdir -p build/pages/downloads
+          mkdir -p build/pages/latest/downloads
+          mkdir -p build/pages/assets
+
+          cp -a build/html/. build/pages/latest/
+          cp build/latex/geisaspecification.pdf build/pages/downloads/geisaspecification.pdf
+          cp build/latex/geisaspecification.pdf build/pages/latest/downloads/geisaspecification.pdf
+
+          test -s source/images/geisa-pyramid.svg
+          cp source/images/geisa-pyramid.svg build/pages/assets/geisa-pyramid.svg
+
+          touch build/pages/.nojekyll
+
+          cat > build/pages/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>GEISA Specification — latest development draft</title>
+            <style>
+              :root {
+                color-scheme: light;
+                --geisa-blue: #1f5f99;
+                --geisa-blue-dark: #16456f;
+                --geisa-green: #00a885;
+                --text: #1f2933;
+                --muted: #52606d;
+                --border: #d9e2ec;
+                --background: #f5f7fa;
+                --card: #ffffff;
+                --warning-bg: #fff7e6;
+                --warning-border: #f0b429;
+              }
+
+              * {
+                box-sizing: border-box;
+              }
+
+              body {
+                margin: 0;
+                background: var(--background);
+                color: var(--text);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                line-height: 1.5;
+              }
+
+              main {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 48px 32px;
+              }
+
+              .hero {
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 18px;
+                box-shadow: 0 16px 40px rgba(31, 41, 51, 0.08);
+                padding: clamp(32px, 5vw, 56px);
+              }
+
+              .brand {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                margin-bottom: 24px;
+              }
+
+              .brand img {
+                width: clamp(120px, 16vw, 220px);
+                height: auto;
+              }
+
+              .eyebrow {
+                color: var(--geisa-blue);
+                font-size: 0.82rem;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+              }
+
+              h1 {
+                margin: 0.2em 0 0;
+                color: var(--geisa-blue-dark);
+                font-size: clamp(2rem, 5vw, 3.2rem);
+                line-height: 1.05;
+              }
+
+              .summary {
+                color: var(--muted);
+                font-size: 1.1rem;
+                max-width: none;
+              }
+
+              .release-panel {
+                margin: 32px 0 18px;
+                padding: 22px 24px;
+                background: #eef7f4;
+                border: 1px solid rgba(0, 168, 133, 0.35);
+                border-left: 6px solid var(--geisa-green);
+                border-radius: 14px;
+              }
+
+              .release-panel .label {
+                color: var(--geisa-blue-dark);
+                font-size: 0.82rem;
+                font-weight: 800;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+              }
+
+              .release-panel h2 {
+                margin: 6px 0 8px;
+                color: var(--geisa-blue-dark);
+                font-size: clamp(1.45rem, 3vw, 2.1rem);
+              }
+
+              .release-panel p {
+                margin: 0;
+                color: var(--muted);
+              }
+
+              .release-panel .release-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 18px;
+              }
+
+              .release-panel .disabled {
+                display: inline-block;
+                padding: 12px 18px;
+                border: 1px dashed var(--border);
+                border-radius: 10px;
+                color: var(--muted);
+                background: #ffffff;
+                font-weight: 700;
+              }
+
+              .notice {
+                margin: 28px 0;
+                padding: 18px 20px;
+                background: var(--warning-bg);
+                border: 1px solid var(--warning-border);
+                border-radius: 12px;
+              }
+
+              .notice strong {
+                display: block;
+                margin-bottom: 4px;
+              }
+
+              .actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin: 28px 0;
+              }
+
+              a.button {
+                display: inline-block;
+                padding: 12px 18px;
+                border-radius: 10px;
+                color: #ffffff;
+                background: var(--geisa-blue);
+                font-weight: 700;
+                text-decoration: none;
+              }
+
+              a.button.secondary {
+                color: var(--geisa-blue-dark);
+                background: #e6f0f8;
+              }
+
+              a.button:hover {
+                background: var(--geisa-blue-dark);
+              }
+
+              a.button.secondary:hover {
+                color: #ffffff;
+              }
+
+              .links {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                gap: 14px;
+                margin-top: 28px;
+              }
+
+              .link-card {
+                padding: 16px;
+                background: #fbfcfd;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+              }
+
+              .link-card a {
+                color: var(--geisa-blue-dark);
+                font-weight: 700;
+              }
+
+              footer {
+                margin-top: 28px;
+                color: var(--muted);
+                font-size: 0.9rem;
+              }
+            </style>
+          </head>
+          <body>
+            <main>
+              <section class="hero">
+                <div class="brand">
+                  <img src="./assets/geisa-pyramid.svg" alt="GEISA logo">
+                  <div>
+                    <div class="eyebrow">Grid Edge Interoperability &amp; Security Alliance</div>
+                    <h1>GEISA Specification</h1>
+                  </div>
+                </div>
+
+                <p class="summary">
+                  GEISA defines a consistent, secure, and interoperable computing
+                  environment for devices at the edge of the electric grid.
+                </p>
+
+                <section class="release-panel" aria-labelledby="current-release-heading">
+                  <div class="label">Current Release</div>
+                  <h2 id="current-release-heading">Coming Soon!</h2>
+                  <p>
+                    The first approved GEISA specification release 0.9 is expected to
+                    be published shortly. Until then, the latest development draft is provided for reference and feedback.
+                  </p>
+                  <div class="release-actions">
+                    <span class="disabled">GEISA 0.9 release pending</span>
+                  </div>
+                </section>
+
+                <div class="notice">
+                  <strong>Latest development draft</strong>
+                  This publication is generated from the current GEISA
+                  specification repository for review and convenience only. It is
+                  not an official approved GEISA release.
+                </div>
+
+                <div class="actions">
+                  <a class="button" href="./latest/index.html">Open the HTML draft</a>
+                  <a class="button secondary" href="./downloads/geisaspecification.pdf">Download the PDF draft</a>
+                </div>
+
+                <div class="links">
+                  <div class="link-card">
+                    <a href="https://github.com/geisa">GEISA on GitHub</a>
+                    <p>Organization home, repositories, and project materials.</p>
+                  </div>
+                  <div class="link-card">
+                    <a href="https://github.com/geisa/specification">Specification repository</a>
+                    <p>Source repository for this development draft.</p>
+                  </div>
+                  <div class="link-card">
+                    <a href="https://github.com/geisa/schemas">Schemas repository</a>
+                    <p>Schema and protobuf definitions for GEISA transactions.</p>
+                  </div>
+                  <div class="link-card">
+                    <a href="https://lfenergy.org/projects/geisa/">LF Energy GEISA project page</a>
+                    <p>General project information and LF Energy context.</p>
+                  </div>
+                </div>
+              </section>
+
+              <footer>
+                Copyright 2025-2026, Contributors to the Grid Edge Interoperability
+                &amp; Security Alliance (GEISA), a Series of LF Projects, LLC.
+              </footer>
+            </main>
+          </body>
+          </html>
+          HTML
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/pages
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
