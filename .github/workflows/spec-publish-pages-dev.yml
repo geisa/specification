@@ -1,0 +1,161 @@
+# Copyright 2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC.
+# This file is licensed under the Community Specification License 1.0 available at:
+# https://github.com/geisa/specification/blob/main/LICENSE.md or
+# https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+
+name: Publish development draft specification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-dev-draft
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build development draft
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            fonts-font-awesome \
+            graphviz \
+            latexmk \
+            librsvg2-bin \
+            make \
+            python3-pip \
+            texlive-fonts-recommended \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-plain-generic \
+            texlive-xetex \
+            xfonts-75dpi \
+            xfonts-base \
+            xvfb
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Install Mermaid CLI with sandbox wrapper
+        run: |
+          npm install -g @mermaid-js/mermaid-cli
+
+          REAL_MMDC="$(command -v mmdc)"
+          echo "REAL_MMDC=${REAL_MMDC}" >> "${GITHUB_ENV}"
+
+          npx puppeteer browsers install chrome-headless-shell@148.0.7778.97
+
+          mkdir -p "${GITHUB_WORKSPACE}/.github/bin"
+          cat > "${GITHUB_WORKSPACE}/.github/bin/puppeteer-config.json" <<'JSON'
+          {
+            "args": [
+              "--no-sandbox",
+              "--disable-setuid-sandbox"
+            ]
+          }
+          JSON
+
+          cat > "${GITHUB_WORKSPACE}/.github/bin/mmdc" <<'SH'
+          #!/usr/bin/env sh
+          exec "$REAL_MMDC" -p "$GITHUB_WORKSPACE/.github/bin/puppeteer-config.json" "$@"
+          SH
+
+          chmod +x "${GITHUB_WORKSPACE}/.github/bin/mmdc"
+          echo "${GITHUB_WORKSPACE}/.github/bin" >> "${GITHUB_PATH}"
+
+      - name: Install draw.io with sandbox wrapper
+        run: |
+          curl -fsSL -o /tmp/drawio.deb \
+            https://github.com/jgraph/drawio-desktop/releases/download/v28.0.6/drawio-amd64-28.0.6.deb
+
+          sudo apt-get install -y /tmp/drawio.deb
+
+          REAL_DRAWIO="$(command -v drawio)"
+          echo "REAL_DRAWIO=${REAL_DRAWIO}" >> "${GITHUB_ENV}"
+
+          mkdir -p "${GITHUB_WORKSPACE}/.github/bin"
+          cat > "${GITHUB_WORKSPACE}/.github/bin/drawio" <<'SH'
+          #!/usr/bin/env sh
+          exec "$REAL_DRAWIO" --no-sandbox "$@"
+          SH
+
+          chmod +x "${GITHUB_WORKSPACE}/.github/bin/drawio"
+          echo "${GITHUB_WORKSPACE}/.github/bin" >> "${GITHUB_PATH}"
+
+      - name: Build specification
+        run: |
+          xvfb-run -a make clean all
+
+      - name: Stage development draft site
+        run: |
+          test -d build/html
+          test -s build/latex/geisaspecification.pdf
+
+          rm -rf build/pages
+          mkdir -p build/pages/latest
+          mkdir -p build/pages/downloads
+          mkdir -p build/pages/latest/downloads
+
+          cp -a build/html/. build/pages/latest/
+          cp build/latex/geisaspecification.pdf build/pages/downloads/geisaspecification.pdf
+          cp build/latex/geisaspecification.pdf build/pages/latest/downloads/geisaspecification.pdf
+          touch build/pages/.nojekyll
+
+          cat > build/pages/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>GEISA Specification — latest development draft</title>
+          </head>
+          <body>
+            <h1>GEISA Specification — latest development draft</h1>
+            <p>
+              This publication is a development draft generated from the current
+              GEISA specification repository. It is provided for review and
+              convenience only and is not an official approved GEISA release.
+            </p>
+            <p>
+              <a href="./latest/index.html">Open the HTML specification draft</a>
+            </p>
+            <p>
+              <a href="./downloads/geisaspecification.pdf">Download the PDF draft</a>
+            </p>
+          </body>
+          </html>
+          HTML
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/pages
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
