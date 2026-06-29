@@ -9,6 +9,8 @@
 Sensors
 -------
 
+.. _iana-senml-units: https://www.iana.org/assignments/senml/senml.xhtml#senml-units
+
 |geisa-api-hdr|
 
 The GEISA Sensors API provides access to non-streaming, lower-rate
@@ -81,7 +83,7 @@ includes:
   ``GEISA_SENSOR_TYPE_CUSTOM``
 - ``sensor_subtype`` (optional): platform-specific refinement of the
   sensor type
-- ``unit`` (required): engineering unit used for reported values
+- ``unit`` (required): engineering unit used for reported values. Where an applicable IANA SenML unit symbol exists, this field SHALL use the SenML unit symbol.
 - ``supports_read`` (required): whether explicit read is supported
 - ``supports_publish`` (required): whether platform-driven publication is
   supported (the platform is capable of pushing sensor data without
@@ -98,7 +100,7 @@ includes:
 - ``geolocation`` (optional): geospatial metadata for the sensor or
   hosting device
 
-The ``unit`` field defines the engineering unit used for reported values. For
+The ``unit`` field defines the engineering unit used for reported values. Where an applicable `IANA SenML unit symbol <iana-senml-units_>`__ exists, this field SHALL use that symbol. For
 sensors that return a single value, it is the expected unit for that value
 unless overridden in the runtime reading. For sensors that return multiple
 values in a single reading, ``unit`` applies only when all returned values
@@ -199,7 +201,7 @@ includes:
   reading was generated
 - ``values`` (required): one or more ``GeisaSensorValue`` entries for the
   observation
-- ``unit`` (optional): unit override for the reading
+- ``unit`` (optional): unit override for the reading. Where an applicable IANA SenML unit symbol exists, this field SHALL use the SenML unit symbol.
 - ``quality`` (optional): quality indicator
 - ``status`` (optional): status text, such as ``OK`` or ``WARNING``
 
@@ -269,9 +271,9 @@ Example platform-local identifiers include:
 For example, a platform may expose:
 
 - ``board_temp1`` with ``sensor_type`` set to
-  ``GEISA_SENSOR_TYPE_TEMPERATURE`` and engineering unit ``C``
+  ``GEISA_SENSOR_TYPE_TEMPERATURE`` and engineering unit ``Cel``
 - ``ambient_temp1`` with ``sensor_type`` set to
-  ``GEISA_SENSOR_TYPE_TEMPERATURE`` and engineering unit ``C``
+  ``GEISA_SENSOR_TYPE_TEMPERATURE`` and engineering unit ``Cel``
 
 MQTT Details
 ============
