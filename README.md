@@ -13,15 +13,36 @@ Follow the onboarding link for details about participating in our community
 process. You are also welcome to fork this repository and submit pull requests
 if you have additions or corrections you would like considered.
 
-GEISA maintains its formal specification as a set of reStructured text files,
-which are converted to HTML via
-[Sphinx](https://www.sphinx-doc.org/en/master/index.html). See the
-[Sphinx documentation](https://www.sphinx-doc.org/en/master/index.html) for
-details on Sphinx.
+GEISA maintains its formal specification as a set of reStructuredText files
+that are built into HTML and PDF using
+[Sphinx](https://www.sphinx-doc.org/en/master/). See the
+[Sphinx documentation](https://www.sphinx-doc.org/en/master/) for details.
+
+GEISA also uses a Git submodule for relevant OMA objects from the
+[LwM2M Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).
+Because this content is provided via a submodule, it is **not** populated by a
+plain `git clone` and the directory will appear empty until the submodule is
+initialized.
+
+For an initial clone of the GEISA specification repository, use:
+
+```bash
+git clone --recurse-submodules <repo-url>
+```
+
+If you have already cloned the repository, fetch the submodule from the
+repository root with:
+
+```bash
+git submodule update --init source/adm/external/lwm2m-registry
+```
+
+Refer to [`source/adm/external/README.md`](source/adm/external/README.md) for
+additional information on GEISA OMA objects.
 
 Python `venv` creates a virtual environment so that Sphinx can be installed
 using its own separate packages and not break anything in the existing
-environment. Depending on your environment, you may need to install python
+environment. Depending on your environment, you may need to install Python
 `venv` using your system package manager.
 
 The GEISA spec also supports generated diagrams. Mermaid is used for sequence
