@@ -1,204 +1,259 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" compressed="false">
   <diagram id="page1" name="Page-1">
-    <mxGraphModel dx="2008" dy="1059" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1437" dy="1018" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="9J2NFKlXrdA1CGceVkTa-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=light-dark(#b826ed, #ededed);verticalAlign=top;opacity=50;dashed=1;strokeWidth=3;fillStyle=hatch;" value="&lt;b&gt;ADM Pillar Scope&lt;/b&gt;" vertex="1">
+          <mxGeometry height="500" width="405" x="45" y="260" as="geometry" />
+        </mxCell>
         <mxCell id="supply" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#66B2FF;strokeColor=#c7c27b;fontStyle=1;" value="Ecosystem Roles" vertex="1">
-          <mxGeometry height="110" width="750" x="250" y="70" as="geometry" />
+          <mxGeometry height="100" width="713" x="142" y="70" as="geometry" />
         </mxCell>
         <mxCell id="hp" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;fontStyle=1;" value="Hardware Provider" vertex="1">
           <mxGeometry height="30" width="120" x="10" y="50" as="geometry" />
         </mxCell>
         <mxCell id="ap" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Application Publisher" vertex="1">
-          <mxGeometry height="32" width="135" x="415.5" y="50" as="geometry" />
+          <mxGeometry height="30" width="135" x="415.5" y="50" as="geometry" />
         </mxCell>
         <mxCell id="pp" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Platform Provider" vertex="1">
-          <mxGeometry height="32" width="120" x="274.5" y="50" as="geometry" />
+          <mxGeometry height="30" width="120" x="274.5" y="50" as="geometry" />
         </mxCell>
         <mxCell id="ac" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Optional App Certifier" vertex="1">
-          <mxGeometry height="32" width="135" x="565" y="50" as="geometry" />
+          <mxGeometry height="30" width="135" x="565" y="50" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="supply" source="hp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;" target="pp" value="base hardware modules&#xa;and supplier certificate">
           <mxGeometry relative="1" x="-0.0378" y="15" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="adm" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#efdccf;strokeColor=#d19a72;fontStyle=1;" value="ADM Pillar / Capabilities" vertex="1">
-          <mxGeometry height="200" width="500" x="270" y="260" as="geometry" />
-        </mxCell>
-        <mxCell id="so" parent="adm" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="System Operator" vertex="1">
-          <mxGeometry height="32" width="120" x="190" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="emswrap" parent="adm" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System /&#xa;EMS" vertex="1">
-          <mxGeometry height="80" width="450" x="25" y="110" as="geometry" />
-        </mxCell>
-        <mxCell id="lwms" parent="emswrap" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="LwM2M Server" vertex="1">
-          <mxGeometry height="30" width="140" x="80" y="40" as="geometry" />
-        </mxCell>
-        <mxCell id="emsf" parent="emswrap" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="Non-LwM2M EMS Functions" vertex="1">
-          <mxGeometry height="30" width="145" x="280" y="40" as="geometry" />
-        </mxCell>
         <mxCell id="edge" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#FF6666;strokeColor=#c7c27b;fontStyle=1;" value="Edge Device" vertex="1">
-          <mxGeometry height="430" width="790" x="70" y="540" as="geometry" />
+          <mxGeometry height="430" width="670" x="70" y="540" as="geometry" />
         </mxCell>
         <mxCell id="platform" parent="edge" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#eff1d4;strokeColor=#c7c27b;fontStyle=1;" value="GEISA Platform" vertex="1">
-          <mxGeometry height="370" width="740" x="20" y="40" as="geometry" />
+          <mxGeometry height="370" width="630" x="20" y="40" as="geometry" />
         </mxCell>
         <mxCell id="emabox" parent="platform" style="swimlane;html=1;rounded=0;startSize=24;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management Agent" vertex="1">
-          <mxGeometry height="120" width="290" x="10" y="40" as="geometry" />
+          <mxGeometry height="120" width="290" x="20" y="40" as="geometry" />
         </mxCell>
         <mxCell id="gov" parent="emabox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="Local policy, restart,&#xa;throttle, stop / disable&#xa;logic" vertex="1">
-          <mxGeometry height="60" width="140" x="10" y="40" as="geometry" />
+          <mxGeometry height="60" width="120" x="10" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="lwmc" parent="emabox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="LwM2M Client" vertex="1">
-          <mxGeometry height="60" width="95" x="172.5" y="40" as="geometry" />
+        <mxCell id="lwmc" parent="emabox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;points=[[0,0,0,0,0],[0,0.25,0,0,0],[0,0.5,0,0,0],[0,0.75,0,0,0],[0,1,0,0,0],[0.25,0,0,0,0],[0.25,1,0,0,0],[0.5,0,0,0,0],[0.5,1,0,0,0],[0.75,0,0,0,0],[0.75,1,0,0,0],[1,0,0,0,0],[1,0.1,0,0,0],[1,0.25,0,0,0],[1,0.4,0,0,0],[1,0.55,0,0,0],[1,0.7,0,0,0],[1,0.85,0,0,0],[1,1,0,0,0]];" value="LwM2M Client" vertex="1">
+          <mxGeometry height="60" width="120" x="150" y="40" as="geometry" />
         </mxCell>
         <mxCell id="OCb3Kikvp9HP05hyJ-Op-2" edge="1" parent="emabox" source="lwmc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="lwmc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ee" parent="platform" style="swimlane;html=1;rounded=0;startSize=24;fillColor=#edf6ea;strokeColor=#a4c79a;fontStyle=1;" value="Execution Environment" vertex="1">
-          <mxGeometry height="250" width="280" x="440" y="110" as="geometry" />
+          <mxGeometry height="250" width="190" x="422" y="110" as="geometry" />
         </mxCell>
         <mxCell id="leebox" parent="ee" style="swimlane;html=1;rounded=0;startSize=22;fillColor=#f2f0c8;strokeColor=#c7c27b;fontStyle=1;" value="LEE" vertex="1">
-          <mxGeometry height="100" width="210" x="20" y="30" as="geometry" />
+          <mxGeometry height="100" width="150" x="20" y="30" as="geometry" />
         </mxCell>
         <mxCell id="appl" parent="leebox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="Edge Application A" vertex="1">
-          <mxGeometry height="30" width="105" x="6.5" y="28" as="geometry" />
+          <mxGeometry height="30" width="123.5" x="12.5" y="28" as="geometry" />
         </mxCell>
         <mxCell id="OCb3Kikvp9HP05hyJ-Op-4" parent="leebox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="Edge Application B" vertex="1">
-          <mxGeometry height="30" width="105" x="6.5" y="64" as="geometry" />
+          <mxGeometry height="30" width="123.5" x="12.5" y="64" as="geometry" />
         </mxCell>
         <mxCell id="veebox" parent="ee" style="swimlane;html=1;rounded=0;startSize=22;fillColor=#f2f0c8;strokeColor=#c7c27b;fontStyle=1;" value="VEE" vertex="1">
-          <mxGeometry height="103" width="210" x="20" y="140" as="geometry" />
+          <mxGeometry height="103" width="150" x="20" y="140" as="geometry" />
         </mxCell>
         <mxCell id="appv" parent="veebox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="Edge Application C" vertex="1">
-          <mxGeometry height="30" width="105" x="6.5" y="27" as="geometry" />
+          <mxGeometry height="30" width="123.5" x="12.5" y="27" as="geometry" />
         </mxCell>
         <mxCell id="OCb3Kikvp9HP05hyJ-Op-3" parent="veebox" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DCEAD2;strokeColor=#6aa84f;" value="Edge Application D" vertex="1">
-          <mxGeometry height="30" width="105" x="6.5" y="63" as="geometry" />
+          <mxGeometry height="30" width="123.5" x="12.5" y="63" as="geometry" />
         </mxCell>
         <mxCell id="api" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="GEISA API" vertex="1">
-          <mxGeometry height="34" width="90" x="240" y="218" as="geometry" />
+          <mxGeometry height="34" width="90" x="240" y="233" as="geometry" />
         </mxCell>
         <mxCell id="e9" edge="1" parent="platform" source="emabox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="210" />
+              <mxPoint x="285" y="210" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="e10" edge="1" parent="platform" source="emabox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="ee" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e10" edge="1" parent="platform" source="emabox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="ee" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="130" />
+              <mxPoint x="380" y="173" />
+            </Array>
+            <mxPoint x="340" y="130" as="sourcePoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="e11" edge="1" parent="platform" source="api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="ee" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e12" edge="1" parent="platform" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="e12" edge="1" parent="platform" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="api" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="183" />
+              <mxPoint x="390" y="210" />
+              <mxPoint x="285" y="210" />
+            </Array>
+            <mxPoint x="450" y="185" as="sourcePoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="e13" edge="1" parent="platform" source="appv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="consumersLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="Operator / Enterprise&#xa;Consumers" vertex="1">
-          <mxGeometry height="40" width="190" x="910" y="330" as="geometry" />
-        </mxCell>
-        <mxCell id="uops" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Utility Operations,&#xa;Analytics, and Third-Party&#xa;Systems" vertex="1">
-          <mxGeometry height="60" width="170" x="920" y="370" as="geometry" />
+        <mxCell id="consumersLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="Operator / Enterprise Consumers" vertex="1">
+          <mxGeometry height="25" width="300" x="725" y="320" as="geometry" />
         </mxCell>
         <mxCell id="dl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Data Lake" vertex="1">
-          <mxGeometry height="40" width="120" x="970" y="440" as="geometry" />
+          <mxGeometry height="60" width="140" x="885" y="385" as="geometry" />
         </mxCell>
-        <mxCell id="e2" edge="1" parent="1" source="pp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.529;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.829;entryY=0.063;entryDx=0;entryDy=0;entryPerimeter=0;" target="so" value="platform software,&#xa;platform artifacts, and&#xa;supplier certificate">
-          <mxGeometry relative="1" x="0.1573" y="-45" as="geometry">
-            <mxPoint x="6" y="-21" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="ap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="so" value="application image, vendor&#xa;manifest, and publisher&#xa;certificate">
-          <mxGeometry relative="1" x="-0.2547" y="-21" as="geometry">
+        <mxCell id="e2" edge="1" parent="1" source="pp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.529;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="so" value="platform software,&#xa;platform artifacts, and&#xa;supplier certificate">
+          <mxGeometry relative="1" x="-0.5111" as="geometry">
             <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e5" edge="1" parent="1" source="so" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.201;exitY=0.969;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="lwms" value="approval, policy,&#xa;deployment authorization">
-          <mxGeometry relative="1" x="0.2647" y="-28" as="geometry">
-            <mxPoint x="8" y="-20" as="offset" />
             <Array as="points">
-              <mxPoint x="484" y="350" />
-              <mxPoint x="410" y="350" />
+              <mxPoint x="480" y="240" />
+              <mxPoint x="595" y="240" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e6" edge="1" parent="1" source="lwms" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="emabox" value="">
+        <mxCell id="e3" edge="1" parent="1" source="ap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="so" value="application image, vendor&#xa;manifest, and publisher&#xa;certificate">
+          <mxGeometry relative="1" x="-0.0913" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="625" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="emabox" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="255" y="505" />
+              <mxPoint x="245" y="410" />
+              <mxPoint x="225" y="410" />
+              <mxPoint x="225" y="525" />
+              <mxPoint x="255" y="525" />
             </Array>
+            <mxPoint x="215" y="390" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e7" edge="1" parent="1" source="lwms" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="lwmc" value="onboarding, registration,&#xa;lifecycle, deployment,&#xa;activation, updates">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e8" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="lwms" value="app data, status,&#xa;behavioral reporting,&#xa;urgent event signaling">
-          <mxGeometry relative="1" x="-0.1668" y="-10" as="geometry">
-            <mxPoint x="10" y="-10" as="offset" />
+        <mxCell id="e8" edge="1" parent="1" source="lwmc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.798;entryY=1.025;entryDx=0;entryDy=0;entryPerimeter=0;" target="lwms" value="app data, status,&#xa;behavioral reporting,&#xa;urgent event signaling">
+          <mxGeometry relative="1" x="0.2629" as="geometry">
+            <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="400" y="670" />
-              <mxPoint x="400" y="640" />
-              <mxPoint x="490" y="640" />
+              <mxPoint x="350" y="520" />
+              <mxPoint x="367" y="520" />
             </Array>
             <mxPoint x="370" y="670" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e14" edge="1" parent="1" source="lwms" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="uops" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
-          <mxGeometry relative="1" x="0.619" y="20" as="geometry">
+        <mxCell id="e16" edge="1" parent="1" source="appv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="uops" value="">
+          <mxGeometry relative="1" x="-0.4926" y="2" as="geometry">
             <mxPoint as="offset" />
+            <mxPoint x="723.0000000000002" y="882" as="sourcePoint" />
+            <mxPoint x="885" y="455" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e15" edge="1" parent="1" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.112;entryY=0.98;entryDx=0;entryDy=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryPerimeter=0;" target="uops" value="">
-          <mxGeometry relative="1" x="0.0011" as="geometry">
+        <mxCell id="e18" edge="1" parent="1" source="OCb3Kikvp9HP05hyJ-Op-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="dl" value="">
+          <mxGeometry relative="1" x="-0.4644" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="661" y="740" />
-              <mxPoint x="940" y="740" />
-              <mxPoint x="940" y="429" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e16" edge="1" parent="1" source="appv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="uops" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
-          <mxGeometry relative="1" x="-0.551" y="40" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e17" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="dl" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
-          <mxGeometry relative="1" x="-0.2799" y="-20" as="geometry">
-            <mxPoint as="offset" />
-            <mxPoint x="750" y="430" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e18" edge="1" parent="1" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="dl" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
-          <mxGeometry relative="1" x="-0.5264" y="18" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="1030" y="778" />
+              <mxPoint x="920" y="799" />
             </Array>
             <mxPoint x="660" y="768" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e19" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="dl" value=" ">
+        <mxCell id="e19" edge="1" parent="1" source="OCb3Kikvp9HP05hyJ-Op-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="dl" value=" ">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="662" y="864" />
-              <mxPoint x="1060" y="864" />
+              <mxPoint x="990" y="908" />
             </Array>
             <mxPoint x="662" y="887" as="sourcePoint" />
+            <mxPoint x="1040" y="430" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="ac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="so" value="certifier certificate,&#xa;certification status, and&#xa;record">
-          <mxGeometry relative="1" x="-0.2966" y="-20" as="geometry">
+        <mxCell id="NJpEaeESbuw3zEwBbxiB-3" connectable="0" parent="e19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="operator-facing visibility,&lt;br&gt;alerts, logs, and reporting" vertex="1">
+          <mxGeometry relative="1" x="0.3494" y="-3" as="geometry">
+            <mxPoint x="-38" y="-215" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="ac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="so" value="certifier certificate,&#xa;certification status, and&#xa;record">
+          <mxGeometry relative="1" x="-0.5206" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="883" y="240" />
-              <mxPoint x="580" y="240" />
+              <mxPoint x="775" y="240" />
+              <mxPoint x="655" y="240" />
             </Array>
             <mxPoint x="802.5" y="164" as="sourcePoint" />
             <mxPoint x="340" y="290" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="so" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="System Operator" vertex="1">
+          <mxGeometry height="32" width="120" x="565" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="so" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="emswrap" value="approval, policy,&#xa;deployment authorization">
+          <mxGeometry relative="1" x="0.0744" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="625" y="320" />
+            </Array>
+            <mxPoint x="325" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="lwms" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" target="lwmc" value="onboarding, registration,&#xa;lifecycle, deployment,&#xa;activation, updates">
+          <mxGeometry relative="1" x="-0.5172" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="290" y="410" />
+              <mxPoint x="290" y="410" />
+            </Array>
+            <mxPoint x="290" y="395" as="sourcePoint" />
+            <mxPoint x="287.78" y="664.63" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uops" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Utility Operations,&lt;br&gt;Analytics, &amp;amp; Third-Party&lt;br&gt;Systems" vertex="1">
+          <mxGeometry height="60" width="140" x="725" y="385" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="uops" value="">
+          <mxGeometry relative="1" x="0.0011" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="760" y="763" />
+            </Array>
+            <mxPoint x="662" y="763" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NJpEaeESbuw3zEwBbxiB-2" connectable="0" parent="e15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="operator-facing visibility,&lt;br&gt;alerts, logs, and reporting" vertex="1">
+          <mxGeometry relative="1" x="0.298" y="-4" as="geometry">
+            <mxPoint x="31" y="-104" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NJpEaeESbuw3zEwBbxiB-6" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="dl" value="">
+          <mxGeometry relative="1" x="0.0272" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="955" y="360" />
+            </Array>
+            <mxPoint x="470" y="380" as="sourcePoint" />
+            <mxPoint x="800" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="uops" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
+          <mxGeometry relative="1" x="0.0272" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="795" y="360" />
+            </Array>
+            <mxPoint x="450" y="345" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="emswrap" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System (EMS)" vertex="1">
+          <mxGeometry height="80" width="358" x="66" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="lwms" parent="emswrap" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="LwM2M Server" vertex="1">
+          <mxGeometry height="30" width="140" x="189" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="emsf" parent="emswrap" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="Non-LwM2M EMS Functions" vertex="1">
+          <mxGeometry height="30" width="145" x="23" y="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
