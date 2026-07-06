@@ -104,6 +104,10 @@ Glossary
     Workload running within a GEISA execution environment using
     GEISA platform services and API interfaces.
 
+   Edge Device
+    A device running platform software that supports services conformant with the
+    GEISA specification.
+
    GEISA
     `Grid Edge Interoperability and Security Alliance
     <https://lfenergy.org/projects/geisa/>`_
@@ -170,6 +174,11 @@ Glossary
     Role with deployment-environment authority for approving,
     configuring, authorizing, deploying, and operating GEISA-managed
     devices and applications.
+
+   System Owner
+    Role with the authority to set policies for a specific deployment
+    environment.  Typically, the owner of the GEISA-managed devices and
+    applications. 
 
    Vendor Application Manifest
     Publisher-supplied application manifest provided with an application

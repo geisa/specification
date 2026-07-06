@@ -42,6 +42,8 @@ The operational view in this chapter complements the interoperability
 goals described in :doc:`introduction` and the general architectural
 material in :doc:`system-architecture`.
 
+|geisa-pyramid|
+
 Roles and Authorities
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -52,7 +54,7 @@ implementations.
 
 For example, a device manufacturer may also provide managed services and,
 in a particular deployment, may act in the role of Platform Provider,
-EMS Provider, or System Operator. In GEISA, responsibilities and
+EMS Provider, and/or System Operator. In GEISA, responsibilities and
 decision authority are tied to the role being performed in the relevant
 interaction, regardless of the type of organization with specific role
 responsibilities. However, there is one notable callout: the utility is
@@ -61,6 +63,13 @@ decisions, even in cases where another organization is performing the
 day-to-day operational duties on their behalf.
 
 The principal roles used in this operational view are:
+
+- :term:`System Owner`
+
+  The role with the authority to set policies for a specific operating
+  environment.  Typically, this role has both ownership of the assets and
+  liability for maloperation, though this may not always be the case.  In most
+  cases, the system owner is the utility.
 
 - :term:`System Operator`
 
@@ -71,20 +80,20 @@ The principal roles used in this operational view are:
   they may be beholden to another organization such as the Utility to 
   dictate actual policies to be followed.
 
+  Often the System Operator will be the utility; however, they may choose to
+  delegate portions of the system operator role to a third party.
+
 - :term:`Platform Provider`
 
   The role responsible for supplying the platform hardware, platform
   software, and associated platform trust material where applicable.
-  This may be a single provider or a Hardware Provider may be separate.
-  In terms of GEISA, Platform Provider generally is noting the provider
-  of the system software that is GEISA-conformant.
+  This may be a single provider or a hardware provider may be separate.
 
-  - :term:`Application Publisher` / :term:`Application Vendor`
+- :term:`Application Publisher` / :term:`Application Vendor`
 
   The role responsible for producing and signing an application artifact
   and supplying its vendor manifest and associated publisher trust
   material.
-
 
 - :term:`Application Certifier`
 
@@ -98,20 +107,32 @@ The principal roles used in this operational view are:
 
 - :term:`Edge Application`
 
-  A workload running within a GEISA execution environment and using
-  GEISA platform services and the GEISA :doc:`api`.
+  A workload running within a GEISA execution environment and using GEISA
+  platform services and the GEISA :doc:`api`.  Typically, provided by an
+  Application Publisher / Application Vendor.
+
+- :term:`Edge Device`
+
+  A device running platform software that supports services conformant with the
+  GEISA specification.  Typically, System Operators deploye Edge Devices to be
+  able to serve a core business purpose (e.g. metering, fault detection, etc.)
+  while also supporting execution of Edge Applications.  A GEISA Edge Device
+  embodies a GEISA Platform Implementation, but is usually more (e.g. a meter,
+  fault indicator, etc.)
 
 - ADM / Application and Device Management
 
-  :term:`ADM` is the GEISA pillar for :doc:`adm`. It
-  spans the capabilities required for application ingestion, operator
-  approval for deployment, deployment, activation, deactivation,
-  updates, and broader lifecycle management of both the platform and
-  the applications running on it. These capabilities may be realized by
-  a single EMS that leverages LwM2M, or by multiple cooperating
-  components, provided the required GEISA ADM behaviors and
-  transactions are satisfied. On the edge device, this capability set
-  includes the EMA and related edge-side management functions.
+  :term:`ADM` is the GEISA pillar for :doc:`adm`.  The ADM pillar defines the
+  interfaces required for interactions between an Edge Management System and
+  Edge Devices. 
+
+  It spans the capabilities required for application ingestion, operator
+  approval for deployment, deployment, activation, deactivation, updates, and
+  broader lifecycle management of both the platform and the applications running
+  on it. These capabilities may be realized by a single EMS that leverages LwM2M,
+  or by multiple cooperating components, provided the required GEISA ADM
+  behaviors and transactions are satisfied. On the edge device, this capability
+  set includes the EMA and related edge-side management functions.
 
 - :term:`EMS`
 
@@ -137,8 +158,10 @@ The following terms are also important to this chapter:
   interfaces.
 
 When policy, approval, deployment scope, resource allocation, or trust
-authorization is in question, the System Operator has final authority
+authorization is in question, the System Owner has final authority
 for the target deployment environment.
+
+|geisa-pyramid|
 
 End-to-End Operational Context
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -172,27 +195,67 @@ understand how the principal GEISA roles, systems, and interoperability
 areas relate end to end.
 
 .. figure:: operations/end-to-end-highlevel.*
-   :alt: LwM2M only version
+   :alt: High-level GEISA operational context showing how principal roles and components relate end to end.
    :align: center
 
-   High-level GEISA operational context showing how principal roles,
-   platform-side and off-device management functions, execution
-   environments, and utility or enterprise interaction points relate
-   end to end (2 diagrams, second is a continuation from System Operator
-   through to to the Edge Device)
+   High-level GEISA operational context showing how principal roles and
+   components relate end to end.
 
-.. figure:: operations/app-lifecycle-A.*
-   :alt: High-level GEISA application lifecycle reference flow
+To understand how these roles and components interact, consider the process of
+deploying an application.  Initially, a system operator may engage with an
+application certifier to verify the provenance (and potentially other
+attributes) of the application.  This optional activity requires that the
+application publisher submit their application to the certifier, and that the
+system operator have a relationship with the certifier as well.
+
+.. figure:: operations/app-lifecycle-certifier.*
+   :alt: Sequence diagram showing optional application certification
    :align: center
 
-   High-Level End to End Sequence Diagram 1 of 2
+   Sequence diagram showing optional application certification
 
-.. figure:: operations/app-lifecycle-B.*
-   :alt: High-level GEISA application lifecycle reference flow
+The system operator chooses to acquire a new application.  This process
+involves obtaining the application image and publisher certificate from the
+application publisher, and optionally obtaining the application certification
+record from the application certifier.  
+
+.. figure:: operations/app-lifecycle-acquisition.*
+   :alt: Sequence diagram showing application acquisition 
    :align: center
 
-   High-Level End to End Sequence Diagram 2 of 2
+   Sequence diagram showing application acquisition
 
+Having aquired the new application, the system operator verifies the
+application signatures and approves the application, creating and signing a
+deployment manifest for it.
+
+.. figure:: operations/app-lifecycle-approval.*
+   :alt: Sequence diagram showing application approval 
+   :align: center
+
+   Sequence diagram showing application approval
+
+Once the application is approved, the System Operator can use the Edge
+Managment System to deploy it the Edge Devices.
+
+.. figure:: operations/app-lifecycle-deployment.*
+   :alt: Sequence diagram showing application deployment 
+   :align: center
+
+   Sequence diagram showing application deployment
+
+Once deployed, the application can be activated, bringing it to a running
+state.  The running application can then report its status, via the platform to
+the Edge Management System.
+
+.. figure:: operations/app-lifecycle-activation.*
+   :alt: Sequence diagram showing application activation 
+   :align: center
+
+   Sequence diagram showing application activation
+
+
+|geisa-pyramid|
 
 Operational Capability
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -206,6 +269,8 @@ Operational capability includes management, lifecycle, deployment,
 visibility, reporting, and integration concerns across platform and
 operator workflows.
 
+|geisa-pyramid|
+
 Device Onboarding and Management Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -215,14 +280,15 @@ includes device provisioning, network attachment, bootstrap or initial
 trust establishment, registration, and subsequent lifecycle management.
 
 .. figure:: operations/reference-device-onboarding.*
-   :alt: High-level GEISA operational context
+   :alt: Sequence diagram showing device onboarding
    :align: center
 
-   Reference device onboarding and management establishment flow
-   retained for comparison and discussion.
+   Sequence diagram showing device onboarding
 
 Additional detailed device onboarding workflows and requirements may be added
 in a future revision of the specification.
+
+|geisa-pyramid|
 
 Application Approval and Deployment Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -240,6 +306,8 @@ remain under operator control.
 
 Additional detailed application approval and deployment workflows and 
 requirements may be added in a future revision of the specification.
+
+|geisa-pyramid|
 
 Off-Device Communication Approval
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -276,6 +344,8 @@ The reporting mechanism may be defined by ADM/EMS behavior, platform event
 reporting, event logs, app accounting, or future GEISA operational event
 extensions.
 
+|geisa-pyramid|
+
 Application Activation and Runtime Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -287,6 +357,8 @@ execution state, status, and other operationally relevant data.
 
 Additional detailed application activation and state information  
 requirements may be added in a future revision of the specification.
+
+|geisa-pyramid|
 
 Operational Reporting and Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -385,6 +457,8 @@ Expected categories of operational reporting and visibility include:
 Detailed operational reporting and visibility workflow material may be
 added in a future revision of the GEISA specification.
 
+|geisa-pyramid|
+
 Utility and Enterprise Interaction Points
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -396,6 +470,8 @@ business processes.
 
 Detailed utility and enterprise integration workflow material may be
 added in a future revision of this chapter.
+
+|geisa-pyramid|
 
 Application Certification
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -443,19 +519,23 @@ this time.
   This model may also require access to details, methods, or validation
   detail that some publishers may consider sensitive or proprietary.
 
-.. figure:: operations/app-lifecycle-A.*
-   :alt: High-level optional certification flow example
+.. figure:: operations/app-lifecycle-certifier.*
+   :alt: Sequence diagram showing optional application certification
    :align: center
 
+   Sequence diagram showing optional application certification
+
 As of this version of the specification, GEISA does not define a
-singular or specific certification program or require either model.
-However, it is useful to distinguish these models explicitly because
+singular or specific certification program or require either model;
+however, it is useful to distinguish these models explicitly because
 they address different operator, certifier, publisher, and ecosystem
 concerns. In the near term, GEISA or GEISA-conformant systems may more
 naturally support does-no-harm style certification than exhaustive
 functional-claim certification, although Platform Providers and
 Operators should consider if a given Platform provides enough
 capabilities to support both types of Certification.
+
+|geisa-pyramid|
 
 Future Considerations
 ^^^^^^^^^^^^^^^^^^^^^
@@ -471,3 +551,6 @@ workflows such as meter swap or move-in and move-out support, more
 detailed operational reporting and visibility models, and more explicit
 event taxonomies for application alerts and Platform-originated
 behavioral events.
+
+|geisa-pyramid|
+

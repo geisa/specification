@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant D as Edge Device
+    participant E as Edge Management System
+    participant O as System Operator
+    participant A as Application Publisher
+    participant C as Application Certifier<br/>(Optional)
+
+    Note over O,E: Application deployment
+    O->>E: Deploy application and manifest
+    E->>D: Transfer application and manifest
+    D->>D: Verify application image hash
+    D->>D: Verify operator authorization
+    D->>D: Verify local trust requirements
+    D->>D: Install application
+

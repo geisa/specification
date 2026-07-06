@@ -1,7 +1,9 @@
 sequenceDiagram
+    participant D as Edge Device
+    participant E as Edge Management System
     participant O as System Operator
     participant A as Application Publisher
-    participant C as Optional Application Certifier
+    participant C as Application Certifier<br/>(Optional)
 
     Note over A,C: Optional application certification activity
     A->>C: Provide publisher certificate
@@ -17,11 +19,3 @@ sequenceDiagram
     O->>C: Establish relationship
     C-->>O: Provide certifier certificate
 
-    Note over O,A: Application acquisition and review
-    O->>A: Acquire application
-    A-->>O: Provide publisher certificate
-    A-->>O: Provide application image
-    O->>C: Request certification record
-    C-->>O: Provide certification record
-
-    
