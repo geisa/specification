@@ -137,7 +137,9 @@ source venv/bin/activate
 
 (venv) $ pip3 install GitPython sphinx sphinxcontrib-svg2pdfconverter
 
-(venv) $ make all
+(venv) $ deactivate
+
+$ make -j4 all
 
 </pre>
 

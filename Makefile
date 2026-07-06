@@ -9,6 +9,13 @@ SPHINXTARGETS ?= html latexpdf
 SOURCEDIR     = source
 BUILDDIR      = build
 
+# detect and use the python venv if present
+ifneq ("$(wildcard $(PWD)/venv/bin/python)", "")
+PYTHONVENV	= $(PWD)/venv/
+else
+PYTHONVENV	=
+endif
+
 # GEISA is supporting mermaid and drawio diagrams as part of the spec, but
 # these diagrams are treated as independent source files to be built.  RST
 # files should reference the image.
@@ -73,4 +80,4 @@ all: $(SPHINXTARGETS)
 	rsvg-convert -f=pdf -o $@ $<
 
 $(SPHINXTARGETS): Makefile prep
-	$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	$(SHELL) -c "PATH=$(PYTHONVENV:/=/bin:)$$PATH $(SPHINXBUILD) -M $@ \"$(SOURCEDIR)\" \"$(BUILDDIR)\" $(SPHINXOPTS)"
