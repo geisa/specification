@@ -19,7 +19,7 @@
         <mxCell id="pp" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Platform Provider" vertex="1">
           <mxGeometry height="30" width="120" x="274.5" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="ac" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Optional App Certifier" vertex="1">
+        <mxCell id="ac" parent="supply" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Application Certifier&lt;div&gt;(&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Optional&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="135" x="565" y="50" as="geometry" />
         </mxCell>
         <mxCell id="e1" edge="1" parent="supply" source="hp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;" target="pp" value="base hardware modules&#xa;and supplier certificate">

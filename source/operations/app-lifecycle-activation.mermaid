@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant D as Edge Device
+    participant E as Edge Management System
+    participant O as System Operator
+    participant A as Application Publisher
+    participant C as Application Certifier<br/>(Optional)
+
+    Note over O,D: Application activation
+    O->>E: Activate application
+    E->>D: Activate application
+    D->>D: Launch application
+    D->>D: Record application logs
+    D-->>E: Report application status
