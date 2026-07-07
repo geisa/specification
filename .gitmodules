@@ -1,0 +1,4 @@
+[submodule "source/adm/external/lwm2m-registry"]
+	path = source/adm/external/lwm2m-registry
+	url = https://github.com/OpenMobileAlliance/lwm2m-registry.git
+	branch = GEISA-LwM2M-Objects
