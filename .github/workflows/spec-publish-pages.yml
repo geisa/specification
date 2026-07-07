@@ -56,8 +56,13 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements.txt
+          python3 -m venv venv
+          . venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install \
+            GitPython \
+            sphinx \
+            sphinxcontrib-svg2pdfconverter
 
       - name: Install Mermaid CLI with sandbox wrapper
         run: |
