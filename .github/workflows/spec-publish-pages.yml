@@ -112,7 +112,7 @@ jobs:
 
       - name: Build specification
         run: |
-          . venv/build/activate
+          . venv/bin/activate
           xvfb-run -a make clean all
 
       - name: Stage specification site
