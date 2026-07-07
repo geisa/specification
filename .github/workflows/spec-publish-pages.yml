@@ -119,23 +119,29 @@ jobs:
         run: |
           test -d build/html
           test -s build/latex/geisaspecification.pdf
+          VERSION="$(tr -d '[:space:]' < source/geisa_release.txt)"
+          test -n "${VERSION}"
 
           rm -rf build/pages
           mkdir -p build/pages/latest
+          mkdir -p "build/pages/${VERSION}"
           mkdir -p build/pages/downloads
           mkdir -p build/pages/latest/downloads
+          mkdir -p "build/pages/${VERSION}/downloads"
           mkdir -p build/pages/assets
 
           cp -a build/html/. build/pages/latest/
+          cp -a build/html/. "build/pages/${VERSION}/"
           cp build/latex/geisaspecification.pdf build/pages/downloads/geisaspecification.pdf
           cp build/latex/geisaspecification.pdf build/pages/latest/downloads/geisaspecification.pdf
+          cp build/latex/geisaspecification.pdf "build/pages/${VERSION}/downloads/geisaspecification.pdf"
 
           test -s source/images/geisa-pyramid.svg
           cp source/images/geisa-pyramid.svg build/pages/assets/geisa-pyramid.svg
 
           touch build/pages/.nojekyll
 
-          cat > build/pages/index.html <<'HTML'
+          cat > build/pages/index.html <<HTML
           <!doctype html>
           <html lang="en">
           <head>
