@@ -80,4 +80,4 @@ all: $(SPHINXTARGETS)
 	rsvg-convert -f=pdf -o $@ $<
 
 $(SPHINXTARGETS): Makefile prep
-	$(SHELL) -c "PATH=$(PYTHONVENV:/=/bin:)$$PATH $(SPHINXBUILD) -M $@ \"$(SOURCEDIR)\" \"$(BUILDDIR)\" $(SPHINXOPTS)"
+	PATH="$(PYTHONVENV:/=/bin:)$$PATH" $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
