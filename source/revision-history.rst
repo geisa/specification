@@ -9,6 +9,16 @@
 Revision History
 ----------------
 
+Version 0.8.4 - 2026-07-09 - Added IANA SenML unit guidance for sensor units; updated Operations chapter and diagrams; validated release Pages workflow.
+
+Version 0.8.3 - 2026-07-06 - Added versioned specification build and Pages publishing workflows; fixed networking RST indentation.
+
+Version 0.8.2 - 2026-06-26 - Added GEISA LwM2M object XML sources and pre-OMA submission updates for objects 3, 20, 3600, 3601, 3602, 3604, 3605, and 3606; updated direct IP networking guidance and added manual specification build workflow.
+
+Version 0.8.1 - 2026-06-01 - Added actuator API coverage; updated the API catalog, Operations chapter, application lifecycle diagrams, and Draw.io diagram build support.
+
+Version 0.8.0 - 2026-04-28 - Added draft Operations chapter; expanded API catalog, sensors, waveform, discovery, networking, platform status, and security content; performed broad documentation cleanup.
+
 Version 0.1.8 - 2026-01-05 - Integrated VEE submission.
 
 Version 0.1.7 - 2025-12-16 - Reorganized App Isolation, local network access, and updated VEE details. 
