@@ -25,10 +25,13 @@ References
    <https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf>`_
 
 .. [RFC2119] `Key words for use in RFCs to Indicate Requirement Levels 
-   <https://www.ietf.org/rfc/rfc2119.txt>`_
+   <https://datatracker.ietf.org/doc/html/rfc2119>`_
 
 .. [RFC7252] `The Constrained Application Protocol (CoAP)
    <https://datatracker.ietf.org/doc/html/rfc7252>`_
+
+.. [RFC9148] `EST-coaps: Enrollment over Secure Transport with the Secure Constrained Application Protocol
+   <https://datatracker.ietf.org/doc/html/rfc9148>`_
 
 
 |geisa-pyramid|

@@ -18,7 +18,10 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   v1.1.
 * ADM conformant platforms and EMS SHALL support CoAP over UDP for
   message transport. [LWM2M-Transport]_
-* ADM conformant platforms and EMS SHALL support DTLS for CoAp security.
+* ADM conformant platforms and EMS SHALL support DTLS for CoAP security.
+* ADM conformant platforms and EMS SHALL support Certificate mode with EST as
+  per [LWM2M-Transport]_ 5.2.4.
+* ADM conformant platforms and EMS SHALL support EST over CoAP per [RFC9148]_
 * ADM conformant platforms and EMS SHALL support the Bootstrap, Registration,
   Device Management and Information Reporting interfaces.
 * ADM conformant platforms and EMS SHALL support the Mandatory resources of
@@ -43,6 +46,9 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3601 -- GEISA Host Monitoring
   * ID 3602 -- GEISA App Accounting
   * ID 3603 -- GEISA Wi-SUN Radio Management
+  * ID 3604 -- GEISA App Monitoring
+  * ID 3605 -- GEISA Platform Monitoring
+  * ID 3606 -- GEISA Platform Configuration
 
 * ADM conformant platforms shall support the following LWM2M Objects
 
@@ -56,6 +62,9 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3600 -- GEISA App Messaging
   * ID 3601 -- GEISA Host Monitoring
   * ID 3602 -- GEISA App Accounting
+  * ID 3604 -- GEISA App Monitoring
+  * ID 3605 -- GEISA Platform Monitoring
+  * ID 3606 -- GEISA Platform Configuration
 
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
   following LWM2M Objects:
