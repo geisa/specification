@@ -39,7 +39,7 @@ Interoperability
 As discussed in the :doc:`introduction`, GEISA defines four types of
 interoperability:
 
-LEE
+**LEE**
    Linux Execution Environment
    **LEE** interoperability |geisa-lee-tux| provides a consistent operating 
    system environment built using Linux.
