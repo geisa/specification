@@ -251,10 +251,10 @@ GEISA object definitions.
 
   Scope: Host / Device
 
-Provides host-level monitoring information used by the GEISA platform,
-including CPU, memory, storage, process, scheduler, and network interface
-observability. This object is not specific to the EMA or GEISA Platform
-services.
+  Provides host-level monitoring information used by the GEISA platform,
+  including CPU, memory, storage, process, scheduler, and network interface
+  observability. This object is not specific to the EMA or GEISA Platform
+  services.
 
 * ``/3602`` GEISA App Accounting
 
