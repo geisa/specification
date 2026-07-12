@@ -33,6 +33,12 @@ The GEISA API defines APIs for the following purposes:
     Manufacturing, Unprovisioned, Normal, Test), communications status, power
     status (powered, outage), and resource availability.
 
+- :doc:`/api/response-status`
+
+    Defines the common response status and error model used by GEISA
+    request/response APIs that include ``GeisaStatus``. This model is distinct
+    from the Platform/App Status notification API.
+
 - :doc:`/api/instantaneous`
 
     Provides streaming metrology data at one-second intervals or better for
@@ -111,6 +117,7 @@ The GEISA API defines APIs for the following purposes:
    api/api-catalog-reference
    api/discovery
    api/status
+   api/response-status
    api/instantaneous
    api/billing
    api/waveform
