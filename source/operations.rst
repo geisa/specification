@@ -114,7 +114,7 @@ The principal roles used in this operational view are:
 - :term:`Edge Device`
 
   A device running platform software that supports services conformant with the
-  GEISA specification.  Typically, System Operators deploye Edge Devices to be
+  GEISA specification.  Typically, System Operators deploy Edge Devices to be
   able to serve a core business purpose (e.g. metering, fault detection, etc.)
   while also supporting execution of Edge Applications.  A GEISA Edge Device
   embodies a GEISA Platform Implementation, but is usually more (e.g. a meter,
@@ -339,10 +339,13 @@ requirements.
 
 Platform-originated reporting should provide timely operator visibility
 into denied access attempts, quota limits reached, unexpected egress attempts,
-proxy or forwarding failures, and other communication policy violations.
-The reporting mechanism may be defined by ADM/EMS behavior, platform event
-reporting, event logs, app accounting, or future GEISA operational event
-extensions.
+proxy or forwarding failures, and other policy violations.
+Current application accounting and policy state may be exposed through GEISA
+App Accounting Object ``/3602``; application runtime health through GEISA App
+Monitoring Object ``/3604``; and platform service, queue, API, and
+communication-path health through GEISA Platform Monitoring Object ``/3605``.
+Durable event, audit, and diagnostic records belong in Event Log Object
+``/20``.  Refer to :doc:`adm/lwm2m` for the detailed GEISA ADM object model.
 
 |geisa-pyramid|
 
@@ -406,6 +409,52 @@ may flow through GEISA messaging and off-device communication paths, but
 those messages are distinct from the broader operational reporting model
 for the platform or managed device fleet.
 
+Operational monitoring and reporting may be distributed across the GEISA
+Platform and one or more upstream ADM components, including the EMS, LwM2M
+servers, analytics services, or other cooperating systems. Some
+implementations may perform substantial collection and evaluation upstream,
+while others may rely more heavily on the EMA and other platform-local
+functions. Hybrid arrangements are also valid.
+
+On constrained, metered, delayed, or shared field networks, local collection,
+aggregation, threshold evaluation, and condition detection can often reduce
+bandwidth use and improve timely awareness. Upstream systems may then provide
+fleet-level correlation, storage, visualization, and operator workflows.
+Regardless of placement, the ADM implementation as a whole is expected to
+provide operator visibility into relevant behavioral, health, accounting,
+policy, and reliability conditions. Applicable object definitions determine
+the current state, counters, reasons, timestamps, and durable records
+available through the interoperable ADM interface.
+
+The GEISA ADM object model separates this current state by scope. Object
+``/3601`` provides host and device monitoring information; ``/3602`` provides
+application accounting and policy summary state; ``/3604`` provides
+application runtime monitoring and health; and ``/3605`` provides
+platform-scoped component, service, queue, API, and operational-path health.
+Object ``/3606`` represents requested and effective platform behavior for
+monitoring, reporting, logging, queueing, and app-message handling. Durable
+event, audit, diagnostic, platform, and application history belongs in
+Object ``/20``.  Refer to :doc:`adm/lwm2m` for the detailed GEISA ADM object
+model.
+
+Application-originated messages may flow through Object ``/3600`` and the
+corresponding GEISA application-facing API paths. Those paths can carry
+application status, events, alarms, telemetry, configuration, and other
+app-message payloads, but Object ``/3600`` is not a general platform event
+bus and does not provide durable event or log history. Refer to
+:doc:`adm/messaging` for the detailed Application Messaging and Configuration
+behavior.
+
+LwM2M Observe is useful for selected current-state resources, but it is not
+by itself a complete operational monitoring system. An EMS, LwM2M server, or
+other upstream ADM component may use selective Observe, periodic Read or
+Read-Composite operations, operator-initiated drilldown, ``/20`` retrieval,
+or a combination of these patterns according to operator policy,
+authorization, reporting urgency, and network constraints. GEISA does not
+assume that every object or resource is continuously observed, and it does
+not prescribe whether most monitoring analysis resides locally, upstream, or
+is distributed across both.
+
 Expected categories of operational reporting and visibility include:
 
 - Lifecycle
@@ -454,8 +503,11 @@ Expected categories of operational reporting and visibility include:
   information is generally routine and suitable for slower or batched
   reporting.
 
-Detailed operational reporting and visibility workflow material may be
-added in a future revision of the GEISA specification.
+The current ADM object model provides interoperable resources for exposing
+current state, application messaging, and durable records. Future revisions
+may add richer end-to-end reporting workflows, operator integration guidance,
+and event taxonomies while preserving the separation between current state,
+app-message exchange, and durable history.
 
 |geisa-pyramid|
 
@@ -501,6 +553,18 @@ this time.
   violations, throttling, shutdown or disablement actions, signature or
   hash mismatch events, and related Platform-originated behavioral
   events.
+
+  Depending on the implementation, its level of ADM conformance,
+  supported platform capabilities, and applicable resources, this evidence
+  may be represented across several ADM objects. Object ``/3602`` may provide
+  accounting, quota, and throttling evidence; ``/3604`` may provide
+  application runtime, crash, restart, and platform-action evidence; and
+  ``/3605`` may provide platform service, queue, API, communication-path,
+  and policy-enforcement evidence. Object ``/20`` may retain durable event,
+  audit, diagnostic, and historical records. The evidence available depends
+  on the implementation's ADM conformance scope, platform capabilities,
+  supported resources, reporting policy, and retained history. See
+  :doc:`adm/lwm2m` for the detailed GEISA ADM object model.
 
 - Deeper Functional Certification
 
