@@ -35,6 +35,7 @@ security philosophy and approach of GEISA.  Specifically this includes:
 
 The second section covers practical aspects of security:
 
+* :doc:`security/signatures`
 * :doc:`security/certificates`
 * :doc:`security/API`
 * :doc:`security/network`
@@ -46,6 +47,7 @@ The second section covers practical aspects of security:
   security/threatmodel.rst
   security/conformance.rst
   security/expectations.rst
+  security/signatures.rst
   security/certificates.rst
   security/network.rst
   security/API.rst

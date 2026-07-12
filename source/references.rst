@@ -15,6 +15,15 @@ References
         references are found in the Bibliography chapter.  We 
         hope to correct this in a future version of the specification.
 
+.. [CSNA20] `The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ 
+   <https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF>`_
+
+.. [FIPS186] `FIPS 186 Digital Signature Standard (DSS)
+   <https://doi.org/10.6028/NIST.FIPS.186-5>`_
+
+.. [FIPS204] `FIPS 204 Module-Lattice-Based Digital Signature Standard
+   <https://doi.org/10.6028/NIST.FIPS.204>`_ 
+
 .. [LWM2M] `OMA Lightweight M2M
    <https://www.openmobilealliance.org/specifications/lwm2m>`_
 
@@ -23,6 +32,9 @@ References
 
 .. [LWM2M-Transport] `OMA SpecWorks Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2
    <https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf>`_
+
+.. [NIST800-186] `NIST SP 800-186 Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters
+   <https://doi.org/10.6028/NIST.SP.800-186>`_
 
 .. [RFC2119] `Key words for use in RFCs to Indicate Requirement Levels 
    <https://datatracker.ietf.org/doc/html/rfc2119>`_
