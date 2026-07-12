@@ -9,6 +9,10 @@
 Revision History
 ----------------
 
+Version 0.8.5 - 2026-07-11 - Updates to ADM section discussions of OMA objects,
+message types, and priorities; Reorganized security section, adding API and
+network security discussions.
+
 Version 0.8.4 - 2026-07-09 - Added IANA SenML unit guidance for sensor units; updated Operations chapter and diagrams; validated release Pages workflow.
 
 Version 0.8.3 - 2026-07-06 - Added versioned specification build and Pages publishing workflows; fixed networking RST indentation.
