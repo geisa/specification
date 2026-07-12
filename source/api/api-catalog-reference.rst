@@ -33,7 +33,7 @@ defined by:
   relevant behavior and constraints
 
 Request/response APIs that include ``GeisaStatus`` use the common response
-status and error model documented in :doc:`../api/response-status`.
+status and error model documented in :doc:`/api/response-status`.
 
 .. note::
    In the event of a conflict between this API catalog and the specific
