@@ -3,6 +3,8 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import sys
+
 from git import Repo
 
 # -- Project information -----------------------------------------------------
@@ -47,10 +49,26 @@ numfig_format = {
 
 # -- Global Inlines ----------------------------------------------------------
 # These are used throughout the docs to make it easy to add GEISA specific
-# icons and headers.
-# The * notation allows the html engine to use the SVG format and LaTex to use PDF
+# icons and headers. Use explicit builder-specific extensions so generated
+# LaTeX never receives wildcard image paths.
 #
-rst_prolog = """
+def _uses_latex_builder(argv: list[str]) -> bool:
+    if '-M' in argv:
+        make_index = argv.index('-M') + 1
+        if make_index < len(argv):
+            return argv[make_index].startswith('latex')
+
+    if '-b' in argv:
+        builder_index = argv.index('-b') + 1
+        if builder_index < len(argv):
+            return argv[builder_index] == 'latex'
+
+    return False
+
+
+_icon_ext = 'pdf' if _uses_latex_builder(sys.argv) else 'svg'
+
+rst_prolog = f"""
 .. include :: <isonum.txt>
 
 .. |GEISA| replace:: Grid Edge Interoperability & Security Alliance 
@@ -61,71 +79,71 @@ rst_prolog = """
 
 .. |geisa-schemas-repo| replace::  https://github.com/geisa/schemas
 
-.. |geisa-ee-logo| image:: /images/geisa-ee-icon.*
+.. |geisa-ee-logo| image:: /images/geisa-ee-icon.{_icon_ext}
     :alt: GEISA Execution Environment
     :height: 48pt
 
-.. |geisa-lee-logo| image:: /images/geisa-lee-icon.*
+.. |geisa-lee-logo| image:: /images/geisa-lee-icon.{_icon_ext}
     :alt: GEISA Linux Execution Environment
     :height: 48pt
 
-.. |geisa-vee-logo| image:: /images/geisa-vee-icon.*
+.. |geisa-vee-logo| image:: /images/geisa-vee-icon.{_icon_ext}
     :alt: GEISA Virtual Execution Environment
     :height: 48pt
 
-.. |geisa-api-logo| image:: /images/geisa-api-icon.*
+.. |geisa-api-logo| image:: /images/geisa-api-icon.{_icon_ext}
     :alt: GEISA Application Programming Interface
     :height: 48pt
 
-.. |geisa-adm-logo| image:: /images/geisa-adm-icon.*
+.. |geisa-adm-logo| image:: /images/geisa-adm-icon.{_icon_ext}
     :alt: GEISA Application & Device Management
     :height: 48pt
 
-.. |geisa-ee-hdr| image:: /images/geisa-ee-header.*
+.. |geisa-ee-hdr| image:: /images/geisa-ee-header.{_icon_ext}
     :alt: GEISA Execution Environment
     :height: 48pt
 
-.. |geisa-lee-hdr| image:: /images/geisa-lee-header.*
+.. |geisa-lee-hdr| image:: /images/geisa-lee-header.{_icon_ext}
     :alt: GEISA Linux Execution Environment
     :height: 48pt
 
-.. |geisa-vee-hdr| image:: /images/geisa-vee-header.*
+.. |geisa-vee-hdr| image:: /images/geisa-vee-header.{_icon_ext}
     :alt: GEISA Virtual Execution Environment
     :height: 48pt
 
-.. |geisa-api-hdr| image:: /images/geisa-api-header.*
+.. |geisa-api-hdr| image:: /images/geisa-api-header.{_icon_ext}
     :alt: GEISA Application Programming Interface
     :height: 48pt
 
-.. |geisa-adm-hdr| image:: /images/geisa-adm-header.*
+.. |geisa-adm-hdr| image:: /images/geisa-adm-header.{_icon_ext}
     :alt: GEISA Application & Device Management
     :height: 48pt
 
-.. |geisa-ee-globe| image:: /images/geisa-globe-thick.*
+.. |geisa-ee-globe| image:: /images/geisa-globe-thick.{_icon_ext}
     :alt: GEISA Execution Environment
     :width: 14pt
 
-.. |geisa-lee-tux| image:: /images/geisa-tux.*
+.. |geisa-lee-tux| image:: /images/geisa-tux.{_icon_ext}
     :alt: GEISA Linux Execution Environment
     :width: 14pt
 
-.. |geisa-vee-bot| image:: /images/geisa-coffeebot.*
+.. |geisa-vee-bot| image:: /images/geisa-coffeebot.{_icon_ext}
     :alt: GEISA Virtual Execution Environment
     :width: 14pt
 
-.. |geisa-vee-cloud| image:: /images/geisa-vcloud.*
+.. |geisa-vee-cloud| image:: /images/geisa-vcloud.{_icon_ext}
     :alt: GEISA Virtual Execution Environment
     :width: 14pt
 
-.. |geisa-api-gear| image:: /images/geisa-gear-thick.*
+.. |geisa-api-gear| image:: /images/geisa-gear-thick.{_icon_ext}
     :alt: GEISA Application Programming Interface
     :width: 14pt
 
-.. |geisa-adm-baton| image:: /images/geisa-baton-thick.*
+.. |geisa-adm-baton| image:: /images/geisa-baton-thick.{_icon_ext}
     :alt: GEISA Application & Device Management
     :width: 14pt
 
-.. |geisa-pyramid| image:: /images/geisa-pyramid.*
+.. |geisa-pyramid| image:: /images/geisa-pyramid.{_icon_ext}
     :alt: GEISA Pyramid 
     :width: 20pt
 
@@ -176,5 +194,3 @@ latex_elements = {
 ''',
         'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
 }
-
-

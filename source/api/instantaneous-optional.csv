@@ -1,0 +1,45 @@
+Scope,Field,Description,Encoding / Unit,Applicability / Notes
+Outer instantaneous message,frequency-hz,Optional top-level instantaneous frequency,double hertz,Standardized by the base schema but not required by the current AC Meter Profile.
+Outer instantaneous message,temperature-celsius,Optional top-level platform or meter temperature,double degrees Celsius,Standardized by the base schema but not required by the current AC Meter Profile.
+Outer instantaneous message,metadata,Optional top-level measurement metadata,Object with measurement-period-s,Presence is meaningful; measurement periods describe averaging or integration windows rather than MQTT publication cadence.
+Per applicable phase,current-micro-a-fundamental,Per-phase RMS current fundamental component,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,voltage-micro-v-fundamental,Per-phase RMS voltage fundamental component,int64 fixed-point microvolts,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,power-factor-angle-deg,Per-phase power factor angle,double degrees,Power factor values remain unsigned magnitudes; directional context comes from power values and angles rather than PF sign.
+Per applicable phase,current-distortion-micro-a-rms,Per-phase distortion current RMS,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,voltage-2nd-harmonic-percent,Per-phase second harmonic voltage magnitude,double percent,Percentage semantics use 0 through 100 rather than 0.0 through 1.0.
+Per applicable phase,metadata,Optional per-phase measurement metadata,Object with measurement-period-s,Presence is meaningful; applies to the same per-phase structure used by applicable phase objects.
+Per applicable phase,active-power-micro-w-del,Per-phase delivered active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,active-power-micro-w-rec,Per-phase received active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,active-power-micro-w-net,Per-phase net active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,reactive-power-micro-var-del,Per-phase delivered reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,reactive-power-micro-var-rec,Per-phase received reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+Per applicable phase,reactive-power-micro-var-net,Per-phase net reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,apparent-power-micro-va-sum-vectorial,System vectorial apparent power sum,int64 fixed-point microvolt-amperes,Arithmetic and vectorial aggregate values may coexist when both are available.
+System aggregate,power-factor-vectorial,System vectorial power factor magnitude,double ratio 0.0 to 1.0,Arithmetic and vectorial aggregate values may coexist when both are available.
+System aggregate,reactive-power-micro-var-sum-arithmetic,System arithmetic reactive power sum,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,power-factor-angle-arithmetic-deg,System arithmetic power factor angle,double degrees,Power factor values remain unsigned magnitudes; directional context comes from power values and angles rather than PF sign.
+System aggregate,power-factor-angle-vectorial-deg,System vectorial power factor angle,double degrees,Power factor values remain unsigned magnitudes; directional context comes from power values and angles rather than PF sign.
+System aggregate,metadata,Optional system measurement metadata,Object with measurement-period-s,Presence is meaningful; measurement periods describe averaging or integration windows rather than MQTT publication cadence.
+System aggregate,active-power-micro-w-del,System delivered active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,active-power-micro-w-rec,System received active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,active-power-micro-w-net,System net active power,int64 fixed-point microwatts,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,reactive-power-micro-var-del,System delivered reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,reactive-power-micro-var-rec,System received reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+System aggregate,reactive-power-micro-var-net,System net reactive power,int64 fixed-point microvars,Standardized by the base schema but not required by the current AC Meter Profile.
+Auxiliary `other` object,neutral-current-imputed-micro-a,Imputed neutral current,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Auxiliary `other` object,load-side-voltage-micro-v,Load-side voltage,int64 fixed-point microvolts,Standardized by the base schema but not required by the current AC Meter Profile.
+Auxiliary `other` object,neutral-current-micro-a,Measured neutral current,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Auxiliary `other` object,metadata,Optional auxiliary measurement metadata,Object with measurement-period-s,Presence is meaningful; measurement periods describe averaging or integration windows rather than MQTT publication cadence.
+Harmonic scalar values,phase-a-current-harmonic-2nd-micro-a,Phase A second harmonic current magnitude,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic scalar values,phase-b-current-harmonic-2nd-micro-a,Phase B second harmonic current magnitude,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic scalar values,phase-c-current-harmonic-2nd-micro-a,Phase C second harmonic current magnitude,int64 fixed-point microamps,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic scalar values,phase-a-voltage-harmonic-2nd-micro-v,Phase A second harmonic voltage magnitude,int64 fixed-point microvolts,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic scalar values,phase-b-voltage-harmonic-2nd-micro-v,Phase B second harmonic voltage magnitude,int64 fixed-point microvolts,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic scalar values,phase-c-voltage-harmonic-2nd-micro-v,Phase C second harmonic voltage magnitude,int64 fixed-point microvolts,Standardized by the base schema but not required by the current AC Meter Profile.
+Harmonic arrays,phase-a-harmonics.voltage-harmonic-micro-v,Phase A harmonic voltage magnitude array,Array of int64 fixed-point microvolts,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,phase-a-harmonics.current-harmonic-micro-a,Phase A harmonic current magnitude array,Array of int64 fixed-point microamps,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,phase-b-harmonics.voltage-harmonic-micro-v,Phase B harmonic voltage magnitude array,Array of int64 fixed-point microvolts,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,phase-b-harmonics.current-harmonic-micro-a,Phase B harmonic current magnitude array,Array of int64 fixed-point microamps,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,phase-c-harmonics.voltage-harmonic-micro-v,Phase C harmonic voltage magnitude array,Array of int64 fixed-point microvolts,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,phase-c-harmonics.current-harmonic-micro-a,Phase C harmonic current magnitude array,Array of int64 fixed-point microamps,Array index 0 represents the second harmonic; index 1 the third harmonic; and so forth.
+Harmonic arrays,metadata,Optional harmonic measurement metadata,Object with measurement-period-s,Presence is meaningful; measurement periods describe averaging or integration windows rather than MQTT publication cadence.
