@@ -10,31 +10,120 @@
 Application Messaging and Configuration
 ---------------------------------------
 
-GEISA LwM2M object 3600 provides a bi-directional messaging facility for applications, with distinct resources defined for 
-Client to Server messaging and Server to Client messaging. Object 3600 SHALL be used by ADM compliant platforms and EMS 
-for sensor data reporting on the uplink (Client to Server) and edge app configuration on the downlink (Server to Client).
+GEISA LwM2M Object ``/3600`` provides an app-scoped messaging path for a
+specific application or application instance. Distinct resources are defined
+for Server to Client messaging and Client to Server messaging. Each Object
+Instance represents the ADM messaging path for one managed application
+instance or application messaging scope identified by resource ``4050`` AppID.
 
-An ADM compliant EMS MAY *Observe* resource 1 to receive asynchronous LwM2M Notifications (containing app data) whenever the 
-platform writes to resource 1 on behalf of the edge app.
+Object ``/3600`` is intended for application-facing message payload exchange,
+configuration delivery, and transport metadata. It can carry app-domain
+configuration, commands, command results, status, events, alarms, application
+data, telemetry, and other application-specific payloads as classified by the
+Message Type resource. It is not a durable event, message, or log history
+store.
 
-An ADM compliant platform will receive asynchronous callbacks from its LwM2M Client whenever the EMS writes to resource 0 
-to reconfigure an edge app, and the platform SHALL forward that resource 0 payload (containing an app configuration) via 
-GEISA API to the app identified in resource 4050.
+Server to Client messages are written to resource ``0`` Server Message. They
+typically carry app-facing configuration, commands, or other application
+payloads from an upstream consumer application, EMS, or operator workflow to
+the edge application. An ADM-conformant platform receiving a Server Message
+SHALL route the message payload and associated message metadata to the
+application or application instance identified by resource ``4050`` AppID
+through the corresponding GEISA downstream application-facing message API,
+subject to authorization, routing policy, application lifecycle state, and
+platform policy.
 
-===========  ================  =========  =========  ==================================================================
-Resource ID  Name              Operation  Data Type  Description
-===========  ================  =========  =========  ==================================================================
-0            Server Message    Write      Opaque     Server to Client message used for edge app configuration.
-1            Client Message    Read       Opaque     Client to Server message used for edge app data reporting.
-2            Message Priority  ReadWrite  Integer    Priority: 0=Immediate, 1=BestEffort, 2=Latest
-3            Message Desc      ReadWrite  Integer    Description: 0=AppConfiguration, 1=AppData
-4050         AppID             ReadWrite  Integer    ID of the edge app using this object instance.
-===========  ================  =========  =========  ==================================================================
+Client to Server messages are exposed through resource ``1`` Client Message
+and are typically consumed by upstream applications, EMS workflows, or other
+authorized endpoints. They typically carry command results, status, events,
+alarms, application data, telemetry, or effective configuration state from
+the edge application toward an upstream consumer application, EMS, or
+operator workflow. An ADM-conformant EMS MAY read or observe this resource
+according to the advertised object model, operator policy, authorization, and
+deployment network constraints.
+
+Message Priority values are:
+
+* ``0`` -- Unspecified
+* ``1`` -- Urgent: highest priority; send immediately when possible
+* ``2`` -- Immediate: high priority; send as soon as possible
+* ``3`` -- BestEffort: normal priority; send when resources are available
+* ``4`` -- Latest: lowest priority; retain/send only the latest applicable
+  message.  When a "Latest" message is received, older messages of the same
+  type for the same AppID may be superseded/dropped.
+* ``5`` through ``100`` -- Reserved for future GEISA use
+* ``101`` through ``254`` -- Reserved for proprietary use
+* ``255`` -- Reserved
+
+Message Type values are:
+
+* ``0`` -- ``UNSPECIFIED``: message type is not specified or not yet classified
+* ``1`` -- ``CONFIG``: app-facing desired or effective configuration state
+* ``2`` -- ``COMMAND``: action request to perform work now or soon
+* ``3`` -- ``COMMAND_RESULT``: result of a ``COMMAND`` execution, distinct
+  from transport-level response acceptance
+* ``4`` -- ``STATUS``: current state, lifecycle, readiness, mode, or
+  policy/quota state
+* ``5`` -- ``EVENT``: operationally meaningful occurrence worth recording or
+  routing
+* ``6`` -- ``ALARM``: actionable, high-severity, security, safety, or policy
+  condition requiring prompt attention or special handling
+* ``7`` -- ``APP_DATA``: supplemental application-specific data that
+  intentionally does not fit ``CONFIG``, ``COMMAND``, ``STATUS``, ``EVENT``,
+  ``ALARM``, ``COMMAND_RESULT``, or ``TELEMETRY``
+* ``8`` -- ``TELEMETRY``: measurement-oriented numeric or structured
+  observations, usually time-series, snapshot, interval, or resource metrics
+* ``9`` through ``100`` -- Reserved for future GEISA use
+* ``101`` through ``254`` -- Reserved for proprietary use
+* ``255`` -- Reserved
+
+Each app message is associated with Message Priority, Message Type, Message
+TTL, and Content Type metadata. The platform and EMS use this metadata to
+classify, schedule, route, retain, expire, and interpret app-message payloads
+exchanged through resource ``0`` or resource ``1``. Resource ``4`` Message TTL
+does not define event-log retention, and resource ``5`` Content Type does not
+expose payload history.
+
+Application configuration carried through Object ``/3600`` is edge application
+configuration. It is configuration payload exchanged between an upstream
+consumer application, EMS, or operator workflow and the edge application
+identified by resource ``4050`` AppID. A Server to Client message with Message
+Type ``CONFIG`` may carry desired application configuration, or request current
+configuration. A Client to Server message with Message Type ``CONFIG`` or
+``STATUS`` may carry application-reported effective configuration,
+configuration status, or configuration-related state.
+
+Object ``/3600`` does not define the internal schema of an application
+configuration payload. The payload format is identified by Content Type and is
+interpreted according to the application, operator, or deployment contract.
+Acceptance of a Server Message by the ADM path does not by itself prove that
+the application accepted or applied the configuration. Application-level
+acceptance, rejection, effective state, or error detail should be reported
+through an appropriate app message, status, event, alarm, or durable record.
+
+Application configuration through Object ``/3600`` does not replace the
+application manifest, Software Management Object ``/9``, Application
+Accounting Object ``/3602``, Application Monitoring Object ``/3604``, or GEISA
+Platform Configuration Object ``/3606``. Manifest and deployment policy define
+what an application is allowed to do; Object ``/3600`` carries app-facing
+configuration payloads within those permissions and platform policies.
+
+===========  ================  =========  ================  ==================================================================
+Resource ID  Name              Operation  Data Type         Description
+===========  ================  =========  ================  ==================================================================
+0            Server Message    Write      Opaque            Server to Client app-message payload.
+1            Client Message    Read       Opaque            Client to Server app-message payload.
+2            Message Priority  ReadWrite  Unsigned Integer  Per-message priority for ordering, scheduling, throttling, or delivery.
+3            Message Type      ReadWrite  Unsigned Integer  Per-message payload classification.
+4            Message TTL       ReadWrite  Unsigned Integer  Per-message time-to-live, in seconds.
+5            Content Type      ReadWrite  String            Media type for the app-message payload encoding.
+4050         AppID             ReadWrite  Unsigned Integer  Local-scope identifier for the edge application.
+===========  ================  =========  ================  ==================================================================
 
 .. figure:: app-messaging-data.*
 
-Edge App Data Reporting 
+Edge App Message Reporting
 
 .. figure:: app-messaging-config.*
 
-Edge App Configuration
+Edge App Message Delivery
