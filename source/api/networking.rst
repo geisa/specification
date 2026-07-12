@@ -15,7 +15,7 @@ Off-Device Communication
 |geisa-api-hdr|
 
 
-GEISA allows applications to make use of 2 types of off-device communications:
+GEISA allows applications to make use of two types of off-device communications:
 Message based, and IP socket based.
 
 GEISA distinguishes between platform-mediated message-based communication
@@ -174,9 +174,10 @@ partner integrations, or to a variety of operator-maintained connectivity
 options such as shared Wi-Fi hotspots, cellular, mesh, wired, or proprietary
 interfaces.
 
-Applications need to know which (or multiple) of these are available and online
-for use at any given time; however, enumerating both the technology and the
-allowable use cases that they can transport can become complex quickly.
+Applications need to know which of these are available (may be multiple or
+none) and online for use at any given time; however, enumerating both the
+technology and the allowable use cases that they can transport can become
+complex quickly.
 
 Example types of network interfaces:
 
@@ -196,6 +197,24 @@ Other network interfaces that may be available (but out of scope of
 - IoT integrations via 802.15.4 technologies (Zigbee, Thread, etc.)
 - Other wired connectivity or peripherals: RS232/485, USB connected devices, etc.
 
+This version of the specification defines two interfaces types:
+
+- HAN
+- FAN
+
+HAN is inclusive of all local network interfaces, though this is most likely to be
+a Wi-FI interface.  Only one local interface is supported.
+
+FAN is inclusive of all operator network interfaces.  This is likely to be
+either cellular or mesh technologies for AMI meters, though it may be powerline
+carrier (PLC) or satellite for some devices.  Only one operator network
+interface is supported.  For devices which have multiple operator network
+interfaces and can switch between them (e.g. dual-radio devices), the FAN
+interface is assumed to be the presently active FAN technology.
+
+.. note::
+
+  New interface types may be added in future versions of this specification.
 
 Destination Classes
 ^^^^^^^^^^^^^^^^^^^
@@ -242,7 +261,9 @@ Volume Limits
 Each destination class may be metered depending on which underlying technology
 transports the data.  A Home Wi-Fi network would normally be considered unlimited
 whereas a cellular connection would be metered in order to keep the device under a
-monthly volume limit.
+monthly volume limit.  An operator may choose to meter application traffic
+even on "unlimited" connections to ensure that devices are polite guests when
+connected to customer networks.
 
 An application developer MUST define volume limits per destination class in
 their Vendor Application Manifest.  These limits may be overridden by the
@@ -266,7 +287,10 @@ The daily rollover mechanism and reset period are deployment and platform
 policy. This version of the specification does not define an
 application-visible transaction for configuring those policy values. The
 application obtains the remaining volume limits and the next reset time via
-:doc:`/api/status`.
+:doc:`/api/status`.  ADM transactions are defined for allowing an EMS to
+monitor an applications consumption and to adjust limits if needed, via the
+LwM2M 3602 GEISA Application Accounting object.  Please see
+:doc:`/adm` for discussion.
 
 If an application exhausts its metered volume quota for one or more
 destination classes, the policy for those classes remains *metered* and
@@ -315,6 +339,11 @@ application-layer trust mechanisms where supported by their protocol.
   future version may define manifest fields or policy controls for this
   behavior.
 
+.. note::
+
+   Please see :doc:`/security/network` for details on deployment manifest
+   security settings for network access.
+
 Connectivity
 ^^^^^^^^^^^^
 
@@ -335,9 +364,9 @@ routing between these components.
   able to use AF_INET/AF_INET6 sockets from within the container environment
   with any encoding and protocol within.
 
-The operating environment MUST provide a local lo interface within the container
-environment for each application. The local lo interface must be up and configured
-with both 127.0.0.1 and ::1 addresses.
+The operating environment MUST provide a local :code:`lo` interface within the container
+environment for each application. The local :code:`lo` interface must be up and configured
+with both :code:`127.0.0.1` and :code:`::1` addresses.
 
 The apparent address, route, or connection path visible to an Application
 inside its container environment is not required to correspond one-to-one
@@ -352,7 +381,8 @@ Policy Rules
 
 The :doc:`/adm/manifests` include a set of Endpoints the Application is expecting
 to communicate with.  The application must list every endpoint that it wishes
-to communicate with per destination class.
+to communicate with per destination class.  See :doc:`/security/network` for
+discussion of network access tuples.
 
 DNS
 ^^^
@@ -460,11 +490,9 @@ API Permissions
 Transaction Data
 ================
 
-.. warning::
+- GeisaAppMessage_Req
+- GeisaAppMessage_Rsp
 
-  Need to add refererence to content within |geisa-schemas-repo| here.
-
-
-
+  As defined in |geisa-schemas-repo|.
 
 |geisa-pyramid|

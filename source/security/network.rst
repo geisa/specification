@@ -7,8 +7,15 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-Network
-^^^^^^^
+Network Security
+^^^^^^^^^^^^^^^^
+
+For a full discussion on how edge applications can access network interfaces
+within an edge environment, please see :doc:`/api/networking`.  This section
+is specifically focused on how the system facilitates access control.
+Implementers should review both sections for a fulsome understanding of how
+network access is exposed and controlled.
+
 
 Interface Access
 ~~~~~~~~~~~~~~~~
@@ -30,7 +37,7 @@ distribution automation, this could potentially be a local Ethernet network
 allowing access to other local device.
 
 For messaging, the system operator must indicate a daily allowed message count
-and grant the application access to the messaging API (see :doc:`../security/API`)
+and grant the application access to the messaging API (see :doc:`/security/API`)
 
 For the HAN and FAN interfaces, the system operator must grant access to the
 desired interfaces.  When access has been granted, the platform will configure

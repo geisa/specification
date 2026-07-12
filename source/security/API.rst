@@ -7,8 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-API
-^^^
+API Security
+^^^^^^^^^^^^
 
 GEISA provides a message based API via MQTT.  Conformant implementations will
 provide the application a local port via the :term:`AII` wherein they can
@@ -41,7 +41,7 @@ Several highlights of API Authentication and Encryption are repeated here:
   - The GEISA threat model already addresses attacks against the API via
     other means.
 
-As discussed in :doc:`../api/architecture`, platforms are responsible for issuing
+As discussed in :doc:`/api/architecture`, platforms are responsible for issuing
 applications their login credentials to access the broker.  The userid and
 password (referred to as a token), MUST be printable alphanumeric characters.
 The userid MUST be unique to the application instance and persist for the life
@@ -74,10 +74,10 @@ deployment manifest supports six API controls:
 
 - waveform: Allows applications to read waveform data
 
-Applications always have access to the :doc:`../api/discovery` and :doc:`../api/status` APIs.
+Applications always have access to the :doc:`/api/discovery` and :doc:`/api/status` APIs.
 
 Access to specific network interfaces is also controlled via the Application
-Manifest.  Please see :doc:`../security/network` for details.
+Manifest.  Please see :doc:`/security/network` for details.
 
 Platform implementations MUST enforce the API permissions granted by the
 application manifest.
