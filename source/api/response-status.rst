@@ -33,8 +33,8 @@ Status Message Model
   application behavior.
 - ``message``: a short human-readable explanation suitable for logs,
   diagnostics, or UI.
-- ``details``: optional diagnostic text. Applications MUST NOT parse
-  ``details`` for interoperable behavior.
+- ``details``: optional diagnostic text. To ensure interoperable behavior,
+  Applications MUST NOT parse ``details`` or take action based on its contents.
 
 ``GEISA_STATUS_SUCCESS`` indicates success.
 
