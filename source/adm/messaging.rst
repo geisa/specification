@@ -75,6 +75,7 @@ Message Type values are:
   observations, usually time-series, snapshot, interval, or resource metrics
 * ``9`` through ``100`` -- Reserved for future GEISA use
 * ``101`` through ``254`` -- Reserved for proprietary use
+* ``255`` -- Reserved
 
 Each app message is associated with Message Priority, Message Type, Message
 TTL, and Content Type metadata. The platform and EMS use this metadata to
