@@ -39,15 +39,19 @@ The GEISA API defines APIs for the following purposes:
     applications that need to continuously monitor conditions, without
     consuming and analyzing waveform data directly.
 
-- Billing Data
+- :doc:`/api/billing`
 
-    Common instantaneous billing/metrology quantities currently appear in
-    :doc:`/api/instantaneous`. A dedicated billing/metered quantities
-    transaction set is reserved for a future version of the specification.
+    Defines billing quantity payloads for meter-register-style summation and
+    demand values using ``GeisaBillingQuantities``. Billing Data is distinct
+    from the Instantaneous Data stream and from Waveform Data.
 
-    .. note::
-       Reserved for expansion and definition in a future version of the
-       specification.
+    This version defines the billing payload/profile structure and the
+    platform-to-application Billing Data broadcast topic
+    ``geisa/api/billing/data``.
+
+    Note that this version of the specification does not define a Billing Data
+    request/response transaction, historical query, or application-selected
+    billing intervals.
 
 
 - :doc:`/api/networking`
@@ -108,6 +112,7 @@ The GEISA API defines APIs for the following purposes:
    api/discovery
    api/status
    api/instantaneous
+   api/billing
    api/waveform
    api/actuators
    api/sensors

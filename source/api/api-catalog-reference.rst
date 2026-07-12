@@ -225,6 +225,20 @@ API Topic and Permission Catalog
      - Platform → App
      - ``GeisaInstantaneousQuantities``
      - Broadcast
+   * - :doc:`Billing Data <../api/billing>`
+     - ``geisa/api/billing/data``
+     - Application
+     - Subscribe
+     - Platform → App
+     - ``GeisaBillingQuantities``
+     - Broadcast
+   * -
+     - ``geisa/api/billing/data``
+     - Platform
+     - Publish
+     - Platform → App
+     - ``GeisaBillingQuantities``
+     - Broadcast
    * - :doc:`Waveform Data <../api/waveform>`
      - ``geisa/api/waveform/req/<userid>``
      - Application

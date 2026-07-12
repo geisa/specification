@@ -13,7 +13,7 @@ API
 GEISA provides a message based API via MQTT.  Conformant implementations will
 provide the application a local port via the :term:`AII` wherein they can
 connect to the MQTT broker.  This is discuss in more detail in
-:doc:`api/architecture`.
+:doc:`/api/architecture`.
 
 
 API Authentication and Encryption
@@ -83,4 +83,3 @@ Platform implementations MUST enforce the API permissions granted by the
 application manifest.
 
 |geisa-pyramid|
-
