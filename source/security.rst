@@ -40,6 +40,20 @@ The second section covers practical aspects of security:
 * :doc:`security/API`
 * :doc:`security/network`
 
+.. Note::
+
+  GEISA security is focused on application-level transactions.  GEISA does not
+  address network security directly.  GEISA does require a variety of LwM2M
+  objects that facilitate management of different network substrates (see
+  :doc:`/adm/lwm2m`), which may allow for network security management; however,
+  network security implementation details are outside of the scope of GEISA.
+  Implementations MUST support the native security mechanisms for the network
+  technologies they use (e.g. EAP-TLS for Wi-SUN, eSIMs/SIMs for Cellular, WPA
+  for Wi-Fi, etc.).  Implementations MUST NOT rely exclusively on application
+  security.  That said, this specification focuses on application security
+  mechanisms, leaving implementation details regarding network technologies for
+  other specifications and standards.
+
 .. toctree::
   :hidden:
 

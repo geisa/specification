@@ -1,0 +1,45 @@
+sequenceDiagram
+    autonumber
+    participant C as GEISA Client<br/>(Edge Device)
+    participant BS as Bootstrap-Server
+    participant DNS as DNS-SD Resolver
+    participant RA as EST/CoAP Server<br/>(Registration Authority)
+    participant MS as GEISA Edge<br/>Management Server
+
+    Note over C,BS: GEISA Client Initiated Bootstrap<br/>over mDTLS using IDevID certificate
+    C->>BS: Bootstrap-Request
+    BS->>C: Discover, Read,<br/>Write, Delete Bootstrap
+    BS->>C: Write /0/0/2 = 4<br/>(Security Mode = Certificate mode with EST)
+    BS->>C: Write Trust Anchor<br/>Certificate to /0/0/4
+    BS->>C: Bootstrap-Finish
+
+    Note over C,RA: GEISA Client performs EST
+    C->>DNS: Unicast DNS-SD query<br/>_est-coaps._udp.<searchDomain>
+    DNS->>C: host + port for RA<br/>coaps://<host>:<port>/.well-known/est/sen
+
+    C->>C: Local key generation
+    C->>RA: CertificateSigningRequest (coaps://.../.well-known/est/sen)<br/>for Long-Lived LDevID
+    RA->>C: Long-Lived LDevID certificate
+
+    rect rgb(236, 255, 236)
+
+    Note over C,BS: Client Initiated Bootstrap<br/>over mDTLS using Long-Lived LDevID certificate
+    C->>BS: Bootstrap-Request
+    BS->>C: Discover, Read,<br/>Write, Delete Bootstrap
+    BS->>C: Write /0/0/2 = 4<br/>(Security Mode = Certificate mode with EST)
+    BS->>C: Write Trust Anchor<br/>Certificate to /0/0/4
+    BS->>C: Bootstrap-Finish
+
+    Note over C,RA: Client performs EST
+    C->>DNS: Unicast DNS-SD query<br/>_est-coaps._udp.<searchDomain>
+    DNS->>C: host + port for RA<br/>coaps://<host>:<port>/.well-known/est/sen
+
+    C->>C: Local key generation
+    C->>RA: CertificateSigningRequest (coaps://.../.well-known/est/sen)<br/>for Short-Lived LDevID
+    RA->>C: Short-Lived LDevID certificate
+
+    end
+
+    Note over C,MS: Register with Mgmt Server<br/>over mDTLS using Short-Lived LDevID certificate
+    C->>MS: Connect / Register
+

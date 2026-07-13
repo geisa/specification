@@ -172,7 +172,12 @@ Here is an example of an vendor application manifest.
           "image-size": 748340,
           "uncompressed-size": 2494464,
           "image": "helloworld-1.tgz",
-          "sha256": "00beeaeeca59f9177d88a13132f7c0686616fe728d85f20ddbd15352abd10988"
+          "signature": {
+            "signatureType": "ECDSA",
+            "signatureLength": 64,
+            "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
+            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Some Company"
+          }
         },
         "compatibility": {
           "GEISA-API": "1.0.0",
