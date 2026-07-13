@@ -356,8 +356,7 @@ jobs:
                   <div class="label">Current Release</div>
                   <h2 id="current-release-heading">Coming Soon!</h2>
                   <p>
-                    The first approved GEISA specification release 0.9 is expected to
-                    be published shortly. Until then, the latest development draft is provided for reference and feedback.
+                    The 0.9 <b>draft</b> release of the GEISA specification is now available!  Please check out the latest development draft versions below.  Formal release of 0.9 is still pending.
                   </p>
                   <div class="release-actions">
                     <span class="disabled">GEISA 0.9 release pending</span>
