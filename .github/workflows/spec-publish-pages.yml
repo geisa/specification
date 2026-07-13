@@ -354,12 +354,12 @@ jobs:
 
                 <section class="release-panel" aria-labelledby="current-release-heading">
                   <div class="label">Current Release</div>
-                  <h2 id="current-release-heading">Coming Soon!</h2>
+                  <h2 id="current-release-heading">Unofficial 0.9 Draft Available</h2>
                   <p>
                     The 0.9 <b>draft</b> release of the GEISA specification is now available!  Please check out the latest development draft versions below.  Formal release of 0.9 is still pending.
                   </p>
                   <div class="release-actions">
-                    <span class="disabled">GEISA 0.9 release pending</span>
+                    <span class="disabled">Official GEISA 0.9 release pending</span>
                   </div>
                 </section>
 
