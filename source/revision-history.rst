@@ -9,8 +9,13 @@
 Revision History
 ----------------
 
-Version 0.8.5 - 2026-07-11 - Updates to ADM section discussions of OMA objects,
-message types, and priorities; Reorganized security section, adding API and
+Version 0.9.0 - 2026-07-12 - Added discussion on certificates and digital
+signatures; updated common response model, metered quantities, and billing
+quantities API; updated operations chapter to align with OMA objects and ADM
+chapter.
+
+Version 0.8.5 - 2026-07-11 - Updated ADM section discussions of OMA objects,
+message types, and priorities; reorganized security section, adding API and
 network security discussions.
 
 Version 0.8.4 - 2026-07-09 - Added IANA SenML unit guidance for sensor units; updated Operations chapter and diagrams; validated release Pages workflow.

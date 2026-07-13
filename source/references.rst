@@ -24,6 +24,9 @@ References
 .. [FIPS204] `FIPS 204 Module-Lattice-Based Digital Signature Standard
    <https://doi.org/10.6028/NIST.FIPS.204>`_ 
 
+.. [IEEE8021AR] `IEEE Standard for Local and metropolitan area networks–Secure Device Identity
+   <https://1.ieee802.org/security/802-1ar/>`_
+
 .. [LWM2M] `OMA Lightweight M2M
    <https://www.openmobilealliance.org/specifications/lwm2m>`_
 
@@ -45,5 +48,7 @@ References
 .. [RFC9148] `EST-coaps: Enrollment over Secure Transport with the Secure Constrained Application Protocol
    <https://datatracker.ietf.org/doc/html/rfc9148>`_
 
+.. [X509] `X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks
+   <https://www.itu.int/rec/T-REC-X.509-201910-I/en>`_
 
 |geisa-pyramid|
