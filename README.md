@@ -173,7 +173,7 @@ outputs.
 
 To build a custom sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Running multiple jobs as part of make (`-j4`) may result in errors in the 
+NOTE: Running multiple jobs as part of make (`-j4`) may result in errors in the
 LatexPDF build.  If these occur, use `make all` instead.
 
 NOTE: Depending on your specific distribution, you may encounter errors on the
