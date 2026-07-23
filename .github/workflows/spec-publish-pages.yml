@@ -9,6 +9,9 @@ on:
   release:
     types:
       - published
+  schedule:
+    # 10:00 UTC = ~2am PST ignoring DST changes
+    - cron: "0 10 * * *"
   workflow_dispatch:
 
 permissions:
