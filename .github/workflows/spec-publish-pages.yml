@@ -181,7 +181,7 @@ jobs:
             --pages-dir "${GITHUB_WORKSPACE}/build/pages" \
             --work-dir "${RUNNER_TEMP}/geisa-spec-release-worktrees"
           LATEST_BUILT_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          LATEST_RELEASE_BASE="$(tr -d '\n' < geisa_release.txt)"
+          LATEST_RELEASE_BASE="$(tr -d '\n' < source/geisa_release.txt)"
           LATEST_SOURCE_SHA="$(git rev-parse --short=7 HEAD)"
           LATEST_SOURCE_VERSION="${LATEST_RELEASE_BASE}-${LATEST_SOURCE_SHA}"
           python .github/scripts/render-spec-site-index.py \
