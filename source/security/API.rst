@@ -7,8 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-API Security
-^^^^^^^^^^^^
+GEISA API Security
+^^^^^^^^^^^^^^^^^^
 
 GEISA provides a message based API via MQTT.  Conformant implementations will
 provide the application a local port via the :term:`AII` wherein they can

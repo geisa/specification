@@ -26,7 +26,6 @@ GEISA Specification |release|
    license
 
    introduction
-   references
    glossary
     
    design-principles
@@ -46,4 +45,4 @@ GEISA Specification |release|
 
    revision-history
 
-
+.. include:: references.rst.inc

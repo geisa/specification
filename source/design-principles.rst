@@ -80,42 +80,8 @@ for the LEE, VEE, & API, and network interoperability for ADM.
 Source written for the GEISA LEE should be compilable without modification,
 and without needing conditional compilation or platform specific directives.
 Similarly, source written for the GEISA VEE should be compilable for the target 
-virtual execution environment with needing conditional compilation or 
+virtual execution environment without needing conditional compilation or 
 platform-specific directives.
-
-As an example, shown below is a "do-nothing" C source code program that should
-compile using any GEISA LEE toolchain,
-producing an executable that runs on any GEISA LEE.
-
-.. code-block:: c
-
-   #include <stdio.h>
-   #include <unistd.h>
-
-   int main(int argc, char *argv[]) {
-        while(1) {
-	    sleep(60); // sleep for 60 seconds
-        }
-        return 0;
-    }
-
-As another example, shown below is a "do-nothing" Java source code program that should
-compile using any GEISA VEE toolchain,
-producing an executable that runs on any GEISA VEE.
-
-.. code-block:: java
-
- public class GeisaHello {
-    public static void main(String[] args) {
-        while (true) {
-            try {
-                Thread.sleep(60000); // sleep for 60 seconds (60,000 milliseconds)
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
- }
 
 .. Warning::
 
@@ -185,9 +151,9 @@ is required.
 Core Specification with Extensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to the four keys aspects of interoperability (ADM, API, LEE, and 
-VEE), future extensions may be added to to the GEISA specification may be added 
-as the community determines the need.
+In addition to the four key aspects of interoperability (ADM, API, LEE, and
+VEE), future extensions may be added to the GEISA specification as the
+community determines the need.
 
 Future extensions may define new areas of interoperability conformance beyond 
 ADM, API, LEE, and VEE, or they may enable new capabilities that are only 
@@ -209,4 +175,3 @@ hardening of the APIs and all services, GEISA security is foundational.
 
 .. [#] GEISA may provide a toolchain and base implementation in the future if 
   there is interest and support from the GEISA community.
-

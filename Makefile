@@ -30,6 +30,8 @@ DRAWIOPDF     	= $(patsubst %.drawio, %.pdf,$(DRAWIO))
 
 IMAGESVG      	= $(wildcard $(SOURCEDIR)/images/*.svg)
 IMAGEPDF      	= $(patsubst %.svg,%.pdf,$(IMAGESVG))
+LICENSEGEN     = .github/scripts/generate-license-rst.py
+LICENSERST     = $(SOURCEDIR)/license.generated.rst.inc
 
 # To solve mermaid issue when building on
 # RPi aarch system system
@@ -53,7 +55,7 @@ help:
 
 .DELETE_ON_ERROR:
 
-.PHONY: help Makefile clean all prep $(SPHINXTARGETS)
+.PHONY: help Makefile clean all prep license-rst license-check $(SPHINXTARGETS)
 
 clean:
 	rm -f $(IMAGEPDF)
@@ -61,11 +63,20 @@ clean:
 	rm -f $(MERMAIDPDF)
 	rm -f $(DRAWIOSVG)
 	rm -f $(DRAWIOPDF)
+	rm -f $(LICENSERST)
 	rm -rf $(BUILDDIR)
 
 prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF)
 
 all: $(SPHINXTARGETS)
+
+license-rst: $(LICENSERST)
+
+license-check: $(LICENSERST)
+	PATH="$(PYTHONVENV:/=/bin:)$$PATH" python3 $(LICENSEGEN) --check
+
+$(LICENSERST): LICENSE.md $(LICENSEGEN)
+	PATH="$(PYTHONVENV:/=/bin:)$$PATH" python3 $(LICENSEGEN)
 
 %.svg: %.mermaid
 	mmdc $(MMDC_FLAGS) -i $< -o $@
@@ -79,5 +90,5 @@ all: $(SPHINXTARGETS)
 %.pdf: %.svg
 	rsvg-convert -f=pdf -o $@ $<
 
-$(SPHINXTARGETS): Makefile prep
+$(SPHINXTARGETS): Makefile prep $(LICENSERST)
 	PATH="$(PYTHONVENV:/=/bin:)$$PATH" $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)

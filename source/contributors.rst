@@ -35,5 +35,7 @@ Our sincere thanks to them for the time and thought they put into this effort:
 * Rick Steuer
 * Brandon Thayer
 * Scott Wegener
+* Peter Vall
+* Balagopal Mathoor
 
 |geisa-pyramid|
