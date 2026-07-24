@@ -11,11 +11,17 @@ OMA Lightweight M2M
 GEISA Application & Device Management uses the Open Mobile Alliance Lightweight M2M
 [LWM2M]_ protocol for application management.  Specifically,
 
-* ADM conformant platforms and Edge Management Systems (EMS) SHALL support LWM2M
-  v1.1 or greater. [LWM2M-Core]_
-* ADM conformant platforms and EMS MAY support LWM2M
-  versions greater than v1.1; however, they MUST retain compatibility with
-  v1.1.
+* ADM conformant platforms and Edge Management Systems (EMS) SHALL support
+  LwM2M protocol version 1.2 as defined by approved revision 1.2.2 of the
+  LwM2M Core and Transport specifications. [LWM2M-Core]_
+  [LWM2M-Transport]_
+* ADM conformant platforms and EMS are required to support only the LwM2M
+  interfaces, operations, Objects, Resources, features, and behaviors made
+  applicable by the GEISA specification. GEISA does not require every optional
+  LwM2M feature or every Object in the OMA registry.
+* ADM conformant platforms and EMS MAY support later LwM2M protocol or Object
+  versions, provided they continue to support the GEISA-pinned baseline and do
+  not require later-version behavior for GEISA interoperability.
 * ADM conformant platforms and EMS SHALL support CoAP over UDP for
   message transport. [LWM2M-Transport]_
 * ADM conformant platforms and EMS SHALL support DTLS for CoAP security.
@@ -24,8 +30,9 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
 * ADM conformant platforms and EMS SHALL support EST over CoAP per [RFC9148]_
 * ADM conformant platforms and EMS SHALL support the Bootstrap, Registration,
   Device Management and Information Reporting interfaces.
-* ADM conformant platforms and EMS SHALL support the Mandatory resources of
-  the most recent version of the required LWM2M Objects.
+* ADM conformant platforms and EMS SHALL support the applicable Resources and
+  behaviors of the required LwM2M Objects at the versions in the fixed GEISA
+  ADM Object-version baseline below.
 * ADM conformant EMS shall support the following LWM2M Objects
 
 
@@ -89,6 +96,109 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
 
   * ID 3603 -- Wi-SUN Radio Management
 
+GEISA ADM Object-version baseline
+=================================
+
+The following Object versions form the fixed GEISA 1.0 ADM baseline. Where an
+updated definition is available, the XML link identifies the pinned definition
+audited for this baseline. Pending definition updates are identified below.
+
+.. list-table:: GEISA 1.0 ADM Object versions
+   :header-rows: 1
+   :widths: 10 40 15 35
+
+   * - Object
+     - Name
+     - Version
+     - Linked XML definition
+   * - ``/0``
+     - LwM2M Security
+     - 1.2
+     - :download:`0.xml <external/lwm2m-registry/0.xml>`
+   * - ``/1``
+     - LwM2M Server
+     - 1.2
+     - :download:`1.xml <external/lwm2m-registry/1.xml>`
+   * - ``/3``
+     - Device
+     - 1.2
+     - :download:`3.xml <external/lwm2m-registry/3.xml>`
+   * - ``/4``
+     - Connectivity Monitoring
+     - 1.3
+     - :download:`4.xml <external/lwm2m-registry/4.xml>`
+   * - ``/5``
+     - Firmware Update
+     - 1.2
+     - :download:`5.xml <external/lwm2m-registry/5.xml>`
+   * - ``/6``
+     - Location
+     - 1.0
+     - :download:`6.xml <external/lwm2m-registry/6.xml>`
+   * - ``/9``
+     - Software Management
+     - 1.1
+     - :download:`Current 9.xml <external/lwm2m-registry/9.xml>`
+       (version 1.0; update pending)
+   * - ``/10``
+     - Cellular Network Connectivity
+     - 1.1
+     - :download:`10.xml <external/lwm2m-registry/10.xml>`
+   * - ``/11``
+     - APN Connection Profile
+     - 1.1
+     - :download:`11.xml <external/lwm2m-registry/11.xml>`
+   * - ``/12``
+     - WLAN Connectivity
+     - 1.1
+     - :download:`12.xml <external/lwm2m-registry/12.xml>`
+   * - ``/13``
+     - Bearer Selection
+     - 1.1
+     - :download:`13.xml <external/lwm2m-registry/13.xml>`
+   * - ``/20``
+     - Event Log
+     - 3.2
+     - :download:`20.xml <external/lwm2m-registry/20.xml>`
+   * - ``/504``
+     - Remote SIM Provisioning
+     - 1.0
+     - :download:`504.xml <external/lwm2m-registry/504.xml>`
+   * - ``/3600``
+     - GEISA App Messaging
+     - 1.1
+     - :download:`3600.xml <external/lwm2m-registry/3600.xml>`
+   * - ``/3601``
+     - GEISA Host Monitoring
+     - 1.0
+     - :download:`3601.xml <external/lwm2m-registry/3601.xml>`
+   * - ``/3602``
+     - GEISA App Accounting
+     - 1.0
+     - :download:`3602.xml <external/lwm2m-registry/3602.xml>`
+   * - ``/3603``
+     - GEISA Wi-SUN Radio Management
+     - TBD
+     - Definition pending
+   * - ``/3604``
+     - GEISA App Monitoring
+     - 1.0
+     - :download:`3604.xml <external/lwm2m-registry/3604.xml>`
+   * - ``/3605``
+     - GEISA Platform Monitoring
+     - 1.0
+     - :download:`3605.xml <external/lwm2m-registry/3605.xml>`
+   * - ``/3606``
+     - GEISA Platform Configuration
+     - 1.0
+     - :download:`3606.xml <external/lwm2m-registry/3606.xml>`
+
+The linked Software Management ``/9`` definition is version 1.0 and does not
+yet represent the GEISA 1.0 baseline requirement for version 1.1, including
+Resources 19 through 22. That linked definition must be updated before GEISA
+1.0 release. The Wi-SUN Radio Management ``/3603`` definition and version are
+pending coordination with the Wi-SUN work and must be resolved before release.
+
 GEISA ADM Object Model
 ======================
 
@@ -102,9 +212,12 @@ GEISA ADM conformance is separate from GEISA API, LEE, and VEE
 conformance. ADM object requirements therefore apply in the context of
 ADM conformance and the relevant platform capability. They do not imply
 that every GEISA device implements every GEISA API, every execution
-environment, or every optional hardware capability. Some implementations
-may support other mechanisms, but they must support LwM2M and relevant
-OMA objects in order to be considered GEISA-conformant for ADM.
+environment, or every optional hardware capability. ADM implementations MAY
+provide alternate or additional mechanisms for device, platform, or application
+management. Such mechanisms do not replace the GEISA ADM requirements; an
+implementation claiming GEISA ADM conformance SHALL support the applicable
+LwM2M interfaces, operations, Objects, Resources, and behaviors defined by
+this specification.
 
 The host is not the GEISA Platform. The GEISA Platform is not an
 application. A conformant ADM system needs enough visibility into all
@@ -141,7 +254,7 @@ GEISA object definitions.
 
 * ``/0`` Security
 
-  Scope: ADM baseline.
+  Scope: ADM baseline
 
   Provides LwM2M security configuration and credentials required for
   secure ADM operation.

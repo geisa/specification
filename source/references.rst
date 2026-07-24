@@ -30,11 +30,11 @@ References
 .. [LWM2M] `OMA Lightweight M2M
    <https://www.openmobilealliance.org/specifications/lwm2m>`_
 
-.. [LWM2M-Core] `OMA SpecWorks Lightweight Machine to Machine Technical Specification Core 1.2
-   <https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf>`_
+.. [LWM2M-Core] `OMA Lightweight Machine to Machine Technical Specification Core 1.2.2
+   <https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.pdf>`_
 
-.. [LWM2M-Transport] `OMA SpecWorks Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2
-   <https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.pdf>`_
+.. [LWM2M-Transport] `OMA Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2.2
+   <https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.pdf>`_
 
 .. [NIST800-186] `NIST SP 800-186 Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters
    <https://doi.org/10.6028/NIST.SP.800-186>`_
