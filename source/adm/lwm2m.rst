@@ -212,9 +212,12 @@ GEISA ADM conformance is separate from GEISA API, LEE, and VEE
 conformance. ADM object requirements therefore apply in the context of
 ADM conformance and the relevant platform capability. They do not imply
 that every GEISA device implements every GEISA API, every execution
-environment, or every optional hardware capability. Some implementations
-may support other mechanisms, but they must support LwM2M and relevant
-OMA objects in order to be considered GEISA-conformant for ADM.
+environment, or every optional hardware capability. ADM implementations MAY
+provide alternate or additional mechanisms for device, platform, or application
+management. Such mechanisms do not replace the GEISA ADM requirements; an
+implementation claiming GEISA ADM conformance SHALL support the applicable
+LwM2M interfaces, operations, Objects, Resources, and behaviors defined by
+this specification.
 
 The host is not the GEISA Platform. The GEISA Platform is not an
 application. A conformant ADM system needs enough visibility into all
@@ -251,7 +254,7 @@ GEISA object definitions.
 
 * ``/0`` Security
 
-  Scope: ADM baseline.
+  Scope: ADM baseline
 
   Provides LwM2M security configuration and credentials required for
   secure ADM operation.
