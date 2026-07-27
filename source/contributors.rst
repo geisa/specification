@@ -28,14 +28,15 @@ Our sincere thanks to them for the time and thought they put into this effort:
 * David Johnson
 * Richard Lam
 * Heather Lancaster
+* Balagopal Mathoor
 * Norm McEntire
 * Kenny O'Dell
 * Vlad Pambucol
 * Jonah Petri
 * Rick Steuer
 * Brandon Thayer
-* Scott Wegener
 * Peter Vall
-* Balagopal Mathoor
+* Scott Wegener
+
 
 |geisa-pyramid|
