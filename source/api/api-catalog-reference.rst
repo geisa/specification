@@ -334,14 +334,14 @@ API Topic and Permission Catalog
      - ``GeisaSensorReading``
      - Broadcast
    * -
-     - ``geisa/api/sensor-req/<userid>``
+     - ``geisa/api/sensor/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaSensorReadings_Req``
      - Request
    * -
-     - ``geisa/api/sensor-rsp/<userid>``
+     - ``geisa/api/sensor/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
@@ -355,14 +355,14 @@ API Topic and Permission Catalog
      - ``GeisaSensorReading``
      - Broadcast
    * -
-     - ``geisa/api/sensor-req/#``
+     - ``geisa/api/sensor/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaSensorReadings_Req``
      - Request
    * -
-     - ``geisa/api/sensor-rsp/<userid>``
+     - ``geisa/api/sensor/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
