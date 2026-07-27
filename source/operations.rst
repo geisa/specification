@@ -214,6 +214,9 @@ system operator have a relationship with the certifier as well.
 
    Sequence diagram showing optional application certification
 
+Note that application certification is distinct from GEISA specification
+conformance testing, as described in :doc:`conformance`.
+
 The system operator chooses to acquire a new application.  This process
 involves obtaining the application image and publisher certificate from the
 application publisher, and optionally obtaining the application certification
@@ -528,8 +531,12 @@ added in a future revision of this chapter.
 Application Certification
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This chapter distinguishes between two broad certification models that
-may be relevant to GEISA application ecosystems.  The industry continues 
+Application certification is distinct from GEISA specification conformance
+testing. Refer to :doc:`conformance` for the scope and interpretation of GEISA
+conformance testing.
+
+This chapter distinguishes between two broad certification models that may be
+relevant to GEISA application ecosystems.  The industry continues 
 to evolve and this may be expanded in a future revision.  Costs as well as
 capabilities of individual providers able to be located to perform this 
 function as a Utility may desire may also come into play.
