@@ -1,4 +1,3 @@
-
 ..
   Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
   Security Alliance (GEISA), a Series of LF Projects, LLC
@@ -7,22 +6,14 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-References
---------------------
-
-.. note::
-        Due to the way the PDF version of the specification is rendered, 
-        references are found in the Bibliography chapter.  We 
-        hope to correct this in a future version of the specification.
-
-.. [CSNA20] `The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ 
+.. [CSNA20] `The Commercial National Security Algorithm Suite 2.0 and Quantum Computing FAQ
    <https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF>`_
 
 .. [FIPS186] `FIPS 186 Digital Signature Standard (DSS)
    <https://doi.org/10.6028/NIST.FIPS.186-5>`_
 
 .. [FIPS204] `FIPS 204 Module-Lattice-Based Digital Signature Standard
-   <https://doi.org/10.6028/NIST.FIPS.204>`_ 
+   <https://doi.org/10.6028/NIST.FIPS.204>`_
 
 .. [IEEE8021AR] `IEEE Standard for Local and metropolitan area networks–Secure Device Identity
    <https://1.ieee802.org/security/802-1ar/>`_
@@ -39,7 +30,7 @@ References
 .. [NIST800-186] `NIST SP 800-186 Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters
    <https://doi.org/10.6028/NIST.SP.800-186>`_
 
-.. [RFC2119] `Key words for use in RFCs to Indicate Requirement Levels 
+.. [RFC2119] `Key words for use in RFCs to Indicate Requirement Levels
    <https://datatracker.ietf.org/doc/html/rfc2119>`_
 
 .. [RFC7252] `The Constrained Application Protocol (CoAP)
@@ -50,5 +41,3 @@ References
 
 .. [X509] `X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks
    <https://www.itu.int/rec/T-REC-X.509-201910-I/en>`_
-
-|geisa-pyramid|

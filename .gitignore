@@ -1,5 +1,6 @@
 /venv
 /build
+source/license.generated.rst.inc
 *.pdf
 *.svg
 !/source/images/*.svg
