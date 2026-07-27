@@ -280,8 +280,8 @@ MQTT Details
 
 - QoS: 0 / Unacknowledged
 - Topic: ``geisa/api/sensor``
-- Topic: ``geisa/api/sensor-req/<userid>``
-- Topic: ``geisa/api/sensor-rsp/<userid>``
+- Topic: ``geisa/api/sensor/req/<userid>``
+- Topic: ``geisa/api/sensor/rsp/<userid>``
 
 .. note::
 
@@ -295,14 +295,14 @@ API Permissions
 - Application:
 
   - Subscribe: ``geisa/api/sensor``
-  - Publish: ``geisa/api/sensor-req/<userid>``
-  - Subscribe: ``geisa/api/sensor-rsp/<userid>``
+  - Publish: ``geisa/api/sensor/req/<userid>``
+  - Subscribe: ``geisa/api/sensor/rsp/<userid>``
 
 - Platform:
 
   - Publish: ``geisa/api/sensor``
-  - Subscribe: ``geisa/api/sensor-req/#``
-  - Publish: ``geisa/api/sensor-rsp/<userid>``
+  - Subscribe: ``geisa/api/sensor/req/#``
+  - Publish: ``geisa/api/sensor/rsp/<userid>``
 
 Transaction Data
 ================
