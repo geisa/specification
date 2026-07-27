@@ -105,6 +105,11 @@ The GEISA API defines APIs for the following purposes:
        Reserved for expansion and definition in a future version of the
        specification.
 
+- :doc:`/api/app-to-app`
+
+    Allows applications to communicate off-device via messaging or direct IP
+    sockets.
+
 .. note::
 
   Additional transaction sets may be added in future versions of the GEISA
@@ -124,6 +129,7 @@ The GEISA API defines APIs for the following purposes:
    api/actuators
    api/sensors
    api/networking
+   api/app-to-app
 
 
 |geisa-pyramid|
