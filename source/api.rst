@@ -107,8 +107,8 @@ The GEISA API defines APIs for the following purposes:
 
 - :doc:`/api/app-to-app`
 
-    Allows applications to communicate off-device via messaging or direct IP
-    sockets.
+    Allows applications to communicate on-device via messaging between
+    specific applications if permitted.
 
 .. note::
 
