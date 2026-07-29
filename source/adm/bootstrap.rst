@@ -35,7 +35,7 @@ information (and subsequent registration).
 
   Client Bootstrap
 
-As noted in [LWM2M-Core], GEISA ADM conformant devices SHALL support Client
+As noted in [LWM2M-Core]_, GEISA ADM conformant devices SHALL support Client
 Initiated bootstrapping.  GESIA ADM conformant devices MAY support other
 bootstrapping methods.  For mass deployed devices, like smart meters, Factory
 Bootstrapping is usually preferred by system operators.
@@ -59,5 +59,4 @@ needed to complete the boostrapping process (e.g. certificates, keys, etc.).
   the identifier provided in the security protocol is sufficient.  We need to
   agree on the security mechanism and discuss whether the identifiers it provides
   are sufficient.
-
 

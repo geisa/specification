@@ -30,6 +30,10 @@ def parse_args() -> argparse.Namespace:
         "--latest-built-at",
         help="ISO-8601 build timestamp for the latest development draft.",
     )
+    parser.add_argument(
+        "--latest-source-version",
+        help="Source version string used to build the latest development draft.",
+    )
     return parser.parse_args()
 
 
@@ -142,6 +146,12 @@ def format_latest_build_time(latest_built_at: str | None) -> str | None:
     )
 
 
+def format_latest_source_version(latest_source_version: str | None) -> str | None:
+    if not latest_source_version:
+        return None
+    return latest_source_version.strip() or None
+
+
 def build_release_items(releases: list[dict]) -> str:
     if not releases:
         return (
@@ -214,12 +224,22 @@ def render_current_panel(release: dict | None) -> str:
     """.strip()
 
 
-def render_html(releases: list[dict], latest_built_at: str | None) -> str:
+def render_html(
+    releases: list[dict],
+    latest_built_at: str | None,
+    latest_source_version: str | None,
+) -> str:
     current = current_official_release(releases)
     latest_built_time = format_latest_build_time(latest_built_at)
+    latest_source_version = format_latest_source_version(latest_source_version)
     latest_built_markup = (
         f"\n          <p>{html.escape(latest_built_time)}</p>"
         if latest_built_time
+        else ""
+    )
+    latest_source_version_markup = (
+        f"\n          <p>Version: <code>{html.escape(latest_source_version)}</code></p>"
+        if latest_source_version
         else ""
     )
     release_items = build_release_items(releases)
@@ -453,7 +473,7 @@ def render_html(releases: list[dict], latest_built_at: str | None) -> str:
             This draft is rebuilt from <code>main</code> on each publication and
             may include changes newer
             than the current official release.
-          </p>{latest_built_markup}
+          </p>{latest_source_version_markup}{latest_built_markup}
           <div class="actions">
             <a class="button" href="./latest/index.html">Open HTML</a>
             <a class="button secondary" href="./latest/downloads/geisaspecification.pdf">Download PDF</a>
@@ -505,7 +525,11 @@ def main() -> None:
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
-        render_html(releases, args.latest_built_at),
+        render_html(
+            releases,
+            args.latest_built_at,
+            args.latest_source_version,
+        ),
         encoding="utf-8",
     )
 
