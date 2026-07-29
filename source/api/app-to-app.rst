@@ -63,12 +63,12 @@ If present in the Application Deployment Manifest, the GEISA Platform allows spe
    Applications offering services (Publish or Respond) do not list in the Manifest what other Apps are allowed to use those services.  This means an Application Publisher offering services will not know what other apps MAY use those services at publication time.  The System Operator is encouraged to determine compatibility before deploying an Application that uses another Application's services.
 
 
-An `app2app` section in the Manifest such as the examples below is added to each Application:
+An `app-to-app` section in the Manifest such as the examples below is added to each Application that uses App-to-App communication:
 
 .. code-block:: json
   :linenos:
 
-  "app2app": {
+  "app-to-app": {
     "publish": [
       "com.example.geisa.fooservice",
      ],
