@@ -536,7 +536,7 @@ testing. Refer to :doc:`conformance` for the scope and interpretation of GEISA
 conformance testing.
 
 This chapter distinguishes between two broad certification models that may be
-relevant to GEISA application ecosystems.  The industry continues 
+relevant to GEISA application ecosystems.  The industry continues
 to evolve and this may be expanded in a future revision.  Costs as well as
 capabilities of individual providers able to be located to perform this 
 function as a Utility may desire may also come into play.
@@ -624,4 +624,3 @@ event taxonomies for application alerts and Platform-originated
 behavioral events.
 
 |geisa-pyramid|
-

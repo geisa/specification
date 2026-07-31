@@ -80,7 +80,7 @@ for the LEE, VEE, & API, and network interoperability for ADM.
 Source written for the GEISA LEE should be compilable without modification,
 and without needing conditional compilation or platform specific directives.
 Similarly, source written for the GEISA VEE should be compilable for the target 
-virtual execution environment without needing conditional compilation or 
+virtual execution environment without needing conditional compilation or
 platform-specific directives.
 
 .. Warning::
