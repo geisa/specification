@@ -33,6 +33,8 @@ APIs are either Request/Response (R/R) type messages from Application
 to Platform and back, or published data from the Platform to all interested
 Applications.  The architecture of the platform daemons that both respond to R/R
 messages and post periodic and event data to the MQTT broker is platform-dependent.
+Request/Response (R/R) type and published data type messages are also possible
+between Applications using the :doc:`/api/app-to-app` capability.
 
 GEISA API conformant platforms SHALL:
 

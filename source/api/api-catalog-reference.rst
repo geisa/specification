@@ -47,7 +47,7 @@ API Topic and Permission Catalog
 .. note::
 
    In the topic definitions below, ``<userid>`` refers to the platform-local
-   identifier of the requesting GEISA application instance (see :doc:`/glossary`).
+   identifier of the requesting GEISA application instance (see :doc:`/glossary`) and SName, AppID-A, and AppID-B refers to the Service Name and Application IDs for :doc:`/api/app-to-app`.
 
 .. list-table:: API Topic and Permission Catalog
    :header-rows: 1
@@ -368,6 +368,48 @@ API Topic and Permission Catalog
      - Platform → App
      - ``GeisaSensorReadings_Rsp``
      - Response
+   * - :doc:`App-to-App <../api/app-to-app>`
+     - ``geisa/api/app2app/pub/<SName>/<AppID-A>``
+     - Application Publisher (A)
+     - Publish
+     - App A → App B
+     - N/A
+     - Broadcast
+   * - 
+     - ``geisa/api/app2app/pub/<SName>/#``
+     - Application Subscriber (B)
+     - Wildcard Subscribe
+     - App A → App B
+     - N/A
+     - Broadcast
+   * - 
+     - ``geisa/api/app2app/req/<SName>/#``
+     - Application Responder (A)
+     - Wildcard Subscribe
+     - App B → App A
+     - N/A
+     - Request
+   * - 
+     - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/<AppID-A>``
+     - Application Responder (A)
+     - Publish
+     - App A → App B
+     - N/A
+     - Response
+   * - 
+     - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/#``
+     - Application Requester (B)
+     - Wildcard Subscribe
+     - App A → App B
+     - N/A
+     - Response
+   * - 
+     - ``geisa/api/app2app/req/<SName>/<AppID-B>``
+     - Application Requester (B)
+     - Publish
+     - App B → App A
+     - N/A
+     - Request
 
 Actuator payloads are defined by ``GeisaActuatorGet_Req``,
 ``GeisaActuatorGet_Rsp``, ``GeisaActuatorSet_Req``, and
