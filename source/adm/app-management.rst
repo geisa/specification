@@ -11,7 +11,7 @@ Application Management
 ----------------------
 
 Application management is the process of deploying, activating, deactivating,
-and decommissioning applications on a GEISA ADM compliant platform, for
+and decommissioning applications on a GEISA ADM conformant platform, for
 execution within an execution environment.
 
 Software Management
@@ -57,7 +57,7 @@ During creation of an ``Software Management object 9`` instance to install an ed
 an ADM conformant EMS SHALL use the AppID as the object 9 instance number, in order to
 simplify subsequent app management operations (start, stop, purge, etc.).
 
-The following example demonstrates GEISA compliant edge app installation and 
+The following example demonstrates GEISA conformant edge app installation and 
       activation:
 
 #.    PULL download of the edge app package from the URL set by the EMS into

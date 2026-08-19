@@ -19,7 +19,7 @@ applications have a `recipe
 `manifest <https://learn.microsoft.com/en-us/azure/iot-central/core/howto-manage-deployment-manifests-with-rest-api>`_,
 or other set of metadata describing the requirements and dependencies.
 
-GEISA handles application meta-data by defining two manifests for each
+GEISA handles application metadata by defining two manifests for each
 application: a vendor manifest and an operator manifest.  
 
 The vendor application manifest provides information about the application to
@@ -33,6 +33,15 @@ allowing the operator to customize and tune the application permissions and
 resource allocations to match their execution environment, intended use case,
 and security requirements prior to deployment to the execution environment.  
 
+.. Warning::
+
+   Overriding the vendor application manifest may prevent applications from
+   running correctly.  If a system operator chooses to override the vendor
+   recommendations, they take responsibility for any related application
+   issues.  To enable operational flexibility, the GEISA specification requires
+   that system operators be able to override vendor settings, but operators
+   should be aware of the potential consequences.
+
 GEISA vendor and operator application manifests SHALL include:
 
 - Vendor assigned Application ID
@@ -41,14 +50,14 @@ GEISA vendor and operator application manifests SHALL include:
       `https://en.wikipedia.org/wiki/Reverse_domain_name_notation Reverse DNS
       Name Notation`, similar to Java packages
     - GEISA recommends ``tld.companyname.geisa.appname`` for application IDs,
-      for example, ``org.lfenergy.geisa.waveformanalyzer``.
+      for example, ``com.example.geisa.waveformanalyzer``.
 
 - Name of the application
 - Description of the application
 - Version Number of the application
 - Hash of the application image
 
-    - The GEISA EE shall not activate an application unless the hash of the image matches the hash in the meta-data
+    - The GEISA EE shall not activate an application unless the hash of the image matches the hash in the metadata
 
 GEISA vendor manifests SHALL include:
 
@@ -123,7 +132,7 @@ GEISA vendor manifests SHALL include:
 - Default Application Configuration
 
     - GEISA applications may need basic information to initialize such as the
-      URL of a server, or settngs such as the frequency of reportng.  The
+      URL of a server, or settngs such as the frequency of reporting.  The
       default application configuration provides an initial set of values that
       can be used by the system operator when creating the operator manifest.  
 
@@ -156,97 +165,12 @@ GEISA vendor manifests SHALL include:
     ToDo: Add details on the signature mechanism.
 
 
-Here is an example of an vendor application manifest.
+Here is an example of an vendor application manifest:
 
-.. code-block:: json
-  :linenos:
+.. include:: vendor-application-manifest-example.rst
 
-  {
-    "geisa-vendor-app-manifest": {
-      "org.lfenergy.geisa.HelloWorld": {
-        "author": "Some Company",
-        "name": "Hello World Application",
-        "description": "Killer application that writes 'hello world' to the log",
-        "version": "1.0.0",
-        "artifacts": {
-          "image-size": 748340,
-          "uncompressed-size": 2494464,
-          "image": "helloworld-1.tgz",
-          "signature": {
-            "signatureType": "ECDSA",
-            "signatureLength": 64,
-            "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
-            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Some Company"
-          }
-        },
-        "compatibility": {
-          "GEISA-API": "1.0.0",
-          "GEISA-LEE": "1.0.0",
-          "GEISA-VEE": null,
-          "CPU": "aarch64"
-          "LIB": "musl"
-        },
-        "resources": {
-          "app-cpu": 30,
-          "app-ram": 40,
-          "storage-persist": 20,
-          "storage-nonpersist": 5,
-          "threads": 50,
-          "AMI": false,
-          "HAN": true,
-          "waveform": true
-        },
-        "communication": {
-          "message": {
-            "daily-messages": 30
-          },
-          "operator": {
-            "daily-volume": 2048,
-            "outbound": [
-              "tcp:[3fff:421:32::/48]:443",
-              "udp:[3fff:421:2:661::/64]:4242",
-              "tcp:198.51.100.0/24:999"
-            ]
-          },
-          "internet": {
-            "daily-volume": 51200,
-            "outbound": [
-              "tcp:[2001:db8:44:12::/64]:443",
-              "udp:203.0.113.66:2256"
-            ]
-          }
-          "local": {
-            "outbound": [
-              "tcp::9999",
-              "tcp::502"
-              "udp::51234"
-              "udp::5540"
-            ]
-            "inbound": [
-              "tcp::5540",
-              "udp::5540",
-            ]
-            "inbound-multicast": [
-              "255.255.255.255",
-              "224.0.0.251",
-              "ff02::fa",
-              "ff02::fb",
-            ]
-          }
-        },
-        "external-dependencies": [
-          null
-        ],
-        "default-configuration": {
-          "knob": 36,
-          "setting": "blue",
-          "turbo encabulator active": true
-        },
-        "default-launch-strategy": {
-          "auto-restart": true,
-          "max restarts": 5,
-          "restart period": 60
-        }
-      }
-    }
-  }
+
+Here is an example of a deployment application manifest:
+
+.. include:: deployment-application-manifest-example.rst
+

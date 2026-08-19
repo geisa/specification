@@ -168,9 +168,9 @@ End-to-End Operational Context
 
 At a high level, the System Operator uses an :term:`EMS` to manage
 conformant platforms, authorize application deployment, and obtain
-operational visibility into the deployed fleet.
+operational visibility into the deployed fleet.  
 
-Within the platform, :term:`ADM` provides the management behavior needed
+Within the platform, :term:`EMA` provides the management behavior needed
 for device onboarding, lifecycle control, and application deployment as
 described in :doc:`adm`. The platform may provide one or both of the
 GEISA execution environments, :term:`LEE` and :term:`VEE`, as described

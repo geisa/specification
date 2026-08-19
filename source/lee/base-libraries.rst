@@ -19,7 +19,7 @@ in the event that the GEISA environment does not provide a needed library.
 
 There are two major groups of libraries:
 
-- C Language Runtime Libraries (e.g. gcc, uclibc, musl)
+- C Language Runtime Libraries (e.g. glibc, uclibc, musl)
 - Other C Libraries
 
 The following list is the current MINIMUM expectation for libraries provided in 
@@ -47,7 +47,7 @@ Other C Libraries (MUST):
 - libatomic - Atomic operations
 - libcrypto - OpenSSL (hashing, encryption, digital signatures, random numbers, 
   certs/keys)
-- libutil - Users, group,s pseudo-ttys (pty), etc.
+- libutil - Users, groups, pseudo-ttys (pty), etc.
 - libz - compression
 - libmosquitto - MQTT client implementation
 - libprotobuf - C++ protobuf implementation
@@ -66,7 +66,7 @@ Other C Libraries (MUST):
   The GEISA API is defined at the protocol level and does not mandate a specific 
   application SDK, programming language, or application implementation.
 
-  While GEISA ADM |geisa-adm-baton| makes use of LWM2M for communication, GEISA
-  Applications are unaware of this and do not require any LWM2M client libraries 
+  While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication, GEISA
+  Applications are unaware of this and do not require any LwM2M client libraries 
   or knowledge.
 

@@ -215,51 +215,65 @@ deployment to determine whether additional boundaries are present.
 Note that examples are illustrative and do not define required sensor types or
 configurations.
 
-+----------------------------+---------------------------------------------+------------------------------+
-| Boundary                   | Description                                 | Examples                     |
-+============================+=============================================+==============================+
-| Field Devices              | Physically accessible deployment            | Enclosure access, debug      |
-|                            | environment where attackers may gain        | ports                        |
-|                            | hardware access. This includes attempts     |                              |
-|                            | to tamper with the device, extract          |                              |
-|                            | sensitive material, or conduct side-channel |                              |      
-|                            | to observe, influence, or bypass normal     |                              |
-|                            | system protections.                         |                              |
-+----------------------------+---------------------------------------------+------------------------------+
-| Local Provisioning /       | Interfaces used during installation or      | Field tools, Bluetooth,      |
-| Maintenance                | maintenance that may introduce temporary    | serial                       |
-|                            | elevated trust.                             |                              |
-+----------------------------+---------------------------------------------+------------------------------+
-| Sensors                    | Data originating from instrumentation whose | Metrology, temperature,      |
-|                            | acquisition and integrity are governed by   | accelerometer, GNSS, other   |
-|                            | the COE device itself.                      | directly-attached sensors    |
-+----------------------------+---------------------------------------------+------------------------------+
-| Customer Networks          | Communications over networks not managed    | Home/Business Wi-Fi, HAN,    |
-|                            | by the utility/operator and therefore not   | LAN, Thread                  |
-|                            | inherently trusted.                         |                              |
-+----------------------------+---------------------------------------------+------------------------------+
-| Workload (e.g.             | Separation between the COE platform and     | GEISA COE APIs, resource     |
-| Applications)              | hosted workloads enabling operator control  | allocation, storage,         |
-|                            | over resource and network access. This      | permission models            |
-|                            | boundary exists even when all code is local |                              |
-|                            | due to multi-tenancy, privilege separation, |                              |
-|                            | and differing lifecycles.                   |                              |
-+----------------------------+---------------------------------------------+------------------------------+
-| External Device / Control  | Interfaces to autonomous systems not        | Inverters, Matter devices,   |
-|                            | governed by GEISA lifecycle or assurance    | thermostats, gateways,       |
-|                            | controls. Includes third-party devices or   | controllable loads, local    |
-|                            | subsystems that may have grid or local      | data sources                 |
-|                            | impact if compromised.                      |                              |
-+----------------------------+---------------------------------------------+------------------------------+
-| Operational Integration    | Exchange of operational data with upstream  | AMI backhaul, DERMS,         |
-|                            | systems, including utility or non-utility   | analytics platforms,         |
-|                            | infrastructure outside the COE trust domain.| monitoring systems, hybrid   |
-|                            |                                             | edge/cloud applications      |
-+----------------------------+---------------------------------------------+------------------------------+
-| Lifecycle Management       | Authority to deploy, configure, approve,    | Application deployment,      |
-|                            | restrict, update, or revoke software and    | update orchestration,        |
-|                            | policy governing the COE.                   | policy/config distribution   |
-+----------------------------+---------------------------------------------+------------------------------+
+|geisa-landscape|
+
+
+.. flat-table:: Trust Boundaries and Interfaces
+   :header-rows: 1
+   :widths: 15 30 20
+
+   * - Boundary
+     - Description
+     - Examples
+
+   * - Field Devices
+     - Physically accessible deployment environment where attackers may gain
+       hardware access. This includes attempts to tamper with the device,
+       extract sensitive material, or conduct side-channel to observe,
+       influence, or bypass normal system protections.
+     - Enclosure access, debug ports
+
+   * - Local Provisioning / Maintenance
+     - Interfaces used during installation or maintenance that may introduce
+       temporary elevated trust.
+     - Field tools, Bluetooth, serial
+
+   * - Sensors
+     - Data originating from instrumentation whose acquisition and integrity
+       are governed by the COE device itself.
+     - Metrology, temperature,  accelerometer, GNSS, other directly-attached sensors
+
+   * - Customer Networks
+     - Communications over networks not managed   by the utility/operator and
+       therefore not inherently trusted.
+     - Home/Business Wi-Fi, HAN, LAN, Thread
+
+   * - Workload (e.g.  Applications)
+     - Separation between the COE platform and   hosted workloads enabling
+       operator control   over resource and network access. This   boundary
+       exists even when all code is local   due to multi-tenancy, privilege
+       separation,   and differing lifecycles.
+     - GEISA COE APIs, resource allocation, storage, permission models
+
+   * - External Device / Control
+     - Interfaces to autonomous systems not governed by GEISA lifecycle or
+       assurance controls. Includes third-party devices or subsystems that may
+       have grid or local impact if compromised.
+     - Inverters, Matter devices, thermostats, gateways, controllable loads,
+       local data sources
+
+   * - Operational Integration
+     - Exchange of operational data with upstream systems, including utility or
+       non-utility infrastructure outside the COE trust domain.
+     - AMI backhaul, DERMS, analytics platforms, monitoring systems, hybrid
+       edge/cloud applications
+
+   * - Lifecycle Management
+     - Authority to deploy, configure, approve, restrict, update, or revoke
+       software and policy governing the COE.
+     - Application deployment, update orchestration, policy/config distribution
+
+|geisa-landscape-end|
 
 Utility-operated networks and systems are considered external to the COE trust
 domain and are therefore modeled within the Operational Integration or
@@ -280,52 +294,57 @@ infrastructure, or upstream systems.
 
 The following categories are considered within scope:
 
-+----------------------------+---------------------------------------------+
-| Threat Actor               | Description                                 |
-+============================+=============================================+
-| Supply Chain Adversary     | Actor seeking to introduce malicious        |
-|                            | components, firmware, or updates during     |
-|                            | manufacturing or distribution stages.       |
-+----------------------------+---------------------------------------------+
-| Field-Level Physical       | Actor with physical access capable of       |
-| Attacker                   | tampering, extraction, or hardware          |
-|                            | manipulation to disrupt operation, alter    |
-|                            | executable code outside authorized          |
-|                            | lifecycle processes, or obtain data from    |
-|                            | the device. This may include invasive       |
-|                            | techniques (e.g., device/chip decapsulation |
-|                            | ("decap"), probing, or unauthorized         |
-|                            | reflashing) intended to bypass protections. |
-+----------------------------+---------------------------------------------+
-| Opportunistic Local        | Actor on a customer or shared network       |
-| Network Attacker           | capable of interception, manipulation, or   |
-|                            | disruption of communications or operations. |
-+----------------------------+---------------------------------------------+
-| Unauthorized Local Service | Individual attempting access via            |
-| Actor                      | provisioning or maintenance interfaces      |
-|                            | using unauthorized or stolen tools or       |
-|                            | credentials.                                |
-+----------------------------+---------------------------------------------+
-| Remote Adversary           | External attacker using network access to   |
-|                            | exploit exposed services, protocols, or     |
-|                            | integrations.                               |
-+----------------------------+---------------------------------------------+
-| Coordinated Distributed    | Group or automated campaign capable of      |
-| Actor                      | influencing behavior across many endpoints. |
-+----------------------------+---------------------------------------------+
-| Compromised Upstream       | Trusted operational or management system    |
-| System                     | issuing valid-looking but malicious actions |
-|                            | after being compromised.                    |
-+----------------------------+---------------------------------------------+
-| Compromised External       | Third-party or customer-managed device      |
-| Device                     | providing malicious data or attempting      |
-|                            | lateral influence on the COE.               |
-+----------------------------+---------------------------------------------+
-| Malicious or Negligent     | Individual with authorized access who may   |
-| Insider                    | misuse privileges, attempt escalation,      |
-|                            | alter policy, or exfiltrate information,    |
-|                            | either intentionally or unintentionally.    |
-+----------------------------+---------------------------------------------+
+.. table:: 
+   :name: Threat Actors
+   :widths: 2 4
+
+   +----------------------------+---------------------------------------------+
+   | Threat Actor               | Description                                 |
+   +----------------------------+---------------------------------------------+
+   | Supply Chain Adversary     | Actor seeking to introduce malicious        |
+   |                            | components, firmware, or updates during     |
+   |                            | manufacturing or distribution stages.       |
+   +----------------------------+---------------------------------------------+
+   | Field-Level Physical       | Actor with physical access capable of       |
+   | Attacker                   | tampering, extraction, or hardware          |
+   |                            | manipulation to disrupt operation, alter    |
+   |                            | executable code outside authorized          |
+   |                            | lifecycle processes, or obtain data from    |
+   |                            | the device. This may include invasive       |
+   |                            | techniques (e.g., device/chip decapsulation |
+   |                            | ("decap"), probing, or unauthorized         |
+   |                            | reflashing) intended to bypass protections. |
+   +----------------------------+---------------------------------------------+
+   | Opportunistic Local        | Actor on a customer or shared network       |
+   | Network Attacker           | capable of interception, manipulation, or   |
+   |                            | disruption of communications or operations. |
+   +----------------------------+---------------------------------------------+
+   | Unauthorized Local Service | Individual attempting access via            |
+   | Actor                      | provisioning or maintenance interfaces      |
+   |                            | using unauthorized or stolen tools or       |
+   |                            | credentials.                                |
+   +----------------------------+---------------------------------------------+
+   | Remote Adversary           | External attacker using network access to   |
+   |                            | exploit exposed services, protocols, or     |
+   |                            | integrations.                               |
+   +----------------------------+---------------------------------------------+
+   | Coordinated Distributed    | Group or automated campaign capable of      |
+   | Actor                      | influencing behavior across many endpoints. |
+   +----------------------------+---------------------------------------------+
+   | Compromised Upstream       | Trusted operational or management system    |
+   | System                     | issuing valid-looking but malicious actions |
+   |                            | after being compromised.                    |
+   +----------------------------+---------------------------------------------+
+   | Compromised External       | Third-party or customer-managed device      |
+   | Device                     | providing malicious data or attempting      |
+   |                            | lateral influence on the COE.               |
+   +----------------------------+---------------------------------------------+
+   | Malicious or Negligent     | Individual with authorized access who may   |
+   | Insider                    | misuse privileges, attempt escalation,      |
+   |                            | alter policy, or exfiltrate information,    |
+   |                            | either intentionally or unintentionally.    |
+   +----------------------------+---------------------------------------------+
+
 
 Representative Threat Scenarios
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

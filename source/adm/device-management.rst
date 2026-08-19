@@ -54,10 +54,10 @@ ADM conformant devices that maintain their Registration state across reboots are
 required to perform a full re-Registration after a reboot or power restoration.
 
 Device management is also used to perform platform-level firmware updates.
-Firmware updates are performed using LWM2M Object 5, Firmware Update.
+Firmware updates are performed using LwM2M Object 5, Firmware Update.
 
 ADM conformant GEISA devices shall support device reboots as well as device
-factory resets, using LWM2M Object 3.  Factory resets of an ADM conformant
+factory resets, using LwM2M Object 3.  Factory resets of an ADM conformant
 device shall remove all installed applications and any associated application
 data. During factory reset, the EMS MAY specify management of local LDevID
 credentials by submitting an argument with the Execute /3/0/5 operation:

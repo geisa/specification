@@ -33,6 +33,9 @@ IMAGEPDF      	= $(patsubst %.svg,%.pdf,$(IMAGESVG))
 LICENSEGEN     = .github/scripts/generate-license-rst.py
 LICENSERST     = $(SOURCEDIR)/license.generated.rst.inc
 
+JSON			= $(shell find $(SOURCEDIR) -name '*.json' ! -name package-lock.json)
+JSONRST			= $(patsubst %.json, %.rst, $(JSON))
+
 # To solve mermaid issue when building on
 # RPi aarch system system
 ARCH := $(shell uname -m)
@@ -64,9 +67,10 @@ clean:
 	rm -f $(DRAWIOSVG)
 	rm -f $(DRAWIOPDF)
 	rm -f $(LICENSERST)
+	rm -f $(JSONRST)
 	rm -rf $(BUILDDIR)
 
-prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF)
+prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF) $(JSONRST)
 
 all: $(SPHINXTARGETS)
 
@@ -89,6 +93,10 @@ $(LICENSERST): LICENSE.md $(LICENSEGEN)
 
 %.pdf: %.svg
 	rsvg-convert -f=pdf -o $@ $<
+
+%.rst: %.json
+	echo ".. code-block:: json\n  :linenos:\n" > $@
+	cat $< | sed 's/^/  /' >> $@
 
 $(SPHINXTARGETS): Makefile prep $(LICENSERST)
 	PATH="$(PYTHONVENV:/=/bin:)$$PATH" $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)

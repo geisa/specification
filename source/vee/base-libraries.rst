@@ -50,8 +50,8 @@ The following APIs MUST be supported:
 
 .. note::
   
-  While GEISA ADM |geisa-adm-baton| makes use of LWM2M for communication, GEISA
-  Applications are unaware of this and do not require any LWM2M client libraries 
+  While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication, GEISA
+  Applications are unaware of this and do not require any LwM2M client libraries 
   or knowledge.
 
 |geisa-pyramid|

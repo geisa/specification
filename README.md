@@ -156,7 +156,7 @@ $ python3 -m venv venv
 
 source venv/bin/activate
 
-(venv) $ pip3 install GitPython sphinx sphinxcontrib-svg2pdfconverter
+(venv) $ pip3 install GitPython sphinx sphinxcontrib-svg2pdfconverter linuxdoc
 
 (venv) $ deactivate
 

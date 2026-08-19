@@ -49,367 +49,390 @@ API Topic and Permission Catalog
    In the topic definitions below, ``<userid>`` refers to the platform-local
    identifier of the requesting GEISA application instance (see :doc:`/glossary`) and SName, AppID-A, and AppID-B refers to the Service Name and Application IDs for :doc:`/api/app-to-app`.
 
-.. list-table:: API Topic and Permission Catalog
-   :header-rows: 1
-   :widths: 28 40 12 18 16 30 12
+|geisa-landscape|
 
-   * - Category
-     - Topic
+.. flat-table:: API Topic and Permission Catalog
+   :header-rows: 2
+   :widths: 25 10 10 9 30 10
+
+   * - :cspan:`5` Category 
+
+   * - Topic
      - Role
      - Action
      - Direction
      - Message Name
      - Message Type
-   * - :doc:`Discovery <../api/discovery>`
-     - ``geisa/api/platform/discovery/req/<userid>``
+
+   * - :cspan:`5` :doc:`Discovery <../api/discovery>`
+
+   * - ``geisa/api/platform/discovery/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaPlatformDiscovery_Req``
      - Request
-   * -
-     - ``geisa/api/platform/discovery/rsp/<userid>``
+
+   * - ``geisa/api/platform/discovery/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaPlatformDiscovery_Rsp``
      - Response
-   * -
-     - ``geisa/api/app/manifest/req/<userid>``
+
+   * - ``geisa/api/app/manifest/req/<userid>``
      - Application
      - Publish
      - App → Platform
-     - ``GeisaApplicationDeploymentManifest_Req``
+     - ``GeisaAppDeploymentManifest_Req``
      - Request
-   * -
-     - ``geisa/api/app/manifest/rsp/<userid>``
+
+   * - ``geisa/api/app/manifest/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
-     - ``GeisaApplicationDeploymentManifest_Rsp``
+     - ``GeisaAppDeploymentManifest_Rsp``
      - Response
-   * -
-     - ``geisa/api/platform/discovery/req/#``
+
+   * - ``geisa/api/platform/discovery/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaPlatformDiscovery_Req``
      - Request
-   * -
-     - ``geisa/api/platform/discovery/rsp/<userid>``
+
+   * - ``geisa/api/platform/discovery/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaPlatformDiscovery_Rsp``
      - Response
-   * -
-     - ``geisa/api/app/manifest/req/#``
+
+   * - ``geisa/api/app/manifest/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
-     - ``GeisaApplicationDeploymentManifest_Req``
+     - ``GeisaAppDeploymentManifest_Req``
      - Request
-   * -
-     - ``geisa/api/app/manifest/rsp/<userid>``
+
+   * - ``geisa/api/app/manifest/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
-     - ``GeisaApplicationDeploymentManifest_Rsp``
+     - ``GeisaAppDeploymentManifest_Rsp``
      - Response
-   * - :doc:`Platform Status <../api/status>`
-     - ``geisa/api/platform/status``
+
+   * - :cspan:`5` :doc:`Platform Status <../api/status>`
+
+   * - ``geisa/api/platform/status``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaPlatformToAppStatus``
      - Broadcast
-   * -
-     - ``geisa/api/platform/app/status/<userid>``
+
+   * - ``geisa/api/platform/app/status/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaPlatformToAppStatus``
      - Directed
-   * -
-     - ``geisa/api/app/platform/status/<userid>``
+
+   * - ``geisa/api/app/platform/status/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaAppToPlatformStatus``
      - Directed
-   * -
-     - ``geisa/api/platform/status``
+
+   * - ``geisa/api/platform/status``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaPlatformToAppStatus``
      - Broadcast
-   * -
-     - ``geisa/api/platform/app/status/<userid>``
+
+   * - ``geisa/api/platform/app/status/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaPlatformToAppStatus``
      - Directed
-   * -
-     - ``geisa/api/app/platform/status/#``
+
+   * - ``geisa/api/app/platform/status/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaAppToPlatformStatus``
      - Directed
-   * - :doc:`Networking <../api/networking>`
-     - ``geisa/api/message/upstream/req/<userid>``
+
+   * - :cspan:`5` :doc:`Networking <../api/networking>`
+
+   * - ``geisa/api/message/upstream/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaAppMessage_Req``
      - Request
-   * -
-     - ``geisa/api/message/upstream/rsp/<userid>``
+
+   * - ``geisa/api/message/upstream/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaAppMessage_Rsp``
      - Response
-   * -
-     - ``geisa/api/message/downstream/req/<userid>``
+
+   * - ``geisa/api/message/downstream/req/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaAppMessage_Req``
      - Request
-   * -
-     - ``geisa/api/message/downstream/rsp/<userid>``
+
+   * - ``geisa/api/message/downstream/rsp/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaAppMessage_Rsp``
      - Response
-   * -
-     - ``geisa/api/message/upstream/req/#``
+
+   * - ``geisa/api/message/upstream/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaAppMessage_Req``
      - Request
-   * -
-     - ``geisa/api/message/upstream/rsp/<userid>``
+
+   * - ``geisa/api/message/upstream/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaAppMessage_Rsp``
      - Response
-   * -
-     - ``geisa/api/message/downstream/req/<userid>``
+
+   * - ``geisa/api/message/downstream/req/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaAppMessage_Req``
      - Request
-   * -
-     - ``geisa/api/message/downstream/rsp/#``
+
+   * - ``geisa/api/message/downstream/rsp/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaAppMessage_Rsp``
      - Response
-   * - :doc:`Instantaneous Data <../api/instantaneous>`
-     - ``geisa/api/instantaneous/data``
+
+   * - :cspan:`5` :doc:`Instantaneous Data <../api/instantaneous>`
+
+   * - ``geisa/api/instantaneous/data``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaInstantaneousQuantities``
      - Broadcast
-   * -
-     - ``geisa/api/instantaneous/data``
+
+   * - ``geisa/api/instantaneous/data``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaInstantaneousQuantities``
      - Broadcast
-   * - :doc:`Billing Data <../api/billing>`
-     - ``geisa/api/billing/data``
+
+   * - :cspan:`5` :doc:`Billing Data <../api/billing>`
+  
+   * - ``geisa/api/billing/data``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaBillingQuantities``
      - Broadcast
-   * -
-     - ``geisa/api/billing/data``
+  
+   * - ``geisa/api/billing/data``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaBillingQuantities``
      - Broadcast
-   * - :doc:`Waveform Data <../api/waveform>`
-     - ``geisa/api/waveform/req/<userid>``
+  
+   * - :cspan:`5` :doc:`Waveform Data <../api/waveform>`
+  
+   * - ``geisa/api/waveform/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaWaveform_Req``
      - Request
-   * -
-     - ``geisa/api/waveform/rsp/<userid>``
+
+   * - ``geisa/api/waveform/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaWaveform_Rsp``
      - Response
-   * -
-     - ``geisa/api/waveform/req/#``
+
+   * - ``geisa/api/waveform/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaWaveform_Req``
      - Request
-   * -
-     - ``geisa/api/waveform/rsp/<userid>``
+  
+   * - ``geisa/api/waveform/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaWaveform_Rsp``
      - Response
-   * - :doc:`Actuator Status & Control <../api/actuators>`
-     - ``geisa/api/actuator/get/req/<userid>``
+  
+   * - :cspan:`5` :doc:`Actuator Status & Control <../api/actuators>`
+  
+   * - ``geisa/api/actuator/get/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaActuatorGet_Req``
      - Request
-   * -
-     - ``geisa/api/actuator/get/rsp/<userid>``
+  
+   * - ``geisa/api/actuator/get/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaActuatorGet_Rsp``
      - Response
-   * -
-     - ``geisa/api/actuator/set/req/<userid>``
+  
+   * - ``geisa/api/actuator/set/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaActuatorSet_Req``
      - Request
-   * -
-     - ``geisa/api/actuator/set/rsp/<userid>``
+
+   * - ``geisa/api/actuator/set/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaActuatorSet_Rsp``
      - Response
-   * -
-     - ``geisa/api/actuator/get/req/#``
+
+   * - ``geisa/api/actuator/get/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaActuatorGet_Req``
      - Request
-   * -
-     - ``geisa/api/actuator/get/rsp/<userid>``
+
+   * - ``geisa/api/actuator/get/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaActuatorGet_Rsp``
      - Response
-   * -
-     - ``geisa/api/actuator/set/req/#``
+
+   * - ``geisa/api/actuator/set/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaActuatorSet_Req``
      - Request
-   * -
-     - ``geisa/api/actuator/set/rsp/<userid>``
+
+   * - ``geisa/api/actuator/set/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaActuatorSet_Rsp``
      - Response
-   * - :doc:`Sensors <../api/sensors>`
-     - ``geisa/api/sensor``
+
+   * - :cspan:`5` :doc:`Sensors <../api/sensors>`
+
+   * - ``geisa/api/sensor``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaSensorReading``
      - Broadcast
-   * -
-     - ``geisa/api/sensor/req/<userid>``
+
+   * - ``geisa/api/sensor/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaSensorReadings_Req``
      - Request
-   * -
-     - ``geisa/api/sensor/rsp/<userid>``
+
+   * - ``geisa/api/sensor/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaSensorReadings_Rsp``
      - Response
-   * -
-     - ``geisa/api/sensor``
+
+   * - ``geisa/api/sensor``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaSensorReading``
      - Broadcast
-   * -
-     - ``geisa/api/sensor/req/#``
+
+   * - ``geisa/api/sensor/req/#``
      - Platform
      - Wildcard Subscribe
      - App → Platform
      - ``GeisaSensorReadings_Req``
      - Request
-   * -
-     - ``geisa/api/sensor/rsp/<userid>``
+
+   * - ``geisa/api/sensor/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaSensorReadings_Rsp``
      - Response
-   * - :doc:`App-to-App <../api/app-to-app>`
-     - ``geisa/api/app2app/pub/<SName>/<AppID-A>``
+
+   * - :cspan:`5` :doc:`App-to-App <../api/app-to-app>`
+
+   * - ``geisa/api/app2app/pub/<SName>/<AppID-A>``
      - Application Publisher (A)
      - Publish
      - App A → App B
      - N/A
      - Broadcast
-   * - 
-     - ``geisa/api/app2app/pub/<SName>/#``
+
+   * - ``geisa/api/app2app/pub/<SName>/#``
      - Application Subscriber (B)
      - Wildcard Subscribe
      - App A → App B
      - N/A
      - Broadcast
-   * - 
-     - ``geisa/api/app2app/req/<SName>/#``
+
+   * - ``geisa/api/app2app/req/<SName>/#``
      - Application Responder (A)
      - Wildcard Subscribe
      - App B → App A
      - N/A
      - Request
-   * - 
-     - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/<AppID-A>``
+
+   * - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/<AppID-A>``
      - Application Responder (A)
      - Publish
      - App A → App B
      - N/A
      - Response
-   * - 
-     - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/#``
+
+   * - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/#``
      - Application Requester (B)
      - Wildcard Subscribe
      - App A → App B
      - N/A
      - Response
-   * - 
-     - ``geisa/api/app2app/req/<SName>/<AppID-B>``
+
+   * - ``geisa/api/app2app/req/<SName>/<AppID-B>``
      - Application Requester (B)
      - Publish
      - App B → App A
      - N/A
      - Request
+
+|geisa-landscape-end|
 
 Actuator payloads are defined by ``GeisaActuatorGet_Req``,
 ``GeisaActuatorGet_Rsp``, ``GeisaActuatorSet_Req``, and

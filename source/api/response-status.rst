@@ -48,6 +48,8 @@ Applications should branch primarily on ``code``. Human-readable ``message``
 and ``details`` values are for diagnostics and display, not interoperable
 control flow.
 
+|geisa-landscape|
+
 .. list-table:: Status Code Handling
    :header-rows: 1
    :widths: 24 36 40
@@ -78,6 +80,8 @@ control flow.
      - ``GEISA_STATUS_CODE_DATA_*``
      - Treat the response as completed, but handle data that may be unavailable,
        stale, incomplete, or otherwise limited.
+
+|geisa-landscape-end|
 
 API Usage
 =========

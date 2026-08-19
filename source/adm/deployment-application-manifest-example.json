@@ -1,0 +1,96 @@
+{
+    "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+    "geisa-application-manifest": {
+        "$comment": "Example deployment manifest derived from the vendor application manifest. Shows operator-approved effective settings for deployment on a specific class of platform.",
+        "manifest": {
+            "$comment": "Application identity and compatibility are carried forward from the vendor application manifest. Deployment-time changes apply to operator policy, configuration, and allocated resources as defined below.",
+            "app-id": "org.lfenergy.geisa.testapp",
+            "author": "GEISA Developer",
+            "name": "Awesome App",
+            "description": "This app makes your device awesome",
+            "app-version": "1.0.0 splat",
+            "manifest-version": "0.9.0",
+            "artifacts": [
+                {
+                    "$comment": "Deployment continues to use the same application artifact as the vendor manifest in this example.",
+                    "image-name": "AwesomeApp.tgz",
+                    "image-type": "appoverlay",
+                    "image-size": 262144,
+                    "uncompressed-size": 1048576,
+                    "signature": {
+                      "signatureType": "ECDSA",
+                      "signatureLength": 64,
+                      "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
+                      "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
+                      "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
+                    }
+                }
+            ],
+            "api-access": {
+                "$comment": "Operator denied requested actuator-control, otherwise API access is accepted unchanged from the vendor application manifest in this example.",
+                "actuator-status": true,
+                "actuator-control": false,
+                "messaging": true,
+                "instantaneous": false,
+                "sensor": true,
+                "waveform": false,
+                "app-to-app": false
+            },
+            "compatibility": {
+                "$comment": "Compatibility requirements are aligned with the vendor application manifest at GEISA API and LEE version 0.9.0.",
+                "GEISA-API": "0.9.0",
+                "GEISA-LEE": "0.9.0",
+                "GEISA-VEE": null,
+                "toolchain-id": "aarch64-linux-musleabihf neon",
+                "toolchain-version": "1.0.0"
+            },
+            "default-configuration": {
+                "$comment": "Operator override of vendor defaults. Volume is reduced and one feature is disabled for this deployment.",
+                "volume": 8,
+                "turbo-encabulator": "off",
+                "oscillation-overthruster": "enabled"
+            },
+            "default-launch-strategy": {
+                "$comment": "Operator-adjusted restart behavior. Restart count is reduced, restart window is increased, and notify timeout is increased. Final enforcement remains subject to platform policy.",
+                "auto-restart": true,
+                "max-restarts": 3,
+                "restart-period": 120,
+                "start-timeout": 5,
+                "stop-timeout": 5,
+                "notify-timeout": 10,
+                "watchdog": true
+            },
+            "external-dependencies": [],
+            "communication": {
+                "$comment": "Operator-restricted communication limits relative to the vendor manifest.",
+                "messaging": {
+                    "$comment": "Deployment reduces permitted daily message-bus usage.",
+                    "daily-messages": 10
+                },
+                "HAN": true,
+                "local": {
+                    "$comment": "Deployment reduces allowed local network daily volume while preserving the same outbound port access.",
+                    "daily-volume": 2500,
+                    "outbound": [
+                        "tcp::80"
+                    ]
+                }
+            },
+            "resources": {
+                "$comment": "Operator-adjusted resource allocation. CPU and persistent storage are reduced relative to the vendor manifest while other minimum resources remain unchanged.",
+                "app-cpu": 15,
+                "threads": 1,
+                "app-ram": 200,
+                "storage-persistent": 1500,
+                "storage-nonpersistent": 0
+            }
+        },
+        "signature": {
+            "signatureType": "ECDSA",
+            "signatureLength": 64,
+            "signatureHex": "052c3a40b5714de38965291d366a28df034023ed0fd423c004d56d3c1ad20d8e052c3a40b5714de38965291d366a28df034023ed0fd423c004d56d3c1ad20d8e",
+            "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
+            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Local Electric Utility"
+        }
+    }
+}

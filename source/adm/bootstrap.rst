@@ -10,8 +10,8 @@
 Bootstrapping
 -------------
 
-As discussed in the LWM2M core specification [LWM2M-Core]_ section 6.1, there
-are four ways to bootstrap a device so that it knows how to contact its LWM2M
+As discussed in the LwM2M core specification [LwM2M-Core]_ section 6.1, there
+are four ways to bootstrap a device so that it knows how to contact its LwM2M
 server for management:
 
 - Factory Bootstrap
@@ -35,7 +35,7 @@ information (and subsequent registration).
 
   Client Bootstrap
 
-As noted in [LWM2M-Core]_, GEISA ADM conformant devices SHALL support Client
+As noted in [LwM2M-Core]_, GEISA ADM conformant devices SHALL support Client
 Initiated bootstrapping.  GESIA ADM conformant devices MAY support other
 bootstrapping methods.  For mass deployed devices, like smart meters, Factory
 Bootstrapping is usually preferred by system operators.
@@ -55,7 +55,7 @@ needed to complete the boostrapping process (e.g. certificates, keys, etc.).
 
 .. Note::
 
-  ToDo:  LWM2M Bootstrapping can include an endpoint client name.  This is optional if
+  ToDo:  LwM2M Bootstrapping can include an endpoint client name.  This is optional if
   the identifier provided in the security protocol is sufficient.  We need to
   agree on the security mechanism and discuss whether the identifiers it provides
   are sufficient.
