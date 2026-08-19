@@ -300,7 +300,7 @@ The following categories are considered within scope:
 
    +----------------------------+---------------------------------------------+
    | Threat Actor               | Description                                 |
-   +----------------------------+---------------------------------------------+
+   +============================+=============================================+
    | Supply Chain Adversary     | Actor seeking to introduce malicious        |
    |                            | components, firmware, or updates during     |
    |                            | manufacturing or distribution stages.       |
