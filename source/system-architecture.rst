@@ -39,7 +39,7 @@ specification.  GEISA simply requires that a conformant EMS expose the required
 functions to the system operator in some meaningful way, and that it implements 
 the specified network protocol and transactions in response to user commands.  
 An EMS could provide a GUI, a command line interface, or an API and still be 
-considered to be conformant.
+considered conformant.
 
 Interacting with the GEISA EMS is one or more platform implementations.  An 
 ADM-conformant platform interface will be able to communicate with the GEISA 

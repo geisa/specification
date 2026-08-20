@@ -27,21 +27,28 @@ interoperability conformance, should be realizable on:
 - One (or more) network interfaces
 - One (or more) metrology interfaces
 
-.. note::
-
-    For the LEE, as this version of the specification does *not* require binary 
-    compatibility, but is limited to source-code compatibility only for LEE 
-    GEISA applications, platform implementers MAY choose to use alternate CPUs 
-    and/or fewer resources for the LEE.
+The resources listed above are the design target for GEISA LEE implementations
+and should be considered a minimum hardware specification.  Platform vendors
+MAY choose to implement GEISA on more constrained environments, but this
+specification is not constrained by that choice.
     
 Platform implementers should be aware that:
+    
+- This version of the specification is limited to source-code compatibility
+  only.
+
+- LEE GEISA platform implementers MAY choose to use alternate CPUs and/or fewer
+  resources for implementations; however, this may create compatibility challenges
+  if binary compatibility is desired.
+
+- VEE GEISA applications are agnostic to underlying CPU architecture, but are
+  also source-code compatible only in this version of the specification.
 
 - It MAY NOT be possible to implement a fully conformant (ADM, API, and EE) 
-  platform on a device with fewer resources
+  platform on a device with fewer resources.
+
 - If GEISA is extended to include binary compatibility in the future, alternate
-  architectures will likely create additional management work for end users 
-  (VEE GEISA applications are agnostic to underlying CPU architecture, but are
-  source-code compatible only in GEISA 1.0.)
+  architectures will likely create additional management work for end users. 
 
 The vision is that the GEISA EE |geisa-ee-globe| runs on a wide range of 
 hardware platforms with various capabilities:
@@ -49,12 +56,12 @@ hardware platforms with various capabilities:
 - Device types such as smart meters, load switches, EV chargers, etc.
 - Single and multi-core CPUs
 - Support for processor extensions and coprocessors such as GPUs  
-- RAM sizes greater than the minimum 512MB target
-- Storage sizes greater than the minimum 1 GB target
+- RAM sizes greater than the 512MB target
+- Storage sizes greater than the 1 GB target
 - Multiple networking interfaces such as mesh, Wi-Fi, cellular, etc.
 - Metrology interfaces to provide voltage, current, etc.
 - Actuators such as relays and contactors
-- Sensors including temperature, humidity, location, vibration and more
+- Sensors including temperature, humidity, location, vibration, and more
 - Hardware watchdogs
 - Generic hardware interfaces such as GPIO, ADC, SPI, etc.
 

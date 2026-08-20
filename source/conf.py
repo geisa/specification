@@ -34,7 +34,7 @@ html_title = 'GEISA Specification'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ["linuxdoc.rstFlatTable"]
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -147,6 +147,14 @@ rst_prolog = f"""
     :alt: GEISA Pyramid 
     :width: 20pt
 
+.. |geisa-landscape| raw:: latex
+
+    \\begin{{landscape}}
+
+.. |geisa-landscape-end| raw:: latex
+
+    \\end{{landscape}}
+
 
 """
 
@@ -184,7 +192,10 @@ latex_elements = {
         'preamble': r'''
 \righthyphenmin=62
 \lefthyphenmin=62
+% set hbadness superhigh to suppress *underflow* error messages.  Overflow messages will still be shown
+\hbadness=99999
 \protected\def\sphinxstyletheadfamily{\footnotesize}
+\usepackage{pdflscape}
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 % activate={true,nocompatibility} - activate protrusion and expansion
 % final - enable microtype; use "draft" to disable

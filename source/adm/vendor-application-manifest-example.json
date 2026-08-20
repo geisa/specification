@@ -1,0 +1,96 @@
+{
+    "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+    "geisa-application-manifest": {
+        "$comment": "Example vendor application manifest. Defines vendor-supplied application identity, compatibility requirements, defaults, requested permissions, and minimum resources prior to operator review or deployment-time override.",
+        "manifest": {
+            "$comment": "Core application metadata and vendor-recommended settings.",
+            "app-id": "org.lfenergy.geisa.testapp",
+            "author": "GEISA Developer",
+            "name": "Awesome App",
+            "description": "This app makes your device awesome",
+            "app-version": "1.0.0 splat",
+            "manifest-version": "0.9.0",
+            "artifacts": [
+                {
+                    "$comment": "Single application artifact example. Additional artifact types may be added in future GEISA revisions.",
+                    "image-name": "AwesomeApp.tgz",
+                    "image-type": "appoverlay",
+                    "image-size": 262144,
+                    "uncompressed-size": 1048576,
+                    "signature": {
+                      "signatureType": "ECDSA",
+                      "signatureLength": 64,
+                      "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
+                      "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
+                      "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
+                    }
+                }
+            ],
+            "api-access": {
+                "$comment": "Requested GEISA API access. Final granted access remains subject to platform and operator policy.",
+                "actuator-status": true,
+                "actuator-control": true,
+                "messaging": true,
+                "instantaneous": false,
+                "sensor": true,
+                "waveform": false,
+                "app-to-app": false
+            },
+            "compatibility": {
+                "$comment": "Application requires GEISA API and LEE version 0.9.0, does not require VEE support, and identifies a vendor-defined toolchain target.",
+                "GEISA-API": "0.9.0",
+                "GEISA-LEE": "0.9.0",
+                "GEISA-VEE": null,
+                "toolchain-id": "aarch64-linux-musleabihf neon",
+                "toolchain-version": "1.0.0"
+            },
+            "default-configuration": {
+                "$comment": "Vendor default configuration values. Operators may override these in the deployment manifest.",
+                "volume": 11,
+                "turbo-encabulator": "on",
+                "oscillation-overthruster": "enabled"
+            },
+            "default-launch-strategy": {
+                "$comment": "Vendor-recommended launch and restart behavior. Final enforcement may be subject to platform and operator policy. Watchdog behavior remains under broader discussion.",
+                "auto-restart": true,
+                "max-restarts": 5,
+                "restart-period": 60,
+                "start-timeout": 5,
+                "stop-timeout": 5,
+                "notify-timeout": 5,
+                "watchdog": true
+            },
+            "external-dependencies": [],
+            "communication": {
+                "$comment": "Requested communication access and limits. This example requests messaging access, HAN access, and local outbound network usage with a daily volume limit.",
+                "messaging": {
+                    "$comment": "Vendor-requested message-bus usage limit.",
+                    "daily-messages": 20
+                },
+                "HAN": true,
+                "local": {
+                    "$comment": "Vendor-requested local network usage. Outbound TCP port 80 is permitted in this example.",
+                    "daily-volume": 5000,
+                    "outbound": [
+                        "tcp::80"
+                    ]
+                }
+            },
+            "resources": {
+                "$comment": "Vendor-requested minimum resource requirements.",
+                "app-cpu": 20,
+                "threads": 1,
+                "app-ram": 200,
+                "storage-persistent": 2000,
+                "storage-nonpersistent": 0
+            }
+        },
+        "signature": {
+            "signatureType": "ECDSA",
+            "signatureLength": 64,
+            "signatureHex": "0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFFAAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
+            "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
+            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
+        }
+    }
+}

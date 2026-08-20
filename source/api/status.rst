@@ -48,7 +48,7 @@ application may be able to directly determine the same error or condition, but
 a platform notification allows for a consistent method of notification and can
 reduce duplication of effort between platform and applications.
 
-A GEISA compliant implementation MUST provide at a minimum non-application-specific
+A GEISA conformant implementation MUST provide at a minimum non-application-specific
 notifications for:
 
 - Over temperature
@@ -72,7 +72,7 @@ Application Updates
 GEISA applications should be made aware of their own resource utilization and
 any events or alarms or commands specific to their application instance.
 
-A GEISA-compliant implementation MUST provide at a minimum application-specific
+A GEISA conformant implementation MUST provide at a minimum application-specific
 notifications for:
 
 - Resource usage periodically (at least once every 15 seconds)
@@ -117,7 +117,7 @@ Application Status
 GEISA platforms require visibility into the status and health of each
 application in order to manage lifecycle and availability.
 
-A GEISA-compliant implementation MUST accept at a minimum application-specific
+A GEISA conformant implementation MUST accept at a minimum application-specific
 messages for:
 
 - Notification that an application startup is complete and now operating
@@ -150,7 +150,7 @@ period it MUST take the following corrective actions:
 Connectivity Updates
 ^^^^^^^^^^^^^^^^^^^^
 
-A GEISA compliant implementation MUST provide at a minimum non-application-specific
+A GEISA conformant implementation MUST provide at a minimum non-application-specific
 notifications for:
 
 - Message-based communication:
@@ -175,7 +175,7 @@ notifications for:
   - protocol: ipv4, ipv6, or both
   - latency: real-time, delayed
 
-A GEISA compliant implementation MUST provide at a minimum application-specific
+A GEISA conformant implementation MUST provide at a minimum application-specific
 notifications for:
 
 - Time of next daily volume reset

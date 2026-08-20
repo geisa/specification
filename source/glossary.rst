@@ -89,12 +89,12 @@ Glossary
     The EMA is the logical component of a GEISA ADM conformant platform
     which implements ADM capabilities on the edge device(s).
 
-   EMS
-    Edge Management System - the overall system implementing the set of
-    capabilities of the ADM Pillar, which will include the LwM2M server and
-    client typically but may also include other software and/or capabilities.
+   EMS 
+    Edge Management System - the central system implementing the management
+    capabilities of the ADM Pillar, which will include the LwM2M server but may
+    also include other software and/or capabilities.
 
-    Note: with the electric utility industry, EMS often means
+    Note: within the electric utility industry, EMS often means
     *Energy* Management System.  Similarly, within the network management
     system EMS often means *Element* Management System.
     Within this specification EMS is used exclusively for Edge

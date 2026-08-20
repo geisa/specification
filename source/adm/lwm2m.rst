@@ -9,12 +9,12 @@ OMA Lightweight M2M
 -------------------------------------
 
 GEISA Application & Device Management uses the Open Mobile Alliance Lightweight M2M
-[LWM2M]_ protocol for application management.  Specifically,
+[LwM2M]_ protocol for application management.  Specifically,
 
 * ADM conformant platforms and Edge Management Systems (EMS) SHALL support
   LwM2M protocol version 1.2 as defined by approved revision 1.2.2 of the
-  LwM2M Core and Transport specifications. [LWM2M-Core]_
-  [LWM2M-Transport]_
+  LwM2M Core and Transport specifications. [LwM2M-Core]_
+  [LwM2M-Transport]_
 * ADM conformant platforms and EMS are required to support only the LwM2M
   interfaces, operations, Objects, Resources, features, and behaviors made
   applicable by the GEISA specification. GEISA does not require every optional
@@ -23,17 +23,17 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   versions, provided they continue to support the GEISA-pinned baseline and do
   not require later-version behavior for GEISA interoperability.
 * ADM conformant platforms and EMS SHALL support CoAP over UDP for
-  message transport. [LWM2M-Transport]_
+  message transport. [LwM2M-Transport]_
 * ADM conformant platforms and EMS SHALL support DTLS for CoAP security.
 * ADM conformant platforms and EMS SHALL support Certificate mode with EST as
-  per [LWM2M-Transport]_ 5.2.4.
+  per [LwM2M-Transport]_ 5.2.4.
 * ADM conformant platforms and EMS SHALL support EST over CoAP per [RFC9148]_
 * ADM conformant platforms and EMS SHALL support the Bootstrap, Registration,
   Device Management and Information Reporting interfaces.
 * ADM conformant platforms and EMS SHALL support the applicable Resources and
   behaviors of the required LwM2M Objects at the versions in the fixed GEISA
   ADM Object-version baseline below.
-* ADM conformant EMS shall support the following LWM2M Objects
+* ADM conformant EMS shall support the following LwM2M Objects
 
 
   * ID 0 -- Security
@@ -57,7 +57,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3605 -- GEISA Platform Monitoring
   * ID 3606 -- GEISA Platform Configuration
 
-* ADM conformant platforms shall support the following LWM2M Objects
+* ADM conformant platforms shall support the following LwM2M Objects
 
   * ID 0 -- Security
   * ID 1 -- Server
@@ -74,7 +74,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3606 -- GEISA Platform Configuration
 
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
-  following LWM2M Objects:
+  following LwM2M Objects:
 
   * ID 10 -- Cellular Network Connectivity
   * ID 11 -- APN Connection Profile
@@ -82,17 +82,17 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 504 -- Remote SIM Provisioning
 
 * ADM conformant platforms with WLAN interfaces SHALL support the
-  following LWM2M Objects:
+  following LwM2M Objects:
 
   * ID 12 -- WLAN Connectivity
 
 * ADM conformant platforms with GNSS interfaces SHALL support the
-  following LWM2M Objects:
+  following LwM2M Objects:
 
   * ID 6 -- Location
 
 * ADM conformant platforms with Wi-SUN interfaces SHALL support the
-  following LWM2M Objects:
+  following LwM2M Objects:
 
   * ID 3603 -- Wi-SUN Radio Management
 
@@ -192,6 +192,7 @@ audited for this baseline. Pending definition updates are identified below.
      - GEISA Platform Configuration
      - 1.0
      - :download:`3606.xml <external/lwm2m-registry/3606.xml>`
+
 
 The linked Software Management ``/9`` definition is version 1.0 and does not
 yet represent the GEISA 1.0 baseline requirement for version 1.1, including

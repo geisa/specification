@@ -19,10 +19,10 @@ system.
 See :doc:`system-architecture` for more discussion of the general concept.
 
 ADM conformance devices support a set of standard transactions using the Open Mobile Alliance 
-Lightweight M2M [LWM2M]_ transaction definitions, over the IETF CoAP
+Lightweight M2M [LwM2M]_ transaction definitions, over the IETF CoAP
 [RFC7252]_ protocol.  ADM conformant platform implementations MUST support the
-LWM2M transactions detailed in this chapter and the supporting device behaviors
-described.  ADM conformant edge management systems MUST support the LWM2M
+LwM2M transactions detailed in this chapter and the supporting device behaviors
+described.  ADM conformant edge management systems MUST support the LwM2M
 transactions detailed in this chapter and the supporting edge management system
 behaviors described.
 

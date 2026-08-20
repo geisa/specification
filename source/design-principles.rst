@@ -121,12 +121,18 @@ MINIMUM resources available for GEISA applications:
 - For GEISA VEE |geisa-vee-cloud|:
 
   - **1 MB of RAM**
-  - **8 MB of Flash memory** for code storage and execution
   - **8 MB of persistent storage**
 
 Additionally, although hardware performance will vary considerably between 
 platforms, GEISA EE SHOULD provide a minimum of **50% of the CPU** for GEISA 
 applications |geisa-ee-globe|.
+
+Persistent storage is used for both code / executable and data storage.  While
+the executable sizes are expected to be very different between LEE and VEE,
+sizes for waveform capture data or machine learning models are likely to be the
+same.  Implementers should carefully consider the applications they plan to
+support when sizing their hardware, as the minimums listed above may be
+insufficient for some applications.
 
 Efficiency is critical. The GEISA EE shall provide only those services which 
 are so widely required that it would be less efficient to *not* provide them.

@@ -9,7 +9,7 @@ Registration
 -----------------------
 
 GEISA ADM conformant devices SHALL attempt to register with a GEISA conformant
-edge management system on startup.  Registration uses the LWM2M `Client Registration
+edge management system on startup.  Registration uses the LwM2M `Client Registration
 Interface`.
 
 The LwM2M Registration process allows a GEISA ADM conformant platform to inform
@@ -32,7 +32,7 @@ GEISA ADM conformant devices SHALL use the Registration Update, a lightweight em
 .. _registration:
 .. figure:: client-registration.*
 
-  LWM2M Registration and Registration Update
+  LwM2M Registration and Registration Update
 
 |geisa-pyramid|
 

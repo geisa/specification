@@ -107,7 +107,7 @@ For Meter type devices, the platform MUST provide at a minimum:
 Sensor Hardware
 ^^^^^^^^^^^^^^^
 
-A GEISA EE compliant platform can optionally provide one or more sensors.
+A GEISA EE conformant platform can optionally provide one or more sensors.
 
 Some example sensors that may be provided include:
 
@@ -215,8 +215,8 @@ Transaction Data
 
 - ``GeisaPlatformDiscovery_Req``
 - ``GeisaPlatformDiscovery_Rsp``
-- ``GeisaApplicationDeploymentManifest_Req``
-- ``GeisaApplicationDeploymentManifest_Rsp``
+- ``GeisaAppDeploymentManifest_Req``
+- ``GeisaAppDeploymentManifest_Rsp``
 
 As defined in |geisa-schemas-repo|
 

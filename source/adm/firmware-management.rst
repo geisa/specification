@@ -11,7 +11,7 @@ Firmware Management
 -------------------
 
 Firmware management is the process of updating the core operating system for an
-ADM compliant GEISA platform.
+ADM conformant GEISA platform.
 
 The LwM2M singleton object ``/5/0 Firmware Update`` represents the firmware
 update *process*, not simply the firmware image stored on the device.  Object

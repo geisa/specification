@@ -66,111 +66,116 @@ instantaneous fields. Every row shown here is required for the AC Meter
 Profile. Additional phase objects may also be required according to meter
 form, phase count, Platform Discovery, etc.
 
+|geisa-landscape|
+
 .. list-table:: Required Outer Payload and phase-a Fields
    :header-rows: 1
-   :widths: 12 22 18 48
+   :widths: 9 30 30 40 
 
    * - Scope
      - Field
      - Encoding / Unit
      - Meaning / Applicability
    * - Outer payload
-     - ``message-version``
+     - message-version
      - uint32 integer
      - Top-level message version
    * - Outer payload
-     - ``timestamp-us``
+     - timestamp-us
      - uint64 UTC Unix epoch microseconds
      - Top-level timestamp
    * - phase-a
-     - ``message-version``
+     - message-version
      - uint32 integer
      - Phase message version
    * - phase-a
-     - ``phase``
+     - phase
      - String enum ``PHASE_A`` | ``PHASE_B`` | ``PHASE_C`` | ``PHASE_N``
      - Phase selector; AC Meter Profile uses PHASE_A here.
    * - phase-a
-     - ``voltage-micro-v``
+     - voltage-micro-v
      - int64 fixed-point microvolts
      - Phase RMS voltage
    * - phase-a
-     - ``current-micro-a``
+     - current-micro-a
      - int64 fixed-point microamps
      - Phase RMS current
    * - phase-a
-     - ``active-power-micro-w-sum``
+     - active-power-micro-w-sum
      - int64 fixed-point microwatts
      - Phase active power sum
    * - phase-a
-     - ``reactive-power-micro-var-sum``
+     - reactive-power-micro-var-sum
      - int64 fixed-point microvars
      - Phase reactive power sum
    * - phase-a
-     - ``apparent-power-micro-va-sum``
+     - apparent-power-micro-va-sum
      - int64 fixed-point microvolt-amperes
      - Phase apparent power sum
    * - phase-a
-     - ``power-factor``
+     - power-factor
      - double ratio 0.0 to 1.0
      - Phase power factor magnitude
    * - phase-a
-     - ``current-angle-deg``
+     - current-angle-deg
      - double degrees
      - Phase current angle
    * - phase-a
-     - ``voltage-angle-deg``
+     - voltage-angle-deg
      - double degrees
      - Phase voltage angle
    * - phase-a
-     - ``current-thd-percent``
+     - current-thd-percent
      - double percent
      - Phase current THD
    * - phase-a
-     - ``voltage-thd-percent``
+     - voltage-thd-percent
      - double percent
      - Phase voltage THD
    * - phase-a
-     - ``current-tdd-percent``
+     - current-tdd-percent
      - double percent
      - Phase current TDD
 
 .. list-table:: Required System Fields
    :header-rows: 1
-   :widths: 12 22 18 48
+   :widths: 9 30 30 40
 
    * - Scope
      - Field
      - Encoding / Unit
      - Meaning / Applicability
    * - system
-     - ``message-version``
+     - message-version
      - uint32 integer
      - System message version
    * - system
-     - ``timestamp-us``
+     - timestamp-us
      - uint64 UTC Unix epoch microseconds
      - System timestamp
    * - system
-     - ``frequency-hz``
+     - frequency-hz
      - double hertz
      - System frequency
    * - system
-     - ``active-power-micro-w-sum``
+     - active-power-micro-w-sum
      - int64 fixed-point microwatts
      - System active power sum
    * - system
-     - ``reactive-power-micro-var-sum``
+     - reactive-power-micro-var-sum
      - int64 fixed-point microvars
      - System reactive power sum
    * - system
-     - ``apparent-power-micro-va-sum-arithmetic``
+     - apparent-power-micro-va-sum-arithmetic
      - int64 fixed-point microvolt-amperes
      - System arithmetic apparent power sum; required as the profile aggregate apparent power baseline
    * - system
-     - ``power-factor-arithmetic``
+     - power-factor-arithmetic
      - double ratio 0.0 to 1.0
      - System arithmetic power factor magnitude
+
+
+|geisa-landscape-end|
 
 Additional Standardized Instantaneous Quantities
 ================================================
@@ -185,10 +190,14 @@ become required according to meter form, phase count, Platform Discovery, and
 conformance logic even though the current AC Meter Profile directly requires
 only the ``phase-a`` and ``system`` objects.
 
+|geisa-landscape|
+
 .. csv-table:: Additional Standardized Optional Instantaneous Fields
   :header-rows: 1
   :widths: 14 20 18 14 34
   :file: /api/instantaneous-optional.csv
+
+|geisa-landscape-end|
 
 Value Semantics
 ===============

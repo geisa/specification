@@ -18,13 +18,13 @@
 .. [IEEE8021AR] `IEEE Standard for Local and metropolitan area networks–Secure Device Identity
    <https://1.ieee802.org/security/802-1ar/>`_
 
-.. [LWM2M] `OMA Lightweight M2M
+.. [LwM2M] `OMA Lightweight M2M
    <https://www.openmobilealliance.org/specifications/lwm2m>`_
 
-.. [LWM2M-Core] `OMA Lightweight Machine to Machine Technical Specification Core 1.2.2
+.. [LwM2M-Core] `OMA Lightweight Machine to Machine Technical Specification Core 1.2.2
    <https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/OMA-TS-LightweightM2M_Core-V1_2_2-20240613-A.pdf>`_
 
-.. [LWM2M-Transport] `OMA Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2.2
+.. [LwM2M-Transport] `OMA Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2.2
    <https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.pdf>`_
 
 .. [NIST800-186] `NIST SP 800-186 Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters
