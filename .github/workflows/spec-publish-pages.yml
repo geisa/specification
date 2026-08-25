@@ -38,6 +38,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+          submodules: recursive
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
