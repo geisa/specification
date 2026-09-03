@@ -49,6 +49,7 @@ endif
 help:
 	@echo "GEISA Specification targets:"
 	@echo "  clean       Clean repo"
+	@echo "  cleanlatex  Clean LaTex build directory"
 	@echo "  all         Build all GEISA outputs ($(SPHINXTARGETS))"
 	@for TT in $(SPHINXTARGETS); do printf "  %-10s  Build GEISA %s output\n" $$TT $$TT; done
 	@echo
@@ -69,6 +70,9 @@ clean:
 	rm -f $(LICENSERST)
 	rm -f $(JSONRST)
 	rm -rf $(BUILDDIR)
+
+cleanlatex:
+	rm -r $(BUILDDIR)/latex
 
 prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF) $(JSONRST)
 
@@ -92,7 +96,7 @@ $(LICENSERST): LICENSE.md $(LICENSEGEN)
 	drawio --export --crop --format pdf --output $@ $<
 
 %.pdf: %.svg
-	rsvg-convert -f=pdf -o $@ $<
+	rsvg-convert -f=pdf1.5 -o $@ $<
 
 %.rst: %.json
 	echo ".. code-block:: json\n  :linenos:\n" > $@

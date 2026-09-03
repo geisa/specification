@@ -20,7 +20,7 @@ request actuator state changes.
 Actuators are optional and platform/device-specific. Examples include a service
 switch, DER switch, and load-control or auxiliary relays.
 
-Permission and safety model
+Permission and Safety Model
 ---------------------------
 
 Access to actuator status and control is governed by deployment manifest policy
@@ -36,7 +36,7 @@ This API defines message structure and request/response behavior. It does not
 define detailed utility switching workflows, sequencing, tariff behavior,
 customer notice behavior, or physical interlock behavior.
 
-Actuator targets
+Actuator Targets
 ----------------
 
 This version names the following actuator targets:
@@ -51,7 +51,7 @@ Future versions of this specification may add additional actuator types as
 appropriate, especially as GEISA is expanded to support distribution automation
 devices.
 
-Getting actuator status
+Getting Actuator Status
 -----------------------
 
 The application publishes ``GeisaActuatorGet_Req`` on:
@@ -64,7 +64,7 @@ The platform responds with ``GeisaActuatorGet_Rsp`` on:
 
 The response includes ``GeisaStatus`` and ``GeisaActuatorStatus`` values.
 
-Setting actuator state
+Setting Actuator State
 ----------------------
 
 The application publishes ``GeisaActuatorSet_Req`` on:

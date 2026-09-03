@@ -181,6 +181,7 @@ platform MAY re-construct the filesystem including deletion of any
 non-persistent files while the persistant files (in `/home/geisa`)
 MUST be preserved.
 
+|geisa-landscape|
 
 Example Filesystem Construction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -257,4 +258,6 @@ Example geisa-app-1 with 50MiB persistent and 4MiB non-persistant volumes ::
   non-persistent.
 
 |geisa-pyramid|
+|geisa-landscape-end|
+
 
