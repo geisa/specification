@@ -106,8 +106,8 @@ and the queue then purged.
   initiate messages to the application in bulk or individually.
 
 
-IP socket based to local devices, private clouds, or public clouds
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IP Socket Based Communications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Applications can also make use of traditional IP socket based real-time
 communications on devices equipped with cellular, Wi-Fi, or other IP connectivity.

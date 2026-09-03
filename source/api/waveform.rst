@@ -366,9 +366,6 @@ Example files for waveform include:
 - ``waveform-unsubscribe-request-example.json``
 - ``waveform-unsubscribe-response-example.json``
 
-References
-==========
-
 .. [#ansiforms] ANSI defines a series of standard meter "forms" for the North
    American market in the ANSI C12.1 standard
    (`Code for Electricity Metering <https://webstore.ansi.org/standards/nema/ansic122024>`__).

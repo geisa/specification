@@ -34,5 +34,4 @@ LEE conformant platforms will provide a consistent:
   lee/core-services
   lee/file-layout 
 
-|geisa-pyramid|
 

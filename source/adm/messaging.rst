@@ -108,22 +108,25 @@ Platform Configuration Object ``/3606``. Manifest and deployment policy define
 what an application is allowed to do; Object ``/3600`` carries app-facing
 configuration payloads within those permissions and platform policies.
 
-===========  ================  =========  ================  ==================================================================
-Resource ID  Name              Operation  Data Type         Description
-===========  ================  =========  ================  ==================================================================
-0            Server Message    Write      Opaque            Server to Client app-message payload.
-1            Client Message    Read       Opaque            Client to Server app-message payload.
-2            Message Priority  ReadWrite  Unsigned Integer  Per-message priority for ordering, scheduling, throttling, or delivery.
-3            Message Type      ReadWrite  Unsigned Integer  Per-message payload classification.
-4            Message TTL       ReadWrite  Unsigned Integer  Per-message time-to-live, in seconds.
-5            Content Type      ReadWrite  String            Media type for the app-message payload encoding.
-4050         AppID             ReadWrite  Unsigned Integer  Local-scope identifier for the edge application.
-===========  ================  =========  ================  ==================================================================
+.. table:: 
+   :widths: 1 2 1 1 3
+
+   ===========  ================  =========  ================  ==================================================================
+   Resource ID  Name              Operation  Data Type         Description
+   ===========  ================  =========  ================  ==================================================================
+   0            Server Message    Write      Opaque            Server to Client app-message payload.
+   1            Client Message    Read       Opaque            Client to Server app-message payload.
+   2            Message Priority  ReadWrite  Unsigned Integer  Per-message priority for ordering, scheduling, throttling, or delivery.
+   3            Message Type      ReadWrite  Unsigned Integer  Per-message payload classification.
+   4            Message TTL       ReadWrite  Unsigned Integer  Per-message time-to-live, in seconds.
+   5            Content Type      ReadWrite  String            Media type for the app-message payload encoding.
+   4050         AppID             ReadWrite  Unsigned Integer  Local-scope identifier for the edge application.
+   ===========  ================  =========  ================  ==================================================================
 
 .. figure:: app-messaging-data.*
 
-Edge App Message Reporting
+  Edge App Message Reporting
 
 .. figure:: app-messaging-config.*
 
-Edge App Message Delivery
+  Edge App Message Delivery

@@ -132,4 +132,3 @@ The GEISA API defines APIs for the following purposes:
    api/app-to-app
 
 
-|geisa-pyramid|

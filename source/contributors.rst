@@ -19,6 +19,7 @@ Our sincere thanks to them for the time and thought they put into this effort:
 * Will Bell
 * Matt Casperson
 * Craig Cornwall
+* Jarosław Dzierżęga  
 * Matt Gillmore
 * Michael Garrison Stuber
 * Bryan Green
@@ -33,6 +34,7 @@ Our sincere thanks to them for the time and thought they put into this effort:
 * Kenny O'Dell
 * Vlad Pambucol
 * Jonah Petri
+* Matt Rockey  
 * Rick Steuer
 * Brandon Thayer
 * Peter Vall

@@ -183,6 +183,7 @@ html_theme_options = {
 # Use the GEISA logo.
 # Use a custom style sheet to add the copyright to the pages
 latex_logo = 'images/geisa-print-logo.png'
+#latex_additional_files = ['latex/sphinxlatexstylepage.sty','latex/sphinxlatexindbibtoc.sty']
 latex_additional_files = ['latex/sphinxlatexstylepage.sty']
 latex_elements = {
         'pointsize': '12pt',
@@ -190,18 +191,44 @@ latex_elements = {
         'figure_align': 'H',
         
         'preamble': r'''
+\pdfsuppresswarningpagegroup=1
 \righthyphenmin=62
 \lefthyphenmin=62
 % set hbadness superhigh to suppress *underflow* error messages.  Overflow messages will still be shown
 \hbadness=99999
 \protected\def\sphinxstyletheadfamily{\footnotesize}
 \usepackage{pdflscape}
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{2.8em}
+\setlength{\cftsubsecindent}{4.3em}
+\setlength{\cftsubsecnumwidth}{4em}
+\setlength{\cfttabnumwidth}{3em}
+\setlength{\cftfignumwidth}{3em}
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\renewcommand{\@cftmakeloftitle}{}
+\renewcommand{\@cftmakelottitle}{}
+\makeatother
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=20,shrink=20]{microtype}
 % activate={true,nocompatibility} - activate protrusion and expansion
 % final - enable microtype; use "draft" to disable
 % tracking=true, kerning=true, spacing=true - activate these techniques
 % factor=1100 - add 10% to the protrusion amount (default is 1000)
 % stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
+\microtypecontext{spacing=nonfrench}
 ''',
         'fncychap': r'\usepackage[Bjornstrup]{fncychap}',
+        'tableofcontents': r'''
+\chapter*{Table of Contents}
+\addcontentsline{toc}{chapter}{Table of Contents}
+\tableofcontents
+\newpage
+\chapter*{List of Figures}
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\newpage
+\chapter*{List of Tables}
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+''',
 }

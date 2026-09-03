@@ -17,7 +17,7 @@ restricting or specifying which languages are suitable for use with GEISA,
 GEISA intentionally provides a message bus API allowing for additional 
 implementor flexibility.
 
-Message bus communication
+Message Bus Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 GEISA uses `MQTT <https://mqtt.org>`_ as its reference message bus.  A GEISA 
@@ -55,7 +55,7 @@ implementation via external network interfaces.
   provide external MQTT implementations separate from the GEISA API MQTT 
   implementation.
 
-Message bus connection and credentials
+Message Bus Connection and Credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The GEISA API SHALL use MQTT standard port 1883. GEISA API transactions
@@ -89,7 +89,7 @@ the life of an application's execution.
   this approach is wholly inappropriate in a general network context.
 
 
-Message bus topics and reliability
+Message Bus Topics and Reliability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 API requests SHALL be sent at MQTT QoS level 1, *At least once*, with 
@@ -100,7 +100,7 @@ but most messages are QoS level 0, *At most once* and unacknowledged.
 MQTT topics used by the API are listed within each subsequent section.
 
 
-Non-message bus communication
+Non-message Bus Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While most application to platform communication is performed over the MQTT 
