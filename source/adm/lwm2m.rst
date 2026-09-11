@@ -1,6 +1,6 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
+  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC
   This file is licensed under the Community Specification License 1.0 available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
@@ -33,9 +33,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
 * ADM conformant platforms and EMS SHALL support the applicable Resources and
   behaviors of the required LwM2M Objects at the versions in the fixed GEISA
   ADM Object-version baseline below.
-* ADM conformant EMS shall support the following LwM2M Objects
-
-
+* ADM conformant EMS SHALL support the following LwM2M Objects:
   * ID 0 -- Security
   * ID 1 -- Server
   * ID 3 -- Device
@@ -52,12 +50,12 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3600 -- GEISA App Messaging
   * ID 3601 -- GEISA Host Monitoring
   * ID 3602 -- GEISA App Accounting
-  * ID 3603 -- GEISA Wi-SUN Radio Management
   * ID 3604 -- GEISA App Monitoring
   * ID 3605 -- GEISA Platform Monitoring
-  * ID 3606 -- GEISA Platform Configuration
+  * ID 3606 -- GEISA Platform Effective Configuration
+  * ID 3607 -- GEISA Platform Requested Configuration
 
-* ADM conformant platforms shall support the following LwM2M Objects
+* ADM conformant platforms SHALL support the following LwM2M Objects:
 
   * ID 0 -- Security
   * ID 1 -- Server
@@ -71,7 +69,13 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   * ID 3602 -- GEISA App Accounting
   * ID 3604 -- GEISA App Monitoring
   * ID 3605 -- GEISA Platform Monitoring
-  * ID 3606 -- GEISA Platform Configuration
+  * ID 3606 -- GEISA Platform Effective Configuration
+  * ID 3607 -- GEISA Platform Requested Configuration
+
+For each required Object, all Mandatory Resources SHALL be implemented.
+
+Object ``/3608`` GEISA Platform Component Monitoring is optional and MAY be
+implemented.
 
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
   following LwM2M Objects:
@@ -91,7 +95,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
 
   * ID 6 -- Location
 
-* ADM conformant platforms with Wi-SUN interfaces SHALL support the
+* ADM conformant platforms and EMS with Wi-SUN interfaces SHALL support the
   following LwM2M Objects:
 
   * ID 3603 -- Wi-SUN Radio Management
@@ -139,7 +143,6 @@ audited for this baseline. Pending definition updates are identified below.
      - Software Management
      - 1.1
      - :download:`Current 9.xml <external/lwm2m-registry/9.xml>`
-       (version 1.0; update pending)
    * - ``/10``
      - Cellular Network Connectivity
      - 1.1
@@ -158,7 +161,7 @@ audited for this baseline. Pending definition updates are identified below.
      - :download:`13.xml <external/lwm2m-registry/13.xml>`
    * - ``/20``
      - Event Log
-     - 3.2
+     - 3.1
      - :download:`20.xml <external/lwm2m-registry/20.xml>`
    * - ``/504``
      - Remote SIM Provisioning
@@ -170,11 +173,11 @@ audited for this baseline. Pending definition updates are identified below.
      - :download:`3600.xml <external/lwm2m-registry/3600.xml>`
    * - ``/3601``
      - GEISA Host Monitoring
-     - 1.0
+     - 1.1
      - :download:`3601.xml <external/lwm2m-registry/3601.xml>`
    * - ``/3602``
      - GEISA App Accounting
-     - 1.0
+     - 1.1
      - :download:`3602.xml <external/lwm2m-registry/3602.xml>`
    * - ``/3603``
      - GEISA Wi-SUN Radio Management
@@ -189,16 +192,21 @@ audited for this baseline. Pending definition updates are identified below.
      - 1.0
      - :download:`3605.xml <external/lwm2m-registry/3605.xml>`
    * - ``/3606``
-     - GEISA Platform Configuration
+     - GEISA Platform Effective Configuration
      - 1.0
      - :download:`3606.xml <external/lwm2m-registry/3606.xml>`
+   * - ``/3607``
+     - GEISA Platform Requested Configuration
+     - 1.0
+     - :download:`3607.xml <external/lwm2m-registry/3607.xml>`
+   * - ``/3608``
+     - GEISA Platform Component Monitoring
+     - 1.0
+     - :download:`3608.xml <external/lwm2m-registry/3608.xml>`
 
 
-The linked Software Management ``/9`` definition is version 1.0 and does not
-yet represent the GEISA 1.0 baseline requirement for version 1.1, including
-Resources 19 through 22. That linked definition must be updated before GEISA
-1.0 release. The Wi-SUN Radio Management ``/3603`` definition and version are
-pending coordination with the Wi-SUN work and must be resolved before release.
+The Wi-SUN Radio Management ``/3603`` definition and version are pending
+coordination with the Wi-SUN work and must be resolved before release.
 
 GEISA ADM Object Model
 ======================
@@ -361,24 +369,36 @@ GEISA object definitions.
   message configuration and transport metadata, not durable event history,
   accounting, runtime health, or platform configuration.
 
+  Resource 4050 AppID is a system-unique identifier for the logical application
+  within the applicable management domain. Resource 4051 Software Instance
+  links to the corresponding LwM2M Software Management ``/9`` instance for the
+  installed application.
+
 * ``/3601`` GEISA Host Monitoring
 
   Scope: Host / Device
 
   Provides host-level monitoring information used by the GEISA platform,
   including CPU, memory, storage, process, scheduler, and network interface
-  observability. This object is not specific to the EMA or GEISA Platform
-  services.
+  observability. It also reports the aggregate monitoring state of the host
+  environment, the reason for that state, optional diagnostic detail, and the
+  time of the last state transition. This object is not specific to the EMA or
+  GEISA Platform services.
 
 * ``/3602`` GEISA App Accounting
 
   Scope: application accounting
 
   Provides operations-facing application accounting and policy summary state
-  for an application or application accounting scope. It exposes 
-  current-period usage counters, quotas and limits, throttle, block, or
-  disabled state, selected enforcement evidence, and operator or EMS/ADM action
-  resources.
+  for an application or application accounting scope. It exposes current-period
+  usage counters, quotas and limits, throttle, block, or disabled state,
+  selected enforcement evidence, operator or EMS/ADM action resources, and
+  application or accounting-scope operational monitoring.
+
+  Multiple AppAccounting object instances may exist for the same AppID,
+  Accounting Class, and Accounting Scope to expose different accounting windows
+  such as configured collection period, daily, since-reboot, rolling-window,
+  lifetime, or operator-defined accounting.
 
 * ``/3603`` GEISA Wi-SUN Radio Management
 
@@ -391,28 +411,58 @@ GEISA object definitions.
   Scope: application runtime
 
   Provides app-scoped runtime monitoring and health visibility. It represents
-  the platform view of one installed or running application instance, including
-  operational health, lifecycle visibility, resource consumption, restart
-  behavior, watchdog state, and platform actions.
+  the platform view of one installed or running application instance. This
+  Object reports the platform's runtime lifecycle view, current application
+  monitoring state, exit history, resource consumption, restart behavior,
+  watchdog state, and platform actions.
 
 * ``/3605`` GEISA Platform Monitoring
 
   Scope: GEISA Platform
 
-  Provides platform-scoped monitoring state for GEISA-capable platform
-  functions, components, services, queues, APIs, and operational paths.
-  It provides an aggregate health instance, as well as allowance for
-  individual component or sub-module reporting; for example, EMA and LwM2M
-  client health, registration and bootstrap state, upstream reporting,
-  API broker or service, or vendor-specific components.
+  This Object represents the platform's aggregate monitoring view. Values may
+  be produced from bounded read-time checks, cached local checks, platform
+  status snapshots, or retained platform telemetry.
 
-* ``/3606`` GEISA Platform Configuration
+  This Object is intended for authoritative aggregate platform monitoring
+  together with upstream communication, queue, API, and event telemetry, but
+  does not require continuous telemetry collection. It does not imply a
+  specific daemon, service, process, or engine architecture.
+
+* ``/3606`` GEISA Platform Effective Configuration
 
   Scope: GEISA Platform
 
-  Configures GEISA Platform behavior for local monitoring, reporting, logging,
-  queueing, and app-message handling. It represents requested and effective
-  behavior of the GEISA Platform for an edge device and is intended for
-  operator or EMS-visible configuration state rather than current operational
-  health. It does not carry app-domain configuration payloads; app-domain
-  configuration uses the GEISA App Messaging object.
+  This Object captures the effective GEISA Platform configuration for an edge
+  device and the reconciliation status of the most recently evaluated requested
+  configuration. An EMS can compare the Effective Configuration Hash with the
+  requested configuration hash before deciding whether a larger Object read is
+  needed.
+
+  Before the first runtime configuration update, this Object represents the
+  effective configuration corresponding to the System Owner-approved requested
+  baseline represented by Object 3607. The platform generates the initial
+  Effective Configuration Revision and computes the Effective Configuration
+  Hash.
+
+* ``/3607`` GEISA Platform Requested Configuration
+
+  Scope: GEISA Platform
+
+  This LwM2M Object reports the GEISA Platform configuration requested by an
+  EMS or operator for an edge device. Writable requested configuration resources
+  express the desired configuration, and the platform computes and exposes the
+  Requested Configuration Hash after accepting or updating those values. Object
+  3606 reports the effective result. Each configuration resource follows its
+  defined Mandatory or Optional status. Optional resources depend on supported
+  capabilities.
+
+* ``/3608`` GEISA Platform Component Monitoring
+
+  Scope: logical component monitoring
+
+  This optional Object provides logical component monitoring state for
+  GEISA-capable platform functions, services, queues, APIs, and operational
+  paths. Each Object Instance represents one logical component, service,
+  function, or operational path used by the implementation to realize the
+  relevant platform requirements.

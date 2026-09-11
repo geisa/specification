@@ -429,16 +429,25 @@ policy, and reliability conditions. Applicable object definitions determine
 the current state, counters, reasons, timestamps, and durable records
 available through the interoperable ADM interface.
 
-The GEISA ADM object model separates this current state by scope. Object
-``/3601`` provides host and device monitoring information; ``/3602`` provides
-application accounting and policy summary state; ``/3604`` provides
-application runtime monitoring and health; and ``/3605`` provides
-platform-scoped component, service, queue, API, and operational-path health.
-Object ``/3606`` represents requested and effective platform behavior for
-monitoring, reporting, logging, queueing, and app-message handling. Durable
-event, audit, diagnostic, platform, and application history belongs in
-Object ``/20``.  Refer to :doc:`adm/lwm2m` for the detailed GEISA ADM object
-model.
+The GEISA ADM object model separates this current state by scope.
+Object ``/3601`` provides host and device monitoring information;
+``/3602`` provides application accounting and policy summary state;
+``/3604`` provides application runtime monitoring and health;
+and ``/3605`` provides a platform-scoped aggregate level of view of
+component, service, queue, API, and operational-path health.
+
+Object ``/3606`` represents the currently effective platform behavior for
+monitoring, reporting, logging, queueing, and app-message handling, with
+``/3607`` being the requested platform configuration which may differ until
+accepted and deployed.
+
+Object ``/3608`` is an optional object whose Object Instances collectively
+represent the complete logical component set used by an implementation to
+realize the relevant platform requirements covered by this Object. This
+Object does not require every operating-system service, library, or helper
+process to be represented. Platform implementers may map their own components
+using the vendor-specific or operator-specific reservation ranges for Component
+Type and Component Role when an exact match is not already provided.
 
 Application-originated messages may flow through Object ``/3600`` and the
 corresponding GEISA application-facing API paths. Those paths can carry

@@ -1,8 +1,8 @@
 
 ..
-  Copyright 2025-2026, Contributors to the Grid Edge Interoperability & 
-  Security Alliance (GEISA) a Series of LF Projects, LLC  
-  This file is licensed under the Community Specification License 1.0 available 
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA) a Series of LF Projects, LLC
+  This file is licensed under the Community Specification License 1.0 available
   at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
@@ -104,24 +104,59 @@ through an appropriate app message, status, event, alarm, or durable record.
 Application configuration through Object ``/3600`` does not replace the
 application manifest, Software Management Object ``/9``, Application
 Accounting Object ``/3602``, Application Monitoring Object ``/3604``, or GEISA
-Platform Configuration Object ``/3606``. Manifest and deployment policy define
+Platform Effective Configuration Object ``/3606``. Manifest and deployment policy define
 what an application is allowed to do; Object ``/3600`` carries app-facing
 configuration payloads within those permissions and platform policies.
 
-.. table:: 
-   :widths: 1 2 1 1 3
+.. list-table::
+   :header-rows: 1
+   :widths: 10 18 12 15 45
 
-   ===========  ================  =========  ================  ==================================================================
-   Resource ID  Name              Operation  Data Type         Description
-   ===========  ================  =========  ================  ==================================================================
-   0            Server Message    Write      Opaque            Server to Client app-message payload.
-   1            Client Message    Read       Opaque            Client to Server app-message payload.
-   2            Message Priority  ReadWrite  Unsigned Integer  Per-message priority for ordering, scheduling, throttling, or delivery.
-   3            Message Type      ReadWrite  Unsigned Integer  Per-message payload classification.
-   4            Message TTL       ReadWrite  Unsigned Integer  Per-message time-to-live, in seconds.
-   5            Content Type      ReadWrite  String            Media type for the app-message payload encoding.
-   4050         AppID             ReadWrite  Unsigned Integer  Local-scope identifier for the edge application.
-   ===========  ================  =========  ================  ==================================================================
+   * - Resource ID
+     - Name
+     - Operation
+     - Data Type
+     - Description
+   * - 4050
+     - AppID
+     - ReadWrite
+     - Unsigned Integer
+     - System-unique identifier for the logical application within the applicable management domain.
+   * - 4051
+     - Software Instance
+     - Read
+     - Objlnk
+     - Link to the corresponding LwM2M Software Management ``/9`` instance.
+   * - 0
+     - Server Message
+     - Write
+     - Opaque
+     - Server to Client app-message payload.
+   * - 1
+     - Client Message
+     - Read
+     - Opaque
+     - Client to Server app-message payload.
+   * - 2
+     - Message Priority
+     - ReadWrite
+     - Unsigned Integer
+     - Per-message priority for ordering, scheduling, throttling, or delivery.
+   * - 3
+     - Message Type
+     - ReadWrite
+     - Unsigned Integer
+     - Per-message payload classification.
+   * - 4
+     - Message TTL
+     - ReadWrite
+     - Unsigned Integer
+     - Per-message time-to-live, in seconds.
+   * - 5
+     - Content Type
+     - ReadWrite
+     - String
+     - Media type for the app-message payload encoding.
 
 .. figure:: app-messaging-data.*
 
