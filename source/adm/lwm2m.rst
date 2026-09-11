@@ -1,6 +1,6 @@
 
 ..
-  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC  
+  Copyright 2025, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC
   This file is licensed under the Community Specification License 1.0 available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
@@ -369,10 +369,10 @@ GEISA object definitions.
   message configuration and transport metadata, not durable event history,
   accounting, runtime health, or platform configuration.
 
-  Resource 4050 AppID is a unique local-scope identifier for distinguishing
-  edge applications within a specific deployment environment. Resource 4051
-  Software Instance links to the corresponding LwM2M Software Management
-  ``/9`` instance for the installed application.
+  Resource 4050 AppID is a system-unique identifier for the logical application
+  within the applicable management domain. Resource 4051 Software Instance
+  links to the corresponding LwM2M Software Management ``/9`` instance for the
+  installed application.
 
 * ``/3601`` GEISA Host Monitoring
 

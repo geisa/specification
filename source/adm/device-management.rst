@@ -12,12 +12,12 @@ Device Management
 Device management within GEISA allows system operators to track, update,
 restart, and reset edge environments.  As discussed under :doc:`registration`,
 when a GEISA ADM conformant device starts, it registers with the GEISA Edge
-Management System (EMS).  
+Management System (EMS).
 
 The Registration context allows the EMS to track the general status of the edge device fleet.
-To facilitate effective management, during Registration an ADM conformant EMS SHALL Read or 
+To facilitate effective management, during Registration an ADM conformant EMS SHALL Read or
 Observe as appropriate the GEISA Objects advertised by the device platform, including the
-required Objects applicable to the deployment:
+required GEISA Objects applicable to the deployment:
 
 .. list-table::
    :header-rows: 1
@@ -78,13 +78,13 @@ required Objects applicable to the deployment:
      - Component Monitoring
      - Optional per-component monitoring represented in aggregate by /3605
 
-To avoid the overhead of full re-Registration during normal session continuance, ADM conformant 
-devices SHALL send a lightweight Registration Update prior to the expiration their Registration 
-Lifetime in order to maintain their Registration context with the server. Although not directly 
-specified in the LwM2M protocol, ADM conformant devices SHOULD send a Registration Update after 
+To avoid the overhead of full re-Registration during normal session continuance, ADM conformant
+devices SHALL send a lightweight Registration Update prior to the expiration their Registration
+Lifetime in order to maintain their Registration context with the server. Although not directly
+specified in the LwM2M protocol, ADM conformant devices SHOULD send a Registration Update after
 expiration of 50% of the Registration Lifetime, similar to the timing strategies of RFC 2131.
 Upon receipt of a Registration Update, an ADM conformant EMS SHALL restart the Lifetime expiration
-timer for the device. ADM conformant devices SHALL only perform a full re-Registration under the 
+timer for the device. ADM conformant devices SHALL only perform a full re-Registration under the
 following conditions:
 
 * Registration Lifetime expired
@@ -113,33 +113,33 @@ facility to perform device, application, and network management operations on
 an ADM conformant GEISA platform:
 
 
-* **Discover** – Used by a LwM2M Management Server to retrieve the list of 
-  Resources instantiated in each Object instance. Data (Resource Values) is not 
+* **Discover** – Used by a LwM2M Management Server to retrieve the list of
+  Resources instantiated in each Object instance. Data (Resource Values) is not
   returned.
-* **Read** – Used by an EMS to retrieve Resource data values (e.g., sensor reading). 
-  Reading may be performed at various levels: Resource Instance, entire Resource, 
+* **Read** – Used by an EMS to retrieve Resource data values (e.g., sensor reading).
+  Reading may be performed at various levels: Resource Instance, entire Resource,
   Object Instance, entire Object
-* **Read-Composite** – Used by an EMS to retrieve multiple Resources/Objects in 
+* **Read-Composite** – Used by an EMS to retrieve multiple Resources/Objects in
   single CoAP request.
-* **Write** – Used by an EMS to modify Device configuration. 
+* **Write** – Used by an EMS to modify Device configuration.
 
 
-  * CoAP PUT is used to Replace the Object Instance or Resource(s) with the new 
+  * CoAP PUT is used to Replace the Object Instance or Resource(s) with the new
     values provided.
-  * CoAP POST is used for Partial Update to update the Resources with the new 
+  * CoAP POST is used for Partial Update to update the Resources with the new
     values provided, leaving other existing Resources unchanged.
 
 
-* **Write-Composite** - Used by an EMS to update multiple Resources/Objects in 
+* **Write-Composite** - Used by an EMS to update multiple Resources/Objects in
   single CoAP request.
-* **Execute** – Used by an EMS to invoke commands on the platform (e.g., Factory 
+* **Execute** – Used by an EMS to invoke commands on the platform (e.g., Factory
   Reset, Activate Edge App).
-* **Create** – Used by an EMS to create new Object Instances on the LwM2M Client 
+* **Create** – Used by an EMS to create new Object Instances on the LwM2M Client
   of the platform.
-* **Delete** – Used by an EMS to delete Object Instances on the LwM2M Client of 
+* **Delete** – Used by an EMS to delete Object Instances on the LwM2M Client of
   the platform.
-* **Write-Attributes** – Used by an EMS to set Notification triggers for an Observe 
-  of a Resource/Object (e.g., Only send a Notification every two hours, only send 
+* **Write-Attributes** – Used by an EMS to set Notification triggers for an Observe
+  of a Resource/Object (e.g., Only send a Notification every two hours, only send
   a Notification if the observed value has changed by more than X).
 
 These operations are performed using the following CoAp methods:
