@@ -53,9 +53,9 @@ of Installation and Activation are manually executed by the EMS, following
 successful package download/verification and successful package install,
 respectively.
 
-During creation of an ``Software Management object 9`` instance to install an edge app,
-an ADM conformant EMS SHALL use the AppID as the object 9 instance number, in order to
-simplify subsequent app management operations (start, stop, purge, etc.).
+The Software Management Object ``/9`` instance number is independent of
+resource ``4050`` AppID. Resource ``4051`` Software Instance links a GEISA
+application Object Instance to the corresponding ``/9`` instance.
 
 The following example demonstrates GEISA conformant edge app installation and 
       activation:
@@ -92,23 +92,41 @@ app execution state semantics:
 Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State* 
 of an edge application:
 
-===========  =========  =========  ==================================================================
-Resource ID  Operation  Data Type  Description
-===========  =========  =========  ==================================================================
-19           Execute                Start Application. Only available when Activation State = Enabled.
-20           Execute                Stop Application. Only available when Activation State = Enabled.
-21           Read       Integer     Execution Status. 0 = Stopped. 1 = Running.
-===========  =========  =========  ==================================================================
+.. list-table::
+   :header-rows: 1
+   :widths: 12 15 15 58
+
+   * - Resource ID
+     - Operation
+     - Data Type
+     - Description
+   * - 19
+     - Execute
+     -
+     - Start Application. Only available when Activation State = Enabled.
+   * - 20
+     - Execute
+     -
+     - Stop Application. Only available when Activation State = Enabled.
+   * - 21
+     - Read
+     - Integer
+     - Execution Status. 0 = Stopped. 1 = Running.
 
 **App Purge**
 
 Version 1.1 of the Software Management object adds an executable resource for an EMS to remotely purge local data 
 from an instance of an edge application installation:
 
-===========  =========  =========  =============================================================================================================
-Resource ID  Operation  Data Type  Description
-===========  =========  =========  =============================================================================================================
-22           Execute               Purge Data. Deletes existing local application data without modifying the app installation/activation states.
-===========  =========  =========  =============================================================================================================
+.. list-table::
+   :header-rows: 1
+   :widths: 12 15 15 58
 
-
+   * - Resource ID
+     - Operation
+     - Data Type
+     - Description
+   * - 22
+     - Execute
+     -
+     - Purge Data. Deletes existing local application data without modifying the app installation/activation states.

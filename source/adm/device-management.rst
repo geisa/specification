@@ -16,24 +16,67 @@ Management System (EMS).
 
 The Registration context allows the EMS to track the general status of the edge device fleet.
 To facilitate effective management, during Registration an ADM conformant EMS SHALL Read or 
-Observe as appropriate all required GEISA objects advertised by the device platform, including:
+Observe as appropriate the GEISA Objects advertised by the device platform, including the
+required Objects applicable to the deployment:
 
-===========  =======================  ==================================================================
-Object ID    Object Name              Information
-===========  =======================  ==================================================================
-3            Device                   Mfg, Model, S/N, Firmware Version, System Clock, Storage, etc. 
-4            Connectivity Monitoring  IP Address, Link Quality, LwM2M Network Bearer, etc
-6            Location                 GNSS location
-10           Cellular Connectivity    3GPP connection management
-11           APN Connection Profile   APN connection management
-12           WLAN Connectivity        Wi-Fi Radio interface management
-13           Bearer Selection         LwM2M bearer selection management
-20           Event Log                System Log and App-specific Log retrieval
-504          Remote SIM Provisioning  eSIM profile management: reporting, swap, add/delete
-3600         GEISA App Messaging      App data reporting on the uplink, App config on the downlink
-3601         GEISA Host Monitoring    CPU, RAM, process, context switch, file handle observability
-3602         GEISA App Accounting     System-level and App-level bandwidth usage and optional throttling
-===========  =======================  ==================================================================
+.. list-table::
+   :header-rows: 1
+   :widths: 10 35 55
+
+   * - Object ID
+     - Object Name
+     - Information
+   * - 3
+     - Device
+     - Mfg, Model, S/N, Firmware Version, System Clock, Storage, etc.
+   * - 4
+     - Connectivity Monitoring
+     - IP Address, Link Quality, LwM2M Network Bearer, etc
+   * - 6
+     - Location
+     - GNSS location
+   * - 10
+     - Cellular Connectivity
+     - 3GPP connection management
+   * - 11
+     - APN Connection Profile
+     - APN connection management
+   * - 12
+     - WLAN Connectivity
+     - Wi-Fi Radio interface management
+   * - 13
+     - Bearer Selection
+     - LwM2M bearer selection management
+   * - 20
+     - Event Log
+     - System Log and App-specific Log retrieval
+   * - 504
+     - Remote SIM Provisioning
+     - eSIM profile management: reporting, swap, add/delete
+   * - 3600
+     - App Messaging
+     - App data reporting on the uplink, App config on the downlink
+   * - 3601
+     - Host Monitoring
+     - CPU, RAM, process, context switch, file handle observability
+   * - 3602
+     - App Accounting
+     - System-level and App-level bandwidth usage and optional throttling
+   * - 3604
+     - App Monitoring
+     - App-scoped runtime monitoring visibility with one instance per App
+   * - 3605
+     - Platform Monitoring
+     - A platform-level monitoring view of its collective components
+   * - 3606
+     - Platform Effective Configuration
+     - The effective Platform configuration for one edge device
+   * - 3607
+     - Platform Requested Configuration
+     - The requested set of Platform configuration values for an edge device
+   * - 3608
+     - Component Monitoring
+     - Optional per-component monitoring represented in aggregate by /3605
 
 To avoid the overhead of full re-Registration during normal session continuance, ADM conformant 
 devices SHALL send a lightweight Registration Update prior to the expiration their Registration 
@@ -101,50 +144,96 @@ an ADM conformant GEISA platform:
 
 These operations are performed using the following CoAp methods:
 
-================ ========================= =============================================== ==================== ==================================
-Operation        CoAp Method               Path                                            Success              Failure
-================ ========================= =============================================== ==================== ==================================
-Read             GET                       /{Object ID}/{Object Instance ID}/{Resource ID} 2.05 Content         4.00 Bad Request, 
-                 Accept: Content Format ID                                                                      4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-                                                                                                                4.06 Not Acceptable
-Discover         GET                       /{Object ID}/{Object Instance ID}/{Resource ID} 2.05 Content         4.00 Bad Request,
-                 Accept:                                                                                        4.01 Unauthorized,
-                 application/link-format                                                                        4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-Write            PUT                       /{Object ID}/{Object Instance ID}/{Resource ID} 2.04 Changed         4.00 Bad Request,
-                 Content Format:                                                           2.31 Continue        4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-                                                                                                                4.06 Not Acceptable
-                                                                                                                4.08 Request Entity Incomplete
-                                                                                                                4.13 Request Entity Too Large
-Write            POST                      /{Object ID}/{Object Instance ID}               2.04 Changed         4.00 Bad Request,
-                 Content Format:                                                           2.31 Continue        4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-                                                                                                                4.06 Not Acceptable
-                                                                                                                4.08 Request Entity Incomplete
-                                                                                                                4.13 Request Entity Too Large
-Write-Attributes PUT                       /{Object ID}/{Object Instance ID}/{Resource ID} 2.04 Changed         4.00 Bad Request,
-                                           ?pmin={minimum period}&pmax={maximum period}                         4.01 Unauthorized,
-                                           &gt={greater than}&lt={less than}&st={step}                          4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-Execute          POST                      /{Object ID}/{Object Instance ID}/{Resource ID} 2.04 Changed         4.00 Bad Request,
-                                                                                                                4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-Create           POST                      /{Object ID}                                    2.01 Created         4.00 Bad Request,
-                 Content Format:                                                                                4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-                                                                                                                4.06 Not Acceptable
-Delete           DELETE                    /{Object ID}/{Object Instance ID}               2.02 Deleted         4.00 Bad Request,
-                                                                                                                4.01 Unauthorized,
-                                                                                                                4.04 Not Found,
-                                                                                                                4.05 Method Not Allowed,
-================ ========================= =============================================== ==================== ==================================
+.. list-table::
+   :header-rows: 1
+   :widths: 15 20 35 12 18
+
+   * - Operation
+     - CoAp Method
+     - Path
+     - Success
+     - Failure
+   * - Read
+     - GET
+     - | /{Object ID}/{Object Instance ID}/{Resource ID}
+       | Accept: Content Format ID
+     - 2.05 Content
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+       | 4.06 Not Acceptable
+   * - Discover
+     - GET
+     - | /{Object ID}/{Object Instance ID}/{Resource ID}
+       | Accept: application/link-format
+     - 2.05 Content
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+   * - Write
+     - PUT
+     - | /{Object ID}/{Object Instance ID}/{Resource ID}
+       | Content Format:
+     - | 2.04 Changed
+       | 2.31 Continue
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+       | 4.06 Not Acceptable
+       | 4.08 Request Entity Incomplete
+       | 4.13 Request Entity Too Large
+   * - Write
+     - POST
+     - | /{Object ID}/{Object Instance ID}
+       | Content Format:
+     - | 2.04 Changed
+       | 2.31 Continue
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+       | 4.06 Not Acceptable
+       | 4.08 Request Entity Incomplete
+       | 4.13 Request Entity Too Large
+   * - Write-Attributes
+     - PUT
+     - | /{Object ID}/{Object Instance ID}/{Resource ID}
+       | ?pmin={minimum period}&pmax={maximum period}
+       | &gt={greater than}&lt={less than}&st={step}
+     - 2.04 Changed
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+   * - Execute
+     - POST
+     - /{Object ID}/{Object Instance ID}/{Resource ID}
+     - 2.04 Changed
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+   * - Create
+     - POST
+     - | /{Object ID}
+       | Content Format:
+     - 2.01 Created
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
+       | 4.06 Not Acceptable
+   * - Delete
+     - DELETE
+     - /{Object ID}/{Object Instance ID}
+     - 2.02 Deleted
+     - | 4.00 Bad Request,
+       | 4.01 Unauthorized,
+       | 4.04 Not Found,
+       | 4.05 Method Not Allowed,
 
 .. figure:: device-management-operations.*
 
@@ -156,4 +245,3 @@ Delete           DELETE                    /{Object ID}/{Object Instance ID}    
 
 
 |geisa-pyramid|
-
