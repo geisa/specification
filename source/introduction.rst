@@ -7,6 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Grid
+
 Introduction
 ------------
 
@@ -16,8 +18,6 @@ utilities.  These edge environments are often found in `Advanced Metering Infras
 <https://en.wikipedia.org/wiki/Smart_meter#Advanced_metering_infrastructure>`_ 
 (AMI) meters, but may also be present in Distribution Automation (DA) devices, 
 customer gateways, or other utility-owned devices.
-
-
 
 .. figure:: images/electricity-grid-north-america.*
    :name: na_grid_figure

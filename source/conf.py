@@ -155,6 +155,14 @@ rst_prolog = f"""
 
     \\end{{landscape}}
 
+.. |geisa-samepage| raw:: latex
+
+    \\begin{{samepage}}
+
+.. |geisa-samepage-end| raw:: latex
+
+    \\end{{samepage}}
+
 
 """
 

@@ -23,6 +23,7 @@ Alliance, a Series of LF Projects, LLC.
 Software developed under the auspices of |GEISA| is licensed under the
 `Apache License <https://www.apache.org/licenses/LICENSE-2.0>`_.
 
+.. index:: single: License
 .. include:: license.generated.rst.inc
 
 |geisa-pyramid|
