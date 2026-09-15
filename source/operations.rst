@@ -44,6 +44,8 @@ material in :doc:`system-architecture`.
 
 |geisa-pyramid|
 
+.. index:: single: Roles
+
 Roles and Authorities
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -64,12 +66,16 @@ day-to-day operational duties on their behalf.
 
 The principal roles used in this operational view are:
 
+.. index:: single: System Owner
+
 - :term:`System Owner`
 
   The role with the authority to set policies for a specific operating
   environment.  Typically, this role has both ownership of the assets and
   liability for maloperation, though this may not always be the case.  In most
   cases, the system owner is the utility.
+
+.. index:: single: System Operator
 
 - :term:`System Operator`
 
@@ -83,17 +89,23 @@ The principal roles used in this operational view are:
   Often the System Operator will be the utility; however, they may choose to
   delegate portions of the system operator role to a third party.
 
+.. index:: single: Platform Provider
+
 - :term:`Platform Provider`
 
   The role responsible for supplying the platform hardware, platform
   software, and associated platform trust material where applicable.
   This may be a single provider or a hardware provider may be separate.
 
+.. index:: single: Application Publisher
+
 - :term:`Application Publisher` / :term:`Application Vendor`
 
   The role responsible for producing and signing an application artifact
   and supplying its vendor manifest and associated publisher trust
   material.
+
+.. index:: single: Application Certifier
 
 - :term:`Application Certifier`
 
@@ -105,11 +117,15 @@ The principal roles used in this operational view are:
   detailed "does what is promised" model focused on functional or
   analytic claims, or both.
 
+.. index:: single: Edge Application
+
 - :term:`Edge Application`
 
   A workload running within a GEISA execution environment and using GEISA
   platform services and the GEISA :doc:`api`.  Typically, provided by an
   Application Publisher / Application Vendor.
+
+.. index:: single: Edge Device
 
 - :term:`Edge Device`
 
@@ -134,13 +150,13 @@ The principal roles used in this operational view are:
   behaviors and transactions are satisfied. On the edge device, this capability
   set includes the EMA and related edge-side management functions.
 
-- :term:`EMS`
+- :term:`EMS` / Edge Management System
 
   The management system role responsible for exposing GEISA-conformant
   management behavior to the operator and communicating with conformant
   platforms as described in :doc:`adm`.
 
-- :term:`EMA`
+- :term:`EMA` / Edge Management Agent
 
   The platform-side management function that implements the required ADM
   support on a GEISA platform on edge devices.
@@ -198,8 +214,7 @@ areas relate end to end.
    :alt: High-level GEISA operational context showing how principal roles and components relate end to end.
    :align: center
 
-   High-level GEISA operational context showing how principal roles and
-   components relate end to end.
+   End-to-End Operational Context Diagram 
 
 To understand how these roles and components interact, consider the process of
 deploying an application.  Initially, a system operator may engage with an
@@ -212,10 +227,12 @@ system operator have a relationship with the certifier as well.
    :alt: Sequence diagram showing optional application certification
    :align: center
 
-   Sequence diagram showing optional application certification
+   Optional Application Certification Sequence Diagram
 
 Note that application certification is distinct from GEISA specification
 conformance testing, as described in :doc:`conformance`.
+
+.. index:: single: Application Acquisition
 
 The system operator chooses to acquire a new application.  This process
 involves obtaining the application image and publisher certificate from the
@@ -226,17 +243,21 @@ record from the application certifier.
    :alt: Sequence diagram showing application acquisition 
    :align: center
 
-   Sequence diagram showing application acquisition
+   Application Acquisition Sequence Diagram
 
 Having aquired the new application, the system operator verifies the
 application signatures and approves the application, creating and signing a
 deployment manifest for it.
 
+.. index:: single: Application Approval
+
 .. figure:: operations/app-lifecycle-approval.*
    :alt: Sequence diagram showing application approval 
    :align: center
 
-   Sequence diagram showing application approval
+   Application Approval Sequence Diagram
+
+.. index:: single: Application Deployment
 
 Once the application is approved, the System Operator can use the Edge
 Managment System to deploy it the Edge Devices.
@@ -245,7 +266,9 @@ Managment System to deploy it the Edge Devices.
    :alt: Sequence diagram showing application deployment 
    :align: center
 
-   Sequence diagram showing application deployment
+   Application Deployment Sequence Diagram
+
+.. index:: single: Application Activation
 
 Once deployed, the application can be activated, bringing it to a running
 state.  The running application can then report its status, via the platform to
@@ -255,7 +278,7 @@ the Edge Management System.
    :alt: Sequence diagram showing application activation 
    :align: center
 
-   Sequence diagram showing application activation
+   Application Activation Sequence Diagram
 
 
 |geisa-pyramid|
@@ -274,6 +297,8 @@ operator workflows.
 
 |geisa-pyramid|
 
+.. index:: single: Device Onboarding
+
 Device Onboarding and Management Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -286,12 +311,14 @@ trust establishment, registration, and subsequent lifecycle management.
    :alt: Sequence diagram showing device onboarding
    :align: center
 
-   Sequence diagram showing device onboarding
+   Device Onboarding Sequence Diagram
 
 Additional detailed device onboarding workflows and requirements may be added
 in a future revision of the specification.
 
 |geisa-pyramid|
+
+.. index:: single: Application Approval
 
 Application Approval and Deployment Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -307,10 +334,20 @@ identity, compatibility, defaults, and requested resources are inputs to
 the deployment decision, but the final approved deployment parameters
 remain under operator control.
 
+.. Warning::
+
+   System operators are solely responsible for their configuration decisions.
+   System operators control what deployment parameters are used when deploying
+   applications.  This work is done without notice to, verification by, or
+   approval by application or platform vendors.  Failing to follow publisher
+   recommendations may result in adverse performance under some conditions.
+
 Additional detailed application approval and deployment workflows and 
 requirements may be added in a future revision of the specification.
 
 |geisa-pyramid|
+
+.. index:: single: Off-Device Communication
 
 Off-Device Communication Approval
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -352,6 +389,8 @@ Durable event, audit, and diagnostic records belong in Event Log Object
 
 |geisa-pyramid|
 
+.. index:: single: Application Activation
+
 Application Activation and Runtime Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -365,6 +404,8 @@ Additional detailed application activation and state information
 requirements may be added in a future revision of the specification.
 
 |geisa-pyramid|
+
+.. index:: single: Operational Reporting
 
 Operational Reporting and Visibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -537,6 +578,8 @@ added in a future revision of this chapter.
 
 |geisa-pyramid|
 
+.. index:: single: Application Certification
+
 Application Certification
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -603,7 +646,7 @@ this time.
    :alt: Sequence diagram showing optional application certification
    :align: center
 
-   Sequence diagram showing optional application certification
+   Optional Application Certification Sequence Diagram
 
 As of this version of the specification, GEISA does not define a
 singular or specific certification program or require either model;
