@@ -33,46 +33,60 @@ GEISA design principles include:
 
 Each design principle is described in more detail below.
 
+.. index:: single: Interoperability
+
 Interoperability
 ^^^^^^^^^^^^^^^^
 
-As discussed in the :doc:`introduction`, GEISA defines four types of
+As discussed in the :doc:`introduction`, GEISA defines three core types of
 interoperability:
 
-**LEE**
-   Linux Execution Environment
-   **LEE** interoperability |geisa-lee-tux| provides a consistent operating 
-   system environment built using Linux.
-   The Linux Execution Environment provides a well-known open development 
-   environment including many standard libraries and makes it easy to integrate 
-   additional technology.  
-   
-   Applications written for the GEISA LEE will run on any LEE-conformant device.
-   
-**VEE**
-   Virtual Execution Environment 
-   
-   VEE interoperability |geisa-vee-cloud| provides a consistent virtual 
-   execution environment.  The Virtual Execution Environment provides a 
-   fully-isolated managed code environment which supports the widely-used C/C++ 
-   and Java |reg| language specifications.  
-
-   Applications written for the GEISA VEE will run on any VEE-conformant device.
-
-**ADM** 
-  Application and Device Management
+**ADM** - Application and Device Management
+  
   ADM interoperability |geisa-adm-baton| enables conformant devices to 
   interoperate with conformant management systems.
 
-**APIs**
-   Application Programming Interface
+|geisa-samepage|
+
+**APIs** - Application Programming Interface
+   
    API interoperability |geisa-api-gear| provides consistent access to 
    resources such as sensors, actuators, networking, and more. 
 
+|geisa-samepage-end|
 
-Note that GEISA does not currently provide a tool-chain or a base-platform 
-implementation.
-[#]_ 
+
+**EE** - Execution Environment 
+   
+   EE interoperability |geisa-ee-globe| allows application developers to write
+   against a known environment, without having to code for platform vendor
+   specific variants.  This version of the GEISA specification defines two
+   different execution environments:
+
+    **LEE** - Linux Execution Environment
+
+       LEE interoperability |geisa-lee-tux| provides a consistent operating 
+       system environment built using Linux.
+       The Linux Execution Environment provides a well-known open development 
+       environment including many standard libraries and makes it easy to integrate 
+       additional technology.  
+       
+       Applications written for the GEISA LEE will run on any LEE-conformant device.
+       
+    **VEE** - Virtual Execution Environment 
+       
+       VEE interoperability |geisa-vee-cloud| provides a consistent virtual 
+       execution environment.  The Virtual Execution Environment provides a 
+       fully-isolated managed code environment which supports the widely-used C/C++ 
+       and Java |reg| language specifications.  
+
+       Applications written for the GEISA VEE will run on any VEE-conformant device.
+
+.. Note::
+
+  GEISA does not currently provide a tool-chain or a base-platform
+  implementation.  GEISA may provide a toolchain and base implementation in the
+  future if there is interest and support from the GEISA community.
 
 This release of the GEISA specification defines **source-code** interoperability 
 for the LEE, VEE, & API, and network interoperability for ADM.  
@@ -93,13 +107,13 @@ platform-specific directives.
 
   It is possible that a platform may support both LEE and VEE. In this case, 
   an application developer may need to determine the proper methods that 
-  allows it to run on one or both execution environments when properly packaged. 
+  allow it to run on one or both execution environments when properly packaged. 
   System operators may need to select applications according to the provided EE. 
   
 See :doc:`system-architecture` for further discussion.
 
-.. index::
-   single: Constrained Environment
+
+.. index:: single: Constrained Environment
 
 Constrained Environment
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -137,8 +151,8 @@ insufficient for some applications.
 Efficiency is critical. The GEISA EE shall provide only those services which 
 are so widely required that it would be less efficient to *not* provide them.
 
-.. index::
-   single: Minimal Implementation
+
+.. index:: single: Minimal Implementation
 
 Minimal Implementation
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -151,15 +165,15 @@ If there is an option that is not needed, then turn it off.  If there is an
 unwanted or un-necessary feature, leave it out.  GEISA should include only what 
 is required.
 
-.. index::
-   single: Extensions
+
+.. index:: single: Extensions
 
 Core Specification with Extensions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to the four key aspects of interoperability (ADM, API, LEE, and
-VEE), future extensions may be added to the GEISA specification as the
-community determines the need.
+In addition to the three key aspects of interoperability (ADM, API, and EE),
+future extensions may be added to the GEISA specification as the community
+determines the need.
 
 Future extensions may define new areas of interoperability conformance beyond 
 ADM, API, LEE, and VEE, or they may enable new capabilities that are only 
@@ -167,6 +181,7 @@ needed by selected devices types or in specific markets.  Extensions will allow
 GEISA to retain its `Minimal Implementation`_ design principle, while still 
 allowing it to grow to meet the needs of platform vendors, application 
 developers, and system operators.
+
 
 Security
 ^^^^^^^^
@@ -179,5 +194,3 @@ hardening of the APIs and all services, GEISA security is foundational.
 
 |geisa-pyramid|
 
-.. [#] GEISA may provide a toolchain and base implementation in the future if 
-  there is interest and support from the GEISA community.

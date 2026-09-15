@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" compressed="false">
   <diagram id="page1" name="Page-1">
-    <mxGraphModel dx="1437" dy="1018" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="815" dy="592" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -102,13 +102,28 @@
         <mxCell id="e13" edge="1" parent="platform" source="appv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="qLdbY-FIABchVk2OcpTw-1" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="Platform Support Functions" vertex="1">
+          <mxGeometry height="60" width="120" x="24" y="239" as="geometry" />
+        </mxCell>
+        <mxCell id="qLdbY-FIABchVk2OcpTw-2" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="Platform Support Functions" vertex="1">
+          <mxGeometry height="60" width="120" x="29" y="244" as="geometry" />
+        </mxCell>
+        <mxCell id="qLdbY-FIABchVk2OcpTw-3" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="Platform Support Functions" vertex="1">
+          <mxGeometry height="60" width="120" x="34" y="249" as="geometry" />
+        </mxCell>
+        <mxCell id="qLdbY-FIABchVk2OcpTw-4" edge="1" parent="platform" source="qLdbY-FIABchVk2OcpTw-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="api" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="255" as="sourcePoint" />
+            <mxPoint x="427" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="consumersLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="Operator / Enterprise Consumers" vertex="1">
           <mxGeometry height="25" width="300" x="725" y="320" as="geometry" />
         </mxCell>
         <mxCell id="dl" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Data Lake" vertex="1">
           <mxGeometry height="60" width="140" x="885" y="385" as="geometry" />
         </mxCell>
-        <mxCell id="e2" edge="1" parent="1" source="pp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.529;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="so" value="platform software,&#xa;platform artifacts, and&#xa;supplier certificate">
+        <mxCell id="e2" edge="1" parent="1" source="pp" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.529;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="so" value="platform software,&lt;br&gt;platform artifacts,&amp;nbsp;&lt;div&gt;supplier certificate,&lt;/div&gt;&lt;div&gt;&amp;amp; conformance evidence&lt;/div&gt;">
           <mxGeometry relative="1" x="-0.5111" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
@@ -117,7 +132,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="ap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="so" value="application image, vendor&#xa;manifest, and publisher&#xa;certificate">
+        <mxCell id="e3" edge="1" parent="1" source="ap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="so" value="application image,&amp;nbsp;&lt;div&gt;vendor manifest,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;amp; publisher&amp;nbsp;certificate&lt;/div&gt;">
           <mxGeometry relative="1" x="-0.0913" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
@@ -176,7 +191,7 @@
             <mxPoint x="-38" y="-215" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="ac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="so" value="certifier certificate,&#xa;certification status, and&#xa;record">
+        <mxCell id="e4" edge="1" parent="1" source="ac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="so" value="certifier certificate,&lt;br&gt;certification status,&amp;nbsp;&lt;div&gt;&amp;amp; record&lt;/div&gt;">
           <mxGeometry relative="1" x="-0.5206" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
