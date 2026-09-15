@@ -14,6 +14,7 @@ Glossary
 
    ADC
     Analog-to-digital conversion
+
     Analog-to-digital converter
 
    ADM
@@ -28,6 +29,12 @@ Glossary
    API
     Applications Programming Interface
 
+   Application
+    A program, targetting a specific Execution Environment, typically delivered
+    as a compiled set of binary codes and associated metadata, bundled into
+    standard artifact that can be transferred to a Platform Implementation for
+    execution.
+
    Application Certifier
     An organization acting in this role that may independently assess, test, 
     and/or countersign application artifacts for validation of behaviors 
@@ -38,6 +45,10 @@ Glossary
     Operator-approved deployment manifest that defines effective
     application deployment parameters for an Application for a target 
     environment.
+
+   Application Instance
+    An Application that been installed on a Platform Implementation and for
+    which that Platform Implementation can report a runtime state.
 
    Application Publisher
     Organization or entity providing one or more Applications for Operator 
@@ -55,12 +66,12 @@ Glossary
     Common Operating Environment
 
     The COE is the software platform specification which defines the software
-    components, interfaces, and processes needed to implement a GEISA-conformant
-    platform.  The COE is designed to be flexible and modular, allowing for a
-    variety of implementations that can meet the needs of different use cases
-    and environmental constraints.  The COE is intended to provide a common
-    foundation for GEISA implementations, while also allowing for customization
-    and innovation by implementers.
+    components, interfaces, and processes or tasks needed to implement a
+    GEISA-conformant platform.  The COE is designed to be flexible and modular,
+    allowing for a variety of implementations that can meet the needs of
+    different use cases and environmental constraints.  The COE is intended to
+    provide a common foundation for GEISA implementations, while also allowing
+    for customization and innovation by implementers.
 
    DER
     Distributed Energy Resource
@@ -78,6 +89,15 @@ Glossary
    FAN
     Field Area Network, generally owned/operated by the Utility or Operator.
     Sometimes referred to as AMI network.
+
+   Firmware 
+    Firmware is the software and associated data deployed as part of an
+    embedded GEISA device that provide the functionality required to initialize,
+    control, and operate its hardware. Firmware is typically stored in
+    non-volatile memory and may include a secure bootloader, RTOS/OS, device
+    drivers, and middleware. Firmware is generally considered relatively static
+    and is typically deployed as a versioned software image. Devices may
+    require a reboot for a firmware update to take effect. 
 
    EE
     Execution Environment - one of LEE (Linux Execution Environment) or VEE
@@ -167,6 +187,9 @@ Glossary
    RMS
     Root Mean Square
 
+   RTOS
+    Real Time Operating System
+
    SPI
     Serial Peripheral Interface
 
@@ -184,7 +207,7 @@ Glossary
     Publisher-supplied application manifest provided with an application
     artifact as input to operator deployment decisions.
 
-   userid
+   Userid
     In context of GEISA MQTT APIs, this is a platform-local unique identifier
     assigned to a deployed GEISA application instance on that local device.  It
     is used for topic routing and message correlation within a device.
