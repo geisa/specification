@@ -1,0 +1,12 @@
+{
+  "$comment": "Permission-gated load-control example targeting an auxiliary relay.",
+  "geisa-actuator-set-req": {
+    "new-settings": [
+      {
+        "actuator": "lc-relay-0",
+        "state": "off",
+        "position-present": false
+      }
+    ]
+  }
+}

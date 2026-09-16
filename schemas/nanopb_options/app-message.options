@@ -1,0 +1,6 @@
+# Bounded strings and bytes used by the embedded C app-message examples.
+GeisaAppMessage_Req.request_id max_size:64
+GeisaAppMessage_Req.content_type max_size:64
+GeisaAppMessage_Req.payload max_size:256
+GeisaAppMessage_Rsp.request_id max_size:64
+GeisaAppMessage_Rsp.status_text max_size:96

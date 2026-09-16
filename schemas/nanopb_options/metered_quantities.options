@@ -1,0 +1,2 @@
+GeisaTypeHarmonic.voltage_harmonic_micro_v max_count:64
+GeisaTypeHarmonic.current_harmonic_micro_a max_count:64

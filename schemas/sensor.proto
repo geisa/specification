@@ -1,0 +1,238 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+// GEISA Sensors API protobuf definitions
+//
+// This file defines generic lower-rate sensor descriptor and runtime reading
+// messages for the GEISA Sensors API.
+//
+// SCOPE:
+// - Covers lower-rate, semantically typed sensor observations
+// - Does NOT include waveform or high-frequency streaming sensor types
+//
+// DESIGN PRINCIPLES:
+// - Sensor descriptors are discovery-oriented metadata
+// - Runtime readings are transported separately from descriptors
+// - A generic value model enables support for unknown/future sensors
+// - The API avoids overfitting to specific sensor implementations
+//
+// VERSION NOTES:
+// - The runtime value model supports one or more scalar values per reading in
+//   this version of the specification
+// - Multi-value readings are allowed, but value meaning and ordering are not
+//   yet self-describing in the schema
+// - Some sensor types (e.g., geolocation) may require richer structured
+//   runtime value extensions in future GEISA specification revisions
+//-----------------------------------------------------------------------------
+
+syntax = "proto3";
+import "geisa-status.proto";
+
+//-----------------------------------------------------------------------------
+// Sensor Type Enumeration
+//-----------------------------------------------------------------------------
+// GEISA-defined sensor types for interoperability
+//
+// Platforms shall use a GEISA-defined sensor type when one applies.
+// If no applicable type exists, GEISA_SENSOR_TYPE_CUSTOM may be used
+// together with custom_sensor_type in the descriptor.
+//-----------------------------------------------------------------------------
+enum GeisaSensorType {
+  GEISA_SENSOR_TYPE_UNSPECIFIED = 0;
+
+  // Environmental / physical measurements
+  GEISA_SENSOR_TYPE_TEMPERATURE = 10;
+  GEISA_SENSOR_TYPE_HUMIDITY = 20;
+  GEISA_SENSOR_TYPE_PRESSURE = 30;
+
+  // Electrical measurements - non-meter
+  GEISA_SENSOR_TYPE_VOLTAGE = 40;
+  GEISA_SENSOR_TYPE_CURRENT = 50;
+  GEISA_SENSOR_TYPE_POWER = 60;
+  GEISA_SENSOR_TYPE_ENERGY = 70;
+
+  // State / event-oriented sensors
+  GEISA_SENSOR_TYPE_CONTACT_STATE = 80;
+  GEISA_SENSOR_TYPE_TAMPER = 90;
+
+  // Motion / physical condition
+  GEISA_SENSOR_TYPE_TILT = 100;
+  GEISA_SENSOR_TYPE_VIBRATION = 110;
+
+  // Position / advanced sensing
+  GEISA_SENSOR_TYPE_GEOLOCATION = 120;  // May require structured runtime value support in a future rev
+  GEISA_SENSOR_TYPE_MICRO_ARC = 130;    // Generic first-pass classification
+  GEISA_SENSOR_TYPE_SEISMIC = 140;      // Generic first-pass classification
+  GEISA_SENSOR_TYPE_CUSTOM = 500;       // Use only when no GEISA-defined type applies.
+}
+
+//-----------------------------------------------------------------------------
+// Sensor Descriptor
+//-----------------------------------------------------------------------------
+// Descriptor for a platform-exposed sensor discovered at application startup.
+//
+// This message defines the identity, classification, and capabilities of a
+// sensor. It does not carry runtime readings.
+//-----------------------------------------------------------------------------
+message GeisaSensorDescriptor {
+  // Platform-local unique identifier for the sensor.
+  string sensor_id = 1;
+
+  // GEISA-defined interoperable sensor type
+  GeisaSensorType sensor_type = 2;
+
+  // Optional platform-specific refinement of the sensor type.
+  optional string sensor_subtype = 3;
+
+  // Required when sensor_type == GEISA_SENSOR_TYPE_CUSTOM.
+  optional string custom_sensor_type = 4;
+
+  // Optional display name - platform defined.
+  optional string name = 5;
+
+  // Optional description - platform defined.
+  optional string description = 6;
+
+  // Optional manufacturer name - highly desired but not required
+  optional string manufacturer = 7;
+
+  // Optional model identifier - highly desired but not mrequired
+  optional string model = 8;
+
+  // Optional geospatial metadata
+  //
+  // This represents device/sensor position in the field and is distinct from:
+  // - service point address
+  // - customer address
+  // - any PII-associated data
+  optional GeisaGeolocation geolocation = 9;
+
+  // Engineering unit used for reported values
+  // For sensors that return a single value, this is the expected unit for that
+  // value unless overridden in the reading.
+  //
+  // For sensors that return multiple values in a single reading, this field
+  // applies only when all returned values share the same unit. When multiple
+  // values have different meanings or units, the interpretation SHALL be
+  // defined by the sensor descriptor, sensor subtype, or platform-specific
+  // documentation.  This may be revised in a future specification version.
+  string unit = 10;
+
+  // Whether explicit read is supported
+  bool supports_read = 11;
+
+  // Whether platform-driven publish is supported
+  bool supports_publish = 12;
+
+  // Optional minimum reporting period
+  optional uint64 min_report_period_ms = 13;
+
+  // Optional maximum reporting period
+  optional uint64 max_report_period_ms = 14;
+}
+
+//-----------------------------------------------------------------------------
+// Sensor Value Model
+//-----------------------------------------------------------------------------
+// Generic scalar value model for lower-rate sensor observations
+//
+// Each individual value remains scalar in this version. A reading may contain
+// one or more values. Future GEISA revisions may introduce richer structured
+// types for self-describing multi-value observations..
+//
+// Mapping guidance (informational):
+// - double_value: temperature, humidity, pressure
+// - int64_value: voltage, current, energy
+// - bool_value: contact-state, tamper
+// - string_value: fallback / vendor-defined / custom
+//-----------------------------------------------------------------------------
+message GeisaSensorValue {
+  oneof value {
+    double double_value = 1;
+    int64 int64_value = 2;
+    bool bool_value = 3;
+    string string_value = 4;
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Runtime Sensor Reading
+//-----------------------------------------------------------------------------
+// Represents a single sensor observation at a point in time, containing one
+// or more values.
+//-----------------------------------------------------------------------------
+message GeisaSensorReading {
+  // Sensor identifier (must match descriptor)
+  string sensor_id = 1;
+
+  // UTC epoch time in milliseconds
+  uint64 timestamp_ms = 2;
+
+  // One or more sensor values for this observation.
+  //
+  // Most sensors will likely provide a single value.
+  // Some sensors may provide multiple related values at the same timestamp.
+  // When multiple values are returned, their meaning and ordering SHALL be
+  // defined by the sensor descriptor, sensor subtype, or platform-specific
+  // documentation until a future GEISA version may define a richer structured
+  // model
+  repeated GeisaSensorValue values = 3;
+
+  // Optional unit override for this reading.
+  //
+  // For single-value readings, this overrides the descriptor unit.
+  // For multi-value readings, this field is only appropriate when all values
+  // share the same unit. Otherwise, unit interpretation SHALL be defined by the
+  // sensor descriptor, sensor subtype, or platform-specific documentation.
+  optional string unit = 4;
+
+  // Optional quality indicator
+  optional string quality = 5;
+
+  // Optional status text (e.g. "OK", "WARNING", ... )
+  optional string status = 6;
+}
+
+//-----------------------------------------------------------------------------
+// Sensor Read Request
+//-----------------------------------------------------------------------------
+// Request one or more sensor readings
+//
+// Behavior:
+// - Empty list MAY be interpreted as "all readable sensors" accessible to an
+//   application.
+//-----------------------------------------------------------------------------
+message GeisaSensorReadings_Req {
+  repeated string sensor_id = 1;
+}
+
+//-----------------------------------------------------------------------------
+// Sensor Read Response
+//-----------------------------------------------------------------------------
+// Response containing zero or more sensor readings. Each reading may contain
+// one or more values.
+//-----------------------------------------------------------------------------
+message GeisaSensorReadings_Rsp {
+  GeisaStatus status = 1;
+  repeated GeisaSensorReading readings = 2;
+}
+
+//-----------------------------------------------------------------------------
+// Geolocation Metadata
+//-----------------------------------------------------------------------------
+// Optional geospatial metadata for a sensor or hosting device
+//
+// This is descriptor metadata only. It is NOT currently used as a runtime
+// sensor value payload in this version of the specification
+//
+// If runtime geolocation sensor readings are introduced in future versions,
+// they will require a structured value model extension
+//-----------------------------------------------------------------------------
+message GeisaGeolocation {
+  double latitude = 1;
+  double longitude = 2;
+  optional double altitude_m = 3;
+}

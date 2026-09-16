@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Waveform v0.9.0",
+  "description": "Canonical structure for a GEISA waveform stream descriptor and waveform subscribe/unsubscribe request-response messages.",
+  "$defs": {
+    "waveformRequestType": {
+      "type": "string",
+      "description": "Waveform request operation for an application instance.",
+      "enum": [
+        "subscribe",
+        "unsubscribe"
+      ]
+    },
+    "waveformStatus": {
+      "type": "string",
+      "description": "Waveform request result status.",
+      "enum": [
+        "success",
+        "invalid-stream-id",
+        "permission-denied",
+        "not-supported",
+        "no-resources",
+        "not-subscribed",
+        "already-subscribed",
+        "unavailable",
+        "other"
+      ]
+    },
+    "waveformSampleType": {
+      "type": "string",
+      "description": "Sample encoding used by the waveform stream.",
+      "enum": [
+        "int16",
+        "int32",
+        "float32",
+        "float64"
+      ]
+    },
+    "streamId": {
+      "description": "Waveform stream identifier. If a platform supports waveform data, it SHALL expose the baseline interoperable stream identifier 'waveform-base'. Platforms MAY expose additional stream identifiers for alternate waveform views. Applications SHALL use waveform metadata to interpret a stream and SHALL NOT infer stream characteristics by parsing the stream-id value.",
+      "type": "string",
+      "minLength": 1
+    },
+    "waveformDescriptor": {
+      "type": "object",
+      "required": [
+        "stream-id",
+        "sample-type",
+        "voltage-channel-count",
+        "current-channel-count",
+        "total-channel-count",
+        "sample-rate-hz",
+        "samples-per-cycle",
+        "nominal-frequency-hz",
+        "cycle-aligned",
+        "zero-crossing-aligned",
+        "expected-frame-period-ms"
+      ],
+      "properties": {
+        "stream-id": {
+          "$ref": "#/$defs/streamId"
+        },
+        "name": {
+          "description": "Optional platform-supplied display name for the waveform stream. This field is informational only and is intended for display, diagnostics, or logging. Applications SHALL NOT rely on this field for interoperability behavior.",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "description": "Optional platform-supplied human-readable description of the waveform stream. This field is informational only and is intended for display, diagnostics, or logging. Applications SHALL NOT rely on this field for interoperability behavior.",
+          "type": "string",
+          "minLength": 1
+        },
+        "sample-type": {
+          "$ref": "#/$defs/waveformSampleType"
+        },
+        "voltage-channel-count": {
+          "description": "Number of voltage channels present in each sample time step.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-channel-count": {
+          "description": "Number of current channels present in each sample time step.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "other-channel-count": {
+          "description": "Number of additional non-voltage, non-current channels present in each sample time step, if any.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "total-channel-count": {
+          "description": "Total number of channels present in each sample time step. This SHALL equal voltage-channel-count plus current-channel-count plus other-channel-count.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "sample-rate-hz": {
+          "description": "Sampling rate in hertz for the waveform stream.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "samples-per-cycle": {
+          "description": "Discrete sample count per nominal AC cycle, when applicable. For baseline waveform-base streams, this SHALL be at least 128 where AC cycle semantics apply. sample-rate-hz is the authoritative actual samples-per-second value, including high-rate streams. 0 indicates not applicable or not provided.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "nominal-frequency-hz": {
+          "description": "Nominal AC frequency in hertz, when applicable.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "cycle-aligned": {
+          "description": "Whether delivered frames are aligned to cycle boundaries.",
+          "type": "boolean"
+        },
+        "zero-crossing-aligned": {
+          "description": "Whether delivered frames are aligned to a zero-crossing reference.",
+          "type": "boolean"
+        },
+        "voltage-scale": {
+          "description": "Scaling factor applied to integer sample formats (int16, int32). This value applies uniformly across voltage channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
+          "type": "number"
+        },
+        "current-scale": {
+          "description": "Scaling factor applied to integer sample formats (int16, int32). This value applies uniformly across current channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
+          "type": "number"
+        },
+        "expected-frame-period-ms": {
+          "description": "Expected period between delivered waveform frames in milliseconds.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "voltage-filter-lowpass": {
+          "description": "Low-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "voltage-filter-highpass": {
+          "description": "High-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-filter-lowpass": {
+          "description": "Low-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-filter-highpass": {
+          "description": "High-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "waveformRequest": {
+      "type": "object",
+      "required": [
+        "stream-id",
+        "request-type"
+      ],
+      "properties": {
+        "stream-id": {
+          "$ref": "#/$defs/streamId"
+        },
+        "request-type": {
+          "$ref": "#/$defs/waveformRequestType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "waveformResponse": {
+      "type": "object",
+      "required": [
+        "status",
+        "stream-id",
+        "subscribed"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/waveformStatus"
+        },
+        "stream-id": {
+          "$ref": "#/$defs/streamId"
+        },
+        "subscribed": {
+          "description": "Whether the requesting application instance is subscribed after processing this request.",
+          "type": "boolean"
+        },
+        "socket-path": {
+          "description": "Runtime AF_UNIX SOCK_SEQPACKET socket path for this application instance. Present when the application is subscribed. This field is runtime state for the requesting application instance and is not static discovery metadata.",
+          "type": "string",
+          "minLength": 1
+        },
+        "sample-type": {
+          "$ref": "#/$defs/waveformSampleType"
+        },
+        "voltage-channel-count": {
+          "description": "Number of voltage channels present in each sample time step.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-channel-count": {
+          "description": "Number of current channels present in each sample time step.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "other-channel-count": {
+          "description": "Number of additional non-voltage, non-current channels present in each sample time step, if any.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "total-channel-count": {
+          "description": "Total number of channels present in each sample time step. This SHALL equal voltage-channel-count plus current-channel-count plus other-channel-count.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "sample-rate-hz": {
+          "description": "Sampling rate in hertz for the waveform stream.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "samples-per-cycle": {
+          "description": "Discrete sample count per nominal AC cycle, when applicable. For baseline waveform-base streams, this SHALL be at least 128 where AC cycle semantics apply. sample-rate-hz is the authoritative actual samples-per-second value, including high-rate streams. 0 indicates not applicable or not provided.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "nominal-frequency-hz": {
+          "description": "Nominal AC frequency in hertz, when applicable.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "cycle-aligned": {
+          "description": "Whether delivered frames are aligned to cycle boundaries.",
+          "type": "boolean"
+        },
+        "zero-crossing-aligned": {
+          "description": "Whether delivered frames are aligned to a zero-crossing reference.",
+          "type": "boolean"
+        },
+        "voltage-scale": {
+          "description": "Scaling factor for voltage channels when integer sample formats are used. This value applies uniformly across voltage channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
+          "type": "number"
+        },
+        "current-scale": {
+          "description": "Scaling factor for current channels when integer sample formats are used. This value applies uniformly across current channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
+          "type": "number"
+        },
+        "expected-frame-period-ms": {
+          "description": "Expected period between delivered waveform frames in milliseconds.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "voltage-filter-lowpass": {
+          "description": "Low-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "voltage-filter-highpass": {
+          "description": "High-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-filter-lowpass": {
+          "description": "Low-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "current-filter-highpass": {
+          "description": "High-pass filter cutoff in hertz if present. Zero or omitted means no filter.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "subscribed": {
+                "const": true
+              }
+            },
+            "required": [
+              "subscribed"
+            ]
+          },
+          "then": {
+            "required": [
+              "socket-path",
+              "sample-type",
+              "voltage-channel-count",
+              "current-channel-count",
+              "other-channel-count",
+              "total-channel-count",
+              "sample-rate-hz",
+              "samples-per-cycle",
+              "nominal-frequency-hz",
+              "cycle-aligned",
+              "zero-crossing-aligned",
+              "expected-frame-period-ms"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "oneOf": [
+    {
+      "required": [
+        "geisa-waveform"
+      ],
+      "properties": {
+        "geisa-waveform": {
+          "type": "object",
+          "required": [
+            "stream"
+          ],
+          "properties": {
+            "stream": {
+              "$ref": "#/$defs/waveformDescriptor"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "geisa-waveform-req"
+      ],
+      "properties": {
+        "geisa-waveform-req": {
+          "$ref": "#/$defs/waveformRequest"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": [
+        "geisa-waveform-rsp"
+      ],
+      "properties": {
+        "geisa-waveform-rsp": {
+          "$ref": "#/$defs/waveformResponse"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

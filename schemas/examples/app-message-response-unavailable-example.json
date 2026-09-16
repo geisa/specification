@@ -1,0 +1,9 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE. Per-request disposition example showing service unavailable for this request.",
+  "geisa-app-message-rsp": {
+    "request-id": "req-0003",
+    "status": "GEISA_APP_MESSAGE_STATUS_UNAVAILABLE",
+    "status-text": "upstream service temporarily unavailable",
+    "timestamp-ms": 1762862400300
+  }
+}

@@ -1,0 +1,370 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+import "geisa-status.proto";
+import "sensor.proto";
+import "waveform.proto";
+
+/*
+ * GEISA Platform Discovery messages.
+ *
+ * MQTT topics:
+ *   Platform Discovery Request:
+ *     geisa/api/platform/discovery/req/<userid>
+ *   Platform Discovery Response:
+ *     geisa/api/platform/discovery/rsp/<userid>
+ *
+ * Platform Discovery provides static or semi-static platform metadata.
+ * Runtime access details and application-specific state are not included in
+ * Platform Discovery and are defined by the corresponding API sections.
+ *
+ * Application Deployment Manifest request / response messages are defined in
+ * a separate proto so that Platform Discovery remains focused on discovery.
+ */
+
+
+/*
+ * GEISA version and supported interoperability pillars.
+ */
+message GeisaPlatformDiscovery_GEISA {
+
+  // GEISA specification major version
+  uint32 ver_major = 1;
+
+  // GEISA specification minor version
+  uint32 ver_minor = 2;
+
+  // GEISA specification revision / patch version
+  uint32 ver_rev = 3;
+
+  // whether the platform supports the GEISA ADM pillar
+  bool pillar_adm = 10;
+
+  // whether the platform supports the GEISA API pillar
+  bool pillar_api = 11;
+
+  // whether the platform supports the GEISA LEE pillar
+  bool pillar_lee = 12;
+
+  // whether the platform supports the GEISA VEE pillar
+  bool pillar_vee = 13;
+}
+
+
+/*
+ * GEISA-defined platform or module device types
+ */
+enum GeisaPlatformDiscovery_DeviceType {
+  TYPE_ELECTRIC_METER = 0;
+  TYPE_METROLOGY_PROCESSOR = 1;
+  TYPE_COMPUTE_CARD = 2;
+  TYPE_NETWORK_CARD = 3;
+  TYPE_COPROCESSOR_CARD = 4;
+  TYPE_CUSTOM = 100; // Platform or module types that do not match a GEISA-defined type
+}
+
+
+/*
+ * Generic platform or sub-module descriptor
+ */
+message GeisaPlatformDiscovery_Module {
+
+  // GEISA-defined device or module type
+  GeisaPlatformDiscovery_DeviceType type = 1;
+
+  // manufacturer name
+  string manufacturer = 2;
+
+  // model identifier
+  string model = 3;
+
+  // serial number, if available
+  string serial_number = 4;
+
+  // hardware revision, if available
+  string hw_revision = 5;
+
+  // firmware revision, if available
+  string fw_revision = 6;
+}
+
+
+/*
+ * Top-level device descriptor plus any subordinate modules.
+ */
+message GeisaPlatformDiscovery_Device {
+
+  // top-level platform module
+  GeisaPlatformDiscovery_Module top_module = 1;
+
+  // subordinate modules, if present
+  repeated GeisaPlatformDiscovery_Module sub_module = 2;
+}
+
+
+/*
+ * Operator-provisioned information, if present.
+ */
+message GeisaPlatformDiscovery_Operator {
+
+  // human-readable operator name, if provisioned
+  string operator_name = 1;
+
+  // operator-assigned identifier for the device, if provisioned
+  string operator_identifier = 2;
+}
+
+
+/*
+ * Metrology hardware characteristics
+ */
+message GeisaPlatformDiscovery_Metrology {
+
+  // meter rating or class designation
+  string meter_rating_class = 1;
+
+  // ANSI / regional meter form designation, e.g. 2S, 12S, etc.
+  string meter_form = 2;
+
+  // number of electrical phases
+  uint32 phase_count = 3;
+
+  // whether a neutral connection is present
+  bool neutral_connected = 4;
+
+  // nominal phase angle in degrees, when applicable
+  double nominal_phase_angle_deg = 5;
+
+  // nominal line frequency in hertz
+  uint32 nominal_frequency_hz = 6;
+
+  // nominal phase-to-phase voltage in volts, when applicable
+  double nominal_phase_to_phase_voltage_v = 7;
+
+  // nominal phase-to-neutral voltage in volts, when applicable
+  double nominal_phase_to_neutral_voltage_v = 8;
+}
+
+/*
+ * Sensor descriptors exposed through Platform Discovery.
+ */
+message GeisaPlatformDiscovery_Sensor {
+  // Sensor descriptors exposed through Platform Discovery.
+  repeated GeisaSensorDescriptor sensors = 1;
+}
+
+/*
+ * Logical network classes aligned to app-facing manifest/networking terms.
+ *
+ * Each network descriptor represents one logical network class.
+ */
+enum GeisaPlatformDiscovery_NetworkClass {
+  NETWORK_CLASS_UNSPECIFIED = 0;
+  NETWORK_CLASS_OPERATOR = 10;
+  NETWORK_CLASS_INTERNET = 20;
+  NETWORK_CLASS_LOCAL = 30;
+  NETWORK_CLASS_OTHER = 90;
+}
+
+/*
+ * Administrative ownership domain for the network
+ *
+ * This is ownership/domain metadata, NOT app permission to use..
+ */
+enum GeisaPlatformDiscovery_NetworkOwner {
+  NETWORK_OWNER_UNSPECIFIED = 0;
+  NETWORK_OWNER_OPERATOR = 10;
+  NETWORK_OWNER_CONSUMER = 20;
+  NETWORK_OWNER_THIRD_PARTY = 30;
+  NETWORK_OWNER_SHARED = 40;
+  NETWORK_OWNER_OTHER = 90;
+}
+
+/*
+ * Broad network technology family
+ *
+ * This is media/transport-family metadata, NOT application protocol detail
+ */
+enum GeisaPlatformDiscovery_NetworkTechnology {
+  NETWORK_TECHNOLOGY_UNSPECIFIED = 0;
+  NETWORK_TECHNOLOGY_RF_MESH = 10;
+  NETWORK_TECHNOLOGY_CELLULAR = 30;
+  NETWORK_TECHNOLOGY_ETHERNET = 40;
+  NETWORK_TECHNOLOGY_FIBER = 50;
+  NETWORK_TECHNOLOGY_WIFI = 60;
+  NETWORK_TECHNOLOGY_OTHER = 90;
+}
+
+/*
+ * Static network capability descriptor exposed through Platform Discovery
+ *
+ * Runtime up/down state belongs to Platform/App Status.
+ * App permission/policy belongs to Deployment Manifest.
+ */
+message GeisaPlatformDiscovery_Network_Instance {
+  // Platform-local identifier for this network capability/interface.
+  string interface_id = 1;
+
+  // Logical app-facing network class for this descriptor.
+  GeisaPlatformDiscovery_NetworkClass network_class = 20;
+
+  // Administrative ownership domain for this network class.
+  GeisaPlatformDiscovery_NetworkOwner owner = 30;
+
+  // Broad technology family for this network capability.
+  GeisaPlatformDiscovery_NetworkTechnology technology = 40;
+
+  // Static support for IPv4 on this network capability.
+  bool supports_ipv4 = 50;
+
+  // Static support for IPv6 on this network capability.
+  bool supports_ipv6 = 60;
+
+  // Optional display name.
+  optional string name = 70;
+
+  // Optional human-readable description
+  optional string description = 80;
+}
+
+/*
+ * Static network capability descriptors exposed through Platform Discovery.
+ */
+message GeisaPlatformDiscovery_Network {
+  repeated GeisaPlatformDiscovery_Network_Instance interfaces = 1;
+}
+
+/*
+ * Waveform sample encodings used in waveform frames.
+ *
+ * Integer sample types carry raw integer values. Integer voltage and current
+ * samples are converted to volts and amperes using voltage_scale and
+ * current_scale, respectively. Floating-point sample types carry values in the
+ * corresponding engineering units directly and SHOULD omit scale fields or set
+ * them to 1.0.
+ */
+
+/*
+ * Descriptor for discoverable waveform streams
+ */
+message GeisaPlatformDiscovery_Waveform_Instance {
+
+  // waveform stream identifier
+  //
+  // platforms that support waveform data SHALL expose a baseline waveform
+  // stream with the identifier "waveform-base". platforms MAY expose
+  // additional stream identifiers for alternate waveform views.
+  //
+  // applications SHALL use waveform metadata to interpret a stream and SHALL
+  // NOT infer stream characteristics by parsing the stream_id value.
+  string stream_id = 1;
+
+  // optional platform-supplied display name
+  //
+  // informational only; intended for display, diagnostics, or logging.
+  // applications SHALL NOT rely on this field for interoperability behavior.
+  string name = 2;
+
+  // optional platform-supplied human-readable description
+  //
+  // informational only; intended for display, diagnostics, or logging.
+  // applications SHALL NOT rely on this field for interoperability behavior.
+  string description = 3;
+
+  // waveform sample encoding used by frames for this stream
+  GeisaWaveform_SampleType sample_type = 200;
+
+  // When sample_type is INT16 or INT32, these multipliers can be applied by the
+  // application to convert from unitless values into volts or amps
+  // respectively.
+  //
+  // for float32 and float64, these SHOULD be omitted or set to 1.0.
+  double voltage_scale = 201;
+  double current_scale = 202;
+
+  // number of voltage channels per sample
+  uint32 voltage_channel_count = 300;
+
+  // number of current channels per sample
+  uint32 current_channel_count = 301;
+
+  // number of additional non-voltage, non-current channels, if present
+  uint32 other_channel_count = 302;
+
+  // total number of channels per sample
+  //
+  // this SHALL equal voltage_channel_count + current_channel_count (+ other_channel_count if used)
+  uint32 total_channel_count = 303;
+
+  // if true, frames contain an integer number of AC cycles
+  bool cycle_aligned = 400;
+
+  // if true, frames are aligned to a zero-crossing reference
+  // (typically the A-phase voltage zero crossing)
+  bool zero_crossing_aligned = 401;
+
+  // sampling rate in hertz
+  uint32 sample_rate_hz = 402;
+
+  // number of samples per AC cycle, when applicable
+  uint32 samples_per_cycle = 403;
+
+  // nominal AC frequency in hertz
+  uint32 nominal_frequency_hz = 404;
+
+  // expected duration of each frame in milliseconds
+  uint32 expected_frame_period_ms = 405;
+
+  // if a hardware or software filter is applied prior to delivery, these
+  // fields indicate filter characteristics in hertz.
+  //
+  // if both lowpass and highpass are provided, a bandpass filter is implied.
+  int32 voltage_filter_lowpass = 500;
+  int32 voltage_filter_highpass = 501;
+  int32 current_filter_lowpass = 502;
+  int32 current_filter_highpass = 503;
+}
+
+
+/*
+ * Waveform discovery container
+ */
+message GeisaPlatformDiscovery_Waveform {
+
+  // waveform streams offered by the platform
+  repeated GeisaPlatformDiscovery_Waveform_Instance streams = 1;
+}
+
+/*
+ * This is the outermost message for GEISA Platform Discovery Request.
+ *
+ * Message topic:
+ *   geisa/api/platform/discovery/req/<userid>
+ *
+ * Empty message for now but may be used in the future.
+ */
+message GeisaPlatformDiscovery_Req {
+}
+
+/*
+ * This is the outermost message for GEISA Platform Discovery Response
+ *
+ * Message topic:
+ *   geisa/api/platform/discovery/rsp/<userid>
+ */
+message GeisaPlatformDiscovery_Rsp {
+  GeisaStatus status = 1;
+  GeisaPlatformDiscovery_GEISA geisa = 2;
+  GeisaPlatformDiscovery_Device device = 3;
+  GeisaPlatformDiscovery_Operator operator = 4;
+  GeisaPlatformDiscovery_Metrology metrology = 5;
+  GeisaPlatformDiscovery_Sensor sensor = 6;
+  GeisaPlatformDiscovery_Network network = 7;
+  GeisaPlatformDiscovery_Waveform waveform = 8;
+}

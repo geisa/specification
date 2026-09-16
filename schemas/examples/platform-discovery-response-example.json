@@ -1,0 +1,111 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "geisa-platform-discovery-rsp": {
+    "status": {
+      "code": "GEISA_STATUS_SUCCESS",
+      "message": "ok"
+    },
+    "geisa": {
+      "ver-major": 0,
+      "ver-minor": 9,
+      "ver-rev": 0,
+      "pillar-adm": true,
+      "pillar-api": true,
+      "pillar-lee": true,
+      "pillar-vee": false
+    },
+    "device": {
+      "top-module": {
+        "type": "electric-meter",
+        "manufacturer": "Example Meter Vendor",
+        "model": "XM-2000",
+        "serial-number": "SN-000123456",
+        "hw-revision": "A1",
+        "fw-revision": "3.2.1"
+      },
+      "sub-modules": [
+        {
+          "type": "compute-card",
+          "manufacturer": "Example Compute/NIC Vendor",
+          "model": "Compute Module 1",
+          "serial-number": "CM-000987654",
+          "hw-revision": "B2",
+          "fw-revision": "1.8.4"
+        }
+      ]
+    },
+    "operator": {
+      "operator-name": "Example Utility",
+      "operator-identifier": "MTR-42-000123456"
+    },
+    "metrology": {
+        "meter-rating-class": "CL200",
+        "meter-form": "2S",
+        "phase-count": 1,
+        "neutral-connected": true,
+        "nominal-phase-angle-deg": 180.0,
+        "nominal-frequency-hz": 60,
+        "nominal-phase-to-phase-voltage-v": 240.0,
+        "nominal-phase-to-neutral-voltage-v": 120.0
+    },
+    "sensor": {},
+    "network": {
+      "interfaces": [
+        {
+          "interface-id": "wan-operator-rfmesh-1",
+          "network-class": "operator",
+          "owner": "operator",
+          "technology": "rf-mesh",
+          "supports-ipv4": true,
+          "supports-ipv6": true,
+          "name": "Utility FAN",
+          "description": "Utility-operated RF mesh field area network"
+        },
+        {
+          "interface-id": "wan-internet-cellular-1",
+          "network-class": "internet",
+          "owner": "operator",
+          "technology": "cellular",
+          "supports-ipv4": true,
+          "supports-ipv6": false,
+          "name": "Public Internet APN",
+          "description": "Public internet access path provided via cellular WAN."
+        },
+        {
+          "interface-id": "lan-consumer-wifi-1",
+          "network-class": "local",
+          "owner": "consumer",
+          "technology": "wifi",
+          "supports-ipv4": true,
+          "supports-ipv6": true,
+          "name": "Home Wi-Fi",
+          "description": "Consumer local network capability for LAN/HAN access"
+        }
+      ]
+    },
+    "waveform": {
+    "streams": [
+        {
+        "stream-id": "waveform-base",
+        "name": "Baseline Waveform Stream",
+        "description": "Baseline interoperable waveform stream for GEISA applications.",
+        "sample-type": "int16",
+        "voltage-scale": 0.003662109375,
+        "current-scale": 0.001220703125,
+        "voltage-channel-count": 1,
+        "current-channel-count": 2,
+        "other-channel-count": 0,
+        "total-channel-count": 3,
+        "cycle-aligned": true,
+        "zero-crossing-aligned": true,
+        "sample-rate-hz": 7680,
+        "samples-per-cycle": 128,
+        "nominal-frequency-hz": 60,
+        "expected-frame-period-ms": 200,
+        "voltage-filter-lowpass": 5000,
+        "current-filter-lowpass": 5000
+        }
+    ]
+    }
+  }
+}

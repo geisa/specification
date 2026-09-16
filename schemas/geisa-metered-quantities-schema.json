@@ -1,0 +1,689 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Metered Quantities v0.9.0",
+  "description": "Canonical structure for GEISA metered billing and instantaneous quantity messages aligned to metered_quantities.proto. For metered quantities, fields ending in -micro-w, -micro-wh, -micro-var, -micro-varh, -micro-va, -micro-vah, -micro-v, and -micro-a carry integer fixed-point micro-unit values. In metering contexts, -micro-varh corresponds to common VARh-style reactive-energy wording and -micro-vah corresponds to common VAh-style apparent-energy wording.",
+  "$defs": {
+    "geisaTypePhase": {
+      "type": "string",
+      "description": "Electrical phase selector for per-phase instantaneous metered quantities.",
+      "enum": [
+        "PHASE_A",
+        "PHASE_B",
+        "PHASE_C",
+        "PHASE_N"
+      ]
+    },
+    "geisaTypeMaxDemand": {
+      "type": "object",
+      "required": [
+        "max-demand-time-us"
+      ],
+      "properties": {
+        "max-demand-time-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, for the recorded maximum demand.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "quantity": {
+          "description": "Fixed-point quantity value in the micro-unit encoded by the containing field name, for example microwatts, microwatt-hours, microvars, microvar-hours (commonly VARh in metering contexts), microvolt-amperes, or microvolt-ampere-hours (commonly VAh in metering contexts).",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaMeasurementMetadata": {
+      "type": "object",
+      "description": "Optional measurement metadata for metered quantities when the source provides an observation window or quality context. measurement-period-s is the averaging or integration window for interval-derived values such as billing summations, billing power factor, demand, and THD/TDD summaries; it is not message cadence. Additional metadata fields may be added in future versions as common implementation needs are identified.",
+      "properties": {
+        "measurement-period-s": {
+          "description": "Averaging or integration window in seconds for interval-derived values such as billing summations, billing power factor, demand, and THD/TDD summaries; this is not message cadence.",
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaTypeHarmonic": {
+      "type": "object",
+      "properties": {
+        "voltage-harmonic-micro-v": {
+          "description": "RMS harmonic voltage magnitudes in microvolts; element 0 = 2nd harmonic, element 1 = 3rd harmonic, and so on.",
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "current-harmonic-micro-a": {
+          "description": "RMS harmonic current magnitudes in microamps; element 0 = 2nd harmonic, element 1 = 3rd harmonic, and so on.",
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaBillingQuantitiesSummationTotal": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the billing snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "active-energy-micro-wh-del": { "type": "integer" },
+        "active-energy-micro-wh-rec": { "type": "integer" },
+        "active-energy-micro-wh-sum": { "type": "integer" },
+        "active-energy-micro-wh-net": { "type": "integer" },
+        "reactive-energy-micro-varh-del": { "type": "integer" },
+        "reactive-energy-micro-varh-rec": { "type": "integer" },
+        "reactive-energy-micro-varh-sum": { "type": "integer" },
+        "reactive-energy-micro-varh-net": { "type": "integer" },
+        "reactive-energy-micro-varh-q1-plus-q4": {
+          "description": "Reactive energy in microvar-hours, Q1+Q4 metering quadrants, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "reactive-energy-micro-varh-q2-plus-q3": {
+          "description": "Reactive energy in microvar-hours, Q2+Q3 metering quadrants, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "reactive-energy-micro-varh-q1": {
+          "description": "Reactive energy in microvar-hours, Q1 metering quadrant, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "reactive-energy-micro-varh-q2": {
+          "description": "Reactive energy in microvar-hours, Q2 metering quadrant, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "reactive-energy-micro-varh-q3": {
+          "description": "Reactive energy in microvar-hours, Q3 metering quadrant, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "reactive-energy-micro-varh-q4": {
+          "description": "Reactive energy in microvar-hours, Q4 metering quadrant, fundamental + harmonics.",
+          "type": "integer"
+        },
+        "apparent-energy-micro-vah-del-arithmetic": {
+          "description": "Arithmetic apparent energy in microvolt-ampere-hours, commonly VAh in metering contexts.",
+          "type": "integer"
+        },
+        "apparent-energy-micro-vah-rec-arithmetic": {
+          "description": "Arithmetic apparent energy in microvolt-ampere-hours, commonly VAh in metering contexts.",
+          "type": "integer"
+        },
+        "apparent-energy-micro-vah-sum-arithmetic": {
+          "description": "Arithmetic apparent energy in microvolt-ampere-hours, commonly VAh in metering contexts.",
+          "type": "integer"
+        },
+        "active-energy-micro-wh-del-fundamental": { "type": "integer" },
+        "active-energy-micro-wh-rec-fundamental": { "type": "integer" },
+        "apparent-energy-micro-vah-sum-vectorial": { "type": "integer" },
+        "apparent-energy-micro-vah-del-q1-plus-q4-vectorial": { "type": "integer" },
+        "apparent-energy-micro-vah-rec-q2-plus-q3-vectorial": { "type": "integer" },
+        "power-factor-del-arithmetic": {
+          "description": "Arithmetic power factor magnitude in the range 0.0 to 1.0 for delivered energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "power-factor-rec-arithmetic": {
+          "description": "Arithmetic power factor magnitude in the range 0.0 to 1.0 for received energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "power-factor-sum-arithmetic": {
+          "description": "Arithmetic power factor magnitude in the range 0.0 to 1.0 for summed energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "power-factor-sum-vectorial": {
+          "description": "Vectorial power factor magnitude in the range 0.0 to 1.0 for summed energy based on vectorially aggregated apparent power; this is not displacement power factor.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reactive-energy-micro-varh-del-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-rec-fundamental": { "type": "integer" },
+        "power-factor-del-vectorial": {
+          "description": "Vectorial power factor magnitude in the range 0.0 to 1.0 for delivered energy based on vectorially aggregated apparent power; this is not displacement power factor.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "power-factor-rec-vectorial": {
+          "description": "Vectorial power factor magnitude in the range 0.0 to 1.0 for received energy based on vectorially aggregated apparent power; this is not displacement power factor.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "active-energy-micro-wh-sum-fundamental": { "type": "integer" },
+        "active-energy-micro-wh-net-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q1-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q2-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q3-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q4-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q1-plus-q4-fundamental": { "type": "integer" },
+        "reactive-energy-micro-varh-q2-plus-q3-fundamental": { "type": "integer" },
+        "apparent-energy-micro-vah-del-fundamental-arithmetic": { "type": "integer" },
+        "apparent-energy-micro-vah-rec-fundamental-arithmetic": { "type": "integer" },
+        "reactive-energy-micro-varh-q1-minus-q4": { "type": "integer" },
+        "reactive-energy-micro-varh-q3-minus-q2": { "type": "integer" },
+        "reactive-energy-micro-varh-q2-minus-q3": { "type": "integer" },
+        "apparent-energy-micro-vah-del-q1-minus-q4-vectorial": { "type": "integer" },
+        "apparent-energy-micro-vah-rec-q3-minus-q2-vectorial": { "type": "integer" },
+        "apparent-energy-micro-vah-del-q2-minus-q3-vectorial": { "type": "integer" },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaBillingQuantitiesDemandTotal": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the demand snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "active-power-micro-w-del": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-rec": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-sum": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-net": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-del-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-rec-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-sum-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "active-power-micro-w-net-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-del": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-rec": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-sum": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-net": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q1-plus-q4": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q2-plus-q3": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q1": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q2": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q3": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q4": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-del-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-rec-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q1-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q2-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q3-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q4-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q1-plus-q4-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q2-plus-q3-fundamental": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q1-minus-q4": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q3-minus-q2": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "reactive-power-micro-var-q2-minus-q3": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-sum-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-del-fundamental-arithmetic": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-rec-fundamental-arithmetic": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-del-q1-plus-q4-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-rec-q2-plus-q3-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-del-q1-minus-q4-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-rec-q3-minus-q2-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-del-q2-minus-q3-vectorial": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-del-arithmetic": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-rec-arithmetic": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "apparent-power-micro-va-sum-arithmetic": { "$ref": "#/$defs/geisaTypeMaxDemand" },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaBillingQuantities": {
+      "type": "object",
+      "$comment": "A top-level geisaBillingQuantities payload SHALL contain at least one billing section. Individual quantities within each section remain optional because register capabilities may vary.",
+      "required": [
+        "message-version"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "summation-total"
+          ]
+        },
+        {
+          "required": [
+            "demand-total"
+          ]
+        }
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "summation-total": {
+          "$ref": "#/$defs/geisaBillingQuantitiesSummationTotal"
+        },
+        "demand-total": {
+          "$ref": "#/$defs/geisaBillingQuantitiesDemandTotal"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaInstantaneousQuantitiesSystem": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the system instantaneous quantity snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "frequency-hz": {
+          "type": "number"
+        },
+        "active-power-micro-w-sum": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-sum": {
+          "type": "integer"
+        },
+        "apparent-power-micro-va-sum-arithmetic": {
+          "type": "integer"
+        },
+        "apparent-power-micro-va-sum-vectorial": {
+          "type": "integer"
+        },
+        "power-factor-arithmetic": {
+          "description": "Arithmetic power factor magnitude in the range 0.0 to 1.0, system, fundamental + harmonics; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "power-factor-vectorial": {
+          "description": "Vectorial power factor magnitude in the range 0.0 to 1.0, system, fundamental + harmonics, based on vectorially aggregated apparent power; this is not displacement power factor.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "reactive-power-micro-var-sum-arithmetic": {
+          "type": "integer"
+        },
+        "power-factor-angle-arithmetic-deg": {
+          "type": "number"
+        },
+        "power-factor-angle-vectorial-deg": {
+          "type": "number"
+        },
+        "active-power-micro-w-del": {
+          "type": "integer"
+        },
+        "active-power-micro-w-rec": {
+          "type": "integer"
+        },
+        "active-power-micro-w-net": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-del": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-rec": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-net": {
+          "type": "integer"
+        },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaInstantaneousQuantitiesPerPhase": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "phase"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "phase": {
+          "$ref": "#/$defs/geisaTypePhase"
+        },
+        "current-micro-a": {
+          "type": "integer"
+        },
+        "voltage-micro-v": {
+          "type": "integer"
+        },
+        "active-power-micro-w-sum": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-sum": {
+          "type": "integer"
+        },
+        "apparent-power-micro-va-sum": {
+          "type": "integer"
+        },
+        "voltage-angle-deg": {
+          "type": "number"
+        },
+        "current-angle-deg": {
+          "type": "number"
+        },
+        "power-factor": {
+          "description": "Power factor magnitude in the range 0.0 to 1.0, per phase, fundamental + harmonics; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "current-micro-a-fundamental": {
+          "type": "integer"
+        },
+        "voltage-micro-v-fundamental": {
+          "type": "integer"
+        },
+        "current-thd-percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "voltage-thd-percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "power-factor-angle-deg": {
+          "type": "number"
+        },
+        "current-tdd-percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "current-distortion-micro-a-rms": {
+          "type": "integer"
+        },
+        "voltage-2nd-harmonic-percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "active-power-micro-w-del": {
+          "type": "integer"
+        },
+        "active-power-micro-w-rec": {
+          "type": "integer"
+        },
+        "active-power-micro-w-net": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-del": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-rec": {
+          "type": "integer"
+        },
+        "reactive-power-micro-var-net": {
+          "type": "integer"
+        },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaInstantaneousQuantitiesOther": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "neutral-current-imputed-micro-a": {
+          "type": "integer"
+        },
+        "load-side-voltage-micro-v": {
+          "type": "integer"
+        },
+        "neutral-current-micro-a": {
+          "type": "integer"
+        },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaInstantaneousQuantitiesHarmonic": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the harmonic snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "phase-a-current-harmonic-2nd-micro-a": {
+          "type": "integer"
+        },
+        "phase-b-current-harmonic-2nd-micro-a": {
+          "type": "integer"
+        },
+        "phase-c-current-harmonic-2nd-micro-a": {
+          "type": "integer"
+        },
+        "phase-a-voltage-harmonic-2nd-micro-v": {
+          "type": "integer"
+        },
+        "phase-b-voltage-harmonic-2nd-micro-v": {
+          "type": "integer"
+        },
+        "phase-c-voltage-harmonic-2nd-micro-v": {
+          "type": "integer"
+        },
+        "phase-a-harmonics": {
+          "$ref": "#/$defs/geisaTypeHarmonic"
+        },
+        "phase-b-harmonics": {
+          "$ref": "#/$defs/geisaTypeHarmonic"
+        },
+        "phase-c-harmonics": {
+          "$ref": "#/$defs/geisaTypeHarmonic"
+        },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaInstantaneousQuantities": {
+      "type": "object",
+      "required": [
+        "message-version",
+        "timestamp-us"
+      ],
+      "properties": {
+        "message-version": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timestamp-us": {
+          "description": "UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, indicating when the top-level instantaneous quantity snapshot was generated.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "phase-a": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesPerPhase"
+        },
+        "phase-b": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesPerPhase"
+        },
+        "phase-c": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesPerPhase"
+        },
+        "phase-n": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesPerPhase"
+        },
+        "other": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesOther"
+        },
+        "frequency-hz": {
+          "type": "number"
+        },
+        "temperature-celsius": {
+          "type": "number"
+        },
+        "system": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesSystem"
+        },
+        "harmonic": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesHarmonic"
+        },
+        "metadata": {
+          "$ref": "#/$defs/geisaMeasurementMetadata"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "geisa-billing-quantities-summation-total"
+      ],
+      "properties": {
+        "geisa-billing-quantities-summation-total": {
+          "$ref": "#/$defs/geisaBillingQuantitiesSummationTotal"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-billing-quantities-demand-total"
+      ],
+      "properties": {
+        "geisa-billing-quantities-demand-total": {
+          "$ref": "#/$defs/geisaBillingQuantitiesDemandTotal"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-billing-quantities"
+      ],
+      "properties": {
+        "geisa-billing-quantities": {
+          "$ref": "#/$defs/geisaBillingQuantities"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-instantaneous-quantities-system"
+      ],
+      "properties": {
+        "geisa-instantaneous-quantities-system": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesSystem"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-instantaneous-quantities-per-phase"
+      ],
+      "properties": {
+        "geisa-instantaneous-quantities-per-phase": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesPerPhase"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-instantaneous-quantities-other"
+      ],
+      "properties": {
+        "geisa-instantaneous-quantities-other": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesOther"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-instantaneous-quantities-harmonic"
+      ],
+      "properties": {
+        "geisa-instantaneous-quantities-harmonic": {
+          "$ref": "#/$defs/geisaInstantaneousQuantitiesHarmonic"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-instantaneous-quantities"
+      ],
+      "properties": {
+        "geisa-instantaneous-quantities": {
+          "$ref": "#/$defs/geisaInstantaneousQuantities"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

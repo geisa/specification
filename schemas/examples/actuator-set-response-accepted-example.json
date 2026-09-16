@@ -1,0 +1,8 @@
+{
+  "geisa-actuator-set-rsp": {
+    "status": {
+      "code": "GEISA_STATUS_SUCCESS",
+      "message": "accepted"
+    }
+  }
+}

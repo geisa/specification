@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Actuator v0.9.0",
+  "description": "Canonical structure for GEISA actuator get/set request and response messages aligned to actuator.proto. Actuator control is deployment-policy and permission gated.",
+  "$defs": {
+    "actuator": {
+      "type": "string",
+      "enum": [
+        "unspecified",
+        "service-switch",
+        "der-switch",
+        "lc-relay-0",
+        "lc-relay-1",
+        "lc-relay-2",
+        "lc-relay-3"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "unspecified",
+        "on",
+        "off"
+      ]
+    },
+    "geisaStatus": {
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "actuatorStatus": {
+      "type": "object",
+      "required": [
+        "actuator",
+        "state"
+      ],
+      "properties": {
+        "actuator": {
+          "$ref": "#/$defs/actuator"
+        },
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "position-present": {
+          "type": "boolean"
+        },
+        "position": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "geisa-actuator-set-req"
+      ],
+      "properties": {
+        "geisa-actuator-set-req": {
+          "type": "object",
+          "required": [
+            "new-settings"
+          ],
+          "properties": {
+            "new-settings": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/actuatorStatus"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-actuator-set-rsp"
+      ],
+      "properties": {
+        "geisa-actuator-set-rsp": {
+          "type": "object",
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "status": {
+              "$ref": "#/$defs/geisaStatus"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-actuator-get-req"
+      ],
+      "properties": {
+        "geisa-actuator-get-req": {
+          "type": "object",
+          "required": [
+            "actuator"
+          ],
+          "properties": {
+            "actuator": {
+              "$ref": "#/$defs/actuator"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-actuator-get-rsp"
+      ],
+      "properties": {
+        "geisa-actuator-get-rsp": {
+          "type": "object",
+          "required": [
+            "status",
+            "actuator-status"
+          ],
+          "properties": {
+            "status": {
+              "$ref": "#/$defs/geisaStatus"
+            },
+            "actuator-status": {
+              "$ref": "#/$defs/actuatorStatus"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

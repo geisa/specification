@@ -1,0 +1,2 @@
+# Bounded repeated fields used by the embedded C actuator examples.
+GeisaActuatorSet_Req.new_settings max_count:4

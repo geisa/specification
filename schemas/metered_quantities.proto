@@ -1,0 +1,240 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+syntax = "proto3";
+
+message GeisaTypeMeasurementMetadata {
+	optional double measurement_period_s = 1;	// Averaging or integration window in seconds for interval-derived values such as billing summations, billing power factor, demand, and THD/TDD summaries; this is not message cadence
+}
+
+message GeisaTypeMaxDemand {
+	uint64 max_demand_time_us = 1;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z, for the recorded maximum demand
+	optional int64 quantity = 2;	// Fixed-point quantity in the micro-unit encoded by the containing field name, for example microwatts, microwatt-hours, microvars, microvar-hours (commonly VARh in metering contexts), microvolt-amperes, or microvolt-ampere-hours (commonly VAh in metering contexts)
+}
+
+message GeisaBillingQuantities_Summation_Total {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+
+	optional int64 active_energy_micro_wh_del = 3;	// Active energy in microwatt-hours, total delivered, fundamental + harmonics
+	optional int64 active_energy_micro_wh_rec = 4;	// Active energy in microwatt-hours, total received, fundamental + harmonics
+	optional int64 active_energy_micro_wh_sum = 5;	// Active energy in microwatt-hours, total sum, fundamental + harmonics
+	optional int64 active_energy_micro_wh_net = 6;	// Active energy in microwatt-hours, total net, fundamental + harmonics
+
+	optional int64 reactive_energy_micro_varh_del = 20;	// Reactive energy in microvar-hours (commonly VARh in metering contexts), total delivered, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_rec = 21;	// Reactive energy in microvar-hours, total received, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_sum = 22;	// Reactive energy in microvar-hours, total sum, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_net = 23;	// Reactive energy in microvar-hours, total net, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q1_plus_q4 = 24;	// Reactive energy in microvar-hours, Q1+Q4 metering quadrants, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q2_plus_q3 = 25;	// Reactive energy in microvar-hours, Q2+Q3 metering quadrants, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q1 = 26;	// Reactive energy in microvar-hours, Q1 metering quadrant, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q2 = 27;	// Reactive energy in microvar-hours, Q2 metering quadrant, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q3 = 28;	// Reactive energy in microvar-hours, Q3 metering quadrant, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q4 = 29;	// Reactive energy in microvar-hours, Q4 metering quadrant, fundamental + harmonics
+
+	optional int64 apparent_energy_micro_vah_del_arithmetic = 40;	// Arithmetic apparent energy in microvolt-ampere-hours (commonly VAh in metering contexts), total delivered, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_rec_arithmetic = 41;	// Arithmetic apparent energy in microvolt-ampere-hours (commonly VAh in metering contexts), total received, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_sum_arithmetic = 42;	// Arithmetic apparent energy in microvolt-ampere-hours (commonly VAh in metering contexts), total sum, fundamental + harmonics
+	optional int64 active_energy_micro_wh_del_fundamental = 43;	// Active energy in microwatt-hours, total delivered, fundamental only
+	optional int64 active_energy_micro_wh_rec_fundamental = 44;	// Active energy in microwatt-hours, total received, fundamental only
+	optional int64 apparent_energy_micro_vah_sum_vectorial = 45;	// Vectorial apparent energy in microvolt-ampere-hours, total sum, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_del_q1_plus_q4_vectorial = 46;	// Vectorial apparent energy in microvolt-ampere-hours, delivered, Q1+Q4, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_rec_q2_plus_q3_vectorial = 47;	// Vectorial apparent energy in microvolt-ampere-hours, received, Q2+Q3, fundamental + harmonics
+
+	optional double power_factor_del_arithmetic = 100;	// Unitless arithmetic power factor magnitude in the range 0.0 to 1.0 for delivered energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context
+	optional double power_factor_rec_arithmetic = 101;	// Unitless arithmetic power factor magnitude in the range 0.0 to 1.0 for received energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context
+	optional double power_factor_sum_arithmetic = 102;	// Unitless arithmetic power factor magnitude in the range 0.0 to 1.0 for summed energy; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context
+	optional double power_factor_sum_vectorial = 103;	// Unitless vectorial power factor magnitude in the range 0.0 to 1.0 for summed energy based on vectorially aggregated apparent power; this is not displacement power factor
+
+	optional int64 reactive_energy_micro_varh_del_fundamental = 120;	// Reactive energy in microvar-hours, total delivered, fundamental only
+	optional int64 reactive_energy_micro_varh_rec_fundamental = 121;	// Reactive energy in microvar-hours, total received, fundamental only
+
+	optional double power_factor_del_vectorial = 130;	// Unitless vectorial power factor magnitude in the range 0.0 to 1.0 for delivered energy based on vectorially aggregated apparent power; this is not displacement power factor
+	optional double power_factor_rec_vectorial = 131;	// Unitless vectorial power factor magnitude in the range 0.0 to 1.0 for received energy based on vectorially aggregated apparent power; this is not displacement power factor
+
+	optional int64 active_energy_micro_wh_sum_fundamental = 132;	// Active energy in microwatt-hours, total sum, fundamental only
+	optional int64 active_energy_micro_wh_net_fundamental = 133;	// Active energy in microwatt-hours, total net, fundamental only
+
+	optional int64 reactive_energy_micro_varh_q1_fundamental = 200;	// Reactive energy in microvar-hours, Q1, fundamental only
+	optional int64 reactive_energy_micro_varh_q2_fundamental = 201;	// Reactive energy in microvar-hours, Q2, fundamental only
+	optional int64 reactive_energy_micro_varh_q3_fundamental = 202;	// Reactive energy in microvar-hours, Q3, fundamental only
+	optional int64 reactive_energy_micro_varh_q4_fundamental = 203;	// Reactive energy in microvar-hours, Q4, fundamental only
+	optional int64 reactive_energy_micro_varh_q1_plus_q4_fundamental = 210;	// Reactive energy in microvar-hours, Q1+Q4, fundamental only
+	optional int64 reactive_energy_micro_varh_q2_plus_q3_fundamental = 220;	// Reactive energy in microvar-hours, Q2+Q3, fundamental only
+
+	optional int64 apparent_energy_micro_vah_del_fundamental_arithmetic = 240;	// Arithmetic apparent energy in microvolt-ampere-hours, total delivered, fundamental only
+	optional int64 apparent_energy_micro_vah_rec_fundamental_arithmetic = 241;	// Arithmetic apparent energy in microvolt-ampere-hours, total received, fundamental only
+
+	optional int64 reactive_energy_micro_varh_q1_minus_q4 = 252;	// Reactive energy in microvar-hours, Q1-Q4, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q3_minus_q2 = 253;	// Reactive energy in microvar-hours, Q3-Q2, fundamental + harmonics
+	optional int64 reactive_energy_micro_varh_q2_minus_q3 = 254;	// Reactive energy in microvar-hours, Q2-Q3, fundamental + harmonics
+
+	optional int64 apparent_energy_micro_vah_del_q1_minus_q4_vectorial = 275;	// Vectorial apparent energy in microvolt-ampere-hours, delivered, Q1-Q4, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_rec_q3_minus_q2_vectorial = 276;	// Vectorial apparent energy in microvolt-ampere-hours, received, Q3-Q2, fundamental + harmonics
+	optional int64 apparent_energy_micro_vah_del_q2_minus_q3_vectorial = 277;	// Vectorial apparent energy in microvolt-ampere-hours, delivered, Q2-Q3, fundamental + harmonics
+	GeisaTypeMeasurementMetadata metadata = 300;
+}
+
+message GeisaBillingQuantities_Demand_Total {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+
+	GeisaTypeMaxDemand active_power_micro_w_del = 3;	// Active power in microwatts, total delivered, fundamental + harmonics
+	GeisaTypeMaxDemand active_power_micro_w_rec = 4;	// Active power in microwatts, total received, fundamental + harmonics
+	GeisaTypeMaxDemand active_power_micro_w_sum = 5;	// Active power in microwatts, total sum, fundamental + harmonics
+	GeisaTypeMaxDemand active_power_micro_w_net = 6;	// Active power in microwatts, total net, fundamental + harmonics
+	GeisaTypeMaxDemand active_power_micro_w_del_fundamental = 200;	// Active power in microwatts, total delivered, fundamental only
+	GeisaTypeMaxDemand active_power_micro_w_rec_fundamental = 210;	// Active power in microwatts, total received, fundamental only
+	GeisaTypeMaxDemand active_power_micro_w_sum_fundamental = 220;	// Active power in microwatts, total sum, fundamental only
+	GeisaTypeMaxDemand active_power_micro_w_net_fundamental = 230;	// Active power in microwatts, total net, fundamental only
+
+	GeisaTypeMaxDemand reactive_power_micro_var_del = 20;	// Reactive power in microvars, total delivered, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_rec = 21;	// Reactive power in microvars, total received, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_sum = 22;	// Reactive power in microvars, total sum, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_net = 23;	// Reactive power in microvars, total net, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q1_plus_q4 = 24;	// Reactive power in microvars, Q1+Q4, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q2_plus_q3 = 25;	// Reactive power in microvars, Q2+Q3, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q1 = 26;	// Reactive power in microvars, Q1, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q2 = 27;	// Reactive power in microvars, Q2, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q3 = 28;	// Reactive power in microvars, Q3, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q4 = 29;	// Reactive power in microvars, Q4, fundamental + harmonics
+
+	GeisaTypeMaxDemand reactive_power_micro_var_del_fundamental = 300;	// Reactive power in microvars, total delivered, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_rec_fundamental = 310;	// Reactive power in microvars, total received, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q1_fundamental = 320;	// Reactive power in microvars, Q1, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q2_fundamental = 321;	// Reactive power in microvars, Q2, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q3_fundamental = 322;	// Reactive power in microvars, Q3, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q4_fundamental = 323;	// Reactive power in microvars, Q4, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q1_plus_q4_fundamental = 400;	// Reactive power in microvars, Q1+Q4, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q2_plus_q3_fundamental = 410;	// Reactive power in microvars, Q2+Q3, fundamental only
+	GeisaTypeMaxDemand reactive_power_micro_var_q1_minus_q4 = 420;	// Reactive power in microvars, Q1-Q4, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q3_minus_q2 = 430;	// Reactive power in microvars, Q3-Q2, fundamental + harmonics
+	GeisaTypeMaxDemand reactive_power_micro_var_q2_minus_q3 = 440;	// Reactive power in microvars, Q2-Q3, fundamental + harmonics
+
+	GeisaTypeMaxDemand apparent_power_micro_va_sum_vectorial = 40;	// Vectorial apparent power in microvolt-amperes, total sum, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_del_fundamental_arithmetic = 500;	// Arithmetic apparent power in microvolt-amperes, total delivered, fundamental only
+	GeisaTypeMaxDemand apparent_power_micro_va_rec_fundamental_arithmetic = 510;	// Arithmetic apparent power in microvolt-amperes, total received, fundamental only
+	GeisaTypeMaxDemand apparent_power_micro_va_del_q1_plus_q4_vectorial = 520;	// Vectorial apparent power in microvolt-amperes, delivered, Q1+Q4, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_rec_q2_plus_q3_vectorial = 530;	// Vectorial apparent power in microvolt-amperes, received, Q2+Q3, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_del_q1_minus_q4_vectorial = 540;	// Vectorial apparent power in microvolt-amperes, delivered, Q1-Q4, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_rec_q3_minus_q2_vectorial = 550;	// Vectorial apparent power in microvolt-amperes, received, Q3-Q2, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_del_q2_minus_q3_vectorial = 560;	// Vectorial apparent power in microvolt-amperes, delivered, Q2-Q3, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_del_arithmetic = 600;	// Arithmetic apparent power in microvolt-amperes, total delivered, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_rec_arithmetic = 610;	// Arithmetic apparent power in microvolt-amperes, total received, fundamental + harmonics
+	GeisaTypeMaxDemand apparent_power_micro_va_sum_arithmetic = 620;	// Arithmetic apparent power in microvolt-amperes, total sum, fundamental + harmonics
+
+	GeisaTypeMeasurementMetadata metadata = 633;
+}
+
+message GeisaBillingQuantities {
+	uint32 message_version = 1;	// Example: 1,2 …
+	GeisaBillingQuantities_Summation_Total summation_total = 2;
+	GeisaBillingQuantities_Demand_Total demand_total = 3;
+}
+
+enum GeisaTypePhase {
+	PHASE_A = 0;
+	PHASE_B = 1;
+	PHASE_C = 2;
+	PHASE_N = 3;
+}
+
+message GeisaTypeInstantaneousQuantities_System {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+	optional double frequency_hz = 3;	// Frequency in hertz
+	optional int64 active_power_micro_w_sum = 4;	// Active power in microwatts, system sum, fundamental + harmonics
+	optional int64 reactive_power_micro_var_sum = 5;	// Reactive power in microvars, system sum, fundamental + harmonics
+	optional int64 apparent_power_micro_va_sum_arithmetic = 6;	// Arithmetic apparent power in microvolt-amperes, system sum, fundamental + harmonics
+	optional int64 apparent_power_micro_va_sum_vectorial = 7;	// Vectorial apparent power in microvolt-amperes, system sum, fundamental + harmonics
+	optional double power_factor_arithmetic = 8;	// Unitless arithmetic power factor magnitude in the range 0.0 to 1.0, system, fundamental + harmonics; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context
+	optional double power_factor_vectorial = 9;	// Unitless vectorial power factor magnitude in the range 0.0 to 1.0, system, fundamental + harmonics, based on vectorially aggregated apparent power; this is not displacement power factor
+	optional int64 reactive_power_micro_var_sum_arithmetic = 10;	// Arithmetic reactive power in microvars, system sum, fundamental + harmonics
+	optional double power_factor_angle_arithmetic_deg = 11;	// Arithmetic power factor angle in degrees, system, fundamental + harmonics
+	optional double power_factor_angle_vectorial_deg = 12;	// Vectorial power factor angle in degrees, system, fundamental + harmonics
+	GeisaTypeMeasurementMetadata metadata = 13;
+	optional int64 active_power_micro_w_del = 20;	// Active power in microwatts, system delivered, fundamental + harmonics
+	optional int64 active_power_micro_w_rec = 21;	// Active power in microwatts, system received, fundamental + harmonics
+	optional int64 active_power_micro_w_net = 22;	// Active power in microwatts, system net, fundamental + harmonics
+	optional int64 reactive_power_micro_var_del = 23;	// Reactive power in microvars, system delivered, fundamental + harmonics
+	optional int64 reactive_power_micro_var_rec = 24;	// Reactive power in microvars, system received, fundamental + harmonics
+	optional int64 reactive_power_micro_var_net = 25;	// Reactive power in microvars, system net, fundamental + harmonics
+}
+
+message GeisaTypeInstantaneousQuantities_PerPhase {
+	uint32 message_version = 1;	// Example: 1,2 …
+	GeisaTypePhase phase = 2;
+	optional int64 current_micro_a = 3;	// Current rms in microamps, per phase, fundamental + harmonics
+	optional int64 voltage_micro_v = 4;	// Voltage rms in microvolts, per phase, fundamental + harmonics
+	optional int64 active_power_micro_w_sum = 5;	// Active power in microwatts, per phase sum, fundamental + harmonics
+	optional int64 reactive_power_micro_var_sum = 6;	// Reactive power in microvars, per phase sum, fundamental + harmonics
+	optional int64 apparent_power_micro_va_sum = 7;	// Apparent power in microvolt-amperes, per phase sum, fundamental + harmonics
+	optional double voltage_angle_deg = 8;	// Phase voltage angle in degrees, relative to phase A voltage
+	optional double current_angle_deg = 9;	// Phase current angle in degrees, relative to same-phase voltage, fundamental + harmonics
+	optional double power_factor = 10;	// Unitless power factor magnitude in the range 0.0 to 1.0, per phase, fundamental + harmonics; sign and quadrant semantics are not encoded in the PF sign, and reactive-power sign and/or PF angle provide directional context
+	optional int64 current_micro_a_fundamental = 11;	// Current rms in microamps, per phase, fundamental only
+	optional int64 voltage_micro_v_fundamental = 12;	// Voltage rms in microvolts, per phase, fundamental only
+	optional double current_thd_percent = 13;	// Current THD percentage, 0-100 semantics, equivalent to SenML ratio * 100
+	optional double voltage_thd_percent = 14;	// Voltage THD percentage, 0-100 semantics, equivalent to SenML ratio * 100
+	optional double power_factor_angle_deg = 15;	// Power factor angle in degrees, per phase, fundamental + harmonics
+	optional double current_tdd_percent = 16;	// Current TDD percentage, 0-100 semantics, equivalent to SenML ratio * 100
+	optional int64 current_distortion_micro_a_rms = 17;	// Distortion current rms in microamps, per phase
+	optional double voltage_2nd_harmonic_percent = 18;	// 2nd harmonic voltage percentage, 0-100 semantics, per phase
+	GeisaTypeMeasurementMetadata metadata = 19;
+	optional int64 active_power_micro_w_del = 20;	// Active power in microwatts, per phase delivered, fundamental + harmonics
+	optional int64 active_power_micro_w_rec = 21;	// Active power in microwatts, per phase received, fundamental + harmonics
+	optional int64 active_power_micro_w_net = 22;	// Active power in microwatts, per phase net, fundamental + harmonics
+	optional int64 reactive_power_micro_var_del = 23;	// Reactive power in microvars, per phase delivered, fundamental + harmonics
+	optional int64 reactive_power_micro_var_rec = 24;	// Reactive power in microvars, per phase received, fundamental + harmonics
+	optional int64 reactive_power_micro_var_net = 25;	// Reactive power in microvars, per phase net, fundamental + harmonics
+}
+
+message GeisaTypeInstantaneousQuantities_Other {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+	optional int64 neutral_current_imputed_micro_a = 3;	// Current rms in microamps, neutral imputed, fundamental + harmonics
+	optional int64 load_side_voltage_micro_v = 4;	// Load-side voltage in microvolts
+	GeisaTypeMeasurementMetadata metadata = 5;
+	optional int64 neutral_current_micro_a = 6;	// Current rms in microamps, neutral measured, fundamental + harmonics
+}
+
+message GeisaTypeHarmonic {
+	repeated int64 voltage_harmonic_micro_v = 1;	// RMS harmonic voltage magnitudes in microvolts, index 0 = 2nd harmonic, index 1 = 3rd harmonic, etc.
+	repeated int64 current_harmonic_micro_a = 2;	// RMS harmonic current magnitudes in microamps, index 0 = 2nd harmonic, index 1 = 3rd harmonic, etc.
+}
+
+// Although instantaneous quantities, harmonics are considered in a category of their own.
+message GeisaInstantaneousQuantities_Harmonic {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+	optional int64 phase_a_current_harmonic_2nd_micro_a = 3;	// Current rms in microamps, phase A, 2nd harmonic
+	optional int64 phase_b_current_harmonic_2nd_micro_a = 4;	// Current rms in microamps, phase B, 2nd harmonic
+	optional int64 phase_c_current_harmonic_2nd_micro_a = 5;	// Current rms in microamps, phase C, 2nd harmonic
+	optional int64 phase_a_voltage_harmonic_2nd_micro_v = 6;	// Voltage rms in microvolts, phase A, 2nd harmonic
+	optional int64 phase_b_voltage_harmonic_2nd_micro_v = 7;	// Voltage rms in microvolts, phase B, 2nd harmonic
+	optional int64 phase_c_voltage_harmonic_2nd_micro_v = 8;	// Voltage rms in microvolts, phase C, 2nd harmonic
+	GeisaTypeHarmonic phase_a_harmonics = 9;
+	GeisaTypeHarmonic phase_b_harmonics = 10;
+	GeisaTypeHarmonic phase_c_harmonics = 11;
+	GeisaTypeMeasurementMetadata metadata = 12;
+}
+
+// This is the outer message for instantaneous quantities.
+// Message topic: geisa/api/instantaneous-data
+message GeisaInstantaneousQuantities {
+	uint32 message_version = 1;	// Example: 1,2 …
+	uint64 timestamp_us = 2;	// UTC Unix epoch time in microseconds, measured from 1970-01-01T00:00:00Z
+	GeisaTypeInstantaneousQuantities_PerPhase phase_a = 3;
+	GeisaTypeInstantaneousQuantities_PerPhase phase_b = 4;
+	GeisaTypeInstantaneousQuantities_PerPhase phase_c = 5;
+	GeisaTypeInstantaneousQuantities_PerPhase phase_n = 6;	// Neutral phase measurements
+	GeisaTypeInstantaneousQuantities_Other other = 7;	// Auxiliary instantaneous quantities not represented elsewhere
+	optional double frequency_hz = 8;	// Overall reported frequency in hertz for this instantaneous snapshot
+	optional double temperature_celsius = 9;	// Optional meter or platform temperature in degrees Celsius for this instantaneous snapshot
+	GeisaTypeInstantaneousQuantities_System system = 10;
+	GeisaInstantaneousQuantities_Harmonic harmonic = 11;
+	GeisaTypeMeasurementMetadata metadata = 12;
+}

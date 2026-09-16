@@ -1,0 +1,224 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+import "geisa-status.proto";
+
+/*
+ * GEISA Waveform API control-plane messages.
+ *
+ * MQTT topics:
+ *   Request:  geisa/api/waveform/req/<userid>
+ *   Response: geisa/api/waveform/rsp/<userid>
+ *
+ * The request/response path is used for waveform access requests and for
+ * runtime metadata needed to decode waveform frames. The high-volume waveform
+ * samples themselves are not transported in these protobuf messages. After a
+ * successful SUBSCRIBE request, the platform provides a per-application
+ * AF_UNIX SOCK_SEQPACKET socket path for native frame delivery.
+ *
+ * Stream metadata is included in the response even when the same stream is
+ * discoverable through Platform Discovery. This duplication is intentional so
+ * that an authorized application can immediately validate and decode waveform
+ * frames received on the returned per-application socket without requiring a
+ * separate discovery transaction.
+ *
+ * Optional name and description values associated with waveform streams are
+ * platform-supplied informational metadata intended for display, diagnostics,
+ * triage or logging. Applications SHALL NOT rely on such fields for
+ * interoperability behavior or runtime decisions..
+ */
+
+enum GeisaWaveform_Status {
+  WAVEFORM_STATUS_UNSPECIFIED = 0;
+  WAVEFORM_SUCCESS = 1;
+  WAVEFORM_ERR_INVALID_STREAM_ID = 100;
+  WAVEFORM_ERR_PERMISSION_DENIED = 101;
+  WAVEFORM_ERR_NOT_SUPPORTED = 102;
+  WAVEFORM_ERR_NO_RESOURCES = 103;
+  WAVEFORM_ERR_NOT_SUBSCRIBED = 104;
+  WAVEFORM_ERR_ALREADY_SUBSCRIBED = 105;
+  WAVEFORM_ERR_UNAVAILABLE = 106;
+  WAVEFORM_ERR_OTHER = 107;
+}
+
+enum GeisaWaveform_RequestType {
+  WAVEFORM_REQUEST_TYPE_UNSPECIFIED = 0;
+  WAVEFORM_SUBSCRIBE = 1;
+  WAVEFORM_UNSUBSCRIBE = 2;
+}
+
+enum GeisaWaveform_SampleType {
+  WAVEFORM_SAMPLE_TYPE_UNSPECIFIED = 0;
+  WAVEFORM_SAMPLE_TYPE_INT16 = 1;
+  WAVEFORM_SAMPLE_TYPE_INT32 = 2;
+  WAVEFORM_SAMPLE_TYPE_FLOAT32 = 3;
+  WAVEFORM_SAMPLE_TYPE_FLOAT64 = 4;
+}
+
+/*
+ * This is the outer message for a Waveform API request..
+ */
+message GeisaWaveform_Req {
+  /*
+   * Waveform stream identifier.
+   *
+   * Platforms that support waveform data SHALL expose a baseline waveform
+   * stream with the identifier "waveform-base". Platforms MAY expose
+   * additional stream identifiers for alternate waveform views.
+   *
+   * Applications SHALL use waveform metadata to interpret a stream and SHALL
+   * NOT infer stream characteristics by parsing the stream_id value.
+   */
+  string stream_id = 1;
+
+  /*
+   * Requested waveform operation for this application instance.
+   */
+  GeisaWaveform_RequestType request_type = 2;
+}
+
+/*
+ * This is the outer message for a Waveform API response.
+ */
+message GeisaWaveform_Rsp {
+  // ----- Envelope / disposition (1-9) -----
+
+  GeisaStatus status = 1;
+
+  /*
+   * Operation result.
+   */
+  GeisaWaveform_Status waveform_status = 2;
+
+  // ----- Identity / access (10-19) -----
+
+  /*
+   * Waveform stream identifier.
+   *
+   * Platforms that support waveform data SHALL expose a baseline waveform
+   * stream with the identifier "waveform-base". Platforms MAY expose
+   * additional stream identifiers for alternate waveform views.
+   *
+   * Applications SHALL use waveform metadata to interpret a stream and SHALL
+   * NOT infer stream characteristics by parsing the stream_id value.
+   */
+  string stream_id = 10;
+
+  /*
+   * Whether the requesting application instance is subscribed to the waveform
+   * stream after processing this request.
+   */
+  bool subscribed = 11;
+
+  /*
+   * Runtime AF_UNIX SOCK_SEQPACKET socket path for this application instance.
+   * This per application instance is intentional to allow future variantions
+   * beyond consumption of the full waveform data stream without exposing this
+   * fact as a form of fingerprinting by neighoring applications.
+   *
+   * This field is populated on successful subscribe responses and omitted when
+   * the application is not subscribed. The socket path is runtime state for
+   * the requesting application instance and is NOT static discovery metadata.
+   */
+  string socket_path = 12;
+
+  // ----- Structural stream layout (20-39) -----
+
+  /*
+   * Sample encoding used in waveform frames delivered on the returned socket.
+   */
+  GeisaWaveform_SampleType sample_type = 20;
+
+  /*
+   * Number of voltage channels present in each sample time step.
+   */
+  uint32 voltage_channel_count = 21;
+
+  /*
+   * Number of current channels present in each sample time step.
+   */
+  uint32 current_channel_count = 22;
+
+  /*
+   * Number of additional non-voltage, non-current channels present in each
+   * sample time step, if any.
+   *
+   * This field SHALL be populated in successful subscribe responses so
+   * applications can compute the full channel layout from the subscribe
+   * response alone without consulting Platform Discovery.
+   */
+  uint32 other_channel_count = 23;
+
+  /*
+   * Total number of channels present in each sample time step.
+   * This SHALL equal voltage_channel_count + current_channel_count +
+   * other_channel_count.
+   */
+  uint32 total_channel_count = 24;
+
+  /*
+   * Sampling rate in hertz for the waveform stream.
+   */
+  uint32 sample_rate_hz = 25;
+
+  /*
+   * Samples per cycle for the waveform stream, when applicable.
+   */
+  uint32 samples_per_cycle = 26;
+
+  /*
+   * Nominal AC frequency in hertz, when applicable.
+   */
+  uint32 nominal_frequency_hz = 27;
+
+  /*
+   * Whether delivered frames are aligned to cycle boundaries.
+   */
+  bool cycle_aligned = 28;
+
+  /*
+   * Whether delivered frames are aligned to a zero-crossing reference.
+   */
+  bool zero_crossing_aligned = 29;
+
+  // ----- Timing / cadence / alignment (40-59) -----
+
+  /*
+   * Expected period between delivered waveform frames in milliseconds.
+   */
+  uint32 expected_frame_period_ms = 40;
+
+  // ----- Scale metadata (60-79) -----
+
+  /*
+   * Scaling factor for voltage channels when integer sample formats are used
+   * (INT16, INT32). For floating-point sample formats (FLOAT32, FLOAT64),
+   * implementations SHOULD omit this field or set it to 1.0.
+   */
+  double voltage_scale = 60;
+
+  /*
+   * Scaling factor for current channels when integer sample formats are used.
+   * For floating-point sample formats, implementations may omit this field or
+   * set it to 1.0 by convention.
+   */
+  double current_scale = 61;
+
+  // ----- Optional filter metadata (80-99) -----
+
+  /*
+   * Optional filter cutoff metadata in hertz, if exposed by the platform.
+   * If both lowpass and highpass are present for a channel type, a bandpass
+   * filter is implied.
+   */
+  int32 voltage_filter_lowpass = 80;
+  int32 voltage_filter_highpass = 81;
+  int32 current_filter_lowpass = 82;
+  int32 current_filter_highpass = 83;
+}

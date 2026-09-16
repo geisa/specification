@@ -1,0 +1,21 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "geisa-sensor": {
+    "$comment": "Example temperature sensor descriptor. Runtime reading examples are provided in the separate sensor-temperature-reading-example.json and sensor-temperature-response-example.json files. Runtime readings may contain one or more scalar values per observation as defined by sensor.proto.",
+       "sensor": {
+      "$comment": "Descriptor metadata for a readable and publishable lower-rate temperature sensor.",
+      "sensor-id": "board_temp1",
+      "sensor-type": "GEISA_SENSOR_TYPE_TEMPERATURE",
+      "sensor-subtype": "board",
+      "name": "Board Temperature Sensor 1",
+      "description": "Internal board or electronics temperature sensor.",
+      "manufacturer": "Example Sensor Vendor",
+      "model": "TMP1075",
+      "unit": "Cel",
+      "supports-read": true,
+      "supports-publish": true,
+      "min-report-period-ms": 1000,
+      "max-report-period-ms": 60000
+    }
+  }
+}

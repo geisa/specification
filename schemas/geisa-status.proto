@@ -1,0 +1,80 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+// ============================================================
+// GEISA Response Common Status / Error Model
+// ============================================================
+
+syntax = "proto3";
+
+// Canonical response codes used across ALL GEISA APIs.
+// Ranges are intentionally grouped for clarity and future expansion.
+enum GeisaStatusCode {
+  GEISA_STATUS_CODE_UNSPECIFIED = 0;
+
+  // ------------------------------------------------------------
+  // Success
+  // ------------------------------------------------------------
+  GEISA_STATUS_SUCCESS = 1;
+
+  // ------------------------------------------------------------
+  // Request / protocol errors (100–199)
+  // ------------------------------------------------------------
+  GEISA_STATUS_CODE_REQUEST_BAD_REQUEST = 100;
+  GEISA_STATUS_CODE_REQUEST_INVALID_ARGUMENT = 101;
+  GEISA_STATUS_CODE_REQUEST_MALFORMED_PAYLOAD = 102;
+  GEISA_STATUS_CODE_REQUEST_DUPLICATE_TARGET = 103;
+  GEISA_STATUS_CODE_REQUEST_OUT_OF_RANGE = 104;
+
+  // The request itself is understood, but a requested option, mode,
+  // or other  is not supported by this API.
+  GEISA_STATUS_CODE_REQUEST_UNSUPPORTED = 105;
+
+  // ------------------------------------------------------------
+  // Authorization / policy errors (200–299)
+  // ------------------------------------------------------------
+  GEISA_STATUS_CODE_AUTH_UNAUTHORIZED = 200;
+  GEISA_STATUS_CODE_AUTH_FORBIDDEN = 201;
+
+  // ------------------------------------------------------------
+  // Resource / platform-limit / state errors (300–399)
+  // ------------------------------------------------------------
+  GEISA_STATUS_CODE_RESOURCE_NOT_FOUND = 300;
+  GEISA_STATUS_CODE_RESOURCE_BUSY = 301;
+  GEISA_STATUS_CODE_RESOURCE_CONFLICT = 302;
+  GEISA_STATUS_CODE_RESOURCE_NO_RESOURCES = 303;
+  GEISA_STATUS_CODE_RESOURCE_RATE_LIMITED = 304;
+
+  // ------------------------------------------------------------
+  // Execution / platform / dependency errors (400–499)
+  // ------------------------------------------------------------
+  GEISA_STATUS_CODE_EXEC_TIMEOUT = 400;
+
+  // The request is valid, but the platform, implementation, or target
+  // capability does not support the requested function on this device
+  GEISA_STATUS_CODE_EXEC_NOT_SUPPORTED = 401;
+  GEISA_STATUS_CODE_EXEC_PLATFORM_ERROR = 402;
+  GEISA_STATUS_CODE_EXEC_INTERNAL_ERROR = 403;
+  GEISA_STATUS_CODE_EXEC_PARTIAL_FAILURE = 404;
+
+  // ------------------------------------------------------------
+  // Data quality / availability conditions (500–599)
+  // ------------------------------------------------------------
+  GEISA_STATUS_CODE_DATA_UNAVAILABLE = 500;
+  GEISA_STATUS_CODE_DATA_STALE = 501;
+}
+
+// Standard response status for ALL GEISA APIs.
+message GeisaStatus {
+  GeisaStatusCode code = 1;  // Machine-readable result
+
+  // Short, human-readable summary (safe for UI/logs)
+  string message = 2;
+
+  // Optional detailed diagnostic info (NOT for parsing)
+  string details = 3;
+}
+

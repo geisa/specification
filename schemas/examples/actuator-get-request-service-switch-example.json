@@ -1,0 +1,6 @@
+{
+  "$comment": "Query current service switch state; platforms may restrict visibility or control by policy.",
+  "geisa-actuator-get-req": {
+    "actuator": "service-switch"
+  }
+}

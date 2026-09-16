@@ -1,0 +1,9 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE. Platform acceptance example for the GEISA app-message response topic.",
+  "geisa-app-message-rsp": {
+    "request-id": "req-0001",
+    "status": "GEISA_APP_MESSAGE_STATUS_ACCEPTED",
+    "status-text": "accepted for delivery",
+    "timestamp-ms": 1762862400100
+  }
+}
