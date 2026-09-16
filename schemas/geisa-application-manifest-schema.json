@@ -270,7 +270,7 @@
                                     "$ref": "#/$defs/fixedVersionOrNull"
                                 },
                                 "toolchain-id": {
-                                    "description": "Target triple identifying the application build target, following LLVM/Clang target-triple conventions (e.g. "aarch64-unknown-linux-musl", "aarch64-unknown-linux-gnu", ..).",
+                                    "description": "Target triple identifying the application build target, following LLVM/Clang target-triple conventions (e.g. \"aarch64-unknown-linux-musl\", \"aarch64-unknown-linux-gnu\", ..).",
                                     "type": "string",
                                     "minLength": 4,
                                     "maxLength": 256

@@ -30,7 +30,7 @@ It currently supports two use cases:
 
 ## Build
 
-From the repository root, the recommended build path is:
+From the `specification/schemas/` directory, the recommended build path is:
 
     make clean
     make examples

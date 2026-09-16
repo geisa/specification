@@ -29,12 +29,13 @@ payloads and prints both sections directly.
 
 ## Build
 
-From the repository root, prepare the repo `venv` used for nanopb generation:
+From the `specification/schemas/` directory, prepare the schemas `venv` used
+for nanopb generation:
 
     bash scripts/setup-dev-venv.sh
 
 After that, direct metered targets such as `make metered-c` and
-`make examples-metered` use the repo `venv` automatically unless you override
+`make examples-metered` use the schemas `venv` automatically unless you override
 the nanopb generator settings explicitly.
 
 Generate metered nanopb bindings only:
@@ -56,7 +57,7 @@ If you already have a working `protoc-gen-nanopb` executable, you can use it
 instead by setting `NANOPB_GENERATOR=...` in place of
 `NANOPB_GENERATOR_MODULE=...`.
 
-The embedded C build uses the repo `venv` for generator packaging plus an
+The embedded C build uses the schemas `venv` for generator packaging plus an
 external nanopb source tree for the runtime C sources.
 
 `NANOPB_DIR` or `NANOPB_RUNTIME_DIR` should point at the root of an external

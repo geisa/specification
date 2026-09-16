@@ -6,17 +6,28 @@ The GEISA Specification is an effort by the
 to define a consistent, secure, and interoperable computing environment for
 embedded devices at the very edge of the electric utility grid, like electric
 meters and distribution automation devices, for the benefit of utilities,
-platform vendors, and software vendors. If you would like to get involved,
-please head over to our Wiki page for details on participation:
-[onboarding link](https://lfenergy.org/projects/geisa/).
-Follow the onboarding link for details about participating in our community
-process. You are also welcome to fork this repository and submit pull requests
-if you have additions or corrections you would like considered.
+platform vendors, and software vendors. See the
+[GEISA project page](https://lfenergy.org/projects/geisa/) for information
+about participating in the community. You are also welcome to fork this
+repository and submit pull requests with additions or corrections for
+consideration.
 
 GEISA maintains its formal specification as a set of reStructuredText files
 that are built into HTML and PDF using
 [Sphinx](https://www.sphinx-doc.org/en/master/). See the
 [Sphinx documentation](https://www.sphinx-doc.org/en/master/) for details.
+
+The repository also includes the GEISA machine-readable definitions under
+[`schemas/`](schemas/), including Protocol Buffer definitions, JSON Schemas,
+profiles, examples, nanopb support, and related tooling. Build with
+`make schemas` or `make schemas-all`, clean with `make schemas-clean`, and lint
+with `make schemas-lint`. Repository setup and combined linting use
+`make setup-dev` and `make lint`.
+
+The GEISA specification and documentation are licensed under the Community
+Specification License. Content under [`schemas/`](schemas/), including schemas,
+examples, and related tooling, is licensed under the Apache License 2.0; see
+[`schemas/LICENSE`](schemas/LICENSE).
 
 GEISA also uses a Git submodule for relevant OMA objects from the
 [LwM2M Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).
@@ -45,22 +56,23 @@ using its own separate packages and not break anything in the existing
 environment. Depending on your environment, you may need to install Python
 `venv` using your system package manager.
 
-The GEISA spec also supports generated diagrams. Mermaid is used for sequence
-diagrams and other simple generated diagrams. diagrams.net/draw.io is used for
-selected layout-sensitive architecture and similar diagrams.
+The GEISA specification also supports generated diagrams. Mermaid is used for
+sequence diagrams and other simple generated diagrams. diagrams.net/draw.io is
+used for selected layout-sensitive architecture and similar diagrams.
 
 To ensure a consistent build process, the build scripts rely on `mmdc` for
 Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
 
-`mmdc` can be downloaded from
-[the Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli), or
-installed using `npm`.
+Install Mermaid CLI with `npm`:
 
-[Mermaid](https://mermaid.js.org/) can be installed using `npm`. `mmdc`
-requires it, so `npm install -g @mermaid-js/mermaid-cli` should automatically
-install it. Please note that the `node.js` and `npm` that come with your Linux
-distribution may be hopelessly out of date. You will likely need to update
-them to successfully install `mmdc`.
+```bash
+npm install -g @mermaid-js/mermaid-cli
+```
+
+See the
+[Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli)
+for additional information. The `node.js` and `npm` packages supplied by some
+Linux distributions may be too old to install current Mermaid CLI releases.
 
 diagrams.net/draw.io is not installed through the Python virtual environment
 and does not have an official npm package equivalent to Mermaid CLI at this
@@ -104,8 +116,8 @@ $ drawio --help
 </pre>
 
 If `$HOME/.local/bin` is not already in your shell startup `PATH`, add it to
-your shell profile before building the specification (or use an existing
-user-level bin path already existing).
+your shell profile before building the specification, or use another user-level
+bin directory already on `PATH`.
 
 Some Linux systems may not have FUSE configured for AppImage execution. If the
 AppImage does not run directly, extract it and update the wrapper to call the
@@ -140,45 +152,34 @@ Depending on the installed application name, the macOS binary may instead be:
 /Applications/diagrams.net.app/Contents/MacOS/diagrams.net
 </pre>
 
-Here are the steps that were used from a posix environment (note, `node.js`
-and `npm` updates are not shown):
+After installing the required host tools, prepare the repository-managed
+development environments with:
 
 <pre>
-$ sudo apt install latexmk librsvg2-bin # or your package manager of choice
-
-$ npm install -g @mermaid-js/mermaid-cli
-
-$ mkdir specification
-
-$ cd specification
-
-$ python3 -m venv venv
-
-source venv/bin/activate
-
-(venv) $ pip3 install GitPython sphinx sphinxcontrib-svg2pdfconverter linuxdoc
-
-(venv) $ deactivate
-
-$ make -j4 all
-
+$ make setup-dev
 </pre>
 
-If you are building this documentation tree from the git repository,
-substitute the ```mkdir specification``` with the appropriate
-```git clone``` command.
+This installs the repository Python and Node.js development dependencies. It
+does not install host tools such as Mermaid CLI, draw.io, LaTeX, `protoc`,
+compilers, or other system packages.
+
+Build the specification with:
+
+<pre>
+$ make all
+</pre>
 
 Alternative make targets include `html` and `latexpdf` to build just those
 outputs.
 
-To build a custom sphinx target, use `SPHINXTARGETS=foo make all`.
+To build a custom Sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Running multiple jobs as part of make (`-j4`) may result in errors in the
-LatexPDF build.  If these occur, use `make all` instead.
+NOTE: Running multiple jobs as part of make may result in errors in the
+`latexpdf` build. If these occur, use `make all` instead.
 
-NOTE: Depending on your specific distribution, you may encounter errors on the
-LaTex file generation at the tail end of the build missing various style files
-such as the following:
+NOTE: Depending on your specific distribution, you may encounter errors during
+LaTeX file generation near the end of the build due to missing style files such
+as the following:
 
 <pre>
 ! LaTeX Error: File `cmap.sty' not found.

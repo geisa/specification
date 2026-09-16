@@ -22,7 +22,7 @@ Interface Access
 
 Application access to network interfaces is controlled through the Application
 Manifest (see
-https://github.com/geisa/schemas/blob/main/geisa-application-manifest-schema.json),
+https://github.com/geisa/specification/blob/main/schemas/geisa-application-manifest-schema.json),
 through the communications object.  Applications may be given access to the
 Field Area Network (FAN) interface, the Home Area Network (HAN) interface, or
 the messaging interface.  Access to each is independent.  System operators may

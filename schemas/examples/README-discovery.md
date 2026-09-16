@@ -18,7 +18,7 @@ and waveform metadata. Waveform frame delivery remains a separate example path.
 
 ## Build
 
-From the repository root:
+From the `specification/schemas/` directory:
 
     make clean
     make examples

@@ -1,6 +1,6 @@
 # GEISA schemas
 
-This repository contains the [protobuf](https://protobuf.dev/) and
+This schemas subtree contains the [protobuf](https://protobuf.dev/) and
 [JSON Schema](https://json-schema.org/) schemas used by the
 [Grid Edge Interoperability and Security Alliance
 Specification](https://github.com/geisa/specification).
@@ -11,9 +11,9 @@ application manifests, profiles, and related examples.
 For full documentation and context, refer to the
 [GEISA Specification][geisa-spec].
 
-## Repository contents
+## Schemas subtree contents
 
-At a high level, this repository contains:
+At a high level, this subtree contains:
 
 - `*.proto` files for protobuf message definitions
 - `geisa-*-schema.json` files for JSON Schema definitions
@@ -25,7 +25,7 @@ At a high level, this repository contains:
 - `examples/helpers/*.h` files with shared example-only helper code.
 - `examples/README*.md` example-specific build and run notes.
 
-This schemas repository SHALL be used in conjunction with the GEISA
+This schemas subtree SHALL be used in conjunction with the GEISA
 specification to enable creation of GEISA conformant implementations. The
 content is intended to help users understand the structure, conformance, and
 intent of GEISA messages and payloads.
@@ -46,12 +46,12 @@ all measurements.
 
 ## Prerequisites
 
-The repository build targets assume these tools are available on `PATH`:
+The schemas build targets assume these tools are available on `PATH`:
 
 - `make`
 - `protoc` (Protocol Buffers compiler)
 
-Linting uses Node.js and `npm`. Install the repository Node dependencies before
+Linting uses Node.js and `npm`. Install the schemas Node dependencies before
 running lint commands:
 
     npm ci
@@ -72,19 +72,19 @@ nanopb source checkout that contains the runtime C sources and headers such as
 `pb_decode.h`. Pointing only at a pip-installed Python package is not
 sufficient because it does not include those runtime C source files.
 
-The repository convention is to keep nanopb sidecar generator settings under
-`nanopb_options/`. In this repository:
+The schemas convention is to keep nanopb sidecar generator settings under
+`nanopb_options/`. In this subtree:
 
 - `*.proto` files define the GEISA protobuf wire/API contract
 - `geisa-*-schema.json` files define the JSON validation contract
 - `nanopb_options/*.options` files define nanopb sidecar generation settings
-  for this repository's embedded C examples
+  for this subtree's embedded C examples
 
 The `.options` bounds support generated example code and embedded C memory
 layout. They are not GEISA protocol limits and do not define universal device
 requirements.
 
-The supported nanopb generator environment is the repository `venv`. Create or
+The supported nanopb generator environment is the schemas `venv`. Create or
 refresh it with:
 
     make setup-dev
@@ -219,7 +219,8 @@ Example-specific build and run instructions are in the `examples/` directory:
 - `examples/README-waveform.md`
 - `examples/README-sensors.md`
 
-You can build the default example workflow directly from the repository root:
+From the `specification/schemas/` directory, build the default example
+workflow:
 
     make examples
 
@@ -242,15 +243,15 @@ To build the embedded C example set explicitly:
 
 This compiles the example binaries into `build/examples/`.
 
-A typical embedded C workflow from the repository root is:
+A typical embedded C workflow from the `specification/schemas/` directory is:
 
     make setup-dev
     test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
     make clean
     make examples-c
 
-The Makefile uses the repository `venv` Python directly when available, so
-shell activation of the repository `venv` is not required. Once the venv has
+The Makefile uses the schemas `venv` Python directly when available, so shell
+activation of the schemas `venv` is not required. Once the venv has
 been set up and `/tmp/nanopb` contains a nanopb source checkout, subsequent
 `make examples` or `make examples-c` will build without issue.
 

@@ -41,13 +41,14 @@ echo "Installing Python development dependencies"
 
 cat <<EOF
 
-Repository venv is ready.
+Schemas venv is ready.
 
-Next embedded C example build:
+From the specification/schemas/ directory, run the next embedded C example
+build:
   test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
   make examples-c
 
-The Makefile uses the repository venv Python directly when available, so shell
+The Makefile uses the schemas venv Python directly when available, so shell
 activation of venv is not required for Makefile targets.
 
 Use NANOPB_DIR or NANOPB_RUNTIME_DIR only if your nanopb checkout lives

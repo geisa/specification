@@ -1,0 +1,11 @@
+{
+  "name": "geisa-specification",
+  "private": true,
+  "scripts": {
+    "lint:md": "markdownlint \"*.md\" \"docs/**/*.md\"",
+    "lint:md:fix": "markdownlint \"*.md\" \"docs/**/*.md\" --fix"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "0.48.0"
+  }
+}

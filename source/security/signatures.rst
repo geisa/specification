@@ -16,7 +16,7 @@ Support Signature Algorithms
 GEISA requires that application images, firmware images, and application
 manifest be digitally signed.  Digital signatures for application images are
 provided in the application manifest in the application artifact object (see
-https://github.com/geisa/schemas/blob/main/geisa-application-manifest-schema.json).  
+https://github.com/geisa/specification/blob/main/schemas/geisa-application-manifest-schema.json).
 
 GEISA supports two digital signature schemas:
 

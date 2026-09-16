@@ -20,7 +20,7 @@ diagnostics, tooling, and tests that convert protobuf messages to JSON.
 
 ## Build
 
-From the repository root:
+From the `specification/schemas/` directory:
 
     make clean
     make examples

@@ -54,7 +54,7 @@ API Access Control and Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Application Manifest (see
-https://github.com/geisa/schemas/blob/main/geisa-application-manifest-schema.json)
+https://github.com/geisa/specification/blob/main/schemas/geisa-application-manifest-schema.json)
 allows the :term:`System Operator` to determine which APIs an application is
 allowed to access.  As of this version of the GEISA specification, the
 deployment manifest supports six API controls:

@@ -15,7 +15,7 @@ These examples demonstrate GEISA platform and app connection status payloads:
 
 ## Build
 
-From the repository root:
+From the `specification/schemas/` directory:
 
     make clean
     make examples

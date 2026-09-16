@@ -22,7 +22,7 @@ standard `/tmp` payloads to already exist.
 
 ## Building examples
 
-From the repository root:
+From the `specification/schemas/` directory:
 
     make clean
     make examples
@@ -39,16 +39,16 @@ Compiled example binaries are written to:
 
     build/examples/
 
-The embedded C build uses the repository `venv` for nanopb generation plus an
+The embedded C build uses the schemas `venv` for nanopb generation plus an
 external nanopb runtime source tree:
 
     make setup-dev
     test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
     make examples-c
 
-The Makefile uses the repository `venv` Python directly when available, so
-shell activation of the repository `venv` is not required.  The build will
-use the repository venv Python directly when available.
+The Makefile uses the schemas `venv` Python directly when available, so
+shell activation of the schemas `venv` is not required.  The build will
+use the schemas venv Python directly when available.
 
 If you already have a working `protoc-gen-nanopb` executable, you can use it
 instead by setting `NANOPB_GENERATOR=protoc-gen-nanopb` or an explicit plugin
@@ -98,11 +98,11 @@ Embedded C examples are available for:
 - Platform Discovery
 - metered quantities
 
-Embedded C examples are the preferred example path for this repository because
+Embedded C examples are the preferred example path for this subtree because
 the nanopb-based build supports proto3 optional fields.
 
 The legacy `make c` protobuf-c generation path remains available for standalone
-code generation, but it is not the primary C example path for this repository.
+code generation, but it is not the primary C example path for this subtree.
 
 The currently supported C++ example path is waveform. The Platform Discovery
 embedded C example includes waveform metadata in the discovery response; it

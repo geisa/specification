@@ -77,7 +77,7 @@ rst_prolog = f"""
 
 .. |geisa-conformance-repo| replace::  https://github.com/geisa/conformance
 
-.. |geisa-schemas-repo| replace::  https://github.com/geisa/schemas
+.. |geisa-schemas-repo| replace::  https://github.com/geisa/specification/tree/main/schemas
 
 .. |geisa-ee-logo| image:: /images/geisa-ee-icon.{_icon_ext}
     :alt: GEISA Execution Environment
