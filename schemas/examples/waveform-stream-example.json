@@ -1,0 +1,24 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "geisa-waveform": {
+    "$comment": "Example waveform stream descriptor exposed through GEISA Platform Discovery. Runtime subscribe and unsubscribe examples are provided in separate files.",
+    "stream": {
+      "$comment": "Descriptor metadata for the required baseline waveform stream. Optional name and description values, when present, are platform-supplied informational metadata intended for display, diagnostics, or logging. Applications SHALL NOT rely on these fields for interoperability behavior.",
+      "stream-id": "waveform-base",
+      "name": "Baseline Waveform Stream",
+      "description": "Baseline interoperable waveform stream for GEISA applications.",
+      "sample-type": "int16",
+      "voltage-channel-count": 1,
+      "current-channel-count": 2,
+      "total-channel-count": 3,
+      "sample-rate-hz": 7680,
+      "samples-per-cycle": 128,
+      "nominal-frequency-hz": 60,
+      "cycle-aligned": true,
+      "zero-crossing-aligned": true,
+      "voltage-scale": 0.003662109375,
+      "current-scale": 0.001220703125,
+      "expected-frame-period-ms": 200
+    }
+  }
+}

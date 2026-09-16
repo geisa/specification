@@ -353,18 +353,18 @@ Transaction Data
 - ``GeisaWaveform_Req``
 - ``GeisaWaveform_Rsp``
 
-As defined in https://github.com/geisa/schemas
+As defined in ``schemas/waveform.proto``
 
 Examples
 --------
 
 Example files for waveform include:
 
-- ``waveform-stream-example.json``
-- ``waveform-subscribe-request-example.json``
-- ``waveform-subscribe-response-example.json``
-- ``waveform-unsubscribe-request-example.json``
-- ``waveform-unsubscribe-response-example.json``
+- ``schemas/examples/waveform-stream-example.json``
+- ``schemas/examples/waveform-subscribe-request-example.json``
+- ``schemas/examples/waveform-subscribe-response-example.json``
+- ``schemas/examples/waveform-unsubscribe-request-example.json``
+- ``schemas/examples/waveform-unsubscribe-response-example.json``
 
 .. [#ansiforms] ANSI defines a series of standard meter "forms" for the North
    American market in the ANSI C12.1 standard

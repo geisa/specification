@@ -7,10 +7,7 @@ source/license.generated.rst.inc
 node_modules
 .vscode/
 .nvmrc
-.markdownlint.json
 .markdownlintignore
-package.json
-package-lock.json
 
 # Python bytecode caches
 __pycache__/

@@ -1,0 +1,63 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+// GEISA Actuator Proto for GEISA API
+
+syntax = "proto3";
+
+import "geisa-status.proto";
+
+// Types of actuators addressable through the GEISA actuator API.
+// Platforms may expose only a subset of these actuator targets.
+enum GeisaTypeActuator {
+  GEISA_TYPE_ACTUATOR_UNSPECIFIED = 0;
+  GEISA_TYPE_ACTUATOR_SERVICE_SWITCH = 10;
+  GEISA_TYPE_ACTUATOR_DER_SWITCH = 20;
+  GEISA_TYPE_ACTUATOR_LC_RELAY_0 = 30;
+  GEISA_TYPE_ACTUATOR_LC_RELAY_1 = 31;
+  GEISA_TYPE_ACTUATOR_LC_RELAY_2 = 32;
+  GEISA_TYPE_ACTUATOR_LC_RELAY_3 = 33;
+}
+
+// Explicit on/off state for discrete actuator targets.
+enum GeisaTypeOnOff {
+  GEISA_TYPE_ON_OFF_UNSPECIFIED = 0;
+  GEISA_TYPE_ON_OFF_ON = 1;
+  GEISA_TYPE_ON_OFF_OFF = 2;
+}
+
+// Current or target actuator settings.
+message GeisaActuatorStatus {
+  GeisaTypeActuator actuator = 1;  // Which actuator is being referenced?
+  GeisaTypeOnOff on = 2;
+  bool position_present = 3;  // True if position is included.
+  int32 position = 4;  // Position or analog setting when supported.
+}
+
+// Request to change one or more actuator settings.
+// Actuator control is permission-gated by deployment manifest and platform
+// policy. Applications should not assume all platforms allow all actuator
+// actions.
+message GeisaActuatorSet_Req {
+  repeated GeisaActuatorStatus new_settings = 1;
+}
+
+message GeisaActuatorSet_Rsp {
+  GeisaStatus status = 1;
+}
+
+// Request the current state for one actuator.
+message GeisaActuatorGet_Req {
+  GeisaTypeActuator actuator = 1;
+}
+
+// Response with status and the current actuator state.
+// Request/response payload examples illustrate message structure only and do
+// not define safety workflow or authorization behavior.
+message GeisaActuatorGet_Rsp {
+  GeisaStatus status = 1;
+  GeisaActuatorStatus actuator_status = 2;
+}

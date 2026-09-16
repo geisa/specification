@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Metered Quantities AC Meter Profile 0.9",
+  "description": "GEISA instantaneous metrology profile for an AC electric meter or AC metrology-capable platform. This profile overlays the base metered quantities schema without replacing it. The base metered quantities proto and JSON schema remain capability-tolerant so implementations can distinguish unsupported or unreported values from valid zero values. This profile requires a general-purpose scalar AC meter baseline including phase voltage, current, power, power factor, angle, THD/TDD, and system frequency values. The required system power factor is the primary/default arithmetic power factor ratio; vectorial power factor remains optional. Harmonic scalar values, THD/TDD, and other scalar metrology fields are part of the metered quantities path and are distinct from waveform frame data. Waveform sample delivery is handled by the separate Waveform API and socket path, and waveform remains separate from scalar metered quantities. Billing quantities are outside this profile. Meter-form-specific phase requirements may be enforced by conformance logic using Platform Discovery rather than fully encoded in this schema. Non-meter GEISA devices such as smart gateways, compute cards, network cards, coprocessor cards, or transformer compute modules are not expected to use this profile or expose metered quantities unless they advertise metrology capability.",
+  "type": "object",
+  "required": [
+    "geisa-instantaneous-quantities"
+  ],
+  "properties": {
+    "geisa-instantaneous-quantities": {
+      "description": "Profile overlay for the top-level GEISA instantaneous quantities payload. It requires scalar metrology values expected for a GEISA AC meter profile and leaves additional capability-advertised fields optional.",
+      "allOf": [
+        {
+          "$ref": "../geisa-metered-quantities-schema.json#/$defs/geisaInstantaneousQuantities"
+        },
+        {
+          "required": [
+            "message-version",
+            "timestamp-us",
+            "phase-a",
+            "system"
+          ],
+          "properties": {
+            "phase-a": {
+              "description": "Required phase A payload for a device validated against the AC meter profile. Additional phase objects may be required by conformance logic depending on meter form and phase count.",
+              "allOf": [
+                {
+                  "$ref": "../geisa-metered-quantities-schema.json#/$defs/geisaInstantaneousQuantitiesPerPhase"
+                },
+                {
+                  "required": [
+                    "message-version",
+                    "phase",
+                    "voltage-micro-v",
+                    "current-micro-a",
+                    "active-power-micro-w-sum",
+                    "reactive-power-micro-var-sum",
+                    "apparent-power-micro-va-sum",
+                    "power-factor",
+                    "current-angle-deg",
+                    "voltage-angle-deg",
+                    "current-thd-percent",
+                    "voltage-thd-percent",
+                    "current-tdd-percent"
+                  ]
+                }
+              ]
+            },
+            "system": {
+              "description": "Required system payload for a device validated against the AC meter profile. This profile requires system frequency, active power, reactive power, arithmetic apparent power, and the primary/default arithmetic power factor ratio. Vectorial power factor remains optional. Billing, waveform frame data, neutral-current values, temperature, fundamentals, harmonics arrays, and directional fields remain outside or optional for this profile.",
+              "allOf": [
+                {
+                  "$ref": "../geisa-metered-quantities-schema.json#/$defs/geisaInstantaneousQuantitiesSystem"
+                },
+                {
+                  "required": [
+                    "message-version",
+                    "timestamp-us",
+                    "frequency-hz",
+                    "active-power-micro-w-sum",
+                    "reactive-power-micro-var-sum",
+                    "apparent-power-micro-va-sum-arithmetic",
+                    "power-factor-arithmetic"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

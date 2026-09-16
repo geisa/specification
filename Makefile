@@ -59,7 +59,7 @@ help:
 
 .DELETE_ON_ERROR:
 
-.PHONY: help Makefile clean all prep license-rst license-check $(SPHINXTARGETS)
+.PHONY: help Makefile clean all prep license-rst license-check schemas schemas-all schemas-clean schemas-lint lint setup-dev $(SPHINXTARGETS)
 
 clean:
 	rm -f $(IMAGEPDF)
@@ -77,6 +77,30 @@ cleanlatex:
 prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF) $(JSONRST)
 
 all: $(SPHINXTARGETS)
+
+schemas:
+	$(MAKE) -C schemas
+
+schemas-all:
+	$(MAKE) -C schemas all
+
+schemas-clean:
+	$(MAKE) -C schemas clean
+
+schemas-lint:
+	cd schemas && npm run lint
+
+lint:
+	npm run lint:md
+	$(MAKE) schemas-lint
+
+setup-dev:
+	python3 -m venv venv
+	venv/bin/python -m pip install --upgrade pip
+	venv/bin/python -m pip install GitPython sphinx sphinxcontrib-svg2pdfconverter linuxdoc
+	npm ci
+	$(MAKE) -C schemas setup-dev
+	npm --prefix schemas ci
 
 license-rst: $(LICENSERST)
 

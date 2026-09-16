@@ -1,0 +1,16 @@
+{
+  "name": "geisa-schemas",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Lint and validation baseline for GEISA schemas repo",
+  "scripts": {
+    "lint": "printf '\\n==> markdown lint\\n' && npm run lint:md && printf '\\n==> json parse validation\\n' && npm run lint:json && printf '\\n==> example/schema semantic validation\\n' && npm run lint:schema",
+    "lint:md": "markdownlint \"*.md\" \"docs/**/*.md\" \"examples/**/*.md\" \"profiles/**/*.md\"",
+    "lint:md:fix": "markdownlint --fix \"*.md\" \"docs/**/*.md\" \"examples/**/*.md\" \"profiles/**/*.md\"",
+    "lint:json": "node scripts/validate-json.mjs",
+    "lint:schema": "node scripts/validate-example-schemas.mjs"
+  },
+  "devDependencies": {
+    "markdownlint-cli": "0.48.0"
+  }
+}

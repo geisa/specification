@@ -1,0 +1,473 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+    "title": "GEISA Application Manifest vX.Y.Z",
+    "description": "Shared manifest structure for a GEISA application. Vendor / application manifests provide requested or default values which operators may over-ride; deployment manifests approved by operators are enforced by conformant platforms.",
+        "$defs": {
+        "transportAddressPort": {
+            "type": "array",
+            "$comment": "transport:address:port notation for network permissions.",
+            "minItems": 1,
+            "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^([Tt][Cc][Pp]:|[Uu][Dd][Pp]:|)([0-9A-Fa-f:\\.]+|\\[[0-9A-Fa-f:\\.]+\\]|)(:[0-9]+)$",
+                "$comment": "The RegEx above will match things beginning with a TCP, UDP, or nothing, followed by an IPv4 or v6 address (or not), and a port (required).  It does not validate the address itself."
+            },
+            "uniqueItems": true
+        },
+        "networkAccessRequirements": {
+            "type": "object",
+            "properties": {
+                "daily-volume": {
+                    "description": "The number of bytes the application needs to exchange each day through this interface.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "inbound": {
+                    "$comment": "transport/address/port tuples allowed inbound.",
+                    "$ref": "#/$defs/transportAddressPort"
+                },
+                "outbound": {
+                    "$comment": "transport/address/port tuples allowed outbound.",
+                    "$ref": "#/$defs/transportAddressPort"
+                }
+            },
+            "required": [
+                "daily-volume"
+            ],
+            "$comment": "If a networkAccessRequirements object is present it must include at least one inbound or outbound permission.",
+            "anyOf": [
+                {
+                    "required": [
+                        "inbound"
+                    ]
+                },
+                {
+                    "required": [
+                        "outbound"
+                    ]
+                }
+            ]
+        },
+        "signatureBlock": {
+            "type": "object",
+            "$comment": "Digital signature for an artifact or the manifest",
+            "required": [
+              "signatureType",
+              "signatureLength",
+              "signatureHex"
+            ],
+            "$comment": "If signatureReference is not included conformant systems should make a best effort to determine which certificates to validate the signature against.  Best practice is to include signatureReference.",
+            "properties": {
+                "signatureType": {
+                    "enum": [ "ECDSA", "MLDSA"],
+                    "$comment": "GEISA currently defines ECDSA and MLDSA as valid signature types.  Other types may be added in the future."
+                },
+                "signatureLength": {
+                    "type": "integer",
+                    "$comment": "The length of the signature in bytes, once convertered from hexadecimal text back into binary.  Provided to allow basic validation"
+                },
+                "signatureHex": {
+                    "type": "string",
+                    "description": "Hexadecimal text encoding of the binary signature.  Should be twice the size of the binary singature because of the encording process.",
+                    "pattern": "^[0-9A-Fa-f]+$",
+                    "minLength": 128
+                },
+                "signatureReference": {
+                    "type": "string",
+                    "description": "CN of the x509 certificate of the signer.  Used to faciliate looking up the signature for validation."
+                }
+            }
+        },
+        "fixedVersion": {
+            "type": "string",
+            "$comment": "fixedVersions do not allow values beyond the X.Y.Z triplet.",
+            "pattern": "^[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}$"
+        },
+        "fixedVersionOrNull": {
+            "$comment": "Allows for cases in which the version is set to null to indicate the feature is not supported.",
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/fixedVersion"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "geisaArtifact": {
+            "type": "object",
+            "$comment": "A GEISA app will have at least one artifact. This schema version supports a single artifact type. Other image types may be added in the future.",
+            "required": [
+                "image-name",
+                "image-type",
+                "image-size",
+                "signature",
+                "uncompressed-size"
+            ],
+            "properties": {
+                "image-name": {
+                    "description": "Full bare file name of the image (e.g. no path, but including extension).",
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 256
+                },
+                "image-type": {
+                    "description": "Type of the image file.",
+                    "enum": [
+                        "appoverlay"
+                    ],
+                    "$comment": "Additional image types may be added over time."
+                },
+                "image-size": {
+                    "description": "Size of the compressed image file in bytes.",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "uncompressed-size": {
+                    "description": "Size of the uncompressed image in bytes.",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "signature": {
+                    "$ref": "#/$defs/signatureBlock"
+                }
+            }
+        }
+    },
+    "type": "object",
+    "required": [
+        "geisa-application-manifest"
+    ],
+    "properties": {
+        "geisa-application-manifest": {
+            "type": "object",
+            "required": [
+                "manifest",
+                "signature"
+            ],
+            "properties": {
+                "manifest": {
+                    "type": "object",
+                    "required": [
+                        "api-access",
+                        "app-id",
+                        "app-version",
+                        "artifacts",
+                        "author",
+                        "communication",
+                        "compatibility",
+                        "default-configuration",
+                        "default-launch-strategy",
+                        "description",
+                        "external-dependencies",
+                        "manifest-version",
+                        "name",
+                        "resources"
+                    ],
+                    "properties": {
+                        "app-id": {
+                            "description": "Text-based ID of the application, following reverse DNS name notation.",
+                            "type": "string",
+                            "minLength": 4
+                        },
+                        "author": {
+                            "description": "Author of the application.  Typically a company or programmer.",
+                            "type": "string",
+                            "minLength": 4
+                        },
+                        "name": {
+                            "description": "Name of the application.",
+                            "type": "string",
+                            "minLength": 4
+                        },
+                        "description": {
+                            "description": "Description of the application.",
+                            "type": "string"
+                        },
+                        "app-version": {
+                            "description": "Version number of the application.",
+                            "type": "string",
+                            "pattern": "^[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}\\b.*$",
+                            "$comment": "The \b.* allows arbitrary text after the numeric version triplet, but only if it is separated in someway."
+                        },
+                        "manifest-version": {
+                            "description": "Version number of the GEISA manifest format per the GEISA specification in use.",
+                            "const": "0.9.0"
+                        },
+                        "api-access": {
+                            "type": "object",
+                            "properties": {
+                                "actuator-status": {
+                                    "description": "Whether access to the actuator status API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "actuator-control": {
+                                    "description": "Whether access to the actuator control API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "messaging": {
+                                    "description": "Whether access to the messaging API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "instantaneous": {
+                                    "description": "Whether access to the instantaneous data API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "sensor": {
+                                    "description": "Whether access to the sensor data API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "waveform": {
+                                    "description": "Whether access to the waveform data API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                },
+                                "app-to-app": {
+                                    "description": "Whether access to the application to application API is requested or authorized for the application.",
+                                    "type": "boolean"
+                                }
+                            },
+                            "anyOf": [
+                                { "required": ["actuator-control"] },
+                                { "required": ["actuator-status"] },
+                                { "required": ["messaging"] },
+                                { "required": ["instantaneous"] },
+                                { "required": ["sensor"] },
+                                { "required": ["waveform"] },
+                                { "required": ["app-to-app"] }
+                            ]
+                        },
+                        "artifacts": {
+                            "type": "array",
+                            "description": "List of one or more artifacts that comprise the application.",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/geisaArtifact"
+                            }
+                        },
+                        "compatibility": {
+                            "description": "Details about what platforms this application is compatible with.",
+                            "type": "object",
+                            "required": [
+                                "GEISA-API",
+                                "GEISA-LEE",
+                                "GEISA-VEE",
+                                "toolchain-id",
+                                "toolchain-version"
+                            ],
+                            "properties": {
+                                "GEISA-API": {
+                                    "description": "Version of GEISA-API required.",
+                                    "$ref": "#/$defs/fixedVersion"
+                                },
+                                "GEISA-LEE": {
+                                    "description": "Version of GEISA-LEE required. Null if unsupported.",
+                                    "$ref": "#/$defs/fixedVersionOrNull"
+                                },
+                                "GEISA-VEE": {
+                                    "description": "Version of GEISA-VEE required. Null if unsupported.",
+                                    "$ref": "#/$defs/fixedVersionOrNull"
+                                },
+                                "toolchain-id": {
+                                    "description": "Target triple identifying the application build target, following LLVM/Clang target-triple conventions (e.g. \"aarch64-unknown-linux-musl\", \"aarch64-unknown-linux-gnu\", ..).",
+                                    "type": "string",
+                                    "minLength": 4,
+                                    "maxLength": 256
+                                },
+                                "toolchain-version": {
+                                    "description": "Version of the toolchain used to build the application.",
+                                    "$ref": "#/$defs/fixedVersion"
+                                }
+                            }
+                        },
+                        "resources": {
+                            "type": "object",
+                            "required": [
+                                "app-ram",
+                                "storage-nonpersistent",
+                                "storage-persistent"
+                            ],
+                            "properties": {
+                                "app-cpu": {
+                                    "description": "Maximum CPU allocation permitted for the application, expressed as a percentage.",
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "app-ram": {
+                                    "description": "Maximum RAM, in KiB, available to the application.",
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "storage-persistent": {
+                                    "description": "Maximum persistent storage allocation, in KiB, available to the application.",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "storage-nonpersistent": {
+                                    "description": "Maximum non-persistent storage allocation, in KiB, available to the application.",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "threads": {
+                                    "description": "Maximum number of threads available to the application. Required for VEE applications; optional for LEE applications.",
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            }
+                        },
+                        "communication": {
+                            "type": "object",
+                            "properties": {
+                                "FAN": {
+                                    "description": "Whether direct access to the FAN / Utility Network is requested or authorized for the application.",
+                                    "type": "boolean",
+                                    "$comment": "This setting is independent of access to the messaging API."
+                                },
+                                "HAN": {
+                                    "description": "Whether direct access to the HAN / Consumer Network is requested or authorized for the application.",
+                                    "type": "boolean",
+                                    "$comment": "This setting is independent of access to the messaging API."
+                                },
+                                "messaging": {
+                                    "type": "object",
+                                    "$comment": "If the application doesn't use system messaging, set to zero.  Apps may use messaging even if they do not have direct interface access.",
+                                    "required": [
+                                        "daily-messages"
+                                    ],
+                                    "properties": {
+                                        "daily-messages": {
+                                            "description": "Allowed message count",
+                                            "type": "integer",
+                                            "minimum": 0
+                                        }
+                                    }
+                                },
+                                "operator": {
+                                    "description": "Allowed data rates and addresses for operator network (FAN).",
+                                    "$ref": "#/$defs/networkAccessRequirements"
+                                },
+                                "internet": {
+                                    "description": "Allowed data rates and addresses for public internet network.",
+                                    "$ref": "#/$defs/networkAccessRequirements"
+                                },
+                                "local": {
+                                    "description": "Allowed data rates and addresses for local device network (HAN).",
+                                    "$ref": "#/$defs/networkAccessRequirements"
+                                }
+                            }
+                        },
+                        "app-to-app": {
+                            "type": "object",
+                            "properties": {
+                                "publish": {
+                                    "description": "A list of service name(s) this application publishes for subscription by other applications in a pub/sub style.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "subscribe": {
+                                    "description": "A list of service name(s) published by other applications that this application subscribes to in a pub/sub style.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "respond": {
+                                    "description": "A list of service name(s) this application responds to in a req/rsp style.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "request": {
+                                    "description": "A list of service name(s) responded by other applications that this application requests in a req/rsp style.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "external-dependencies": {
+                            "type": "array",
+                            "description": "This array lists the external dependencies this application has.  This is expected to be a list of other applications, but this is not enforced in GEISA 1.0.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "default-launch-strategy": {
+                            "type": "object",
+                            "description": "Default settings for launching & restarting the application.",
+                            "required": [
+                                "max-restarts",
+                                "restart-period",
+                                "start-timeout",
+                                "stop-timeout",
+                                "notify-timeout"
+                           ],
+                           "properties": {
+                                "auto-restart": {
+                                    "description": "Whether or not an application should be restarted in the event of a crash or other reason for being stopped.",
+                                    "type" :"boolean"
+                                },
+                                "max-restarts": {
+                                    "description": "What is the maximum number of automatic restarts before marking the application as failed.",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "restart-period": {
+                                    "description": "Over what period (in seconds) can max-restarts occur?",
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "start-timeout": {
+                                    "description": "Indicates the maximum time (in seconds) the start command may take before a failure to start should be declared.  This value is unused if start-background is not true.",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 60
+                                },
+                                "start-background": {
+                                    "description": "Indicates whether the start-string command will exit/return once launched (true) or continue running indefinitely (false). Defaults to false if absent.",
+                                    "type": "boolean"
+                                },
+                                "start-string": {
+                                    "description": "Command to use to start the app.  If not provided, assumed to be init for LEE.",
+                                    "type": "string"
+                                },
+                                "stop-string": {
+                                    "description": "Command to use to stop the app.  If not provided, assumed to be shutdown of the container for LEE.",
+                                    "type": "string"
+                                },
+                                "stop-timeout": {
+                                    "description": "Indicates the maximum time (in seconds) the stop command is allowed to take before the application and the stop command itself are forcibly stopped (in seconds).",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 60
+                                },
+                                "notify-timeout": {
+                                    "description": "Indicates the maximum time the app requires to initialize, become ready for operation, and notify the GEISA platform via the message bus it is running (in seconds).",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 120
+                                },
+                                "watchdog": {
+                                    "description": "Whether the application requests the GEISA application watchdog mechanism and will provide the required status updates. This setting does not affect platform monitoring, resource enforcement, shutdown, or other lifecycle controls.",
+                                    "type":"boolean"
+                                }
+                            }
+                        },
+                        "default-configuration": {
+                            "description": "The default configuration is a JSON object that the platform will make available to the application. It is initially supplied by the Vendor then carried through the manifest process so that the system operator may review or adjust it.",
+                            "type": "object"
+                        }
+                    }
+                },
+                "signature": {
+                    "$ref": "#/$defs/signatureBlock"
+                }
+            }
+        }
+    }
+}

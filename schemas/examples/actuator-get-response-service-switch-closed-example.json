@@ -1,0 +1,14 @@
+{
+  "$comment": "Response payload example only; this does not imply all applications are authorized to control this actuator.",
+  "geisa-actuator-get-rsp": {
+    "status": {
+      "code": "GEISA_STATUS_SUCCESS",
+      "message": "ok"
+    },
+    "actuator-status": {
+      "actuator": "service-switch",
+      "state": "on",
+      "position-present": false
+    }
+  }
+}

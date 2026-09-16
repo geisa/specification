@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Application Message Response v0.9.0",
+  "description": "Canonical structure for GEISA application messaging per-request disposition responses aligned to app-message.proto.",
+  "type": "object",
+  "required": [
+    "geisa-app-message-rsp"
+  ],
+  "properties": {
+    "geisa-app-message-rsp": {
+      "type": "object",
+      "required": [
+        "request-id",
+        "status",
+        "timestamp-ms"
+      ],
+      "properties": {
+        "request-id": {
+          "description": "Application request identifier used for correlation.",
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "description": "Upstream only: Platform disposition for the corresponding request-id (for example accepted, rejected, permission-denied, quota-exceeded, unavailable, expired, or other). quota-exceeded means the platform rejected the request because accepting it would exceed an applicable quota or policy limit (for example message-count, byte/volume, or network policy limits). Applications should consult Platform/App Status for detailed usage, remaining quota, and reset timing.",
+          "type": "string",
+          "enum": [
+            "GEISA_APP_MESSAGE_STATUS_UNSPECIFIED",
+            "GEISA_APP_MESSAGE_STATUS_ACCEPTED",
+            "GEISA_APP_MESSAGE_STATUS_REJECTED",
+            "GEISA_APP_MESSAGE_STATUS_PERMISSION_DENIED",
+            "GEISA_APP_MESSAGE_STATUS_QUOTA_EXCEEDED",
+            "GEISA_APP_MESSAGE_STATUS_UNAVAILABLE",
+            "GEISA_APP_MESSAGE_STATUS_EXPIRED",
+            "GEISA_APP_MESSAGE_STATUS_OTHER"
+          ]
+        },
+        "status-text": {
+          "description": "Upstream only: Optional human-readable diagnostic or status text.",
+          "type": "string",
+          "minLength": 1
+        },
+        "timestamp-ms": {
+          "description": "UTC epoch time in milliseconds when the message was created.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "$comment": "Quota counters/usage values are not carried here; those are reported through Platform/App Status. This response is a per-request disposition, not a metadata echo of the request."
+    }
+  },
+  "additionalProperties": false
+}

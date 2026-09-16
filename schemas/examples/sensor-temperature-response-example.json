@@ -1,0 +1,36 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "geisa-sensor-readings-rsp": {
+    "$comment": "Example successful multi-reading response. The first reading demonstrates multiple values within a single sensor reading; the second demonstrates a separate sensor/value pair.",
+    "status": "GEISA_STATUS_SUCCESS",
+    "readings": [
+      {
+        "sensor-id": "board_temp1",
+        "timestamp-ms": 1735689600000,
+        "values": [
+          {
+            "double-value": 47.25
+          },
+          {
+            "double-value": 47.38
+          }
+        ],
+        "unit": "Cel",
+        "quality": "GOOD",
+        "status": "OK"
+      },
+      {
+        "sensor-id": "ambient_temp1",
+        "timestamp-ms": 1735689600000,
+        "values": [
+          {
+            "double-value": 33.0
+          }
+        ],
+        "unit": "Cel",
+        "quality": "GOOD",
+        "status": "OK"
+      }
+    ]
+  }
+}

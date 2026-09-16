@@ -1,0 +1,20 @@
+# Bounded fields used by the embedded C Platform Discovery examples.
+GeisaPlatformDiscovery_Module.manufacturer max_size:96
+GeisaPlatformDiscovery_Module.model max_size:64
+GeisaPlatformDiscovery_Module.serial_number max_size:64
+GeisaPlatformDiscovery_Module.hw_revision max_size:32
+GeisaPlatformDiscovery_Module.fw_revision max_size:32
+GeisaPlatformDiscovery_Device.sub_module max_count:4
+GeisaPlatformDiscovery_Operator.operator_name max_size:96
+GeisaPlatformDiscovery_Operator.operator_identifier max_size:64
+GeisaPlatformDiscovery_Metrology.meter_rating_class max_size:32
+GeisaPlatformDiscovery_Metrology.meter_form max_size:32
+GeisaPlatformDiscovery_Sensor.sensors max_count:8
+GeisaPlatformDiscovery_Network_Instance.interface_id max_size:64
+GeisaPlatformDiscovery_Network_Instance.name max_size:96
+GeisaPlatformDiscovery_Network_Instance.description max_size:160
+GeisaPlatformDiscovery_Network.interfaces max_count:8
+GeisaPlatformDiscovery_Waveform_Instance.stream_id max_size:64
+GeisaPlatformDiscovery_Waveform_Instance.name max_size:96
+GeisaPlatformDiscovery_Waveform_Instance.description max_size:160
+GeisaPlatformDiscovery_Waveform.streams max_count:4

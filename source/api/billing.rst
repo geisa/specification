@@ -94,11 +94,11 @@ Value Semantics
 Profile and Example
 ===================
 
-The maintained schemas repository includes a billing profile overlay and
+The maintained ``schemas/`` subtree includes a billing profile overlay and
 example payload for this model:
 
-- ``profiles/geisa-metered-quantities-billing-profile.json``
-- ``examples/metered-quantities-billing-profile-example.json``
+- ``schemas/profiles/geisa-metered-quantities-billing-profile.json``
+- ``schemas/examples/metered-quantities-billing-profile-example.json``
 
 The current billing profile requires a billing payload with both
 ``summation-total`` and ``demand-total`` sections. The required baseline

@@ -1,0 +1,3 @@
+# Shared status text bounds used by embedded C examples that include GeisaStatus.
+GeisaStatus.message max_size:96
+GeisaStatus.details max_size:160

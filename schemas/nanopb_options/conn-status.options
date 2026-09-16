@@ -1,0 +1,2 @@
+# No custom bounds are required for the embedded C conn-status examples.
+# This file is kept for per-family nanopb generation consistency.

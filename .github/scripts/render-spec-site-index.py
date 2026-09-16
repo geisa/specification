@@ -499,7 +499,7 @@ def render_html(
           <p>Source repository for the latest draft and versioned releases.</p>
         </div>
         <div class="link-card">
-          <a href="https://github.com/geisa/schemas">Schemas repository</a>
+          <a href="https://github.com/geisa/specification/tree/main/schemas">Schemas repository</a>
           <p>Schema and protobuf definitions for GEISA transactions.</p>
         </div>
         <div class="link-card">

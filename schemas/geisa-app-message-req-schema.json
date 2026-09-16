@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Application Message Request v0.9.0",
+  "description": "Canonical structure for GEISA application messaging request payloads aligned to app-message.proto. The payload bytes are opaque application data selected by content-type and carried as base64 in JSON examples.",
+  "type": "object",
+  "required": [
+    "geisa-app-message-req"
+  ],
+  "properties": {
+    "geisa-app-message-req": {
+      "$comment": "Application and application-instance identity come from authenticated GEISA topic/session binding and are not duplicated in app-message request payloads. Quota counters/usage values are not carried here; those are reported through Platform/App Status.",
+      "type": "object",
+      "required": [
+        "request-id",
+        "priority",
+        "message-type",
+        "timestamp-ms",
+        "ttl-seconds",
+        "content-type",
+        "payload-base64"
+      ],
+      "properties": {
+        "request-id": {
+          "description": "Application request identifier used for correlation.",
+          "type": "string",
+          "minLength": 1
+        },
+        "priority": {
+          "description": "ADM object 3600-style message priority for app-facing messaging.",
+          "type": "string",
+          "enum": [
+            "GEISA_APP_MESSAGE_PRIORITY_UNSPECIFIED",
+            "GEISA_APP_MESSAGE_PRIORITY_URGENT",
+            "GEISA_APP_MESSAGE_PRIORITY_IMMEDIATE",
+            "GEISA_APP_MESSAGE_PRIORITY_BEST_EFFORT",
+            "GEISA_APP_MESSAGE_PRIORITY_LATEST"
+          ]
+        },
+        "message-type": {
+          "description": "App-message type aligned to ADM object 3600 Message Type.",
+          "type": "string",
+          "enum": [
+            "GEISA_APP_MESSAGE_TYPE_UNSPECIFIED",
+            "GEISA_APP_MESSAGE_TYPE_CONFIG",
+            "GEISA_APP_MESSAGE_TYPE_COMMAND",
+            "GEISA_APP_MESSAGE_TYPE_COMMAND_RESULT",
+            "GEISA_APP_MESSAGE_TYPE_STATUS",
+            "GEISA_APP_MESSAGE_TYPE_EVENT",
+            "GEISA_APP_MESSAGE_TYPE_ALARM",
+            "GEISA_APP_MESSAGE_TYPE_APP_DATA",
+            "GEISA_APP_MESSAGE_TYPE_TELEMETRY"
+          ]
+        },
+        "timestamp-ms": {
+          "description": "UTC epoch time in milliseconds when the message was created.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "ttl-seconds": {
+          "description": "Message TTL in seconds; 0 means no explicit message-specific TTL and allows platform/EMS default policy.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "content-type": {
+          "description": "MIME type describing the opaque payload bytes.",
+          "type": "string",
+          "minLength": 1
+        },
+        "payload-base64": {
+          "description": "Base64-encoded opaque payload bytes. GEISA app-message requests carry a non-empty application payload.",
+          "type": "string",
+          "contentEncoding": "base64",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

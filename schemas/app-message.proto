@@ -1,0 +1,126 @@
+//-----------------------------------------------------------------------------
+// Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+// Security Alliance (GEISA), a Series of LF Projects, LLC
+//
+// Licensed under the Apache License, Version 2.0. See LICENSE.
+//-----------------------------------------------------------------------------
+
+syntax = "proto3";
+
+// GEISA app-message payloads are application API messages.
+//
+// Applications use these GEISA payloads directly and do not use LwM2M
+// directly. On ADM-conformant platforms, the platform maps/transports this
+// behavior through ADM app messaging concepts (including LwM2M object 3600).
+//
+// Internal EMS/EMA/LwM2M implementation details are intentionally not
+// represented in these payload structures.
+
+// Application-facing message priority is aligned with ADM object 3600.
+// Lower numeric values are higher priority.
+// This is for GEISA app messaging, not direct app access to LwM2M/ADM.
+enum GeisaAppMessagePriority {
+  GEISA_APP_MESSAGE_PRIORITY_UNSPECIFIED = 0;
+  // URGENT requests highest handling priority for exceptional time-sensitive
+  // messages, but does not bypass authorization, quota, or operator policy.
+  GEISA_APP_MESSAGE_PRIORITY_URGENT = 1;
+  GEISA_APP_MESSAGE_PRIORITY_IMMEDIATE = 2;
+  GEISA_APP_MESSAGE_PRIORITY_BEST_EFFORT = 3;
+  GEISA_APP_MESSAGE_PRIORITY_LATEST = 4;
+}
+
+// Application-facing message type aligned with ADM object 3600.
+// This is for GEISA app messaging, not direct app access to LwM2M/ADM.
+enum GeisaAppMessageType {
+  GEISA_APP_MESSAGE_TYPE_UNSPECIFIED = 0;
+  GEISA_APP_MESSAGE_TYPE_CONFIG = 1;
+  GEISA_APP_MESSAGE_TYPE_COMMAND = 2;
+  GEISA_APP_MESSAGE_TYPE_COMMAND_RESULT = 3;
+  GEISA_APP_MESSAGE_TYPE_STATUS = 4;
+  GEISA_APP_MESSAGE_TYPE_EVENT = 5;
+  GEISA_APP_MESSAGE_TYPE_ALARM = 6;
+  GEISA_APP_MESSAGE_TYPE_APP_DATA = 7;
+  GEISA_APP_MESSAGE_TYPE_TELEMETRY = 8;
+}
+
+// Per-request platform disposition for app messaging for upstream messages only
+// Values describe request handling outcomes without promising transport-level
+// or business-system finality.
+enum GeisaAppMessageStatus {
+  GEISA_APP_MESSAGE_STATUS_UNSPECIFIED = 0;
+  GEISA_APP_MESSAGE_STATUS_ACCEPTED = 1;
+  GEISA_APP_MESSAGE_STATUS_REJECTED = 2;
+  GEISA_APP_MESSAGE_STATUS_PERMISSION_DENIED = 3;
+  // Request rejected because accepting it would exceed an applicable app
+  // messaging quota or policy limit, e.g. message count or bandwidth /
+  // network policy limits. Detailed usage/remaining/reset info is
+  // reported out-of-band via Platform/App Status.
+  GEISA_APP_MESSAGE_STATUS_QUOTA_EXCEEDED = 4;
+  GEISA_APP_MESSAGE_STATUS_UNAVAILABLE = 5;
+  GEISA_APP_MESSAGE_STATUS_EXPIRED = 6;
+  GEISA_APP_MESSAGE_STATUS_OTHER = 7;
+}
+
+// This is the outermost message for GEISA application message requests.
+//
+// Message topics:
+//   geisa/api/message/upstream/req/<userid>
+//   geisa/api/message/downstream/req/<userid>
+//
+// For upstream messages, published by an application
+// For downstream messages, published by the platform
+//
+// The payload is opaque application bytes. The platform handles underlying
+// ADM/LwM2M transport behavior behind the scenes; this message is the
+// app-facing GEISA MQTT request.
+// Application and application-instance identity come from authenticated
+// GEISA topic/session binding and are not duplicated in this payload.
+
+message GeisaAppMessage_Req {
+  // Correlation identifier set by the sender.
+  string request_id = 1;
+  // Message priority aligned with ADM object 3600 concepts.
+  GeisaAppMessagePriority priority = 2;
+  // Message type aligned with ADM object 3600 concepts.
+  GeisaAppMessageType message_type = 3;
+  // UTC epoch time in milliseconds when the message was created.
+  uint64 timestamp_ms = 4;
+  // Lifetime of the request, in seconds. 0 means no explicit message-specific
+  // TTL; platform or EMS default policy may apply.
+  uint64 ttl_seconds = 5;
+  // MIME type for the opaque payload bytes.
+  string content_type = 6;
+  // Application payload bytes. GEISA app-message requests SHALL contain a
+  // non-empty payload; empty payloads are invalid even though proto3 bytes
+  // fields can encode an empty value. The content_type tells receivers how to
+  // interpret the bytes.
+  bytes payload = 7;
+}
+
+// This is the outermost message for GEISA application message responses
+//
+// Message topics:
+//   geisa/api/message/upstream/rsp/<userid>
+//   geisa/api/message/downstream/rsp/<userid>
+//
+// For upstream messages, published by the platform
+// For downstream messages, published by an application
+//
+// This message carries per-request disposition for a corresponding
+// GeisaAppMessage_Req identified by request_id. It is NOT for delivery of
+// message payload.
+//
+// Quota counters and usage reporting are out-of-band via Platform/App Status
+// Internal EMS/EMA/LwM2M implementation details are not represented here..
+
+message GeisaAppMessage_Rsp {
+  // Correlation identifier copied from the request when available.
+  string request_id = 1;
+  // Upstream only: Platform-side disposition for the corresponding request.
+  GeisaAppMessageStatus status = 2;
+  // Upstream only: Optional human-readable diagnostic or status text.
+  string status_text = 3;
+  // UTC epoch time in milliseconds when the response was created.
+  uint64 timestamp_ms = 4;
+  reserved 5, 6, 7;
+}

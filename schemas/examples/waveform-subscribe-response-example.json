@@ -1,0 +1,25 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "geisa-waveform-rsp": {
+    "$comment": "Example successful response for an application instance subscribing to the required baseline waveform stream. The runtime socket path is per-application and is used for native waveform frame delivery.",
+    "status": "success",
+    "stream-id": "waveform-base",
+    "subscribed": true,
+    "socket-path": "/run/geisa/waveform/app-42/waveform-base.sock",
+    "sample-type": "int16",
+    "voltage-channel-count": 1,
+    "current-channel-count": 2,
+    "other-channel-count": 0,
+    "total-channel-count": 3,
+    "sample-rate-hz": 7680,
+    "samples-per-cycle": 128,
+    "nominal-frequency-hz": 60,
+    "cycle-aligned": true,
+    "zero-crossing-aligned": true,
+    "voltage-scale": 0.003662109375,
+    "current-scale": 0.001220703125,
+    "expected-frame-period-ms": 200,
+    "voltage-filter-lowpass": 5000,
+    "current-filter-lowpass": 5000
+  }
+}

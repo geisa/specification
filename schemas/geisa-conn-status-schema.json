@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+  "title": "GEISA Connection Status v0.9.0",
+  "description": "Canonical structure for GEISA platform and app connection status messages aligned to conn-status.proto.",
+  "$defs": {
+    "geisaConnState": {
+      "type": "string",
+      "enum": [
+        "CONN_DISABLED",
+        "CONN_ENABLED_DOWN",
+        "CONN_ENABLED_UP"
+      ]
+    },
+    "geisaConnPolicy": {
+      "type": "string",
+      "enum": [
+        "CONN_POLICY_ZERO",
+        "CONN_POLICY_METERED",
+        "CONN_POLICY_UNLIMITED"
+      ]
+    },
+    "geisaPlatformMode": {
+      "type": "string",
+      "enum": [
+        "PLATFORM_MODE_NORMAL",
+        "PLATFORM_MODE_UNPROVISIONED",
+        "PLATFORM_MODE_MANUFACTURING",
+        "PLATFORM_MODE_TEST"
+      ]
+    },
+    "geisaAppToPlatformStatusType": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "CLEARED_PII",
+        "SHUTTING_DOWN",
+        "NEED_TERMINATE_RESTART",
+        "NEED_TERMINATE_NORESTART"
+      ]
+    },
+    "geisaConnInfo": {
+      "type": "object",
+      "required": [
+        "state",
+        "ipv4",
+        "ipv6",
+        "realtime"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/geisaConnState"
+        },
+        "ipv4": {
+          "type": "boolean"
+        },
+        "ipv6": {
+          "type": "boolean"
+        },
+        "realtime": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaConnAppMsg": {
+      "type": "object",
+      "required": [
+        "yesterday-used",
+        "today-used",
+        "today-limit",
+        "today-remaining",
+        "next-daily-reset-ms"
+      ],
+      "properties": {
+        "yesterday-used": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-used": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-remaining": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "next-daily-reset-ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "geisaConnAppInfo": {
+      "type": "object",
+      "required": [
+        "policy",
+        "yesterday-used-unlimited",
+        "yesterday-used-metered",
+        "today-used-unlimited",
+        "today-used-metered",
+        "today-limit-metered",
+        "today-remaining-metered",
+        "next-daily-reset-ms"
+      ],
+      "properties": {
+        "policy": {
+          "$ref": "#/$defs/geisaConnPolicy"
+        },
+        "yesterday-used-unlimited": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "yesterday-used-metered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-used-unlimited": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-used-metered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-limit-metered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "today-remaining-metered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "next-daily-reset-ms": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "geisa-platform-status"
+      ],
+      "properties": {
+        "geisa-platform-status": {
+          "type": "object",
+          "required": [
+            "timestamp-ms",
+            "mode",
+            "conn-msg",
+            "conn-oper",
+            "conn-inet",
+            "conn-local",
+            "sys-over-temp",
+            "sys-high-cpu",
+            "sys-low-mem",
+            "sys-power-degraded",
+            "sys-power-loss",
+            "sys-reboot-soon",
+            "sys-shutdown-soon"
+          ],
+          "properties": {
+            "timestamp-ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "mode": {
+              "$ref": "#/$defs/geisaPlatformMode"
+            },
+            "conn-msg": {
+              "$ref": "#/$defs/geisaConnState"
+            },
+            "conn-oper": {
+              "$ref": "#/$defs/geisaConnInfo"
+            },
+            "conn-inet": {
+              "$ref": "#/$defs/geisaConnInfo"
+            },
+            "conn-local": {
+              "$ref": "#/$defs/geisaConnInfo"
+            },
+            "sys-over-temp": {
+              "type": "boolean"
+            },
+            "sys-high-cpu": {
+              "type": "boolean"
+            },
+            "sys-low-mem": {
+              "type": "boolean"
+            },
+            "sys-power-degraded": {
+              "type": "boolean"
+            },
+            "sys-power-loss": {
+              "type": "boolean"
+            },
+            "sys-reboot-soon": {
+              "type": "boolean"
+            },
+            "sys-shutdown-soon": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-platform-to-app-status"
+      ],
+      "properties": {
+        "geisa-platform-to-app-status": {
+          "type": "object",
+          "required": [
+            "cmd-send-status",
+            "cmd-shut-down",
+            "cmd-clear-pii",
+            "timestamp-ms",
+            "cpu-usage",
+            "cpu-limit",
+            "memory-usage",
+            "memory-limit",
+            "persist-storage-usage",
+            "persist-storage-limit",
+            "nonpersist-storage-usage",
+            "nonpersist-storage-limit",
+            "conn-msg",
+            "conn-oper",
+            "conn-inet",
+            "conn-local"
+          ],
+          "properties": {
+            "cmd-send-status": {
+              "type": "boolean"
+            },
+            "cmd-shut-down": {
+              "type": "boolean"
+            },
+            "cmd-clear-pii": {
+              "type": "boolean"
+            },
+            "timestamp-ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cpu-usage": {
+              "type": "number"
+            },
+            "cpu-limit": {
+              "type": "number"
+            },
+            "memory-usage": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "memory-limit": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "persist-storage-usage": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "persist-storage-limit": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nonpersist-storage-usage": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nonpersist-storage-limit": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "conn-msg": {
+              "$ref": "#/$defs/geisaConnAppMsg"
+            },
+            "conn-oper": {
+              "$ref": "#/$defs/geisaConnAppInfo"
+            },
+            "conn-inet": {
+              "$ref": "#/$defs/geisaConnAppInfo"
+            },
+            "conn-local": {
+              "$ref": "#/$defs/geisaConnAppInfo"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "geisa-app-to-platform-status"
+      ],
+      "properties": {
+        "geisa-app-to-platform-status": {
+          "type": "object",
+          "required": [
+            "type",
+            "next-status",
+            "next-status-timeout"
+          ],
+          "properties": {
+            "type": {
+              "$ref": "#/$defs/geisaAppToPlatformStatusType"
+            },
+            "next-status": {
+              "type": "integer"
+            },
+            "next-status-timeout": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

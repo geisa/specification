@@ -1,0 +1,30 @@
+{
+  "geisa-instantaneous-quantities": {
+    "message-version": 1,
+    "timestamp-us": 1736035200123456,
+    "phase-a": {
+      "message-version": 1,
+      "phase": "PHASE_A",
+      "voltage-micro-v": 120150000,
+      "current-micro-a": 1425000,
+      "active-power-micro-w-sum": 173250000,
+      "reactive-power-micro-var-sum": 18400000,
+      "apparent-power-micro-va-sum": 174226000,
+      "power-factor": 0.992,
+      "current-angle-deg": -6.1,
+      "voltage-angle-deg": 0.0,
+      "current-thd-percent": 2.1,
+      "voltage-thd-percent": 1.4,
+      "current-tdd-percent": 2.4
+    },
+    "system": {
+      "message-version": 1,
+      "timestamp-us": 1736035200123456,
+      "frequency-hz": 60.0,
+      "active-power-micro-w-sum": 346500000,
+      "reactive-power-micro-var-sum": 18400000,
+      "apparent-power-micro-va-sum-arithmetic": 349418000,
+      "power-factor-arithmetic": 0.991
+    }
+  }
+}

@@ -177,10 +177,9 @@ operational production systems. Examples include:
 Others may also be of interest outside of the core conformance repo.  Browse
 the other GEISA repositories at `GEISA GitHub`_.
 
-The GEISA project is undergoing a repository consolidation. Starting with
-the 1.1 release, the schemas repository will be included within the
-specification repository, and the conformance repository will aim for
-parity with the specification/schemas release cycle.
+The schemas are maintained under ``specification/schemas/`` and the
+conformance repository will aim for parity with the specification/schemas
+release cycle.
 
 |geisa-pyramid|
 

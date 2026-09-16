@@ -1,0 +1,18 @@
+# Bounded fields used by the embedded C sensor examples.
+GeisaSensorDescriptor.sensor_id max_size:64
+GeisaSensorDescriptor.sensor_subtype max_size:32
+GeisaSensorDescriptor.custom_sensor_type max_size:64
+GeisaSensorDescriptor.name max_size:96
+GeisaSensorDescriptor.description max_size:160
+GeisaSensorDescriptor.manufacturer max_size:96
+GeisaSensorDescriptor.model max_size:64
+GeisaSensorDescriptor.unit max_size:32
+GeisaSensorValue.string_value max_size:96
+GeisaSensorReading.sensor_id max_size:64
+GeisaSensorReading.values max_count:4
+GeisaSensorReading.unit max_size:32
+GeisaSensorReading.quality max_size:32
+GeisaSensorReading.status max_size:32
+GeisaSensorReadings_Req.sensor_id max_count:8
+GeisaSensorReadings_Req.sensor_id max_size:64
+GeisaSensorReadings_Rsp.readings max_count:8
