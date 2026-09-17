@@ -6,42 +6,10 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-.. GEISA Specification documentation master file, created by
-   sphinx-quickstart on Sun Jun 15 03:41:33 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. GEISA Specification documentation master file for Latex / PDF
+   Pulls actual TOC from index.rst.inc
+   See index.rst for the master file for HTML
 
-GEISA Specification |release|
-=================================
-
-.. toctree::
-   :maxdepth: 3
-   :numbered:
-   :includehidden:
-   :caption: Contents:
-
-   abstract
-   contributors
-   license
-
-   introduction
-   glossary
-    
-   design-principles
-   operations
-   system-architecture
-   conformance
-   hardware
-
-   adm
-
-   linux-environment
-   virtual-environment
-
-   api
-
-   security
-
-   revision-history
+.. include:: index.rst.inc
 
 .. include:: references.rst.inc

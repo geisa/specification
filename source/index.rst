@@ -11,38 +11,10 @@
    Please see index-latex.rst for the master file the PDF output
    This split is necessary because of rendering differences that Sphinx doesn't
    adequately account for.  Sigh.
+   Pulls main ToC from index.rst.inc.  Adds references.rst and genindex.rst as
+   unnumbered entries to the ToC to mirror what LaTex does for the PDF output.
 
-GEISA Specification |release|
-=================================
-
-.. toctree::
-   :maxdepth: 3
-   :numbered:
-   :includehidden:
-
-   abstract
-   contributors
-   license
-
-   introduction
-   glossary
-    
-   design-principles
-   operations
-   system-architecture
-   conformance
-   hardware
-
-   adm
-
-   linux-environment
-   virtual-environment
-
-   api
-
-   security
-
-   revision-history
+.. include:: index.rst.inc
 
 .. The second toctree entry here turns off the section numbering, so the HTML
    output aligns with the PDF.
