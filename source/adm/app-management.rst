@@ -7,6 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Application Management
+
 Application Management
 ----------------------
 
@@ -36,6 +38,10 @@ rather than providing their own.  Consideration for the management of the base
 libraries and/or package dependencies will be deferred to a future release;  at
 this time, no consideration is made for the use of LwM2M object ``14 Software
 Component``.
+
+.. index:: single: Application Installation
+
+.. index:: single: Application Activation
 
 **App Installation and Activation**
 
@@ -87,6 +93,9 @@ app execution state semantics:
 * When the current state is set to ACTIVE, the installed software can be used by the LwM2M Client.
 * When the current state is set to INACTIVE, the LwM2M Client MUST NOT use the installed software.
 
+
+.. index:: single: Execution State
+
 **App Execution State**
 
 Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State* 
@@ -112,6 +121,8 @@ of an edge application:
      - Read
      - Integer
      - Execution Status. 0 = Stopped. 1 = Running.
+
+.. index:: single: Application Purge
 
 **App Purge**
 

@@ -67,8 +67,20 @@ hardware platforms with various capabilities:
 
 Platform providers offering a GEISA EE |geisa-ee-globe| MUST provide a 
 toolchain which allows application developers to build applications written for 
-the GEISA EE. [#]_
+the GEISA EE. 
 
+GEISA LEE |geisa-lee-tux| specifically assumes a GNU/Linux environment (see
+:doc:`lee/operating-system`), such that it is likely that the tool chain in use
+is open-source.  If a platform vendor is using a commercial tool chain, there
+is no requirement that the platform vendor provide a license; however, they
+MUST provide information regarding where third parties can purchase the
+necessary tool chain and the version of the tool chain in use, and they must
+provide any supporting files required to allow the tool chain to be used to
+compile applications for their platform.  Platform providers should fully document the
+necessary compiler options for building compatible images for their platforms.
+They should also provide sample build scripts.
+
+.. index:: single: Metrology
 
 Metrology
 ^^^^^^^^^
@@ -84,9 +96,10 @@ device (see :doc:`api/discovery`)
     The GEISA API is not expected to provide metrological information when used 
     on a non-metrological device; however, some platforms without local 
     metrology MAY support providing remote metrological data through their 
-    local GEISA API
+    local GEISA API.  For example, an edge gateway may host a GEISA app
+    environment, and obtain measurement data from a connected meter.
 
-Metrological hardware, at a minimum, should be able to provide: [#]_
+Metrological hardware, at a minimum, should be able to provide: 
 
 - Instantaneous RMS Voltage Reading
 - Instantaneous RMS Current Reading
@@ -95,6 +108,14 @@ Metrological hardware, at a minimum, should be able to provide: [#]_
 When coupled with a billing register, metrological hardware may also be able 
 to provide derived quantities such as demand values, cummulative values, and 
 interval values.
+
+.. Note::
+
+   Inductively powered devices, such as remote fault indicators, may 
+   lack a ground reference and thus may be unable to provide voltage data.  
+   Similarly, some devices may lack a current sensor and may thus be limited 
+   to voltage only.  Electric meters are expected to be able to provide both.
+
 
 Metrological hardware may also be able to provide waveform data.  See 
 :doc:`api/waveform` for additional details.  
@@ -113,6 +134,8 @@ The GEISA API allows applications to obtain details about the waveform data
 available on the platform so that they can correctly interpret the information 
 the platform exposes through the API.
 
+.. index:: single: Sensors
+
 Sensors
 ^^^^^^^
 
@@ -126,6 +149,8 @@ Examples of sensors that may be provided include:
 - Switch Sensor
 - GNSS Location
 - Vibration / accelerometer
+
+.. index:: single: Actuators
 
 Actuators
 ^^^^^^^^^
@@ -144,19 +169,5 @@ Examples of actuators that may be provided include:
 .. [#] Future versions of the GEISA specification may require binary 
     compatibility, though it is likely this will only be done in conjunction 
     with a GEISA community reference implementation.
-
-.. [#] GEISA LEE specifically assumes a GNU/Linux environment 
-   (see :doc:`lee/operating-system`), such that it is likely that the tool chain 
-   in use is open-source.  If a vendor is using a commercial tool chain, there 
-   is no requirement that the platform vendor provide a license; however, they 
-   MUST provide information regarding where third parties can purchase the 
-   necessary tool chain and the version of the tool chain in use, and they must 
-   provide any supporting files required to allow the tool chain to be used to 
-   compile applications for their platform.
-
-.. [#] Note: inductively powered devices, such a remote fault indicators, may 
-   lack a ground reference and thus may be unable to provide voltage data.  
-   Similarly, some devices may lack a current sensor and may thus be limited 
-   to voltage only.  Electric meters are expected to be able to provide both.
 
 

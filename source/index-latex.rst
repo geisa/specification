@@ -1,4 +1,3 @@
-
 ..
   Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
   Security Alliance (GEISA), a Series of LF Projects, LLC
@@ -7,10 +6,10 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
-.. GEISA Specification documentation master file for ***HTML*** output
-   Please see index-latex.rst for the master file the PDF output
-   This split is necessary because of rendering differences that Sphinx doesn't
-   adequately account for.  Sigh.
+.. GEISA Specification documentation master file, created by
+   sphinx-quickstart on Sun Jun 15 03:41:33 2025.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
 GEISA Specification |release|
 =================================
@@ -19,6 +18,7 @@ GEISA Specification |release|
    :maxdepth: 3
    :numbered:
    :includehidden:
+   :caption: Contents:
 
    abstract
    contributors
@@ -44,12 +44,4 @@ GEISA Specification |release|
 
    revision-history
 
-.. The second toctree entry here turns off the section numbering, so the HTML
-   output aligns with the PDF.
-
-.. toctree::
-
-   references
-   
-   genindex
-
+.. include:: references.rst.inc
