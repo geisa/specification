@@ -170,7 +170,7 @@ platform for the following reasons:
   outside of the GEISA implementation.
 
 Because the GEISA specification defines multiple execution environments, the
-Application Isolation Implementation (AII) is expected to vary between
+Application Isolation Implementation (:term:`AII`) is expected to vary between
 execution environments and may vary from one platform to another within an
 execution environment.  Regardless of AII (e.g. LXC container, systemd, VEE,
 etc.), an **authenticated application manifest** shall control access to
@@ -194,6 +194,7 @@ ensure that:
 - Applications cannot create denial-of-service situations
 - Resources are fairly distributed when oversubscribed
 
+.. index:: single: Application Manifest
 
 Application Manifest
 ^^^^^^^^^^^^^^^^^^^^
@@ -233,10 +234,11 @@ provided by the platform.  See :doc:`api` for details.  Each defined API shall
 have its own set of permissions.
 
 
-Container Resource Management
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Resource Management
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Container resource limits shall include the following:
+The AII shall enforce resource limits according to the manifest.  AII resource
+limits shall include the following:
 
 - CPU limit (% of CPU)
 - Memory Limit (in 1KiB units)

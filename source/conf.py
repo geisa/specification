@@ -10,6 +10,21 @@ from git import Repo
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+# change which files are included based on build type
+
+def set_master_doc(app):
+    if app.tags.has("latex"):
+        app.config.master_doc = "index-latex"
+        app.config.exclude_patterns.append("index.rst")
+        app.config.exclude_patterns.append("references.rst")
+    else:
+        app.config.master_doc = "index"
+        app.config.exclude_patterns.append("index-latex.rst")
+
+def setup(app):
+    app.connect('builder-inited', set_master_doc)
+
+
 # returns "x.x.x-hhhhhh[-dirty]" as needed
 def geisa_get_release() -> str:
     release = "unknown"

@@ -34,43 +34,44 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   behaviors of the required LwM2M Objects at the versions in the fixed GEISA
   ADM Object-version baseline below.
 * ADM conformant EMS SHALL support the following LwM2M Objects:
-  * ID 0 -- Security
-  * ID 1 -- Server
-  * ID 3 -- Device
-  * ID 4 -- Connectivity Monitoring
-  * ID 5 -- Firmware Update
-  * ID 6 -- Location
-  * ID 9 -- Software Management
-  * ID 10 -- Cellular Network Connectivity
-  * ID 11 -- APN Connection Profile
-  * ID 12 -- WLAN Connectivity
-  * ID 13 -- Bearer Selection
-  * ID 20 -- Event Log
-  * ID 504 -- Remote SIM Provisioning
-  * ID 3600 -- GEISA App Messaging
-  * ID 3601 -- GEISA Host Monitoring
-  * ID 3602 -- GEISA App Accounting
-  * ID 3604 -- GEISA App Monitoring
-  * ID 3605 -- GEISA Platform Monitoring
-  * ID 3606 -- GEISA Platform Effective Configuration
-  * ID 3607 -- GEISA Platform Requested Configuration
+
+  * ``/0`` -- Security
+  * ``/1`` -- Server
+  * ``/3`` -- Device
+  * ``/4`` -- Connectivity Monitoring
+  * ``/5`` -- Firmware Update
+  * ``/6`` -- Location
+  * ``/9`` -- Software Management
+  * ``/10`` -- Cellular Network Connectivity
+  * ``/11`` -- APN Connection Profile
+  * ``/12`` -- WLAN Connectivity
+  * ``/13`` -- Bearer Selection
+  * ``/20`` -- Event Log
+  * ``/504`` -- Remote SIM Provisioning
+  * ``/3600`` -- GEISA App Messaging
+  * ``/3601`` -- GEISA Host Monitoring
+  * ``/3602`` -- GEISA App Accounting
+  * ``/3604`` -- GEISA App Monitoring
+  * ``/3605`` -- GEISA Platform Monitoring
+  * ``/3606`` -- GEISA Platform Effective Configuration
+  * ``/3607`` -- GEISA Platform Requested Configuration
 
 * ADM conformant platforms SHALL support the following LwM2M Objects:
 
-  * ID 0 -- Security
-  * ID 1 -- Server
-  * ID 3 -- Device
-  * ID 4 -- Connectivity Monitoring
-  * ID 5 -- Firmware Update
-  * ID 9 -- Software Management
-  * ID 20 -- Event Log
-  * ID 3600 -- GEISA App Messaging
-  * ID 3601 -- GEISA Host Monitoring
-  * ID 3602 -- GEISA App Accounting
-  * ID 3604 -- GEISA App Monitoring
-  * ID 3605 -- GEISA Platform Monitoring
-  * ID 3606 -- GEISA Platform Effective Configuration
-  * ID 3607 -- GEISA Platform Requested Configuration
+  * ``/0`` -- Security
+  * ``/1`` -- Server
+  * ``/3`` -- Device
+  * ``/4`` -- Connectivity Monitoring
+  * ``/5`` -- Firmware Update
+  * ``/9`` -- Software Management
+  * ``/20`` -- Event Log
+  * ``/3600`` -- GEISA App Messaging
+  * ``/3601`` -- GEISA Host Monitoring
+  * ``/3602`` -- GEISA App Accounting
+  * ``/3604`` -- GEISA App Monitoring
+  * ``/3605`` -- GEISA Platform Monitoring
+  * ``/3606`` -- GEISA Platform Effective Configuration
+  * ``/3607`` -- GEISA Platform Requested Configuration
 
 For each required Object, all Mandatory Resources SHALL be implemented.
 
@@ -80,25 +81,25 @@ implemented.
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
   following LwM2M Objects:
 
-  * ID 10 -- Cellular Network Connectivity
-  * ID 11 -- APN Connection Profile
-  * ID 13 -- Bearer Selection
-  * ID 504 -- Remote SIM Provisioning
+  * ``/10`` -- Cellular Network Connectivity
+  * ``/11`` -- APN Connection Profile
+  * ``/13`` -- Bearer Selection
+  * ``/504`` -- Remote SIM Provisioning
 
 * ADM conformant platforms with WLAN interfaces SHALL support the
   following LwM2M Objects:
 
-  * ID 12 -- WLAN Connectivity
+  * ``/12`` -- WLAN Connectivity
 
 * ADM conformant platforms with GNSS interfaces SHALL support the
   following LwM2M Objects:
 
-  * ID 6 -- Location
+  * ``/6`` -- Location
 
 * ADM conformant platforms and EMS with Wi-SUN interfaces SHALL support the
   following LwM2M Objects:
 
-  * ID 3603 -- Wi-SUN Radio Management
+  * ``/3603`` -- Wi-SUN Radio Management
 
 GEISA ADM Object-version baseline
 =================================
