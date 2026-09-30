@@ -148,13 +148,30 @@ def validate_manifest(manifest: object) -> list[dict]:
     return validated_entries
 
 
+def release_output_paths(worktree: Path) -> tuple[Path, Path]:
+    build_dir = worktree / "build"
+    layouts = (
+        (
+            build_dir / "html" / "html",
+            build_dir / "latexpdf" / "latex" / "geisaspecification.pdf",
+        ),
+        (
+            build_dir / "html",
+            build_dir / "latex" / "geisaspecification.pdf",
+        ),
+    )
+
+    for html_dir, pdf_path in layouts:
+        if (html_dir / "index.html").is_file() and pdf_path.is_file():
+            return html_dir, pdf_path
+
+    raise RuntimeError(
+        f"missing release build outputs in supported layouts under {build_dir}"
+    )
+
+
 def ensure_release_outputs(worktree: Path) -> None:
-    html_index = worktree / "build" / "html" / "html" / "index.html"
-    pdf_path = worktree / "build" / "latexpdf" / "latex" / "geisaspecification.pdf"
-    if not html_index.is_file():
-        raise RuntimeError(f"missing HTML output file {html_index}")
-    if not pdf_path.is_file():
-        raise RuntimeError(f"missing PDF output file {pdf_path}")
+    _, pdf_path = release_output_paths(worktree)
     if pdf_path.stat().st_size == 0:
         raise RuntimeError(f"empty PDF output file {pdf_path}")
 
@@ -263,9 +280,10 @@ def stage_release(worktree: Path, pages_dir: Path, version: str) -> None:
 
     try:
         downloads_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(worktree / "build" / "html" / "html", temp_dir, dirs_exist_ok=True)
+        html_dir, pdf_path = release_output_paths(worktree)
+        shutil.copytree(html_dir, temp_dir, dirs_exist_ok=True)
         shutil.copy2(
-            worktree / "build" / "latexpdf" / "latex" / "geisaspecification.pdf",
+            pdf_path,
             downloads_dir / "geisaspecification.pdf",
         )
         ensure_staged_release_outputs(temp_dir)
