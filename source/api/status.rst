@@ -88,6 +88,12 @@ notifications for:
   - Request application to shut down cleanly
   - Request application to clear PII from memory and storage, if any
 
+.. note::
+
+   What constitutes PII may vary by jurisdiction and operator policy.
+   Application vendors should document what data their applications collect
+   and what data is removed in response to a clear PII request.
+
 The platform MAY request that an application perform a clean shutdown via the
 message bus, OR it MAY invoke the stop command defined in the application
 manifest. These mechanisms are considered functionally equivalent from the
@@ -117,34 +123,89 @@ Application Status
 GEISA platforms require visibility into the status and health of each
 application in order to manage lifecycle and availability.
 
-A GEISA conformant implementation MUST accept at a minimum application-specific
-messages for:
+A GEISA conformant implementation MUST process at a minimum the following
+application-specific status and lifecycle messages:
 
 - Notification that an application startup is complete and now operating
-- Current application status (running, shutting down)
-- Notification that an application is shut down (due to a shutdown request)
-  and ready for termination
+- Current application status (RUNNING or SHUTTING_DOWN)
 - Request from an application to terminate itself then restart
 - Request from an application to terminate itself without restart
 
-Upon startup of an application, the application MUST send a notification to 
-the platform that it is now operating and its status is RUNNING. In this 
-message, the application MAY indicate whether it expects the platform to 
-provide a keepalive/watchdog mechanism.  If so, the application SHALL also 
-send its application status periodically (at a period specified in the most recent
-message).  If the application does not require a keepalive/watchdog mechanism,
-it MAY omit a timeout value.
+Upon startup, the application MUST notify the platform that it is operating
+by reporting a status of RUNNING.
 
-If the platform does not receive a status message within the specified timeout
-period it MUST take the following corrective actions:
+The ``watchdog`` setting in the Vendor Application Manifest indicates whether
+the application supports the GEISA keepalive/watchdog mechanism and can provide
+the required periodic status updates. The operator MAY disable watchdog for an
+application that supports it by setting ``watchdog`` to false in the
+Application Deployment Manifest. The EMS MUST NOT allow watchdog to be enabled
+in an Application Deployment Manifest unless the corresponding Vendor
+Application Manifest sets ``watchdog`` to true. If ``watchdog`` is omitted from
+either manifest, it is treated as false.
 
-- Send a message to the application requesting its status
-- If the application does not respond within a second timeout period, run the
-  stop command specified in the application manifest
+When the watchdog is enabled in the Application Deployment Manifest, the
+application SHALL send its application status periodically. ``next_status``
+specifies the number of seconds until the application is expected to send its
+next periodic status message. ``next_status_timeout`` specifies the number of
+seconds the platform will wait for that message before triggering watchdog
+handling. While the application is RUNNING and watchdog is enabled,
+``next_status`` and ``next_status_timeout`` MUST both be greater than 0.
+
+A ``next_status`` value of 0 means that no next periodic watchdog status is
+scheduled. When ``next_status`` is 0, ``next_status_timeout`` MUST also be 0 and
+the platform MUST ignore both values.
+
+When watchdog is not enabled, the application is not required to send periodic
+status messages and the platform MUST ignore ``next_status`` and
+``next_status_timeout``. The platform MAY use directed status requests, local
+execution or process state, or other platform mechanisms to determine application
+status.
+
+When the platform sets ``cmd_send_status`` to true in a message on
+``geisa/api/platform/app/status/<userid>``, the application MUST respond on
+``geisa/api/app/platform/status/<userid>`` with its current application status.
+This requirement applies whether or not watchdog is enabled for the application.
+
+After receiving a platform message-bus request to shut down, the application
+MUST report SHUTTING_DOWN before completing its orderly shutdown, while it is
+still running and able to communicate.
+
+SHUTTING_DOWN indicates that shutdown is in progress, not that the process has
+exited. The platform MUST determine when the application has actually stopped
+using local execution, runtime, or process state.
+
+The platform MUST act on an application request to terminate itself
+with or without restart. It determines the resulting application state using
+local runtime or execution state and, where applicable, application status
+messages or a later RUNNING notification. The platform MUST apply the effective
+restart policy in the current Application Deployment Manifest when handling a
+terminate-and-restart request. For a terminate-without-restart request, the
+platform MUST leave the application stopped.
+
+When the platform monitors periodic status messages for watchdog handling and
+does not receive a status message within the specified timeout period, it MUST
+take the following corrective actions:
+
+- Send a directed status request by setting ``cmd_send_status`` to true on
+  ``geisa/api/platform/app/status/<userid>``
+- If the application does not respond within the platform-defined timeout
+  following this request, run the stop command specified in the application
+  manifest
 - If the stop command itself times out (as defined in the application manifest),
   terminate the application
-- Restart the application using the start command as defined in the application
-  manifest
+
+The timeout following the directed status request is platform-defined in this
+version of the specification.
+
+.. note::
+
+   A future specification version may define subsequent timeout or backoff
+   behavior more precisely.
+
+After stopping or terminating the application following watchdog failure, the
+platform MUST apply the effective restart policy in the Application Deployment
+Manifest. The platform MUST NOT restart the application when that policy
+prohibits a restart.
 
 
 Connectivity Updates
@@ -212,9 +273,13 @@ notifications for:
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
-- Topic: ``geisa/api/platform/status``
-- Topic: ``geisa/api/platform/app/status/<userid>``
-- Topic: ``geisa/api/app/platform/status/<userid>``
+
+  - Topic: ``geisa/api/platform/status``
+
+- QoS: 1 / Acknowledged
+
+  - Topic: ``geisa/api/platform/app/status/<userid>``
+  - Topic: ``geisa/api/app/platform/status/<userid>``
 
 .. note::
 
