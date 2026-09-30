@@ -24,7 +24,7 @@ application: a vendor manifest and an operator manifest.
 
 The vendor application manifest provides information about the application to
 the operator and the edge management system, including any external
-dependencies and minimum resource requirements.  The vendor manifest is used by
+dependencies and requested resource limits.  The vendor manifest is used by
 a GEISA ADM conformant edge management system to inform the operator about the
 application and to facilitate the secure import of the application.  
 
@@ -91,13 +91,14 @@ GEISA vendor manifests SHALL include:
         - Java 21: java21
 
 
-- System Resources Required:
+- System Resource Limits:
 
-    - CPU usage in percent
-    - RAM in KiB
-    - Persistent Storage in KiB
-    - Non-persistent Storage in KiB
-    - Max threads/processes
+    - Maximum CPU allocation in percent (optional)
+    - Maximum RAM in KiB
+    - Maximum Persistent Storage in KiB
+    - Maximum Non-persistent Storage in KiB
+    - Maximum number of threads (required for VEE applications, optional for
+      LEE applications)
 
 - Off-Device Communication
 
@@ -167,10 +168,14 @@ GEISA vendor manifests SHALL include:
 
 Here is an example of an vendor application manifest:
 
-.. include:: vendor-application-manifest-example.rst
+.. literalinclude:: ../../schemas/examples/vendor-application-manifest-example.json
+   :language: json
+   :linenos:
 
 
 Here is an example of a deployment application manifest:
 
-.. include:: deployment-application-manifest-example.rst
+.. literalinclude:: ../../schemas/examples/deployment-application-manifest-example.json
+   :language: json
+   :linenos:
 

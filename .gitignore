@@ -14,5 +14,3 @@ __pycache__/
 
 # generated files for build
 source/license.generated.rst.inc
-source/adm/deployment-application-manifest-example.rst
-source/adm/vendor-application-manifest-example.rst
