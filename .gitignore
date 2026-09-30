@@ -1,6 +1,5 @@
 /venv
 /build
-source/license.generated.rst.inc
 *.pdf
 *.svg
 !/source/images/*.svg
@@ -15,3 +14,5 @@ __pycache__/
 
 # generated files for build
 source/license.generated.rst.inc
+source/adm/deployment-application-manifest-example.rst
+source/adm/vendor-application-manifest-example.rst

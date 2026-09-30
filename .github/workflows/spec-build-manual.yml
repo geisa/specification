@@ -128,7 +128,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: geisa-specification-html
-          path: build/html/**
+          path: build/html/html/**
           if-no-files-found: ignore
 
       - name: Upload PDF artifact
@@ -136,7 +136,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: geisa-specification-pdf
-          path: build/latex/*.pdf
+          path: build/latexpdf/latex/*.pdf
           if-no-files-found: ignore
 
       - name: Upload LaTeX logs
@@ -145,7 +145,7 @@ jobs:
         with:
           name: geisa-specification-latex-logs
           path: |
-            build/latex/*.log
-            build/latex/*.fls
-            build/latex/*.fdb_latexmk
+            build/latexpdf/latex/*.log
+            build/latexpdf/latex/*.fls
+            build/latexpdf/latex/*.fdb_latexmk
           if-no-files-found: ignore

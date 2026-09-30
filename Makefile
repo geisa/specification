@@ -44,6 +44,14 @@ ifeq ($(ARCH),aarch64)
 MMDC_FLAGS += --puppeteerConfigFile puppeteer-config.json
 endif
 
+# determine if rsvg-convert supports "pdfX.X" in format
+RSVG_PDF_VER = 1.5
+$(shell rsvg-convert -f=pdf$(RSVG_PDF_VER) </dev/null 2>&1 |grep -q USAGE)
+ifneq ($(.SHELLSTATUS),0)
+RSVG_FORMAT = pdf$(RSVG_PDF_VER)
+else
+RSVG_FORMAT = pdf
+endif
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -120,11 +128,11 @@ $(LICENSERST): LICENSE.md $(LICENSEGEN)
 	drawio --export --crop --format pdf --output $@ $<
 
 %.pdf: %.svg
-	rsvg-convert -f=pdf1.5 -o $@ $<
+	rsvg-convert -f=$(RSVG_FORMAT) -o $@ $<
 
 %.rst: %.json
 	echo ".. code-block:: json\n  :linenos:\n" > $@
 	cat $< | sed 's/^/  /' >> $@
 
 $(SPHINXTARGETS): Makefile prep $(LICENSERST)
-	PATH="$(PYTHONVENV:/=/bin:)$$PATH" $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	PATH="$(PYTHONVENV:/=/bin:)$$PATH" $(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)/$@" $(SPHINXOPTS)

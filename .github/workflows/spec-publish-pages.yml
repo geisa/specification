@@ -160,8 +160,8 @@ jobs:
 
       - name: Stage specification site
         run: |
-          test -d build/html
-          test -s build/latex/geisaspecification.pdf
+          test -d build/html/html
+          test -s build/latexpdf/latex/geisaspecification.pdf
 
           rm -rf build/pages
           mkdir -p build/pages/latest
@@ -169,9 +169,9 @@ jobs:
           mkdir -p build/pages/latest/downloads
           mkdir -p build/pages/assets
 
-          cp -a build/html/. build/pages/latest/
-          cp build/latex/geisaspecification.pdf build/pages/downloads/geisaspecification.pdf
-          cp build/latex/geisaspecification.pdf build/pages/latest/downloads/geisaspecification.pdf
+          cp -a build/html/html/. build/pages/latest/
+          cp build/latexpdf/latex/geisaspecification.pdf build/pages/downloads/geisaspecification.pdf
+          cp build/latexpdf/latex/geisaspecification.pdf build/pages/latest/downloads/geisaspecification.pdf
 
           test -s source/images/geisa-pyramid.svg
           cp source/images/geisa-pyramid.svg build/pages/assets/geisa-pyramid.svg

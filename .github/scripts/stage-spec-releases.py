@@ -149,8 +149,8 @@ def validate_manifest(manifest: object) -> list[dict]:
 
 
 def ensure_release_outputs(worktree: Path) -> None:
-    html_index = worktree / "build" / "html" / "index.html"
-    pdf_path = worktree / "build" / "latex" / "geisaspecification.pdf"
+    html_index = worktree / "build" / "html" / "html" / "index.html"
+    pdf_path = worktree / "build" / "latexpdf" / "latex" / "geisaspecification.pdf"
     if not html_index.is_file():
         raise RuntimeError(f"missing HTML output file {html_index}")
     if not pdf_path.is_file():
@@ -263,9 +263,9 @@ def stage_release(worktree: Path, pages_dir: Path, version: str) -> None:
 
     try:
         downloads_dir.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(worktree / "build" / "html", temp_dir, dirs_exist_ok=True)
+        shutil.copytree(worktree / "build" / "html" / "html", temp_dir, dirs_exist_ok=True)
         shutil.copy2(
-            worktree / "build" / "latex" / "geisaspecification.pdf",
+            worktree / "build" / "latexpdf" / "latex" / "geisaspecification.pdf",
             downloads_dir / "geisaspecification.pdf",
         )
         ensure_staged_release_outputs(temp_dir)
