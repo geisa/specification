@@ -51,7 +51,7 @@
                 "oscillation-overthruster": "enabled"
             },
             "default-launch-strategy": {
-                "$comment": "Vendor-recommended launch and restart behavior. Final enforcement may be subject to platform and operator policy. The watchdog setting requests or expects GEISA application watchdog behavior.",
+                "$comment": "Vendor-recommended launch and restart behavior. Final enforcement may be subject to platform and operator policy. The watchdog setting indicates whether the application supports the GEISA application watchdog mechanism.",
                 "auto-restart": true,
                 "max-restarts": 5,
                 "restart-period": 60,

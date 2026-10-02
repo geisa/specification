@@ -148,6 +148,6 @@ message GeisaPlatformToAppStatus {
 message GeisaAppToPlatformStatus {
 	// App-side status sent back to the platform.
 	GeisaAppToPlatformStatusType type = 1;
-	int32 next_status = 10;              // How long until App will send next status
-	int32 next_status_timeout = 11;      // Timeout platform should use (recommended 2.5x next_status)
+	int32 next_status = 10;              // Seconds until App is expected to send its next status; 0 if none
+	int32 next_status_timeout = 11;      // Timeout in seconds platform should use; ignored if 0 (recommended 2.5x next_status)
 }
