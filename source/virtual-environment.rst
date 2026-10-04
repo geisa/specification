@@ -13,7 +13,7 @@ Virtual Execution Environment
 |geisa-vee-hdr|
 
 A Virtual Execution Environment (VEE) is a multi-sandboxed application 
-container for resource-constrained embedded devices running on microcontrollers 
+environment for resource-constrained embedded devices running on microcontrollers 
 or microprocessors.  It allows devices to run multiple and mixed managed code 
 (Java |reg| compiled binary code, C/C++ compiled binary code, JavaScript code, 
 etc.). 
