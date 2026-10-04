@@ -1,4 +1,3 @@
-
 ..
   Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
   Security Alliance (GEISA), a Series of LF Projects, LLC
@@ -180,19 +179,38 @@ principle of least-privilege.
 The application isolation implementation of GEISA conformant platforms shall
 ensure that:
 
-- Applications run in independent processes
+- Applications run in isolation (e.g. independent processes, threads, virtual
+  machines as appropriate for the EE)
+  appropriate for the 
 - Applications run with least privilege
 - Application access permissions are deny by default
 - Application-to-application communication are denied by default 
 - Applications cannot access other application's memory or other resources
-- Applications do not know about other applications unless explicitly informed
 - Applications cannot access the platform's local file-system
 - Applications cannot impact the performance of the platform
 - Applications cannot impact the stability of the platform
 - Applications cannot impact the performance of other applications
 - Applications cannot impact the stability of other applications
-- Applications cannot create denial-of-service situations
-- Resources are fairly distributed when oversubscribed
+- Applications cannot consume more than their allocated resources 
+- Applications can only share data with other applications when specifically
+  granted permission
+
+..
+    Internal GEISA ToDo for 1.1:  Add language describing expected platform
+    behavior when oversubscribed -- e.g., each application resource allocation
+    individually is supported by the platform, but collectively the combined
+    allocations are greater than the platform can support.
+
+
+.. Note:: 
+
+   This version of the GEISA specification does not provide a mechanism for
+   application discovery, but it does provide a mechanism for application to
+   application communication (see :doc:`api/app-to-app`).  To take advantage of
+   application to application communications, applications will need to be
+   written to offer or consume services.  This is an out-of-band design /
+   deployment choice, rather than something facilitated within the
+   specification.
 
 .. index:: single: Application Manifest
 
@@ -219,12 +237,15 @@ The AII shall control:
 - Which network interfaces an application may access (none by default),
   including HAN/LAN and FAN/WAN interfaces.
 
-- The allowed instantaneous bandwidth an application may use.
-
 - The allowed average network volume an application may use over a
   daily period (e.g., 24 hours).
 
-- Allowed destination peers (IP/proto/port).
+- Allowed destination peers (IP/proto/port) for IP-based communications.
+
+
+.. 
+    Internal GEISA ToDo for 1.1: Define instantaneous bandwidth limits.
+
 
 API Control
 ^^^^^^^^^^^
