@@ -369,11 +369,24 @@ GEISA object definitions.
   application or application instance. It is intended for application-facing
   message configuration and transport metadata, not durable event history,
   accounting, runtime health, or platform configuration.
-
+   
   Resource 4050 AppID is a system-unique identifier for the logical application
   within the applicable management domain. Resource 4051 Software Instance
   links to the corresponding LwM2M Software Management ``/9`` instance for the
-  installed application.
+  installed application.  
+  
+  To ensure interoperability across platform implmentations, AppIDs MUST be
+  managed by the EMS.  EMS must ensure that AppIDs are unique within a given
+  deployed system (two different applications SHALL NOT be assigned the same
+  AppID at the same time) and specific (the same application SHALL NOT have two
+  different IDs assigned at the same time).  AppIDs values have no meaning and
+  should not be ascribed any.  In this version of the specification, AppIDs are
+  limited to a range of 0 to 255.  Over the life of a running system, this may
+  mean that AppIDs need to be reused.  EMS MAY reuse AppIDs as required, but
+  EMS SHALL NOT assign the same AppID to more than one application
+  simultaneously.  EMS SHOULD maximize the time between AppID reuse to minimize
+  any confusion for operators reading logs or other system messages.  EMS shall
+  clearly log when an AppID is assigned.
 
 * ``/3601`` GEISA Host Monitoring
 

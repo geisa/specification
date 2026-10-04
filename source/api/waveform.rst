@@ -72,7 +72,8 @@ A waveform stream descriptor SHALL include:
 - The number of voltage channels present in each sample index.
 - The number of current channels present in each sample index.
 - The total number of channels present in each sample index. This SHALL
-  equal voltage-channel-count plus current-channel-count.
+  equal voltage-channel-count plus current-channel-count plus
+  other-channel-count (if used).
 - The waveform ``sample-rate-hz``.
 - The waveform ``samples-per-cycle`` when applicable.
 - The waveform ``nominal-frequency-hz`` when applicable.
