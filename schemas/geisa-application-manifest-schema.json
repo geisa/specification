@@ -453,7 +453,7 @@
                                     "maximum": 120
                                 },
                                 "watchdog": {
-                                    "description": "Whether the application requests the GEISA application watchdog mechanism and will provide the required status updates. This setting does not affect platform monitoring, resource enforcement, shutdown, or other lifecycle controls.",
+                                    "description": "In a Vendor Application Manifest, true indicates that the application supports the GEISA application watchdog mechanism and can provide the required periodic status updates. In an Application Deployment Manifest, true enables watchdog for that deployed application. If omitted, this value is treated as false. This setting does not affect platform monitoring, resource enforcement, shutdown, or other lifecycle controls.",
                                     "type":"boolean"
                                 }
                             }

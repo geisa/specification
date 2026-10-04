@@ -321,10 +321,14 @@
               "$ref": "#/$defs/geisaAppToPlatformStatusType"
             },
             "next-status": {
-              "type": "integer"
+              "description": "Seconds until the application expects to send its next periodic status. A value of 0 means no next periodic status is scheduled.",
+              "type": "integer",
+              "minimum": 0
             },
             "next-status-timeout": {
-              "type": "integer"
+              "description": "Timeout in seconds the platform uses while waiting for the next periodic status. Ignored when next-status is 0.",
+              "type": "integer",
+              "minimum": 0
             }
           },
           "additionalProperties": false

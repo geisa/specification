@@ -10,63 +10,77 @@
 Linux Base Libraries
 --------------------
 
-To facilitate clean and regular updates and to minimize container sizes, GEISA 
-applications are encouraged to take advantage of the libraries provided in the 
-base GEISA environment whenever possible.
+To facilitate clean and regular updates and to minimize container sizes, GEISA
+applications are encouraged to take advantage of libraries provided by the base
+GEISA environment whenever possible.
 
-This does not prevent GEISA applications from including their own libraries
-in the event that the GEISA environment does not provide a needed library.
+GEISA defines a baseline set of runtime and application libraries provided by
+the platform for use within the GEISA execution environment. Applications MAY
+include additional libraries that are not part of this baseline.
 
-There are two major groups of libraries:
+C Language and Toolchain-provided Runtime Libraries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- C Language Runtime Libraries (e.g. glibc, uclibc, musl)
-- Other C Libraries
-
-The following list is the current MINIMUM expectation for libraries provided in 
-the base GEISA environment.  This list is expected to grow over time as the base 
-environment and specification evolves and as applications surface additional 
-common needs.  
-
-C Language and Toolchain-provided Runtime Libraries (may vary by implementation):
+The following runtime libraries are part of the GEISA baseline. The specific
+implementation may vary by platform and toolchain.
 
 - libc - Core runtime support
 - libgcc - GNU C Compiler Collection (low-level runtime support)
 - libstdc++
-- libcrypt - Password hashing (MD5, SHA-256)
+- libatomic - Atomic operations
+- libcrypt - Password hashing
 - libdl - Dynamic loading
 - libm - Math library
-- libnsl - Network Services Library
 - libpthread - POSIX Threads
 - libresolv - DNS resolution and name services
 - librt - Real-time
 - libcap - POSIX capabilities
 
-Other C Libraries (MUST):
+Common Application Libraries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- libasyncns - Asynchronous Name Service 
-- libatomic - Atomic operations
-- libcrypto - OpenSSL (hashing, encryption, digital signatures, random numbers, 
+The following common application libraries, or function-compatible alternate
+implementations as described below, MUST be provided by the platform and
+available to applications within the GEISA execution environment:
+
+- libcrypto - OpenSSL (hashing, encryption, digital signatures, random numbers,
   certs/keys)
-- libutil - Users, groups, pseudo-ttys (pty), etc.
-- libz - compression
+- libnsl - Network Services Library
+- libz - Compression
 - libmosquitto - MQTT client implementation
+
+A platform implementation MAY provide an alternate library implementation in
+place of one of the named libraries above, provided that the alternate
+implementation is function-compatible with the named library.
+
+Optional Application Libraries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Platform implementations MAY provide additional commonly used libraries in the
+base GEISA environment. When provided as part of that environment, these
+libraries MUST be available to GEISA applications within their execution
+environment.
+
+Examples include:
+
+- libasyncns - Asynchronous Name Service
+- libutil - Users, groups, pseudo-ttys (pty), etc.
 - libprotobuf - C++ protobuf implementation
+
+Applications MAY include additional libraries or alternate implementations when
+needed.
 
 .. note::
 
-  Many MQTT client libraries exist and applications MAY use `libmosquitto` listed 
-  above or choose a `different implementation <https://mqtt.org/software/>`_ as 
-  needed.
+   Applications MAY use a platform-provided `libprotobuf` when suitable, or
+   another protobuf implementation such as one listed in
+   `Third-Party Add-ons for Protocol Buffers
+   <https://github.com/protocolbuffers/protobuf/blob/main/docs/third_party.md>`_.
 
-  Similarly, applications MAY use `libprotobuf` if their application is C++, 
-  otherwise the application must bring their own implementation of protobufs 
-  such as but not limited to one listed in 
-  `Third-Party Add-ons for Protocol Buffers <https://github.com/protocolbuffers/protobuf/blob/main/docs/third_party.md>`_.
+   The GEISA API is defined at the protocol level and does not mandate a
+   specific application SDK, programming language, or application
+   implementation.
 
-  The GEISA API is defined at the protocol level and does not mandate a specific 
-  application SDK, programming language, or application implementation.
-
-  While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication, GEISA
-  Applications are unaware of this and do not require any LwM2M client libraries 
-  or knowledge.
-
+   While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication,
+   GEISA Applications are unaware of this and do not require any LwM2M client
+   libraries or knowledge.

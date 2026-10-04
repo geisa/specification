@@ -17,8 +17,8 @@ implementer SHOULD use a Linux 6.x or greater kernel. A LEE platform may use
 an older version if needed, but it MUST provide the needed application isolation
 requirements as defined within the GEISA specification.
 
-The attack surface and size of the Linux kernel and base libraries provided 
-MUST be minimized. A LEE platform implementation SHOULD remove unnecessary 
+The attack surface and size of the Linux kernel and base libraries provided
+SHOULD be minimized. A LEE platform implementation SHOULD remove unnecessary
 components and libraries providing the platform and applications the required 
 functionalities while being cognizant and intentional on minimizing the overall 
 packages and services and should not be similar to a full typical Linux 
@@ -34,6 +34,5 @@ receive, over time, their resource allotment and not be starved to the point
 where metrological and waveform data is significantly delayed or lost.
 
 |geisa-pyramid|
-
 
 

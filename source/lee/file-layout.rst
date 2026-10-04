@@ -77,14 +77,24 @@ mounts within the container environment:
     checks, etc...)
   - Application SHALL be tolerant to data corruption and missing files
 
+.. note::
+
+   Detailed persistent-storage metadata-integrity requirements are under
+   discussion and may be expanded in a future specification version.
+
 Utilities and Environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A base set of executables typically found in an embedded or minimal container 
-environment MUST be present.
+environment SHOULD be present.
 
 GEISA does not require a specific implementation, however 
 `Busybox <https://busybox.net/>`_ is recommended with the default build options.
+
+.. note::
+
+   A future specification version may define a more explicit minimum
+   executable set.
 
 A skeleton filesystem MUST be populated including typical paths for binaries and 
 libraries:
@@ -259,5 +269,3 @@ Example geisa-app-1 with 50MiB persistent and 4MiB non-persistant volumes ::
 
 |geisa-pyramid|
 |geisa-landscape-end|
-
-

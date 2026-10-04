@@ -177,9 +177,6 @@ semantics. Each socket message SHALL contain exactly one complete waveform
 frame. Partial frames SHALL NOT be transmitted.  A data payload frame MAY or 
 MAY not correspond to one or multiple AC cycles depending on the metadata.
 
-Each frame SHALL provide sufficient information for an application to safely
-consume and interpret the delivered samples without vendor-specific knowledge.
-
 At a minimum, each frame SHALL include:
 
 - A timestamp
@@ -314,13 +311,9 @@ applied as defined by the ``voltage-scale`` and ``current-scale`` metadata
 values. For floating-point formats (``float32``, ``float64``), scaling factors
 SHOULD be omitted or set to ``1.0``.
 
-The waveform frame format SHALL be defined by this specification and SHALL be
-sufficient to ensure interoperable decoding across conformant implementations.
-
-The frame structure, including timestamp representation, sequence numbering,
-sample encoding, channel ordering, and endianness, SHALL be defined such that an
-application can decode waveform data using only the waveform metadata provided
-and this specification, without requiring vendor-specific knowledge.
+The defined frame structure and waveform metadata allow an application to
+decode waveform data using only the GEISA API and this specification, without
+vendor- or platform-specific handling.
 
 MQTT Details
 ------------
