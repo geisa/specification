@@ -18,20 +18,55 @@ binary compatibility. [#]_  Neverthless, it is important to define
 the expected hardware deployment platform, as it informs a variety
 of design decisions.
 
-A full GEISA conformant platform, including ADM, API, and LEE or VEE 
-interoperability conformance, should be realizable on:
+A full GEISA conformant platform, including ADM, API, and LEE 
+|geisa-lee-tux| interoperability conformance, should be realizable on:
 
-- ARMv7 CPU with NEON extensions
+- ARMv7-A Architecture CPU with NEON extensions
 - 512 MB of RAM
 - 1 GB of Flash
 - One (or more) network interfaces
 - One (or more) metrology interfaces
 
-The resources listed above are the design target for GEISA LEE implementations
-and should be considered a minimum hardware specification.  Platform vendors
-MAY choose to implement GEISA on more constrained environments, but this
+A full GEISA conformant platform, including ADM, API, and VEE 
+|geisa-vee-cloud| interoperability conformance, should be realizable on:
+
+- ARMv7-M Architecture CPU 
+- 10 MB of RAM
+- 20 MB of Flash
+- One (or more) network interfaces
+- One (or more) metrology interfaces
+
+The resources listed above are the design targets for GEISA implementations and
+should be considered a minimum hardware specification.  Platform vendors MAY
+choose to implement GEISA on more constrained environments, but this
 specification is not constrained by that choice.
-    
+
+.. Note::
+
+   Processors based on the ARMv7-A and ARMv7-M architectures should not be
+   confused with the ARM7 processor, a largely obsolete part based on the ARMv3
+   architecture.  See https://en.wikipedia.org/wiki/ARM7 for details on the
+   ARM7 processor and https://en.wikipedia.org/wiki/ARM_architecture_family for
+   a discussion on ARM architectures.
+
+.. Note::
+
+   |geisa-vee-cloud| The VEE hardware minimums provided above assume an
+   embedded RTOS like `Zephyr <https://zephyrproject.org/>`_ or `FreeRTOS
+   <https://www.freertos.org/>`_, rather than a multitasking operating system
+   like Linux.  GEISA does not specify an operating system for VEE.  VEE
+   platform implementers may need additional resources depending on their
+   operating system choice.  
+   
+.. Warning::
+
+   Just as a minimum spec PC may be insufficient for running advanced
+   applications like CAD, 3D modeling, or scientific analysis, the minimums
+   listed above may not be sufficient for advanced machine learning, complex
+   waveform analysis, or artificial intelligence operations at the edge.
+   Platform implementers and system operators should consider the target
+   applications when making hardware sizing and procurement decisions. 
+
 Platform implementers should be aware that:
     
 - This version of the specification is limited to source-code compatibility
@@ -39,10 +74,11 @@ Platform implementers should be aware that:
 
 - LEE GEISA platform implementers MAY choose to use alternate CPUs and/or fewer
   resources for implementations; however, this may create compatibility challenges
-  if binary compatibility is desired.
+  if binary compatibility is desired. |geisa-lee-tux|
 
 - VEE GEISA applications are agnostic to underlying CPU architecture, but are
   also source-code compatible only in this version of the specification.
+  |geisa-vee-cloud|
 
 - It MAY NOT be possible to implement a fully conformant (ADM, API, and EE) 
   platform on a device with fewer resources.
@@ -56,8 +92,8 @@ hardware platforms with various capabilities:
 - Device types such as smart meters, load switches, EV chargers, etc.
 - Single and multi-core CPUs
 - Support for processor extensions and coprocessors such as GPUs  
-- RAM sizes greater than the 512MB target
-- Storage sizes greater than the 1 GB target
+- RAM sizes greater than the 512MB LEE design target or 10 MB VEE design target
+- Storage sizes greater than the 1 GB LEE design target or 20 MB VEE design target
 - Multiple networking interfaces such as mesh, Wi-Fi, cellular, etc.
 - Metrology interfaces to provide voltage, current, etc.
 - Actuators such as relays and contactors
@@ -74,7 +110,7 @@ GEISA LEE |geisa-lee-tux| specifically assumes a GNU/Linux environment (see
 is open-source.  If a platform vendor is using a commercial tool chain, there
 is no requirement that the platform vendor provide a license; however, they
 MUST provide information regarding where third parties can purchase the
-necessary tool chain and the version of the tool chain in use, and they must
+necessary tool chain and the version of the tool chain in use, and they MUST
 provide any supporting files required to allow the tool chain to be used to
 compile applications for their platform.  Platform providers should fully document the
 necessary compiler options for building compatible images for their platforms.

@@ -73,6 +73,17 @@ Glossary
     provide a common foundation for GEISA implementations, while also allowing
     for customization and innovation by implementers.
 
+   Container
+    Within GEISA, applications are deployed within an Application Isolation
+    Implementation which provides isolation and resource management
+    capabilities.  On servers and workstations running Linux, this is typically
+    done using an Open Container Initiative (OCI) formatted container image, which is
+    executed via a tool like Docker or Podman, relying on Linux kernel features
+    such as cgroups and namespaces.  GEISA uses its own formats for application
+    images which are more efficient and appropriate for embedded environments.
+    Platforms must provide an AII.  The AII technology in use will vary
+    depending on the execution environment. 
+
    DER
     Distributed Energy Resource
 

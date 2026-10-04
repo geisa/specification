@@ -71,11 +71,13 @@ the credentials to authenticate with the MQTT message broker providing the
 GEISA API.
 
 The platform SHALL generate and manage application user ID and tokens locally
-on-device. User IDs and tokens MUST be alphanumeric printable strings.  Tokens
-MUST contain a minimum of twelve (12) bytes of random data.  Sixteen (16) bytes
-is preferred.  User ID values persist for the life of the application's
-installation and tokens persist for at least the life of an application's
-execution.
+on-device. User IDs and tokens MUST be alphanumeric printable strings,
+restricted to the UTF8 character set.  Implementations should avoid quotation
+marks, equals signs and backslashes, as these may complicate parsing of the
+configuration file.  Tokens MUST contain a minimum of twelve (12) bytes of
+random data.  Sixteen (16) bytes is preferred.  User ID values persist for the
+life of the application's installation and tokens persist for at least the life
+of an application's execution.
 
 .. Note::
 
