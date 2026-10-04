@@ -119,8 +119,8 @@ Applications MUST also specify the expected volume of data per day per
 destination class.
 
 Once a network interface is online, the Application may use outbound-initiated
-AF_INET/AF_INET6 sockets from within the container environment to reach the
-specified endpoints.
+AF_INET/AF_INET6 sockets from within the AII environment to reach the specified
+endpoints.
 
 Approval of IP socket communication does not imply unmanaged or
 application-selected network reachability. The System Operator remains
@@ -348,7 +348,7 @@ Connectivity
 ^^^^^^^^^^^^
 
 The operating environment is responsible for providing network connectivity
-between each Application container environment and network interfaces.
+between each AII environment and network interfaces.
 
 The platform is responsible for implementing policy (by firewall and forwarding
 rules), accounting (volume limits), and providing underlying connectivity and
@@ -359,17 +359,18 @@ routing between these components.
   GEISA does not mandate a specific technology that the implementer of the
   operating environment must use to accomplish this, but does recommend the use
   of Linux network namespaces, veth interfaces, and iptables/nftables for
-  filtering, NAT, and accounting.  The implementer may also make use of
-  on-device transparent proxies if desired, however the Application must be
-  able to use AF_INET/AF_INET6 sockets from within the container environment
-  with any encoding and protocol within.
+  filtering, NAT, and accounting on LEE platform implementations
+  |geisa-lee-tux|.  The implementer may also make use of on-device transparent
+  proxies if desired, however the Application must be able to use
+  AF_INET/AF_INET6 sockets from within the AII environment with any encoding
+  and protocol within.
 
-The operating environment MUST provide a local :code:`lo` interface within the container
-environment for each application. The local :code:`lo` interface must be up and configured
-with both :code:`127.0.0.1` and :code:`::1` addresses.
+The operating environment MUST provide a local :code:`lo` interface within the
+AII environment for each application. The local :code:`lo` interface must be up
+and configured with both :code:`127.0.0.1` and :code:`::1` addresses.
 
 The apparent address, route, or connection path visible to an Application
-inside its container environment is not required to correspond one-to-one
+inside its AII environment is not required to correspond one-to-one
 with the physical interface, upstream session, or operator network path
 used by the platform. Applications should treat the socket interface as
 the approved local execution-environment abstraction and rely on Platform
@@ -403,8 +404,9 @@ GEISA highly recommends that the Operating Environment implement a caching
 local resolver that honors TTL to reduce network traffic off-device due to
 repeated application lookups for the same name.
 
-The application must be able to reach DNS services from within the container
-environment by using standard Linux libraries (i.e., libnss/resolvconf/etc.)
+The application must be able to reach DNS services from within the AII 
+environment by using standard libraries (i.e., libnss, resolvconf, etc. for LEE
+|geisa-lee-tux| or java.net.* for VEE |geisa-vee-cloud|.)
 
 DNS in a multi-tenant and multi-interface environment can get quite complex.
 For example, an operator may implement their Operator Endpoints using a
@@ -435,16 +437,15 @@ addresses for policy rules, but instead only protocol/port and multicast groups.
 
 An application requesting inbound access in its manifest requires that the
 platform create that inbound mapping from the appropriate local interface (such
-as a WiFi interface) into the application container environment.  When
-requesting a port mapping, both IPv4 and IPv6 MUST be mapped if the local
-interface supports both.
+as a WiFi interface) into the AII environment.  When requesting a port mapping,
+both IPv4 and IPv6 MUST be mapped if the local interface supports both.
 
 Many common local device protocols use multicast or broadcast for discovery and
 registration.  Applications SHOULD be able to both send to IP multicast groups
 and register IP multicast groups for receipt.  If specified in the application
 manifest, the platform will register those addresses on the appropriate local
 interface and forward received packets that match both the multicast/broadcast
-address and the inbound protocol/port into the application container environment.
+address and the inbound protocol/port into the AII environment.
 
 Multiple applications MAY register the same IP multicast group at the same time;
 however, they MUST NOT register the same protocol/port.  The platform and/or ADM

@@ -11,16 +11,16 @@ Application Isolation
 ---------------------
 
 Linux Execution Environments are expected to use the containerization
-capabilites provided natively within the Linux Kernel via cgroups.  GEISA does
-not specify which container engine or management system a platform should use,
-but it does specify how app images are provided.  Platform implementations may
-use any engine or management system they choose, but they MUST meet the
-requirements described in this chapter, they MUST provide a base image, and
-they MUST accept application images.
+capabilites provided natively within the Linux Kernel via cgroups to provide an
+Application Isolation Implementation.  GEISA does not specify which container
+engine or management system a platform should use, but it does specify how app
+images are provided.  Platform implementations may use any engine or management
+system they choose, but they MUST meet the requirements described in this
+chapter, they MUST provide a base image, and they MUST accept application
+images.
 
-While platforms may use any container mechanism they choose, for clarity of
-intent, this portion of the GEISA specification uses ``lxc`` for various 
-examples.  
+While platforms may use any AII mechanism they choose, for clarity of intent,
+this portion of the GEISA specification uses ``lxc`` for various examples.  
 
 
 Isolation Requirements
@@ -63,16 +63,15 @@ interface may be granted specific permission.
 GEISA applications MAY be granted limited network access as described 
 in :doc:`/system-architecture`.
 
-If granted permissions in the operator manifest, the platform SHALL provide the 
-application with the ability to use standard socket-based IP connectivity from 
-within the containerized environment via the Linux kernel.  The platform SHALL 
-be responsible for enforcing the access control list and volume limits described 
+If granted permissions in the operator manifest, the platform SHALL provide the
+application with the ability to use standard socket-based IP connectivity from
+within the AII environment via the Linux kernel.  The platform SHALL be
+responsible for enforcing the access control list and volume limits described
 in the application's manifest.
 
-GEISA does not require a specific mechanism for providing network interface 
-access to the containerized environment, however typical options would be a 
-veth pair or passthrough interface using iptables/nftables for policy 
-enforcement.
+GEISA does not require a specific mechanism for providing network interface
+access to the AII environment, however typical options would be a veth pair or
+passthrough interface using iptables/nftables for policy enforcement.
 
 API Control
 ^^^^^^^^^^^

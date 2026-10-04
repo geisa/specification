@@ -26,6 +26,15 @@ Glossary
    AII
     Application Isolation Implementation
 
+    GEISA requires that platforms provide an Application Isolation
+    Implementation that ensures GEISA applications cannot impact each other, or
+    the platform they are running on, and that they are constrained to the
+    resources allocated to them by the system operator.  These requirements are
+    discussed in :doc:`system-architecture`.  Because GEISA supports different
+    execution environments, the specification does not mandate a specific
+    technology.  On Linux Execution Environments, AII is typically provided by
+    container technologies like cgroups and namespaces.
+
    API
     Applications Programming Interface
 
@@ -82,7 +91,9 @@ Glossary
     such as cgroups and namespaces.  GEISA uses its own formats for application
     images which are more efficient and appropriate for embedded environments.
     Platforms must provide an AII.  The AII technology in use will vary
-    depending on the execution environment. 
+    depending on the execution environment.  When this specification refers to
+    a container or containerization, it usually is a reference to the AII
+    provided by the EE.
 
    DER
     Distributed Energy Resource

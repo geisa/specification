@@ -80,13 +80,13 @@ without being ported.
 
 |geisa-lee-hdr|
 
-LEE GEISA applications are provided as container images, as detailed in
-:doc:`lee/app-isolation`.  An LEE conformant GEISA implementation is able to
-mount a container image and grant that container the rights the system operator
-permitted the application in the deployment manifest.  The container runtime
-used by the platform implementation is out of scope, but conformant
-implementations MUST be able to enforce the permissions and controls the GEISA
-specification requires.
+LEE GEISA applications are provided as GEISA-specific application container
+images, as detailed in :doc:`lee/app-isolation`.  An LEE conformant GEISA
+implementation is able to mount a container image and grant that container the
+rights the system operator permitted the application in the deployment
+manifest.  The Application Isolation Implementation used by the platform
+implementation is out of scope, but conformant implementations MUST be able to
+enforce the permissions and controls the GEISA specification requires.
 
 An LEE-conformant GEISA implementation must provide a set of
 :doc:`lee/base-libraries` and :doc:`lee/core-services` to containers running in

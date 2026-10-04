@@ -32,7 +32,7 @@ and SHALL be composed of the following components:
 *    :doc:`Edge Application Manifest </adm/manifests>`
 *    Edge Application Binary
 
-To minimize edge app container sizes, applications are encouraged to
+To minimize edge application image sizes, applications are encouraged to
 dynamically link against the libraries provided by the base GEISA environment
 rather than providing their own.  Consideration for the management of the base
 libraries and/or package dependencies will be deferred to a future release;  at

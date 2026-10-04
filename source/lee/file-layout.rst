@@ -11,17 +11,17 @@ Base Filesystem
 ---------------
 
 A GEISA LEE |geisa-lee-tux| container provides the following minimum filesystem
-within each Application Container environment.  The container filesystem
-contents may be derived from the platform host filesystem or separately
-constructed specifically for GEISA container environments.
+within each AII environment.  The container filesystem contents may be derived
+from the platform host filesystem or separately constructed specifically for
+GEISA container environments.
 
 
 Filesystem Mounts
 ^^^^^^^^^^^^^^^^^
 
-Each GEISA Application MUST be provisioned in its own container environment
-separate from other Applications.  As such, application-specific names, IDs,
-and other identifiers do not need to be encoded in filesystem paths within the
+Each GEISA Application MUST be provisioned in its own AII environment separate
+from other Applications.  As such, application-specific names, IDs, and other
+identifiers do not need to be encoded in filesystem paths within the
 Application environment.
 
 The GEISA platform implementation MUST provide the following virtual filesystem 
@@ -197,8 +197,8 @@ Example Filesystem Construction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As an example of how this might be composed, consider a platform using ``lxc``
-as its container engine.  ``/platform`` is persistant storage for the GEISA 
-platform and a shared base image is at ``/platform/base/geisa-base-1.0.0.sqfs``.
+as its AII.  ``/platform`` is persistant storage for the GEISA platform and a
+shared base image is at ``/platform/base/geisa-base-1.0.0.sqfs``.
 
 The Platform receives an application manifest for a given application, 
 including the image's digital signature.  Upon receiving the application image 
