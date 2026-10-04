@@ -181,7 +181,6 @@ ensure that:
 
 - Applications run in isolation (e.g. independent processes, threads, virtual
   machines as appropriate for the EE)
-  appropriate for the 
 - Applications run with least privilege
 - Application access permissions are deny by default
 - Application-to-application communication are denied by default 
