@@ -67,7 +67,7 @@ GEISA vendor manifests SHALL include:
     - GEISA LEE Minimum Version (null for unsupported)
     - GEISA VEE Minimum Version (null for unsupported)
     - Waveform Access Required (boolean)
-    - GEISA LEE CPU arch string as returned by the Linux arch command:
+    - GEISA CPU architecture string:
 
         - ARM 32-bit: armv7l, armv6l
         - ARM 64-bit: aarch64
@@ -76,7 +76,7 @@ GEISA vendor manifests SHALL include:
         - x86 32-bit: i686
         - X86 64-bit: x86_64, amd64
 
-    - GEISA LEE C library required:
+    - GEISA EE C library required:
 
         - glibc
         - musl
@@ -85,10 +85,9 @@ GEISA vendor manifests SHALL include:
 
     - For VEE, a string of the JVM version:
 
+        - Java 7: java7
         - Java 8: java8
         - Java 11: java11
-        - Java 17: java17
-        - Java 21: java21
 
 
 - System Resource Limits:
@@ -106,6 +105,14 @@ GEISA vendor manifests SHALL include:
       classes, destinations, and daily volume of that communication.
     - See :doc:`/api/networking` for details.
     - Daily volumes are specified in Byte units, and daily messages are in message units.
+
+.. Note::
+
+   The CPU Archicture string is used by both LEE and VEE.  On Linux systems,
+   the architecture string can be obtained using the ``arch`` command, but this
+   command is not required to be provided.  Architecture names used within
+   GEISA follow the target architecture names used by gcc, llvm, and other
+   compilers.  `Triple.cpp` provides a cannonical list. [TARGET]_
 
 .. Note::
 

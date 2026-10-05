@@ -28,9 +28,9 @@ Package is defined in :doc:`/lee/file-layout` for LEE conformant |geisa-lee-tux|
 and SHALL be composed of the following components:
 
 *    X.509 Public Key Certificate used to verify the digital signature in the Package
-*    Digital Signature across the Edge Application Manifest and Edge Application Binary
+*    Digital Signature across the Edge Application Manifest and Edge Application Image
 *    :doc:`Edge Application Manifest </adm/manifests>`
-*    Edge Application Binary
+*    Edge Application Image 
 
 To minimize edge application image sizes, applications are encouraged to
 dynamically link against the libraries provided by the base GEISA environment
@@ -50,8 +50,15 @@ permits edge app packages can be transferred to the EE via either of the
 following methods:
 
 *    PUSH via *Write* of the opaque package to ``/9/x/2 Package`` 
+
 *    PULL via *Write* to resource ``/9/x/3 Package URI`` for the GEISA platform 
-      to download via CoAP/HTTP as soon as practical
+      to download as soon as practical
+
+PULL downloads will attempt to use the protocol specified in the URI.  GEISA
+ADM conformant EMS and GEISA ADM conformant platform implementations must
+support CoAP transfers.  GEISA ADM conformant EMS must include the ability to
+host firmware and application images for download via CoAP.  GEISA conformant
+EMS MAY support alternate protocols (like HTTP) or specifying external URIs. 
 
 In contrast to Firmware Update, the ``Software Management object 9`` does not
 support the concept of automatic Installation or Activation.  Both operations

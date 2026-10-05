@@ -96,10 +96,13 @@ implemented.
 
   * ``/6`` -- Location
 
-* ADM conformant platforms and EMS with Wi-SUN interfaces SHALL support the
-  following LwM2M Objects:
+.. 
+    GEISA Internal ToDo: Add Wi-SUN 1.1 Objects
 
-  * ``/3603`` -- Wi-SUN Radio Management
+    * ADM conformant platforms and EMS with Wi-SUN interfaces SHALL support the
+      following LwM2M Objects:
+
+    * ``/3603`` -- Wi-SUN Radio Management
 
 GEISA ADM Object-version baseline
 =================================
@@ -229,10 +232,12 @@ implementation claiming GEISA ADM conformance SHALL support the applicable
 LwM2M interfaces, operations, Objects, Resources, and behaviors defined by
 this specification.
 
-The host is not the GEISA Platform. The GEISA Platform is not an
-application. A conformant ADM system needs enough visibility into all
-three scopes to manage the device, operate the platform, and monitor
-applications consistently.
+The host is not the GEISA Platform.  Its native operating system is out of
+scope for GEISA.  Hosts may include vendor specific functions or legacy
+protocols, though system operators should be aware that depending on these may
+limit interoperability. The GEISA Platform is not an application. A conformant
+ADM system needs enough visibility into all three scopes to manage the device,
+operate the platform, and monitor applications consistently.
 
 ADM implementations should keep these distinct:
 
@@ -480,3 +485,21 @@ GEISA object definitions.
   paths. Each Object Instance represents one logical component, service,
   function, or operational path used by the implementation to realize the
   relevant platform requirements.
+
+GEISA Object Lifecycle
+=========================
+
+To ensure consistent behavior and to enable interoperability across ADM
+implementations, GEISA ADM conformant platforms and EMS shall support a
+consistent object lifecycle:
+
+- Platforms shall instantiate platform-level objects on boot.
+
+- EMS shall instantiate an instance of object ``/9`` when an application is
+  installed.
+
+- Platforms shall create application specific GEISA objects (``/36xx``) as required,
+  and link them back to the appropriate object ``/9`` instance via Object ID.
+
+
+

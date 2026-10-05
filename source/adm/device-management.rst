@@ -19,72 +19,74 @@ To facilitate effective management, during Registration an ADM conformant EMS SH
 Observe as appropriate the GEISA Objects advertised by the device platform, including the
 required GEISA Objects applicable to the deployment:
 
-.. list-table::
+.. list-table:: GEISA Required LwM2M Objects
    :header-rows: 1
    :widths: 10 35 55
 
    * - Object ID
      - Object Name
      - Information
-   * - 3
+   * - ``/3``
      - Device
      - Mfg, Model, S/N, Firmware Version, System Clock, Storage, etc.
-   * - 4
+   * - ``/4``
      - Connectivity Monitoring
      - IP Address, Link Quality, LwM2M Network Bearer, etc
-   * - 6
+   * - ``/6``
      - Location
      - GNSS location
-   * - 10
+   * - ``/10``
      - Cellular Connectivity
      - 3GPP connection management
-   * - 11
+   * - ``/11``
      - APN Connection Profile
      - APN connection management
-   * - 12
+   * - ``/12``
      - WLAN Connectivity
      - Wi-Fi Radio interface management
-   * - 13
+   * - ``/13``
      - Bearer Selection
      - LwM2M bearer selection management
-   * - 20
+   * - ``/20``
      - Event Log
      - System Log and App-specific Log retrieval
-   * - 504
+   * - ``/504``
      - Remote SIM Provisioning
      - eSIM profile management: reporting, swap, add/delete
-   * - 3600
+   * - ``/3600``
      - App Messaging
      - App data reporting on the uplink, App config on the downlink
-   * - 3601
+   * - ``/3601``
      - Host Monitoring
      - CPU, RAM, process, context switch, file handle observability
-   * - 3602
+   * - ``/3602``
      - App Accounting
      - System-level and App-level bandwidth usage and optional throttling
-   * - 3604
+   * - ``/3604``
      - App Monitoring
      - App-scoped runtime monitoring visibility with one instance per App
-   * - 3605
+   * - ``/3605``
      - Platform Monitoring
      - A platform-level monitoring view of its collective components
-   * - 3606
+   * - ``/3606``
      - Platform Effective Configuration
      - The effective Platform configuration for one edge device
-   * - 3607
+   * - ``/3607``
      - Platform Requested Configuration
      - The requested set of Platform configuration values for an edge device
-   * - 3608
+   * - ``/3608``
      - Component Monitoring
      - Optional per-component monitoring represented in aggregate by /3605
 
-To avoid the overhead of full re-Registration during normal session continuance, ADM conformant
-devices SHALL send a lightweight Registration Update prior to the expiration their Registration
-Lifetime in order to maintain their Registration context with the server. Although not directly
-specified in the LwM2M protocol, ADM conformant devices SHOULD send a Registration Update after
-expiration of 50% of the Registration Lifetime, similar to the timing strategies of RFC 2131.
-Upon receipt of a Registration Update, an ADM conformant EMS SHALL restart the Lifetime expiration
-timer for the device. ADM conformant devices SHALL only perform a full re-Registration under the
+To avoid the overhead of full re-Registration during normal session
+continuance, ADM conformant devices SHALL send a lightweight Registration
+Update prior to the expiration their Registration Lifetime in order to maintain
+their Registration context with the server. Although not directly specified in
+the LwM2M protocol, ADM conformant devices SHOULD send a Registration Update
+after expiration of 50% of the Registration Lifetime, similar to the timing
+strategies of RFC 2131. [RFC2131]_ Upon receipt of a Registration Update, an
+ADM conformant EMS SHALL restart the Lifetime expiration timer for the device.
+ADM conformant devices SHALL only perform a full re-Registration under the
 following conditions:
 
 * Registration Lifetime expired
@@ -97,13 +99,13 @@ ADM conformant devices that maintain their Registration state across reboots are
 required to perform a full re-Registration after a reboot or power restoration.
 
 Device management is also used to perform platform-level firmware updates.
-Firmware updates are performed using LwM2M Object 5, Firmware Update.
+Firmware updates are performed using LwM2M Object ``/5``, Firmware Update.
 
 ADM conformant GEISA devices shall support device reboots as well as device
-factory resets, using LwM2M Object 3.  Factory resets of an ADM conformant
+factory resets, using LwM2M Object ``/3``.  Factory resets of an ADM conformant
 device shall remove all installed applications and any associated application
 data. During factory reset, the EMS MAY specify management of local LDevID
-credentials by submitting an argument with the Execute /3/0/5 operation:
+credentials by submitting an argument with the Execute ``/3/0/5`` operation:
 
 * No Argument or Argument = 0 indicates that the Client MUST preserve its IDevID upon factory reset.
 * Argument = 1 indicates that the Client MUST preserve both IDevID and LDevID(s) upon factory reset.
@@ -144,15 +146,18 @@ an ADM conformant GEISA platform:
 
 These operations are performed using the following CoAp methods:
 
-.. list-table::
+|geisa-landscape|
+
+.. flat-table:: LwM2M CoAp Operations
    :header-rows: 1
-   :widths: 15 20 35 12 18
+   :widths: 10 10 35 20 25
 
    * - Operation
      - CoAp Method
      - Path
      - Success
      - Failure
+
    * - Read
      - GET
      - | /{Object ID}/{Object Instance ID}/{Resource ID}
@@ -163,6 +168,7 @@ These operations are performed using the following CoAp methods:
        | 4.04 Not Found,
        | 4.05 Method Not Allowed,
        | 4.06 Not Acceptable
+
    * - Discover
      - GET
      - | /{Object ID}/{Object Instance ID}/{Resource ID}
@@ -172,32 +178,39 @@ These operations are performed using the following CoAp methods:
        | 4.01 Unauthorized,
        | 4.04 Not Found,
        | 4.05 Method Not Allowed,
+
    * - Write
      - PUT
      - | /{Object ID}/{Object Instance ID}/{Resource ID}
        | Content Format:
-     - | 2.04 Changed
-       | 2.31 Continue
+     - | 2.04 Changed,
+       | 2.31 Continue,
      - | 4.00 Bad Request,
        | 4.01 Unauthorized,
        | 4.04 Not Found,
        | 4.05 Method Not Allowed,
-       | 4.06 Not Acceptable
-       | 4.08 Request Entity Incomplete
+       | 4.06 Not Acceptable,
+       | 4.08 Request Entity Incomplete,
        | 4.13 Request Entity Too Large
+
+.. flat-table:: 
+   :header-rows: 0
+   :widths: 10 10 35 20 25
+
    * - Write
      - POST
      - | /{Object ID}/{Object Instance ID}
        | Content Format:
-     - | 2.04 Changed
-       | 2.31 Continue
+     - | 2.04 Changed,
+       | 2.31 Continue,
      - | 4.00 Bad Request,
        | 4.01 Unauthorized,
        | 4.04 Not Found,
        | 4.05 Method Not Allowed,
-       | 4.06 Not Acceptable
-       | 4.08 Request Entity Incomplete
+       | 4.06 Not Acceptable,
+       | 4.08 Request Entity Incomplete,
        | 4.13 Request Entity Too Large
+
    * - Write-Attributes
      - PUT
      - | /{Object ID}/{Object Instance ID}/{Resource ID}
@@ -207,7 +220,8 @@ These operations are performed using the following CoAp methods:
      - | 4.00 Bad Request,
        | 4.01 Unauthorized,
        | 4.04 Not Found,
-       | 4.05 Method Not Allowed,
+       | 4.05 Method Not Allowed
+
    * - Execute
      - POST
      - /{Object ID}/{Object Instance ID}/{Resource ID}
@@ -215,7 +229,8 @@ These operations are performed using the following CoAp methods:
      - | 4.00 Bad Request,
        | 4.01 Unauthorized,
        | 4.04 Not Found,
-       | 4.05 Method Not Allowed,
+       | 4.05 Method Not Allowed
+
    * - Create
      - POST
      - | /{Object ID}
@@ -226,6 +241,7 @@ These operations are performed using the following CoAp methods:
        | 4.04 Not Found,
        | 4.05 Method Not Allowed,
        | 4.06 Not Acceptable
+
    * - Delete
      - DELETE
      - /{Object ID}/{Object Instance ID}
@@ -233,7 +249,10 @@ These operations are performed using the following CoAp methods:
      - | 4.00 Bad Request,
        | 4.01 Unauthorized,
        | 4.04 Not Found,
-       | 4.05 Method Not Allowed,
+       | 4.05 Method Not Allowed
+
+
+|geisa-landscape-end|
 
 .. figure:: device-management-operations.*
 

@@ -52,11 +52,17 @@ needed to complete the boostrapping process (e.g. certificates, keys, etc.).
   expected that they will inform the purchaser in advance or provide a bootstrap
   server.
 
+GEISA ADM conformant devices SHALL support EST-coaps per [RFC9148]_.
+Certificate management is discussed in :doc:`../security`.  The EST process
+requires that the GEISA devices know the address of the registration authority.
+For this version of the specification, the registration address may be provided
+either as part of a factory process or using an out-of-band mechanism.
+Build-to-order mass deployment devices are expected to be configured with the
+registration authority name in the factory.  Build-to-stock and custom
+deployment devices are expected to be configured using a manufacturer tool
+prior to deployment.
 
-.. Note::
-
-  ToDo:  LwM2M Bootstrapping can include an endpoint client name.  This is optional if
-  the identifier provided in the security protocol is sufficient.  We need to
-  agree on the security mechanism and discuss whether the identifiers it provides
-  are sufficient.
-
+Future versions of the specification may require DNS-SD, DHCP Options, and/or
+well known DNS names (e.g. geisa-ra).  Mechanisms like *Manufacturer-Signed CA
+Certificate Distribution for EST and EST-coaps Deployments* [MITTAL]_ are also
+under consideration.
