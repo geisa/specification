@@ -27,11 +27,17 @@
 .. [LwM2M-Transport] `OMA Lightweight Machine to Machine Technical Specification: Transport Bindings 1.2.2
    <https://www.openmobilealliance.org/release/LightweightM2M/V1_2_2-20240613-A/OMA-TS-LightweightM2M_Transport-V1_2_2-20240613-A.pdf>`_
 
+.. [MITTAL] `Manufacturer-Signed CA Certificate Distribution for EST and EST-coaps Deployments
+   <https://datatracker.ietf.org/doc/draft-mittal-est-coap-ca-certs/>`_
+
 .. [NIST800-186] `NIST SP 800-186 Recommendations for Discrete Logarithm-based Cryptography: Elliptic Curve Domain Parameters
    <https://doi.org/10.6028/NIST.SP.800-186>`_
 
 .. [RFC2119] `Key words for use in RFCs to Indicate Requirement Levels
    <https://datatracker.ietf.org/doc/html/rfc2119>`_
+
+.. [RFC2131] `Dynamic Host Configuration Protocol
+   <https://datatracker.ietf.org/doc/rfc2131>`_
 
 .. [RFC7252] `The Constrained Application Protocol (CoAP)
    <https://datatracker.ietf.org/doc/html/rfc7252>`_
@@ -39,5 +45,7 @@
 .. [RFC9148] `EST-coaps: Enrollment over Secure Transport with the Secure Constrained Application Protocol
    <https://datatracker.ietf.org/doc/html/rfc9148>`_
 
+.. [TARGET] `Triple.cpp - Target Triple Helper Class 
+   <https://llvm.org/doxygen/Triple_8cpp_source.html>`_
 .. [X509] `X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks
    <https://www.itu.int/rec/T-REC-X.509-201910-I/en>`_

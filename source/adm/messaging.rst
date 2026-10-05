@@ -117,42 +117,42 @@ configuration payloads within those permissions and platform policies.
      - Operation
      - Data Type
      - Description
-   * - 4050
+   * - ``4050``
      - AppID
      - ReadWrite
      - Unsigned Integer
      - System-unique identifier for the logical application within the applicable management domain.
-   * - 4051
+   * - ``4051``
      - Software Instance
      - Read
      - Objlnk
      - Link to the corresponding LwM2M Software Management ``/9`` instance.
-   * - 0
+   * - ``0``
      - Server Message
      - Write
      - Opaque
      - Server to Client app-message payload.
-   * - 1
+   * - ``1``
      - Client Message
      - Read
      - Opaque
      - Client to Server app-message payload.
-   * - 2
+   * - ``2``
      - Message Priority
      - ReadWrite
      - Unsigned Integer
      - Per-message priority for ordering, scheduling, throttling, or delivery.
-   * - 3
+   * - ``3``
      - Message Type
      - ReadWrite
      - Unsigned Integer
      - Per-message payload classification.
-   * - 4
+   * - ``4``
      - Message TTL
      - ReadWrite
      - Unsigned Integer
      - Per-message time-to-live, in seconds.
-   * - 5
+   * - ``5``
      - Content Type
      - ReadWrite
      - String
@@ -165,3 +165,5 @@ configuration payloads within those permissions and platform policies.
 .. figure:: app-messaging-config.*
 
   Edge App Message Delivery
+
+|geisa-pyramid|

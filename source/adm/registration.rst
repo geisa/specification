@@ -22,12 +22,12 @@ instantiated Object Instances.
 
 GEISA ADM conformant devices SHALL use the Registration Update, a lightweight empty Registration packet sent to the EMS, for the following:
 
-* A periodic heartbeat from Client to Server to maintain the existing management session.
-* If any previous Registration information changes, for example:
+* A periodic heartbeat from Client to Server to maintain the existing management session
+* If any previous registration information changes, for example:
 
 
-  * GEISA platform IP Address changes
-  * The objects supported by the platform changes after a firmware upgrade
+  * GEISA platform IP address changes
+  * The objects supported by the platform change after a firmware upgrade
 
 .. _registration:
 .. figure:: client-registration.*
