@@ -191,6 +191,8 @@ ensure that:
 - Applications cannot impact the performance of other applications
 - Applications cannot impact the stability of other applications
 - Applications cannot consume more than their allocated resources 
+- Applications cannot directly access platform hardware, such as UART, SPI,
+  I2C, GPIO, or actuators  
 - Applications can only share data with other applications when specifically
   granted permission
 

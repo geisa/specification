@@ -29,21 +29,19 @@ definitions allows platforms which support running applications in a virtual
 execution environment, rather than a full operating system, to do so in an 
 interoperable way.
 
-VEEs are used on a variety of platforms. The GEISA VEE may run on top the GEISA 
-Linux Execution Environment (LEE) (refer to 
-:doc:`GEISA Linux Execution Environment (LEE) </linux-environment>`), although 
-this is not an obligation; that is, the underlying system for a GEISA VEE can be 
-any RTOS-like variant and not necessarily Linux or the GEISA LEE.
+VEEs may be implemented on any suitable operating system, including embedded
+real-time operating systems like Zephyr or FreeRTOS, as well as multi-user
+operating systems like Linux.  Platform implementers may choose to offer both a
+VEE and an LEE on the same platform, but this it not an obligation.  
 
 VEEs rely on managed-code virtual runtime (typically a virtual machine): GEISA
 VEE MUST support both multi-thread managed C/C++ and (managed) Java |reg|. 
 Support for other languages (e.g. Kotlin, Lua, Rust, ECMAScript, etc.) may be 
 included in the future, but is not defined or mandated at this time.
 
-In this version of the GEISA specification the host operating system is Linux 
-and the VEE SHOULD execute in user space as a process. In future versions, it 
-may become possible to consider options such as Zephyr OS, in which case the
-VEE would be executed as a task.
+When the host operating system is Linux and the VEE SHOULD execute in user
+space as a process.  When the host operating system is an RTOS, such as Zephyr,  
+the VEE SHOULD be executed as a task.
 
 On top of this runtime sits a multi-application kernel that manages the 
 lifecycle, scheduling, and isolation of multiple apps running concurrently. 
@@ -63,4 +61,3 @@ VEE conformant platforms will provide a consistent:
   vee/runtime
   vee/base-libraries
 
-|geisa-pyramid|

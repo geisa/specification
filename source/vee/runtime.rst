@@ -45,7 +45,8 @@ target, independent of the underlying OS/RTOS.
 
 The GEISA VEE scheduler MUST provide:
 
-- Application-level thread scheduling independent of OS scheduling
+- Application-level thread scheduling independent of underlying operating
+  system scheduling
 - Fair resource allocation among running sandboxed applications
 - Prevention of thread starvation across applications
 - Consistent scheduling behavior across heterogeneous hardware platforms
