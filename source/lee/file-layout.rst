@@ -27,47 +27,49 @@ Application environment.
 The GEISA platform implementation MUST provide the following virtual filesystem 
 mounts within the container environment:
 
-- /
+- ``/``
 
   - a filesystem containing base binaries, libraries, the application and other 
     files and directories not specifically listed below.  It MUST be 
     either mounted read-only, or the application MUST lack write permission to all 
     items within the filesystem except as explained below.
 
-- /proc
+- ``/proc``
 
-  - a Linux `procfs` filesystem populated by the kernel for the specific 
+  - a Linux ``procfs`` filesystem populated by the kernel for the specific 
     application's container
 
-- /dev
+- ``/dev``
 
-  - MAY be part of the `/` filesystem or separate mount such as `tmpfs` or 
-    `devtmpfs` types
-  - MUST contain at a minimum: `console` `full` `log` `null` `random` `stderr` 
-    `stdin` `stdout` `urandom` and `zero`
-  - `/dev/log` MUST be backed by the platform to filter and direct logs into 
+  - MAY be part of the ``/`` filesystem or separate mount such as ``tmpfs`` or 
+    ``devtmpfs`` types
+  - MUST contain at a minimum: ``console`` ``full`` ``log`` ``null`` ``random``
+    ``stderr`` ``stdin`` ``stdout`` ``urandom`` and ``zero``
+  - ``/dev/log`` MUST be backed by the platform to filter and direct logs into 
     the GEISA ADM or another system logging mechanism if the implementation is 
-    not ADM conformant
+    not ADM conformant.  Implementations conformant with both ADM and LEE SHALL
+    expose application logs submitted via ``/dev/log`` via LwM2M Object
+    ``/20``.
 
-- /sys
+- ``/sys``
 
-  - a Linux `sysfs` filesystem populated by the kernel for the specific 
+  - a Linux ``sysfs`` filesystem populated by the kernel for the specific 
     application's container
 
-- /tmp
+- ``/tmp``
 
-  - A separate filesystem or directory within / that is writable by the 
+  - A separate filesystem or directory within ``/`` that is writable by the 
     Application process
   - MUST be limited in size as described in the Application's Deployment Manifest
-  - MAY be backed by `tmpfs` or a persistent filesystem
+  - MAY be backed by ``tmpfs`` or a persistent filesystem
   - Applications MUST handle stale files and cleanup contents it created to 
     remain under limits
   - Platform MAY clean, purge, or delete contents while the Application is NOT 
     running
 
-- /home/geisa
+- ``/home/geisa``
 
-  - A separate filesystem or directory within / that is writable by the 
+  - A separate filesystem or directory within ``/`` that is writable by the 
     Application process
   - MUST be limited in size as described in the Application's Deployment Manifest
   - Applications MUST handle stale files and cleanup contents it created to 
@@ -99,41 +101,41 @@ GEISA does not require a specific implementation, however
 A skeleton filesystem MUST be populated including typical paths for binaries and 
 libraries:
 
-- bin
-- dev
-- etc
-- home
-- lib
-- proc
-- sys
-- tmp
-- var
+- ``/bin``
+- ``/dev``
+- ``/etc``
+- ``/home``
+- ``/lib``
+- ``/proc``
+- ``/sys``
+- ``/tmp``
+- ``/var``
 
 and optionally:
 
-- sbin
-- usr/sbin
-- usr/bin
-- usr/lib
-- run (if present, SHOULD be non-persistent and share `/tmp` size limits)
+- ``/sbin``
+- ``/usr/sbin``
+- ``/usr/bin``
+- ``/usr/lib``
+- ``/run`` (if present, SHOULD be non-persistent and share ``/tmp`` size limits)
 
 A skeleton filesystem MUST be populated with typical files including at a 
 minimum:
 
-- /etc/group
-- /etc/hostname
-- /etc/hosts (including a `localhost` entry)
-- /etc/passwd
+- ``/etc/group``
+- ``/etc/hostname``
+- ``/etc/hosts`` (including a ``localhost`` entry)
+- ``/etc/passwd``
 
 and if provided by libc implementation:
 
-- /etc/resolv.conf
-- /etc/nsswitch.conf
-- /etc/locale.conf
-- /etc/services
-- /etc/protocols
-- /etc/shells
-- /etc/timezone
+- ``/etc/resolv.conf``
+- ``/etc/nsswitch.conf``
+- ``/etc/locale.conf``
+- ``/etc/services``
+- ``/etc/protocols``
+- ``/etc/shells``
+- ``/etc/timezone``
 
 The following environment variables MUST be set at a minimum when invoking 
 Applications processes:
@@ -149,7 +151,7 @@ GEISA Components
 The Application needs to determine information about the environment it is
 running on and as such can expect certain GEISA specific configuration to be
 present.  As explained in :doc:`/api/architecture` and :doc:`/api/discovery`
-these files are placed in `/etc/geisa` within the container environment.
+these files are placed in ``/etc/geisa`` within the container environment.
 
 
 Base Libraries
@@ -191,8 +193,6 @@ platform MAY re-construct the filesystem including deletion of any
 non-persistent files while the persistant files (in `/home/geisa`)
 MUST be preserved.
 
-|geisa-landscape|
-
 Example Filesystem Construction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -225,8 +225,9 @@ and this example LEE uses a quota to limit application usage as specified in the
 deployment manifest.  Other mechanisms could be used to limit a persistent 
 volume such as a file-backed loopback device.
 
-Example geisa-app-1 with 50MiB persistent and 4MiB non-persistant volumes ::
+|geisa-landscape|
 
+Example geisa-app-1 with 50MiB persistent and 4MiB non-persistant volumes: ::
 
   mkdir -p /platform/apps/geisa-app-1/config/etc/geisa
   geisa_create_mqtt_conf geisa-app-1 /platform/apps/geisa-app-1/config/etc/geisa/mqtt.conf
@@ -242,30 +243,30 @@ Example geisa-app-1 with 50MiB persistent and 4MiB non-persistant volumes ::
   mount --bind /platform/apps/geisa-app-1/config /var/lxc/geisa-app-1/config
 
   mount -t overlay -oro overlay \
-  -olowerdir=/var/lxc/geisa-app-1/base:/var/lxc/geisa-app-1/app:/var/lxc/geisa-app-1/config \
-  -oupperdir=/var/lxc/geisa-app-1/upper \
-  -oworkdir=/var/lxc/geisa-app-1/work \
-  /var/lxc/geisa-app-1/rootfs
+    -olowerdir=/var/lxc/geisa-app-1/base:/var/lxc/geisa-app-1/app:/var/lxc/geisa-app-1/config \
+    -oupperdir=/var/lxc/geisa-app-1/upper \
+    -oworkdir=/var/lxc/geisa-app-1/work \
+    /var/lxc/geisa-app-1/rootfs
 
   mount --bind /platform/apps/geisa-app-1/persist /var/lxc/geisa-app-1/rootfs/home/geisa
   mount -t tmpfs -osize=4M,mode=1777 tmpfs /var/lxc/geisa-app-1/rootfs/tmp
   mount -t sysfs sysfs /var/lxc/geisa-app-1/rootfs/sys
   mount -t proc proc /var/lxc/geisa-app-1/rootfs/proc
 
+|geisa-landscape-end|
 
 .. note::
 
-  GEISA LEE SHOULD have their `/` filesystem mounted read-only
+  GEISA LEE SHOULD have their ``/`` filesystem mounted read-only
   in the kernel to follow the principle of least privilege. This prevents
   Applications from modifying or adding files in unexpected places and forces
   deterministic Application behavior on each startup.
 
-  If an implementation chooses to mount `/` read-write, it MUST enforce file 
+  If an implementation chooses to mount ``/`` read-write, it MUST enforce file 
   and directory permissions appropriately as well as limit the growable size of 
   the filesystem to the same limits as the Application's Deployment Manifest 
-  specifies for non-persistent storage.  In this case a seperate `/tmp` mount 
-  is unnecessary and any changes outside of the persistent `/home/geisa` are 
+  specifies for non-persistent storage.  In this case a seperate ``/tmp`` mount 
+  is unnecessary and any changes outside of the persistent ``/home/geisa`` are 
   non-persistent.
 
 |geisa-pyramid|
-|geisa-landscape-end|

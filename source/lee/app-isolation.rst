@@ -11,13 +11,13 @@ Application Isolation
 ---------------------
 
 Linux Execution Environments are expected to use the containerization
-capabilites provided natively within the Linux Kernel via cgroups to provide an
-Application Isolation Implementation.  GEISA does not specify which container
-engine or management system a platform should use, but it does specify how app
-images are provided.  Platform implementations may use any engine or management
-system they choose, but they MUST meet the requirements described in this
-chapter, they MUST provide a base image, and they MUST accept application
-images.
+capabilites provided natively within the Linux Kernel (i.e. cgroups,
+namespaces, etc.) to provide an Application Isolation Implementation.  GEISA
+does not specify which container engine or management system a platform should
+use, but it does specify how app images are provided.  Platform implementations
+may use any engine or management system they choose, but they MUST meet the
+requirements described in this chapter, they MUST provide a base image, and
+they MUST accept application images.
 
 While platforms may use any AII mechanism they choose, for clarity of intent,
 this portion of the GEISA specification uses ``lxc`` for various examples.  
