@@ -20,7 +20,7 @@ Software Management
 ======================
 
 The LwM2M ``/9/x Software Management`` object SHALL be used to manage the
-Installation and Activation of containerized edge applications running in the
+software package lifecycle of containerized edge applications running in the
 GEISA EE.  In contrast to the Firmware Update object, each instance of the
 multi-instance Software Management object represents a distinct edge
 application *Package* installed in the EE.  The format of the edge application
@@ -30,7 +30,7 @@ and SHALL be composed of the following components:
 *    X.509 Public Key Certificate used to verify the digital signature in the Package
 *    Digital Signature across the Edge Application Manifest and Edge Application Image
 *    :doc:`Edge Application Manifest </adm/manifests>`
-*    Edge Application Image 
+*    Edge Application Image
 
 To minimize edge application image sizes, applications are encouraged to
 dynamically link against the libraries provided by the base GEISA environment
@@ -45,20 +45,20 @@ Component``.
 
 **App Installation and Activation**
 
-Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec 
-permits edge app packages can be transferred to the EE via either of the 
+Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec
+permits edge app packages can be transferred to the EE via either of the
 following methods:
 
-*    PUSH via *Write* of the opaque package to ``/9/x/2 Package`` 
+*    PUSH via *Write* of the opaque package to ``/9/x/2 Package``
 
-*    PULL via *Write* to resource ``/9/x/3 Package URI`` for the GEISA platform 
+*    PULL via *Write* to resource ``/9/x/3 Package URI`` for the GEISA platform
       to download as soon as practical
 
 PULL downloads will attempt to use the protocol specified in the URI.  GEISA
 ADM conformant EMS and GEISA ADM conformant platform implementations must
 support CoAP transfers.  GEISA ADM conformant EMS must include the ability to
 host firmware and application images for download via CoAP.  GEISA conformant
-EMS MAY support alternate protocols (like HTTP) or specifying external URIs. 
+EMS MAY support alternate protocols (like HTTP) or specifying external URIs.
 
 In contrast to Firmware Update, the ``Software Management object 9`` does not
 support the concept of automatic Installation or Activation.  Both operations
@@ -70,7 +70,7 @@ The Software Management Object ``/9`` instance number is independent of
 resource ``4050`` AppID. Resource ``4051`` Software Instance links a GEISA
 application Object Instance to the corresponding ``/9`` instance.
 
-The following example demonstrates GEISA conformant edge app installation and 
+The following example demonstrates GEISA conformant edge app installation and
       activation:
 
 #.    PULL download of the edge app package from the URL set by the EMS into
@@ -94,8 +94,38 @@ The following example demonstrates GEISA conformant edge app installation and
 
     Edge App Install and Activate
 
-The Software Management object Activation state machine defines the ability to use an app but does not address 
-app execution state semantics:
+**App Update**
+
+ADM conformant platforms and EMS MUST support application updates using the
+existing ``/9/x Software Management`` Object Instance and
+``/9/x/6 Uninstall`` with argument ``1`` (``ForUpdate``).
+
+When updating an installed edge application, the EMS SHALL use ``ForUpdate``.
+The platform SHALL set ``/9/x/7 Update State`` to ``INITIAL`` and
+``/9/x/9 Update Result`` to ``0``, and prepare to receive the replacement
+package as defined by the Software Management Object.
+
+Application updates MUST preserve persistent files in ``/home/geisa``.
+Non-persistent files are not retained when the application filesystem is
+reconstructed as part of the update.
+
+If the operator does not wish to retain persistent application data when
+moving to a newer version, they may instead use ``/9/x/22 Purge Data`` via the
+EMS together with a normal ``/9/x/6 Uninstall`` and then perform a new
+application installation. ``Purge Data`` remains an independent operation and
+MAY also be used outside of an application replacement workflow.  Note that
+``Purge Data`` MUST be supported as part of GEISA conformance.
+
+Executing ``/9/x/6`` with no argument or argument ``0`` performs a normal
+uninstall rather than an application update.
+
+After ``ForUpdate``, the replacement package SHALL be transferred using
+``/9/x/2 Package`` or ``/9/x/3 Package URI`` and follow the normal download,
+verification, and ``/9/x/4 Install`` sequence. After successful installation,
+the EMS MAY execute ``/9/x/10 Activate`` and, when application execution is
+desired, ``/9/x/19 Start``.
+
+The Software Management object Activation state machine defines the ability to use an app but does not address app execution state semantics:
 
 * When the current state is set to ACTIVE, the installed software can be used by the LwM2M Client.
 * When the current state is set to INACTIVE, the LwM2M Client MUST NOT use the installed software.
@@ -105,7 +135,7 @@ app execution state semantics:
 
 **App Execution State**
 
-Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State* 
+Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State*
 of an edge application:
 
 .. list-table::
@@ -133,8 +163,11 @@ of an edge application:
 
 **App Purge**
 
-Version 1.1 of the Software Management object adds an executable resource for an EMS to remotely purge local data 
-from an instance of an edge application installation:
+Version 1.1 of the Software Management object adds an executable resource for
+an EMS to remotely purge local data from an instance of an edge application
+installation. Purge is independent of application update and uninstall
+operations and MAY also be used when an operator requires a clean application
+replacement without retaining persistent data:
 
 .. list-table::
    :header-rows: 1
