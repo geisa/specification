@@ -18,7 +18,7 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
 * ADM conformant platforms and EMS are required to support only the LwM2M
   interfaces, operations, Objects, Resources, features, and behaviors made
   applicable by the GEISA specification. GEISA does not require every optional
-  LwM2M feature or every Object in the OMA registry.
+  LwM2M feature or every Object in the OMA registry to be supported.
 * ADM conformant platforms and EMS MAY support later LwM2M protocol or Object
   versions, provided they continue to support the GEISA-pinned baseline and do
   not require later-version behavior for GEISA interoperability.
@@ -96,7 +96,7 @@ implemented.
 
   * ``/6`` -- Location
 
-.. 
+..
     GEISA Internal ToDo: Add Wi-SUN 1.1 Objects
 
     * ADM conformant platforms and EMS with Wi-SUN interfaces SHALL support the
@@ -318,8 +318,8 @@ GEISA object definitions.
 
   Scope: application lifecycle
 
-  Provides application package download, install, activation, execution
-  state where supported, uninstall, and purge behavior.
+  Provides application package download, install, update, activation, and
+  execution state as well as uninstall and purge behavior.
 
 * ``/10`` Cellular Network Connectivity
 
@@ -374,12 +374,12 @@ GEISA object definitions.
   application or application instance. It is intended for application-facing
   message configuration and transport metadata, not durable event history,
   accounting, runtime health, or platform configuration.
-   
+
   Resource 4050 AppID is a system-unique identifier for the logical application
   within the applicable management domain. Resource 4051 Software Instance
   links to the corresponding LwM2M Software Management ``/9`` instance for the
-  installed application.  
-  
+  installed application.
+
   To ensure interoperability across platform implmentations, AppIDs MUST be
   managed by the EMS.  EMS must ensure that AppIDs are unique within a given
   deployed system (two different applications SHALL NOT be assigned the same
