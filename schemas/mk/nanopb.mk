@@ -95,7 +95,7 @@ NANOPB_$(1)_PBH := $$(NANOPBDIR)/$$(NANOPB_$(1)_STEM).pb.h
 NANOPB_$(1)_GEN := $$(NANOPB_$(1)_PBC) $$(NANOPB_$(1)_PBH)
 NANOPB_$(1)_STAMP := $$(NANOPBDIR)/.$(1).nanopb.stamp
 
-$$(NANOPB_$(1)_STAMP): $$(NANOPB_$(1)_PROTO) $$(NANOPB_$(1)_OPTIONS) $$(call nanopb-module-stamps,$$(NANOPB_$(1)_DEPS))
+$$(NANOPB_$(1)_STAMP): $$(NANOPB_$(1)_PROTO) $$(NANOPB_$(1)_OPTIONS) $$(call nanopb-module-stamps,$$(NANOPB_$(1)_DEPS)) | check-protoc
 	$$(call NANOPB_GENERATE,$$(NANOPB_$(1)_PROTO),$$(NANOPB_$(1)_GEN))
 	@touch $$@
 endef

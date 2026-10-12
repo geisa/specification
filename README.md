@@ -21,8 +21,9 @@ The repository also includes the GEISA machine-readable definitions under
 [`schemas/`](schemas/), including Protocol Buffer definitions, JSON Schemas,
 profiles, examples, nanopb support, and related tooling. Build with
 `make schemas` or `make schemas-all`, clean with `make schemas-clean`, and lint
-with `make schemas-lint`. Repository setup and combined linting use
-`make setup-dev` and `make lint`.
+with `make schemas-lint`. Example targets are available from the repository root
+as `make schemas-examples`, `make schemas-examples-c`, and `make schemas-demos`.
+Repository setup and combined linting use `make setup-dev` and `make lint`.
 
 The GEISA specification and documentation are licensed under the Community
 Specification License. Content under [`schemas/`](schemas/), including schemas,
