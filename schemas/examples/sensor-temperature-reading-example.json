@@ -3,7 +3,7 @@
   "geisa-sensor-reading": {
     "$comment": "Example runtime reading for a lower-rate temperature sensor. The proto allows one or more scalar values per reading; this example uses a single value in the values array.",
     "sensor-id": "board_temp1",
-    "timestamp-ms": 1735689600000,
+    "timestamp-us": 1735689600000000,
     "values": [
       {
         "double-value": 47.25

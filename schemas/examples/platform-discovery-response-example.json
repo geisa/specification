@@ -101,7 +101,7 @@
         "sample-rate-hz": 7680,
         "samples-per-cycle": 128,
         "nominal-frequency-hz": 60,
-        "expected-frame-period-ms": 200,
+        "expected-frame-period-us": 200000,
         "voltage-filter-lowpass": 5000,
         "current-filter-lowpass": 5000
         }

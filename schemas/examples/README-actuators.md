@@ -25,11 +25,16 @@ From the `specification/schemas/` directory:
     make clean
     make examples
 
-To build the embedded C actuator examples:
+Before building the embedded C examples, complete the nanopb setup described in
+`../README.md`: run `make setup-dev` and provide the external nanopb runtime
+source checkout. The schemas `venv` does not need to be activated.
 
-    make actuator-c NANOPB_GENERATOR=protoc-gen-nanopb
-    make examples-actuator NANOPB_GENERATOR=protoc-gen-nanopb \
-      NANOPB_DIR=/path/to/nanopb
+Then build the actuator examples:
+
+    make examples-actuator
+
+If the runtime checkout is not under `/tmp/nanopb`, set `NANOPB_DIR` or
+`NANOPB_RUNTIME_DIR` to its location.
 
 Example binaries are written to:
 

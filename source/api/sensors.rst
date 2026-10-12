@@ -90,8 +90,8 @@ includes:
   explicit read requests; updates may be periodic or event-driven;
   configuration of publishing behavior is implementation-specific as 
   of this version of the specification)
-- ``min_report_period_ms`` (optional): minimum reporting period
-- ``max_report_period_ms`` (optional): maximum reporting period
+- ``min_report_period_us`` (optional): minimum reporting period
+- ``max_report_period_us`` (optional): maximum reporting period
 - ``model`` (optional): model identifier, useful for troubleshooting
 - ``name`` (optional): platform-defined display name
 - ``description`` (optional): platform-defined description
@@ -197,7 +197,7 @@ includes:
 
 - ``sensor_id`` (required): sensor identifier, matching a discovered
   descriptor
-- ``timestamp_ms`` (required): UTC epoch time in milliseconds when the
+- ``timestamp_us`` (required): UTC epoch time in microseconds when the
   reading was generated
 - ``values`` (required): one or more ``GeisaSensorValue`` entries for the
   observation

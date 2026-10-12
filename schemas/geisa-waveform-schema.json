@@ -55,7 +55,7 @@
         "nominal-frequency-hz",
         "cycle-aligned",
         "zero-crossing-aligned",
-        "expected-frame-period-ms"
+        "expected-frame-period-us"
       ],
       "properties": {
         "stream-id": {
@@ -125,8 +125,8 @@
           "description": "Scaling factor applied to integer sample formats (int16, int32). This value applies uniformly across current channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
           "type": "number"
         },
-        "expected-frame-period-ms": {
-          "description": "Expected period between delivered waveform frames in milliseconds.",
+        "expected-frame-period-us": {
+          "description": "Expected period between delivered waveform frames in microseconds.",
           "type": "integer",
           "minimum": 1
         },
@@ -246,8 +246,8 @@
           "description": "Scaling factor for current channels when integer sample formats are used. This value applies uniformly across current channels in the stream. Samples are assumed zero-centered; no offset term is defined in 0.9 metadata. For floating-point formats (float32, float64), this field SHOULD be omitted or set to 1.0.",
           "type": "number"
         },
-        "expected-frame-period-ms": {
-          "description": "Expected period between delivered waveform frames in milliseconds.",
+        "expected-frame-period-us": {
+          "description": "Expected period between delivered waveform frames in microseconds.",
           "type": "integer",
           "minimum": 1
         },
@@ -298,7 +298,7 @@
               "nominal-frequency-hz",
               "cycle-aligned",
               "zero-crossing-aligned",
-              "expected-frame-period-ms"
+              "expected-frame-period-us"
             ]
           }
         }

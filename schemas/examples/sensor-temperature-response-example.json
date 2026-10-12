@@ -6,7 +6,7 @@
     "readings": [
       {
         "sensor-id": "board_temp1",
-        "timestamp-ms": 1735689600000,
+        "timestamp-us": 1735689600000000,
         "values": [
           {
             "double-value": 47.25
@@ -21,7 +21,7 @@
       },
       {
         "sensor-id": "ambient_temp1",
-        "timestamp-ms": 1735689600000,
+        "timestamp-us": 1735689600000000,
         "values": [
           {
             "double-value": 33.0

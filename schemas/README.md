@@ -84,15 +84,23 @@ The `.options` bounds support generated example code and embedded C memory
 layout. They are not GEISA protocol limits and do not define universal device
 requirements.
 
-The supported nanopb generator environment is the schemas `venv`. Create or
-refresh it with:
+The embedded C build has two separate nanopb prerequisites:
 
-    make setup-dev
+1. The nanopb Python generator environment. Create or refresh the schemas
+   `venv` with:
 
-The embedded C runtime C files still come from an external nanopb source
-checkout. By default, the Makefile uses `/tmp/nanopb` when it contains the
-required nanopb runtime sources; use `NANOPB_DIR` or `NANOPB_RUNTIME_DIR` to
-point at a different checkout.
+       make setup-dev
+
+   The Makefile uses the schemas `venv` directly when it exists; activating the
+   virtual environment is not required.
+
+2. A nanopb source checkout containing the runtime C sources and headers. By
+   default, the Makefile uses `/tmp/nanopb` when it contains the required
+   runtime sources:
+
+       test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
+
+   Use `NANOPB_DIR` or `NANOPB_RUNTIME_DIR` to point at a different checkout.
 
 The C++ example build target also requires:
 

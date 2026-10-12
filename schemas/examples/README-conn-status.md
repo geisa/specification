@@ -20,10 +20,16 @@ From the `specification/schemas/` directory:
     make clean
     make examples
 
-Building the embedded C conn-status examples with an external nanopb runtime
-checkout:
+Before building the embedded C examples, complete the nanopb setup described in
+`../README.md`: run `make setup-dev` and provide the external nanopb runtime
+source checkout. The schemas `venv` does not need to be activated.
 
-    make examples-conn-status NANOPB_DIR=/path/to/nanopb
+Then build the conn-status examples:
+
+    make examples-conn-status
+
+If the runtime checkout is not under `/tmp/nanopb`, set `NANOPB_DIR` or
+`NANOPB_RUNTIME_DIR` to its location.
 
 Compiled binaries are written to:
 

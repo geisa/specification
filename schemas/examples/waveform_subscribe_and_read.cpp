@@ -82,7 +82,7 @@ namespace {
 
 /*
  * Matches the spec's geisa_waveform_frame header layout:
- *   int64 timestamp_ms
+ *   int64 timestamp_us
  *   uint32 sequence_num
  *   uint32 reserved
  * followed by samples payload
@@ -94,7 +94,7 @@ namespace {
  */
 #pragma pack(push, 1)
 struct GeisaWaveformFrameHeader {
-  int64_t timestamp_ms;
+  int64_t timestamp_us;
   uint32_t sequence_num;
   uint32_t reserved;
 };
@@ -138,12 +138,12 @@ std::string MakeSampleFrameBytes(const GeisaWaveform_Rsp& rsp) {
   // Build one frame for demo mode so parsing can be exercised without
   // a real platform waveform source..
   GeisaWaveformFrameHeader hdr{};
-  hdr.timestamp_ms = 1735689600000LL;
+  hdr.timestamp_us = 1735689600000000LL;
   hdr.sequence_num = 1;
   hdr.reserved = 0;
 
   const uint32_t time_steps =
-      (rsp.sample_rate_hz() * rsp.expected_frame_period_ms()) / 1000;
+      (rsp.sample_rate_hz() * rsp.expected_frame_period_us()) / 1000000;
   const uint32_t channels = rsp.total_channel_count();
   constexpr double kPi = 3.14159265358979323846;
   const double w = 2.0 * kPi * static_cast<double>(rsp.nominal_frequency_hz());
@@ -231,7 +231,7 @@ bool TryRecvOneFrameFromUnixSeqpacket(const std::string& path,
 // Builds the sample response + single sample frame used by `--demo`
 // and `--write-rsp-sample` modes.
 //
-// Frame is 200 ms at 7680 Hz with 1 voltage + 2 current int16 channels,
+// Frame is 200000 us at 7680 Hz with 1 voltage + 2 current int16 channels,
 // approximating a US split-phase 2S meter and is written to `<rsp>.frame`.
 void WriteRspSampleAndFrame(const std::string& rsp_path,
                             const char* program_name) {
@@ -254,7 +254,7 @@ void WriteRspSampleAndFrame(const std::string& rsp_path,
   rsp.set_zero_crossing_aligned(true);
   rsp.set_voltage_scale(0.010359);
   rsp.set_current_scale(0.001220703125);
-  rsp.set_expected_frame_period_ms(200);
+  rsp.set_expected_frame_period_us(200000);
   rsp.set_voltage_filter_lowpass(5000);
   rsp.set_current_filter_lowpass(5000);
 
@@ -460,7 +460,7 @@ void PrintInt16RawAndScaledPreview(const uint8_t* payload,
                                    double voltage_scale,
                                    double current_scale,
                                    uint32_t sample_rate_hz,
-                                   uint32_t expected_frame_period_ms,
+                                   uint32_t expected_frame_period_us,
                                    size_t max_time_steps = 10) {
   if (total_channel_count == 0) {
     std::cout << "total_channel_count=0 (nothing to print)\n";
@@ -474,7 +474,7 @@ void PrintInt16RawAndScaledPreview(const uint8_t* payload,
 
   std::cout << "Interpretation:\n";
   std::cout << "  A time step is one sample instant.\n";
-  std::cout << "  time_steps = sample_rate_hz * frame_period_ms / 1000.\n";
+  std::cout << "  time_steps = sample_rate_hz * frame_period_us / 1000000.\n";
   std::cout
       << "  Typical US split-phase 2S service is 120/240V; demo ch0 "
       << "represents L1-L2 voltage (240 Vrms), ch1=Current leg A (I1), "
@@ -485,10 +485,10 @@ void PrintInt16RawAndScaledPreview(const uint8_t* payload,
       << "(voltage_scale/current_scale).\n";
   std::cout << "  scaled = raw * voltage_scale (V) or raw * "
                "current_scale (A).\n";
-  std::cout << "  timestamp_ms is UTC epoch milliseconds; demo uses a fixed "
+  std::cout << "  timestamp_us is UTC epoch microseconds; demo uses a fixed "
       << "example value.\n";
-  std::cout << "  Frame period " << expected_frame_period_ms << " ms is about "
-            << (static_cast<double>(expected_frame_period_ms) / 1000.0 * 60.0)
+  std::cout << "  Frame period " << expected_frame_period_us << " us is about "
+            << (static_cast<double>(expected_frame_period_us) / 1000000.0 * 60.0)
             << " cycles at 60 Hz.\n";
   std::cout
       << "  Use the min/max summary as a sanity check (demo expectation: "
@@ -619,7 +619,7 @@ void DecodeAndPrintFrame(const std::vector<uint8_t>& frame_bytes,
       frame_bytes.data() + sizeof(GeisaWaveformFrameHeader);
   size_t payload_len = frame_bytes.size() - sizeof(GeisaWaveformFrameHeader);
 
-  std::cout << "frame.timestamp_ms=" << hdr->timestamp_ms << "ms"
+  std::cout << "frame.timestamp_us=" << hdr->timestamp_us << "us"
             << " sequence_num=" << hdr->sequence_num
             << " reserved=" << hdr->reserved
             << " payload_len=" << payload_len << "\n";
@@ -639,7 +639,7 @@ void DecodeAndPrintFrame(const std::vector<uint8_t>& frame_bytes,
       (total_channel_count == 0) ? 0 : (sample_count / total_channel_count);
   std::cout << "frame.summary: time_steps=" << time_steps
             << " sample_rate_hz=" << rsp.sample_rate_hz()
-            << " expected_frame_period_ms=" << rsp.expected_frame_period_ms()
+            << " expected_frame_period_us=" << rsp.expected_frame_period_us()
             << " channel_count=" << total_channel_count << "\n";
 
   switch (sample_type) {
@@ -650,7 +650,7 @@ void DecodeAndPrintFrame(const std::vector<uint8_t>& frame_bytes,
                                     rsp.voltage_scale(),
                                     rsp.current_scale(),
                                     rsp.sample_rate_hz(),
-                                    rsp.expected_frame_period_ms(),
+                                    rsp.expected_frame_period_us(),
                                     10);
       PrintPerChannelRawMinMax<int16_t>(payload, payload_len,
                                         total_channel_count);
