@@ -24,12 +24,22 @@ def set_master_doc(app):
 def setup(app):
     app.connect('builder-inited', set_master_doc)
 
-
-# returns "x.x.x-hhhhhh[-dirty]" as needed
-def geisa_get_release() -> str:
+# read geisa_release.txt to get basic "x.x.x" release string
+# this is used to allow the spec to reference the git tag
+# ideally we'd update this to pull the top entry from the 
+# version history, but that will require more parsing 
+def geisa_get_version() -> str:
     release = "unknown"
     with open ('geisa_release.txt', 'r') as f:
         release = f.read().rstrip()
+
+    return release
+
+# returns "x.x.x-hhhhhh[-dirty]" as needed
+# this is used to allow the spec to include the specific commit
+# ID, so folks know exactly what it was built from
+def geisa_get_release() -> str:
+    release = geisa_get_version()
 
     # append version string with git hash and optionally 'dirty'
     repo = Repo("..")
@@ -44,6 +54,7 @@ project = 'GEISA Specification'
 copyright = 'Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
 author = 'Contributors to GEISA'
 release = geisa_get_release()
+version = geisa_get_version()
 html_title = 'GEISA Specification'
 
 # -- General configuration ---------------------------------------------------
@@ -93,6 +104,8 @@ rst_prolog = f"""
 .. |geisa-conformance-repo| replace::  https://github.com/geisa/conformance
 
 .. |geisa-schemas-repo| replace::  https://github.com/geisa/specification/tree/main/schemas
+
+.. |geisa-spec-version| replace::  v{version}
 
 .. |geisa-ee-logo| image:: /images/geisa-ee-icon.{_icon_ext}
     :alt: GEISA Execution Environment

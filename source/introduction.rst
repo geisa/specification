@@ -79,8 +79,6 @@ applications which run on them.
 When this documentation notes something that is ADM-related, there may be an 
 orchestrator's baton icon |geisa-adm-baton| to highlight it.
 
-|geisa-pyramid|
-
 |geisa-api-hdr|
 
 Application Programming Interface (API) interoperability allows software
@@ -92,8 +90,6 @@ constrained to a specific programming language.
 When this specification notes something that is API related, there may be a 
 gear icon |geisa-api-gear| to highlight it.
 
-|geisa-pyramid|
-
 |geisa-ee-hdr|
 
 Execution Environment (EE) interoperability defines the specific target
@@ -104,8 +100,6 @@ Execution Environment and a Virtual Execution Environment.
 Ocassionaly there are requirements common to both.  When this specification
 discusses execution environments in general, there may be a globe icon
 |geisa-ee-globe| to highlight it.
-
-|geisa-pyramid|
 
 |geisa-lee-hdr|
 
@@ -119,8 +113,6 @@ have to manage variations across different platform implementations.
 When this specification notes something that is LEE related, there may be a Tux 
 icon |geisa-lee-tux| to highlight it.
 
-|geisa-pyramid|
-
 |geisa-vee-hdr|
 
 Virtual Execution Environment (VEE) interoperability allows software developers 
@@ -133,8 +125,6 @@ their respective libraries.
 
 When this specification notes something that is VEE related, there may be a 
 connected cloud icon |geisa-vee-cloud| to highlight it.
-
-|geisa-pyramid|
 
 Vendor implementations of the GEISA specification may not support 
 interoperability in all areas. For example, some vendors may support either a 

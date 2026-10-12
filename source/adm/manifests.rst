@@ -8,8 +8,12 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 
+.. index:: single: Application Manifest
+
 Application Manifests
 _____________________
+
+|geisa-adm-hdr|
 
 GEISA's application management system follows a model similar to `Amazon IoT
 Greengrass <https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html>`_
@@ -172,6 +176,7 @@ GEISA vendor manifests SHALL include:
 
     ToDo: Add details on the signature mechanism.
 
+|geisa-landscape|
 
 Here is an example of an vendor application manifest:
 
@@ -185,4 +190,7 @@ Here is an example of a deployment application manifest:
 .. literalinclude:: ../../schemas/examples/deployment-application-manifest-example.json
    :language: json
    :linenos:
+
+|geisa-pyramid|
+|geisa-landscape-end|
 

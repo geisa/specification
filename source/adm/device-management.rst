@@ -6,8 +6,12 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Device Management
+
 Device Management
 -------------------------------
+
+|geisa-adm-hdr|
 
 Device management within GEISA allows system operators to track, update,
 restart, and reset edge environments.  As discussed under :doc:`registration`,
@@ -147,6 +151,10 @@ an ADM conformant GEISA platform:
 These operations are performed using the following CoAp methods:
 
 |geisa-landscape|
+
+.. Internal Editors Note:  The table below has been split into two because for
+   some reason the LatexPDF renderer cuts off the table otherwise.  Sigh.
+
 
 .. flat-table:: LwM2M CoAp Operations
    :header-rows: 1

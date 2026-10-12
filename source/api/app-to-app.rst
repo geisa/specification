@@ -7,6 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: App-to-App Communication
+
 .. _api-app-to-app:
 
 App-to-App Communication
@@ -28,7 +30,7 @@ GEISA conformant devices implementing the GIESA API pillar are required to imple
    App-to-App communication described in this section is for on-device communication only. Communication between Apps on separate Edge devices is not provided by this API.
 
 
-Platform implementation
+Platform Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Each App installed on a device MUST not know about another App installed or running on the same device unless permission to communicate is given.
@@ -43,6 +45,7 @@ An Application Vendor SHOULD consider a service name for their offered services 
 
 GEISA recommends ``tld.companyname.geisa.servicename`` for services offered by Applications, for example, ``com.example.geisa.summaryservice``.
 
+|geisa-pyramid|
 
 Application Manifest
 ^^^^^^^^^^^^^^^^^^^^
@@ -87,6 +90,7 @@ An `app-to-app` section in the Manifest such as the examples below is added to e
 
 There are up to 4 sections in the Manifest.  `publish` and `respond` are service names this Application is offering, while `subscribe` and `request` are service names of other Applications that this Application will use.
 
+|geisa-pyramid|
 
 Runtime and Dependency Considerations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -95,6 +99,7 @@ A GEISA Application does not know about the existence and runtime status of anot
 
 Dependencies are not enforced by the platform or ADM/EMS such as a requirement that App A can only be installed or run if it App B is also running.  Applications MUST detect and handle missing applications at runtime in this version of GEISA.
 
+|geisa-pyramid|
 
 Security Considerations
 ^^^^^^^^^^^^^^^^^^^^^^^

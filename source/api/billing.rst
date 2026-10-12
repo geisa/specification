@@ -6,13 +6,13 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Billing Data
+
 Billing Data
 ------------
 
 |geisa-api-hdr|
 
-Summary
-========
 Billing Data defines meter-register-style metered quantities that are distinct
 from the continuous Instantaneous Data stream and from Waveform Data. The
 schema-level billing payload is ``GeisaBillingQuantities``.
@@ -27,8 +27,8 @@ Platforms that support Billing Data publish billing snapshots on:
 
 - ``geisa/api/billing/data``
 
-The payload is ``GeisaBillingQuantities``. Billing Data is a platform-to-
-application snapshot stream rather than a high-rate continuous feed.
+The payload is ``GeisaBillingQuantities``. Billing Data is a 
+platform-to-application snapshot stream rather than a high-rate continuous feed.
 Publication cadence is platform-specific and may reflect meter register update
 timing, billing or interval windows, demand interval closure, or platform
 policy.
@@ -40,6 +40,8 @@ window boundaries solely from MQTT delivery time.
 This version defines the Billing Data broadcast topic and payload. It does not
 define a Billing Data request/response transaction, historical query,
 application-selected billing interval, or socketed stream.
+
+|geisa-pyramid|
 
 Billing Payload Model
 =====================
@@ -62,6 +64,8 @@ quadrant-qualified, and apparent-energy values where defined.
 The demand model is used for active, reactive, and apparent demand quantities
 where defined by the schema.
 
+|geisa-pyramid|
+
 Value Semantics
 ===============
 
@@ -81,6 +85,10 @@ Value Semantics
   quantities where defined.
 - Billing quantities remain separate from instantaneous scalar values and
   waveform data.
+- Demand values provide the maximum demand (and the time of that maximum) over
+  the current demand period and will reset if the metered source for the GEISA
+  platform resets.
+ 
 
 .. note::
 
@@ -90,6 +98,8 @@ Value Semantics
    calculation methods are defined, so applications can distinguish the
    calculation basis from the field name rather than relying on a global
    stream-level setting.
+
+|geisa-pyramid|
 
 Profile and Example
 ===================
@@ -105,10 +115,14 @@ The current billing profile requires a billing payload with both
 includes delivered active-energy summation, delivered active-power demand, and
 ``measurement-period-s`` metadata for both sections.
 
+|geisa-pyramid|
+
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
 - Topic: ``geisa/api/billing/data``
+
+|geisa-pyramid|
 
 API Permissions
 ===============
@@ -120,6 +134,8 @@ API Permissions
 - Platform:
 
   - Publish: ``geisa/api/billing/data``
+
+|geisa-pyramid|
 
 Transaction Data
 ================

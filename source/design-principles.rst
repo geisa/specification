@@ -112,6 +112,7 @@ platform-specific directives.
   
 See :doc:`system-architecture` for further discussion.
 
+|geisa-pyramid|
 
 .. index:: single: Constrained Environment
 
@@ -151,6 +152,7 @@ insufficient for some applications.
 Efficiency is critical. The GEISA EE shall provide only those services which 
 are so widely required that it would be less efficient to *not* provide them.
 
+|geisa-pyramid|
 
 .. index:: single: Minimal Implementation
 
@@ -165,6 +167,7 @@ If there is an option that is not needed, then turn it off.  If there is an
 unwanted or un-necessary feature, leave it out.  GEISA should include only what 
 is required.
 
+|geisa-pyramid|
 
 .. index:: single: Extensions
 
@@ -182,6 +185,7 @@ GEISA to retain its `Minimal Implementation`_ design principle, while still
 allowing it to grow to meet the needs of platform vendors, application 
 developers, and system operators.
 
+|geisa-pyramid|
 
 Security
 ^^^^^^^^

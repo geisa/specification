@@ -40,6 +40,9 @@ status and error model documented in :doc:`/api/response-status`.
    description in each API reference section, the API reference section SHALL 
    prevail.
 
+.. index:: single: API Permissions
+
+.. index:: single: API Catalog
 
 API Topic and Permission Catalog
 --------------------------------

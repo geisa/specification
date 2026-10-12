@@ -7,8 +7,12 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Application Messaging
+
 Application Messaging and Configuration
 ---------------------------------------
+
+|geisa-adm-hdr|
 
 GEISA LwM2M Object ``/3600`` provides an app-scoped messaging path for a
 specific application or application instance. Distinct resources are defined

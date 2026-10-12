@@ -6,6 +6,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Sensors
+
 Sensors
 -------
 
@@ -46,22 +48,18 @@ The Sensors API supports two interaction patterns:
 #. publish/subscribe, for platform-driven publication of current sensor
    observations to authorized subscribers
 
-Reporting cadence for published sensor data is determined by platform
-and sensor policy, not independently by each subscribing application.
+Reporting cadence for published sensor data is determined by platform and
+sensor policy, not independently by each subscribing application.
 
 Sensor data access is subject to platform policy, including topic and
 message-bus access control.
-
-Scope
-=====
-
-The Sensors API covers lower-rate, semantically typed sensor observations. It
-does not include waveform or high-frequency streaming sensor types.
 
 Sensor descriptors are discovery-oriented metadata. Runtime readings are
 transported separately from descriptors. A generic runtime value model enables
 support for unknown or future sensors without defining a separate GEISA API for
 every sensor class.
+
+|geisa-pyramid|
 
 Sensor Discovery Model
 ======================
@@ -127,6 +125,10 @@ This approach preserves interoperability across platforms while still
 allowing future and platform-specific sensors to be integrated into the
 system.
 
+|geisa-pyramid|
+
+.. index:: single: Geolocation
+
 Geolocation Metadata
 ====================
 
@@ -145,6 +147,8 @@ Geolocation is descriptor metadata only. It is not currently used as a runtime
 sensor value payload in this version of the specification. Runtime geolocation
 sensor readings may require a structured value model extension in a future
 version of the GEISA specification.
+
+|geisa-pyramid|
 
 Sensor Type Enumeration
 =======================
@@ -188,6 +192,8 @@ interoperability:
 | ``GEISA_SENSOR_TYPE_CUSTOM``           | 500   | Use only when no GEISA-defined type applies   |
 +----------------------------------------+-------+-----------------------------------------------+
 
+|geisa-pyramid|
+
 Runtime Data Model
 ==================
 
@@ -220,6 +226,8 @@ The runtime value model is intentionally generic so that unknown or
 future sensor types can be added without requiring a new GEISA API
 for each sensor class.
 
+|geisa-pyramid|
+
 Sensor Value Model
 ==================
 
@@ -241,6 +249,8 @@ Informational mapping guidance:
 - ``int64_value``: voltage, current, energy
 - ``bool_value``: contact-state, tamper
 - ``string_value``: fallback, vendor-defined, or custom values
+
+|geisa-pyramid|
 
 Read Request and Response
 =========================
@@ -275,6 +285,8 @@ For example, a platform may expose:
 - ``ambient_temp1`` with ``sensor_type`` set to
   ``GEISA_SENSOR_TYPE_TEMPERATURE`` and engineering unit ``Cel``
 
+|geisa-pyramid|
+
 MQTT Details
 ============
 
@@ -288,6 +300,8 @@ MQTT Details
    In the topic definitions, ``<userid>`` refers to the platform-local
    identifier of the requesting GEISA application instance (see :doc:`/glossary`
    for additional information).
+
+|geisa-pyramid|
 
 API Permissions
 ===============
@@ -304,6 +318,8 @@ API Permissions
   - Subscribe: ``geisa/api/sensor/req/#``
   - Publish: ``geisa/api/sensor/rsp/<userid>``
 
+|geisa-pyramid|
+
 Transaction Data
 ================
 
@@ -316,6 +332,8 @@ Transaction Data
 
 as defined in |geisa-schemas-repo|
 
+|geisa-pyramid|
+
 Notes
 =====
 
@@ -327,6 +345,8 @@ Notes
   of multi-value readings are not yet self-describing in the schema.
 - Some sensor types, such as geolocation, may require richer structured runtime
   value support in future versions of the GEISA specification.
+
+|geisa-pyramid|
 
 References
 ==========

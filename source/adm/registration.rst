@@ -5,8 +5,12 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Registration
+
 Registration
 -----------------------
+
+|geisa-adm-hdr|
 
 GEISA ADM conformant devices SHALL attempt to register with a GEISA conformant
 edge management system on startup.  Registration uses the LwM2M `Client Registration

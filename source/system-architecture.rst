@@ -9,9 +9,6 @@
 System Architecture
 -------------------
 
-General Architecture
-====================
-
 As discussed in :doc:`introduction`, the |GEISA| specification describes 
 four types of interoperability: ADM, API, LEE, and VEE.  
 These types of interoperability live in a general system context, which is 
@@ -51,14 +48,12 @@ EMA functions within other elements of their platform as they see fit.
 GEISA ADM elements |geisa-adm-baton| are shown in red in 
 :numref:`geisa-architecture` above.
 
-|geisa-pyramid|
+|geisa-ee-hdr|
 
 The system operator is able to use the GEISA EMS to deploy and activate GEISA 
 edge applications to GEISA platform implementations.  A fully conformant GEISA 
 platform implementation will provide both a GEISA-conformant EE / execution 
 environment and a GEISA-conformant API / application programming interface.
-
-|geisa-ee-hdr|
 
 GEISA defines two different execution environments:
 
@@ -102,8 +97,6 @@ excise any unnecessary system components and/or services.
 GEISA LEE elements |geisa-lee-tux| are shown in blue in :numref:`geisa-architecture` 
 above.
 
-|geisa-pyramid|
-
 |geisa-vee-hdr|
 
 VEE GEISA applications are provided as loadable VEE archives, as detailed in 
@@ -119,8 +112,6 @@ required by the GEISA specification.
 
 Note that GEISA VEE elements |geisa-vee-cloud| are not currently shown in 
 :numref:`geisa-architecture` above.
-
-|geisa-pyramid|
 
 |geisa-api-hdr|
 
@@ -213,6 +204,8 @@ ensure that:
    deployment choice, rather than something facilitated within the
    specification.
 
+|geisa-pyramid|
+
 .. index:: single: Application Manifest
 
 Application Manifest
@@ -224,8 +217,12 @@ application manifest, even if their underlying implementation is substantially
 different.  Application manifests are documented in :doc:`adm/manifests`.
 
 
-Networking Control
-^^^^^^^^^^^^^^^^^^
+|geisa-pyramid|
+
+.. index:: single: Networking Controls
+
+Networking Controls
+^^^^^^^^^^^^^^^^^^^
 
 The AII must control access to the network interface.  By default, applications 
 are not granted any network access.  The application manifest may indicate that 
@@ -247,14 +244,20 @@ The AII shall control:
 .. 
     Internal GEISA ToDo for 1.1: Define instantaneous bandwidth limits.
 
+|geisa-pyramid|
 
-API Control
-^^^^^^^^^^^
+.. index:: single: API Controls
+
+API Controls
+^^^^^^^^^^^^
 
 These permissions relate to controlling application access to the GEISA API
 provided by the platform.  See :doc:`api` for details.  Each defined API shall
 have its own set of permissions.
 
+|geisa-pyramid|
+
+.. index:: single: Resource Management
 
 Resource Management
 ^^^^^^^^^^^^^^^^^^^^^^^

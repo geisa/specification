@@ -8,6 +8,7 @@
    https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-waveform-data:
+.. index:: single: Waveform
 
 Waveform Data
 =============
@@ -56,6 +57,8 @@ platform-supplied informational metadata intended for display, diagnostics, or
 logging. Applications SHALL NOT rely on these fields for interoperability
 behavior.
 
+|geisa-pyramid|
+
 Device Capabilities
 -------------------
 
@@ -71,6 +74,7 @@ A waveform stream descriptor SHALL include:
   or ``float64``.
 - The number of voltage channels present in each sample index.
 - The number of current channels present in each sample index.
+- The number of other channels present in each sample index (if used).
 - The total number of channels present in each sample index. This SHALL
   equal voltage-channel-count plus current-channel-count plus
   other-channel-count (if used).
@@ -79,6 +83,7 @@ A waveform stream descriptor SHALL include:
 - The waveform ``nominal-frequency-hz`` when applicable.
 - Whether frames are ``cycle-aligned``.
 - Whether frames are ``zero-crossing-aligned``.
+- Whether DC error / offset has been removed.
 - Optional integer-sample ``voltage-scale`` and ``current-scale`` values.
 - The expected frame delivery period in microseconds.
 
@@ -110,6 +115,8 @@ the corresponding samples in other channels for that sample index.
 :doc:`/api/discovery` SHALL expose only static waveform descriptor metadata. 
 Runtime access handles such as socket paths SHALL NOT be included in
 :doc:`/api/discovery`.
+
+|geisa-pyramid|
 
 API Request Response
 --------------------
@@ -164,6 +171,9 @@ only describes frame duration.
 The ``sample-rate-hz`` value is the authoritative samples-per-second value.
 The ``samples-per-cycle`` value is a nominal descriptor and applications SHALL
 interpret it together with the stream alignment fields and platform metadata.
+
+|geisa-pyramid|
+.. index:: single: Waveform Data Format
 
 Data Format
 -----------
@@ -228,8 +238,9 @@ Samples SHALL be packed in channel-interleaved order per index. For each
 sample index, all channel values SHALL be present, and channel ordering SHALL be
 stable and consistent for a given stream.
 
-Within each index, voltage channels are listed first, followed by current channels,
-using the stable channel ordering described by the stream metadata:
+Within each index, voltage channels are listed first, followed by current
+channels, followed by other channels (if present), using the stable channel
+ordering described by the stream metadata:
 
 - Time index 0
 
@@ -309,12 +320,29 @@ values are IEEE 754 encoded.
 
 For integer sample formats (``int16``, ``int32``), scaling factors SHALL be
 applied as defined by the ``voltage-scale`` and ``current-scale`` metadata
-values. For floating-point formats (``float32``, ``float64``), scaling factors
-SHOULD be omitted or set to ``1.0``.
+values. The scaling factor allows the real voltage and curent values to be
+mapped to an integer range for data capture purposes, avoiding the overhead of
+floating-point operatings during data acquisition and transmission. For
+example, a voltage scaling factor of 0.01 would mean that each int16 sample
+would support a range of -327.67 volts to 327.67 volts in 0.01 volt increments.
+The appropriate scaling factor will depend on what the range of values the
+device is capable of capturing, and the capture resolution desired.  After
+applying scaling factors, the resulting values SHALL be in units of Volts or
+Amps for voltage and current channels respectively. 
+
+For floating-point formats (``float32``, ``float64``), scaling factors SHOULD
+be omitted or set to ``1.0``.  
+
+Voltage waveform for any frame containing a whole number of cycles SHOULD
+average to zero if the metadata indicates that DC error / offset has been
+removed.  Otherwise, an application MAY need to perform offset correction
+itself. 
 
 The defined frame structure and waveform metadata allow an application to
 decode waveform data using only the GEISA API and this specification, without
-vendor- or platform-specific handling.
+vendor-specific or platform-specific handling.
+
+|geisa-pyramid|
 
 MQTT Details
 ------------
@@ -322,6 +350,8 @@ MQTT Details
 - QoS: 1 / Acknowledged R/R
 - Req Topic: ``geisa/api/waveform/req/<userid>``
 - Rsp Topic: ``geisa/api/waveform/rsp/<userid>``
+
+|geisa-pyramid|
 
 API Permissions
 ---------------
@@ -341,6 +371,8 @@ API Permissions
   - Wildcard Subscribe: ``geisa/api/waveform/req/#``
   - Publish: ``geisa/api/waveform/rsp/<userid>``
 
+|geisa-pyramid|
+
 Transaction Data
 ----------------
 
@@ -348,6 +380,8 @@ Transaction Data
 - ``GeisaWaveform_Rsp``
 
 As defined in ``schemas/waveform.proto``
+
+|geisa-pyramid|
 
 Examples
 --------

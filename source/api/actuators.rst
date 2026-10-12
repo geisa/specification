@@ -6,13 +6,14 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Actuator Status
+
+.. index:: single: Actuator Control
+
 Actuator Status & Control
 =========================
 
 |geisa-api-hdr|
-
-Summary
--------
 
 The actuator API allows authorized applications to query actuator state and
 request actuator state changes.
@@ -36,6 +37,8 @@ This API defines message structure and request/response behavior. It does not
 define detailed utility switching workflows, sequencing, tariff behavior,
 customer notice behavior, or physical interlock behavior.
 
+|geisa-pyramid|
+
 Actuator Targets
 ----------------
 
@@ -51,6 +54,8 @@ Future versions of this specification may add additional actuator types as
 appropriate, especially as GEISA is expanded to support distribution automation
 devices.
 
+|geisa-pyramid|
+
 Getting Actuator Status
 -----------------------
 
@@ -63,6 +68,8 @@ The platform responds with ``GeisaActuatorGet_Rsp`` on:
 ``geisa/api/actuator/get/rsp/<userid>``
 
 The response includes ``GeisaStatus`` and ``GeisaActuatorStatus`` values.
+
+|geisa-pyramid|
 
 Setting Actuator State
 ----------------------
@@ -80,6 +87,8 @@ The platform responds with ``GeisaActuatorSet_Rsp`` on:
 The response status indicates request outcome. A set response does not by
 itself guarantee completed physical motion; applications should query current
 status after a request when confirmation of state is required or desired.
+
+|geisa-pyramid|
 
 MQTT Details
 ------------
@@ -102,6 +111,8 @@ Set:
    identifier of the requesting GEISA application instance (see :doc:`/glossary` for
    additional information).
 
+|geisa-pyramid|
+
 API Permissions
 ---------------
 
@@ -118,6 +129,8 @@ Platform permissions:
 - Wildcard Subscribe ``geisa/api/actuator/set/req/#``
 - Publish ``geisa/api/actuator/get/rsp/<userid>``
 - Publish ``geisa/api/actuator/set/rsp/<userid>``
+
+|geisa-pyramid|
 
 Transaction Data
 ----------------
@@ -139,6 +152,8 @@ Note that JSON examples and JSON schema are human-readable schema
 representations, while runtime API payloads are protobuf.
 
 Reference: defined in |geisa-schemas-repo|
+
+|geisa-pyramid|
 
 Notes
 -----

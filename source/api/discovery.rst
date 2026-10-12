@@ -8,6 +8,7 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-platform-discovery:
+.. index:: single: Platform Discovery
 
 Platform Discovery
 ------------------
@@ -82,6 +83,8 @@ determine the realized hardware and software environment available on the device
    #. the GEISA API implementation
    #. the GEISA platform runtime environment in use, such as LEE or VEE where implemented
 
+|geisa-pyramid|
+
 Application Information
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -90,6 +93,9 @@ Application Manifest originally supplied by the application vendor,
 applications MUST be able to retrieve their own current Application Deployment
 Manifest as described in :doc:`/adm/manifests`.
 
+|geisa-pyramid|
+
+.. index:: single: Metrology Hardware
 
 Metrology Hardware
 ^^^^^^^^^^^^^^^^^^
@@ -103,6 +109,9 @@ For Meter type devices, the platform MUST provide at a minimum:
 - Nominal Frequency
 - Nominal Phase-to-Phase and Phase-to-Neutral Voltage (when applicable)
 
+|geisa-pyramid|
+
+.. index:: single: Sensor Hardware
 
 Sensor Hardware
 ^^^^^^^^^^^^^^^
@@ -125,19 +134,65 @@ applications can enumerate which sensors exist on the platform at startup.
 Runtime sensor readings and application-directed sensor queries are defined by
 the Sensors API (:doc:`/api/sensors`).
 
+|geisa-pyramid|
+
+.. index:: single: Network Hardware
+
 Network Hardware
 ^^^^^^^^^^^^^^^^
 
-.. admonition:: Status: Reserved for Future Definition
-   :class: tbd-section
+This version of the GEISA specification provides information
+regarding the network interfaces supported by the platform, but only at an
+abstract level.  Details like maximum transmission units, data rates, or
+specific technologies are not provided.  GEISA network discovery provides
+details on the class of network, the owner of the network, and the type of
+technology.  These may be useful for applications to tune the type and/or
+volume of data that they transmit over interfaces they been granted permission
+to use.
 
-   Network hardware discovery remains reserved for future definition.
+``NetworkClass`` specifies whether a network is a ``local``, ``operator``, or
+``internet`` network.  ``operator`` networks are assumed to be controlled by
+the system operator (typically a utility or DSO).  ``local`` networks are local
+to the deployed device and often used for interactions with other devices, such
+as smart inverters or EVSE.  ``internet`` networks provide access to the public
+internet, and may be useful for accessing cloud services.
 
-   Implementations SHALL NOT assume behavior, interface, or data structure
-   beyond what is explicitly defined elsewhere in this specification.
+``NetworkOwner`` specifies whether a network is owned by the system operator, a
+consumer or a third party.  The distinction between system operator and third
+party may be helpful so that applications can moderate their network usage on
+public carrier networks which may have pay-per-byte rates or usage caps.
+Similarly, applications may have logic to limit the volumes or types of data
+sent over consumer networks.  
 
-   The Application SHALL assume that network permissions and volume restrictions 
-   described in it's Deployment Manifest are valid and realizable on the device 
+``NetworkTechnology`` specifies the general type of network technology is use.
+These include:
+
+-   Radio Frequency Mesh
+-   Cellular
+-   Ethernet
+-   Fiber
+-   WiFi
+-   Power Line Carrier
+
+Because these technologies can have quite different data rates,
+``NetworkTechnology`` should not inform application behaviors with respect to
+data rates.  Typically, the system operator will set appropriate per
+application quotas in the application manifest, which the application should
+use to determine its network communication strategy.  ``NetworkTechnology`` is
+more useful for determining things like message retry strategies.
+
+Each ``Network_Instance`` provided through :doc:`/api/discovery` also includes
+whether the interface supports IPv4, IPv6, or both, as well as optional names
+and descriptions for the available interfaces.
+
+Implementations SHOULD NOT assume behavior, interfaces, or data structures
+beyond what is explicitly defined in this specification.  Applications SHALL
+assume that network permissions and volume restrictions described in its
+Deployment Manifest are valid and realizable on the device. 
+
+|geisa-pyramid|
+
+.. index:: single: Waveform
 
 Waveform Discovery
 ^^^^^^^^^^^^^^^^^^
@@ -153,6 +208,9 @@ parsing the stream identifier.
 Runtime access details and application-specific state are defined by 
 the :doc:`/api/waveform` API.
 
+|geisa-pyramid|
+
+.. index:: single: Application Manifest
 
 Application Deployment Manifest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -176,6 +234,7 @@ a manifest change.
   over another mechanism such as the application message based communication with
   the ADM system.
 
+|geisa-pyramid|
 
 MQTT Details
 ============

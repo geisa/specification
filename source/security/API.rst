@@ -59,20 +59,20 @@ allows the :term:`System Operator` to determine which APIs an application is
 allowed to access.  As of this version of the GEISA specification, the
 deployment manifest supports six API controls:
 
-- actuator-status: Allows applications to read the status of actuators
+- actuator-status: Allows applications to read the status of actuators.
 
-- actuator-control: Allows applications to control actuators
+- actuator-control: Allows applications to control actuators.
 
 - instantaneous: Allows applications to obtain instantaneous readings & billing
   data.  (These may be split into separate permissions in future versions of the
   specification).
 
 - messaging: Allows applications to send and receive application messages
-  (limited by the application's message allocation)
+  (limited by the application's message allocation).
 
-- sensor: Allows applications to read sensor data
+- sensor: Allows applications to read sensor data.
 
-- waveform: Allows applications to read waveform data
+- waveform: Allows applications to read waveform data.
 
 Applications always have access to the :doc:`/api/discovery` and :doc:`/api/status` APIs.
 

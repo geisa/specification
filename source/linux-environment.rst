@@ -25,6 +25,8 @@ LEE conformant platforms will provide a consistent:
 * :doc:`lee/core-services`
 * :doc:`lee/file-layout`
 
+|geisa-pyramid|
+
 .. toctree::
   :hidden:
 

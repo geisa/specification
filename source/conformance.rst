@@ -26,22 +26,22 @@ specific GEISA specification version for one or more GEISA interoperability
 pillars:
 
 .. list-table:: GEISA Conformance Pillars
-   :widths: 10 35 55
+   :widths: 12 35 55
    :header-rows: 1
 
    * - Pillar
      - Test domain
      - Broad scope
-   * - ADM
+   * - ADM |geisa-adm-baton|
      - GEISA platform/EMA, EMS, or both in their declared roles
      - LwM2M transactions, required objects, management and lifecycle behavior
-   * - API
+   * - API |geisa-api-gear|
      - Platform-provided GEISA API implementation
      - Topics, payloads, request/response behavior, permissions, and platform/application interaction
-   * - LEE
+   * - LEE |geisa-lee-tux|
      - Platform execution environment
      - Linux environment, libraries, filesystem, isolation, and required execution behavior
-   * - VEE
+   * - VEE |geisa-vee-cloud|
      - Platform virtual execution environment
      - Runtime, libraries, isolation, and defined managed execution behavior;
        automated conformance coverage is planned
@@ -103,6 +103,10 @@ Application certification may cover:
 
 Refer to :doc:`operations` for more on Application Certification.
 
+|geisa-pyramid|
+
+.. index:: single: Conformance Test 
+
 Conformance Test Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -115,6 +119,8 @@ The GEISA conformance test suite is Apache-2.0 licensed and:
 - may be used in development, integration labs, procurement evaluation, and
   for regression testing or other related purposes
 
+|geisa-pyramid|
+
 Validation Tools
 ^^^^^^^^^^^^^^^^
 
@@ -124,6 +130,8 @@ The ADM tests are designed to work with compatible LwM2M server and client
 implementations, rather than being tied to specific Leshan or Wakaama
 versions.
 
+|geisa-pyramid|
+
 Running the Conformance Tests
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -131,6 +139,8 @@ The conformance test suite may be run manually from a Linux host or through
 continuous integration using a configured runner and target. Detailed
 information on installing, configuring, and running the test suite in a
 user's environment is provided in the `Conformance README`_.
+
+|geisa-pyramid|
 
 Conformance Test Coverage
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -148,6 +158,8 @@ The project intends to expand coverage across all pillars. At the time of
 writing, LEE and API coverage are the most mature, followed by ADM. VEE
 coverage is planned and remains the least complete at this time.
 
+|geisa-pyramid|
+
 Contributing or Reporting Issues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -158,6 +170,8 @@ If issues are encountered while running the suite, or if gaps or incorrect
 behaviors are found, open an issue in `GitHub issues`_. Include the test-suite
 version, pillar being evaluated, operating system and version, relevant system
 configuration, and enough detail to reproduce the problem.
+
+|geisa-pyramid|
 
 Other Resources
 ^^^^^^^^^^^^^^^

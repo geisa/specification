@@ -115,6 +115,8 @@ The GEISA API defines APIs for the following purposes:
   Additional transaction sets may be added in future versions of the GEISA
   specification.
 
+|geisa-pyramid|
+
 .. toctree::
    :hidden:
 

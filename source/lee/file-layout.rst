@@ -7,8 +7,12 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: File Layout
+
 Base Filesystem
 ---------------
+
+|geisa-lee-hdr|
 
 A GEISA LEE |geisa-lee-tux| container provides the following minimum filesystem
 within each AII environment.  The container filesystem contents may be derived
@@ -77,12 +81,14 @@ mounts within the container environment:
   - MUST be persistent across application restarts and device reboots
   - Platform SHALL be responsible for metadata integrity (journaling, startup 
     checks, etc...)
-  - Application SHALL be tolerant to data corruption and missing files
+  - Applications SHALL be tolerant to data corruption and missing files
 
 .. note::
 
    Detailed persistent-storage metadata-integrity requirements are under
    discussion and may be expanded in a future specification version.
+
+|geisa-pyramid|
 
 Utilities and Environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,6 +151,8 @@ Applications processes:
 - USER
 - PATH
 
+|geisa-pyramid|
+
 GEISA Components
 ^^^^^^^^^^^^^^^^
 
@@ -153,6 +161,7 @@ running on and as such can expect certain GEISA specific configuration to be
 present.  As explained in :doc:`/api/architecture` and :doc:`/api/discovery`
 these files are placed in ``/etc/geisa`` within the container environment.
 
+|geisa-pyramid|
 
 Base Libraries
 ^^^^^^^^^^^^^^
@@ -160,6 +169,7 @@ Base Libraries
 A set of base libraries SHALL be provided in the base filesystem.
 See :doc:`base-libraries` for further details.
 
+|geisa-pyramid|
 
 Construction of the Filesystem
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -192,6 +202,8 @@ When an Application is stopped and restarted (or device rebooted), the
 platform MAY re-construct the filesystem including deletion of any 
 non-persistent files while the persistant files (in `/home/geisa`)
 MUST be preserved.
+
+|geisa-pyramid|
 
 Example Filesystem Construction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

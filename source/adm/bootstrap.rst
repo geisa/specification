@@ -10,6 +10,8 @@
 Bootstrapping
 -------------
 
+|geisa-adm-hdr|
+
 As discussed in the LwM2M core specification [LwM2M-Core]_ section 6.1, there
 are four ways to bootstrap a device so that it knows how to contact its LwM2M
 server for management:
@@ -66,3 +68,6 @@ Future versions of the specification may require DNS-SD, DHCP Options, and/or
 well known DNS names (e.g. geisa-ra).  Mechanisms like *Manufacturer-Signed CA
 Certificate Distribution for EST and EST-coaps Deployments* [MITTAL]_ are also
 under consideration.
+
+|geisa-pyramid|
+

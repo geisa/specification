@@ -221,4 +221,8 @@ message GeisaWaveform_Rsp {
   int32 voltage_filter_highpass = 81;
   int32 current_filter_lowpass = 82;
   int32 current_filter_highpass = 83;
+
+  // ----- Optional data quality metadata (100-119) ----
+  bool dc_offset_removed = 100;
+   
 }
