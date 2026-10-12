@@ -25,24 +25,24 @@ python: $(PYTHON_STAMP)
 # Supported language/binding generation only. No example binaries here.
 langs: cpp java python
 
-$(BINPBDIR)/%.binpb: %.proto
+$(BINPBDIR)/%.binpb: %.proto | check-protoc
 	@mkdir -p $(@D)
 	$(PROTOC) $(PROTOC_FLAGS) -I. -o $@ $<
 
-$(CDIR)/%.pb-c.c $(CDIR)/%.pb-c.h: %.proto
+$(CDIR)/%.pb-c.c $(CDIR)/%.pb-c.h: %.proto | check-protoc
 	@mkdir -p $(CDIR)
 	$(PROTOC) $(PROTOC_FLAGS) --c_out=$(CDIR) $<
 
-$(CPPDIR)/%.pb.cc $(CPPDIR)/%.pb.h: %.proto
+$(CPPDIR)/%.pb.cc $(CPPDIR)/%.pb.h: %.proto | check-protoc
 	@mkdir -p $(CPPDIR)
 	$(PROTOC) $(PROTOC_FLAGS) --cpp_out=$(CPPDIR) $<
 
-$(JAVA_STAMP): $(PROTOS)
+$(JAVA_STAMP): $(PROTOS) | check-protoc
 	@mkdir -p $(JAVADIR)
 	$(PROTOC) $(PROTOC_FLAGS) --java_out=$(JAVADIR) $(PROTOS)
 	@touch $@
 
-$(PYTHON_STAMP): $(PROTOS)
+$(PYTHON_STAMP): $(PROTOS) | check-protoc
 	@mkdir -p $(PYTHONDIR)
 	$(PROTOC) $(PROTOC_FLAGS) --python_out=$(PYTHONDIR) $(PROTOS)
 	@touch $@

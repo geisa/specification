@@ -64,7 +64,7 @@ help:
 
 .DELETE_ON_ERROR:
 
-.PHONY: help Makefile clean all prep license-rst license-check schemas schemas-all schemas-clean schemas-lint lint setup-dev $(SPHINXTARGETS)
+.PHONY: help Makefile clean all prep license-rst license-check schemas schemas-all schemas-clean schemas-lint schemas-examples schemas-examples-c schemas-demos lint setup-dev $(SPHINXTARGETS)
 
 clean:
 	rm -f $(IMAGEPDF)
@@ -93,6 +93,15 @@ schemas-clean:
 
 schemas-lint:
 	cd schemas && npm run lint
+
+schemas-examples:
+	$(MAKE) -C schemas examples
+
+schemas-examples-c:
+	$(MAKE) -C schemas examples-c
+
+schemas-demos:
+	$(MAKE) -C schemas demos
 
 lint:
 	npm run lint:md
