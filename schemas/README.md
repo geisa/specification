@@ -51,6 +51,18 @@ The schemas build targets assume these tools are available on `PATH`:
 - `make`
 - `protoc` (Protocol Buffers compiler)
 
+`protoc` is a host build dependency and is not installed by `make setup-dev`.
+For example:
+
+    # Ubuntu/Debian
+    sudo apt install protobuf-compiler
+
+    # macOS with MacPorts
+    sudo port install protobuf
+
+    # macOS with Homebrew
+    brew install protobuf
+
 Linting uses Node.js and `npm`. Install the schemas Node dependencies before
 running lint commands:
 
@@ -108,6 +120,10 @@ The C++ example build target also requires:
 - `pkg-config`
 - protobuf development headers and libraries discoverable through
   `pkg-config protobuf`
+
+On Ubuntu/Debian, the protobuf development package is typically installed with:
+
+  sudo apt install libprotobuf-dev pkg-config
 
 The legacy C generation target (`make c`) requires protobuf-c support,
 including `protoc-gen-c` on `PATH`. It is a best-effort generator path and is

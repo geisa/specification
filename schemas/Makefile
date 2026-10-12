@@ -50,13 +50,14 @@ NANOPB_RUNTIME_DIR_EFFECTIVE := $(strip $(NANOPB_RUNTIME_DIR))
 NANOPB_VENV_SITE_PACKAGES := $(firstword $(wildcard $(CURDIR)/venv/lib/python*/site-packages))
 NANOPB_GENERATOR_MODULE ?= $(if $(NANOPB_VENV_SITE_PACKAGES),nanopb.generator.nanopb_generator,)
 
-PROTOC_VERSION := $(shell $(PROTOC) --version | awk '{print $$2}')
+PROTOC_VERSION = $(shell $(PROTOC) --version | awk '{print $$2}')
 PROTOC_FLAGS ?=
-ifeq ($(shell printf "3.12.0\n$(PROTOC_VERSION)\n" | sort -V | head -n1),3.12.0)
-  ifneq ($(shell printf "$(PROTOC_VERSION)\n3.15.0\n" | sort -V | head -n1),3.15.0)
-    PROTOC_FLAGS += --experimental_allow_proto3_optional
-  endif
-endif
+PROTOC_FLAGS += $(shell \
+	version="$(PROTOC_VERSION)"; \
+	if [ "$$(printf "3.12.0\n%s\n" "$$version" | sort -V | head -n1)" = "3.12.0" ] && \
+	   [ "$$(printf "%s\n3.15.0\n" "$$version" | sort -V | head -n1)" != "3.15.0" ]; then \
+	  printf '%s' --experimental_allow_proto3_optional; \
+	fi)
 PROTOC_OPTS ?= $(PROTOC_FLAGS)
 PROTOBUF_CFLAGS := $(shell pkg-config --cflags protobuf 2>/dev/null)
 PROTOBUF_LIBS := $(shell pkg-config --libs protobuf 2>/dev/null)
@@ -64,6 +65,12 @@ PROTOBUF_LIBS := $(shell pkg-config --libs protobuf 2>/dev/null)
 include mk/proto.mk
 include mk/nanopb.mk
 include mk/examples.mk
+
+check-protoc:
+	@command -v "$(PROTOC)" >/dev/null 2>&1 || { \
+	  printf '%s\n' 'Missing required host tool: protoc. Install protoc and ensure it is available on PATH.'; \
+	  exit 1; \
+	}
 
 all: proto-descriptors examples
 
@@ -109,4 +116,4 @@ help:
 clean:
 	rm -rf $(BUILDDIR)
 
-.PHONY: all setup-dev help clean
+.PHONY: all setup-dev help clean check-protoc
