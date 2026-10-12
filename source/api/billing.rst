@@ -11,8 +11,6 @@ Billing Data
 
 |geisa-api-hdr|
 
-Summary
-========
 Billing Data defines meter-register-style metered quantities that are distinct
 from the continuous Instantaneous Data stream and from Waveform Data. The
 schema-level billing payload is ``GeisaBillingQuantities``.
@@ -27,8 +25,8 @@ Platforms that support Billing Data publish billing snapshots on:
 
 - ``geisa/api/billing/data``
 
-The payload is ``GeisaBillingQuantities``. Billing Data is a platform-to-
-application snapshot stream rather than a high-rate continuous feed.
+The payload is ``GeisaBillingQuantities``. Billing Data is a 
+platform-to-application snapshot stream rather than a high-rate continuous feed.
 Publication cadence is platform-specific and may reflect meter register update
 timing, billing or interval windows, demand interval closure, or platform
 policy.
@@ -81,6 +79,10 @@ Value Semantics
   quantities where defined.
 - Billing quantities remain separate from instantaneous scalar values and
   waveform data.
+- Demand values provide the maximum demand (and the time of that maximum) over
+  the current demand period and will reset if the metered source for the GEISA
+  platform resets.
+ 
 
 .. note::
 

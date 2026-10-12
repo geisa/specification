@@ -104,7 +104,7 @@ implemented.
 
     * ``/3603`` -- Wi-SUN Radio Management
 
-GEISA ADM Object-version baseline
+GEISA ADM Object-Version Baseline
 =================================
 
 The following Object versions form the fixed GEISA 1.0 ADM baseline. Where an

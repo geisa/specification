@@ -14,9 +14,12 @@ To facilitate clean and regular updates and to minimize container sizes, GEISA
 applications are encouraged to take advantage of libraries provided by the base
 GEISA environment whenever possible.
 
-GEISA defines a baseline set of runtime and application libraries provided by
-the platform for use within the GEISA execution environment. Applications MAY
-include additional libraries that are not part of this baseline.
+The GEISA API is defined at the protocol / transaction level and does not
+mandate a specific application SDK, programming language, or application
+implementation.  GEISA does define a baseline set of runtime and application
+libraries provided by the platform for use within the GEISA Linux Execution
+Environment. Applications MAY include additional libraries that are not part of
+this baseline.
 
 C Language and Toolchain-provided Runtime Libraries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -77,9 +80,8 @@ needed.
    `Third-Party Add-ons for Protocol Buffers
    <https://github.com/protocolbuffers/protobuf/blob/main/docs/third_party.md>`_.
 
-   The GEISA API is defined at the protocol level and does not mandate a
-   specific application SDK, programming language, or application
-   implementation.
+
+.. note::
 
    While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication,
    GEISA Applications are unaware of this and do not require any LwM2M client

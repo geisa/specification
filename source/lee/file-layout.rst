@@ -77,7 +77,7 @@ mounts within the container environment:
   - MUST be persistent across application restarts and device reboots
   - Platform SHALL be responsible for metadata integrity (journaling, startup 
     checks, etc...)
-  - Application SHALL be tolerant to data corruption and missing files
+  - Applications SHALL be tolerant to data corruption and missing files
 
 .. note::
 

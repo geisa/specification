@@ -108,6 +108,12 @@ Glossary
    DTLS
     Data Transport Layer Security
 
+   DNS
+    Domain Name Service
+
+   EVSE
+    Electric Vehicle Supply Equipment
+
    FAN
     Field Area Network, generally owned/operated by the Utility or Operator.
     Sometimes referred to as AMI network.
@@ -191,16 +197,29 @@ Glossary
    OS
     Operating System
 
-   Platform Provider
-    Role responsible for supplying platform hardware, platform software,
-    and associated platform trust material where applicable.
+   PII
+    Personally Indentifiable Information
+
+    PII is a term used to refer to sensitive personal information, such a
+    person's name, address, phone number, and government identification number.
+    GEISA does not explicitly address PII, as it policies and definitions may
+    vary by jurisdiction, but some GEISA applications may process, store, or
+    exchange PII.
+    
 
    PKI
     Public Key Infrastructure
 
+   Platform 
+    See :term:`Platform Implementation`
+
    Platform Implementation
     A combination of hardware and software which provides one or more
     GEISA conformant interfaces (ADM, API, EE).
+ 
+   Platform Provider
+    Role responsible for supplying platform hardware, platform software,
+    and associated platform trust material where applicable.
 
    POSIX
     `Portable Operating System Interface
@@ -224,6 +243,9 @@ Glossary
     Role with the authority to set policies for a specific deployment
     environment.  Typically, the owner of the GEISA-managed devices and
     applications. 
+
+   TLD
+    Top Level Domain
 
    Vendor Application Manifest
     Publisher-supplied application manifest provided with an application

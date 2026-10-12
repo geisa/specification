@@ -15,20 +15,6 @@ Virtual Base Libraries
 GEISA does not specify which virtual runtime to use for the managed-code 
 memory-safe languages.
 
-For Java |reg|, a GEISA conformant VEE MUST include support for the following 
-class libraries:
-
- * java.io
- * java.lang
- * java.lang.annotation
- * java.lang.ref
- * java.lang.reflect
- * java.util
- * org.eclipse.paho.client.mqttv5
- * com.google.protobuf
-
-Additional libraries may be provided by platforms if desired.
-
 For C and C++, a GEISA conformant VEE MUST provide support for standard libc C 
 library with the exception of OS-specific or non-sandbox-friendly functions
 such as ``fork()``/``exec()``, process control, and signals. 
@@ -47,6 +33,20 @@ The following APIs MUST be supported:
   ``pthread_attr_setstacksize``, ``pthread_attr_destroy``
 * **Semaphores:** ``sem_wait``, ``sem_post``, ``sem_destroy``
 * **C++ Standard Library**
+
+When Java |reg| is supported, a GEISA conformant VEE MUST include support for the following 
+class libraries:
+
+ * java.io
+ * java.lang
+ * java.lang.annotation
+ * java.lang.ref
+ * java.lang.reflect
+ * java.util
+ * org.eclipse.paho.client.mqttv5
+ * com.google.protobuf
+
+Additional libraries may be provided by platforms if desired.
 
 .. note::
   

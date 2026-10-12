@@ -11,9 +11,6 @@ Actuator Status & Control
 
 |geisa-api-hdr|
 
-Summary
--------
-
 The actuator API allows authorized applications to query actuator state and
 request actuator state changes.
 

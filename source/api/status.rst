@@ -58,6 +58,7 @@ notifications for:
 - Power Loss (running on backup power)
 - Reboot Scheduled
 - Shutdown Scheduled
+- Time Adjustment
 
 When an application receives one of these updates it MAY take an action but
 SHALL continue operating until a separate application shutdown request is
@@ -116,6 +117,23 @@ The timestamp SHALL be expressed as UTC epoch time in milliseconds.
 Applications MAY use this timestamp for ordering, correlation, and
 time-based calculations relative to device-local policy such as daily
 resource reset intervals.
+
+GEISA platforms SHALL ensure that the timestamp provided is accurate.  GEISA
+platforms SHOULD NOT start edge applications until they can provide valid
+timestamps, whether from a local real-time clock, a network source, global
+positioning, or an external time source.  The platform is responsible for
+maintaining the timestamp as close as possible with UTC epoch time,
+synchronizing at least once every twenty-four hours, though continuous clock
+discipline is preferred.  GEISA does not allow backwards time adjustments.
+Platforms are expected to automatically correct for fast running clocks to
+ensure backwards time adjustments are not required.
+
+Should a GEISA platform start with incorrect time that would require a
+backwards time set to correct, once the correct time has been obtained, the
+GEISA edge environment and applications should be restarted.  Platforms SHALL
+notify applications of time adjustments that move the GEISA system clock
+forward by setting ``sys_time_adjust`` to ``true`` in the next platform status
+message sent after the time adjustment.
 
 Application Status
 ^^^^^^^^^^^^^^^^^^
@@ -307,10 +325,18 @@ API Permissions
 Transaction Data
 ================
 
+- ``GeisaPlatformStatus``
 - ``GeisaPlatformToAppStatus``
 - ``GeisaAppToPlatformStatus``
 
 as defined in |geisa-schemas-repo|
+
+.. Note::
+
+   Within the GEISA schemas, ``geisa-status.proto`` defines that canonical
+   response codes used by all GEISA applications.  ``conn-status.proto`` has
+   the GEISA ``PlatformStatus``, ``PlatformtoAppStatus``, and
+   ``AppToPlatformStatus`` definitions.
 
 
 |geisa-pyramid|

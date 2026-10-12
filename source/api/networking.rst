@@ -94,16 +94,18 @@ acknowledge message delivery over the message bus, the :doc:`/adm` is still
 responsible for queuing these messages and, if undeliverable beyond a timeout
 period, reporting a failure status to the sender.
 
-If an application is uninstalled while its messages are in the queue, a delivery
+If an application is uninstalled while its messages are in the queue, or if
+messages are received for an application that is not installed, a delivery
 failure status SHALL be sent back upstream for each queued downstream message,
 and the queue then purged.
 
 .. note::
 
-  Messages that the application sends are deposited into an operator-run system
-  for retrieval by the operator and/or application developer using APIs to the
-  operator's cloud services.  The operator or application developer can also
-  initiate messages to the application in bulk or individually.
+  Subject to operator policy, messages that the application sends SHOULD be
+  deposited into an operator-run system for retrieval by the operator and/or
+  application developer using APIs to the operator's cloud services.  Subject
+  to operator policy, the operator or application developer MAY also initiate
+  messages to the application in bulk or individually.
 
 
 IP Socket Based Communications
@@ -132,15 +134,15 @@ platform-controlled mechanisms, provided the Application can use standard
 socket APIs from within its execution environment and the approved policy
 is enforced.
 
-Approved IP socket communication may be satisfied through proxying, NAT,
-forwarding, or shared upstream connectivity. Regardless of the platform
-mechanism used, the Application remains responsible for its application-layer
-security behavior. The operator remains responsible for the deployment policy,
-operator-managed trust configuration, and operation of operator-managed
-platform and EMS components. See Security considerations below.
+Regardless of the platform mechanism used, the Application remains responsible
+for its application-layer security behavior. The operator remains responsible
+for the deployment policy, operator-managed trust configuration, and operation
+of operator-managed platform and EMS components. See Security considerations
+below.
 
-Inbound connections towards the Application are only supported for the local
-destination class defined below and disallowed from other destination classes.
+Inbound-initiated connections towards the Application are only supported for
+the local destination class defined below and disallowed from other destination
+classes.
 
 .. note::
 
@@ -232,7 +234,9 @@ Each endpoint an application defines falls into one of these categories:
 - Message based (LwM2M)
 
 For each of these classes, applications have a defined volume limit for when
-that class is metered.
+that class is metered.  In typical deployments, the platform will associate
+Internet and Local classes to the device's HAN interface and the Operator class
+to the device's FAN interface; however, other combinations are possible.
 
 
 Network State
@@ -324,7 +328,7 @@ provided by the application protocol or deployment environment.
 When a platform uses proxying, forwarding, NAT, tunneling, or shared
 upstream connectivity, application-layer security remains the
 responsibility of the relevant communication design. Network-layer
-mediation can preserve end-to-end application TLS or mTLS semantics.
+mediation SHALL preserve end-to-end application TLS or mTLS semantics.
 Applications MAY use certificate pinning, client authentication, or other
 application-layer trust mechanisms where supported by their protocol.
 
@@ -366,8 +370,9 @@ routing between these components.
   and protocol within.
 
 The operating environment MUST provide a local :code:`lo` interface within the
-AII environment for each application. The local :code:`lo` interface must be up
-and configured with both :code:`127.0.0.1` and :code:`::1` addresses.
+AII environment for each application, even when off-device IP communication is
+not requested or approved. The local :code:`lo` interface must be up and
+configured with both :code:`127.0.0.1` and :code:`::1` addresses.
 
 The apparent address, route, or connection path visible to an Application
 inside its AII environment is not required to correspond one-to-one
@@ -388,25 +393,27 @@ discussion of network access tuples.
 DNS
 ^^^
 
-.. warning::
+Applications must be able to reach DNS services from within the AII environment
+by using standard libraries.  Platforms MUST provide a local DNS implementation
+that applications can query using conventional calls (e.g. ``gethostbyname()``
+or ``getaddrinfo()``); however, there is no guarantee that the deployed
+environment or accessible network interface offers DNS services.  Therefore,
+applications should fallback gracefully if DNS resolution fails or the
+application itself may fail. 
 
-  TODO: should we forgo DNS for GEISA 1.0?
+Platforms are not required to support mDNS or DNS-SD in this version of
+the specification.  While applications MAY attemt to use DNS, applications
+which depend on DNS will fail to operate correctly in deployments that do not
+provide DNS support.
 
 While policy rules are defined using IP addresses, Applications may use DNS
 queries to avoid hard-coded IP literals within their application source or
-configuration files.
+configuration files, but applications should not assume that name resolution
+will be successful in all environments.
 
-The Operating Environment and Network Manager must provide DNS services for
-applications to use, however the scope of resolution may be limited particularly
-for devices that are not or are poorly Internet connected.
-
-GEISA highly recommends that the Operating Environment implement a caching
-local resolver that honors TTL to reduce network traffic off-device due to
-repeated application lookups for the same name.
-
-The application must be able to reach DNS services from within the AII 
-environment by using standard libraries (i.e., libnss, resolvconf, etc. for LEE
-|geisa-lee-tux| or java.net.* for VEE |geisa-vee-cloud|.)
+Platforms that SHOULD implement a caching local resolver that honors TTL to
+reduce network traffic off-device due to repeated application lookups for the
+same name.
 
 DNS in a multi-tenant and multi-interface environment can get quite complex.
 For example, an operator may implement their Operator Endpoints using a
@@ -441,11 +448,12 @@ as a WiFi interface) into the AII environment.  When requesting a port mapping,
 both IPv4 and IPv6 MUST be mapped if the local interface supports both.
 
 Many common local device protocols use multicast or broadcast for discovery and
-registration.  Applications SHOULD be able to both send to IP multicast groups
-and register IP multicast groups for receipt.  If specified in the application
-manifest, the platform will register those addresses on the appropriate local
-interface and forward received packets that match both the multicast/broadcast
-address and the inbound protocol/port into the AII environment.
+registration.  Applications with access to a Local interface, SHOULD be able to
+both send to IP multicast groups and register IP multicast groups for receipt
+on that interface.  If specified in the application manifest, the platform
+SHALL register those addresses on the appropriate local interface and forward
+received packets that match both the multicast/broadcast address and the
+inbound protocol/port into the AII environment.
 
 Multiple applications MAY register the same IP multicast group at the same time;
 however, they MUST NOT register the same protocol/port.  The platform and/or ADM

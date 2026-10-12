@@ -14,8 +14,6 @@ Instantaneous Data
 
 |geisa-api-hdr|
 
-Summary
-========
 Instantaneous data provides a continuous stream of scalar metrological data as
 provided by the host device, with data being pushed at least once a second.
 Platforms MAY push data more frequently; however, data push periodicity MUST be

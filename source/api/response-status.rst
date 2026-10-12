@@ -11,9 +11,6 @@ Common Response Status
 
 |geisa-api-hdr|
 
-Summary
-=======
-
 GEISA request/response APIs that include ``GeisaStatus`` use it as a common
 response status and error model. The common status is used for request/response
 result handling and does not replace API-specific response fields that provide

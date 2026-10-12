@@ -29,17 +29,20 @@ underlying platform.  The platform MAY proxy IP communications for the LEE over
 a non-IP network; however, this is not a preferred solution, as it may create
 communications interoperability challenges.
 
+The LEE environment must provide a standard name resolution interface (e.g.
+``getaddrinfo()``); however, there is no guarantee that DNS services are
+available on a given network interface or as part of a given deployed system.
+
 GEISA LEE implementations MAY also provide:
 
--   Domain Name Services
 -   Multicast Domain Name Services
 -   DNS Service Discovery
 
-.. Note::
+.. Warning::
 
-   This version of the GEISA specification does not require implementations to
-   offer DNS, mDNS, or DNS-SD.  Applications written to this version should be
-   able to gracefully fallback to using direct IP addresses if DNS services are
-   available.
+   This version of the GEISA specification does not assume that DNS is
+   available, nor does it require implementations to offer mDNS, or
+   DNS-SD.  Applications written to this version should be able to gracefully
+   fallback to using direct IP addresses if DNS services are not available.
 
 

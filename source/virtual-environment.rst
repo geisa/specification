@@ -34,10 +34,20 @@ real-time operating systems like Zephyr or FreeRTOS, as well as multi-user
 operating systems like Linux.  Platform implementers may choose to offer both a
 VEE and an LEE on the same platform, but this it not an obligation.  
 
-VEEs rely on managed-code virtual runtime (typically a virtual machine): GEISA
-VEE MUST support both multi-thread managed C/C++ and (managed) Java |reg|. 
-Support for other languages (e.g. Kotlin, Lua, Rust, ECMAScript, etc.) may be 
-included in the future, but is not defined or mandated at this time.
+VEEs rely on managed-code virtual runtime (typically a virtual machine). GEISA
+VEE MUST support multi-threaded managed C/C++, and MAY support Java |reg|.
+Support for other languages (e.g. Kotlin, Lua, Rust, ECMAScript, etc.) may be
+included in the future, but is not defined or mandated at this time.  GEISA's
+definition of VEE requires it to support a specific language (C/C++), rather
+than a specific virtual byte-code (i.e. Java Virtual Machine bytecode or Common
+Intermediate Language), resulting in VEE only being source code compatible in
+this version of the GEISA specification.
+
+.. Warning::
+
+   Application providers should be careful when using languages other than
+   C/C++ with GEISA VEE environments, as they may not be supported by all
+   VEE toolchains, limiting interoperability across VEE implementations.
 
 When the host operating system is Linux and the VEE SHOULD execute in user
 space as a process.  When the host operating system is an RTOS, such as Zephyr,  
@@ -54,6 +64,8 @@ VEE conformant platforms will provide a consistent:
 
 * :doc:`vee/runtime`
 * :doc:`vee/base-libraries`
+
+|geisa-pyramid|
 
 .. toctree::
   :hidden:

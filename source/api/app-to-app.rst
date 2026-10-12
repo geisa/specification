@@ -28,7 +28,7 @@ GEISA conformant devices implementing the GIESA API pillar are required to imple
    App-to-App communication described in this section is for on-device communication only. Communication between Apps on separate Edge devices is not provided by this API.
 
 
-Platform implementation
+Platform Implementation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Each App installed on a device MUST not know about another App installed or running on the same device unless permission to communicate is given.

@@ -15,9 +15,9 @@ capabilites provided natively within the Linux Kernel (i.e. cgroups,
 namespaces, etc.) to provide an Application Isolation Implementation.  GEISA
 does not specify which container engine or management system a platform should
 use, but it does specify how app images are provided.  Platform implementations
-may use any engine or management system they choose, but they MUST meet the
-requirements described in this chapter, they MUST provide a base image, and
-they MUST accept application images.
+may use any engine or management system they choose, but they are required to
+meet the requirements described in this chapter, they MUST provide a base
+image, and they MUST accept application images.
 
 While platforms may use any AII mechanism they choose, for clarity of intent,
 this portion of the GEISA specification uses ``lxc`` for various examples.  
@@ -35,12 +35,11 @@ in :doc:`/system-architecture`.
 Resource Management
 ^^^^^^^^^^^^^^^^^^^
 
-The platform SHALL control every aspect of a GEISA applications access to
-system resources, including:
+The platform SHALL control GEISA applications' access to system resources,
+including:
 
 - The number of CPUs allocated (e.g. cgroups ``limits.cpu``)
 - The percentage of CPU allowed (e.g. cgroups ``limits.cpu.allowance``) 
-- The priority of the application (e.g. cgroups ``limits.cpu.priority``)
 - The maximum RAM (e.g. cgroups ``limits.memory``)
 - Persistent Storage 
 - Non-Persistent Storage 

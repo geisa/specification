@@ -71,6 +71,7 @@ A waveform stream descriptor SHALL include:
   or ``float64``.
 - The number of voltage channels present in each sample index.
 - The number of current channels present in each sample index.
+- The number of other channels present in each sample index (if used).
 - The total number of channels present in each sample index. This SHALL
   equal voltage-channel-count plus current-channel-count plus
   other-channel-count (if used).
@@ -79,6 +80,7 @@ A waveform stream descriptor SHALL include:
 - The waveform ``nominal-frequency-hz`` when applicable.
 - Whether frames are ``cycle-aligned``.
 - Whether frames are ``zero-crossing-aligned``.
+- Whether DC error / offset has been removed.
 - Optional integer-sample ``voltage-scale`` and ``current-scale`` values.
 - The expected frame delivery period in milliseconds.
 
@@ -191,7 +193,7 @@ an illustrative native layout for the frame header and typed sample payload:
 
    struct geisa_waveform_frame
    {
-     int64_t    timestamp_ns;    /* first sample time, ns since UNIX epoch UTC */
+     int64_t    timestamp_us;    /* first sample time, us since UNIX epoch UTC */
      uint32_t   sequence_num;    /* unspecified starting value */
      uint32_t   reserved;
      union {
@@ -203,11 +205,12 @@ an illustrative native layout for the frame header and typed sample payload:
      } data;
    };
 
-The timestamp SHALL represent the time associated with the first sample index in the
-frame and SHALL be expressed as a signed 64-bit integer in nanoseconds since the
-UNIX epoch (UTC). This defines the timestamp representation and does not imply
-that the platform clock is accurate to one nanosecond. Timestamp accuracy is
-platform-dependent.
+The timestamp SHALL represent the time associated with the first sample index
+in the frame and SHALL be expressed as a signed 64-bit integer in microseconds
+since the UNIX epoch (UTC). While time accuracy to the microsecond level is
+desired, timestamp accuracy is platform-dependent.  System operators should
+work with the platform providers to understand the accuracy they support and
+how it may impact the performance of applications that consume waveform data.
 
 A monotonically increasing and wrapping sequence number SHALL be included to 
 allow detection of dropped or out-of-order frames. The starting value is 
@@ -228,8 +231,9 @@ Samples SHALL be packed in channel-interleaved order per index. For each
 sample index, all channel values SHALL be present, and channel ordering SHALL be
 stable and consistent for a given stream.
 
-Within each index, voltage channels are listed first, followed by current channels,
-using the stable channel ordering described by the stream metadata:
+Within each index, voltage channels are listed first, followed by current
+channels, followed by other channels (if present), using the stable channel
+ordering described by the stream metadata:
 
 - Time index 0
 
@@ -309,12 +313,27 @@ values are IEEE 754 encoded.
 
 For integer sample formats (``int16``, ``int32``), scaling factors SHALL be
 applied as defined by the ``voltage-scale`` and ``current-scale`` metadata
-values. For floating-point formats (``float32``, ``float64``), scaling factors
-SHOULD be omitted or set to ``1.0``.
+values. The scaling factor allows the real voltage and curent values to be
+mapped to an integer range for data capture purposes, avoiding the overhead of
+floating-point operatings during data acquisition and transmission. For
+example, a voltage scaling factor of 0.01 would mean that each int16 sample
+would support a range of -327.67 volts to 327.67 volts in 0.01 volt increments.
+The appropriate scaling factor will depend on what the range of values the
+device is capable of capturing, and the capture resolution desired.  After
+applying scaling factors, the resulting values SHALL be in units of Volts or
+Amps for voltage and current channels respectively. 
+
+For floating-point formats (``float32``, ``float64``), scaling factors SHOULD
+be omitted or set to ``1.0``.  
+
+Voltage waveform for any frame containing a whole number of cycles SHOULD
+average to zero if the metadata indicates that DC error / offset has been
+removed.  Otherwise, an application MAY need to perform offset correction
+itself. 
 
 The defined frame structure and waveform metadata allow an application to
 decode waveform data using only the GEISA API and this specification, without
-vendor- or platform-specific handling.
+vendor-specific or platform-specific handling.
 
 MQTT Details
 ------------

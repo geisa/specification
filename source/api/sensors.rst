@@ -46,17 +46,11 @@ The Sensors API supports two interaction patterns:
 #. publish/subscribe, for platform-driven publication of current sensor
    observations to authorized subscribers
 
-Reporting cadence for published sensor data is determined by platform
-and sensor policy, not independently by each subscribing application.
+Reporting cadence for published sensor data is determined by platform and
+sensor policy, not independently by each subscribing application.
 
 Sensor data access is subject to platform policy, including topic and
 message-bus access control.
-
-Scope
-=====
-
-The Sensors API covers lower-rate, semantically typed sensor observations. It
-does not include waveform or high-frequency streaming sensor types.
 
 Sensor descriptors are discovery-oriented metadata. Runtime readings are
 transported separately from descriptors. A generic runtime value model enables

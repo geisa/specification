@@ -35,6 +35,12 @@ operating system (Linux, Zephyr, bare metal), the Processing Unit provides a
 stable abstraction layer that guarantees the same behavior for any binary 
 application across any physical GEISA devices.
 
+.. Note::
+
+   This version of the GEISA specification does not require a specific byte
+   code such as Java Virtual Machine bytecode, Common Intermedial Lanuage, or
+   Web Assembly.  VEE compatibility is at the source code level only.
+
 Scheduler
 ^^^^^^^^^
 
@@ -51,13 +57,29 @@ The GEISA VEE scheduler MUST provide:
 - Prevention of thread starvation across applications
 - Consistent scheduling behavior across heterogeneous hardware platforms
 
+In practice this should mean that if two or more applications are running in a
+VEE, and each is periodically requesting resources, each should receive the
+requested resources requested until they reach their limit, as per the
+deployment manifest, or the resources of the platform are exhausted.  One
+application should not receive all available resources while other applications
+are starved.
+
+C/C++ Language Support
+^^^^^^^^^^^^^^^^^^^^^^
+
+A GEISA VEE MUST support the C and C++ programming languages. 
+
+The VEE runtime MUST prevent C/C++ code from bypassing sandbox isolation, 
+accessing other applications' memory, or circumventing security controls 
+through unsafe pointer operations or direct hardware access.
+
 Java Language Support
 ^^^^^^^^^^^^^^^^^^^^^
 
-A GEISA conformant VEE MUST support the Java language specification version 7 or
+A GEISA conformant VEE SHOULD support the Java language specification version 7 or
 later.
 
-The GEISA VEE MUST implement:
+The GEISA VEE which support Java MUST implement:
 
 - Core Language Features
 
@@ -80,16 +102,6 @@ The GEISA VEE MUST implement:
     - Minimal impact on application latency suitable for embedded devices
     - Configurable collection policies per sandbox to respect resource constraints
   
-C/C++ Language Support
-^^^^^^^^^^^^^^^^^^^^^^
-
-A GEISA VEE MUST support the C and C++ programming languages. 
-Applications MAY be written entirely in C/C++, or mixed-language applications 
-MAY combine Java and C/C++ components within the same application. 
-
-The VEE runtime MUST prevent C/C++ code from bypassing sandbox isolation, 
-accessing other applications' memory, or circumventing security controls 
-through unsafe pointer operations or direct hardware access.
 
 Multi-Sandbox Execution Control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

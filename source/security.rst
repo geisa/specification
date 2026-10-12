@@ -66,5 +66,4 @@ The second section covers practical aspects of security:
   security/network.rst
   security/API.rst
 
-|geisa-pyramid|
 
