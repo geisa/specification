@@ -8,6 +8,7 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-instantaneous-data:
+.. index:: single: Instantaneous Data
 
 Instantaneous Data
 ------------------
@@ -55,6 +56,8 @@ another profile or capability model.
 Scalar metered quantities remain separate from waveform frame delivery.
 Billing quantities use separate metered-quantities payloads and profile
 definitions and are not part of the instantaneous scalar profile.
+
+|geisa-pyramid|
 
 AC Meter Profile Required Fields
 ================================
@@ -172,6 +175,7 @@ form, phase count, Platform Discovery, etc.
      - double ratio 0.0 to 1.0
      - System arithmetic power factor magnitude
 
+|geisa-pyramid|
 
 |geisa-landscape-end|
 
@@ -194,6 +198,8 @@ only the ``phase-a`` and ``system`` objects.
   :header-rows: 1
   :widths: 14 20 18 14 34
   :file: /api/instantaneous-optional.csv
+
+|geisa-pyramid|
 
 |geisa-landscape-end|
 
@@ -231,10 +237,14 @@ Value Semantics
    vectorial aggregate values must tolerate their absence unless another
    applicable profile or requirement makes them mandatory.
 
+|geisa-pyramid|
+
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
 - Topic: ``geisa/api/instantaneous/data``
+
+|geisa-pyramid|
 
 API Permissions
 ===============
@@ -247,6 +257,7 @@ API Permissions
 
   - Publish: ``geisa/api/instantaneous/data``
 
+|geisa-pyramid|
 
 Transaction Data
 ================

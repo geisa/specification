@@ -8,6 +8,8 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-networking:
+.. index:: single: Network Communication
+
 
 Off-Device Communication
 ------------------------
@@ -29,6 +31,8 @@ transport details.  Applications that require both mechanisms must request both
 in their manifest, and platforms enforce each according to the approved
 deployment policy.
 
+.. index:: single: Application Messaging
+.. index:: single: Messaging
 
 Message-based via LwM2M
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,6 +111,10 @@ and the queue then purged.
   to operator policy, the operator or application developer MAY also initiate
   messages to the application in bulk or individually.
 
+|geisa-pyramid|
+
+.. index:: single: IP Communication
+.. index:: single: Off Device Communication
 
 IP Socket Based Communications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -166,6 +174,10 @@ classes.
   communication only when that behavior is implemented by the application and
   allowed by deployment policy.
 
+|geisa-pyramid|
+
+.. index:: single: Interface Type
+.. index:: single: Network Interface
 
 Interface Types
 ^^^^^^^^^^^^^^^
@@ -218,6 +230,10 @@ interface is assumed to be the presently active FAN technology.
 
   New interface types may be added in future versions of this specification.
 
+|geisa-pyramid|
+
+.. index:: single: Destination Class
+
 Destination Classes
 ^^^^^^^^^^^^^^^^^^^
 
@@ -238,6 +254,9 @@ that class is metered.  In typical deployments, the platform will associate
 Internet and Local classes to the device's HAN interface and the Operator class
 to the device's FAN interface; however, other combinations are possible.
 
+|geisa-pyramid|
+
+.. index:: single: Network State
 
 Network State
 ^^^^^^^^^^^^^
@@ -258,6 +277,10 @@ Implementations MAY expose troubleshooting, logging, or diagnostic
 reporting through implementation-specific mechanisms or through future GEISA
 status, logging, or messaging extensions.
 
+|geisa-pyramid|
+
+.. index:: single: Network Volume Limits
+.. index:: single: Volume Limits
 
 Volume Limits
 ^^^^^^^^^^^^^
@@ -307,6 +330,7 @@ allocation for that destination class, such as where access is not approved
 by deployment policy. Volume limits do not apply to destination classes
 when the policy is *unlimited*.
 
+|geisa-pyramid|
 
 Security considerations
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -348,6 +372,8 @@ application-layer trust mechanisms where supported by their protocol.
    Please see :doc:`/security/network` for details on deployment manifest
    security settings for network access.
 
+|geisa-pyramid|
+
 Connectivity
 ^^^^^^^^^^^^
 
@@ -381,6 +407,7 @@ used by the platform. Applications should treat the socket interface as
 the approved local execution-environment abstraction and rely on Platform
 and App Status for communication availability and quota state.
 
+|geisa-pyramid|
 
 Policy Rules
 ^^^^^^^^^^^^
@@ -389,6 +416,11 @@ The :doc:`/adm/manifests` include a set of Endpoints the Application is expectin
 to communicate with.  The application must list every endpoint that it wishes
 to communicate with per destination class.  See :doc:`/security/network` for
 discussion of network access tuples.
+
+|geisa-pyramid|
+
+.. index:: single: DNS
+.. index:: single: Domain Name Service
 
 DNS
 ^^^
@@ -421,6 +453,10 @@ dedicated private TLD and configure the resolver to direct DNS lookups for that
 TLD over their private network where other TLDs for Internet Endpoints use a
 home Wi-Fi or Internet-connected Cellular provider's supplied DNS.
 
+|geisa-pyramid|
+
+.. index:: single: Local Network Communication
+.. index:: single: Network Communication
 
 Local Endpoint Considerations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -461,7 +497,6 @@ system MUST arbitrate inbound protocol/port requests in each application manifes
 to prevent multiple applications from requesting the same inbound protocol/port
 combination.
 
-
 MQTT Details
 ============
 
@@ -476,7 +511,6 @@ MQTT Details
    In the topic definitions, ``<userid>`` refers to the platform-local
    identifier of the requesting GEISA application instance (see :doc:`/glossary` for
    additional information).
-
 
 API Permissions
 ===============
@@ -494,7 +528,6 @@ API Permissions
   - Wildcard Subscribe: ``geisa/api/message/downstream/rsp/#``
   - Publish: ``geisa/api/message/upstream/rsp/<userid>``
   - Publish: ``geisa/api/message/downstream/req/<userid>``
-
 
 Transaction Data
 ================

@@ -170,6 +170,8 @@ The GEISA API allows applications to obtain details about the waveform data
 available on the platform so that they can correctly interpret the information 
 the platform exposes through the API.
 
+|geisa-pyramid|
+
 .. index:: single: Sensors
 
 Sensors
@@ -185,6 +187,8 @@ Examples of sensors that may be provided include:
 - Switch Sensor
 - GNSS Location
 - Vibration / accelerometer
+
+|geisa-pyramid|
 
 .. index:: single: Actuators
 

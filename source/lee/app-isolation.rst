@@ -10,6 +10,8 @@
 Application Isolation
 ---------------------
 
+|geisa-lee-hdr|
+
 Linux Execution Environments are expected to use the containerization
 capabilites provided natively within the Linux Kernel (i.e. cgroups,
 namespaces, etc.) to provide an Application Isolation Implementation.  GEISA
@@ -22,6 +24,8 @@ image, and they MUST accept application images.
 While platforms may use any AII mechanism they choose, for clarity of intent,
 this portion of the GEISA specification uses ``lxc`` for various examples.  
 
+
+.. index:: single: Isolation
 
 Isolation Requirements
 ======================
@@ -81,6 +85,10 @@ assign a userid and token (provided to the application in its unique
 the message bus.  That user will be restricted according to the permissions in
 the application manifest.  Please see :doc:`/api` and :doc:`/adm/manifests` for
 additional details.
+
+|geisa-pyramid|
+
+.. index:: single: Application Image
 
 Container Image Requirements
 ============================

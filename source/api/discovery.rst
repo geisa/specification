@@ -8,6 +8,7 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-platform-discovery:
+.. index:: single: Platform Discovery
 
 Platform Discovery
 ------------------
@@ -82,6 +83,8 @@ determine the realized hardware and software environment available on the device
    #. the GEISA API implementation
    #. the GEISA platform runtime environment in use, such as LEE or VEE where implemented
 
+|geisa-pyramid|
+
 Application Information
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -90,6 +93,9 @@ Application Manifest originally supplied by the application vendor,
 applications MUST be able to retrieve their own current Application Deployment
 Manifest as described in :doc:`/adm/manifests`.
 
+|geisa-pyramid|
+
+.. index:: single: Metrology Hardware
 
 Metrology Hardware
 ^^^^^^^^^^^^^^^^^^
@@ -103,6 +109,9 @@ For Meter type devices, the platform MUST provide at a minimum:
 - Nominal Frequency
 - Nominal Phase-to-Phase and Phase-to-Neutral Voltage (when applicable)
 
+|geisa-pyramid|
+
+.. index:: single: Sensor Hardware
 
 Sensor Hardware
 ^^^^^^^^^^^^^^^
@@ -124,6 +133,10 @@ Platform Discovery MAY include a list of available sensor descriptors so that
 applications can enumerate which sensors exist on the platform at startup.
 Runtime sensor readings and application-directed sensor queries are defined by
 the Sensors API (:doc:`/api/sensors`).
+
+|geisa-pyramid|
+
+.. index:: single: Network Hardware
 
 Network Hardware
 ^^^^^^^^^^^^^^^^
@@ -177,6 +190,9 @@ beyond what is explicitly defined in this specification.  Applications SHALL
 assume that network permissions and volume restrictions described in its
 Deployment Manifest are valid and realizable on the device. 
 
+|geisa-pyramid|
+
+.. index:: single: Waveform
 
 Waveform Discovery
 ^^^^^^^^^^^^^^^^^^
@@ -192,6 +208,9 @@ parsing the stream identifier.
 Runtime access details and application-specific state are defined by 
 the :doc:`/api/waveform` API.
 
+|geisa-pyramid|
+
+.. index:: single: Application Manifest
 
 Application Deployment Manifest
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -215,6 +234,7 @@ a manifest change.
   over another mechanism such as the application message based communication with
   the ADM system.
 
+|geisa-pyramid|
 
 MQTT Details
 ============

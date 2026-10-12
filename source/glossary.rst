@@ -189,6 +189,8 @@ Glossary
    LwM2M
     Lightweight Machine-to-Machine
 
+    See [LwM2M]_
+
    MQTT
     `MQTT <https://en.wikipedia.org/wiki/MQTT>`_
     is a light-weight publish and subscribe protocol formerly
@@ -202,8 +204,8 @@ Glossary
 
     PII is a term used to refer to sensitive personal information, such a
     person's name, address, phone number, and government identification number.
-    GEISA does not explicitly address PII, as it policies and definitions may
-    vary by jurisdiction, but some GEISA applications may process, store, or
+    GEISA does not explicitly address PII, as policies and definitions may vary
+    by jurisdiction, but some GEISA applications may process, store, or
     exchange PII.
     
 

@@ -10,6 +10,8 @@
 Core Services
 -------------
 
+|geisa-lee-hdr|
+
 GEISA LEE |geisa-lee-tux| implementations MUST provide:
 
 -   ``/dev/log`` services
@@ -45,4 +47,5 @@ GEISA LEE implementations MAY also provide:
    DNS-SD.  Applications written to this version should be able to gracefully
    fallback to using direct IP addresses if DNS services are not available.
 
+|geisa-pyramid|
 

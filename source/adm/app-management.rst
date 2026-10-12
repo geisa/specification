@@ -9,15 +9,16 @@
 
 .. index:: single: Application Management
 
+.. index:: single: Software Management
+
 Application Management
 ----------------------
+
+|geisa-adm-hdr|
 
 Application management is the process of deploying, activating, deactivating,
 and decommissioning applications on a GEISA ADM conformant platform, for
 execution within an execution environment.
-
-Software Management
-======================
 
 The LwM2M ``/9/x Software Management`` object SHALL be used to manage the
 software package lifecycle of containerized edge applications running in the
@@ -181,3 +182,5 @@ replacement without retaining persistent data:
      - Execute
      -
      - Purge Data. Deletes existing local application data without modifying the app installation/activation states.
+
+|geisa-pyramid|

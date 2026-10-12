@@ -8,6 +8,8 @@
 OMA Lightweight M2M
 -------------------------------------
 
+|geisa-adm-hdr|
+
 GEISA Application & Device Management uses the Open Mobile Alliance Lightweight M2M
 [LwM2M]_ protocol for application management.  Specifically,
 
@@ -211,6 +213,8 @@ audited for this baseline. Pending definition updates are identified below.
 
 The Wi-SUN Radio Management ``/3603`` definition and version are pending
 coordination with the Wi-SUN work and must be resolved before release.
+
+|geisa-pyramid|
 
 GEISA ADM Object Model
 ======================
@@ -486,6 +490,8 @@ GEISA object definitions.
   function, or operational path used by the implementation to realize the
   relevant platform requirements.
 
+|geisa-pyramid|
+
 GEISA Object Lifecycle
 =========================
 
@@ -501,5 +507,5 @@ consistent object lifecycle:
 - Platforms shall create application specific GEISA objects (``/36xx``) as required,
   and link them back to the appropriate object ``/9`` instance via Object ID.
 
-
+|geisa-pyramid|
 

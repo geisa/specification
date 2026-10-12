@@ -8,6 +8,7 @@
    https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 .. _api-waveform-data:
+.. index:: single: Waveform
 
 Waveform Data
 =============
@@ -55,6 +56,8 @@ If present, waveform stream ``name`` and ``description`` values are
 platform-supplied informational metadata intended for display, diagnostics, or
 logging. Applications SHALL NOT rely on these fields for interoperability
 behavior.
+
+|geisa-pyramid|
 
 Device Capabilities
 -------------------
@@ -113,6 +116,8 @@ the corresponding samples in other channels for that sample index.
 Runtime access handles such as socket paths SHALL NOT be included in
 :doc:`/api/discovery`.
 
+|geisa-pyramid|
+
 API Request Response
 --------------------
 
@@ -166,6 +171,9 @@ only describes frame duration.
 The ``sample-rate-hz`` value is the authoritative samples-per-second value.
 The ``samples-per-cycle`` value is a nominal descriptor and applications SHALL
 interpret it together with the stream alignment fields and platform metadata.
+
+|geisa-pyramid|
+.. index:: single: Waveform Data Format
 
 Data Format
 -----------
@@ -334,12 +342,16 @@ The defined frame structure and waveform metadata allow an application to
 decode waveform data using only the GEISA API and this specification, without
 vendor-specific or platform-specific handling.
 
+|geisa-pyramid|
+
 MQTT Details
 ------------
 
 - QoS: 1 / Acknowledged R/R
 - Req Topic: ``geisa/api/waveform/req/<userid>``
 - Rsp Topic: ``geisa/api/waveform/rsp/<userid>``
+
+|geisa-pyramid|
 
 API Permissions
 ---------------
@@ -359,6 +371,8 @@ API Permissions
   - Wildcard Subscribe: ``geisa/api/waveform/req/#``
   - Publish: ``geisa/api/waveform/rsp/<userid>``
 
+|geisa-pyramid|
+
 Transaction Data
 ----------------
 
@@ -366,6 +380,8 @@ Transaction Data
 - ``GeisaWaveform_Rsp``
 
 As defined in ``schemas/waveform.proto``
+
+|geisa-pyramid|
 
 Examples
 --------

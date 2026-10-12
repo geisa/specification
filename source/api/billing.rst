@@ -6,6 +6,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Billing Data
+
 Billing Data
 ------------
 
@@ -39,6 +41,8 @@ This version defines the Billing Data broadcast topic and payload. It does not
 define a Billing Data request/response transaction, historical query,
 application-selected billing interval, or socketed stream.
 
+|geisa-pyramid|
+
 Billing Payload Model
 =====================
 
@@ -59,6 +63,8 @@ quadrant-qualified, and apparent-energy values where defined.
 
 The demand model is used for active, reactive, and apparent demand quantities
 where defined by the schema.
+
+|geisa-pyramid|
 
 Value Semantics
 ===============
@@ -93,6 +99,8 @@ Value Semantics
    calculation basis from the field name rather than relying on a global
    stream-level setting.
 
+|geisa-pyramid|
+
 Profile and Example
 ===================
 
@@ -107,10 +115,14 @@ The current billing profile requires a billing payload with both
 includes delivered active-energy summation, delivered active-power demand, and
 ``measurement-period-s`` metadata for both sections.
 
+|geisa-pyramid|
+
 MQTT Details
 ============
 - QoS: 0 / Unacknowledged
 - Topic: ``geisa/api/billing/data``
+
+|geisa-pyramid|
 
 API Permissions
 ===============
@@ -122,6 +134,8 @@ API Permissions
 - Platform:
 
   - Publish: ``geisa/api/billing/data``
+
+|geisa-pyramid|
 
 Transaction Data
 ================

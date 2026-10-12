@@ -6,6 +6,9 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Responses
+.. index:: single: Common Response Status
+
 Common Response Status
 ----------------------
 
@@ -37,6 +40,8 @@ Status Message Model
 
 ``GEISA_STATUS_CODE_UNSPECIFIED`` MUST NOT be treated as success unless an API
 explicitly says otherwise.
+
+|geisa-pyramid|
 
 Status Code Handling
 ====================
@@ -78,6 +83,7 @@ control flow.
      - Treat the response as completed, but handle data that may be unavailable,
        stale, incomplete, or otherwise limited.
 
+|geisa-pyramid|
 |geisa-landscape-end|
 
 API Usage
@@ -98,6 +104,8 @@ they do not replace ``GeisaStatus`` where it is present.
 ``GeisaAppMessage_Rsp`` uses its own app-message response status field and is
 not defined with ``GeisaStatus`` in the current schemas.
 
+|geisa-pyramid|
+
 Implementation Guidance
 =======================
 
@@ -113,6 +121,8 @@ Platforms should return the most specific applicable status code and include
 human-readable diagnostics where useful. Platforms should not use success with
 partial or invalid data unless the API explicitly defines partial-success
 semantics.
+
+|geisa-pyramid|
 
 Transaction Data
 ================

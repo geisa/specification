@@ -10,6 +10,8 @@
 Firmware Management
 -------------------
 
+|geisa-adm-hdr|
+
 Firmware management is the process of updating the core operating system for an
 ADM conformant GEISA platform.
 

@@ -43,6 +43,8 @@ conformant edge management systems expose these messages over a local ReST API,
 allowing other systems to easily consume messages sent by edge applications or
 to send messages to edge applications.
 
+|geisa-pyramid|
+
 .. toctree::
   :hidden:
 
@@ -55,6 +57,5 @@ to send messages to edge applications.
   adm/app-management
   adm/messaging
 
-|geisa-pyramid|
 
 

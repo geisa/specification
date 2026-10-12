@@ -7,6 +7,8 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: API Architecture
+
 API Architecture
 ----------------
 
@@ -16,6 +18,8 @@ Rather than provide an interface library, and in the process potentially
 restricting or specifying which languages are suitable for use with GEISA, 
 GEISA intentionally provides a message bus API allowing for additional 
 implementor flexibility.
+
+.. index:: single: Message Bus Communication
 
 Message Bus Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,6 +66,10 @@ implementation via external network interfaces.
   provide external MQTT implementations separate from the GEISA API MQTT 
   implementation.
 
+|geisa-pyramid|
+
+.. index:: single: Message Bus Credentials
+
 Message Bus Connection and Credentials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -104,6 +112,13 @@ sequence of random characters, rather than a predictable value.
   environment, without requiring unwanted customizations.  It is understood that 
   this approach is wholly inappropriate in a general network context.
 
+|geisa-pyramid|
+
+.. index:: single: Message Bus Topics
+
+.. index:: single: Topics
+
+.. index:: single: Message Bus Reliability
 
 Message Bus Topics and Reliability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -115,8 +130,11 @@ but most messages are QoS level 0, *At most once* and unacknowledged.
 
 MQTT topics used by the API are listed within each subsequent section.
 
+|geisa-pyramid|
 
-Non-message Bus Communication
+.. index:: single: Non-Message Bus Communication
+
+Non-Message Bus Communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 While most application to platform communication is performed over the MQTT 

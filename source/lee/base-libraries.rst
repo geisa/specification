@@ -7,8 +7,12 @@
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
+.. index:: single: Libraries
+
 Linux Base Libraries
 --------------------
+
+|geisa-lee-hdr|
 
 To facilitate clean and regular updates and to minimize container sizes, GEISA
 applications are encouraged to take advantage of libraries provided by the base
@@ -39,6 +43,8 @@ implementation may vary by platform and toolchain.
 - librt - Real-time
 - libcap - POSIX capabilities
 
+|geisa-pyramid|
+
 Common Application Libraries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -55,6 +61,8 @@ available to applications within the GEISA execution environment:
 A platform implementation MAY provide an alternate library implementation in
 place of one of the named libraries above, provided that the alternate
 implementation is function-compatible with the named library.
+
+|geisa-pyramid|
 
 Optional Application Libraries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,3 +94,5 @@ needed.
    While GEISA ADM |geisa-adm-baton| makes use of LwM2M for communication,
    GEISA Applications are unaware of this and do not require any LwM2M client
    libraries or knowledge.
+
+|geisa-pyramid|
