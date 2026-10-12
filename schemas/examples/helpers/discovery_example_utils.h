@@ -105,6 +105,8 @@ static inline const char *discovery_network_technology_name(GeisaPlatformDiscove
         return "GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_FIBER";
     case GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_WIFI:
         return "GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_WIFI";
+    case GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_PLC:
+        return "GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_PLC";
     case GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_OTHER:
         return "GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_OTHER";
     case GeisaPlatformDiscovery_NetworkTechnology_NETWORK_TECHNOLOGY_UNSPECIFIED:
@@ -180,10 +182,10 @@ static inline void fill_demo_discovery_sensor(GeisaSensorDescriptor *sensor)
     strncpy(sensor->unit, "Cel", sizeof(sensor->unit) - 1);
     sensor->supports_read = true;
     sensor->supports_publish = true;
-    sensor->has_min_report_period_ms = true;
-    sensor->min_report_period_ms = 1000ULL;
-    sensor->has_max_report_period_ms = true;
-    sensor->max_report_period_ms = 60000ULL;
+    sensor->has_min_report_period_us = true;
+    sensor->min_report_period_us = 1000000ULL;
+    sensor->has_max_report_period_us = true;
+    sensor->max_report_period_us = 60000000ULL;
 }
 
 static inline void fill_demo_network(GeisaPlatformDiscovery_Network_Instance *network,
@@ -299,7 +301,7 @@ static inline void fill_demo_discovery_rsp(GeisaPlatformDiscovery_Rsp *message)
     stream->sample_rate_hz = 15360;
     stream->samples_per_cycle = 256;
     stream->nominal_frequency_hz = 60;
-    stream->expected_frame_period_ms = 16;
+    stream->expected_frame_period_us = 16;
     stream->voltage_filter_lowpass = 5000;
     stream->current_filter_lowpass = 5000;
 }
@@ -358,13 +360,13 @@ static inline void print_discovery_sensor_descriptor_json(const GeisaSensorDescr
     fputs(sensor->supports_read ? "true" : "false", stdout);
     fputs(",\"supports-publish\":", stdout);
     fputs(sensor->supports_publish ? "true" : "false", stdout);
-    if (sensor->has_min_report_period_ms)
+    if (sensor->has_min_report_period_us)
     {
-        printf(",\"min-report-period-ms\":%llu", (unsigned long long)sensor->min_report_period_ms);
+        printf(",\"min-report-period-us\":%llu", (unsigned long long)sensor->min_report_period_us);
     }
-    if (sensor->has_max_report_period_ms)
+    if (sensor->has_max_report_period_us)
     {
-        printf(",\"max-report-period-ms\":%llu", (unsigned long long)sensor->max_report_period_ms);
+        printf(",\"max-report-period-us\":%llu", (unsigned long long)sensor->max_report_period_us);
     }
     putchar('}');
 }
@@ -420,7 +422,7 @@ static inline void print_discovery_waveform_json(const GeisaPlatformDiscovery_Wa
     printf(",\"sample-rate-hz\":%u", stream->sample_rate_hz);
     printf(",\"samples-per-cycle\":%u", stream->samples_per_cycle);
     printf(",\"nominal-frequency-hz\":%u", stream->nominal_frequency_hz);
-    printf(",\"expected-frame-period-ms\":%u", stream->expected_frame_period_ms);
+    printf(",\"expected-frame-period-us\":%u", stream->expected_frame_period_us);
     if (stream->voltage_filter_lowpass != 0)
     {
         printf(",\"voltage-filter-lowpass\":%d", stream->voltage_filter_lowpass);

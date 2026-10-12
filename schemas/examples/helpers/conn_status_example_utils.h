@@ -103,7 +103,7 @@ static inline void fill_demo_conn_app_msg(GeisaConnAppMsg *message)
     message->today_used = 42;
     message->today_limit = 500;
     message->today_remaining = 458;
-    message->next_daily_reset_ms = 1762905600000ULL;
+    message->next_daily_reset_us = 1762905600000000ULL;
 }
 
 static inline void fill_demo_conn_app_info(GeisaConnAppInfo *info,
@@ -123,13 +123,13 @@ static inline void fill_demo_conn_app_info(GeisaConnAppInfo *info,
     info->today_used_metered = today_metered;
     info->today_limit_metered = limit_metered;
     info->today_remaining_metered = remaining_metered;
-    info->next_daily_reset_ms = 1762905600000ULL;
+    info->next_daily_reset_us = 1762905600000000ULL;
 }
 
 static inline void fill_demo_platform_status(GeisaPlatformStatus *message)
 {
     *message = (GeisaPlatformStatus)GeisaPlatformStatus_init_zero;
-    message->timestamp_ms = 1762862400000ULL;
+    message->timestamp_us = 1762862400000000ULL;
     message->mode = GeisaPlatformMode_PLATFORM_MODE_NORMAL;
     message->conn_msg = GeisaConnState_CONN_ENABLED_UP;
     message->has_conn_oper = true;
@@ -146,7 +146,7 @@ static inline void fill_demo_platform_to_app_status(GeisaPlatformToAppStatus *me
     message->cmd_send_status = true;
     message->cmd_shut_down = false;
     message->cmd_clear_pii = false;
-    message->timestamp_ms = 1762862405000ULL;
+    message->timestamp_us = 1762862405000000ULL;
     message->cpu_usage = 34.5f;
     message->cpu_limit = 80.0f;
     message->memory_usage = 8388608U;
@@ -190,12 +190,12 @@ static inline void print_conn_info_json(const GeisaConnInfo *info)
 static inline void print_conn_app_msg_json(const GeisaConnAppMsg *message)
 {
     printf("{\"yesterday-used\":%u,\"today-used\":%u,\"today-limit\":%u,\"today-remaining\":%u,"
-           "\"next-daily-reset-ms\":%llu}",
+           "\"next-daily-reset-us\":%llu}",
            (unsigned)message->yesterday_used,
            (unsigned)message->today_used,
            (unsigned)message->today_limit,
            (unsigned)message->today_remaining,
-           (unsigned long long)message->next_daily_reset_ms);
+           (unsigned long long)message->next_daily_reset_us);
 }
 
 static inline void print_conn_app_info_json(const GeisaConnAppInfo *info)
@@ -209,7 +209,7 @@ static inline void print_conn_app_info_json(const GeisaConnAppInfo *info)
     printf(",\"today-used-metered\":%llu", (unsigned long long)info->today_used_metered);
     printf(",\"today-limit-metered\":%llu", (unsigned long long)info->today_limit_metered);
     printf(",\"today-remaining-metered\":%llu", (unsigned long long)info->today_remaining_metered);
-    printf(",\"next-daily-reset-ms\":%llu", (unsigned long long)info->next_daily_reset_ms);
+    printf(",\"next-daily-reset-us\":%llu", (unsigned long long)info->next_daily_reset_us);
     putchar('}');
 }
 
@@ -222,7 +222,7 @@ static inline int conn_status_decode_and_print_platform_status_file(const char *
     }
 
     fputs("{\"geisa-platform-status\":{", stdout);
-    printf("\"timestamp-ms\":%llu,", (unsigned long long)message.timestamp_ms);
+    printf("\"timestamp-us\":%llu,", (unsigned long long)message.timestamp_us);
     geisa_print_json_key("mode");
     geisa_print_json_escaped(platform_mode_name(message.mode));
     fputs(",\"conn-msg\":", stdout);
@@ -266,7 +266,7 @@ static inline int conn_status_decode_and_print_platform_to_app_file(const char *
     fputs(message.cmd_shut_down ? "true" : "false", stdout);
     fputs(",\"cmd-clear-pii\":", stdout);
     fputs(message.cmd_clear_pii ? "true" : "false", stdout);
-    printf(",\"timestamp-ms\":%llu", (unsigned long long)message.timestamp_ms);
+    printf(",\"timestamp-us\":%llu", (unsigned long long)message.timestamp_us);
     printf(",\"cpu-usage\":%.6g", message.cpu_usage);
     printf(",\"cpu-limit\":%.6g", message.cpu_limit);
     printf(",\"memory-usage\":%u", (unsigned)message.memory_usage);

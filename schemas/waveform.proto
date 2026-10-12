@@ -190,9 +190,9 @@ message GeisaWaveform_Rsp {
   // ----- Timing / cadence / alignment (40-59) -----
 
   /*
-   * Expected period between delivered waveform frames in milliseconds.
+   * Expected period between delivered waveform frames in microseconds.
    */
-  uint32 expected_frame_period_ms = 40;
+  uint32 expected_frame_period_us = 40;
 
   // ----- Scale metadata (60-79) -----
 

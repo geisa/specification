@@ -166,7 +166,8 @@
             "sys-power-degraded",
             "sys-power-loss",
             "sys-reboot-soon",
-            "sys-shutdown-soon"
+            "sys-shutdown-soon",
+            "sys-time-adjust"
           ],
           "properties": {
             "timestamp-ms": {
@@ -207,6 +208,9 @@
               "type": "boolean"
             },
             "sys-shutdown-soon": {
+              "type": "boolean"
+            },
+            "sys-time-adjust": {
               "type": "boolean"
             }
           },

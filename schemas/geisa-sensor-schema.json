@@ -151,11 +151,11 @@
         "supports-publish": {
           "type": "boolean"
         },
-        "min-report-period-ms": {
+        "min-report-period-us": {
           "type": "integer",
           "minimum": 0
         },
-        "max-report-period-ms": {
+        "max-report-period-us": {
           "type": "integer",
           "minimum": 0
         }
@@ -185,7 +185,7 @@
       "type": "object",
       "required": [
         "sensor-id",
-        "timestamp-ms",
+        "timestamp-us",
         "values"
       ],
       "properties": {
@@ -193,8 +193,8 @@
           "type": "string",
           "minLength": 1
         },
-        "timestamp-ms": {
-          "description": "UTC epoch time in milliseconds indicating when the reading was generated.",
+        "timestamp-us": {
+          "description": "UTC epoch time in microseconds indicating when the reading was generated.",
           "type": "integer",
           "minimum": 0
         },

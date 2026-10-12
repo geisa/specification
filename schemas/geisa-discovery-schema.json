@@ -59,6 +59,7 @@
         "ethernet",
         "fiber",
         "wifi",
+        "plc",
         "other"
       ]
     },

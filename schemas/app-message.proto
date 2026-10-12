@@ -83,8 +83,8 @@ message GeisaAppMessage_Req {
   GeisaAppMessagePriority priority = 2;
   // Message type aligned with ADM object 3600 concepts.
   GeisaAppMessageType message_type = 3;
-  // UTC epoch time in milliseconds when the message was created.
-  uint64 timestamp_ms = 4;
+  // UTC epoch time in microseconds when the message was created.
+  uint64 timestamp_us = 4;
   // Lifetime of the request, in seconds. 0 means no explicit message-specific
   // TTL; platform or EMS default policy may apply.
   uint64 ttl_seconds = 5;
@@ -120,7 +120,7 @@ message GeisaAppMessage_Rsp {
   GeisaAppMessageStatus status = 2;
   // Upstream only: Optional human-readable diagnostic or status text.
   string status_text = 3;
-  // UTC epoch time in milliseconds when the response was created.
-  uint64 timestamp_ms = 4;
+  // UTC epoch time in microseconds when the response was created.
+  uint64 timestamp_us = 4;
   reserved 5, 6, 7;
 }

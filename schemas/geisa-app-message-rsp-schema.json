@@ -40,8 +40,8 @@
           "type": "string",
           "minLength": 1
         },
-        "timestamp-ms": {
-          "description": "UTC epoch time in milliseconds when the message was created.",
+        "timestamp-us": {
+          "description": "UTC epoch time in microseconds when the message was created.",
           "type": "integer",
           "minimum": 0
         }
