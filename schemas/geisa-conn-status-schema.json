@@ -70,7 +70,7 @@
         "today-used",
         "today-limit",
         "today-remaining",
-        "next-daily-reset-ms"
+        "next-daily-reset-us"
       ],
       "properties": {
         "yesterday-used": {
@@ -89,7 +89,7 @@
           "type": "integer",
           "minimum": 0
         },
-        "next-daily-reset-ms": {
+        "next-daily-reset-us": {
           "type": "integer",
           "minimum": 0
         }
@@ -106,7 +106,7 @@
         "today-used-metered",
         "today-limit-metered",
         "today-remaining-metered",
-        "next-daily-reset-ms"
+        "next-daily-reset-us"
       ],
       "properties": {
         "policy": {
@@ -136,7 +136,7 @@
           "type": "integer",
           "minimum": 0
         },
-        "next-daily-reset-ms": {
+        "next-daily-reset-us": {
           "type": "integer",
           "minimum": 0
         }
@@ -154,7 +154,7 @@
         "geisa-platform-status": {
           "type": "object",
           "required": [
-            "timestamp-ms",
+            "timestamp-us",
             "mode",
             "conn-msg",
             "conn-oper",
@@ -166,10 +166,11 @@
             "sys-power-degraded",
             "sys-power-loss",
             "sys-reboot-soon",
-            "sys-shutdown-soon"
+            "sys-shutdown-soon",
+            "sys-time-adjust"
           ],
           "properties": {
-            "timestamp-ms": {
+            "timestamp-us": {
               "type": "integer",
               "minimum": 0
             },
@@ -208,6 +209,9 @@
             },
             "sys-shutdown-soon": {
               "type": "boolean"
+            },
+            "sys-time-adjust": {
+              "type": "boolean"
             }
           },
           "additionalProperties": false
@@ -227,7 +231,7 @@
             "cmd-send-status",
             "cmd-shut-down",
             "cmd-clear-pii",
-            "timestamp-ms",
+            "timestamp-us",
             "cpu-usage",
             "cpu-limit",
             "memory-usage",
@@ -251,7 +255,7 @@
             "cmd-clear-pii": {
               "type": "boolean"
             },
-            "timestamp-ms": {
+            "timestamp-us": {
               "type": "integer",
               "minimum": 0
             },

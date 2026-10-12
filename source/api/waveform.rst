@@ -80,7 +80,7 @@ A waveform stream descriptor SHALL include:
 - Whether frames are ``cycle-aligned``.
 - Whether frames are ``zero-crossing-aligned``.
 - Optional integer-sample ``voltage-scale`` and ``current-scale`` values.
-- The expected frame delivery period in milliseconds.
+- The expected frame delivery period in microseconds.
 
 Platforms that provide waveform data SHALL provide, at a minimum:
 
@@ -191,7 +191,7 @@ an illustrative native layout for the frame header and typed sample payload:
 
    struct geisa_waveform_frame
    {
-     int64_t    timestamp_ns;    /* first sample time, ns since UNIX epoch UTC */
+     int64_t    timestamp_us;    /* first sample time, us since UNIX epoch UTC */
      uint32_t   sequence_num;    /* unspecified starting value */
      uint32_t   reserved;
      union {
@@ -204,9 +204,9 @@ an illustrative native layout for the frame header and typed sample payload:
    };
 
 The timestamp SHALL represent the time associated with the first sample index in the
-frame and SHALL be expressed as a signed 64-bit integer in nanoseconds since the
+frame and SHALL be expressed as a signed 64-bit integer in microseconds since the
 UNIX epoch (UTC). This defines the timestamp representation and does not imply
-that the platform clock is accurate to one nanosecond. Timestamp accuracy is
+that the platform clock is accurate to one microsecond. Timestamp accuracy is
 platform-dependent.
 
 A monotonically increasing and wrapping sequence number SHALL be included to 

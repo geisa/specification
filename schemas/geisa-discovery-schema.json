@@ -59,6 +59,7 @@
         "ethernet",
         "fiber",
         "wifi",
+        "plc",
         "other"
       ]
     },
@@ -304,7 +305,7 @@
         "sample-rate-hz",
         "samples-per-cycle",
         "nominal-frequency-hz",
-        "expected-frame-period-ms"
+        "expected-frame-period-us"
       ],
       "properties": {
         "stream-id": {
@@ -371,7 +372,7 @@
           "type": "integer",
           "minimum": 1
         },
-        "expected-frame-period-ms": {
+        "expected-frame-period-us": {
           "type": "integer",
           "minimum": 1
         },

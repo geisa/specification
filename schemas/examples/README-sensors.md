@@ -31,9 +31,16 @@ From the `specification/schemas/` directory:
     make clean
     make examples
 
-Build the embedded C sensor examples with an external nanopb runtime checkout:
+Before building the embedded C examples, complete the nanopb setup described in
+`../README.md`: run `make setup-dev` and provide the external nanopb runtime
+source checkout. The schemas `venv` does not need to be activated.
 
-    make examples-sensor NANOPB_DIR=/path/to/nanopb
+Then build the sensor examples:
+
+    make examples-sensor
+
+If the runtime checkout is not under `/tmp/nanopb`, set `NANOPB_DIR` or
+`NANOPB_RUNTIME_DIR` to its location.
 
 Compiled binaries are written to:
 

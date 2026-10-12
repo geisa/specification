@@ -14,8 +14,8 @@
       "unit": "Cel",
       "supports-read": true,
       "supports-publish": true,
-      "min-report-period-ms": 1000,
-      "max-report-period-ms": 60000
+      "min-report-period-us": 1000000,
+      "max-report-period-us": 60000000
     }
   }
 }

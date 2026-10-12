@@ -95,7 +95,7 @@ static inline void fill_demo_app_message_req(GeisaAppMessage_Req *message)
     strncpy(message->request_id, "req-0001", sizeof(message->request_id) - 1);
     message->priority = GeisaAppMessagePriority_GEISA_APP_MESSAGE_PRIORITY_IMMEDIATE;
     message->message_type = GeisaAppMessageType_GEISA_APP_MESSAGE_TYPE_APP_DATA;
-    message->timestamp_ms = 1762862400000ULL;
+    message->timestamp_us = 1762862400000000ULL;
     message->ttl_seconds = 300ULL;
     strncpy(message->content_type, "application/json", sizeof(message->content_type) - 1);
     message->payload.size = sizeof(payload) - 1;
@@ -108,7 +108,7 @@ static inline void fill_demo_app_message_rsp(GeisaAppMessage_Rsp *message)
     strncpy(message->request_id, "req-0001", sizeof(message->request_id) - 1);
     message->status = GeisaAppMessageStatus_GEISA_APP_MESSAGE_STATUS_ACCEPTED;
     strncpy(message->status_text, "accepted for processing", sizeof(message->status_text) - 1);
-    message->timestamp_ms = 1762862400100ULL;
+    message->timestamp_us = 1762862400100000ULL;
 }
 
 static inline int app_message_decode_and_print_req_file(const char *path)
@@ -125,7 +125,7 @@ static inline int app_message_decode_and_print_req_file(const char *path)
     geisa_print_json_escaped(geisa_app_message_priority_name(message.priority));
     fputs(",\"message-type\":", stdout);
     geisa_print_json_escaped(geisa_app_message_type_name(message.message_type));
-    printf(",\"timestamp-ms\":%llu", (unsigned long long)message.timestamp_ms);
+    printf(",\"timestamp-us\":%llu", (unsigned long long)message.timestamp_us);
     printf(",\"ttl-seconds\":%llu", (unsigned long long)message.ttl_seconds);
     if (message.content_type[0] != '\0')
     {
@@ -153,7 +153,7 @@ static inline int app_message_decode_and_print_rsp_file(const char *path)
     geisa_print_json_escaped(message.request_id);
     fputs(",\"status\":", stdout);
     geisa_print_json_escaped(geisa_app_message_status_name(message.status));
-    printf(",\"timestamp-ms\":%llu", (unsigned long long)message.timestamp_ms);
+    printf(",\"timestamp-us\":%llu", (unsigned long long)message.timestamp_us);
     if (message.status_text[0] != '\0')
     {
         fputs(",\"status-text\":", stdout);

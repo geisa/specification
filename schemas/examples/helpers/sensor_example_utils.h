@@ -77,7 +77,7 @@ static inline void fill_demo_sensor_readings_rsp(GeisaSensorReadings_Rsp *messag
 
     GeisaSensorReading *board = &message->readings[0];
     strncpy(board->sensor_id, "board-temp-1", sizeof(board->sensor_id) - 1);
-    board->timestamp_ms = 1762862400000ULL;
+    board->timestamp_us = 1762862400000000ULL;
     board->values_count = 2;
     fill_demo_sensor_value_double(&board->values[0], 47.25);
     fill_demo_sensor_value_double(&board->values[1], 47.38);
@@ -90,7 +90,7 @@ static inline void fill_demo_sensor_readings_rsp(GeisaSensorReadings_Rsp *messag
 
     GeisaSensorReading *ambient = &message->readings[1];
     strncpy(ambient->sensor_id, "ambient-temp-1", sizeof(ambient->sensor_id) - 1);
-    ambient->timestamp_ms = 1762862400000ULL;
+    ambient->timestamp_us = 1762862400000000ULL;
     ambient->values_count = 1;
     fill_demo_sensor_value_double(&ambient->values[0], 22.70);
     ambient->has_unit = true;
@@ -147,7 +147,7 @@ static inline void print_sensor_reading_json(const GeisaSensorReading *reading)
     putchar('{');
     geisa_print_json_key("sensor-id");
     geisa_print_json_escaped(reading->sensor_id);
-    printf(",\"timestamp-ms\":%llu", (unsigned long long)reading->timestamp_ms);
+    printf(",\"timestamp-us\":%llu", (unsigned long long)reading->timestamp_us);
     fputs(",\"values\":[", stdout);
     for (pb_size_t i = 0; i < reading->values_count; ++i)
     {

@@ -89,7 +89,7 @@ This will create:
 
 ## Demo output
 
-- `timestamp_ms` is UTC epoch milliseconds; the local demo uses a fixed example
+- `timestamp_us` is UTC epoch microseconds; the local demo uses a fixed example
   value.
 - Preview shows the first 10 time steps with raw `int16` values and scaled
   engineering units printed to 3 decimal places.

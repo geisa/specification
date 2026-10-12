@@ -38,11 +38,16 @@ From the `specification/schemas/` directory:
     make clean
     make examples
 
-To build the embedded C app-message examples:
+Before building the embedded C examples, complete the nanopb setup described in
+`../README.md`: run `make setup-dev` and provide the external nanopb runtime
+source checkout. The schemas `venv` does not need to be activated.
 
-    make app-message-c NANOPB_GENERATOR=protoc-gen-nanopb
-    make examples-app-message NANOPB_GENERATOR=protoc-gen-nanopb \
-      NANOPB_DIR=/path/to/nanopb
+Then build the app-message examples:
+
+    make examples-app-message
+
+If the runtime checkout is not under `/tmp/nanopb`, set `NANOPB_DIR` or
+`NANOPB_RUNTIME_DIR` to its location.
 
 Example binaries are written to:
 

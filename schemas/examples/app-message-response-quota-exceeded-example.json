@@ -4,6 +4,6 @@
     "request-id": "req-0002",
     "status": "GEISA_APP_MESSAGE_STATUS_QUOTA_EXCEEDED",
     "status-text": "rejected: app-message quota/policy limit exceeded",
-    "timestamp-ms": 1762862400200
+    "timestamp-us": 1762862400200000
   }
 }

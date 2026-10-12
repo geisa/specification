@@ -4,6 +4,6 @@
     "request-id": "req-0003",
     "status": "GEISA_APP_MESSAGE_STATUS_UNAVAILABLE",
     "status-text": "upstream service temporarily unavailable",
-    "timestamp-ms": 1762862400300
+    "timestamp-us": 1762862400300000
   }
 }

@@ -4,6 +4,6 @@
     "request-id": "req-0001",
     "status": "GEISA_APP_MESSAGE_STATUS_ACCEPTED",
     "status-text": "accepted for delivery",
-    "timestamp-ms": 1762862400100
+    "timestamp-us": 1762862400100000
   }
 }

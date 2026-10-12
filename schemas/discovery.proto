@@ -198,6 +198,7 @@ enum GeisaPlatformDiscovery_NetworkTechnology {
   NETWORK_TECHNOLOGY_ETHERNET = 40;
   NETWORK_TECHNOLOGY_FIBER = 50;
   NETWORK_TECHNOLOGY_WIFI = 60;
+  NETWORK_TECHNOLOGY_PLC = 70;
   NETWORK_TECHNOLOGY_OTHER = 90;
 }
 
@@ -318,8 +319,8 @@ message GeisaPlatformDiscovery_Waveform_Instance {
   // nominal AC frequency in hertz
   uint32 nominal_frequency_hz = 404;
 
-  // expected duration of each frame in milliseconds
-  uint32 expected_frame_period_ms = 405;
+  // expected duration of each frame in microseconds
+  uint32 expected_frame_period_us = 405;
 
   // if a hardware or software filter is applied prior to delivery, these
   // fields indicate filter characteristics in hertz.
