@@ -15,7 +15,7 @@
         "request-id",
         "priority",
         "message-type",
-        "timestamp-ms",
+        "timestamp-us",
         "ttl-seconds",
         "content-type",
         "payload-base64"
@@ -52,7 +52,7 @@
             "GEISA_APP_MESSAGE_TYPE_TELEMETRY"
           ]
         },
-        "timestamp-ms": {
+        "timestamp-us": {
           "description": "UTC epoch time in microseconds when the message was created.",
           "type": "integer",
           "minimum": 0

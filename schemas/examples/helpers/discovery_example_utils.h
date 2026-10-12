@@ -301,7 +301,7 @@ static inline void fill_demo_discovery_rsp(GeisaPlatformDiscovery_Rsp *message)
     stream->sample_rate_hz = 15360;
     stream->samples_per_cycle = 256;
     stream->nominal_frequency_hz = 60;
-    stream->expected_frame_period_us = 16;
+    stream->expected_frame_period_us = 16000;
     stream->voltage_filter_lowpass = 5000;
     stream->current_filter_lowpass = 5000;
 }

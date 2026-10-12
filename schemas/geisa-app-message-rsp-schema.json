@@ -13,7 +13,7 @@
       "required": [
         "request-id",
         "status",
-        "timestamp-ms"
+        "timestamp-us"
       ],
       "properties": {
         "request-id": {

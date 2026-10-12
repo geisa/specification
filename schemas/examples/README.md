@@ -39,16 +39,19 @@ Compiled example binaries are written to:
 
     build/examples/
 
-The embedded C build uses the schemas `venv` for nanopb generation plus an
-external nanopb runtime source tree:
+The embedded C build requires both the nanopb Python generator environment and
+a nanopb runtime source checkout:
 
     make setup-dev
     test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
     make examples-c
 
-The Makefile uses the schemas `venv` Python directly when available, so
-shell activation of the schemas `venv` is not required.  The build will
-use the schemas venv Python directly when available.
+`make setup-dev` prepares the schemas `venv` used for nanopb generation. The
+Makefile uses that `venv` directly when available, so shell activation is not
+required. The separate nanopb checkout provides the runtime C sources and
+headers used to compile the examples.
+
+See `../README.md` for the full nanopb prerequisite details.
 
 If you already have a working `protoc-gen-nanopb` executable, you can use it
 instead by setting `NANOPB_GENERATOR=protoc-gen-nanopb` or an explicit plugin

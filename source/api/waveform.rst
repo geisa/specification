@@ -82,7 +82,7 @@ A waveform stream descriptor SHALL include:
 - Whether frames are ``zero-crossing-aligned``.
 - Whether DC error / offset has been removed.
 - Optional integer-sample ``voltage-scale`` and ``current-scale`` values.
-- The expected frame delivery period in milliseconds.
+- The expected frame delivery period in microseconds.
 
 Platforms that provide waveform data SHALL provide, at a minimum:
 
@@ -205,12 +205,11 @@ an illustrative native layout for the frame header and typed sample payload:
      } data;
    };
 
-The timestamp SHALL represent the time associated with the first sample index
-in the frame and SHALL be expressed as a signed 64-bit integer in microseconds
-since the UNIX epoch (UTC). While time accuracy to the microsecond level is
-desired, timestamp accuracy is platform-dependent.  System operators should
-work with the platform providers to understand the accuracy they support and
-how it may impact the performance of applications that consume waveform data.
+The timestamp SHALL represent the time associated with the first sample index in the
+frame and SHALL be expressed as a signed 64-bit integer in microseconds since the
+UNIX epoch (UTC). This defines the timestamp representation and does not imply
+that the platform clock is accurate to one microsecond. Timestamp accuracy is
+platform-dependent.
 
 A monotonically increasing and wrapping sequence number SHALL be included to 
 allow detection of dropped or out-of-order frames. The starting value is 
