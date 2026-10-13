@@ -152,7 +152,7 @@ These operations are performed using the following CoAp methods:
 
 |geisa-landscape|
 
-.. Internal Editors Note:  The table below has been split into two because for
+.. Internal Editors Note:  The table below has been split because for
    some reason the LatexPDF renderer cuts off the table otherwise.  Sigh.
 
 
@@ -230,6 +230,10 @@ These operations are performed using the following CoAp methods:
        | 4.04 Not Found,
        | 4.05 Method Not Allowed
 
+.. flat-table:: 
+   :header-rows: 0
+   :widths: 10 10 35 20 25
+
    * - Execute
      - POST
      - /{Object ID}/{Object Instance ID}/{Resource ID}
@@ -262,13 +266,17 @@ These operations are performed using the following CoAp methods:
 
 |geisa-landscape-end|
 
-.. figure:: device-management-operations.*
 
-  Device Management Operations
+.. figure:: device-management-operations.*
+   :width: 80 %
+
+   Device Management Operations
+
 
 .. figure:: object-creation-deletion.*
+   :width: 70 %
 
-  Object Creation and Deletion
+   Object Creation and Deletion
 
 
 |geisa-pyramid|

@@ -57,9 +57,9 @@ environment and a GEISA-conformant API / application programming interface.
 
 GEISA defines two different execution environments:
 
-* **Linux Execution Environment (LEE)** |geisa-lee-tux|
+* Linux Execution Environment (LEE) |geisa-lee-tux|
 
-* **Virtual Execution Environment (VEE)** |geisa-vee-cloud|
+* Virtual Execution Environment (VEE) |geisa-vee-cloud|
 
 Platforms may offer one or both of these execution environments (EE).
 

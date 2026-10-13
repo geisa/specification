@@ -368,14 +368,16 @@ forwarding, transparent proxying, or shared upstream connections.
 The approval review should consider endpoint ownership, protocol and port
 scope, certificate and trust behavior, expected data volume, retry behavior,
 outage behavior, inbound exposure, fleet network capacity, and operational
-visibility. Inbound IP socket communication generally presents higher
-operational and security risk than outbound-initiated communication and
-may be limited to local endpoint use cases or denied by operator policy.
-This version of the specification does not define interoperable support for
+visibility. Inbound-initated IP socket communication generally presents higher
+operational and security risk than outbound-initiated communication and is
+limited to local endpoint use cases or denied by operator policy.  This version
+of the specification does not define interoperable support for
 application-hosted listeners reachable from upstream operator networks or for
 peer-to-peer application communication over the AMI network. Those use cases
 may be considered in a future version if driven by operator or application
-requirements.
+requirements.  Inbound-initiated IP socket communication is currently only
+defined for the ``Local`` ``NetworkClass`` (see :doc:`/api/discovery` and
+:doc:`/api/networking`).
 
 Platform-originated reporting should provide timely operator visibility
 into denied access attempts, quota limits reached, unexpected egress attempts,

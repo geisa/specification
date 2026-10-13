@@ -87,13 +87,15 @@ The following example demonstrates GEISA conformant edge app installation and
 
 .. _software-update-trigger:
 .. figure:: software-update-trigger.*
+   :width: 70 %
 
-    Edge App Image Pull
+   Edge App Image Pull
 
 .. _software-update-install:
 .. figure:: software-update-install.*
+   :width: 70 %
 
-    Edge App Install and Activate
+   Edge App Install and Activate
 
 **App Update**
 

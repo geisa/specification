@@ -97,7 +97,7 @@ environment a GEISA platform supports for running applications.  This version
 of the GEISA specification defines two specific execution environments: A Linux
 Execution Environment and a Virtual Execution Environment.
 
-Ocassionaly there are requirements common to both.  When this specification
+Occasionaly there are requirements common to both.  When this specification
 discusses execution environments in general, there may be a globe icon
 |geisa-ee-globe| to highlight it.
 

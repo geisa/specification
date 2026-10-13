@@ -34,9 +34,11 @@ GEISA ADM conformant devices SHALL use the Registration Update, a lightweight em
   * The objects supported by the platform change after a firmware upgrade
 
 .. _registration:
-.. figure:: client-registration.*
 
-  LwM2M Registration and Registration Update
+.. figure:: client-registration.*
+   :width: 70 %
+
+   LwM2M Registration and Registration Update
 
 |geisa-pyramid|
 

@@ -210,7 +210,12 @@ html_theme_options = {
         'show_relbars': False,
         'show_relbar_bottom': True,
         'show_powered_by': False,
-        'page_width': '1200px'
+        'page_width': '1200px',
+        'body_text': '#000000',
+        'sidebar_text': '#000000',
+        'sidebar_header': '#000000',
+        'sidebar_link': '#000000',
+        'sidebar_list': '#000000'
         }
 
 # -- LaTex Options ------------------------------------------------------------
