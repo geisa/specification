@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant E as Edge Management System
+    participant K as Kafka-Compatible Data Distribution Service
+    participant U as Utility Data-Lake Adapter
+    participant V as Application Vendor Adapter
+
+    Note over E,V: Normal continuous consumption
+    E->>K: Publish GEISA data record 1 (Kafka Produce)
+    K-->>U: Return record 1 when available
+    K-->>V: Return record 1 when available
+    U->>K: Commit Utility consumer position
+    V->>K: Commit Application Vendor consumer position
+
+    Note over U,U: Utility consumer becomes unavailable
+    E->>K: Publish GEISA data records 2 and 3
+    K-->>V: Return records 2 and 3 when available
+    V->>K: Commit Application Vendor consumer position
+    Note over K,U: Records remain available according to configured retention
+
+    Note over U,K: Utility consumer reconnects
+    U->>K: Resume continuous consumption from committed position
+    K-->>U: Return retained records 2 and 3
+    U->>K: Commit Utility consumer position
+
+    Note over U,V: One consumer's outage does not interrupt another consumer

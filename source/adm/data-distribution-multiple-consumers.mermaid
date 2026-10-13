@@ -1,0 +1,25 @@
+sequenceDiagram
+participant A as Edge Application
+participant D as Edge Device
+participant E as Edge Management System
+participant K as Kafka-Compatible Data Distribution Service
+participant U as Utility Data-Lake Adapter
+participant V as Application Vendor Adapter
+
+Note over A,E: Application data reaches the EMS
+A->>D: Send GEISA application message
+D-->>E: Send application message via ADM /3600
+
+Note over E,K: Data Distribution publication
+E->>K: Publish GEISA data record (Kafka Produce)
+
+Note over K,V: Independent logical consumers
+U->>K: Continuously consume Utility topic
+K-->>U: Return GEISA data record when available
+U->>K: Commit Utility consumer position
+
+V->>K: Continuously consume Application Vendor topic
+K-->>V: Return same GEISA data record when available
+V->>K: Commit Application Vendor consumer position
+
+Note over U,V: Consumption or commit by one consumer does not affect the other

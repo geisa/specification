@@ -14,11 +14,11 @@ Application & Device Management
 
 GEISA provides a uniform mechanism for managing edge devices and the
 applications that run on top of them.  ADM conformant devices from different
-platform vendors can be managed by a single ADM conformant edge management 
+platform vendors can be managed by a single ADM conformant edge management
 system.
 See :doc:`system-architecture` for more discussion of the general concept.
 
-ADM conformance devices support a set of standard transactions using the Open Mobile Alliance 
+ADM conformance devices support a set of standard transactions using the Open Mobile Alliance
 Lightweight M2M [LwM2M]_ transaction definitions, over the IETF CoAP
 [RFC7252]_ protocol.  ADM conformant platform implementations MUST support the
 LwM2M transactions detailed in this chapter and the supporting device behaviors
@@ -56,6 +56,7 @@ to send messages to edge applications.
   adm/firmware-management
   adm/app-management
   adm/messaging
+  adm/data-distribution
 
 
 
