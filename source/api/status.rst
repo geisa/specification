@@ -132,7 +132,7 @@ time-based calculations relative to device-local policy such as daily
 resource reset intervals.
 
 GEISA platforms SHALL ensure that the timestamp provided is accurate.  GEISA
-platforms SHOULD NOT start GEISA applications until they can provided valid
+platforms SHOULD NOT start GEISA applications until they can provide valid
 timestamps, whether from a local real-time clock, a network source, global
 positioning, or an external time source.  The platform is responsible for
 maintaining the timestamp as close as possible with UTC epoch time,
