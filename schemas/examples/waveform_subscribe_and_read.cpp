@@ -82,7 +82,7 @@ namespace {
 
 /*
  * Matches the spec's geisa_waveform_frame header layout:
- *   int64 timestamp_us
+ *   uint64 timestamp_us
  *   uint32 sequence_num
  *   uint32 reserved
  * followed by samples payload
@@ -94,7 +94,7 @@ namespace {
  */
 #pragma pack(push, 1)
 struct GeisaWaveformFrameHeader {
-  int64_t timestamp_us;
+  uint64_t timestamp_us;
   uint32_t sequence_num;
   uint32_t reserved;
 };
@@ -138,7 +138,7 @@ std::string MakeSampleFrameBytes(const GeisaWaveform_Rsp& rsp) {
   // Build one frame for demo mode so parsing can be exercised without
   // a real platform waveform source..
   GeisaWaveformFrameHeader hdr{};
-  hdr.timestamp_us = 1735689600000000LL;
+  hdr.timestamp_us = 1735689600000000ULL;
   hdr.sequence_num = 1;
   hdr.reserved = 0;
 

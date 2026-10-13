@@ -109,7 +109,7 @@ and the queue then purged.
   deposited into an operator-run system for retrieval by the operator and/or
   application developer using APIs to the operator's cloud services.  Subject
   to operator policy, the operator or application developer MAY also initiate
-  messages to the application in bulk or individually.
+  messages to instances of the application in bulk or individually.
 
 |geisa-pyramid|
 
@@ -443,7 +443,7 @@ queries to avoid hard-coded IP literals within their application source or
 configuration files, but applications should not assume that name resolution
 will be successful in all environments.
 
-Platforms that SHOULD implement a caching local resolver that honors TTL to
+Platforms SHOULD implement a caching local resolver that honors TTL to
 reduce network traffic off-device due to repeated application lookups for the
 same name.
 
