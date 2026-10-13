@@ -156,7 +156,7 @@ application.
 The format of the ``mqtt.conf`` file shall be key/value pairs separated by an
 equals sign.  The file shall contain at least an entry for ``SOCKET`` or
 entries for both ``HOST`` and ``PORT``.  Platforms that support both IP and
-unix domain sockets should include all three.  Edge applications MUST support
+unix domain sockets should include all three.  GEISA applications MUST support
 both ways of connecting.
 
 .. code-block:: console

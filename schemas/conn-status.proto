@@ -116,7 +116,7 @@ message GeisaPlatformStatus {
 	bool sys_power_loss = 34;
 	bool sys_reboot_soon = 35;
 	bool sys_shutdown_soon = 36;
-	bool sys_time_adjust = 37;
+	int64 sys_time_adjust = 37;         // If the time has been stepped, amount in microseconds
 }
 
 // This is the most outer message for Platform To App Status
