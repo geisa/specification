@@ -201,7 +201,7 @@ an illustrative native layout for the frame header and typed sample payload:
 
    struct geisa_waveform_frame
    {
-     int64_t    timestamp_us;    /* first sample time, us since UNIX epoch UTC */
+     uint64_t   timestamp_us;    /* first sample time, us since UNIX epoch UTC */
      uint32_t   sequence_num;    /* unspecified starting value */
      uint32_t   reserved;
      union {
@@ -214,7 +214,7 @@ an illustrative native layout for the frame header and typed sample payload:
    };
 
 The timestamp SHALL represent the time associated with the first sample index in the
-frame and SHALL be expressed as a signed 64-bit integer in microseconds since the
+frame and SHALL be expressed as an unsigned 64-bit integer in microseconds since the
 UNIX epoch (UTC). This defines the timestamp representation and does not imply
 that the platform clock is accurate to one microsecond. Timestamp accuracy is
 platform-dependent.
