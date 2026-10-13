@@ -54,13 +54,15 @@ upgrade in :numref:`fota-push-activate`.
 
 .. _fota-push-image:
 .. figure:: fota-push-image.*
+   :width: 70 %
 
-  Firmware Over-the-Air Push Update
+   Firmware Over-the-Air Push Update
 
 .. _fota-push-activate:
 .. figure:: fota-push-activate.*
+   :width: 70 %
 
-  Firmware Over-the-Air Manual Activate
+   Firmware Over-the-Air Manual Activate
 
 The second example, as shown in :numref:`fota-pull-initiate`, demonstrates the
 PULL of the firmware image from the URL set by the EMS into ``/5/0/1 Package
@@ -70,13 +72,15 @@ setting ``/5/0/14 Automatic Upgrade = True``.
 
 .. _fota-pull-initiate:
 .. figure:: fota-pull-initiate.*
+   :width: 70 %
 
-  Firmware Over-the-Air Pull Image Initiate
+   Firmware Over-the-Air Pull Image Initiate
 
 .. _fota-pull-automatic:
 .. figure:: fota-pull-automatic.*
+   :width: 90 %
 
-  Firmware Over-the-Air Pull Automatic Download and Update
+   Firmware Over-the-Air Pull Automatic Download and Update
 
 
 |geisa-pyramid|

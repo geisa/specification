@@ -34,8 +34,9 @@ information (and subsequent registration).
 
 .. _bootstrap:
 .. figure:: client-bootstrap.*
+    :width: 70 %
 
-  Client Bootstrap
+    Client Bootstrap
 
 As noted in [LwM2M-Core]_, GEISA ADM conformant devices SHALL support Client
 Initiated bootstrapping.  GESIA ADM conformant devices MAY support other

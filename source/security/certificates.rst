@@ -83,11 +83,16 @@ to expiration and is replaced periodically.
 
 This extended bootstrap follows the process shown below:
 
-.. figure:: TwoPassESTBootstrap.*
+.. figure:: TwoPassESTBootstrap-IDevID.*
+   :width: 90 %
 
-   Enrollment over Secure Transport triggered by Client-Initiated Bootstrap
-   with long-lived and short-lived LDevIDs.
+   Initial Enrollment over Secure Transport triggered by Client-Initiated Bootstrap
+   using IDevID.
 
+.. figure:: TwoPassESTBootstrap-LDevID.*
+   :width: 90 %
+
+   Re-Enrollment over Secure Transport using System Operator Issued LDevID
 
 .. 
    Need to discuss how the long-lived LDevID and the short-lived LDevID are
