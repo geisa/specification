@@ -65,10 +65,10 @@ on `mmdc` for Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
 
 ### Mermaid
 
-Mermaid requires node.js and can be installed using the node package manager.
+Mermaid requires `node.js` and can be installed using the node package manager.
 The `node.js` and `npm` packages supplied by some Linux distributions may be
 too old to install current Mermaid CLI releases.  As a result, you may need to
-update node.js and npm before mermaid can be installed.
+update `node.js` and `npm` before mermaid can be installed.
 
 Install Mermaid CLI with `npm`:
 
@@ -146,12 +146,12 @@ application directly. If it does not provide a `drawio` command on `PATH`,
 create a user-local wrapper or symlink to the application binary.
 For example:
 
-<pre>
+```bash
 mkdir -p "$HOME/bin"
 ln -s "/Applications/draw.io.app/Contents/MacOS/draw.io" "$HOME/bin/drawio"
 export PATH="$HOME/bin:$PATH"
 drawio --help
-</pre>
+```
 
 Depending on the installed application name, the macOS binary may instead be:
 
@@ -182,7 +182,7 @@ Building the schema examples requires several external tools:
 ### protoc
 
 Protoc is a protobuf compiler.  See https://github.com/protocolbuffers/protobuf
-for details.  Most Linux distributions have this, it and the associated
+for details.  Most Linux distributions have this. It and the associated
 libraries and headers need to be installed. 
 
 ### nanopb
@@ -247,7 +247,7 @@ outputs.
 
 To build a custom Sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Running multiple jobs as part of make (i.e. -j 4) may result in errors in the
+NOTE: Running multiple jobs as part of make (i.e. `-j 4`) may result in errors in the
 `latexpdf` build. 
 
 NOTE: Depending on your specific distribution, you may encounter errors during
