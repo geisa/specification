@@ -21,7 +21,7 @@
 
 ###############################################################################
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := help
 
 PROTOS ?= $(wildcard *.proto)
 
@@ -82,7 +82,7 @@ help:
 	  'GEISA schemas build targets:' \
 	  '' \
 	  'Proto generation:' \
-	  '  make / make all    Build default proto descriptors and all supported examples.' \
+	  '  make all           Build default proto descriptors and all supported examples.' \
 	  '  make langs         Build supported binding/code-generation outputs only (cpp, java, python).' \
 	  '  make c             Generate C bindings via protoc-c (best-effort).' \
 	  '  make cpp           Generate C++ protobuf bindings.' \
