@@ -52,15 +52,22 @@ endif
 
 # Put it first so that "make" without argument is like "make help".
 help:
-	@echo "GEISA Specification targets:"
+	@echo "GEISA Build environment targets:"
 	@echo "  setup-dev   Setup venv and sphinx -- recommended for new environments"
+	@echo "  lint        lints both specification and schemas"
+	@echo
+	@echo "GEISA Specification targets:"
 	@echo "  clean       Clean repo"
 	@echo "  cleanlatex  Clean LaTex build directory"
-	@echo "  schemas-all All schema examples and demos"
-	@echo "  all         Build all GEISA outputs ($(SPHINXTARGETS))"
+	@echo "  all         Build all GEISA specification outputs ($(SPHINXTARGETS))"
 	@for TT in $(SPHINXTARGETS); do printf "  %-10s  Build GEISA %s output\n" $$TT $$TT; done
 	@echo 
-	@echo "To see a full list of schema build targets"
+	@echo "GEISA Schema targets:"
+	@echo "  schemas-examples-c"
+	@echo "  schemas-demos"
+	@echo "  schemas-lint"
+	@echo "  schemas-clean"
+	@echo "To see a full list of schema build targets:"
 	@echo "  cd schemas; make"
 	@echo
 

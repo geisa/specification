@@ -1,7 +1,9 @@
 
 # GEISA Specification
 
-## What is this?
+## Getting Started
+
+### What is this?
 
 The GEISA Specification is an effort by the
 [GEISA project](https://lfenergy.org/projects/geisa/)
@@ -21,25 +23,25 @@ that are built into HTML and PDF using
 
 The repository also includes the GEISA machine-readable definitions under
 [`schemas/`](schemas/), including Protocol Buffer definitions, JSON Schemas,
-profiles, examples, nanopb support, and related tooling. 
+profiles, examples, nanopb support, and related tooling.
 
-## How is it licensed?
+### How is it licensed?
 
 The GEISA specification and documentation are licensed under the Community
 Specification License. Content under [`schemas/`](schemas/), including schemas,
 examples, and related tooling, is licensed under the Apache License 2.0; see
 [`schemas/LICENSE`](schemas/LICENSE).
 
-## How can I use this?
+### How can I use this?
 
-### Just the spec 
+#### Just the spec
 
 If you're just interested in the specification itself, headover to the [GEISA
 Specification](https://spec.geisa-energy.org) to access both formal releases of
 the GEISA specification and nightly builds with the latest changes.  The spec
 is available as both PDF and HTML.
 
-### Contributing
+#### Contributing
 
 If you want to contribute to the specification or build your own implementation
 of GEISA, you'll want to be able to generate the specification and the schema
@@ -47,9 +49,9 @@ examples locally.  This requires a host environment capable of running standard
 POSIX tools.  Linux, MacOS, and WSL on Windows are suitable.  See below for
 details on how to setup your environment.
 
-# Setting up your own build environment
+## Setting up your own build environment
 
-## External tools for the specification
+### External tools for the specification
 
 Building the specification requires several external tools:
 
@@ -63,7 +65,7 @@ diagrams.net/draw.io is used for selected layout-sensitive architecture and
 similar diagrams. To ensure a consistent build process, the build scripts rely
 on `mmdc` for Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
 
-### Mermaid
+#### Mermaid
 
 Mermaid requires `node.js` and can be installed using the node package manager.
 The `node.js` and `npm` packages supplied by some Linux distributions may be
@@ -77,9 +79,9 @@ npm install -g @mermaid-js/mermaid-cli
 ```
 
 See the [Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli)
-for additional information. 
+for additional information.
 
-### Draw.IO
+#### Draw.IO
 
 diagrams.net/draw.io is not installed through the Python virtual environment
 and does not have an official npm package equivalent to Mermaid CLI at this
@@ -159,38 +161,36 @@ Depending on the installed application name, the macOS binary may instead be:
 /Applications/diagrams.net.app/Contents/MacOS/diagrams.net
 </pre>
 
-### rsvgconvert
+#### rsvgconvert
 
-Building the specification PDF requires rsvg-convert.  It's part of the GNOME
-project.  Project details can be found at:
-https://gitlab.gnome.org/GNOME/librsvg.  Most Linux distributions have this, it
-just needs to be installed.
+Building the specification PDF requires
+[rsvg-convert](https://gitlab.gnome.org/GNOME/librsvg).  It's part of the GNOME
+project. Most Linux distributions have this; it just needs to be installed.
 
-### LaTex
+#### LaTex
 
-Building the specification PDF requires LaTex.  Project details can be found at: 
-https://www.latex-project.org/. Most distributions have this, it just needs to 
-be installed.
+Building the specification PDF requires [LaTex](https://www.latex-project.org/).
+Most distributions have this; it just needs to be installed.
 
-## External tools for the schemas
+### External tools for the schemas
 
 Building the schema examples requires several external tools:
 
 - protoc
 - nanopb
 
-### protoc
+#### protoc
 
-Protoc is a protobuf compiler.  See https://github.com/protocolbuffers/protobuf
-for details.  Most Linux distributions have this. It and the associated
-libraries and headers need to be installed. 
+Protoc is a [protobuf](https://github.com/protocolbuffers/protobuf) compiler.
+Most Linux distributions have this. It and the associated libraries and headers
+need to be installed.
 
-### nanopb
+#### nanopb
 
-nanopb is a protobuf compiler for C focused on constrained environments.  See
-https://github.com/nanopb/nanopb.  This can be installed manually.
+[nanopb](https://github.com/nanopb/nanopb) is a protobuf compiler for C focused
+on constrained environments. This can be installed manually.
 Alternatively, the `setup-dev` target will prompt you to install it in `/tmp`.
-See `schemas/README.md` for additional details.
+See below and `schemas/README.md` for additional details.
 
 ## Cloning the repo
 
@@ -204,10 +204,11 @@ git clone --recurse-submodules https://github.com/geisa/specification.git
 ```
 
 Do note the `--recurse-submodules`.  GEISA uses a Git submodule for relevant
-OMA objects from the [LwM2M Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).  
-Because this content is provided via a submodule, it is **not** populated by a 
-plain `git clone` and the directory will appear empty until the submodule is 
-initialized.  Failing to include `--recurse-submodules` will result in build errors.
+OMA objects from the [LwM2M
+Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).  Because this
+content is provided via a submodule, it is **not** populated by a plain `git
+clone` and the directory will appear empty until the submodule is initialized.
+Failing to include `--recurse-submodules` will result in build errors.
 
 If you have already cloned the repository, without recursing submodules, fetch
 the submodule from the repository root with:
@@ -225,7 +226,7 @@ Building the GEISA specification requires `sphinx` as well as `GitPython`
 `sphinxcontrib-svg2pdfconverter` and `linuxdoc`.  If you already have these in
 your environment, things might build, but by default GEISA uses Python `venv`
 to create a virtual environment so that Sphinx can be installed using its own
-separate packages and not break anything in the existing environment. 
+separate packages and not break anything in the existing environment.
 
 Note: depending on your environment, you may need to install
 Python `venv` using your system package manager first.
@@ -238,17 +239,24 @@ need into them.  It will also address Node.js development dependencies.
 make setup-dev
 ```
 
+## Building the specification
+
 Assuming you've installed the required external tools, you should now be able
 to build the specification.  Typing `make` by itself will provide a list of
-available build targets.
+available build targets.  `make all` will build both the PDF and html versions
+of the specification.  Output can be found in `build/html` and `build/latexpdf`.
+
+```bash
+make all
+```
 
 Alternative make targets include `html` and `latexpdf` to build just those
 outputs.
 
 To build a custom Sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Running multiple jobs as part of make (i.e. `-j 4`) may result in errors in the
-`latexpdf` build. 
+NOTE: Running multiple jobs as part of make (i.e. `-j 4`) may result in errors
+in the `latexpdf` build.
 
 NOTE: Depending on your specific distribution, you may encounter errors during
 LaTeX file generation near the end of the build due to missing style files such
@@ -274,24 +282,24 @@ tlmgr search --file --global "cmap.sty"
 which will provide the texlive package providing the specified file which can
 then be used to install any missing individual files.
 
-
 ## Building the schema examples
 
 When `make setup-dev` completes, it will prompt you to install `nanopb` if it's
-not already installed.  
-
-From the specification/schemas/ directory, run the next embedded C example
-build:
+not already installed.
 
 ```bash
 test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
-make examples-c
+```
+
+Once this is done, you can start building examples:
+
+```bash
+make schemas-examples-c
 ```
 
 Build with `make schemas` or `make schemas-all`, clean with `make
 schemas-clean`, and lint with `make schemas-lint`. Example targets are
 available from the repository root as `make schemas-examples`, `make
-schemas-examples-c`, and `make schemas-demos`.  Repository setup and combined
-linting use `make setup-dev` and `make lint`.
+schemas-examples-c`, and `make schemas-demos`.
 
 See `schemas/README.md` for additional details.
