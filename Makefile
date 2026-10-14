@@ -53,14 +53,16 @@ endif
 # Put it first so that "make" without argument is like "make help".
 help:
 	@echo "GEISA Specification targets:"
+	@echo "  setup-dev   Setup venv and sphinx -- recommended for new environments"
 	@echo "  clean       Clean repo"
 	@echo "  cleanlatex  Clean LaTex build directory"
+	@echo "  schemas-all All schema examples and demos"
 	@echo "  all         Build all GEISA outputs ($(SPHINXTARGETS))"
 	@for TT in $(SPHINXTARGETS); do printf "  %-10s  Build GEISA %s output\n" $$TT $$TT; done
+	@echo 
+	@echo "To see a full list of schema build targets"
+	@echo "  cd schemas; make"
 	@echo
-	@echo "Or build custom Sphinx target with:"
-	@echo "  SPHINXTARGETS=foo make all"
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
 .DELETE_ON_ERROR:
 

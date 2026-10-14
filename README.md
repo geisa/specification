@@ -1,5 +1,7 @@
 
-# specification
+# GEISA Specification
+
+## What is this?
 
 The GEISA Specification is an effort by the
 [GEISA project](https://lfenergy.org/projects/geisa/)
@@ -19,50 +21,54 @@ that are built into HTML and PDF using
 
 The repository also includes the GEISA machine-readable definitions under
 [`schemas/`](schemas/), including Protocol Buffer definitions, JSON Schemas,
-profiles, examples, nanopb support, and related tooling. Build with
-`make schemas` or `make schemas-all`, clean with `make schemas-clean`, and lint
-with `make schemas-lint`. Example targets are available from the repository root
-as `make schemas-examples`, `make schemas-examples-c`, and `make schemas-demos`.
-Repository setup and combined linting use `make setup-dev` and `make lint`.
+profiles, examples, nanopb support, and related tooling. 
+
+## How is it licensed?
 
 The GEISA specification and documentation are licensed under the Community
 Specification License. Content under [`schemas/`](schemas/), including schemas,
 examples, and related tooling, is licensed under the Apache License 2.0; see
 [`schemas/LICENSE`](schemas/LICENSE).
 
-GEISA also uses a Git submodule for relevant OMA objects from the
-[LwM2M Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).
-Because this content is provided via a submodule, it is **not** populated by a
-plain `git clone` and the directory will appear empty until the submodule is
-initialized.
+## How can I use this?
 
-For an initial clone of the GEISA specification repository, use:
+### Just the spec 
 
-```bash
-git clone --recurse-submodules <repo-url>
-```
+If you're just interested in the specification itself, headover to the [GEISA
+Specification](https://spec.geisa-energy.org) to access both formal releases of
+the GEISA specification and nightly builds with the latest changes.  The spec
+is available as both PDF and HTML.
 
-If you have already cloned the repository, fetch the submodule from the
-repository root with:
+### Contributing
 
-```bash
-git submodule update --init source/adm/external/lwm2m-registry
-```
+If you want to contribute to the specification or build your own implementation
+of GEISA, you'll want to be able to generate the specification and the schema
+examples locally.  This requires a host environment capable of running standard
+POSIX tools.  Linux, MacOS, and WSL on Windows are suitable.  See below for
+details on how to setup your environment.
 
-Refer to [`source/adm/external/README.md`](source/adm/external/README.md) for
-additional information on GEISA OMA objects.
+# Setting up your own build environment
 
-Python `venv` creates a virtual environment so that Sphinx can be installed
-using its own separate packages and not break anything in the existing
-environment. Depending on your environment, you may need to install Python
-`venv` using your system package manager.
+## External tools for the specification
 
-The GEISA specification also supports generated diagrams. Mermaid is used for
-sequence diagrams and other simple generated diagrams. diagrams.net/draw.io is
-used for selected layout-sensitive architecture and similar diagrams.
+Building the specification requires several external tools:
 
-To ensure a consistent build process, the build scripts rely on `mmdc` for
-Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
+- Mermaid
+- Draw.IO
+- rsvgconvert
+- LaTex
+
+Mermaid is used for sequence diagrams and other simple generated diagrams.
+diagrams.net/draw.io is used for selected layout-sensitive architecture and
+similar diagrams. To ensure a consistent build process, the build scripts rely
+on `mmdc` for Mermaid diagrams and `drawio` for diagrams.net/draw.io diagrams.
+
+### Mermaid
+
+Mermaid requires node.js and can be installed using the node package manager.
+The `node.js` and `npm` packages supplied by some Linux distributions may be
+too old to install current Mermaid CLI releases.  As a result, you may need to
+update node.js and npm before mermaid can be installed.
 
 Install Mermaid CLI with `npm`:
 
@@ -70,10 +76,10 @@ Install Mermaid CLI with `npm`:
 npm install -g @mermaid-js/mermaid-cli
 ```
 
-See the
-[Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli)
-for additional information. The `node.js` and `npm` packages supplied by some
-Linux distributions may be too old to install current Mermaid CLI releases.
+See the [Mermaid CLI repository](https://github.com/mermaid-js/mermaid-cli)
+for additional information. 
+
+### Draw.IO
 
 diagrams.net/draw.io is not installed through the Python virtual environment
 and does not have an official npm package equivalent to Mermaid CLI at this
@@ -91,11 +97,11 @@ For example, on Ubuntu or another Debian-based distribution, download the
 official draw.io Desktop `.deb` package, then install it with:
 
 <pre>
-$ sudo apt install ./drawio-amd64-&lt;version&gt;.deb
+$ sudo apt install ./drawio-amd64-<version>.deb
 $ drawio --help
 </pre>
 
-Replace `&lt;version&gt;` with the appropriate version string from the
+Replace `<version>` with the appropriate version string from the
 downloaded package name.
 
 If you prefer to do a single-user install without modifying system packages,
@@ -105,11 +111,11 @@ somewhere in your user `PATH`:
 
 <pre>
 $ mkdir -p "$HOME/.local/opt/drawio" "$HOME/.local/bin"
-$ cp drawio-x86_64-&lt;version&gt;.AppImage "$HOME/.local/opt/drawio/"
-$ chmod +x "$HOME/.local/opt/drawio/drawio-x86_64-&lt;version&gt;.AppImage"
+$ cp drawio-x86_64-<version>.AppImage "$HOME/.local/opt/drawio/"
+$ chmod +x "$HOME/.local/opt/drawio/drawio-x86_64-<version>.AppImage"
 $ cat > "$HOME/.local/bin/drawio" <<'EOF'
 #!/usr/bin/env bash
-exec "$HOME/.local/opt/drawio/drawio-x86_64-&lt;version&gt;.AppImage" "$@"
+exec "$HOME/.local/opt/drawio/drawio-x86_64-<version>.AppImage" "$@"
 EOF
 $ chmod +x "$HOME/.local/bin/drawio"
 $ export PATH="$HOME/.local/bin:$PATH"
@@ -126,7 +132,7 @@ extracted `AppRun` binary:
 
 <pre>
 $ cd "$HOME/.local/opt/drawio"
-$ ./drawio-x86_64-&lt;version&gt;.AppImage --appimage-extract
+$ ./drawio-x86_64-<version>.AppImage --appimage-extract
 $ cat > "$HOME/.local/bin/drawio" <<'EOF'
 #!/usr/bin/env bash
 exec "$HOME/.local/opt/drawio/squashfs-root/AppRun" "$@"
@@ -153,30 +159,96 @@ Depending on the installed application name, the macOS binary may instead be:
 /Applications/diagrams.net.app/Contents/MacOS/diagrams.net
 </pre>
 
-After installing the required host tools, prepare the repository-managed
-development environments with:
+### rsvgconvert
 
-<pre>
-$ make setup-dev
-</pre>
+Building the specification PDF requires rsvg-convert.  It's part of the GNOME
+project.  Project details can be found at:
+https://gitlab.gnome.org/GNOME/librsvg.  Most Linux distributions have this, it
+just needs to be installed.
 
-This installs the repository Python and Node.js development dependencies. It
-does not install host tools such as Mermaid CLI, draw.io, LaTeX, `protoc`,
-compilers, or other system packages.
+### LaTex
 
-Build the specification with:
+Building the specification PDF requires LaTex.  Project details can be found at: 
+https://www.latex-project.org/. Most distributions have this, it just needs to 
+be installed.
 
-<pre>
-$ make all
-</pre>
+## External tools for the schemas
+
+Building the schema examples requires several external tools:
+
+- protoc
+- nanopb
+
+### protoc
+
+Protoc is a protobuf compiler.  See https://github.com/protocolbuffers/protobuf
+for details.  Most Linux distributions have this, it and the associated
+libraries and headers need to be installed. 
+
+### nanopb
+
+nanopb is a protobuf compiler for C focused on constrained environments.  See
+https://github.com/nanopb/nanopb.  This can be installed manually.
+Alternatively, the `setup-dev` target will prompt you to install it in `/tmp`.
+See `schemas/README.md` for additional details.
+
+## Cloning the repo
+
+If you want to build the examples or the specification locally on your machine,
+start by cloning this repo, including sub-modules.  (GEISA uses a sub-module to
+pull in the required LwM2M schema files from the OMA GitHub repository).  For
+example, to clone the main GEISA specification repo, use:
+
+```bash
+git clone --recurse-submodules https://github.com/geisa/specification.git
+```
+
+Do note the `--recurse-submodules`.  GEISA uses a Git submodule for relevant
+OMA objects from the [LwM2M Registry](https://github.com/OpenMobileAlliance/lwm2m-registry).  
+Because this content is provided via a submodule, it is **not** populated by a 
+plain `git clone` and the directory will appear empty until the submodule is 
+initialized.  Failing to include `--recurse-submodules` will result in build errors.
+
+If you have already cloned the repository, without recursing submodules, fetch
+the submodule from the repository root with:
+
+```bash
+git submodule update --init source/adm/external/lwm2m-registry
+```
+
+Refer to [`source/adm/external/README.md`](source/adm/external/README.md) for
+additional information on GEISA OMA objects.
+
+## Getting the base development environment setup
+
+Building the GEISA specification requires `sphinx` as well as `GitPython`
+`sphinxcontrib-svg2pdfconverter` and `linuxdoc`.  If you already have these in
+your environment, things might build, but by default GEISA uses Python `venv`
+to create a virtual environment so that Sphinx can be installed using its own
+separate packages and not break anything in the existing environment. 
+
+Note: depending on your environment, you may need to install
+Python `venv` using your system package manager first.
+
+The GEISA `setup-dev` target will create local Python `venv` environments for
+both `specification` and `schema` and automatically load much of what you'll
+need into them.  It will also address Node.js development dependencies.
+
+```bash
+make setup-dev
+```
+
+Assuming you've installed the required external tools, you should now be able
+to build the specification.  Typing `make` by itself will provide a list of
+available build targets.
 
 Alternative make targets include `html` and `latexpdf` to build just those
 outputs.
 
 To build a custom Sphinx target, use `SPHINXTARGETS=foo make all`.
 
-NOTE: Running multiple jobs as part of make may result in errors in the
-`latexpdf` build. If these occur, use `make all` instead.
+NOTE: Running multiple jobs as part of make (i.e. -j 4) may result in errors in the
+`latexpdf` build. 
 
 NOTE: Depending on your specific distribution, you may encounter errors during
 LaTeX file generation near the end of the build due to missing style files such
@@ -201,3 +273,25 @@ tlmgr search --file --global "cmap.sty"
 
 which will provide the texlive package providing the specified file which can
 then be used to install any missing individual files.
+
+
+## Building the schema examples
+
+When `make setup-dev` completes, it will prompt you to install `nanopb` if it's
+not already installed.  
+
+From the specification/schemas/ directory, run the next embedded C example
+build:
+
+```bash
+test -d /tmp/nanopb/.git || git clone https://github.com/nanopb/nanopb /tmp/nanopb
+make examples-c
+```
+
+Build with `make schemas` or `make schemas-all`, clean with `make
+schemas-clean`, and lint with `make schemas-lint`. Example targets are
+available from the repository root as `make schemas-examples`, `make
+schemas-examples-c`, and `make schemas-demos`.  Repository setup and combined
+linting use `make setup-dev` and `make lint`.
+
+See `schemas/README.md` for additional details.
