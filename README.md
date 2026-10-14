@@ -27,9 +27,11 @@ profiles, examples, nanopb support, and related tooling.
 
 ### How is it licensed?
 
-The GEISA specification and documentation are licensed under the Community
-Specification License. Content under [`schemas/`](schemas/), including schemas,
-examples, and related tooling, is licensed under the Apache License 2.0; see
+The GEISA specification and documentation are licensed under the [Community
+Specification
+License](https://github.com/CommunitySpecification/Community_Specification).
+Content under [`schemas/`](schemas/), including schemas, examples, and related
+tooling, is licensed under the Apache License 2.0; see
 [`schemas/LICENSE`](schemas/LICENSE).
 
 ### How can I use this?
@@ -301,5 +303,8 @@ Build with `make schemas` or `make schemas-all`, clean with `make
 schemas-clean`, and lint with `make schemas-lint`. Example targets are
 available from the repository root as `make schemas-examples`, `make
 schemas-examples-c`, and `make schemas-demos`.
+
+Alternatively, `cd schemas` and execute `make` for a full list of schema
+targets rather than using the pass-through targets from the master makefile.`
 
 See `schemas/README.md` for additional details.
