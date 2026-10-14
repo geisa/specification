@@ -203,8 +203,8 @@ permit, restrict, or condition interactions between applications, networks,
 and connected systems.
 
 These enforcement functions exist regardless of whether applications execute
-locally, participate in hybrid edge/cloud workflows, or are installed through
-centralized lifecycle management systems.
+locally, communicate with external systems, or are installed through centralized
+lifecycle management systems.
 
 All interactions crossing these boundaries shall be treated as untrusted unless
 explicitly authenticated, authorized, and governed by operator-defined policy.
@@ -265,8 +265,8 @@ configurations.
    * - Operational Integration
      - Exchange of operational data with upstream systems, including utility or
        non-utility infrastructure outside the COE trust domain.
-     - AMI backhaul, DERMS, analytics platforms, monitoring systems, hybrid
-       edge/cloud applications
+     - AMI backhaul, DERMS, analytics platforms, monitoring systems, and
+       applications that communicate with external services
 
    * - Lifecycle Management
      - Authority to deploy, configure, approve, restrict, update, or revoke
@@ -371,7 +371,8 @@ Compromise of a Customer-Network Connected Device
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 A Compromised External Device (e.g., Matter or Wi-Fi system) provides falsified
 telemetry or malformed data intended to influence processing performed locally
-or by upstream systems participating in hybrid workflows.
+or by upstream systems participating in workflows that divide processing
+between Edge Applications and Vendor Application Servers.
 
 * Boundaries Involved: External Device / Control, Customer Networks
 * Potential Impact: Corrupted data, unintended control actions, incorrect

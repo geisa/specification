@@ -22,7 +22,7 @@
           "minLength": 1
         },
         "status": {
-          "description": "Upstream only: Platform disposition for the corresponding request-id (for example accepted, rejected, permission-denied, quota-exceeded, unavailable, expired, or other). quota-exceeded means the platform rejected the request because accepting it would exceed an applicable quota or policy limit (for example message-count, byte/volume, or network policy limits). Applications should consult Platform/App Status for detailed usage, remaining quota, and reset timing.",
+          "description": "Client to Server only: Platform disposition for the corresponding request-id (for example accepted, rejected, permission-denied, quota-exceeded, unavailable, expired, or other). quota-exceeded means the platform rejected the request because accepting it would exceed an applicable quota or policy limit (for example message-count, byte/volume, or network policy limits). Applications should consult Platform/App Status for detailed usage, remaining quota, and reset timing.",
           "type": "string",
           "enum": [
             "GEISA_APP_MESSAGE_STATUS_UNSPECIFIED",
@@ -36,7 +36,7 @@
           ]
         },
         "status-text": {
-          "description": "Upstream only: Optional human-readable diagnostic or status text.",
+          "description": "Client to Server only: Optional human-readable diagnostic or status text.",
           "type": "string",
           "minLength": 1
         },

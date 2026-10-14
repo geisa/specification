@@ -23,30 +23,36 @@ applications have a `recipe
 `manifest <https://learn.microsoft.com/en-us/azure/iot-central/core/howto-manage-deployment-manifests-with-rest-api>`_,
 or other set of metadata describing the requirements and dependencies.
 
-GEISA handles application metadata by defining two manifests for each
-application: a vendor manifest and an operator manifest.  
+GEISA defines two manifests for each Edge Application: a Vendor Application
+Manifest and an Application Deployment Manifest.
 
-The vendor application manifest provides information about the application to
-the operator and the edge management system, including any external
-dependencies and requested resource limits.  The vendor manifest is used by
-a GEISA ADM conformant edge management system to inform the operator about the
-application and to facilitate the secure import of the application.  
+The Vendor Application Manifest provides information about the Edge
+Application to the System Operator and EMS, including external communication
+and dependency requirements and requested resource limits. It is used by an
+ADM-conformant EMS to inform the System Operator and facilitate secure import
+of the Edge Application.
 
-The operator application manifest is based on the vendor application manifest 
-allowing the operator to customize and tune the application permissions and 
-resource allocations to match their execution environment, intended use case,
-and security requirements prior to deployment to the execution environment.  
+The Application Deployment Manifest is the System Operator-approved set of
+effective deployment parameters for a specific Edge Application. It is based
+on the Vendor Application Manifest and allows the System Operator to set
+permissions and resource allocations for the target environment, use case, and
+security requirements.
+
+A manifest may describe external communication or dependency requirements
+needed to interact with a Vendor Application Server. It does not deploy or
+configure a Vendor Application Server.
 
 .. Warning::
 
-   Overriding the vendor application manifest may prevent applications from
+   Overriding the Vendor Application Manifest may prevent applications from
    running correctly.  If a system operator chooses to override the vendor
    recommendations, they take responsibility for any related application
    issues.  To enable operational flexibility, the GEISA specification requires
    that system operators be able to override vendor settings, but operators
    should be aware of the potential consequences.
 
-GEISA vendor and operator application manifests SHALL include:
+The Vendor Application Manifest and Application Deployment Manifest SHALL
+include:
 
 - Vendor assigned Application ID
 
@@ -63,7 +69,7 @@ GEISA vendor and operator application manifests SHALL include:
 
     - The GEISA EE shall not activate an application unless the hash of the image matches the hash in the metadata
 
-GEISA vendor manifests SHALL include:
+The Vendor Application Manifest SHALL include:
 
 - Compatibility:
 
@@ -125,8 +131,9 @@ GEISA vendor manifests SHALL include:
 
 .. Note::
 
-   Requests for IP socket communication in a vendor manifest are subject to
-   operator approval in the deployment manifest. Operators may approve,
+   Requests for IP socket communication in a Vendor Application Manifest are
+   subject to operator approval in the Application Deployment Manifest. The
+   System Operator may approve,
    narrow, replace, or deny requested destination classes, endpoints, ports,
    and volume limits according to deployment policy.
 
@@ -146,7 +153,8 @@ GEISA vendor manifests SHALL include:
     - GEISA applications may need basic information to initialize such as the
       URL of a server, or settngs such as the frequency of reporting.  The
       default application configuration provides an initial set of values that
-      can be used by the system operator when creating the operator manifest.  
+      can be used by the System Operator when creating the Application
+      Deployment Manifest.
 
 .. Note :: 
   
@@ -169,8 +177,8 @@ GEISA vendor manifests SHALL include:
 
 - Vendor Signature
 
-    - Base64 Encoded Signature of the compact JSON encoding of the vendor
-      application manifest.
+    - Base64 Encoded Signature of the compact JSON encoding of the Vendor
+      Application Manifest.
 
 .. Note::
 
@@ -178,14 +186,14 @@ GEISA vendor manifests SHALL include:
 
 |geisa-landscape|
 
-Here is an example of an vendor application manifest:
+Here is an example of a Vendor Application Manifest:
 
 .. literalinclude:: ../../schemas/examples/vendor-application-manifest-example.json
    :language: json
    :linenos:
 
 
-Here is an example of a deployment application manifest:
+Here is an example of an Application Deployment Manifest:
 
 .. literalinclude:: ../../schemas/examples/deployment-application-manifest-example.json
    :language: json

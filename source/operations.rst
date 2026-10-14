@@ -460,7 +460,8 @@ Platform and one or more upstream ADM components, including the EMS, LwM2M
 servers, analytics services, or other cooperating systems. Some
 implementations may perform substantial collection and evaluation upstream,
 while others may rely more heavily on the EMA and other platform-local
-functions. Hybrid arrangements are also valid.
+functions. Implementations may divide these monitoring functions between the
+Platform and upstream components.
 
 On constrained, metered, delayed, or shared field networks, local collection,
 aggregation, threshold evaluation, and condition detection can often reduce
@@ -638,7 +639,8 @@ this time.
   
   This type of certification may be substantially more complex and
   expensive, particularly for applications that make use of local AI
-  inferencing, hybrid edge/cloud processing, behind-the-meter
+  inferencing, processing divided between an Edge Application and one or more
+  Vendor Application Servers, behind-the-meter
   integrations, or other advanced workflows.
 
   This model may also require access to details, methods, or validation

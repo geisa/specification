@@ -38,10 +38,14 @@ behaviors described.
   without offering an ADM conformant device.
 
 As described in the GEISA :doc:`api`, GEISA provides a default :doc:`adm/messaging`
-mechanism.  ADM conformant platforms transport these messages over CoAP.  ADM
-conformant edge management systems expose these messages over a local ReST API,
-allowing other systems to easily consume messages sent by edge applications or
-to send messages to edge applications.
+mechanism. ADM-conformant platforms transport these messages over CoAP. An
+ADM-conformant EMS MUST provide the required ReST POST operation for an
+authorized Vendor Application Server to submit messages for delivery to an
+Edge Application. That message is delivered through ``/3600`` Server to
+Client. In the other direction, the EMS MUST make ``/3600`` Client to Server
+application messages available for Kafka-protocol Data Distribution. Configured
+Data Distribution routes determine actual publication. Other EMS ReST
+operations are not required for GEISA interoperability.
 
 |geisa-pyramid|
 

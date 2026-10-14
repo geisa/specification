@@ -30,6 +30,7 @@ flowchart TB
             LWMS["LwM2M Server"]
             EMSF["Non-LwM2M<br/>EMS Functions"]
         end
+        DD["Kafka-Protocol<br/>Data Distribution Target"]
     end
 
     subgraph EDGE["Edge Device"]
@@ -73,7 +74,7 @@ flowchart TB
 
     class HP hardware;
     class PP,AP,AC,SO role;
-    class ADMSET,UOPS,DL cloud;
+    class ADMSET,DD,UOPS,DL cloud;
     class API system;
     class LWMS,LWMC,GOV,EMSF lwm2m;
     class APPL,APPV app;
@@ -105,10 +106,8 @@ flowchart TB
     APPL <--> API
     APPV <--> API
 
-    LWMC -->|"app data, status,<br/>behavioral reporting,<br/>urgent event signaling"| LWMS
-    LWMS -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| UOPS
-    APPL -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| UOPS
-    APPV -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| UOPS
-    LWMS -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| DL
-    APPL -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| DL
-    APPV -->|"operator-facing visibility,<br/>alerts, logs, and reporting"| DL
+    LWMC -->|"/3600 Client to Server application messages"| LWMS
+    LWMS --> EMSF
+    EMSF --> DD
+    DD -->|"Kafka protocol to authorized consumer"| UOPS
+    DD -->|"Kafka protocol to authorized consumer"| DL

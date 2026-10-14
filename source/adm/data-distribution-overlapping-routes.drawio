@@ -13,11 +13,11 @@
         <mxCell id="source" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Eligible GEISA Data in EMS" vertex="1">
           <mxGeometry height="250" width="190" x="55" y="255" as="geometry" />
         </mxCell>
-        <mxCell id="alarm" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record A&lt;/b&gt;&lt;br&gt;AppID 42&lt;br&gt;Message Type: ALARM" vertex="1">
-          <mxGeometry height="70" width="150" x="20" y="50" as="geometry" />
+        <mxCell id="alarm" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record A&lt;/b&gt;&lt;br&gt;operator-identifier&lt;br&gt;AppID 17&lt;br&gt;Message Type: ALARM" vertex="1">
+          <mxGeometry height="80" width="150" x="20" y="45" as="geometry" />
         </mxCell>
-        <mxCell id="telemetry" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record B&lt;/b&gt;&lt;br&gt;AppID 42&lt;br&gt;Message Type: TELEMETRY" vertex="1">
-          <mxGeometry height="70" width="150" x="20" y="145" as="geometry" />
+        <mxCell id="telemetry" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record B&lt;/b&gt;&lt;br&gt;operator-identifier&lt;br&gt;AppID 17&lt;br&gt;Message Type: TELEMETRY" vertex="1">
+          <mxGeometry height="80" width="150" x="20" y="145" as="geometry" />
         </mxCell>
         <mxCell id="ems" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System (EMS)" vertex="1">
           <mxGeometry height="460" width="430" x="315" y="190" as="geometry" />
@@ -28,14 +28,14 @@
         <mxCell id="routecfg" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Route / Topic&lt;br&gt;Configuration" vertex="1">
           <mxGeometry height="60" width="150" x="240" y="45" as="geometry" />
         </mxCell>
-        <mxCell id="route1" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 1&lt;/b&gt;&lt;br&gt;AppID 42&lt;br&gt;All message types" vertex="1">
-          <mxGeometry height="72" width="162" x="223" y="137" as="geometry" />
+        <mxCell id="route1" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 1: Vendor&lt;/b&gt;&lt;br&gt;AppID = 17&lt;br&gt;Any device, any type" vertex="1">
+          <mxGeometry height="82" width="162" x="223" y="137" as="geometry" />
         </mxCell>
-        <mxCell id="route2" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 2&lt;/b&gt;&lt;br&gt;AppID 42&lt;br&gt;Message Type: EVENT or ALARM" vertex="1">
-          <mxGeometry height="72" width="162" x="132" y="242" as="geometry" />
+        <mxCell id="route2" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 2: Operations&lt;/b&gt;&lt;br&gt;Message Type:&lt;br&gt;EVENT or ALARM" vertex="1">
+          <mxGeometry height="82" width="162" x="132" y="242" as="geometry" />
         </mxCell>
-        <mxCell id="route3" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 3&lt;/b&gt;&lt;br&gt;AppID 42&lt;br&gt;All message types" vertex="1">
-          <mxGeometry height="72" width="165" x="45" y="335" as="geometry" />
+        <mxCell id="route3" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;" value="&lt;b&gt;Route 3: Data Lake&lt;/b&gt;&lt;br&gt;All application-message records" vertex="1">
+          <mxGeometry height="82" width="165" x="45" y="335" as="geometry" />
         </mxCell>
         <mxCell id="eCfg" edge="1" parent="ems" source="routecfg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="ddfunc">
           <mxGeometry relative="1" as="geometry" />
@@ -55,7 +55,7 @@
         <mxCell id="kafka" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#fbe5d6;strokeColor=#c77b30;fontStyle=1;" value="Kafka-Compatible Data Distribution Service" vertex="1">
           <mxGeometry height="460" width="330" x="790" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Application Vendor Topic" vertex="1">
+        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Vendor Application Server Topic" vertex="1">
           <mxGeometry height="62" width="250" x="40" y="142" as="geometry" />
         </mxCell>
         <mxCell id="topic2" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Utility Operations Topic" vertex="1">
@@ -64,8 +64,8 @@
         <mxCell id="topic3" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Utility Data Lake Topic" vertex="1">
           <mxGeometry height="62" width="250" x="40" y="340" as="geometry" />
         </mxCell>
-        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;Record A (ALARM) matches Routes 1, 2, and 3&lt;br&gt;Record B (TELEMETRY) matches Routes 1 and 3" vertex="1">
-          <mxGeometry height="82" width="710" x="350" y="680" as="geometry" />
+        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;Record A (AppID 17, ALARM) matches Routes 1, 2, and 3&lt;br&gt;Record B (AppID 17, TELEMETRY) matches Routes 1 and 3&lt;br&gt;Both records carry operator-identifier; AppID 17 from different devices can share the Vendor Application Server topic." vertex="1">
+          <mxGeometry height="96" width="710" x="350" y="680" as="geometry" />
         </mxCell>
         <mxCell id="labelConfig" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="routes, targets, security" vertex="1">
           <mxGeometry height="25" width="175" x="561" y="95" as="geometry" />

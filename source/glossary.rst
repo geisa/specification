@@ -51,9 +51,8 @@ Glossary
     Specification.
 
    Application Deployment Manifest
-    Operator-approved deployment manifest that defines effective
-    application deployment parameters for an Application for a target 
-    environment.
+    Operator-approved deployment manifest that defines the effective deployment
+    parameters for a specific Edge Application in a target environment.
 
    Application Instance
     An Application that been installed on a Platform Implementation and for
@@ -170,15 +169,9 @@ Glossary
     Home Area Network
 
    Hybrid Application Model
-     A hybrid application model in context of GEISA refers to an application
-     which may use a combination of edge/local and cloud resources for
-     determination of actual conditions, or additional upstream analysis on
-     the aggregation of edge-determined conditions.  For example, a specific
-     edge application may determine some specific conditions locally, but also
-     share data upstream to a cloud-based application to perform additional
-     analysis to determine if other conditions may exist, or to determine if
-     the locally-determined conditions are part of a larger pattern of
-     conditions.
+     Processing for a function is divided between an Edge Application and one
+     or more Vendor Application Servers. Merely using an off-edge server does
+     not make an application hybrid.
 
    LAN
     Local Area Network
@@ -250,8 +243,16 @@ Glossary
     Top Level Domain
 
    Vendor Application Manifest
-    Publisher-supplied application manifest provided with an application
-    artifact as input to operator deployment decisions.
+    Publisher-supplied manifest for an Edge Application, provided with its
+    application artifact as input to operator deployment decisions.
+
+   Vendor Application Server
+    An application or service associated with an Application Vendor that
+    operates outside the GEISA Execution Environment and communicates with one
+    or more Edge Applications. A GEISA application may use one or more Vendor
+    Application Servers. A Vendor Application Server may be hosted by the
+    Application Vendor, System Operator, or another authorized party, and may
+    run in a cloud, data center, or other non-edge environment.
 
    Userid
     In context of GEISA MQTT APIs, this is a platform-local unique identifier

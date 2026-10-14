@@ -41,28 +41,30 @@ This type of communication is available on every device with :doc:`/adm` and use
 the administrative LwM2M connection for transport.
 
 This type of communication is bi-directional and messages may be sent unsolicited
-by either side.  Messages can be sent from the application (upstream) and to the
-application (downstream).
+by either side. Messages may be sent by an Edge Application or delivered to an
+Edge Application.
 
 Applications use the message bus to send and receive these messages to/from the
 platform which in turn makes use of LwM2M to transport them.  The applications
 themselves are unaware of any LwM2M details.
 
 Delivery of messages under some circumstances may be significantly delayed or
-lost. The :doc:`/adm` is responsible for queuing these messages in both directions.
+lost. Queue responsibility depends on the direction of the message.
 
-For upstream messages, the queue contents may be long-lived due to delivery delays
-or network outages.  The messages in the queue SHALL be persistent across device
-reboots, power cycles, or application restarts, and if undeliverable beyond a
-timeout period a failure status is reported to the sender.
+For messages sent by an Edge Application through ``/3600`` Client to Server, the
+ADM-conformant Platform is responsible for retaining accepted messages while
+delivery to the EMS is temporarily unavailable. The Platform remains responsible
+until the message is delivered to the EMS, expires, or reaches an applicable
+retention limit. Accepted messages SHALL be persistent across device reboots,
+power cycles, or application restarts. If a message cannot be delivered, a
+failure status is reported to the sender.
 
 .. note::
 
-   Message queue persistence, retention, retry behavior, and recovery pacing
-   are platform-managed behaviors subject to operator policy. This version of
-   the specification does not define interoperable configuration mechanisms for
-   these behaviors. Future versions may define standard configuration and
-   observability mechanisms for platform-managed message queues.
+   GEISA does not currently define interoperable configuration for message
+   queue depth, maximum retention time, retry behavior, or other queue limits.
+   Implementations may provide operator-configured limits for these values.
+   This may be standardized in a future version of the specification.
 
 Platforms SHOULD avoid creating a burst of delayed traffic when connectivity
 is restored. Appropriate mechanisms may include message expiration, priority
@@ -92,24 +94,25 @@ communication. Applications that require cross-mechanism fallback are
 responsible for implementing that behavior within the permissions approved
 by the deployment policy.
 
-For downstream messages, the queue contents are usually short-lived if the
-application is running. If an application is not running, or does not
-acknowledge message delivery over the message bus, the :doc:`/adm` is still
-responsible for queuing these messages and, if undeliverable beyond a timeout
-period, reporting a failure status to the sender.
+For messages being delivered to an Edge Application through ``/3600`` Server to
+Client, the EMS is responsible for retaining an accepted message while the target
+Platform is unavailable. After the Platform accepts the message, the Platform is
+responsible for delivery to the Edge Application. If the application is not
+running or does not acknowledge delivery over the message bus, the Platform
+retains the message according to the applicable TTL and retention policy and
+reports a failure status to the sender if delivery fails.
 
 If an application is uninstalled while its messages are in the queue, or if
 messages are received for an application that is not installed, a delivery
-failure status SHALL be sent back upstream for each queued downstream message,
-and the queue then purged.
+failure status SHALL be reported to the sender for each queued message, and the
+queue then purged.
 
 .. note::
 
-  Subject to operator policy, messages that the application sends SHOULD be
-  deposited into an operator-run system for retrieval by the operator and/or
-  application developer using APIs to the operator's cloud services.  Subject
-  to operator policy, the operator or application developer MAY also initiate
-  messages to instances of the application in bulk or individually.
+  Messages sent by an Edge Application are made available through configured
+  Data Distribution targets as required by :doc:`/adm/data-distribution`.
+  Subject to operator policy, the System Operator or an authorized Vendor
+  Application Server MAY also initiate messages to an Edge Application.
 
 |geisa-pyramid|
 
@@ -431,7 +434,7 @@ that applications can query using conventional calls (e.g. ``gethostbyname()``
 or ``getaddrinfo()``); however, there is no guarantee that the deployed
 environment or accessible network interface offers DNS services.  Therefore,
 applications should fallback gracefully if DNS resolution fails or the
-application itself may fail. 
+application itself may fail.
 
 Platforms are not required to support mDNS or DNS-SD in this version of
 the specification.  While applications MAY attemt to use DNS, applications
