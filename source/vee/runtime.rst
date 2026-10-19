@@ -30,7 +30,7 @@ This bytecode is then executed by the Processing Unit using a deterministic,
 low-latency execution model tailored for embedded systems. 
 
 Because the instruction set is independent from the underlying processor 
-architecture (ARM, RISC-V, x86, etc.) and and also independent from the 
+architecture (ARM, RISC-V, x86, etc.) and also independent from the 
 operating system (Linux, Zephyr, bare metal), the Processing Unit provides a
 stable abstraction layer that guarantees the same behavior for any binary 
 application across any physical GEISA devices.

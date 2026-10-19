@@ -95,7 +95,7 @@ The principal roles used in this operational view are:
 
   The role responsible for supplying the platform hardware, platform
   software, and associated platform trust material where applicable.
-  This may be a single provider or a hardware provider may be separate.
+  This role may be filled by one or more providers, such as separate hardware and software providers.
 
 .. index:: single: Application Publisher
 
