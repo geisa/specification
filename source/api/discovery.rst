@@ -73,9 +73,11 @@ determine the realized hardware and software environment available on the device
   device identifier.  If the device is not provisioned to an operator, the
   Operator Information MAY be omitted from the Platform Discovery response.
 
-When provisioned, the operator-assigned device identifier MUST uniquely
-identify the device within the System Operator's managed deployment. The
-Operator Information remains optional for an unprovisioned device. For
+.. _operator-identifier:
+
+When provisioned, the System Operator assigns ``operator-identifier``, which
+MUST uniquely identify the Edge Device within the System Operator's managed
+deployment. The Operator Information remains optional for an unprovisioned device. For
 external application-message addressing, the EMS MUST use a provisioned
 ``operator-identifier`` and obtain or map it from its managed-device
 and provisioning context. The Edge Application does not need to include its

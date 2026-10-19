@@ -51,20 +51,26 @@ Vendor Application Server to Edge Application
 An ADM-conformant EMS MUST provide a ReST API that allows an authorized Vendor
 Application Server to submit a message for delivery to an Edge Application.
 POST is the only operation required for GEISA interoperability. The request
-MUST identify the target using its provisioned ``operator-identifier``
+MUST identify the target using its provisioned
+:ref:` ``operator-identifier`` <operator-identifier>`
 and AppID, and MUST carry the standard GEISA application-message
 envelope. The EMS obtains or maps ``operator-identifier`` from
 its managed-device and provisioning context; the Edge Application does not
 need to include this identifier in the application message.
 
-For example, an EMS may expose:
+An ADM-conformant EMS MUST accept POST requests at:
 
 .. code-block:: text
 
    POST /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages
 
-``operator-identifier`` and ``appid`` identify the target Edge Device and
-application. The request body carries the GEISA application-message envelope.
+The URI's ``operator-identifier`` and ``appid`` identify the target Edge Device
+and application. Requests MUST use HTTP ``Content-Type: application/json``. The
+request body MUST conform to
+``schemas/geisa-app-message-req-schema.json`` and carry the GEISA
+application-message envelope, including ``payload-base64`` for the opaque
+application payload. The envelope's ``content-type`` describes the application
+payload; the HTTP Content-Type describes the JSON request.
 
 The EMS MUST preserve ``request-id`` for correlation and synchronously indicate
 whether it accepted or rejected the message for delivery. Acceptance means the
@@ -117,9 +123,7 @@ TTL, Content Type, Request ID, and Message Timestamp metadata. These resources
 describe the current application message; they do not provide durable message
 history. The Platform and EMS use this metadata to classify, schedule, route,
 retain, expire, correlate, and interpret app-message payloads exchanged through
-resource ``0`` or resource ``1``. Resource ``4`` Message TTL does not define
-event-log retention, and resource ``5`` Content Type does not expose payload
-history.
+resource ``0`` or resource ``1``.
 
 For the GEISA application-message envelope, ``request_id``, ``priority``,
 ``message_type``, ``timestamp_us``, ``ttl_seconds``, and ``content_type`` map to
@@ -144,11 +148,6 @@ Acceptance of a Server Message by the ADM path does not by itself prove that
 the application accepted or applied the configuration. Application-level
 acceptance, rejection, effective state, or error detail should be reported
 through an appropriate app message, status, event, alarm, or durable record.
-
-Application configuration through Object ``/3600`` does not replace the
-application manifest, Software Management Object ``/9``, Application
-Accounting Object ``/3602``, Application Monitoring Object ``/3604``, or GEISA
-Platform Effective Configuration Object ``/3606``.
 
 Manifest and deployment policy define what an application is allowed to do;
 Object ``/3600`` carries app-facing configuration payloads within those

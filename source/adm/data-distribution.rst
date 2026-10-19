@@ -543,7 +543,7 @@ The System Operator MUST be able to select data for a route using defined GEISA
 metadata, including where applicable:
 
 * source scope or class
-* ``operator-identifier``
+* :ref:` ``operator-identifier`` <operator-identifier>`
 * AppID
 * message type, including a set of message types
 * event or record type
@@ -599,10 +599,6 @@ GEISA does not require Kafka topic names to encode AppID,
 selection uses defined GEISA metadata, and the System Operator chooses the
 configured target/topic name. GEISA does not prescribe a topic naming
 convention.
-
-The EMS producer is not required to have ``CreateTopics``, ``DeleteTopics``, or
-``CreatePartitions`` privileges, ACL or credential administration privileges,
-or general Kafka cluster-administration privileges.
 
 Authorization Boundary
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -779,10 +775,6 @@ This requirement applies to protocol behavior and does not require Apache Kafka
 software. A conformant deployment may use Apache Kafka or another implementation or
 service that provides the Kafka protocol capabilities required by this section.
 
-GEISA intentionally requires only the Kafka protocol operations needed for Data
-Distribution. Support for unrelated Kafka administration, processing, transaction,
-cluster-management, or other features is not required.
-
 Consumer Delivery Model
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -929,10 +921,6 @@ another section explicitly makes them applicable:
      - Not required
      - These capabilities are not required for the Data Distribution interoperability model
 
-The distinction is intentional. GEISA requires enough of the Kafka protocol to publish,
-independently consume, resume, and reprocess Data Distribution records without requiring
-the complete Apache Kafka software feature set.
-
 Kafka-Compatible Implementations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1067,9 +1055,6 @@ the EMS may expose the applicable retention configuration to the System Operator
 When an external Kafka-compatible service is used, the System Operator may configure
 retention through that service's administrative interface before the target is placed
 into service.
-
-The EMS producer is not required to have Kafka cluster-administration permissions or to
-use Kafka topic-configuration APIs.
 
 Reprocessing
 ~~~~~~~~~~~~

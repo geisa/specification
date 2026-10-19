@@ -120,13 +120,23 @@
           <mxGeometry height="35" width="155" x="20" y="88" as="geometry" />
         </mxCell>
         <mxCell id="api" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="GEISA API" vertex="1">
-          <mxGeometry height="35" width="100" x="245" y="230" as="geometry" />
+          <mxGeometry height="35" width="100" x="245" y="225" as="geometry" />
         </mxCell>
         <mxCell id="appToApi" edge="1" parent="platform" source="appA" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="417.5" y="194" />
+              <mxPoint x="295" y="194" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="monitorToEma" edge="1" parent="platform" source="monitoring" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="nonlwm2mplatform" value="">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="115" y="186" />
+              <mxPoint x="220" y="186" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="apiToEma" edge="1" parent="platform" source="api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="nonlwm2mplatform" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -185,8 +195,15 @@
         <mxCell id="vendorToNative" edge="1" parent="1" source="adapterVendor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="vendorSystem" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="admTransportText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ADM / LwM2M (CoAP)" vertex="1">
-          <mxGeometry height="20" width="165" x="155" y="438" as="geometry" />
+        <mxCell id="vendorPostToEms" edge="1" parent="1" source="vendorSystem" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="emsfunc" value="&amp;nbsp;">
+          <mxGeometry relative="1" x="-0.0073" as="geometry">
+            <Array as="points">
+              <mxPoint x="1110" y="438" />
+              <mxPoint x="1080" y="438" />
+              <mxPoint x="1080" y="456" />
+              <mxPoint x="242.5" y="456" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="commonRecordText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="common GEISA data record" vertex="1">
           <mxGeometry height="22" width="185" x="505" y="299" as="geometry" />
@@ -202,6 +219,12 @@
         </mxCell>
         <mxCell id="lakeRouteText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="selected GEISA records" vertex="1">
           <mxGeometry height="20" width="145" x="752" y="361" as="geometry" />
+        </mxCell>
+        <mxCell id="admTransportText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ADM / LwM2M (CoAP)" vertex="1">
+          <mxGeometry height="20" width="165" x="59" y="444" as="geometry" />
+        </mxCell>
+        <mxCell id="zQu-90Q7gCY7WcxzFCxe-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ReST POST" vertex="1">
+          <mxGeometry height="20" width="165" x="212" y="435" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
