@@ -18,11 +18,8 @@
                     "image-size": 262144,
                     "uncompressed-size": 1048576,
                     "signature": {
-                      "signatureType": "ECDSA",
-                      "signatureLength": 64,
-                      "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
-                      "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
-                      "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
+                      "signerRole": "publisher",
+                      "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg==haYh"
                     }
                 }
             ],
@@ -85,11 +82,8 @@
             }
         },
         "signature": {
-            "signatureType": "ECDSA",
-            "signatureLength": 64,
-            "signatureHex": "052c3a40b5714de38965291d366a28df034023ed0fd423c004d56d3c1ad20d8e052c3a40b5714de38965291d366a28df034023ed0fd423c004d56d3c1ad20d8e",
-            "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
-            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Local Electric Utility"
+            "signerRole": "operator",
+            "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYbIwAKCRAoV+memssgbak1AQDQVe6la1of/xOldr7RT7rIV46fJNABrai8Z4yoT4DDPwD9ELcAtkc0TX16CNsBSrZY5zW4Mz4pl1odv1s4UdCxqQE==sS6V"
         }
     }
 }
