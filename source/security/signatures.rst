@@ -30,10 +30,10 @@ GEISA supports two digital signature schemas:
 - ECDSA as per [FIPS186]_ and as operationalized in [RFC9580]_.
 - MLDSA as per [FIPS204]_ and as operationalized in [RFC9980]_.
 
-Spefically, conformant EMS and platform implementations must support
+Spefically, conformant EMS and platform implementations MUST support
 
-``ML-DSA-65+Ed25519`` (algorithm ID 31) and
-``ECDSA`` (algorithm ID 19)
+- ``ML-DSA-65+Ed25519`` (algorithm ID 31) 
+- ``ECDSA`` (algorithm ID 19)
 
 .. Note::
 
