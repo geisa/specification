@@ -6,7 +6,7 @@
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
 
 OMA Lightweight M2M
--------------------------------------
+-------------------
 
 |geisa-adm-hdr|
 
@@ -37,43 +37,89 @@ GEISA Application & Device Management uses the Open Mobile Alliance Lightweight 
   ADM Object-version baseline below.
 * ADM conformant EMS SHALL support the following LwM2M Objects:
 
-  * ``/0`` -- Security
-  * ``/1`` -- Server
-  * ``/3`` -- Device
-  * ``/4`` -- Connectivity Monitoring
-  * ``/5`` -- Firmware Update
-  * ``/6`` -- Location
-  * ``/9`` -- Software Management
-  * ``/10`` -- Cellular Network Connectivity
-  * ``/11`` -- APN Connection Profile
-  * ``/12`` -- WLAN Connectivity
-  * ``/13`` -- Bearer Selection
-  * ``/20`` -- Event Log
-  * ``/504`` -- Remote SIM Provisioning
-  * ``/3600`` -- GEISA App Messaging
-  * ``/3601`` -- GEISA Host Monitoring
-  * ``/3602`` -- GEISA App Accounting
-  * ``/3604`` -- GEISA App Monitoring
-  * ``/3605`` -- GEISA Platform Monitoring
-  * ``/3606`` -- GEISA Platform Effective Configuration
-  * ``/3607`` -- GEISA Platform Requested Configuration
+  .. list-table:: Required for ADM-conformant EMS
+     :header-rows: 1
+     :widths: 15 45
+
+     * - Object
+       - Name
+     * - ``/0``
+       - Security
+     * - ``/1``
+       - Server
+     * - ``/3``
+       - Device
+     * - ``/4``
+       - Connectivity Monitoring
+     * - ``/5``
+       - Firmware Update
+     * - ``/6``
+       - Location
+     * - ``/9``
+       - Software Management
+     * - ``/10``
+       - Cellular Network Connectivity
+     * - ``/11``
+       - APN Connection Profile
+     * - ``/12``
+       - WLAN Connectivity
+     * - ``/13``
+       - Bearer Selection
+     * - ``/20``
+       - Event Log
+     * - ``/504``
+       - Remote SIM Provisioning
+     * - ``/3600``
+       - GEISA App Messaging
+     * - ``/3601``
+       - GEISA Host Monitoring
+     * - ``/3602``
+       - GEISA App Accounting
+     * - ``/3604``
+       - GEISA App Monitoring
+     * - ``/3605``
+       - GEISA Platform Monitoring
+     * - ``/3606``
+       - GEISA Platform Effective Configuration
+     * - ``/3607``
+       - GEISA Platform Requested Configuration
 
 * ADM conformant platforms SHALL support the following LwM2M Objects:
 
-  * ``/0`` -- Security
-  * ``/1`` -- Server
-  * ``/3`` -- Device
-  * ``/4`` -- Connectivity Monitoring
-  * ``/5`` -- Firmware Update
-  * ``/9`` -- Software Management
-  * ``/20`` -- Event Log
-  * ``/3600`` -- GEISA App Messaging
-  * ``/3601`` -- GEISA Host Monitoring
-  * ``/3602`` -- GEISA App Accounting
-  * ``/3604`` -- GEISA App Monitoring
-  * ``/3605`` -- GEISA Platform Monitoring
-  * ``/3606`` -- GEISA Platform Effective Configuration
-  * ``/3607`` -- GEISA Platform Requested Configuration
+  .. list-table:: Required for ADM-conformant platforms
+     :header-rows: 1
+     :widths: 15 45
+
+     * - Object
+       - Name
+     * - ``/0``
+       - Security
+     * - ``/1``
+       - Server
+     * - ``/3``
+       - Device
+     * - ``/4``
+       - Connectivity Monitoring
+     * - ``/5``
+       - Firmware Update
+     * - ``/9``
+       - Software Management
+     * - ``/20``
+       - Event Log
+     * - ``/3600``
+       - GEISA App Messaging
+     * - ``/3601``
+       - GEISA Host Monitoring
+     * - ``/3602``
+       - GEISA App Accounting
+     * - ``/3604``
+       - GEISA App Monitoring
+     * - ``/3605``
+       - GEISA Platform Monitoring
+     * - ``/3606``
+       - GEISA Platform Effective Configuration
+     * - ``/3607``
+       - GEISA Platform Requested Configuration
 
 For each required Object, all Mandatory Resources SHALL be implemented.
 
@@ -83,20 +129,44 @@ implemented.
 * ADM conformant platforms with 3GPP network interfaces SHALL support the
   following LwM2M Objects:
 
-  * ``/10`` -- Cellular Network Connectivity
-  * ``/11`` -- APN Connection Profile
-  * ``/13`` -- Bearer Selection
-  * ``/504`` -- Remote SIM Provisioning
+  .. list-table:: Conditional on 3GPP network interfaces
+     :header-rows: 1
+     :widths: 15 45
+
+     * - Object
+       - Name
+     * - ``/10``
+       - Cellular Network Connectivity
+     * - ``/11``
+       - APN Connection Profile
+     * - ``/13``
+       - Bearer Selection
+     * - ``/504``
+       - Remote SIM Provisioning
 
 * ADM conformant platforms with WLAN interfaces SHALL support the
   following LwM2M Objects:
 
-  * ``/12`` -- WLAN Connectivity
+  .. list-table:: Conditional on WLAN interfaces
+     :header-rows: 1
+     :widths: 15 45
+
+     * - Object
+       - Name
+     * - ``/12``
+       - WLAN Connectivity
 
 * ADM conformant platforms with GNSS interfaces SHALL support the
   following LwM2M Objects:
 
-  * ``/6`` -- Location
+  .. list-table:: Conditional on GNSS interfaces
+     :header-rows: 1
+     :widths: 15 45
+
+     * - Object
+       - Name
+     * - ``/6``
+       - Location
 
 ..
     GEISA Internal ToDo: Add Wi-SUN 1.1 Objects
@@ -175,7 +245,7 @@ audited for this baseline. Pending definition updates are identified below.
      - :download:`504.xml <external/lwm2m-registry/504.xml>`
    * - ``/3600``
      - GEISA App Messaging
-     - 1.1
+     - 1.2
      - :download:`3600.xml <external/lwm2m-registry/3600.xml>`
    * - ``/3601``
      - GEISA Host Monitoring
@@ -374,10 +444,8 @@ GEISA object definitions.
 
   Scope: application / EMS bridge
 
-  Provides an app-scoped messaging exchange and defaults surface for a specific
-  application or application instance. It is intended for application-facing
-  message configuration and transport metadata, not durable event history,
-  accounting, runtime health, or platform configuration.
+  Provides application messaging, configuration delivery, and transport
+  metadata between the EMS and Edge Applications.
 
   Resource 4050 AppID is a system-unique identifier for the logical application
   within the applicable management domain. Resource 4051 Software Instance
