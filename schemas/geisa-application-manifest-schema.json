@@ -64,7 +64,9 @@
 				},
                 "signatureValue": {
                     "$comment": "The base64 encoded OpenPGP detached signature packet over the compact JSON value of the Manifest.  The signature packet (see RFC9580) includes the required certificate reference and algorithm type to facilitate signature verification.",
-                    "type": "string"
+                    "type": "string",
+					"contentEncoding": "base64",
+                    "minLength": 1
                 }
             }
         },

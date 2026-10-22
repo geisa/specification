@@ -224,7 +224,7 @@ GEISA vendor manifests SHALL include:
 
     - Signature blocks may include an optional ``signatureRole``.  Valid values
       in this version of the specification are: 'publisher', 'operator',
-      'certifier', and 'other'.  Singature roles may be useful for logging and system
+      'certifier', and 'other'.  Signature roles may be useful for logging and system
       operations, but are optional.
 
 The compact value of an application manifest removes all unnecessary whitespace
