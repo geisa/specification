@@ -39,7 +39,7 @@ Glossary
     Applications Programming Interface
 
    Application
-    A program targeting a specific Execution Environment, typically delivered
+    A program, targeting a specific Execution Environment, typically delivered
     as a compiled set of binary codes and associated metadata, bundled into
     a standard artifact that can be transferred to a Platform Implementation for
     execution.
