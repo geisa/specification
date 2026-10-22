@@ -114,7 +114,7 @@ The GEISA VEE MUST enforce resource limits per resource (using a Resource
 Manager): 
 
 - Compute Resources: CPU allocation with fair scheduling among running 
-  applications, and criticality level between applications
+  applications
 - Memory Resources: Heap size limits per application
 - Network Resources: Bandwidth throttling and volume limits
 
