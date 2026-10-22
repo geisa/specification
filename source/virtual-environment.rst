@@ -49,7 +49,7 @@ this version of the GEISA specification.
    C/C++ with GEISA VEE environments, as they may not be supported by all
    VEE toolchains, limiting interoperability across VEE implementations.
 
-When the host operating system is Linux and the VEE SHOULD execute in user
+When the host operating system is Linux, the VEE SHOULD execute in user
 space as a process.  When the host operating system is an RTOS, such as Zephyr,  
 the VEE SHOULD be executed as a task.
 
