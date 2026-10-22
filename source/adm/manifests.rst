@@ -144,7 +144,7 @@ GEISA vendor manifests SHALL include:
 - Default Application Configuration
 
     - GEISA applications may need basic information to initialize such as the
-      URL of a server, or settngs such as the frequency of reporting.  The
+      URL of a server, or settings such as the frequency of reporting.  The
       default application configuration provides an initial set of values that
       can be used by the system operator when creating the operator manifest.
 

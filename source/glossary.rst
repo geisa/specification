@@ -39,9 +39,9 @@ Glossary
     Applications Programming Interface
 
    Application
-    A program, targetting a specific Execution Environment, typically delivered
+    A program, targeting a specific Execution Environment, typically delivered
     as a compiled set of binary codes and associated metadata, bundled into
-    standard artifact that can be transferred to a Platform Implementation for
+    a standard artifact that can be transferred to a Platform Implementation for
     execution.
 
    Application Certifier
@@ -56,7 +56,7 @@ Glossary
     environment.
 
    Application Instance
-    An Application that been installed on a Platform Implementation and for
+    An Application that has been installed on a Platform Implementation and for
     which that Platform Implementation can report a runtime state.
 
    Application Publisher
@@ -122,7 +122,7 @@ Glossary
     Firmware is the software and associated data deployed as part of an
     embedded GEISA device that provide the functionality required to initialize,
     control, and operate its hardware. Firmware is typically stored in
-    non-volatile memory and may include a secure bootloader, RTOS/OS, device
+    non-volatile memory and may include a secure bootloader, OS/RTOS, device
     drivers, and middleware. Firmware is generally considered relatively static
     and is typically deployed as a versioned software image. Devices may
     require a reboot for a firmware update to take effect. 
@@ -213,7 +213,9 @@ Glossary
     Public Key Infrastructure
 
    Platform 
-    See :term:`Platform Implementation`
+    See :term:`Platform Implementation`.
+    In this specification, Platform refers to the :term:`Edge Device`, not to
+    a cloud platform.
 
    Platform Implementation
     A combination of hardware and software which provides one or more
@@ -232,6 +234,10 @@ Glossary
 
    RTOS
     Real Time Operating System
+
+   Sandbox
+    The isolated space in which the VEE runs each application.  Sandboxes are
+    how the VEE provides the :term:`AII`, as containers are in the LEE.
 
    SPI
     Serial Peripheral Interface
