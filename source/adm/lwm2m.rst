@@ -179,9 +179,18 @@ implemented.
 GEISA ADM Object-Version Baseline
 =================================
 
-The following Object versions form the fixed GEISA 1.0 ADM baseline. Where an
-updated definition is available, the XML link identifies the pinned definition
-audited for this baseline. Pending definition updates are identified below.
+The following Object versions form the proposed GEISA 1.0 ADM baseline. Where
+an updated definition is available, the XML link identifies the pinned
+definition audited for this baseline. Pending definition updates are identified
+below.
+
+.. note::
+
+   The GEISA definitions for Objects ``/3600``, ``/3601``, and
+   ``/3602`` at version 2.0 remain under review. The linked XML
+   definitions identify the versions used by this draft and may
+   be revised before GEISA 1.0 is finalized.
+
 
 .. list-table:: GEISA 1.0 ADM Object versions
    :header-rows: 1
