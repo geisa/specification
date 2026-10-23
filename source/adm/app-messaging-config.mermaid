@@ -10,27 +10,25 @@
 
 sequenceDiagram
     autonumber
-    participant V as Vendor Application Server
-    participant E as EMS ReST API
     participant A as Edge App
-    participant C as LwM2M Client<br/>(GEISA Platform)
-    participant S as LwM2M Server<br/>(GEISA EMS)
+    participant C as GEISA Platform<br/>(LwM2M Client)
+    participant S as GEISA EMS<br/>(LwM2M Server)
+    participant V as Vendor Application Server
 
-    Note over V,E: HTTP / ReST
+
     Note over A,C: GEISA MQTT API
-    Note over C,S: LwM2M / DTLS
-
-    A->>C: <br/><br/>App Subscribes to GEISA API topic (app config)
+    A->>C: App Subscribes to GEISA<br/>API topic (app config)
     C-->>A: SUBACK
 
-    V->>E: POST application message (CONFIG)
-    E-->>V: 202 Accepted
-    Note right of E: EMS forwards message via LwM2M
+    Note over V,S: HTTPS / ReST
+    V->>S: POST application<br/>message (CONFIG)
+    S-->>V: 202 Accepted
 
-    S->>C: PUT /3600/x/0 (App Config)
+    Note over C,S: LwM2M / DTLS
+    S->>C: PUT /3600/x/0<br/>(App Config)
     C-->>S: 2.04 Changed
 
-    C->>A: <br/><br/>Platform Publishes topic (app config) to App
+    C->>A: Platform Publishes topic<br/>(app config) to App
     A-->>C: PUBACK
 
-    A->>A: <br/>App reloads <br/>config<br/>
+    A->>A: App reloads config<br/>

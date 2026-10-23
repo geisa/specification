@@ -245,15 +245,15 @@ audited for this baseline. Pending definition updates are identified below.
      - :download:`504.xml <external/lwm2m-registry/504.xml>`
    * - ``/3600``
      - GEISA App Messaging
-     - 1.2
+     - 2.0
      - :download:`3600.xml <external/lwm2m-registry/3600.xml>`
    * - ``/3601``
      - GEISA Host Monitoring
-     - 1.1
+     - 2.0
      - :download:`3601.xml <external/lwm2m-registry/3601.xml>`
    * - ``/3602``
      - GEISA App Accounting
-     - 1.1
+     - 2.0
      - :download:`3602.xml <external/lwm2m-registry/3602.xml>`
    * - ``/3603``
      - GEISA Wi-SUN Radio Management

@@ -44,6 +44,8 @@ Vendor Application Server to Edge Application
 
 An ADM-conformant EMS MUST provide a ReST API that allows an authorized Vendor
 Application Server to submit a message for delivery to an Edge Application.
+All EMS ReST APIs, including the required application-message POST endpoint and
+any additional operations, MUST use HTTPS.
 The request MUST identify the target using its provisioned
 :ref:`operator-identifier <operator-identifier>`
 and AppID. The EMS obtains or maps ``operator-identifier`` from its
