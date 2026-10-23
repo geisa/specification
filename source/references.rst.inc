@@ -45,6 +45,12 @@
 .. [RFC9148] `EST-coaps: Enrollment over Secure Transport with the Secure Constrained Application Protocol
    <https://datatracker.ietf.org/doc/html/rfc9148>`_
 
+.. [RFC9580] `OpenPGP
+   <https://datatracker.ietf.org/doc/html/rfc9580>`_
+
+.. [RFC9980] `Post-Quantum Cryptography in OpenPGP
+   <https://datatracker.ietf.org/doc/rfc9980/>`_
+
 .. [TARGET] `Triple.cpp - Target Triple Helper Class 
    <https://llvm.org/doxygen/Triple_8cpp_source.html>`_
 .. [X509] `X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks

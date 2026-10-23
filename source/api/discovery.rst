@@ -90,9 +90,9 @@ device identifier in an application message. The LwM2M Endpoint Name and
    Firmware information. However, GEISA mandates that it MUST include, at a
    minimum, the versions of:
 
-   #. the base host OS
+   #. the base host OS/RTOS
    #. the GEISA API implementation
-   #. the GEISA platform runtime environment in use, such as LEE or VEE where implemented
+   #. the GEISA execution environment(s) in use (LEE, VEE, or both), where implemented
 
 |geisa-pyramid|
 

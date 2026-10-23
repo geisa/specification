@@ -50,33 +50,31 @@
                 }
             ]
         },
+        "signatureSet": {
+            "type": "array",
+            "description": "List of one or more signatures.",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/signatureBlock"
+            }
+        },
         "signatureBlock": {
             "type": "object",
             "$comment": "Digital signature for an artifact or the manifest",
             "required": [
-              "signatureType",
-              "signatureLength",
-              "signatureHex"
+              "signatureValue"
             ],
-            "$comment": "If signatureReference is not included conformant systems should make a best effort to determine which certificates to validate the signature against.  Best practice is to include signatureReference.",
             "properties": {
-                "signatureType": {
-                    "enum": [ "ECDSA", "MLDSA"],
-                    "$comment": "GEISA currently defines ECDSA and MLDSA as valid signature types.  Other types may be added in the future."
+                "signerRole": {
+                    "$comment": "Optional indicator of the role of provider of the signature.",
+                    "enum": [ "publisher", "operator", "certifier", "other" ],
+                    "type": "string"
                 },
-                "signatureLength": {
-                    "type": "integer",
-                    "$comment": "The length of the signature in bytes, once convertered from hexadecimal text back into binary.  Provided to allow basic validation"
-                },
-                "signatureHex": {
+                "signatureValue": {
+                    "$comment": "The base64 encoded OpenPGP detached signature packet over the compact JSON value of the Manifest.  The signature packet (see RFC9580) includes the required certificate reference and algorithm type to facilitate signature verification.",
                     "type": "string",
-                    "description": "Hexadecimal text encoding of the binary signature.  Should be twice the size of the binary singature because of the encording process.",
-                    "pattern": "^[0-9A-Fa-f]+$",
-                    "minLength": 128
-                },
-                "signatureReference": {
-                    "type": "string",
-                    "description": "CN of the x509 certificate of the signer.  Used to faciliate looking up the signature for validation."
+                    "contentEncoding": "base64",
+                    "minLength": 1
                 }
             }
         },
@@ -103,7 +101,7 @@
                 "image-name",
                 "image-type",
                 "image-size",
-                "signature",
+                "signatures",
                 "uncompressed-size"
             ],
             "properties": {
@@ -130,8 +128,8 @@
                     "type": "integer",
                     "minimum": 1
                 },
-                "signature": {
-                    "$ref": "#/$defs/signatureBlock"
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
                 }
             }
         }
@@ -145,7 +143,7 @@
             "type": "object",
             "required": [
                 "manifest",
-                "signature"
+                "signatures"
             ],
             "properties": {
                 "manifest": {
@@ -464,8 +462,8 @@
                         }
                     }
                 },
-                "signature": {
-                    "$ref": "#/$defs/signatureBlock"
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
                 }
             }
         }
