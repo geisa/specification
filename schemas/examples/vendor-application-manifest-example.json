@@ -17,13 +17,12 @@
                     "image-type": "appoverlay",
                     "image-size": 262144,
                     "uncompressed-size": 1048576,
-                    "signature": {
-                      "signatureType": "ECDSA",
-                      "signatureLength": 64,
-                      "signatureHex": "AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
-                      "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
-                      "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
-                    }
+                    "signatures": [
+                        {
+                           "signerRole": "publisher",
+                           "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg==haYh"
+                        }
+                    ]
                 }
             ],
             "api-access": {
@@ -84,12 +83,11 @@
                 "storage-nonpersistent": 0
             }
         },
-        "signature": {
-            "signatureType": "ECDSA",
-            "signatureLength": 64,
-            "signatureHex": "0000111122223333444455556666777788889999AAAABBBBCCCCDDDDEEEEFFFFAAAABBBBCCCCDDDDEEEEFFFF0000111122223333444455556666777788889999",
-            "$comment": "The signature Reference should match the Subject Idenfitier of the signing certificate.",
-            "signatureReference": "C=US, ST=Any State, L=Any Town, O=Awesome App Publisher"
-        }
+        "signatures": [
+            {
+                "signerRole": "publisher",
+                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCatuk/AAKCRBFeoCWIY0ehxyuAP96K767QUxb9ejqwR2Y6nMCwU2NbYfYe7YO89Bwm/7NAQD+KkfD/mETtFIdFjfb7HyTVLd6m5EAabRHT19OZukBkgs==WYyf"
+            }
+        ]
     }
 }

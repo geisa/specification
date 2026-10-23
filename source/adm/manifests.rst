@@ -1,7 +1,7 @@
 
 ..
-  Copyright 2025-2026, Contributors to the Grid Edge Interoperability & 
-  Security Alliance (GEISA) a Series of LF Projects, LLC  
+  Copyright 2025-2026, Contributors to the Grid Edge Interoperability &
+  Security Alliance (GEISA) a Series of LF Projects, LLC
   This file is licensed under the Community Specification License 1.0 available
    at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
@@ -24,18 +24,18 @@ applications have a `recipe
 or other set of metadata describing the requirements and dependencies.
 
 GEISA handles application metadata by defining two manifests for each
-application: a vendor manifest and an operator manifest.  
+application: a vendor manifest and an operator manifest.
 
 The vendor application manifest provides information about the application to
 the operator and the edge management system, including any external
 dependencies and requested resource limits.  The vendor manifest is used by
 a GEISA ADM conformant edge management system to inform the operator about the
-application and to facilitate the secure import of the application.  
+application and to facilitate the secure import of the application.
 
-The operator application manifest is based on the vendor application manifest 
-allowing the operator to customize and tune the application permissions and 
+The operator application manifest is based on the vendor application manifest
+allowing the operator to customize and tune the application permissions and
 resource allocations to match their execution environment, intended use case,
-and security requirements prior to deployment to the execution environment.  
+and security requirements prior to deployment to the execution environment.
 
 .. Warning::
 
@@ -87,7 +87,7 @@ GEISA vendor manifests SHALL include:
         - uClibc
         - uClibc-ng
 
-    - For VEE, a string of the JVM version:
+    - For VEE, a string of the JVM version (null for unsupported):
 
         - Java 7: java7
         - Java 8: java8
@@ -120,8 +120,8 @@ GEISA vendor manifests SHALL include:
 
 .. Note::
 
-  Application messaging is provided through the API and does not require direct
-  access to a network interface.
+   Application messaging is provided through the API and does not require direct
+   access to a network interface.
 
 .. Note::
 
@@ -133,25 +133,25 @@ GEISA vendor manifests SHALL include:
 - External Dependencies
 
     - GEISA applications should be as self-contained as possible, with all
-      necessary dependencies, except for the base libraries provided by the EE, 
+      necessary dependencies, except for the base libraries provided by the EE,
       contained with the application artifacts.
     - GEISA does not provide a mechanism for loading arbitrary packages.  The
       external dependencies element in the manifest is used exclusively to
       indicate that one application depends on another.
     - Vendor-assigned Application ID of the application this application
-      depends on.  
+      depends on.
 
 - Default Application Configuration
 
     - GEISA applications may need basic information to initialize such as the
       URL of a server, or settings such as the frequency of reporting.  The
       default application configuration provides an initial set of values that
-      can be used by the system operator when creating the operator manifest.  
+      can be used by the system operator when creating the operator manifest.
 
-.. Note :: 
-  
-  The system operator should be able to change the configuration information
-  without needing to redeploy the application.
+.. Note::
+
+   The system operator should be able to change the configuration information
+   without needing to redeploy the application.
 
 - Default Launch Strategy
 
@@ -164,17 +164,89 @@ GEISA vendor manifests SHALL include:
         which the application will not be restarted
       - Restart period -- elasped time, in minutes, before the failure count is
         reset.  The first failure starts the timer.  If the configured maximum
-        number of failures occurs before the restart period is over, the 
+        number of failures occurs before the restart period is over, the
         application is not restarted.  Otherwise, the failure count is reset.
 
-- Vendor Signature
+- Signature(s)
 
-    - Base64 Encoded Signature of the compact JSON encoding of the vendor
-      application manifest.
+    - All signatures SHALL be an OpenPGP detached signature packet encoded
+      base64, as per [RFC9580]_ section 6, with the formatting modifications
+      noted in this specification, and placed in the ``signatureValue``
+      element.
+
+    - EMS and Platform implementations SHALL parse the contents of the
+      ``signatureValue`` element to extract the OpenPGP signature block for
+      evaluation.
+
+    - To ensure a consistent canonical form of the manifest and to avoid the
+      issues of escaping embedded newlines, the ``signatureValue`` shall
+      contain only the concatenated base64 encoded value of the OpenPGP
+      detached signature packet.  This means:
+
+          - Implementations MUST not include  ``-----BEGIN PGP SIGNATURE-----`` and
+            ``-----END PGP SIGNATURE-----`` labels.
+
+          - Implementations MUST not include a newline before the base64 encoded
+            signature.
+
+          - Implementations MUST not include any newlines within the
+            ``signatureValue`` element, even if they are escaped (e.g.
+            ``\\n``).
+
+          - Implementations MUST concatenate base64 encoded text into a single
+            continuous string.
+
+          - Implementations MUST accept ``signatureValue`` elements that contains
+            only the base64/ASCII armor encoded signature packet.
+  
+    - The Signature Packet shall follow [RFC9580]_, section 5.2.
+
+    - The Signature Type ID (as documented in [RFC9580]_, section 5.2) shall be
+      ``0x00``, Binary Signature.
+  
+    - Signatures for the manifest shall be over the compact JSON encoding of
+      the value of the manifest element, inclusive of the value only and all
+      JSON syntax.
+
+    - Signatures for application artifacts shall be over the entire binary
+      image file.
+
+    - Application manifests require at least one signature, though they support
+      multiple signatures.
+
+    - Application artifacts SHALL be signed by the application publisher
+
+    - Application artifacts MAY be signed by an application certifier, system
+      operator, or other entity.
+
+    - Platform implementations SHALL validate all signatures included in a
+      manifest.
+
+    - Signature blocks may include an optional ``signerRole``.  Valid values
+      in this version of the specification are: 'publisher', 'operator',
+      'certifier', and 'other'.  Signature roles may be useful for logging and system
+      operations, but are optional.
+
+The compact value of an application manifest removes all unnecessary whitespace
+(i.e. whitespace not part of a JSON element value).  This provides a consistent,
+canonical form of the manifest for calculating the signature.
+
+One way of obtaining the compact value of the ``manifest`` element is using the
+``jq`` command.  For example:
+
+``jq -c '.["geisa-application-manifest"].["manifest"]' <
+vendor-application-manifest-example.json``
+
+yields:
+
+|geisa-manifest-extract|
 
 .. Note::
 
-    ToDo: Add details on the signature mechanism.
+   The ``jq`` *command* shown above does not include any line breaks or
+   newlines in its output, but the Sphinx documenation system used by the GEISA
+   specification adds them back in for readability.  Manifest signatures are
+   always over the canonical compact form, without any newlines.
 
 |geisa-landscape|
 

@@ -17,14 +17,30 @@ GEISA requires that application images, firmware images, and application
 manifest be digitally signed.  Digital signatures for application images are
 provided in the application manifest in the application artifact object (see
 https://github.com/geisa/specification/blob/main/schemas/geisa-application-manifest-schema.json).
+A full discussion of how signature are formatted within GEISA can be found in
+:doc:`/adm/manifests`.
+
+Generally, GEISA signatures are detached signature packets, as defined within
+the OpenPGP standard, as defined in [RFC9580]_ and [RFC9980]_.  These standards
+define a rich set of signing and encryption capabilities, of which GEISA uses
+just a minor subset.
 
 GEISA supports two digital signature schemas:
 
-- ECDSA as per [FIPS186]_
-- MLDSA as per [FIPS204]_
+- ECDSA as per [FIPS186]_ and as operationalized in [RFC9580]_.
+- MLDSA as per [FIPS204]_ and as operationalized in [RFC9980]_.
 
-Additional signature schemes (e.g EdDSA, FNDSA, etc.) maybe added if there is
-demand.
+Spefically, conformant EMS and platform implementations MUST support
+
+- ``ML-DSA-65+Ed25519`` (algorithm ID 30) 
+- ``ECDSA`` (algorithm ID 19)
+
+.. Note::
+
+   The OpenPGP implementation of MLDSA is hybridized with EdDSA.
+
+GEISA conformant EMS and platforms MUST support Version 6 signatures, as per
+[RFC9580]_.
 
 GEISA conformant EMS and platforms MUST support ECDSA using the P-521 curve
 (see [NIST800-186]_) and MLDSA using ML-DSA-65 signatures.  ML-DSA-65
@@ -37,21 +53,14 @@ Signature Validation
 ~~~~~~~~~~~~~~~~~~~~
 
 To facilitate tranport of digital signatures in JSON files, signatures are
-provided as hexadecimal text.  While this approach is not as efficient as
-Base64 and other denser encoding it is very simple to implement and it avoids
-requiring escape sequences.  Encoding and decoding in C can be done with
-:code:`printf("%x",signature)` or :code:`scanf("%x",signature)`.
+provided as base64 encoded text, based on [RFC9580]_ and the GEISA specific
+guidance provided in :doc:`/adm/manifests`.
 
-The application manifest schema requires expected length of the signature (in
-bytes) be included.  This acts as a simple integrity check.  Given the
-hexadecimal encoding, the signature length should always be half the number of
-characters in the signature string.
-
-The application manifest schema also includes a signatureReference field.  This
-field is the SubjectName of the x.509 signature that can be used to validate
-the signature.  While this field is not required, publishers SHOULD include it
-when providing an application manifest so that the GEISA EMS can easily
-identify which certificate should be used.
+The [RFC9580]_ signature packet embeds within it the required metadata (e.g.
+the algorithm, key identifier, etc.) to allow the signature to be matched to
+the appropriate public key and the verification completed.  Implementers should
+be able to use an appropriate OpenPGP compliant library to verify or generate
+signatures as required.
 
 The GEISA deployment manifest requires at least one signature per artifact and
 at lease one signature per manifest.  Artifacts may have more than one
@@ -65,11 +74,11 @@ publishers MUST always sign their artifacts, even if an artifact will be
 submitted to an optional certifier.
 
 
-.. admonition:: To-Do
+.. To-Do
 
    Need to define the wrapper for firmware images.
 
-.. admonition:: To-Do
+.. To-Do
 
    Need to add discussion on zip files containing images and manifest.
 

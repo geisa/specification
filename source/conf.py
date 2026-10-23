@@ -4,7 +4,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 import sys
-
+import subprocess
 from git import Repo
 
 # -- Project information -----------------------------------------------------
@@ -50,12 +50,24 @@ def geisa_get_release() -> str:
 
     return release
 
+# returns the manifest block from the sample vendor manifest
+def geisa_extract_manifest() -> str:
+    jqoutput = subprocess.run(['./extract-manifest-block.sh', ''], stdout=subprocess.PIPE)
+    extract = "``" + jqoutput.stdout.decode('utf-8')
+    #extract = extract.replace("{","{{")
+    #extract = extract.replace("}","}}")
+    extract = extract.strip()
+    extract = extract + "``"
+
+    return extract
+
 project = 'GEISA Specification'
 copyright = 'Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA) a Series of LF Projects, LLC'
 author = 'Contributors to GEISA'
 release = geisa_get_release()
 version = geisa_get_version()
 html_title = 'GEISA Specification'
+extract = geisa_extract_manifest()
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -106,6 +118,10 @@ rst_prolog = f"""
 .. |geisa-schemas-repo| replace::  https://github.com/geisa/specification/tree/main/schemas
 
 .. |geisa-spec-version| replace::  v{version}
+
+.. |geisa-manifest-extract| replace:: {extract}
+
+.. |geisa-manifest-test| replace:: ``{{"$comment":"Core application metadata and vendor-recommended settings."}}``
 
 .. |geisa-ee-logo| image:: /images/geisa-ee-icon.{_icon_ext}
     :alt: GEISA Execution Environment
