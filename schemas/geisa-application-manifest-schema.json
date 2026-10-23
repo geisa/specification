@@ -50,6 +50,14 @@
                 }
             ]
         },
+        "signatureSet": {
+            "type": "array",
+            "description": "List of one or more signatures.",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/signatureBlock"
+            }
+        },
         "signatureBlock": {
             "type": "object",
             "$comment": "Digital signature for an artifact or the manifest",
@@ -58,14 +66,14 @@
             ],
             "properties": {
                 "signerRole": {
-					"$comment": "Optional indicator of the role of provider of the signature.",
-					"enum": [ "publisher", "operator", "certifier", "other" ],
-					"type": "string"
-				},
+                    "$comment": "Optional indicator of the role of provider of the signature.",
+                    "enum": [ "publisher", "operator", "certifier", "other" ],
+                    "type": "string"
+                },
                 "signatureValue": {
                     "$comment": "The base64 encoded OpenPGP detached signature packet over the compact JSON value of the Manifest.  The signature packet (see RFC9580) includes the required certificate reference and algorithm type to facilitate signature verification.",
                     "type": "string",
-					"contentEncoding": "base64",
+                    "contentEncoding": "base64",
                     "minLength": 1
                 }
             }
@@ -93,7 +101,7 @@
                 "image-name",
                 "image-type",
                 "image-size",
-                "signature",
+                "signatures",
                 "uncompressed-size"
             ],
             "properties": {
@@ -120,8 +128,8 @@
                     "type": "integer",
                     "minimum": 1
                 },
-                "signature": {
-                    "$ref": "#/$defs/signatureBlock"
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
                 }
             }
         }
@@ -135,7 +143,7 @@
             "type": "object",
             "required": [
                 "manifest",
-                "signature"
+                "signatures"
             ],
             "properties": {
                 "manifest": {
@@ -454,8 +462,8 @@
                         }
                     }
                 },
-                "signature": {
-                    "$ref": "#/$defs/signatureBlock"
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
                 }
             }
         }

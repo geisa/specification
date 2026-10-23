@@ -32,7 +32,7 @@ GEISA supports two digital signature schemas:
 
 Spefically, conformant EMS and platform implementations MUST support
 
-- ``ML-DSA-65+Ed25519`` (algorithm ID 31) 
+- ``ML-DSA-65+Ed25519`` (algorithm ID 30) 
 - ``ECDSA`` (algorithm ID 19)
 
 .. Note::
@@ -40,7 +40,7 @@ Spefically, conformant EMS and platform implementations MUST support
    The OpenPGP implementation of MLDSA is hybridized with EdDSA.
 
 GEISA conformant EMS and platforms MUST support Version 6 signatures, as per
-[RFC9580]_ and SHOULD support Version 6 signatures.
+[RFC9580]_.
 
 GEISA conformant EMS and platforms MUST support ECDSA using the P-521 curve
 (see [NIST800-186]_) and MLDSA using ML-DSA-65 signatures.  ML-DSA-65

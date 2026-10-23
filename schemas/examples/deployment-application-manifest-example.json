@@ -17,10 +17,12 @@
                     "image-type": "appoverlay",
                     "image-size": 262144,
                     "uncompressed-size": 1048576,
-                    "signature": {
-                      "signerRole": "publisher",
-                      "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg==haYh"
-                    }
+                    "signatures": [
+                        {
+                            "signerRole": "publisher",
+                            "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg==haYh"
+                        }
+                    ]
                 }
             ],
             "api-access": {
@@ -81,9 +83,11 @@
                 "storage-nonpersistent": 0
             }
         },
-        "signature": {
-            "signerRole": "operator",
-            "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYbIwAKCRAoV+memssgbak1AQDQVe6la1of/xOldr7RT7rIV46fJNABrai8Z4yoT4DDPwD9ELcAtkc0TX16CNsBSrZY5zW4Mz4pl1odv1s4UdCxqQE==sS6V"
-        }
+        "signatures": [
+            {
+                "signerRole": "operator",
+                "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatulIQAKCRAoV+memssgbQUOAQCiY3aeScPRsFl1QtXv2f/69OBYdW6rSwhgxYWp1bTvyQEA7QiyYTJ0tnbEa2EJtwJZ8LIC/jVSI3cSDPsLSc2ZHQ8==CLqf"
+            }
+        ]
     }
 }

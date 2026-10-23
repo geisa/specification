@@ -222,7 +222,7 @@ GEISA vendor manifests SHALL include:
     - Platform implementations SHALL validate all signatures included in a
       manifest.
 
-    - Signature blocks may include an optional ``signatureRole``.  Valid values
+    - Signature blocks may include an optional ``signerRole``.  Valid values
       in this version of the specification are: 'publisher', 'operator',
       'certifier', and 'other'.  Signature roles may be useful for logging and system
       operations, but are optional.
