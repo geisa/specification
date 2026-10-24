@@ -245,7 +245,8 @@
         },
         "operator-identifier": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "When provisioned, this operator-assigned device identifier MUST uniquely identify the device within the System Operator's managed deployment."
         }
       },
       "additionalProperties": false

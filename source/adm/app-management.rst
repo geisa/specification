@@ -29,8 +29,8 @@ Package is defined in :doc:`/lee/file-layout` for LEE conformant |geisa-lee-tux|
 and SHALL be composed of the following components:
 
 *    X.509 Public Key Certificate used to verify the digital signature in the Package
-*    Digital Signature across the Edge Application Manifest and Edge Application Image
-*    :doc:`Edge Application Manifest </adm/manifests>`
+*    Digital Signature across the Vendor Application Manifest and Edge Application Image
+*    :doc:`Vendor Application Manifest </adm/manifests>`
 *    Edge Application Image
 
 To minimize edge application image sizes, applications are encouraged to

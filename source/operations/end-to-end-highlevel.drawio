@@ -161,36 +161,6 @@
             <mxPoint x="370" y="670" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e16" edge="1" parent="1" source="appv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="uops" value="">
-          <mxGeometry relative="1" x="-0.4926" y="2" as="geometry">
-            <mxPoint as="offset" />
-            <mxPoint x="723.0000000000002" y="882" as="sourcePoint" />
-            <mxPoint x="885" y="455" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e18" edge="1" parent="1" source="OCb3Kikvp9HP05hyJ-Op-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="dl" value="">
-          <mxGeometry relative="1" x="-0.4644" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="920" y="799" />
-            </Array>
-            <mxPoint x="660" y="768" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e19" edge="1" parent="1" source="OCb3Kikvp9HP05hyJ-Op-3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="dl" value=" ">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="990" y="908" />
-            </Array>
-            <mxPoint x="662" y="887" as="sourcePoint" />
-            <mxPoint x="1040" y="430" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="NJpEaeESbuw3zEwBbxiB-3" connectable="0" parent="e19" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="operator-facing visibility,&lt;br&gt;alerts, logs, and reporting" vertex="1">
-          <mxGeometry relative="1" x="0.3494" y="-3" as="geometry">
-            <mxPoint x="-38" y="-215" as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="e4" edge="1" parent="1" source="ac" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="so" value="certifier certificate,&lt;br&gt;certification status,&amp;nbsp;&lt;div&gt;&amp;amp; record&lt;/div&gt;">
           <mxGeometry relative="1" x="-0.5206" as="geometry">
             <mxPoint as="offset" />
@@ -228,38 +198,11 @@
         <mxCell id="uops" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Utility Operations,&lt;br&gt;Analytics, &amp;amp; Third-Party&lt;br&gt;Systems" vertex="1">
           <mxGeometry height="60" width="140" x="725" y="385" as="geometry" />
         </mxCell>
-        <mxCell id="e15" edge="1" parent="1" source="appl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="uops" value="">
-          <mxGeometry relative="1" x="0.0011" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="760" y="763" />
-            </Array>
-            <mxPoint x="662" y="763" as="sourcePoint" />
-          </mxGeometry>
+        <mxCell id="e15" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="uops" value="/3600 Client to Server records via Kafka-protocol Data Distribution">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="NJpEaeESbuw3zEwBbxiB-2" connectable="0" parent="e15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="operator-facing visibility,&lt;br&gt;alerts, logs, and reporting" vertex="1">
-          <mxGeometry relative="1" x="0.298" y="-4" as="geometry">
-            <mxPoint x="31" y="-104" as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="NJpEaeESbuw3zEwBbxiB-6" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="dl" value="">
-          <mxGeometry relative="1" x="0.0272" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="955" y="360" />
-            </Array>
-            <mxPoint x="470" y="380" as="sourcePoint" />
-            <mxPoint x="800" y="390" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e17" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="uops" value="operator-facing visibility,&#xa;alerts, logs, and reporting">
-          <mxGeometry relative="1" x="0.0272" as="geometry">
-            <mxPoint as="offset" />
-            <Array as="points">
-              <mxPoint x="795" y="360" />
-            </Array>
-            <mxPoint x="450" y="345" as="sourcePoint" />
-          </mxGeometry>
+        <mxCell id="e18" edge="1" parent="1" source="emswrap" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="dl" value="/3600 Client to Server records via Kafka-protocol Data Distribution">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="emswrap" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System (EMS)" vertex="1">
           <mxGeometry height="80" width="358" x="66" y="300" as="geometry" />

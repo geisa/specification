@@ -32,7 +32,7 @@ GEISA supports two digital signature schemas:
 
 Spefically, conformant EMS and platform implementations MUST support
 
-- ``ML-DSA-65+Ed25519`` (algorithm ID 30) 
+- ``ML-DSA-65+Ed25519`` (algorithm ID 30)
 - ``ECDSA`` (algorithm ID 19)
 
 .. Note::

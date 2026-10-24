@@ -80,10 +80,10 @@ The principal roles used in this operational view are:
 - :term:`System Operator`
 
   The role responsible for approving, configuring, authorizing,
-  deploying, and operating GEISA-managed devices and applications  
+  deploying, and operating GEISA-managed devices and applications
   within a specific operating environment in accordance with agreed-on
   policies.  The Operator effectively runs the day-to-day systems, although
-  they may be beholden to another organization such as the Utility to 
+  they may be beholden to another organization such as the Utility to
   dictate actual policies to be followed.
 
   Often the System Operator will be the utility; however, they may choose to
@@ -95,7 +95,7 @@ The principal roles used in this operational view are:
 
   The role responsible for supplying the platform hardware, platform
   software, and associated platform trust material where applicable.
-  This role may be filled by one or more providers, such as separate hardware 
+  This role may be filled by one or more providers, such as separate hardware
   and software providers.
 
 .. index:: single: Application Publisher
@@ -141,7 +141,7 @@ The principal roles used in this operational view are:
 
   :term:`ADM` is the GEISA pillar for :doc:`adm`.  The ADM pillar defines the
   interfaces required for interactions between an Edge Management System and
-  Edge Devices. 
+  Edge Devices.
 
   It spans the capabilities required for application ingestion, operator
   approval for deployment, deployment, activation, deactivation, updates, and
@@ -185,7 +185,7 @@ End-to-End Operational Context
 
 At a high level, the System Operator uses an :term:`EMS` to manage
 conformant platforms, authorize application deployment, and obtain
-operational visibility into the deployed fleet.  
+operational visibility into the deployed fleet.
 
 Within the platform, :term:`EMA` provides the management behavior needed
 for device onboarding, lifecycle control, and application deployment as
@@ -215,7 +215,7 @@ areas relate end to end.
    :alt: High-level GEISA operational context showing how principal roles and components relate end to end.
    :align: center
 
-   End-to-End Operational Context Diagram 
+   End-to-End Operational Context Diagram
 
 To understand how these roles and components interact, consider the process of
 deploying an application.  Initially, a system operator may engage with an
@@ -238,10 +238,10 @@ conformance testing, as described in :doc:`conformance`.
 The system operator chooses to acquire a new application.  This process
 involves obtaining the application image and publisher certificate from the
 application publisher, and optionally obtaining the application certification
-record from the application certifier.  
+record from the application certifier.
 
 .. figure:: operations/app-lifecycle-acquisition.*
-   :alt: Sequence diagram showing application acquisition 
+   :alt: Sequence diagram showing application acquisition
    :align: center
 
    Application Acquisition Sequence Diagram
@@ -253,7 +253,7 @@ deployment manifest for it.
 .. index:: single: Application Approval
 
 .. figure:: operations/app-lifecycle-approval.*
-   :alt: Sequence diagram showing application approval 
+   :alt: Sequence diagram showing application approval
    :align: center
 
    Application Approval Sequence Diagram
@@ -264,7 +264,7 @@ Once the application is approved, the System Operator can use the Edge
 Managment System to deploy it the Edge Devices.
 
 .. figure:: operations/app-lifecycle-deployment.*
-   :alt: Sequence diagram showing application deployment 
+   :alt: Sequence diagram showing application deployment
    :align: center
 
    Application Deployment Sequence Diagram
@@ -276,7 +276,7 @@ state.  The running application can then report its status, via the platform to
 the Edge Management System.
 
 .. figure:: operations/app-lifecycle-activation.*
-   :alt: Sequence diagram showing application activation 
+   :alt: Sequence diagram showing application activation
    :align: center
 
    Application Activation Sequence Diagram
@@ -343,7 +343,7 @@ remain under operator control.
    approval by application or platform vendors.  Failing to follow publisher
    recommendations may result in adverse performance under some conditions.
 
-Additional detailed application approval and deployment workflows and 
+Additional detailed application approval and deployment workflows and
 requirements may be added in a future revision of the specification.
 
 |geisa-pyramid|
@@ -403,7 +403,7 @@ environment. During runtime, the platform and EMS provide visibility
 into application and platform state, including activation state,
 execution state, status, and other operationally relevant data.
 
-Additional detailed application activation and state information  
+Additional detailed application activation and state information
 requirements may be added in a future revision of the specification.
 
 |geisa-pyramid|
@@ -461,7 +461,8 @@ Platform and one or more upstream ADM components, including the EMS, LwM2M
 servers, analytics services, or other cooperating systems. Some
 implementations may perform substantial collection and evaluation upstream,
 while others may rely more heavily on the EMA and other platform-local
-functions. Hybrid arrangements are also valid.
+functions. Implementations may divide these monitoring functions between the
+Platform and upstream components.
 
 On constrained, metered, delayed, or shared field networks, local collection,
 aggregation, threshold evaluation, and condition detection can often reduce
@@ -593,7 +594,7 @@ conformance testing.
 This chapter distinguishes between two broad certification models that may be
 relevant to GEISA application ecosystems.  The industry continues
 to evolve and this may be expanded in a future revision.  Costs as well as
-capabilities of individual providers able to be located to perform this 
+capabilities of individual providers able to be located to perform this
 function as a Utility may desire may also come into play.
 
 Regardless, there are two broad types of certification we will consider at
@@ -634,12 +635,13 @@ this time.
   satisfies a deeper specific functional and/or performance claim, such as
   analytics accuracy, condition-detection fidelity, expected true or
   false positive rates, interoperability with specific external devices,
-  or similar claims. It is essentially - 'does this application do what is 
+  or similar claims. It is essentially - 'does this application do what is
   promised?'
-  
+
   This type of certification may be substantially more complex and
   expensive, particularly for applications that make use of local AI
-  inferencing, hybrid edge/cloud processing, behind-the-meter
+  inferencing, processing divided between an Edge Application and one or more
+  Vendor Application Servers, behind-the-meter
   integrations, or other advanced workflows.
 
   This model may also require access to details, methods, or validation

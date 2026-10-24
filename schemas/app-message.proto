@@ -43,7 +43,7 @@ enum GeisaAppMessageType {
   GEISA_APP_MESSAGE_TYPE_TELEMETRY = 8;
 }
 
-// Per-request platform disposition for app messaging for upstream messages only
+// Per-request Platform disposition for messages sent by an Edge Application.
 // Values describe request handling outcomes without promising transport-level
 // or business-system finality.
 enum GeisaAppMessageStatus {
@@ -67,8 +67,8 @@ enum GeisaAppMessageStatus {
 //   geisa/api/message/upstream/req/<userid>
 //   geisa/api/message/downstream/req/<userid>
 //
-// For upstream messages, published by an application
-// For downstream messages, published by the platform
+// Client to Server messages are published by an Edge Application.
+// Server to Client messages are published by the Platform.
 //
 // The payload is opaque application bytes. The platform handles underlying
 // ADM/LwM2M transport behavior behind the scenes; this message is the
@@ -103,8 +103,8 @@ message GeisaAppMessage_Req {
 //   geisa/api/message/upstream/rsp/<userid>
 //   geisa/api/message/downstream/rsp/<userid>
 //
-// For upstream messages, published by the platform
-// For downstream messages, published by an application
+// Client to Server responses are published by the Platform.
+// Server to Client responses are published by an Edge Application.
 //
 // This message carries per-request disposition for a corresponding
 // GeisaAppMessage_Req identified by request_id. It is NOT for delivery of
@@ -116,9 +116,9 @@ message GeisaAppMessage_Req {
 message GeisaAppMessage_Rsp {
   // Correlation identifier copied from the request when available.
   string request_id = 1;
-  // Upstream only: Platform-side disposition for the corresponding request.
+  // Client to Server only: Platform-side disposition for the corresponding request.
   GeisaAppMessageStatus status = 2;
-  // Upstream only: Optional human-readable diagnostic or status text.
+  // Client to Server only: Optional human-readable diagnostic or status text.
   string status_text = 3;
   // UTC epoch time in microseconds when the response was created.
   uint64 timestamp_us = 4;

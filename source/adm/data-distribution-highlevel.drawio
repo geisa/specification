@@ -1,0 +1,232 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" compressed="false">
+  <diagram id="dataDistribution" name="Page-1">
+    <mxGraphModel dx="1496" dy="895" grid="0" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ddscope" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=light-dark(#b826ed, #ededed);verticalAlign=top;opacity=50;dashed=1;strokeWidth=3;fillStyle=hatch;fontStyle=1;" value="&lt;b&gt;Data Distribution Interoperability Scope&lt;/b&gt;" vertex="1">
+          <mxGeometry height="263" width="595" x="384" y="203" as="geometry" />
+        </mxCell>
+        <mxCell id="roles" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#66B2FF;strokeColor=#c7c27b;fontStyle=1;" value="Operational Roles" vertex="1">
+          <mxGeometry height="100" width="500" x="250" y="55" as="geometry" />
+        </mxCell>
+        <mxCell id="owner" parent="roles" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#edf4fd;strokeColor=#7aa6d8;fontStyle=1;" value="System Owner" vertex="1">
+          <mxGeometry height="30" width="130" x="80" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="operator" parent="roles" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="System Operator" vertex="1">
+          <mxGeometry height="30" width="130" x="276" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="policyText" parent="roles" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="policy" vertex="1">
+          <mxGeometry height="18" width="65" x="213" y="43" as="geometry" />
+        </mxCell>
+        <mxCell id="ems" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System (EMS)" vertex="1">
+          <mxGeometry height="195" width="575" x="70" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="lwm2mserver" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="LwM2M Server" vertex="1">
+          <mxGeometry height="40" width="130" x="20" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="emsfunc" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="Non-LwM2M EMS Functions" vertex="1">
+          <mxGeometry height="40" width="145" x="100" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="ddservice" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;fontStyle=1;" value="Data Distribution Functions" vertex="1">
+          <mxGeometry height="92" width="105" x="335" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="routecfg" parent="ems" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;" value="Route / Target&lt;br&gt;Configuration" vertex="1">
+          <mxGeometry height="32" width="215" x="335" y="153" as="geometry" />
+        </mxCell>
+        <mxCell id="lwmToDD" edge="1" parent="ems" source="lwm2mserver" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ddservice" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="83" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="emsfuncToDD" edge="1" parent="ems" source="emsfunc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ddservice" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="313" y="86" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eligibleGeisaDataLabel" parent="ems" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="eligible GEISA data" vertex="1">
+          <mxGeometry height="20" width="120" x="170" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="Phz88y7ikWuY1e233mfk-1" edge="1" parent="ems" source="routecfg" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" target="ddservice" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="630" y="245" as="sourcePoint" />
+            <mxPoint x="680" y="195" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="commonrecord" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;fontStyle=1;" value="Kafka-Compatible&lt;br&gt;Data Distribution Service" vertex="1">
+          <mxGeometry height="75" width="130" x="680" y="286" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" edge="1" parent="1" style="edgeStyle=none;html=1;dashed=1;strokeWidth=2;endArrow=none;startArrow=none;strokeColor=#666666;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="979" y="173" as="sourcePoint" />
+            <mxPoint x="979" y="763" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="boundaryLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="GEISA Boundary" vertex="1">
+          <mxGeometry height="25" width="150" x="919" y="142" as="geometry" />
+        </mxCell>
+        <mxCell id="outsideLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="Consumer-specific processing outside GEISA" vertex="1">
+          <mxGeometry height="35" width="230" x="1012" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="consumersLabel" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="Authorized GEISA-Facing Consumers" vertex="1">
+          <mxGeometry height="25" width="190" x="1032" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="adapterOps" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Adapter / Consumer" vertex="1">
+          <mxGeometry height="45" width="110" x="900" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="adapterLake" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Adapter / Consumer" vertex="1">
+          <mxGeometry height="45" width="110" x="900" y="339" as="geometry" />
+        </mxCell>
+        <mxCell id="adapterVendor" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;fontStyle=1;" value="Adapter / Consumer" vertex="1">
+          <mxGeometry height="45" width="110" x="900" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="uops" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Utility Operations&lt;br&gt;System" vertex="1">
+          <mxGeometry height="60" width="130" x="1110" y="263" as="geometry" />
+        </mxCell>
+        <mxCell id="datalake" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Utility Data Lake" vertex="1">
+          <mxGeometry height="60" width="130" x="1110" y="331.5" as="geometry" />
+        </mxCell>
+        <mxCell id="vendorSystem" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fbe5d6;strokeColor=#c77b30;" value="Vendor Application&lt;br&gt;Server" vertex="1">
+          <mxGeometry height="60" width="130" x="1110" y="396.5" as="geometry" />
+        </mxCell>
+        <mxCell id="outsideNote" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="Transformation, routing, persistence,&lt;br&gt;and native-system ingestion" vertex="1">
+          <mxGeometry height="55" width="215" x="1027" y="473" as="geometry" />
+        </mxCell>
+        <mxCell id="edge" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#FF6666;strokeColor=#c7c27b;fontStyle=1;" value="Edge Device" vertex="1">
+          <mxGeometry height="345" width="575" x="70" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="platform" parent="edge" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#eff1d4;strokeColor=#c7c27b;fontStyle=1;" value="GEISA Platform" vertex="1">
+          <mxGeometry height="285" width="535" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ema" parent="platform" style="swimlane;html=1;rounded=0;startSize=24;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management Agent" vertex="1">
+          <mxGeometry height="125" width="285" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lwm2mclient" parent="ema" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="LwM2M Client" vertex="1">
+          <mxGeometry height="65" width="105" x="15" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="nonlwm2mplatform" parent="ema" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#c0504d;" value="Non-LwM2M Platform Functions&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;policy, queues, local event/data handling&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="140" x="130" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="monitoring" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="Platform Monitoring,&lt;br&gt;Accounting, Events, Logs" vertex="1">
+          <mxGeometry height="65" width="190" x="20" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="ee" parent="platform" style="swimlane;html=1;rounded=0;startSize=24;fillColor=#edf6ea;strokeColor=#a4c79a;fontStyle=1;" value="Execution Environment" vertex="1">
+          <mxGeometry height="155" width="195" x="320" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="appA" parent="ee" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="Edge Application A" vertex="1">
+          <mxGeometry height="35" width="155" x="20" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="appB" parent="ee" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="Edge Application B" vertex="1">
+          <mxGeometry height="35" width="155" x="20" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="api" parent="platform" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;" value="GEISA API" vertex="1">
+          <mxGeometry height="35" width="100" x="245" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="appToApi" edge="1" parent="platform" source="appA" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="417.5" y="194" />
+              <mxPoint x="295" y="194" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="monitorToEma" edge="1" parent="platform" source="monitoring" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="nonlwm2mplatform" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="115" y="186" />
+              <mxPoint x="220" y="186" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apiToEma" edge="1" parent="platform" source="api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="nonlwm2mplatform" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ownerToOperator" edge="1" parent="1" source="owner" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;endFill=1;" target="operator" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="operatorToRoute" edge="1" parent="1" source="operator" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;exitX=0.162;exitY=1.067;exitDx=0;exitDy=0;exitPerimeter=0;" target="routecfg" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="547.1" y="135" />
+              <mxPoint x="545" y="135" />
+              <mxPoint x="545" y="190" />
+              <mxPoint x="540" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="emsToEdge" edge="1" parent="1" source="lwm2mserver" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="lwm2mclient" value="">
+          <mxGeometry relative="1" x="-0.35" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="425" />
+              <mxPoint x="210" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ddToRecord" edge="1" parent="1" source="ddservice" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="commonrecord" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="recordToOps" edge="1" parent="1" source="commonrecord" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="adapterOps" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="855" y="307" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="recordToLake" edge="1" parent="1" source="lakeRouteText" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="adapterLake" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="745" y="383.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="recordToVendor" edge="1" parent="1" source="commonrecord" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="adapterVendor" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="745" y="432.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="opsToNative" edge="1" parent="1" source="adapterOps" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="uops" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lakeToNative" edge="1" parent="1" source="adapterLake" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="datalake" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vendorToNative" edge="1" parent="1" source="adapterVendor" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="vendorSystem" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vendorPostToEms" edge="1" parent="1" source="vendorSystem" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="emsfunc" value="&amp;nbsp;">
+          <mxGeometry relative="1" x="-0.0073" as="geometry">
+            <Array as="points">
+              <mxPoint x="1110" y="438" />
+              <mxPoint x="1080" y="438" />
+              <mxPoint x="1080" y="456" />
+              <mxPoint x="242.5" y="456" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="commonRecordText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="common GEISA data record" vertex="1">
+          <mxGeometry height="22" width="185" x="505" y="299" as="geometry" />
+        </mxCell>
+        <mxCell id="opsRouteText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="EVENT / ALARM subset" vertex="1">
+          <mxGeometry height="20" width="145" x="755" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="vendorRouteText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="application records" vertex="1">
+          <mxGeometry height="20" width="145" x="755" y="404" as="geometry" />
+        </mxCell>
+        <mxCell id="routeConfigText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;" value="routes, targets, security" vertex="1">
+          <mxGeometry height="20" width="155" x="548" y="161" as="geometry" />
+        </mxCell>
+        <mxCell id="lakeRouteText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="selected GEISA records" vertex="1">
+          <mxGeometry height="20" width="145" x="752" y="361" as="geometry" />
+        </mxCell>
+        <mxCell id="admTransportText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ADM / LwM2M (CoAP)" vertex="1">
+          <mxGeometry height="20" width="165" x="59" y="444" as="geometry" />
+        </mxCell>
+        <mxCell id="zQu-90Q7gCY7WcxzFCxe-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ReST POST" vertex="1">
+          <mxGeometry height="20" width="165" x="212" y="435" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

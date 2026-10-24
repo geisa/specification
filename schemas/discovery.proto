@@ -116,7 +116,8 @@ message GeisaPlatformDiscovery_Operator {
   // human-readable operator name, if provisioned
   string operator_name = 1;
 
-  // operator-assigned identifier for the device, if provisioned
+  // Operator-assigned device identifier, if provisioned. It MUST uniquely
+  // identify the device within the System Operator's managed deployment.
   string operator_identifier = 2;
 }
 

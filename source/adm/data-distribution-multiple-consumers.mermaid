@@ -1,0 +1,25 @@
+sequenceDiagram
+participant A as Edge Application
+participant D as Edge Device
+participant E as Edge Management System
+participant K as Kafka-Compatible Data Distribution Service
+participant U as Authorized Logical Consumer A
+participant V as Authorized Logical Consumer B
+
+Note over A,E: Application data reaches the EMS
+A->>D: Send GEISA application message
+D-->>E: Send application message via ADM /3600
+
+Note over E,K: Both consumers are authorized for the same configured target/topic
+E->>K: Publish GEISA data record (Kafka Produce)
+
+Note over K,V: Independent logical consumers
+U->>K: Fetch from Consumer A position
+K-->>U: Return GEISA data record when available
+U->>K: Commit Consumer A position
+
+V->>K: Fetch from Consumer B position
+K-->>V: Return same GEISA data record when available
+V->>K: Commit Consumer B position
+
+Note over U,V: Positions are independent. EMS does not publish another copy per consumer
