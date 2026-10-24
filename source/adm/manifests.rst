@@ -133,9 +133,8 @@ The Vendor Application Manifest SHALL include:
 
    Requests for IP socket communication in a Vendor Application Manifest are
    subject to operator approval in the Application Deployment Manifest. The
-   System Operator may approve,
-   narrow, replace, or deny requested destination classes, endpoints, ports,
-   and volume limits according to deployment policy.
+   System Operator may approve, narrow, replace, or deny requested destination 
+   classes, endpoints, ports, and volume limits according to deployment policy.
 
 - External Dependencies
 
