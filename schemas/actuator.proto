@@ -35,6 +35,10 @@ message GeisaActuatorStatus {
   GeisaTypeOnOff on = 2;
   bool position_present = 3;  // True if position is included.
   int32 position = 4;  // Position or analog setting when supported.
+  // Set requests only: seconds to hold the new setting before the platform's
+  // normal control resumes. Absent means hold until changed. Zero is invalid.
+  // Not reported in get responses.
+  optional uint32 duration_s = 5;
 }
 
 // Request to change one or more actuator settings.
