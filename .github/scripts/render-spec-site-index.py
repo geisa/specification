@@ -420,11 +420,18 @@ def render_html(
       text-decoration: none;
     }}
 
-    .links {{
+    .links-row {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 14px;
       margin-top: 28px;
+    }}
+
+    .links-top {{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }}
+
+    .links-bottom {{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }}
 
     .link-card {{
@@ -432,6 +439,14 @@ def render_html(
       background: #fbfcfd;
       border: 1px solid var(--border);
       border-radius: 12px;
+    }}
+
+    .link-card.compact {{
+      padding: 10px 14px;
+    }}
+
+    .link-card.compact p {{
+      margin: 4px 0 0;
     }}
 
     footer {{
@@ -443,6 +458,11 @@ def render_html(
       .brand,
       .release-item {{
         flex-direction: column;
+      }}
+
+      .links-top,
+      .links-bottom {{
+        grid-template-columns: 1fr;
       }}
     }}
   </style>
@@ -489,22 +509,28 @@ def render_html(
         </section>
       </div>
 
-      <div class="links">
-        <div class="link-card">
+      <div class="links-row links-top">
+        <div class="link-card compact">
           <a href="https://github.com/geisa">GEISA on GitHub</a>
-          <p>Organization home, repositories, and project materials.</p>
+          <p>Repositories and development activity.</p>
+        </div>
+        <div class="link-card compact">
+          <a href="https://lfenergy.org/projects/geisa/">GEISA at LF Energy</a>
+          <p>Project information and participation.</p>
+        </div>
+      </div>
+      <div class="links-row links-bottom">
+        <div class="link-card">
+          <a href="https://github.com/geisa/specification">Specification</a>
+          <p>Specification source, JSON Schemas, Protocol Buffers, examples, and tooling.</p>
         </div>
         <div class="link-card">
-          <a href="https://github.com/geisa/specification">Specification repository</a>
-          <p>Source repository for the latest draft and versioned releases.</p>
+          <a href="https://github.com/geisa/conformance">Conformance</a>
+          <p>Tests and tools for validating GEISA implementations on target hardware.</p>
         </div>
         <div class="link-card">
-          <a href="https://github.com/geisa/specification/tree/main/schemas">Schemas repository</a>
-          <p>Schema and protobuf definitions for GEISA transactions.</p>
-        </div>
-        <div class="link-card">
-          <a href="https://lfenergy.org/projects/geisa/">LF Energy GEISA project page</a>
-          <p>General project information and LF Energy context.</p>
+          <a href="https://github.com/geisa/community">Community</a>
+          <p>Community applications, platforms, examples, demonstrations, and tools.</p>
         </div>
       </div>
     </section>
