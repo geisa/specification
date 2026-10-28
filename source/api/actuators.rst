@@ -148,6 +148,21 @@ Position is meaningful only for actuator types and platforms that support a
 position or analog setting. Where position is not present, applications should
 rely on discrete state and response status.
 
+``GeisaActuatorStatus`` also includes an optional ``duration_s`` field, used
+only in set requests. It gives the number of seconds the platform holds the new
+setting before its normal control of the actuator resumes. When it is absent,
+the platform holds the setting until it is changed. It is not reported in get
+responses.
+
+- A platform MUST reject a ``duration_s`` of zero with
+  ``GEISA_STATUS_CODE_REQUEST_INVALID_ARGUMENT``.
+- A platform that cannot hold a setting until it is changed MUST reject a
+  setting without ``duration_s`` with ``GEISA_STATUS_CODE_REQUEST_UNSUPPORTED``.
+- A platform that cannot hold a setting for a limited time MUST reject a setting
+  with ``duration_s`` with ``GEISA_STATUS_CODE_REQUEST_UNSUPPORTED``.
+- A platform MUST reject a ``duration_s`` longer than the actuator supports with
+  ``GEISA_STATUS_CODE_REQUEST_OUT_OF_RANGE`` rather than shorten it.
+
 Note that JSON examples and JSON schema are human-readable schema 
 representations, while runtime API payloads are protobuf.
 

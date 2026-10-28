@@ -5,7 +5,8 @@
       {
         "actuator": "lc-relay-0",
         "state": "off",
-        "position-present": false
+        "position-present": false,
+        "duration-s": 3600
       }
     ]
   }

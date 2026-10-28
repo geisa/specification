@@ -63,6 +63,12 @@
         },
         "position": {
           "type": "integer"
+        },
+        "duration-s": {
+          "description": "Set requests only: seconds to hold the new setting before the platform's normal control resumes. Absent means hold until changed. Not reported in get responses.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
         }
       },
       "additionalProperties": false
