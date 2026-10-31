@@ -13,11 +13,8 @@
         <mxCell id="source" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Eligible GEISA Data in EMS" vertex="1">
           <mxGeometry height="250" width="190" x="55" y="255" as="geometry" />
         </mxCell>
-        <mxCell id="alarm" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record A&lt;/b&gt;&lt;br&gt;operator-identifier&lt;br&gt;AppID 17&lt;br&gt;Message Type: ALARM" vertex="1">
+        <mxCell id="alarm" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;One ALARM record&lt;/b&gt;&lt;br&gt;operator-identifier&lt;br&gt;AppID 17&lt;br&gt;Message Type: ALARM" vertex="1">
           <mxGeometry height="80" width="150" x="20" y="45" as="geometry" />
-        </mxCell>
-        <mxCell id="telemetry" parent="source" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="&lt;b&gt;Record B&lt;/b&gt;&lt;br&gt;operator-identifier&lt;br&gt;AppID 17&lt;br&gt;Message Type: TELEMETRY" vertex="1">
-          <mxGeometry height="80" width="150" x="20" y="145" as="geometry" />
         </mxCell>
         <mxCell id="ems" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#f8e7e4;strokeColor=#d9a3a0;fontStyle=1;" value="Edge Management System (EMS)" vertex="1">
           <mxGeometry height="460" width="430" x="315" y="190" as="geometry" />
@@ -55,16 +52,22 @@
         <mxCell id="kafka" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#fbe5d6;strokeColor=#c77b30;fontStyle=1;" value="Kafka-Compatible Data Distribution Service" vertex="1">
           <mxGeometry height="460" width="330" x="790" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Vendor Application Server Topic" vertex="1">
-          <mxGeometry height="62" width="250" x="40" y="142" as="geometry" />
+        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Vendor Application Server target/topic&lt;br&gt;For this record: &amp;lt;app-id&amp;gt;.ALARM" vertex="1">
+          <mxGeometry height="82" width="250" x="40" y="137" as="geometry" />
         </mxCell>
         <mxCell id="topic2" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Utility Operations Topic" vertex="1">
-          <mxGeometry height="62" width="250" x="40" y="247" as="geometry" />
+          <mxGeometry height="62" width="250" x="40" y="252" as="geometry" />
         </mxCell>
         <mxCell id="topic3" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Utility Data Lake Topic" vertex="1">
-          <mxGeometry height="62" width="250" x="40" y="340" as="geometry" />
+          <mxGeometry height="62" width="250" x="40" y="344" as="geometry" />
         </mxCell>
-        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;Record A (AppID 17, ALARM) matches Routes 1, 2, and 3&lt;br&gt;Record B (AppID 17, TELEMETRY) matches Routes 1 and 3&lt;br&gt;Both records carry operator-identifier; AppID 17 from different devices can share the Vendor Application Server topic." vertex="1">
+        <mxCell id="consumerA" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;" value="Logical Consumer A&lt;br&gt;Independent position" vertex="1">
+          <mxGeometry height="58" width="112" x="1171" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="consumerB" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;" value="Logical Consumer B&lt;br&gt;Independent position" vertex="1">
+          <mxGeometry height="58" width="112" x="1171" y="392" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;One AppID 17 ALARM record matches all three routes&lt;br&gt;AppID 17 is numeric; &amp;lt;app-id&amp;gt; denotes the manifest reverse-DNS ID&lt;br&gt;Both consumers are separately authorized for every record in the Vendor target; subscription does not grant authorization." vertex="1">
           <mxGeometry height="96" width="710" x="350" y="680" as="geometry" />
         </mxCell>
         <mxCell id="labelConfig" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="routes, targets, security" vertex="1">
@@ -76,10 +79,13 @@
         <mxCell id="eAlarm" edge="1" parent="1" source="alarm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="ddfunc">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eTelemetry" edge="1" parent="1" source="telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="ddfunc">
+        <mxCell id="eT1" edge="1" parent="1" source="route1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="topic1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="eT1" edge="1" parent="1" source="route1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="topic1">
+        <mxCell id="eConsumerA" edge="1" parent="1" source="topic1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="consumerA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eConsumerB" edge="1" parent="1" source="topic1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="consumerB">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="eT2" edge="1" parent="1" source="route2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="topic2">

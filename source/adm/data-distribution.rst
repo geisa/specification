@@ -17,6 +17,9 @@ Data Distribution
 
    See :ref:`Open Questions <data-distribution-open-questions>` for unresolved decisions and open questions.
 
+Purpose and Scope
+=================
+
 GEISA Application and Device Management provides mechanisms for moving application and
 operational information between Edge Devices and an Edge Management System (EMS).
 Systems operating a GEISA deployment also need an interoperable way to distribute
@@ -31,9 +34,6 @@ authorized consumer receives a common GEISA data record, at which point it may t
 the data as required for its own native ingestion. Transformation into consumer-specific
 formats, further routing, persistence, business-system ingestion, user interfaces, and
 other consumer-side processing are outside the scope of GEISA.
-
-Purpose and Scope
-=================
 
 Data Distribution is intended to allow independently implemented systems to consume the
 same GEISA data without requiring a GEISA deployment to adopt the native schema, data
@@ -75,15 +75,13 @@ requirements defined here.  Direct IP communication by Edge Applications is a se
 mechanism described elsewhere in this specification and is not part of Data
 Distribution.
 
-GEISA Data Distribution as defined in this section carries information from the EMS to
-authorized consumers using the Apache Kafka wire protocol. This is a protocol requirement
-and does not require use of Apache Kafka software.
+GEISA Data Distribution SHALL use the Apache Kafka wire protocol for interoperable
+communication between an EMS and the configured Data Distribution service.
 
-.. note::
-
-   Kafka consumers typically maintain broker connections and fetch records as they
-   become available. A GEISA-facing adapter may pass those records to another system
-   through its native interface.
+This requirement applies to protocol behavior and does not require Apache Kafka
+software as part of its implementation; a conformant deployment may use Apache
+Kafka or another implementation or service that provides the Kafka protocol
+capabilities required by this chapter.
 
 Data Distribution does not define a separate message-delivery control path.
 Application messages being delivered to an Edge Application are defined by
@@ -114,23 +112,173 @@ The System Owner retains final authority over Data Distribution policies for a
 deployment environment. The System Operator is expected to configure and operate Data
 Distribution within that policy.
 
-Data Eligible for Distribution
-==============================
-
 Data Distribution may carry information originating from several GEISA scopes. The
-original GEISA semantics SHALL be preserved when the data is distributed. For example,
-an application message retains its AppID, message type, priority, content type,
+original GEISA record's semantics and applicable metadata SHALL be preserved, including
+identifiers, message types, timestamps, priorities, reason codes, and payloads. For
+example, an application message retains its AppID, message type, priority, content type,
 timestamp, and other applicable GEISA metadata.
 
 Platform-originated data similarly retains its defined source, state, severity,
 reason, event type, and/or other applicable GEISA information rather than
 requiring consumers to reconstruct them.
 
-Application-Originated Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+A consumer must receive enough information to interpret the distributed record without
+depending on implementation-specific EMS behavior in order to ensure interoperability.
 
-Application-originated messages use the GEISA Application Messaging path defined
-by the :doc:`GEISA API </api>` and ADM Application Messaging Object ``/3600``.
+Where the source already defines:
+
+* message type
+* priority
+* reason code
+* action
+* severity
+* AppID
+* Software Instance
+* timestamp
+* content type
+* other interoperable metadata
+
+the Data Distribution record SHOULD reuse that information rather than defining
+another equivalent value.
+
+A GEISA Data Distribution record MUST contain the identifiers, metadata, and payload,
+where applicable, needed to interpret the record without depending on Kafka topic names,
+record keys, or Kafka-specific headers. This does not prohibit duplicating metadata in
+Kafka headers or record keys for routing, partitioning, or other purposes.
+
+Distribution Configuration and Topics
+=====================================
+
+The System Owner retains final authority over Data Distribution policy.
+The System Operator configures Data Distribution routes, destinations, security,
+and other deployment-specific behavior in accordance with System Owner policy.
+
+A route maps selection criteria to a Data Distribution target.
+
+Data Selection
+~~~~~~~~~~~~~~
+
+The System Operator MUST be able to select data for a route using defined GEISA
+metadata, including where applicable:
+
+* source scope or class
+* :ref:`operator-identifier <operator-identifier>`
+* AppID
+* message type, including a set of message types
+* event or record type
+* Platform or component identity
+
+Criteria MAY be combined. Routing MUST use GEISA semantics and MUST NOT require
+the EMS to inspect or interpret an opaque application payload. This version does
+not define a general-purpose policy language or utility-specific fleet grouping
+system. Implementations MAY provide additional grouping, tag, region, device
+class, or similar conveniences.
+
+For every enabled route that matches a GEISA record, the EMS MUST publish the
+record to that route's Data Distribution target. Multiple Data Distribution
+routes MAY select the same GEISA record.
+
+For example, a System Operator may configure these routes, each with its own
+configured target and topic:
+
+* all messages for ``AppID = 17`` to a Vendor Application Server target/topic
+* ``message-type = EVENT`` or ``ALARM`` to a Utility Operations target/topic
+* all application-message records to a Utility Data Lake target/topic
+
+An ``AppID = 17`` ``ALARM`` record matches all three routes and is published
+to each matching route's configured target. Multiple independent authorized
+consumers of one target consume that target's publication independently and do
+not require separate EMS publications.
+
+Distribution Target
+~~~~~~~~~~~~~~~~~~~
+
+The System Operator MUST be able to configure a Data Distribution target.
+
+Each configured target MUST include at least:
+
+* enabled or disabled state
+* Kafka endpoint or bootstrap server information
+* target topic
+* applicable security and authentication configuration
+
+The System Operator configures Data Distribution targets under System Owner
+policy. The EMS uses its configured publication targets, applicable topic names,
+and producer credentials. Kafka topics, credentials, permissions, and related
+broker infrastructure MAY be provisioned by an infrastructure operations team
+using Kafka administration or provisioning tools. The EMS is not required to
+create topics or administer Kafka infrastructure. EMS implementations MAY
+provide additional administrative capabilities, but they are not required for
+interoperability. The EMS MUST NOT autonomously create a topic merely because a
+new consumer exists.
+
+Kafka topic names used by GEISA Data Distribution MUST be structured.
+
+The illustrative format ``appid.type`` uses the reverse-DNS application
+identifier from the manifest for ``appid`` and an existing GEISA Message Type
+for ``type``. For example, ``com.example.geisa.waveformanalyzer.ALARM``.
+This is not the finalized topic grammar. Numeric OMA AppID is a separate
+identifier.
+
+.. note::
+
+   Objects ``/20``, ``/3600``, ``/3602``, and ``/3604`` use an Unsigned Integer
+   for Resource 4050 (AppID), while the application manifest represents
+   ``app-id`` as a reverse-DNS string. The EMS MUST be able to resolve the
+   numeric ``AppID`` to the corresponding manifest ``app-id`` using the
+   originating Edge Device identity and its application deployment or
+   provisioning information. Numeric AppID values are not necessarily unique
+   across Edge Devices.
+
+Authorization Boundary
+~~~~~~~~~~~~~~~~~~~~~~
+
+A Data Distribution target and its Kafka topic are an authorization boundary.
+Every consumer authorized to read a target MUST be permitted to receive every
+record published to it. Consumers with the same data-selection and
+authorization requirements MAY share one target/topic and maintain independent
+consumption positions. Records with different data-selection or authorization
+requirements MUST be assigned to separate targets. Kafka consumer-side
+per-record filtering MUST NOT be used as an access-control mechanism. Record-
+level encryption is not the baseline solution for separating these requirements.
+
+Topic subscription does not by itself grant authorization. The configured
+access policy determines whether a subscribed consumer is authorized.
+
+Kafka Record Keys
+~~~~~~~~~~~~~~~~~
+
+GEISA does not require a topic per Edge Device. Topic selection is determined by
+the System Operator's route configuration. Application-message Kafka record keys
+SHALL identify the originating Edge Device and application using
+``operator-identifier`` and numeric ``AppID``.
+
+Application Publishers or Application Vendors may provide integration
+requirements or recommendations, but they do not control the System Operator's
+Data Distribution configuration.
+
+.. figure:: data-distribution-overlapping-routes.*
+   :alt: Example showing one AppID 17 ALARM record matching three routes to a structured topic and multiple independently authorized consumers.
+   :align: center
+
+   Overlapping Data Distribution Routes
+
+Data Distribution for Applications
+==================================
+
+Application messaging uses three distinct paths:
+
+* Edge-to-consumer distribution: Client to Server messages from Edge Devices
+  use ``/3600`` and Kafka Data Distribution to reach authorized consumers.
+* External-to-Edge delivery: an authorized Vendor Application Server or Utility
+  Operations client submits a message to the EMS over HTTPS POST. The EMS
+  delivers it to the Edge Application through ``/3600``. See
+  :doc:`Application Messaging and Configuration </adm/messaging>`.
+* EMS message retrieval: an authorized Vendor Application Server or Utility
+  Operations client uses HTTPS GET to retrieve the latest available matching
+  message or historical messages. Request ID may be used as an optional lookup
+  or filter criterion. See
+  :doc:`Application Messaging and Configuration </adm/messaging>`.
 
 Existing GEISA application message classifications include:
 
@@ -164,8 +312,46 @@ processing it when authorized and when its content type or format is known.
 Data Distribution MUST preserve the GEISA metadata required to identify and
 interpret the record.
 
-Platform-Originated Operational Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Minimum ``/3600`` Application-Message Fields
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For each distributed ``/3600`` Client to Server application message, the
+Data Distribution record MUST carry at least:
+
+* ``operator-identifier``
+* ``AppID``
+* ``request-id``
+* ``priority``
+* ``message-type``
+* ``timestamp-us``
+* ``ttl-seconds``
+* ``content-type``
+* ``payload``
+
+These names and meanings reuse Platform Discovery and the GEISA application-
+message envelope. The EMS obtains ``operator-identifier`` from managed-device
+or provisioning context; it is not required in the Edge Application's message
+envelope. Software Instance MAY be included as additional metadata but is not
+required by this minimum.
+
+Retention duration and capacity for these queries are not prescribed by GEISA;
+they are determined by agreement between the Application Vendor and the
+Utility/System Owner.
+
+``DATA_DISTRIBUTION`` is not a GEISA message type. Data Distribution describes what is
+done with a record, not what the record means.
+
+For ``/3600`` application messages, the provisioned ``operator-identifier``
+MUST identify the originating Edge Device within the System Operator's managed
+deployment. The EMS MUST obtain or map this identifier from its managed-device
+or provisioning context. ``/3`` Serial Number and the LwM2M Endpoint Name MUST
+NOT be repurposed as the external application-message device identifier.
+
+Where a record concerns an application, the existing AppID and other applicable
+application identity SHOULD be retained.
+
+Data Distribution for Platform
+==============================
 
 The GEISA Platform provides operational state and monitoring information through
 several ADM Objects. Depending on the Object, this may include current state,
@@ -215,20 +401,14 @@ distribution.
 The inclusion of additional ADM data does not change the scope or meaning of the source
 Object or Resource.
 
+Where a record concerns a Platform component, the applicable Platform or component
+identity SHOULD be retained.
+
+For Platform-scoped ``/20`` records, GEISA may reserve an AppID value to represent the
+Platform. The need for such a value and its numeric assignment remain open questions.
+
 Platform Event Reporting
-========================
-
-GEISA already defines extensive state, monitoring, accounting, lifecycle, and durable
-event capabilities. The current draft still needs to determine whether those mechanisms
-are sufficient for Platform-originated behavioral events or whether a distinct Platform
-Event Reporting mechanism is required.
-
-This section describes the interoperability problem and candidate approaches. It
-intentionally does not decide or dictate the final Platform Event Reporting transport or
-OMA Object.
-
-Current Mechanisms
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Current ADM mechanisms provide several ways to observe Platform and application
 behavior:
@@ -245,9 +425,6 @@ behavior:
 
 These mechanisms overlap but serve different purposes.
 
-Why Isn't Observe/Notify Enough?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 Observe/Notify is appropriate for reporting current state and changes to monitored
 Resources. In many cases, it may be all that is required. A consumer observing
 application lifecycle state, Platform health, queue status, or component state can
@@ -262,9 +439,6 @@ Resource, every notification is received, and related Resource changes can be co
 correctly, the EMS may have enough information to reconstruct what occurred, but those
 assumptions do not always hold.
 
-Multiple Resource Changes May Represent One Occurrence
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 A single policy or lifecycle occurrence may update several independent Resources.
 
 For example, one application policy violation might result in:
@@ -277,9 +451,6 @@ For example, one application policy violation might result in:
 
 Individual Resource notifications do not establish that these changes all
 resulted from the same occurrence.
-
-Several Occurrences or Events May Happen Before the EMS Receives the Resulting State
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An application may crash, restart, crash again, and eventually reach a restart limit
 while the EMS is temporarily unreachable or while several state changes occur in a short
@@ -295,9 +466,6 @@ The resulting monitoring state may correctly indicate that:
 That state does not necessarily retain the ordered sequence, occurrence time,
 or reasons associated with each individual transition.
 
-Counters Preserve Quantity But Not Necessarily Occurrence Detail
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 A counter can show that an event occurred one or more times, but does not
 identify each occurrence.
 
@@ -305,9 +473,6 @@ For example, a change in an unauthorized API attempt counter can show that addit
 unauthorized attempts occurred. The counter alone does not necessarily identify
 each occurrence, its exact time, its subject, its reason, or an action taken in
 response.
-
-Temporary Communication Loss Can Limit Reconstruction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After a management communication outage, monitoring state can accurately tell the EMS
 what is true now at the current point in time. Counters can also show accumulated
@@ -319,9 +484,6 @@ during the outage.
 Event Log ``/20`` may provide the durable history required to fill this gap. Whether
 ``/20`` plus LwM2M Send is sufficient for interoperable Platform Event Reporting remains
 an open design question.
-
-Not Every State Change Requires an Event
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Platform Event Reporting should not duplicate monitoring by generating a separate
 event for every Resource transition.
@@ -337,14 +499,12 @@ or more of the following:
 * preservation of occurrence-specific information not represented by current state
 
 Platform Event Information
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The initial Platform Event model should contain enough information for an EMS to
 identify a discrete occurrence without reconstructing it from multiple monitoring
 Resources. The intent is to reuse existing GEISA fields and enumerations wherever
 possible rather than define another parallel event model.
-
-The following is the initial working model for discussion:
 
 .. list-table::
    :header-rows: 1
@@ -461,23 +621,22 @@ or Platform component identifiers.
 See :ref:`Open Questions <data-distribution-open-questions>` for unresolved Platform
 Event Reporting decisions.
 
-An edge-generated occurrence identifier is not required to be globally unique. It must
-be usable together with the identity of the originating managed device to distinguish
-and identify the occurrence within the applicable management domain. However, an Edge
-Device does not need to contact the EMS to obtain an identifier before reporting an event.
+Event and Condition Identity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A separate identifier may be needed to associate an asserted condition with later
-updates or a clear/recovery report. Whether a separate condition identifier is
-needed is an open question at this time.
+An Edge Device may generate event information while disconnected from its EMS.
+
+Any origin event identifier therefore SHALL NOT require an EMS round trip before the
+event can be created.
+
+An origin event identifier may be unique only within the originating device scope. The
+combination of managed-device identity and origin event identifier can identify the
+event within the management domain.
 
 Candidate Reporting Mechanisms
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following mechanisms should be reviewed and considered before finalizing Platform
-Event Reporting behavior.
-
-Monitoring, Observe/Notify, and Event Log
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Monitoring, Observe/Notify, and Event Log**
 
 Current monitoring Objects provide state and accumulated monitoring information.
 Observe/Notify provides timely state-change reporting, while ``/20`` provides durable
@@ -486,8 +645,7 @@ history.
 This option adds the least new protocol or Object behavior but may require the EMS to
 correlate several state changes in order to reconstruct one operational occurrence.
 
-Structured GEISA Event Records Through Event Log and LwM2M Send
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Structured GEISA Event Records Through Event Log and LwM2M Send**
 
 GEISA may define a structured Platform event representation stored through ``/20`` and
 reported using ``LogDataIncremental`` and LwM2M Send.
@@ -501,8 +659,7 @@ If this approach is selected, GEISA may need to:
 * define how Platform-scoped records are represented when ``/20`` AppID is mandatory
 * determine whether a reserved AppID value represents the GEISA Platform
 
-Dedicated Platform Event Reporting Object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Dedicated Platform Event Reporting Object**
 
 GEISA may define a separate Platform Event Reporting Object or equivalent ADM interface.
 
@@ -511,8 +668,7 @@ and discrete event reporting, but adds another GEISA-defined ADM interface and s
 only be selected if the existing ``/20`` and Information Reporting mechanisms cannot
 meet the interoperability requirements cleanly.
 
-Remote Logging
-^^^^^^^^^^^^^^
+**Remote Logging**
 
 Remote logging may supplement Platform Event Reporting and provide integration with
 established operational logging systems.
@@ -520,255 +676,9 @@ established operational logging systems.
 Remote logging alone should not be assumed to provide the structured, interoperable
 GEISA event semantics required for Data Distribution.
 
-Distribution Routes and Configuration
-=====================================
 
-The System Operator configures Data Distribution routes. A route maps selection
-criteria to a Data Distribution target. The System Owner retains final policy
-authority, and the System Operator configures routes and targets under that
-policy.
-
-The exact configuration representation remains under review.
-
-Data Selection
-~~~~~~~~~~~~~~
-
-The System Operator MUST be able to select data for a route using defined GEISA
-metadata, including where applicable:
-
-* source scope or class
-* :ref:`operator-identifier <operator-identifier>`
-* AppID
-* message type, including a set of message types
-* event or record type
-* Platform or component identity
-
-Criteria MAY be combined. Routing MUST use GEISA semantics and MUST NOT require
-the EMS to inspect or interpret an opaque application payload. This version does
-not define a general-purpose policy language or utility-specific fleet grouping
-system. Implementations MAY provide additional grouping, tag, region, device
-class, or similar conveniences.
-
-For every enabled route that matches a GEISA record, the EMS MUST publish the
-record to that route's Data Distribution target. Multiple Data Distribution
-routes MAY select the same GEISA record.
-
-For example, a System Operator may configure these routes with separate
-targets/topics:
-
-* all messages for ``AppID = 17`` to a Vendor Application Server target/topic
-* ``message-type = EVENT`` or ``ALARM`` to a Utility Operations target/topic
-* all application-message records to a Utility Data Lake target/topic
-
-An ``AppID = 17`` ``ALARM`` record matches all three routes and is published
-to all three targets. An ``AppID = 17`` ``TELEMETRY`` record matches the
-Vendor Application Server and Utility Data Lake routes and is published to
-those two targets.
-
-Distribution Target
-~~~~~~~~~~~~~~~~~~~
-
-The System Operator MUST be able to configure a Data Distribution target.
-
-Each configured target MUST include at least:
-
-* enabled or disabled state
-* Kafka endpoint or bootstrap server information
-* target topic
-* applicable security and authentication configuration
-
-Additional configuration may be required after the Kafka protocol profile,
-routing behavior, partitioning, and security requirements are finalized.
-
-Topic names remain System Operator configuration. The EMS producer MUST NOT
-autonomously create a topic merely because a new consumer exists. The System
-Operator determines routes, authorization boundaries, and configured targets.
-Kafka topic creation, ACL administration, identities, credentials, partitions,
-and other broker administration MAY be performed by Kafka tooling, an operator
-provisioning system, an EMS operator interface, or another implementation-
-specific system.
-
-GEISA does not require Kafka topic names to encode AppID,
-``operator-identifier``, message type, or other selection criteria. Route
-selection uses defined GEISA metadata, and the System Operator chooses the
-configured target/topic name. GEISA does not prescribe a topic naming
-convention.
-
-Authorization Boundary
-~~~~~~~~~~~~~~~~~~~~~~
-
-A Data Distribution target and its Kafka topic are an authorization boundary.
-Every consumer authorized to read a target MUST be permitted to receive every
-record published to it. Consumers with the same data-selection and
-authorization requirements MAY share one target/topic and maintain independent
-consumption positions. Records with different data-selection or authorization
-requirements MUST be assigned to separate targets. Kafka consumer-side
-per-record filtering MUST NOT be used as an access-control mechanism. Record-
-level encryption is not the baseline solution for separating these requirements.
-
-Kafka Record Key
-~~~~~~~~~~~~~~~~
-
-GEISA does not define a topic per Edge Device. Topic selection is determined by
-the System Operator's route configuration. For application-message
-partitioning or ordering, the combination of ``operator-identifier`` and
-``AppID`` is the candidate Kafka record-key scope for later definition. This
-does not establish a mandatory ordering guarantee.
-
-Configuration Authority
-~~~~~~~~~~~~~~~~~~~~~~~
-
-The System Owner retains final authority over Data Distribution policy.
-
-The System Operator configures Data Distribution routes, destinations, security,
-and other deployment-specific behavior in accordance with System Owner policy.
-
-Application Publishers or Application Vendors may provide integration
-requirements or recommendations, but they do not control the System Operator's
-Data Distribution configuration.
-
-Relationship to Platform Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Objects ``/3606`` and ``/3607`` describe effective and requested GEISA Platform
-configuration on the Edge Device.
-
-Existing Platform configuration includes concepts such as:
-
-* minimum upstream severity
-* event suppression period
-* clear/recovery reporting
-* reporting priority
-* message and queue TTL
-* queue or spool limits
-* other Platform-side reporting behavior
-
-These controls affect behavior between the Edge Device and EMS.
-
-Data Distribution routing and Kafka retention are EMS-side or Data Distribution service
-concerns and are not part of ``/3606`` or ``/3607``. For example, Platform Queue TTL
-controls how long an Edge Device may retain an upstream message while attempting
-delivery to the EMS. Kafka retention controls how long a record remains available to
-consumers after publication to the Data Distribution service. They are
-separate policies and SHALL NOT be implicitly mapped to one another.
-
-The Data Distribution configuration model should reuse existing GEISA concepts where
-applicable without mixing EMS-side routing or Kafka-service configuration into Edge
-Device Platform configuration.
-
-GEISA Data Distribution Record
-==============================
-
-A consumer must receive enough information to interpret the distributed record without
-depending on implementation-specific EMS behavior in order to ensure interoperability.
-
-The common GEISA Data Distribution record format for data classes other than
-the ``/3600`` application-message minimum below remains under review.
-
-Preservation of GEISA Semantics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Data Distribution SHALL preserve the semantics of the original GEISA information.
-
-Where the source already defines:
-
-* message type
-* priority
-* reason code
-* action
-* severity
-* AppID
-* Software Instance
-* timestamp
-* content type
-* other interoperable metadata
-
-the Data Distribution record SHOULD reuse that information rather than defining
-another equivalent value.
-
-Minimum ``/3600`` Application-Message Fields
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For each distributed ``/3600`` Client to Server application message, the
-Data Distribution record MUST carry at least:
-
-* ``operator-identifier``
-* ``AppID``
-* ``request-id``
-* ``priority``
-* ``message-type``
-* ``timestamp-us``
-* ``ttl-seconds``
-* ``content-type``
-* ``payload``
-
-These names and meanings reuse Platform Discovery and the GEISA application-
-message envelope. The EMS obtains ``operator-identifier`` from managed-device
-or provisioning context; it is not required in the Edge Application's message
-envelope. Software Instance MAY be included as additional metadata but is not
-required by this minimum.
-
-``DATA_DISTRIBUTION`` is not a GEISA message type. Data Distribution describes what is
-done with a record, not what the record means.
-
-Origin and Subject Identity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For ``/3600`` application messages, the provisioned ``operator-identifier``
-MUST identify the originating Edge Device within the System Operator's managed
-deployment. The EMS MUST obtain or map this identifier from its managed-device
-or provisioning context. ``/3`` Serial Number and the LwM2M Endpoint Name MUST
-NOT be repurposed as the external application-message device identifier.
-
-Identity requirements for Data Distribution records other than ``/3600``
-application messages remain under review.
-
-Where a record concerns an application, the existing AppID and other applicable
-application identity SHOULD be retained.
-
-Where a record concerns a Platform component, the applicable Platform or component
-identity SHOULD be retained.
-
-For Platform-scoped ``/20`` records, GEISA may reserve an AppID value to represent the
-Platform. The need for such a value and its numeric assignment remain open questions.
-
-Event and Condition Identity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-An Edge Device may generate event information while disconnected from its EMS.
-
-Any origin event identifier therefore SHALL NOT require an EMS round trip before the
-event can be created.
-
-An origin event identifier may be unique only within the originating device scope. The
-combination of managed-device identity and origin event identifier can identify the
-event within the management domain.
-
-GEISA should determine whether a separate condition identifier is required for an alarm
-or other condition that produces later update or clear/recovery records.
-
-Payload and Encoding
-~~~~~~~~~~~~~~~~~~~~
-
-Where the source record carries an opaque application payload, Data Distribution SHALL
-preserve the payload bytes unless an explicitly defined GEISA transformation applies.
-
-The Data Distribution record SHOULD be self-contained and should not require a
-consumer to reconstruct essential GEISA semantics from Kafka-specific headers.
-
-The final Data Distribution record may reuse an existing GEISA schema, extend
-an existing schema, or define a Data Distribution envelope if required.
-
-Kafka Protocol Profile
-======================
-
-GEISA Data Distribution SHALL use the Apache Kafka wire protocol for interoperable
-communication between an EMS and the configured Data Distribution service.
-
-This requirement applies to protocol behavior and does not require Apache Kafka
-software as part of its implementation; a conformant deployment may use Apache
-Kafka or another implementation or service that provides the Kafka protocol
-capabilities required by this section.
+Kafka Protocol and Operations
+=============================
 
 Consumer Delivery Model
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -791,15 +701,8 @@ through that interface. The native delivery mechanism and any transformation
 performed after consumption of the GEISA data record are outside the GEISA
 interoperability boundary.
 
-GEISA should confirm that this continuous-consumption model satisfies operational
-requirements for delivery of the time-sensitive ``EVENT`` and ``ALARM`` message
-types.
-
 Kafka Protocol Baseline
 ~~~~~~~~~~~~~~~~~~~~~~~
-
-GEISA will identify a Kafka protocol baseline used for interoperability and
-conformance testing.
 
 Implementations MAY support later compatible Kafka protocol versions provided
 they continue to support the GEISA baseline.
@@ -809,7 +712,8 @@ The exact protocol-version baseline remains under review.
 Required Kafka Protocol Operations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following is the initial protocol profile for discussion.
+The table below lists the required and conditional Kafka protocol capabilities for
+interoperability among the EMS producer, distribution endpoint, and consumers.
 
 .. list-table::
    :header-rows: 1
@@ -968,10 +872,10 @@ consumers. A Utility data-lake consumer and a Vendor Application Server consumer
 must be able to consume the same Data Distribution records independently.
 
 Distribution and Consumer Behavior
-==================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Multiple Independent Consumers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Data Distribution SHALL permit the same distributed GEISA record to be consumed
 independently by multiple authorized logical consumers.
@@ -983,12 +887,24 @@ independent consumption positions for the same target. Consumption, outage,
 acknowledgement, or processing by one logical consumer SHALL NOT prevent another
 authorized logical consumer from consuming the same retained record.
 
+A GEISA application generates a record that reaches the EMS. The EMS publishes
+the record to a configured target. Two authorized independent logical
+consumers of that target, such as a utility data-lake adapter and a Vendor
+Application Server, consume the same record and maintain separate positions.
+This arrangement is appropriate only when both consumers are authorized to
+receive every record in the target. An outage or commit by one consumer does not
+affect the other.
+
+.. figure:: data-distribution-multiple-consumers.*
+   :alt: Sequence showing one published GEISA record consumed independently by two authorized logical consumers of the same target.
+   :align: center
+
+   Multiple Independent Data Distribution Consumers
+
 Ordering
-~~~~~~~~
+^^^^^^^^
 
-GEISA Ordering requirements remain TBD at this time.
-
-The specification should determine whether ordering is required:
+Ordering guarantees for Data Distribution remain under review:
 
 * by originating Edge Device
 * by application
@@ -1000,12 +916,10 @@ GEISA does not require global ordering across an entire deployment unless it is
 shown to be required for interoperability.
 
 Publication and Failure Behavior
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The EMS must be able to detect whether publication to the configured Data Distribution
-target succeeds or fails.
-
-GEISA should define the minimum required behavior for:
+target succeeds or fails. Publication failure conditions include:
 
 * temporary Data Distribution endpoint unavailability
 * producer retries
@@ -1016,14 +930,27 @@ GEISA should define the minimum required behavior for:
 Detailed retry algorithms and fixed retry timing are deployment concerns unless required
 for interoperability.
 
+Consumer Outage and Recovery
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A consumer becomes unavailable while the EMS continues publishing records.
+
+The Kafka service retains records according to deployment configuration.
+
+When the consumer returns, it resumes consumption of records that remain available.
+Other independent consumers continue operating during the outage.
+
+.. figure:: data-distribution-consumer-outage-recovery.*
+   :alt: Sequence showing continued Data Distribution publication while one consumer is unavailable and later resumes from its committed position.
+   :align: center
+
+   Consumer Outage and Recovery
+
 Consumer Interruption, Retention, and Recovery
-==============================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Data Distribution must account for temporary consumer outages without requiring the
 Kafka service to become the permanent historical system of record.
-
-Temporary Consumer Interruption
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A consumer may disconnect and later resume consumption of records that remain available
 within the configured Kafka retention window.
@@ -1031,8 +958,57 @@ within the configured Kafka retention window.
 Temporary failure of one consumer SHALL NOT affect the delivery state of another
 independent consumer.
 
+
+Objects ``/3606`` and ``/3607`` describe effective and requested GEISA Platform
+configuration on the Edge Device.
+
+Existing Platform configuration includes concepts such as:
+
+* minimum upstream severity
+* event suppression period
+* clear/recovery reporting
+* reporting priority
+* message and queue TTL
+* queue or spool limits
+* other Platform-side reporting behavior
+
+These controls affect behavior between the Edge Device and EMS.
+
+Kafka retention is a Data Distribution service concern and is separate from
+``/3606`` and ``/3607`` Platform configuration. It SHALL NOT be implicitly mapped
+to or derived from their queue, spool, or message TTL settings.
+
+The Data Distribution configuration model should reuse existing GEISA concepts where
+applicable without mixing EMS-side routing or Kafka-service configuration into Edge
+Device Platform configuration.
+
+
+These responsibilities are distinct even when an implementation uses shared storage:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 22 78
+
+   * - Responsibility
+     - Scope
+   * - Edge buffering
+     - Queue, spool, message TTL, and connectivity govern delivery from the Edge Device
+       to the EMS.
+   * - EMS publication buffering
+     - Where implemented, buffering before successful Kafka publication retains records
+       awaiting publication.
+   * - Kafka retention
+     - The Data Distribution service retains published records for independent consumer
+       positions and recovery.
+   * - EMS latest-message and historical retrieval
+     - EMS query capabilities expose available messages separately from Edge buffering
+       and Kafka retention.
+   * - Application/Vendor storage and processing
+     - Application/Vendor-side storage and processing after receipt are outside the
+       GEISA Data Distribution boundary.
+
 Retention
-~~~~~~~~~
+^^^^^^^^^
 
 The Data Distribution service SHALL support configurable retention of published records
 so that consumers may disconnect and later resume consumption while records remain
@@ -1042,10 +1018,6 @@ GEISA does not prescribe a fixed retention period or storage size. The System Ow
 retains authority over retention policy and the System Operator SHALL be able to
 configure or approve the retention policy used by each Data Distribution target.
 
-Kafka retention is configuration of the Data Distribution service or topic. It is not
-GEISA Platform configuration and SHALL NOT be derived from ``/3606`` or ``/3607`` queue,
-spool, or message TTL settings.
-
 When the Data Distribution service is integrated with or operated as part of the EMS,
 the EMS may expose the applicable retention configuration to the System Operator.
 
@@ -1054,18 +1026,17 @@ retention through that service's administrative interface before the target is p
 into service.
 
 Reprocessing
-~~~~~~~~~~~~
+^^^^^^^^^^^^
 
 A consumer may reprocess data that remains available from the Kafka service.
 
-GEISA should define only the minimum protocol capabilities needed to enable such
-behavior and should not prescribe consumer-side processing or replay policy.
-
 Historical Retrieval
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
 
-Data that is older than the Data Distribution retention window may be available through
-other mechanisms, including:
+Historical retrieval is separate from Kafka replay. The historical query time
+range, response representation, and error behavior remain under review. Data that
+is older than the Kafka retention window may be available through other mechanisms,
+including:
 
 * EMS query or REST APIs
 * Event Log ``/20``
@@ -1074,8 +1045,9 @@ other mechanisms, including:
 
 Data Distribution is not required to serve as the long-term historical system of record.
 
+
 Security
-========
+~~~~~~~~
 
 Data Distribution crosses the GEISA operational boundary and therefore requires
 authenticated and encrypted communication.
@@ -1099,7 +1071,7 @@ the Kafka protocol or a particular Kafka implementation.
 The exact mandatory TLS and authentication mechanisms remain under review.
 
 Operational Visibility and Failure Handling
-===========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The System Operator needs enough visibility to determine whether Data Distribution is
 operating correctly.
@@ -1114,75 +1086,6 @@ The implementation should expose information sufficient to determine at least:
 * whether records have expired or been dropped
 * the time of recent successful and failed Data Distribution activity
 
-GEISA should first determine whether existing monitoring Objects can represent this
-information before defining another monitoring Object or additional Resources.
-
-Examples and Sequences
-======================
-
-Multiple Independent Consumers
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A GEISA application generates a record that reaches the EMS. The EMS publishes
-the record to a configured target. Two authorized independent logical
-consumers of that target, such as a utility data-lake adapter and a Vendor
-Application Server, consume the same record and maintain separate positions.
-This arrangement is appropriate only when both consumers are authorized to
-receive every record in the target. An outage or commit by one consumer does not
-affect the other.
-
-.. figure:: data-distribution-multiple-consumers.*
-   :alt: Sequence showing one published GEISA record consumed independently by two authorized logical consumers of the same target.
-   :align: center
-
-   Multiple Independent Data Distribution Consumers
-
-Overlapping Distribution Routes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For example, a System Operator configures these routes:
-
-* ``AppID = 17`` to a Vendor Application Server topic
-* ``message-type = EVENT`` or ``ALARM`` to a utility operations topic
-* all application-message records to a utility data-lake topic
-
-An ``AppID = 17`` ``ALARM`` record matches all three routes and is published to
-all three targets. Each record includes ``operator-identifier``, so records for
-AppID 17 from different managed devices remain distinguishable even when they
-use the same Vendor Application Server topic.
-
-.. figure:: data-distribution-overlapping-routes.*
-   :alt: Example showing an AppID 17 ALARM record matching vendor, utility operations, and data-lake routes, with device identity retained in each record.
-   :align: center
-
-   Overlapping Data Distribution Routes
-
-Consumer Outage and Recovery
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A consumer becomes unavailable while the EMS continues publishing records.
-
-The Kafka service retains records according to deployment configuration.
-
-When the consumer returns, it resumes consumption of records that remain available.
-Other independent consumers continue operating during the outage.
-
-.. figure:: data-distribution-consumer-outage-recovery.*
-   :alt: Sequence showing continued Data Distribution publication while one consumer is unavailable and later resumes from its committed position.
-   :align: center
-
-   Consumer Outage and Recovery
-
-Platform Event Reporting
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-A Platform Event Reporting sequence should be added after GEISA selects the
-Platform-to-EMS event mechanism.
-
-Candidate sequences should include an occurrence where several monitoring Resources
-change as the result of one Platform action, such as restart-policy exhaustion or a
-policy violation.
-
 .. _data-distribution-open-questions:
 
 Open Questions
@@ -1193,16 +1096,100 @@ The following questions remain open for review and discussion.
 Northbound ReST API
 ~~~~~~~~~~~~~~~~~~~
 
-* Should the API support GET for the latest message by Edge Device, AppID, and
-  Message Type, with optional lookup by Request ID?
+* What time-range representation and boundary semantics should historical GET use?
 
-* If GET is supported, which messages should the EMS retain, and when should they
-  be replaced or expire?
+* What response and error behavior should GET define?
 
-* What correlation behavior should be defined for future GET operations?
+* How should ``request-id`` selection combine with the target, Message Type, and
+  historical time-range criteria?
 
 * How should the EMS report delivery failures to the originating Vendor
-  Application Server?
+  Application Server?  (This would be asyncronous and presumably as a
+  Platform-type message.. )
+
+Data Selection and Routing
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* What configuration representation, if any, should GEISA define for Data
+  Distribution routes and targets?
+
+* Beyond /3600 Application Messaging, which ADM data sources must an EMS
+  support for Data Distribution?
+
+* When multiple routes resolve to the same Kafka endpoint and topic, should
+  the EMS publish the matching record only once?
+
+* How should structured ``appid.type`` topics handle different authorization
+  scopes? For example, a vendor authorized for alarms from 500 of 10,000
+  devices must not receive alarms from the remaining devices.
+
+* Should topic names use the reverse-DNS manifest ``app-id`` or numeric OMA
+  ``AppID``, and what exact naming rules should GEISA define?
+
+GEISA Data Distribution Record
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Identity requirements for Data Distribution records other than ``/3600``
+application messages remain under review.
+
+* Can an existing GEISA schema serve as the common Data Distribution representation, or
+  is a small Data Distribution envelope or other changes needed?
+
+* Should distributed ``/3600`` records include the manifest's reverse-DNS
+	``app-id`` in addition to numeric ``AppID``, so external consumers can
+	identify the application without a separate mapping?
+
+* Which source identifiers are required for Data Distribution records other than
+  ``/3600`` application messages?
+
+* Which fields can be reused directly from Platform monitoring, application
+  monitoring, Event Log, or other ADM Objects for non-``/3600`` records? Do
+  we need to add any additional into existing OMA objects?
+
+Kafka Profile
+~~~~~~~~~~~~~
+
+* What, if any, delivery-latency requirements should GEISA define for
+  time-sensitive ``EVENT`` and ``ALARM`` messages over Kafka?
+
+* Which Kafka protocol/version baseline should GEISA require in the spec as minimum?
+
+* Should ``FindCoordinator``, ``OffsetCommit``, and ``OffsetFetch`` remain required
+  endpoint capabilities for independent consumer position and recovery, or should GEISA
+  allow consumers to manage position without broker-managed offsets?
+
+* Should Kafka consumer-group APIs be required of the distribution endpoint even though
+  use of consumer groups currently is optional for consumers?
+
+* What, if any, producer acknowledgement and retry behavior is needed for GEISA
+  interoperability?
+
+* What is required for publication failure, record expiration, and records that
+  cannot be published?
+
+* What ordering guarantee is required, and at what scope?
+
+* How should application-message record keys encode ``operator-identifier`` and numeric
+  (or reverse-DNS) ``AppID``?
+
+Retention and Recovery
+~~~~~~~~~~~~~~~~~~~~~~
+
+* What minimum consumer-resume behavior belongs in GEISA conformance/mandate?
+
+* How should consumers determine when to use EMS historical queries, Event Log, or
+  another system instead of Kafka replay?
+
+Security
+~~~~~~~~
+
+* Which TLS and Kafka authentication mechanism or mechanisms form the mandatory
+  baseline?
+
+* Which additional Kafka security mechanisms should be optional?
+
+* What configuration information must the EMS expose to the System Operator without
+  requiring the EMS to administer the Kafka security system?
 
 Platform Event Reporting
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1220,8 +1207,8 @@ Platform Event Reporting
   Possible direction: first determine whether a structured GEISA event
   representation fits cleanly into ``/20`` ``LogDataIncremental``.
 
-* If ``/20`` plus Send is selected, this implies the applicable LwM2M Send
-  behavior becomes mandatory/MUST for ADM.
+* If ``/20`` plus Send is selected, which LwM2M Send behaviors need to become
+  mandatory/MUST for ADM interoperability?
 
 * How should Platform-scoped ``/20`` records satisfy the mandatory AppID Resource?
 
@@ -1250,68 +1237,5 @@ Platform Event Reporting
 
 * When event suppression combines repeated equivalent occurrences, what occurrence count
   or timing information must be retained?
-
-Data Selection and Routing
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Which ADM data classes must an EMS be able to route through Data Distribution, and
-  which are optional?
-
-GEISA Data Distribution Record
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Can an existing GEISA schema serve as the common Data Distribution representation, or
-  is a small Data Distribution envelope required?
-
-* Which source identifiers are required for Data Distribution records other than
-  ``/3600`` application messages?
-
-* Which fields can be reused directly from Platform monitoring, application
-  monitoring, Event Log, or other ADM Objects for non-``/3600`` records?
-
-* Should Kafka record headers contain only transport hints while the GEISA value remains
-  self-contained?
-
-Kafka Profile
-~~~~~~~~~~~~~
-
-* Does Kafka continuous consumption provide the required behavior and latency for
-  time-sensitive ``EVENT`` and ``ALARM`` delivery, or is a separate GEISA push-capable
-  interface required?
-
-* Which Kafka protocol/version baseline should GEISA require?
-
-* Should ``FindCoordinator``, ``OffsetCommit``, and ``OffsetFetch`` remain required
-  endpoint capabilities for independent consumer position and recovery, or should GEISA
-  allow consumers to manage position without broker-managed offsets?
-
-* Should Kafka consumer-group APIs be required of the distribution endpoint even though
-  use of consumer groups remains optional for consumers?
-
-* What producer acknowledgement and retry behavior is needed for GEISA interoperability?
-
-* What ordering guarantee is required, and at what scope?
-
-Retention and Recovery
-~~~~~~~~~~~~~~~~~~~~~~
-
-* What minimum consumer-resume behavior belongs in GEISA conformance?
-
-* Should GEISA define a minimum retention period or storage size for
-  conformance, or leave both to System Owner policy?
-
-* At what point should consumers use EMS historical APIs, Event Log, or another system
-  instead of Kafka replay?
-
-Security
-~~~~~~~~
-
-* Which TLS and Kafka authentication mechanism or mechanisms form the mandatory
-  baseline?
-
-* Which additional Kafka security mechanisms should be optional?
-
-* What configuration information must the EMS expose to the System Operator without
-  requiring the EMS to administer the Kafka security system?
 
 |geisa-pyramid|

@@ -10,7 +10,7 @@ Note over A,E: Application data reaches the EMS
 A->>D: Send GEISA application message
 D-->>E: Send application message via ADM /3600
 
-Note over E,K: Both consumers are authorized for the same configured target/topic
+Note over E,K: Both consumers authorized for the same target/topic
 E->>K: Publish GEISA data record (Kafka Produce)
 
 Note over K,V: Independent logical consumers
@@ -22,4 +22,4 @@ V->>K: Fetch from Consumer B position
 K-->>V: Return same GEISA data record when available
 V->>K: Commit Consumer B position
 
-Note over U,V: Positions are independent. EMS does not publish another copy per consumer
+Note over U,V: Independent positions, one EMS publication
