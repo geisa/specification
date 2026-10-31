@@ -39,11 +39,14 @@ telemetry, or effective configuration state sent by the Edge Application.
 An ADM-conformant EMS MUST obtain these messages and their associated metadata
 using the applicable LwM2M mechanisms.
 
-Vendor Application Server to Edge Application
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Application-Message ReST Interface
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An ADM-conformant EMS MUST provide a ReST API that allows an authorized Vendor
-Application Server to submit a message for delivery to an Edge Application.
+An ADM-conformant EMS MUST provide a ReST API that authorized Vendor Application
+Servers and Utility Operations clients can use, where permitted by System Operator
+policy, to submit a message for delivery to an Edge Application. These authorized
+clients may also use the API for latest-message and historical GET operations under
+that policy.
 All EMS ReST APIs, including the required application-message POST endpoint and
 any additional operations, MUST use HTTPS.
 The request MUST identify the target using its provisioned
@@ -124,8 +127,24 @@ The EMS MUST return the following HTTP response codes as applicable:
 For resources whose existence is sensitive, the EMS MUST NOT distinguish
 unauthorized access from nonexistence and MAY return ``404`` for either.
 
-EMS implementations MAY provide additional ReST operations. POST is the only
-operation required for GEISA interoperability at this time.
+EMS implementations MAY provide additional ReST operations.
+
+**Application-message GET operations**
+
+An ADM-conformant EMS MUST support latest-message and historical GET operations.
+The following examples illustrate possible request forms:
+
+.. code-block:: text
+
+   GET /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages/latest?message-type=ALARM
+   GET /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages?message-type=ALARM&from=...&to=...
+
+The path identifies the Edge Device and application. The ``latest`` endpoint
+MUST return the latest available message matching the target and Message Type.
+The historical endpoint MUST return available messages matching the target and
+Message Type within the requested time range. GET requests MAY include
+``request-id`` as an additional selection criterion. The EMS MUST support
+filtering by ``request-id`` when provided.
 
 Message Priority values are:
 
