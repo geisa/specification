@@ -130,6 +130,14 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="appBToApi" edge="1" parent="platform" source="appB" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;" target="api" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="417.5" y="205" />
+              <mxPoint x="295" y="205" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="monitorToEma" edge="1" parent="platform" source="monitoring" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="nonlwm2mplatform" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -172,7 +180,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="recordToLake" edge="1" parent="1" source="lakeRouteText" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="adapterLake" value="">
+        <mxCell id="recordToLake" edge="1" parent="1" source="commonrecord" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" target="adapterLake" value="">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="745" y="383.5" />
@@ -205,6 +213,17 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="uopsRestToEms" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="emsfunc" value="HTTPS POST / GET">
+          <mxGeometry relative="1" x="0.0152" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="311" />
+              <mxPoint x="1060" y="189" />
+              <mxPoint x="242.5" y="189" />
+            </Array>
+            <mxPoint x="1110" y="311" as="sourcePoint" />
+            <mxPoint x="242.5" y="366" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="commonRecordText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="common GEISA data record" vertex="1">
           <mxGeometry height="22" width="185" x="505" y="299" as="geometry" />
         </mxCell>
@@ -223,8 +242,8 @@
         <mxCell id="admTransportText" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ADM / LwM2M (CoAP)" vertex="1">
           <mxGeometry height="20" width="165" x="59" y="444" as="geometry" />
         </mxCell>
-        <mxCell id="zQu-90Q7gCY7WcxzFCxe-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="ReST POST" vertex="1">
-          <mxGeometry height="20" width="165" x="212" y="435" as="geometry" />
+        <mxCell id="zQu-90Q7gCY7WcxzFCxe-1" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="HTTPS POST / GET" vertex="1">
+          <mxGeometry height="20" width="165" x="227.5" y="436.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
