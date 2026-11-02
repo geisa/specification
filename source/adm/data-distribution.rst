@@ -122,8 +122,8 @@ Platform-originated data similarly retains its defined source, state, severity,
 reason, event type, and/or other applicable GEISA information rather than
 requiring consumers to reconstruct them.
 
-A consumer must receive enough information to interpret the distributed record without
-depending on implementation-specific EMS behavior in order to ensure interoperability.
+In order to ensure interoperability, a consumer must receive enough information to 
+interpret the distributed record without depending on implementation-specific EMS behavior.
 
 Where the source already defines:
 
