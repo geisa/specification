@@ -22,7 +22,7 @@ meet the requirements described in this chapter, they MUST provide a base
 image, and they MUST accept application images.
 
 While platforms may use any AII mechanism they choose, for clarity of intent,
-this portion of the GEISA specification uses ``lxc`` for various examples.  
+this portion of the GEISA specification uses ``lxc`` for various examples.
 
 
 .. index:: single: Isolation
@@ -33,7 +33,7 @@ Isolation Requirements
 General Requirements
 ^^^^^^^^^^^^^^^^^^^^
 
-GEISA applications SHALL be isolated from each other as described 
+GEISA applications SHALL be isolated from each other as described
 in :doc:`/system-architecture`.
 
 Resource Management
@@ -42,28 +42,27 @@ Resource Management
 The platform SHALL control GEISA applications' access to system resources,
 including:
 
-- The number of CPUs allocated (e.g. cgroups ``limits.cpu``)
-- The percentage of CPU allowed (e.g. cgroups ``limits.cpu.allowance``) 
+- The percentage of CPU allowed (e.g. cgroups ``limits.cpu.max``)
 - The maximum RAM (e.g. cgroups ``limits.memory``)
-- Persistent Storage 
-- Non-Persistent Storage 
+- Persistent Storage
+- Non-Persistent Storage
 
 .. note::
 
-  Storage limits can be enforced in a variety of ways, depending on the 
-  underlying chosen technologies in place.  For example, LXC supports the ``root size`` 
-  option.  ``tmpfs`` supports size limits.  Quotas may be used.  It is up to 
+  Storage limits can be enforced in a variety of ways, depending on the
+  underlying chosen technologies in place.  For example, LXC supports the ``root size``
+  option.  ``tmpfs`` supports size limits.  Quotas may be used.  It is up to
   the platform provider to choose the appropriate technology to enforce limits.
 
 Networking Control
 ^^^^^^^^^^^^^^^^^^
 
-By default, applications are not given any network access.  Applications which 
-need relatively simple communication may use the application messaging API that 
-is part of the GEISA API.  Apps that require direct access to a network 
+By default, applications are not given any network access.  Applications which
+need relatively simple communication may use the application messaging API that
+is part of the GEISA API.  Apps that require direct access to a network
 interface may be granted specific permission.
 
-GEISA applications MAY be granted limited network access as described 
+GEISA applications MAY be granted limited network access as described
 in :doc:`/system-architecture`.
 
 If granted permissions in the operator manifest, the platform SHALL provide the
@@ -93,13 +92,13 @@ additional details.
 Container Image Requirements
 ============================
 
-Container images in GEISA are composed by combining a base image (provided by 
-the platform), an application configuration image or directory (provided by the 
-platform), an application image (provided by the application vendor), a 
-non-persistent temporary filesystem or directory (provided by the platform) and 
-a persistent file system or directory (provided by the platform).  This 
-combination is mounted as the root file system for the application container.  
-Details of the contents and an example of this file systems can be found 
+Container images in GEISA are composed by combining a base image (provided by
+the platform), an application configuration image or directory (provided by the
+platform), an application image (provided by the application vendor), a
+non-persistent temporary filesystem or directory (provided by the platform) and
+a persistent file system or directory (provided by the platform).  This
+combination is mounted as the root file system for the application container.
+Details of the contents and an example of this file systems can be found
 in :doc:`/lee/file-layout`
 
 |geisa-pyramid|
