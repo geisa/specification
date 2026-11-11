@@ -20,7 +20,7 @@
                     "signatures": [
                         {
                             "signerRole": "publisher",
-                            "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg==haYh"
+                            "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatYX8QAKCRAoV+memssgbU9zAQChKH9MDC/kCezIAVIiXyn8LWjW+8fzhXqO61Wg375YbQD/TVC7H5sTOT1tlknw+FTOjPN+EgpgvNkfRRQ0d3t6vgg="
                         }
                     ]
                 }
@@ -86,7 +86,7 @@
         "signatures": [
             {
                 "signerRole": "operator",
-                "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCatulIQAKCRAoV+memssgbQUOAQCiY3aeScPRsFl1QtXv2f/69OBYdW6rSwhgxYWp1bTvyQEA7QiyYTJ0tnbEa2EJtwJZ8LIC/jVSI3cSDPsLSc2ZHQ8==CLqf"
+                "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCavSy4QAKCRAoV+memssgbdvPAQDN6vqWpsr56t1yasEdJuCGzMdc8cHYf49VtRk6+P7pdwEA9H5Hd3pSm8bVYuSpgDg+hcheQoznQIXG3teUfNHSdwk="
             }
         ]
     }

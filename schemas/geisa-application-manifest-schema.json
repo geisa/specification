@@ -11,7 +11,7 @@
             "items": {
                 "type": "string",
                 "minLength": 1,
-                "pattern": "^([Tt][Cc][Pp]:|[Uu][Dd][Pp]:|)([0-9A-Fa-f:\\.]+|\\[[0-9A-Fa-f:\\.]+\\]|)(:[0-9]+)$",
+                "pattern": "^([Tt][Cc][Pp]:|[Uu][Dd][Pp]:)([0-9A-Fa-f:\\.]+|\\[[0-9A-Fa-f:\\.]+\\]|)(:[0-9]+)$",
                 "$comment": "The RegEx above will match things beginning with a TCP, UDP, or nothing, followed by an IPv4 or v6 address (or not), and a port (required).  It does not validate the address itself."
             },
             "uniqueItems": true
@@ -197,6 +197,23 @@
                         "api-access": {
                             "type": "object",
                             "properties": {
+                                "allowed-actuators": {
+                                    "type": "array",
+                                    "description": "List of one or more allowed actuators.  Required if actuator-control is true.",
+                                    "minItems": 1,
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                            "unspecified",
+                                            "service-switch",
+                                            "der-switch",
+                                            "lc-relay-0",
+                                            "lc-relay-1",
+                                            "lc-relay-2",
+                                            "lc-relay-3"
+                                        ]
+                                    }
+                                },
                                 "actuator-status": {
                                     "description": "Whether access to the actuator status API is requested or authorized for the application.",
                                     "type": "boolean"
@@ -234,7 +251,14 @@
                                 { "required": ["sensor"] },
                                 { "required": ["waveform"] },
                                 { "required": ["app-to-app"] }
-                            ]
+                            ],
+                            "if": {
+                                "properties": {
+                                  "actuator-control": { "const": true }
+                                },
+                                "required": ["actuator-control"]
+                              },
+                            "then": { "required": ["allowed-actuators"] }
                         },
                         "artifacts": {
                             "type": "array",
