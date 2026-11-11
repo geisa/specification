@@ -29,12 +29,10 @@ and using `gpg`.
 
 To extract the manifest, the following command can be used:
 
-`jq -c '.["geisa-application-manifest"].["manifest"]' \
- < deployment-application-manifest-example.json \
- > manifest-block.json `
+`jq -c '.["geisa-application-manifest"].["manifest"]' < deployment-application-manifest-example.json  > manifest-block.json`
 
-The signatureValue element must be extracted and placed in a text file with 
-the required "-----BEGIN PGP SIGNATURE-----" header.  This can be done with 
+The `signatureValue` element must be extracted and placed in a text file with 
+the required `-----BEGIN PGP SIGNATURE-----` header.  This can be done with 
 following commands:
 
 `echo -e "-----BEGIN PGP SIGNATURE-----\n" > manifest-block.asc`
