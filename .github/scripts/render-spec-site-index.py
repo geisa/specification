@@ -102,15 +102,16 @@ def load_releases(manifest_path: Path) -> list[dict]:
 def release_label(release: dict) -> str:
     version = release["version"]
     match = SEMVER_RE.fullmatch(version)
-    if match and int(match.group("major")) == 0:
+    if (match and int(match.group("major")) == 0) or version.endswith("-DRAFT"):
         return "Draft Release"
-    if release.get("prerelease"):
+    if is_prerelease(release):
         return "Prerelease"
     return "Release"
 
 
-def current_official_release(releases: list[dict]) -> dict | None:
-    return releases[0] if releases else None
+def is_prerelease(release: dict) -> bool:
+    match = SEMVER_RE.fullmatch(release["version"])
+    return bool(release.get("prerelease")) or bool(match and match.group("prerelease"))
 
 
 def parse_iso8601(timestamp: str) -> datetime | None:
@@ -191,9 +192,9 @@ def build_release_items(releases: list[dict]) -> str:
 def render_current_panel(release: dict | None) -> str:
     if release is None:
         return """
-        <section class="panel" aria-labelledby="current-release-heading">
-          <div class="section-label">Current official release</div>
-          <h2 id="current-release-heading">No published GEISA release yet</h2>
+        <section class="panel" aria-labelledby="current-published-release-heading">
+          <div class="section-label">Current published release</div>
+          <h2 id="current-published-release-heading">No published GEISA release yet</h2>
           <p>
             Published GitHub releases will appear here automatically after they
             are released.
@@ -207,9 +208,9 @@ def render_current_panel(release: dict | None) -> str:
     published_date = format_release_date(release)
     published_markup = f"\n          <p>{html.escape(published_date)}</p>" if published_date else ""
     return f"""
-        <section class="panel" aria-labelledby="current-release-heading">
-          <div class="section-label">Current official release</div>
-          <h2 id="current-release-heading">GEISA Specification {current_version} {current_label}</h2>
+        <section class="panel" aria-labelledby="current-published-release-heading">
+          <div class="section-label">Current published release</div>
+          <h2 id="current-published-release-heading">GEISA Specification {current_version} {current_label}</h2>
           <p>
             This is the newest published GEISA specification release. It is built
             from tag {html.escape(release["tag_name"])} and remains fixed while
@@ -229,7 +230,7 @@ def render_html(
     latest_built_at: str | None,
     latest_source_version: str | None,
 ) -> str:
-    current = current_official_release(releases)
+    current_release = releases[0] if releases else None
     latest_built_time = format_latest_build_time(latest_built_at)
     latest_source_version = format_latest_source_version(latest_source_version)
     latest_built_markup = (
@@ -243,7 +244,7 @@ def render_html(
         else ""
     )
     release_items = build_release_items(releases)
-    current_panel = render_current_panel(current)
+    current_panel = render_current_panel(current_release)
 
     return f"""<!doctype html>
 <html lang="en">
@@ -492,7 +493,7 @@ def render_html(
           <p>
             This draft is rebuilt from <code>main</code> on each publication and
             may include changes newer
-            than the current official release.
+            than the current published release.
           </p>{latest_source_version_markup}{latest_built_markup}
           <div class="actions">
             <a class="button" href="./latest/index.html">Open HTML</a>

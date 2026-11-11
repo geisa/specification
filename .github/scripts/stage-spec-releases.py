@@ -176,6 +176,18 @@ def ensure_release_outputs(worktree: Path) -> None:
         raise RuntimeError(f"empty PDF output file {pdf_path}")
 
 
+def validate_release_source_version(worktree: Path, version: str) -> None:
+    version_path = worktree / "source" / "geisa_release.txt"
+    if not version_path.is_file():
+        raise RuntimeError(f"missing release version metadata file {version_path}")
+    source_version = version_path.read_text(encoding="utf-8").strip()
+    if source_version != version:
+        raise RuntimeError(
+            f"release tag version {version!r} does not match "
+            f"{version_path.relative_to(worktree)} value {source_version!r}"
+        )
+
+
 def ensure_staged_release_outputs(staged_release_dir: Path) -> None:
     html_index = staged_release_dir / "index.html"
     pdf_path = staged_release_dir / "downloads" / "geisaspecification.pdf"
@@ -352,6 +364,7 @@ def main() -> None:
         build_error: BaseException | None = None
         cleanup_error: BaseException | None = None
         try:
+            validate_release_source_version(worktree, version)
             run(build_command, cwd=worktree, env=env)
             ensure_release_outputs(worktree)
             stage_release(worktree, pages_dir, version)
