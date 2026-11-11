@@ -25,11 +25,11 @@ For repository-level JSON validation/lint checks, run:
 
 The signatures in the manifests are valid.  It is possible to check these 
 signatures by extracting the manifest block, formatting it in canonical form,
-and using gpg.
+and using `gpg`.
 
 To extract the manifest, the following command can be used:
 
-`jq -c '.["geisa-application-manifest"].["manifest"]' \ 
+`jq -c '.["geisa-application-manifest"].["manifest"]' \
  < deployment-application-manifest-example.json \
  > manifest-block.json `
 
