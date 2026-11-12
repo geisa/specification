@@ -66,21 +66,12 @@ The GEISA deployment manifest requires at least one signature per artifact and
 at lease one signature per manifest.  Artifacts may have more than one
 signature in the manifest.  When more than one signature is included,
 conformant EMS and conformant platforms MUST validate every signature in the
-manifest.  If any of the signatures do not validate, the manifest or artificat
+manifest.  If any of the signatures do not validate, the manifest or artifact
 MUST be rejected as having failed signature validation.  Support for multiple
 signatures is provided to allow an optional certifier (see :doc:`/operations`)
 to countersign images, manifests, or both.  To ensure artifacts provenance
 publishers MUST always sign their artifacts, even if an artifact will be
 submitted to an optional certifier.
-
-
-.. To-Do
-
-   Need to define the wrapper for firmware images.
-
-.. To-Do
-
-   Need to add discussion on zip files containing images and manifest.
 
 |geisa-pyramid|
 
