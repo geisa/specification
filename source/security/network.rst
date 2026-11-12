@@ -92,11 +92,14 @@ separated by colons.  For example:
 
 .. code::
 
-  tcp:192.168.101.30:502
+  tcp:192.0.2.30:502
   udp::5540
-  tcp:23.185.0.4:443
+  tcp:203.0.113.57:443
+  udp:2001:db8:13::ba76:93f:5683
+  tcp:fe80::1234:5678:90ab:cdef:80
 
-Transport and address may be omitted.  Port is always required.  Both IPv4
+
+Address may be omitted.  Transport and port are always required.  Both IPv4
 and IPv6 addresses are acceptable.  Only raw IP addresses are supported in this
 version of the specification, not domain names.  This version of the
 specification only allows TCP and UDP as transports.
