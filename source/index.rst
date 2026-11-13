@@ -6,6 +6,7 @@
   available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+  SPDX-License-Identifier: Community-Spec-1.0
 
 .. GEISA Specification documentation master file for ***HTML*** output
    Please see index-latex.rst for the master file the PDF output
