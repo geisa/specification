@@ -6,6 +6,7 @@
   at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+  SPDX-License-Identifier: Community-Spec-1.0
 
 .. index:: single: Application Messaging
 
