@@ -25,7 +25,17 @@ Permission and Safety Model
 ---------------------------
 
 Access to actuator status and control is governed by deployment manifest policy
-and platform policy.
+and platform policy.  When the deployment manifest grants an application access
+to the control API, the manifest MUST include an array listing which specific
+actuators the application is allowed to control.  Platforms MUST enforce these
+permissions, ensuring that applications are only allowed to control the
+specific actuators for which they have been given permission.
+
+.. Note::
+
+   GEISA does not provide fine-grained control over actuator status
+   information.  Applications either are granted permission to check actuator
+   status or they are not.
 
 A platform MUST reject unauthorized actuator requests.
 

@@ -15,6 +15,9 @@
 .. [FIPS204] `FIPS 204 Module-Lattice-Based Digital Signature Standard
    <https://doi.org/10.6028/NIST.FIPS.204>`_
 
+.. [GNUTAR] `GNU tar: an archiver tool
+   <https://www.gnu.org/software/tar/manual/html_node/index.html>`_
+
 .. [IEEE8021AR] `IEEE Standard for Local and metropolitan area networks–Secure Device Identity
    <https://1.ieee802.org/security/802-1ar/>`_
 

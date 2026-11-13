@@ -106,12 +106,12 @@ toolchain which allows application developers to build applications written for
 the GEISA EE. 
 
 GEISA LEE |geisa-lee-tux| specifically assumes a GNU/Linux environment (see
-:doc:`lee/operating-system`), such that it is likely that the tool chain in use
-is open-source.  If a platform vendor is using a commercial tool chain, there
+:doc:`lee/operating-system`), such that it is likely that the toolchain in use
+is open-source.  If a platform vendor is using a commercial toolchain, there
 is no requirement that the platform vendor provide a license; however, they
 MUST provide information regarding where third parties can purchase the
-necessary tool chain and the version of the tool chain in use, and they MUST
-provide any supporting files required to allow the tool chain to be used to
+necessary toolchain and the version of the toolchain in use, and they MUST
+provide any supporting files required to allow the toolchain to be used to
 compile applications for their platform.  Platform providers should fully document the
 necessary compiler options for building compatible images for their platforms.
 They should also provide sample build scripts.

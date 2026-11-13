@@ -6,6 +6,7 @@
   available at:
   https://github.com/geisa/specification/blob/main/LICENSE.md or
   https://github.com/CommunitySpecification/Community_Specification/blob/main/1._Community_Specification_License-v1.md
+  SPDX-License-Identifier: Community-Spec-1.0
 
 .. index:: single: Application Management
 
@@ -24,14 +25,32 @@ The LwM2M ``/9/x Software Management`` object SHALL be used to manage the
 software package lifecycle of containerized edge applications running in the
 GEISA EE.  In contrast to the Firmware Update object, each instance of the
 multi-instance Software Management object represents a distinct edge
-application *Package* installed in the EE.  The format of the edge application
-Package is defined in :doc:`/lee/file-layout` for LEE conformant |geisa-lee-tux| systems
-and SHALL be composed of the following components:
+application *Package* installed in the EE.  
 
-*    X.509 Public Key Certificate used to verify the digital signature in the Package
-*    Digital Signature across the Vendor Application Manifest and Edge Application Image
-*    :doc:`Vendor Application Manifest </adm/manifests>`
-*    Edge Application Image
+Application Package Format
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To enable interoperable of loading of application packages into the Edge
+Management System, GEISA defines a simple application package format.  This
+format is used for all execution environments |geisa-ee-globe|.
+
+The format is a gzipped ``tar`` file, following the POSIX.1-2001/pax tape
+archive format.  This is the default archive format used by GNU ``tar``, see
+[GNUTAR]_, Appendix E for details, but common ``tar`` implementations should
+support this format by default, and it is well supported by `LibArchive
+<https://www.libarchive.org/>`_.
+
+The file SHALL contain a GEISA application manifest in the root of the archive
+named ``manifest.json``.  For publisher provided manifests, it SHALL be the
+vendor manifest.  For manifests provided by an EMS to a platform, it SHALL be
+the deployment manifest.
+
+Each artifact listed in ``manifest.json`` shall be provided in the root of the
+compressed archive.
+
+The format of artifacts themselves will be determined by the toolchain in use;
+however, LEE application images SHALL follow the file layout described in 
+:doc:`/lee/file-layout` |geisa-lee-tux|.
 
 To minimize edge application image sizes, applications are encouraged to
 dynamically link against the libraries provided by the base GEISA environment
@@ -44,7 +63,8 @@ Component``.
 
 .. index:: single: Application Activation
 
-**App Installation and Activation**
+Application Installation and Activation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Similar to :doc:`Firmware Update </adm/firmware-management>`, the LwM2M spec
 permits edge app packages can be transferred to the EE via either of the
@@ -97,7 +117,8 @@ The following example demonstrates GEISA conformant edge app installation and
 
    Edge App Install and Activate
 
-**App Update**
+Application Update
+~~~~~~~~~~~~~~~~~~
 
 ADM conformant platforms and EMS MUST support application updates using the
 existing ``/9/x Software Management`` Object Instance and
@@ -136,7 +157,8 @@ The Software Management object Activation state machine defines the ability to u
 
 .. index:: single: Execution State
 
-**App Execution State**
+Application Execution State
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Version 1.1 of the Software Management object adds resources for an EMS to control the *Execution State*
 of an edge application:
@@ -164,7 +186,8 @@ of an edge application:
 
 .. index:: single: Application Purge
 
-**App Purge**
+Application Purge
+~~~~~~~~~~~~~~~~~
 
 Version 1.1 of the Software Management object adds an executable resource for
 an EMS to remotely purge local data from an instance of an edge application

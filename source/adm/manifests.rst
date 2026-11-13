@@ -65,9 +65,10 @@ include:
 - Name of the application
 - Description of the application
 - Version Number of the application
-- Hash of the application image
+- Signature(s) of the application image artifact(s).
 
-    - The GEISA EE shall not activate an application unless the hash of the image matches the hash in the metadata
+    - The GEISA EE SHALL NOT activate an application unless every signature
+      for every image artifact provided in the manifest is valid.
 
 The Vendor Application Manifest SHALL include:
 
@@ -77,27 +78,10 @@ The Vendor Application Manifest SHALL include:
     - GEISA LEE Minimum Version (null for unsupported)
     - GEISA VEE Minimum Version (null for unsupported)
     - Waveform Access Required (boolean)
-    - GEISA CPU architecture string:
-
-        - ARM 32-bit: armv7l, armv6l
-        - ARM 64-bit: aarch64
-        - RISC-V 32-bit: riscv32
-        - RISC-V 64-bit: riscv64
-        - x86 32-bit: i686
-        - X86 64-bit: x86_64, amd64
-
-    - GEISA EE C library required:
-
-        - glibc
-        - musl
-        - uClibc
-        - uClibc-ng
-
-    - For VEE, a string of the JVM version (null for unsupported):
-
-        - Java 7: java7
-        - Java 8: java8
-        - Java 11: java11
+    - Toolchain target triple following LLVM/Clang target-triple conventions 
+      (e.g. ``aarch64-unknown-linux-musl``, ``aarch64-unknown-linux-gnu``,
+      etc.)
+    - Toolchain version
 
 
 - System Resource Limits:
@@ -206,6 +190,14 @@ The Vendor Application Manifest SHALL include:
           - Implementations MUST accept ``signatureValue`` elements that contains
             only the base64/ASCII armor encoded signature packet.
 
+          - Implementations SHOULD not include a checksum or any other
+            characters after the required pad / special processing function
+            characters, ``=``, as these may cause the JSON file to fail
+            validation.
+
+          - Implementations SHOULD ignore any extra characters beyond the
+            required pad characters, ``=``.
+
     - The Signature Packet shall follow [RFC9580]_, section 5.2.
 
     - The Signature Type ID (as documented in [RFC9580]_, section 5.2) shall be
@@ -252,7 +244,7 @@ yields:
 
    The ``jq`` *command* shown above does not include any line breaks or
    newlines in its output, but the Sphinx documenation system used by the GEISA
-   specification adds them back in for readability.  Manifest signatures are
+   specification adds them in for readability.  Manifest signatures are
    always over the canonical compact form, without any newlines.
 
 |geisa-landscape|
