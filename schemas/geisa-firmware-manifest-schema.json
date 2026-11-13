@@ -1,0 +1,176 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$comment": "SPDX-License-Identifier: Apache-2.0",
+    "title": "GEISA Firmware Manifest vX.Y.Z",
+    "description": "Shared manifest structure for a GEISA firmware image.",
+    "$defs": {
+        "signatureSet": {
+            "type": "array",
+            "description": "List of one or more signatures.",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/signatureBlock"
+            }
+        },
+        "signatureBlock": {
+            "type": "object",
+            "$comment": "Digital signature for an artifact or the manifest",
+            "required": [
+                "signatureValue"
+            ],
+            "properties": {
+                "signerRole": {
+                    "$comment": "Optional indicator of the role of provider of the signature.",
+                    "enum": [
+                        "publisher",
+                        "operator",
+                        "certifier",
+                        "other"
+                    ],
+                    "type": "string"
+                },
+                "signatureValue": {
+                    "$comment": "The base64 encoded OpenPGP detached signature packet over the compact JSON value of the Manifest.  The signature packet (see RFC9580) includes the required certificate reference and algorithm type to facilitate signature verification.",
+                    "type": "string",
+                    "contentEncoding": "base64",
+                    "minLength": 1
+                }
+            }
+        },
+        "fixedVersion": {
+            "type": "string",
+            "$comment": "fixedVersions do not allow values beyond the X.Y.Z triplet.",
+            "pattern": "^[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}$"
+        },
+        "fixedVersionOrNull": {
+            "$comment": "Allows for cases in which the version is set to null to indicate the feature is not supported.",
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/fixedVersion"
+                },
+                {
+                    "type": "null"
+                }
+            ]
+        },
+        "geisaArtifact": {
+            "type": "object",
+            "$comment": "A GEISA app will have at least one artifact. This schema version supports a single artifact type. Other image types may be added in the future.",
+            "required": [
+                "image-name",
+                "image-type",
+                "image-size",
+                "signatures",
+                "uncompressed-size"
+            ],
+            "properties": {
+                "image-name": {
+                    "description": "Full bare file name of the image (e.g. no path, but including extension).",
+                    "type": "string",
+                    "minLength": 4,
+                    "maxLength": 256
+                },
+                "image-type": {
+                    "description": "Type of the image file.",
+                    "enum": [
+                        "firmware"
+                    ],
+                    "$comment": "Additional image types may be added over time."
+                },
+                "image-size": {
+                    "description": "Size of the compressed image file in bytes.",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "uncompressed-size": {
+                    "description": "Size of the uncompressed image in bytes.",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
+                }
+            }
+        }
+    },
+    "type": "object",
+    "required": [
+        "geisa-firmware-manifest"
+    ],
+    "properties": {
+        "geisa-firmware-manifest": {
+            "type": "object",
+            "required": [
+                "manifest",
+                "signatures"
+            ],
+            "properties": {
+                "manifest": {
+                    "type": "object",
+                    "required": [
+                        "manifest-version",
+                        "firmware-version",
+                        "author",
+                        "description",
+                        "compatibility",
+                        "artifacts"
+                    ],
+                    "properties": {
+                        "manifest-version": {
+                            "description": "Version number of the GEISA firmware manifest format per the GEISA specification in use.",
+                            "const": "0.9.0"
+                        },
+                        "firmware-version": {
+                            "description": "Version number of the firmware.",
+                            "type": "string",
+                            "pattern": "^[0-9]{1,}\\.[0-9]{1,}\\.[0-9]{1,}\\b.*$",
+                            "$comment": "The \b.* allows arbitrary text after the numeric version triplet, but only if it is separated in someway."
+                        },
+                        "author": {
+                            "description": "Author of the application.  Typically a company or programmer.",
+                            "type": "string",
+                            "minLength": 4
+                        },
+                        "description": {
+                            "description": "Description of the firmware image.",
+                            "type": "string"
+                        },
+                        "compatibility": {
+                            "description": "Details about what platforms this firmware is compatible with.",
+                            "type": "object",
+                            "required": [
+                                "manufacturer",
+                                "model-number"
+                            ],
+                            "properties": {
+                                "manufacturer": {
+                                    "description": "Manufacturer string matching the LwM2M Object 3 Manufacturer field",
+                                    "$comment": "This, combined with the model-number, is used to link a given firmware image to a specific target device.",
+                                    "type": "string",
+                                    "minLength": 2
+                                },
+                                "model-number": {
+                                    "description": "Model Number string matching the LwM2M Object 3 Model Number field",
+                                    "$comment": "This, combined with the manufacturer, is used to link a given firmware image to a specific target device.",
+                                    "type": "string",
+                                    "minLength": 2
+                                }
+                            }
+                        },
+                        "artifacts": {
+                            "type": "array",
+                            "description": "List of one or more artifacts that comprise the firmware.",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/geisaArtifact"
+                            }
+                        }
+                    }
+                },
+                "signatures": {
+                    "$ref": "#/$defs/signatureSet"
+                }
+            }
+        }
+    }
+}
