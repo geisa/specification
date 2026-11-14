@@ -222,10 +222,16 @@ The Vendor Application Manifest SHALL include:
     - Platform implementations SHALL validate all signatures included in a
       manifest.
 
-    - Signature blocks may include an optional ``signerRole``.  Valid values
+    - Signature blocks SHALL include a ``signerRole``.  Valid values
       in this version of the specification are: 'publisher', 'operator',
-      'certifier', and 'other'.  Signature roles may be useful for logging and system
-      operations, but are optional.
+      'certifier', and 'other'. 
+
+    - Vendor application manifests SHALL include a manifest signature with the
+      'publisher' ``signerRole``.
+
+    - Deployment application manifests SHALL include a manifest signatuer with
+      the 'operator' ``signerRole``.
+
 
 The compact value of an application manifest removes all unnecessary whitespace
 (i.e. whitespace not part of a JSON element value).  This provides a consistent,

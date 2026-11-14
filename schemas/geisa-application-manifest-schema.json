@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+    "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
     "title": "GEISA Application Manifest vX.Y.Z",
     "description": "Shared manifest structure for a GEISA application. Vendor / application manifests provide requested or default values which operators may over-ride; deployment manifests approved by operators are enforced by conformant platforms.",
         "$defs": {
@@ -62,7 +62,8 @@
             "type": "object",
             "$comment": "Digital signature for an artifact or the manifest",
             "required": [
-              "signatureValue"
+              "signatureValue",
+              "signerRole"
             ],
             "properties": {
                 "signerRole": {

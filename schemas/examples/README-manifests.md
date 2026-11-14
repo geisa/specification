@@ -5,47 +5,56 @@ Security Alliance (GEISA), a Series of LF Projects, LLC
 Licensed under the Apache License, Version 2.0. See LICENSE.
 -->
 
-# Application manifest examples (JSON)
+# Manifests
 
-This directory includes JSON examples aligned to the GEISA application manifest
-schema.
+GEISA uses signed manifests to transfer applications between publisher and
+operators and between operators and devices.  Manifests provide a digitally
+signed set of meta-data for artifacts such as applications and firmware images.
+
+## Manifest Examples (JSON)
+
+This directory includes JSON examples aligned to the GEISA application and
+firmware manifest schema.
 
 Current examples:
 
-- vendor application manifest example:
+- vendor manifest examples:
   - `vendor-application-manifest-example.json`
-- deployment/operator application manifest example:
+  - `vendor-firmware-manifest-example.json`
+
+- deployment/operator manifest example:
   - `deployment-application-manifest-example.json`
+  - `deployment-firmware-manifest-example.json`
 
 For repository-level JSON validation/lint checks, run:
 
     npm run lint
 
-# Signatures
+## Signatures
 
-The signatures in the manifests are valid.  It is possible to check these 
+The signatures in the manifests are valid.  It is possible to check these
 signatures by extracting the manifest block, formatting it in canonical form,
 and using `gpg`.
 
 To extract the manifest, the following command can be used:
 
-`jq -c '.["geisa-application-manifest"].["manifest"]' < deployment-application-manifest-example.json  > manifest-block.json`
+`jq -c '.["geisa-application-manifest"].["manifest"]'
+< deployment-application-manifest-example.json  > manifest-block.json`
 
-The `signatureValue` element must be extracted and placed in a text file with 
-the required `-----BEGIN PGP SIGNATURE-----` header.  This can be done with 
+The `signatureValue` element must be extracted and placed in a text file with
+the required `-----BEGIN PGP SIGNATURE-----` header.  This can be done with
 following commands:
 
 `echo -e "-----BEGIN PGP SIGNATURE-----\n" > manifest-block.asc`
 
-`jq -c '.["geisa-application-manifest"].["signatures"].[0].["signatureValue"]' \
- < deployment-application-manifest-example.json | sed s/\"//g >> manifest-block.asc`
+`jq -c '.["geisa-application-manifest"].["signatures"].[0].["signatureValue"]'
+< deployment-application-manifest-example.json | sed s/\"//g >>
+manifest-block.asc`
 
 `gpg --verify manifest-block.asc manifest-block.json`
 
-Note: to complete the verification, the appropriate key must be loaded.  The 
-`deployment-application-manifest-example.json` was signed using 
+Note: to complete the verification, the appropriate key must be loaded.  The
+`deployment-application-manifest-example.json` was signed using
 `system-operator-example.key`.  The `vendor-application-manifest-example.json`
-was signed using `app-publisher-example.key`.  The public keys are available 
+was signed using `app-publisher-example.key`.  The public keys are available
 in the `examples` directory.
-
-
