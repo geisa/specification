@@ -26,15 +26,15 @@ Current examples:
   - `deployment-application-manifest-example.json`
   - `deployment-firmware-manifest-example.json`
 
-For repository-level JSON validation/lint checks, run:
+From `specification/schemas/`, run:
 
     npm run lint
 
 ## Signatures
 
-The signatures in the manifests are valid.  It is possible to check these
-signatures by extracting the manifest block, formatting it in canonical form,
-and using `gpg`.
+The application manifest example signatures are valid.  It is possible to
+check these signatures by extracting the manifest block, formatting it in
+canonical form, and using `gpg`.
 
 To extract the manifest, the following command can be used:
 

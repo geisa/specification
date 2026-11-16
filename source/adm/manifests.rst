@@ -224,12 +224,16 @@ The Vendor Application Manifest SHALL include:
 
     - Signature blocks SHALL include a ``signerRole``.  Valid values
       in this version of the specification are: 'publisher', 'operator',
-      'certifier', and 'other'. 
+      'certifier', and 'other'.
+
+    - EMS and platform implementations SHALL verify that the signing identity
+      is authorized for its declared ``signerRole`` under the operator-approved
+      trust configuration.
 
     - Vendor application manifests SHALL include a manifest signature with the
       'publisher' ``signerRole``.
 
-    - Deployment application manifests SHALL include a manifest signatuer with
+    - Deployment application manifests SHALL include a manifest signature with
       the 'operator' ``signerRole``.
 
 
