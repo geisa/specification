@@ -36,8 +36,8 @@
                 "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavc+WAAKCRBFeoCWIY0eh3APAQCHy7HXGO6F/HvLAn8v7+clWVzHSt150KH8R1CDGZY6fwEA7d6q9U0mv/bRYb5JDZwFb0QDxQdkQBbpP6Af/DYuUQs="
             },
             {
-                "$comment": "Publisher signature over the manifest.",        
-                "signerRole": "publisher",
+                "$comment": "System operator signature over the manifest.",
+                "signerRole": "operator",
                 "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCavdECwAKCRAoV+memssgbV0eAQCS2XetYtAXy8zNxKaH6YzPPXgsdlf3l6Sj6w/6FKlvGAEA3IccVeIvYNGEN4FzJZD0uGcFcgktKdfCULt2Bu9QRwk="
             }
         ]

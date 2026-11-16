@@ -14,7 +14,7 @@
         },
         "signatureBlock": {
             "type": "object",
-            "$comment": "Digital signature for an artifact or the manifest",
+            "$comment": "Digital signature for a firmware artifact or a manifest.",
             "required": [
                 "signatureValue"
             ],
@@ -30,7 +30,7 @@
                     "type": "string"
                 },
                 "signatureValue": {
-                    "$comment": "The base64 encoded OpenPGP detached signature packet over the compact JSON value of the Manifest.  The signature packet (see RFC9580) includes the required certificate reference and algorithm type to facilitate signature verification.",
+                    "$comment": "Base64-encoded OpenPGP detached signature packet over either the compact JSON manifest value or the entire binary image file for an artifact. The signature packet (see RFC 9580) includes the required certificate reference and algorithm type to facilitate verification.",
                     "type": "string",
                     "contentEncoding": "base64",
                     "minLength": 1
@@ -55,7 +55,7 @@
         },
         "geisaArtifact": {
             "type": "object",
-            "$comment": "A GEISA app will have at least one artifact. This schema version supports a single artifact type. Other image types may be added in the future.",
+            "$comment": "A GEISA firmware manifest has at least one artifact. This schema version supports a single artifact type. Other image types may be added in the future.",
             "required": [
                 "image-name",
                 "image-type",
@@ -127,7 +127,7 @@
                             "$comment": "The \b.* allows arbitrary text after the numeric version triplet, but only if it is separated in someway."
                         },
                         "author": {
-                            "description": "Author of the application.  Typically a company or programmer.",
+                            "description": "Author of the firmware. Typically a company or programmer.",
                             "type": "string",
                             "minLength": 4
                         },
