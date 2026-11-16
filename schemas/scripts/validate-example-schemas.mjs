@@ -23,11 +23,13 @@ const SCHEMA_BY_PREFIX = [
   ["examples/actuator-", "geisa-actuator-schema.json"],
   ["examples/app-message-request-", "geisa-app-message-req-schema.json"],
   ["examples/app-message-response-", "geisa-app-message-rsp-schema.json"],
+  ["examples/deployment-firmware-", "geisa-firmware-manifest-schema.json"],
   ["examples/deployment-", "geisa-application-manifest-schema.json"],
   ["examples/metered-quantities-ac-meter-profile-", "profiles/geisa-metered-quantities-ac-meter-profile.json"],
   ["examples/metered-quantities-billing-profile-", "profiles/geisa-metered-quantities-billing-profile.json"],
   ["examples/platform-discovery-", "geisa-discovery-schema.json"],
   ["examples/sensor-", "geisa-sensor-schema.json"],
+  ["examples/vendor-firmware-", "geisa-firmware-manifest-schema.json"],
   ["examples/vendor-", "geisa-application-manifest-schema.json"],
   ["examples/waveform-", "geisa-waveform-schema.json"]
 ];

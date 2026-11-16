@@ -1,0 +1,40 @@
+{
+    "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
+    "geisa-firmware-manifest": {
+        "$comment": "Example firmware manifest. Provides compatibility and provenance information in a uniform manner.",       
+        "manifest": {
+            "manifest-version": "0.9.0",
+            "firmware-version": "1.0.0",
+            "author": "Awesome platform company",
+            "description": "Firmware for Awesome XZY 10000",
+            "compatibility": {
+                "$comment": "Compatible with the Awesome Inc XYZ 10000.  Note that both manufacturer & model-number are required and must match the values reported in LwM2M Object 3.",        
+                "manufacturer": "Awesome Inc.",
+                "model-number": "XYZ 10000"
+            },
+            "artifacts": [
+                {
+                    "$comment": "Single firmware artifact. Additional artifact types may be added in future GEISA revisions.",        
+                    "image-name": "AwesomeFirmware.tgz",
+                    "image-type": "firmware",
+                    "image-size": 1454080,
+                    "uncompressed-size": 1356099,
+                    "signatures": [
+                        {
+                            "$comment": "Publisher signature over the artifact (firmware image).",        
+                            "signerRole": "publisher",
+                            "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavdDsAAKCRBFeoCWIY0eh0kbAPwLCkz3+ytNEZ9wrH2BM3Lwqtpe1+vKKGGWW/mWNrgOmQEAsxNlSe96ByFnih8CsrWUqOxNBCz++FHjvsOb23XbAgk="
+                        }
+                    ]
+                }
+            ]
+        },
+        "signatures": [
+            {
+                "$comment": "Publisher signature over the manifest.",        
+                "signerRole": "publisher",
+                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavc+WAAKCRBFeoCWIY0eh3APAQCHy7HXGO6F/HvLAn8v7+clWVzHSt150KH8R1CDGZY6fwEA7d6q9U0mv/bRYb5JDZwFb0QDxQdkQBbpP6Af/DYuUQs="
+            }
+        ]
+    }
+}
