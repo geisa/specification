@@ -320,7 +320,7 @@ LwM2M Transactions
 
 The ADM pillar |geisa-adm-baton| uses LwM2M as the basis of the management API
 between platform implementations and an Edge Management System (see
-`doc:/operations.rst` for discussion).  LwM2M object definitions each contain a
+:doc:`/operations.rst` for discussion).  LwM2M object definitions each contain a
 version identifier (``ObjectVersion``).  OMA does not allow any changes to the
 object definiton without updating the ``ObjectVersion`` field.  LwM2M objects
 are maintained in a GitHub Repository.  For convenience, the |GEISA| includes a
