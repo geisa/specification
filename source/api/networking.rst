@@ -129,6 +129,13 @@ Applications MUST specify the endpoints they need to communicate to (IP/Port)
 in their Application Deployment Manifest so that those policies can be approved
 by operators and implemented in the platform using firewall rules.
 
+Conformant platform implementations MUST provide an IP socket based interface
+to authorized Applications; however, in any given environment, applications may
+or may not be able to successfully communicate over IP.  Application designers
+should consider carefully the challenges of local IP communications and 
+design their applications to robustly handle limited or intermitent
+communications.
+
 Applications MUST also specify the expected volume of data per day per
 destination class.
 
@@ -138,13 +145,14 @@ endpoints.
 
 Approval of IP socket communication does not imply unmanaged or
 application-selected network reachability. The System Operator remains
-authoritative for which destination classes, endpoints, protocols, ports,
-and volumes are allowed. Platform implementations MAY satisfy approved IP
-socket communication using direct routing, NAT, firewall rules,
-forwarding, transparent proxies, shared upstream connections, or other
-platform-controlled mechanisms, provided the Application can use standard
-socket APIs from within its execution environment and the approved policy
-is enforced.
+authoritative for which destination classes, endpoints, protocols, ports, and
+volumes are allowed. Platform implementations MAY satisfy approved IP socket
+communication using direct routing, NAT, firewall rules, forwarding,
+transparent proxies, shared upstream connections, or other platform-controlled
+mechanisms, provided that authorized Applications can use standard socket APIs
+from within the execution environment and the approved policy is locally
+enforced.  Implementations which require traffic to route through an external
+proxy prior to reaching their destination network are not conformant.
 
 Regardless of the platform mechanism used, the Application remains responsible
 for its application-layer security behavior. The operator remains responsible
@@ -158,26 +166,25 @@ classes.
 
 .. note::
 
-  Application-visible IP socket communication from within the Application
-  execution environment is NOT REQUIRED by every GEISA device. ADM-conformant
-  platforms still require IP connectivity for the ADM LwM2M over CoAP path, but
-  that platform-managed IP connectivity is distinct from Application-managed IP
-  socket access. Applications can be designed to require IP socket
-  communication or, if it is not available, fall back to message-based
-  communication functionality.
-
-  Additionally, not all destination classes are REQUIRED by a GEISA device. An
-  operator or device manufacturer may only support a subset depending on
-  capabilities, deployment architecture, or security policy. The availability
-  of an approved application IP communication path is not guaranteed.
-  Applications may encounter intermittent or prolonged outages, or may run on
-  devices where some or all destination classes are not provisioned.
+  Not all destination classes may be available in a given GEISA device or
+  deployment. An operator or device manufacturer may only support a subset
+  depending on capabilities, deployment architecture, or security policy. The
+  availability of an approved application IP communication path is not
+  guaranteed.  Applications may encounter intermittent or prolonged outages, or
+  may run on devices where some or all destination classes are not provisioned.
   Applications approved for IP socket communication SHOULD be designed to
   handle these conditions, operate in a degraded mode where appropriate, avoid
   producing excessive alarms or logs, and fall back to message-based
   communication only when that behavior is implemented by the application and
   allowed by deployment policy.
 
+.. note::
+
+  Regardless of whether applications are authorized to use direct IP socket
+  communications, ADM-conformant platforms still require IP connectivity for
+  the ADM LwM2M over CoAP path. Platform-managed IP connectivity is
+  distinct from Application-managed IP socket access. 
+  
 |geisa-pyramid|
 
 .. index:: single: Interface Type
