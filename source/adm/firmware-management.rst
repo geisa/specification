@@ -13,6 +13,48 @@ Firmware Management
 
 |geisa-adm-hdr|
 
+Manifests & Packages
+~~~~~~~~~~~~~~~~~~~~
+
+To ensure interoperability across systems, GEISA uses a defined firmware
+package format.  The package format is the same as the application package
+format (see :doc:`/adm/app-management`): a gzip compressed ``tar`` archive
+containing the manifest, named ``manifest.json``, and all of the artifacts
+listed in the manifest.  The format and contents of the firmware artifacts are
+not defined by GEISA and are specific to the device they have been built for.
+GEISA defines the package format and the manifest to allow an EMS to load and
+transfer firmware for any device from any vendor and to ensure a consistent
+and secure firmware transfer process.  The gzip compressed ``tar`` file is the
+image that the EMS transfers to the device using the LwM2M mechanisms discussed
+below.
+
+The firmware manifest format is provided in
+``geisa-firmware-manifest-schema.json``.  The format is substantially similar
+to the application manifest (see :doc:`/adm/manifests`); however, it only
+includes artifacts, compatibility meta-data and signatures, omitting resouces
+allocations and permissions.  Critically, the firmware manifest uses the LwM2M
+Object ``3`` ``manufacturer`` and ``model-number`` fields to determine whether
+the firmware package is compatible with the target device.  The
+``firmware-version`` field allows the EMS to understand whether a package is an
+upgrade or a downgrade.
+
+Firmware manifests and the incorporated artifacts MUST be signed by the
+publisher.  Firmware manifests in deployment packages MAY be countersigned by
+the system operator.  Device manufacturers are free to include multiple
+artifacts within a firmware package.  This capability can be used to provide
+images for specific subcomponents within a device.  Manufacturers may use the
+``image-name``, ``image-type`` or both to distinguish between different
+artifacts.  EMS MUST pass through the ``geisa-firmware-manifest`` element of
+the firmware manifest provided by the publisher without any changes.  Only the
+manifest's ``signatures`` block MAY be updated by the EMS.  Typically, this is
+done to allow system operator to counter-sign a package.  The publisher
+signature on the ``geisa-firmware-manifest`` MUST be retained, as it may be
+required by the target device.
+
+
+LwM2M Update Process
+~~~~~~~~~~~~~~~~~~~~
+
 Firmware management is the process of updating the core operating system for an
 ADM conformant GEISA platform.
 
@@ -34,7 +76,7 @@ Automatic Upgrade at Download``, a GEISA ADM conformant EMS SHALL perform the
 following:
 
 *  *Observe* ``/5/0/3 State`` when object ``/5/0`` is advertised during GEISA
-   platform Registration 
+   platform Registration
 *  *Read* ``/5/0/5 Update`` Result after Notification that ``/5/0/3 State = Idle``
 
 

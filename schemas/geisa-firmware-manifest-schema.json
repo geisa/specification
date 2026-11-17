@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$comment": "SPDX-License-Identifier: Apache-2.0",
-    "title": "GEISA Firmware Manifest vX.Y.Z",
+    "title": "GEISA Firmware Manifest v0.9.9",
     "description": "Shared manifest structure for a GEISA firmware image.",
     "$defs": {
         "signatureSet": {
@@ -55,7 +55,7 @@
         },
         "geisaArtifact": {
             "type": "object",
-            "$comment": "A GEISA firmware manifest has at least one artifact. This schema version supports a single artifact type. Other image types may be added in the future.",
+            "$comment": "A GEISA firmware manifest has at least one artifact. Image-type and image-name are determined by the device manufacturer and MUST be meaningful to the device.",
             "required": [
                 "image-name",
                 "image-type",
@@ -71,9 +71,15 @@
                     "maxLength": 256
                 },
                 "image-type": {
-                    "description": "Type of the image file.",
+                    "description": "Type of the image file.  Manufacturers may use these types as they see fit to distinguish between different firmware image artifacts within a firmware package.",
                     "enum": [
-                        "firmware"
+                        "firmware",
+                        "electric-meter",
+                        "metrology-processor",
+                        "compute-card",
+                        "network-card",
+                        "coprocessor-card",
+                        "custom"
                     ],
                     "$comment": "Additional image types may be added over time."
                 },
