@@ -342,16 +342,25 @@ GEISA uses protobuf schemas to define the transactions exchanged over the MQTT
 API |geisa-api-gear|.  By design, protobuf allows new fields to be added
 without breaking existing implementations.  This allows older implementations
 to accept messages with new fields gracefully, provided that the API
-transaction does not require the use of the new fields.  The |GEISA| will not
-allow any new mandatory fields or other breaking changes to be made to MQTT API
-without introducing a new topic hierarchy.  For example, should a new required
-field need to be added to the billing API, a new topic name, such as
-``geisa/api/billing2/data`` would be defined.  Should the entire API need to be
-refreshed, a ``geisa/api2`` topic hierarchy would be created.  The topic names
-are provided in the specification, and the associated protobuf schemas are held
-within the specification repository.  As a result, it is possible to determine
-exactly which version of a schema is associated with a given version of the
-GEISA specification.
+transaction does not require the use of the new fields.  The |GEISA| requires
+that any new mandatory fields or other breaking changes to the MQTT API MUST
+introduce a new topic hierarchy. Changes affecting only one API area MAY use
+a versioned topic, such as ``geisa/api/billing/v2/data``, while broader
+versioning of the API MUST introduce a new versioned hierarchy, such as
+``geisa/api/v2/billing/data``.
+
+The topic names are provided in the specification, and the associated protobuf
+schemas are held within the specification repository.  As a result, it is
+possible to determine exactly which version of a schema is associated with a
+given version of the GEISA specification.
+
+ReST APIs
+^^^^^^^^^
+
+GEISA ReST APIs use versioned URI paths, such as ``/geisa/adm/v1/``.
+Breaking changes to a ReST API MUST introduce a new versioned URI path,
+such as ``/geisa/adm/v2/``.  Compatible changes MAY retain the existing
+URI version.
 
 |geisa-pyramid|
 
