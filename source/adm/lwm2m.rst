@@ -477,9 +477,9 @@ GEISA object definitions.
   any confusion for operators reading logs or other system messages.  EMS shall
   clearly log when an AppID is assigned.
 
-  Platform implementations MAY reserve AppIDs 252 through 255 for applications
-  installed and managed locally on development or test devices.  When reserved,
-  these AppIDs SHALL NOT be assigned by the EMS on those devices.
+  AppIDs 252 through 255 are reserved for Platform implementations for applications
+  installed and managed locally on development or test devices.  These AppIDs SHALL 
+  NOT be assigned by the EMS.
 
   Applications deployed for field operation, including through field tools,
   MUST already be registered with the EMS and use their EMS-assigned AppID.
