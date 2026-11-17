@@ -171,6 +171,12 @@
                             "type": "string",
                             "minLength": 4
                         },
+                        "AppID": {
+                            "description": "EMS-assigned numeric AppID (LwM2M Resource 4050). Required in Application Deployment Manifests.",
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 255
+                        },
                         "author": {
                             "description": "Author of the application.  Typically a company or programmer.",
                             "type": "string",

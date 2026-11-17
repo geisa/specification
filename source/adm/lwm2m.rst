@@ -464,7 +464,8 @@ GEISA object definitions.
   installed application.
 
   To ensure interoperability across platform implmentations, AppIDs MUST be
-  managed by the EMS.  EMS must ensure that AppIDs are unique within a given
+  managed by the EMS, except for locally managed development AppIDs.
+  EMS must ensure that AppIDs are unique within a given
   deployed system (two different applications SHALL NOT be assigned the same
   AppID at the same time) and specific (the same application SHALL NOT have two
   different IDs assigned at the same time).  AppIDs values have no meaning and
@@ -475,6 +476,13 @@ GEISA object definitions.
   simultaneously.  EMS SHOULD maximize the time between AppID reuse to minimize
   any confusion for operators reading logs or other system messages.  EMS shall
   clearly log when an AppID is assigned.
+
+  Platform implementations MAY reserve AppIDs 252 through 255 for applications
+  installed and managed locally on development or test devices.  When reserved,
+  these AppIDs SHALL NOT be assigned by the EMS on those devices.
+
+  Applications deployed for field operation, including through field tools,
+  MUST already be registered with the EMS and use their EMS-assigned AppID.
 
 * ``/3601`` GEISA Host Monitoring
 
