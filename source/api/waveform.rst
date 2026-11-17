@@ -140,9 +140,14 @@ A waveform response includes:
 A waveform subscribe request does not imply that an application controls the
 underlying platform metrology hardware or the global lifecycle of waveform
 capture. Rather, the request asks the platform to grant or deny access to a
-waveform stream for the requesting application instance.  Multiple applications 
-MAY consume waveform data simultaneously without interference or placing the 
-metrology hardware in a special operating mode.
+waveform stream for the requesting application instance.  Platforms MUST
+support multiple applications consuming waveform data simultaneously without
+interference or placing the metrology hardware in a special operating mode;
+however, the number of concurrent applications supported is subject to the
+hardware capacity of the devices and the resource demands of the applications,
+and, as a result, MAY vary between implementations.  System operators will need
+to work with their platform and application providers to determine how many
+applications can consume waveform data concurrently in a given deployment.
 
 Per-Application Socket
 ~~~~~~~~~~~~~~~~~~~~~~
