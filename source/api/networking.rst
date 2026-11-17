@@ -132,8 +132,8 @@ by operators and implemented in the platform using firewall rules.
 Conformant platform implementations MUST provide an IP socket based interface
 to authorized Applications; however, in any given environment, applications may
 or may not be able to successfully communicate over IP.  Application designers
-should consider carefully the challenges of local IP communications and 
-design their applications to robustly handle limited or intermitent
+should consider carefully the challenges of local IP communications and
+design their applications to robustly handle limited or intermittent
 communications.
 
 Applications MUST also specify the expected volume of data per day per
@@ -183,8 +183,8 @@ classes.
   Regardless of whether applications are authorized to use direct IP socket
   communications, ADM-conformant platforms still require IP connectivity for
   the ADM LwM2M over CoAP path. Platform-managed IP connectivity is
-  distinct from Application-managed IP socket access. 
-  
+  distinct from Application-managed IP socket access.
+
 |geisa-pyramid|
 
 .. index:: single: Interface Type
