@@ -23,7 +23,7 @@
                         {
                             "$comment": "Publisher signature over the artifact (firmware image).",        
                             "signerRole": "publisher",
-                            "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavdDsAAKCRBFeoCWIY0eh0kbAPwLCkz3+ytNEZ9wrH2BM3Lwqtpe1+vKKGGWW/mWNrgOmQEAsxNlSe96ByFnih8CsrWUqOxNBCz++FHjvsOb23XbAgk="
+                            "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavc9twAKCRBFeoCWIY0eh/mPAP9kCuAwhnF1aQFaCtgEbq/9mggBND+0UFoVkkV5zJ3jjgEAm8f3/TOgcPxxOzGuccPGX+jr/CXJeXEj6kjlxHNehg0="
                         }
                     ]
                 }
@@ -33,7 +33,7 @@
             {
                 "$comment": "Publisher signature over the manifest.",        
                 "signerRole": "publisher",
-                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavc+WAAKCRBFeoCWIY0eh3APAQCHy7HXGO6F/HvLAn8v7+clWVzHSt150KH8R1CDGZY6fwEA7d6q9U0mv/bRYb5JDZwFb0QDxQdkQBbpP6Af/DYuUQs="
+                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavdDsAAKCRBFeoCWIY0eh0kbAPwLCkz3+ytNEZ9wrH2BM3Lwqtpe1+vKKGGWW/mWNrgOmQEAsxNlSe96ByFnih8CsrWUqOxNBCz++FHjvsOb23XbAgk="
             },
             {
                 "$comment": "System operator signature over the manifest.",
