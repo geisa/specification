@@ -63,7 +63,7 @@ consumers. For example, metrology, waveform, sensor, or similar device data may 
 exposed by the GEISA Platform to Edge Applications without becoming Platform operational
 data or being required to be transported through ADM/EMS systems for distribution.
 
-Note that EMS implementations MAY expose additional interfaces, including REST APIs,
+Note that EMS implementations MAY expose additional interfaces, including ReST APIs,
 operator interfaces, query APIs, MQTT interfaces, or implementation-specific integration
 mechanisms, but such interfaces do not replace the interoperable Data Distribution
 requirements defined here.  Direct IP communication by Edge Applications is a separate
@@ -117,7 +117,7 @@ Platform-originated data similarly retains its defined source, state, severity,
 reason, event type, and/or other applicable GEISA information rather than
 requiring consumers to reconstruct them.
 
-In order to ensure interoperability, a consumer must receive enough information to 
+In order to ensure interoperability, a consumer must receive enough information to
 interpret the distributed record without depending on implementation-specific EMS behavior.
 
 Where the source already defines:
@@ -1149,7 +1149,7 @@ range, response representation, and error behavior remain under review. Data tha
 is older than the Kafka retention window may be available through other mechanisms,
 including:
 
-* EMS query or REST APIs
+* EMS query or ReST APIs
 * Event Log ``/20``
 * utility-operated archives or data lakes
 * application or Edge Device resend mechanisms where supported
