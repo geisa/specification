@@ -136,15 +136,15 @@ device (see :doc:`api/discovery`)
     local GEISA API.  For example, an edge gateway may host a GEISA app
     environment, and obtain measurement data from a connected meter.
 
-Metrological hardware, at a minimum, should be able to provide: 
+Metrological hardware, at a minimum, SHOULD be able to provide: 
 
 - Instantaneous RMS Voltage Reading
 - Instantaneous RMS Current Reading
 - Frequency
 
-When coupled with a billing register, metrological hardware may also be able 
-to provide derived quantities such as demand values, cummulative values, and 
-interval values.
+When coupled with a billing register, metrological hardware SHOULD provide
+derived quantities such as demand values, cummulative values, and interval
+values.
 
 .. Note::
 
@@ -154,8 +154,10 @@ interval values.
    to voltage only.  Electric meters are expected to be able to provide both.
 
 
-Metrological hardware may also be able to provide waveform data.  See 
-:doc:`api/waveform` for additional details.  
+Metrological hardware SHOULD provide waveform data.  See :doc:`api/waveform`
+for additional details.  Waveform data is expected on modern advanced meters;
+however, this specification allows for devices which do not provide it, so that
+older or lower function devices can support edge interoperability.
 
 When waveform data is provided, at a mininum, it SHALL provide:
 
