@@ -286,5 +286,72 @@ limits shall include the following:
   the EMS and the action MUST be aborted, leaving the Application running with 
   the previous manifest.
 
+
+Versioning
+==========
+
+GEISA endeavors to support forwards and backwards compatibility across its
+requirements and APIs.  Because of the wide breadth that GEISA covers (as
+discussed above), it can be challenging to understand how versions are
+maintained.  The |GEISA| has endeavored to ensure that minor changes can be
+accommodated in a fully backwards compatible way, and that major changes are
+well defined so that implementations can detect exactly which transactions are
+supported if they choose to support multiple versions.
+
+Specification
+^^^^^^^^^^^^^
+
+GEISA is first and foremost, versioned at the specification level.  Each
+version of the specification includes a specific set of requirements.  GEISA
+uses a three digit versioning system:  major.minor.patch.  Corrections to the
+specification that do not change APIs or functionality, but simply clarify
+meaning or intent ("patches" as it were) are indicated by incrementing the
+patch number.  Additions to the functions or behavior described in the
+specification that do NOT break or change existing behaviors, are indicated by
+incrementing the minor number.  Changes to the architecture, breaking changes,
+or major new additions (e.g., adding a new execution environment), are
+indicated by incrementing the major number.  All builds of the GEISA
+specification also include a commit identifier, allowing users to see the exact
+source files that were used to generate the specification, and to see each and
+every change that was made.
+
+LwM2M Transactions
+^^^^^^^^^^^^^^^^^^
+
+The ADM pillar |geisa-adm-baton| uses LwM2M as the basis of the management API
+between platform implementations and an Edge Management System (see
+:doc:`/operations.rst` for discussion).  LwM2M object definitions each contain a
+version identifier (``ObjectVersion``).  OMA does not allow any changes to the
+object definition without updating the ``ObjectVersion`` field.  LwM2M objects
+are maintained in a GitHub Repository.  For convenience, the |GEISA| includes a
+pinned reference to the LwM2M object repository within the GEISA specification
+repository.  As a result, it is possible to use the commit ID of the GEISA
+specification to sync to the specific versions of the LwM2M objects associated
+with that version of the GEISA specification.
+
+Manifests
+^^^^^^^^^
+
+Application and Firmware Manifests are defined in JSON schemas.  These schemas
+include a version number.  The version number is updated when changes are made.
+
+MQTT API & Protobufs
+^^^^^^^^^^^^^^^^^^^^
+
+GEISA uses protobuf schemas to define the transactions exchanged over the MQTT
+API |geisa-api-gear|.  By design, protobuf allows new fields to be added
+without breaking existing implementations.  This allows older implementations
+to accept messages with new fields gracefully, provided that the API
+transaction does not require the use of the new fields.  The |GEISA| will not
+allow any new mandatory fields or other breaking changes to be made to MQTT API
+without introducing a new topic hierarchy.  For example, should a new required
+field need to be added to the billing API, a new topic name, such as
+``geisa/api/billing2/data`` would be defined.  Should the entire API need to be
+refreshed, a ``geisa/api2`` topic hierarchy would be created.  The topic names
+are provided in the specification, and the associated protobuf schemas are held
+within the specification repository.  As a result, it is possible to determine
+exactly which version of a schema is associated with a given version of the
+GEISA specification.
+
 |geisa-pyramid|
 
