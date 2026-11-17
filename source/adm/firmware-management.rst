@@ -31,7 +31,7 @@ below.
 The firmware manifest format is provided in
 ``geisa-firmware-manifest-schema.json``.  The format is substantially similar
 to the application manifest (see :doc:`/adm/manifests`); however, it only
-includes artifacts, compatibility meta-data and signatures, omitting resouces
+includes artifacts, compatibility meta-data and signatures, omitting resource
 allocations and permissions.  Critically, the firmware manifest uses the LwM2M
 Object ``3`` ``manufacturer`` and ``model-number`` fields to determine whether
 the firmware package is compatible with the target device.  The
@@ -44,9 +44,9 @@ the system operator.  Device manufacturers are free to include multiple
 artifacts within a firmware package.  This capability can be used to provide
 images for specific subcomponents within a device.  Manufacturers may use the
 ``image-name``, ``image-type`` or both to distinguish between different
-artifacts.  EMS MUST pass through the ``geisa-firmware-manifest`` element of
-the firmware manifest provided by the publisher without any changes.  Only the
-manifest's ``signatures`` block MAY be updated by the EMS.  Typically, this is
+artifacts.  The EMS MUST preserve the ``manifest`` value within
+``geisa-firmware-manifest`` without any changes.  Only the manifest's
+``signatures`` block MAY be updated by the EMS.  Typically, this is
 done to allow system operator to counter-sign a package.  The publisher
 signature on the ``geisa-firmware-manifest`` MUST be retained, as it may be
 required by the target device.

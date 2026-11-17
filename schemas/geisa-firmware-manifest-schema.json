@@ -16,11 +16,12 @@
             "type": "object",
             "$comment": "Digital signature for a firmware artifact or a manifest.",
             "required": [
-                "signatureValue"
+                "signatureValue",
+                "signerRole"
             ],
             "properties": {
                 "signerRole": {
-                    "$comment": "Optional indicator of the role of provider of the signature.",
+                    "$comment": "Required indicator of the role of provider of the signature.",
                     "enum": [
                         "publisher",
                         "operator",
@@ -75,11 +76,11 @@
                     "enum": [
                         "firmware",
                         "electric-meter",
-                        "metrology-processor",
-                        "compute-card",
-                        "network-card",
-                        "coprocessor-card",
-                        "custom"
+                        "metrology-processor",
+                        "compute-card",
+                        "network-card",
+                        "coprocessor-card",
+                        "custom"
                     ],
                     "$comment": "Additional image types may be added over time."
                 },
