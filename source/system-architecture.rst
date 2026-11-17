@@ -294,7 +294,7 @@ GEISA endeavors to support forwards and backwards compatibility across its
 requirements and APIs.  Because of the wide breadth that GEISA covers (as
 discussed above), it can be challenging to understand how versions are
 maintained.  The |GEISA| has endeavored to ensure that minor changes can be
-accomodated in a fully backwards compatible way, and that major changes are
+accommodated in a fully backwards compatible way, and that major changes are
 well defined so that implementations can detect exactly which transactions are
 supported if they choose to support multiple versions.
 
@@ -322,12 +322,12 @@ The ADM pillar |geisa-adm-baton| uses LwM2M as the basis of the management API
 between platform implementations and an Edge Management System (see
 :doc:`/operations.rst` for discussion).  LwM2M object definitions each contain a
 version identifier (``ObjectVersion``).  OMA does not allow any changes to the
-object definiton without updating the ``ObjectVersion`` field.  LwM2M objects
+object definition without updating the ``ObjectVersion`` field.  LwM2M objects
 are maintained in a GitHub Repository.  For convenience, the |GEISA| includes a
 pinned reference to the LwM2M object repository within the GEISA specification
 repository.  As a result, it is possible to use the commit ID of the GEISA
 specification to sync to the specific versions of the LwM2M objects associated
-with that version of the GEISA specification.  
+with that version of the GEISA specification.
 
 Manifests
 ^^^^^^^^^
@@ -349,7 +349,7 @@ field need to be added to the billing API, a new topic name, such as
 ``geisa/api/billing2/data`` would be defined.  Should the entire API need to be
 refreshed, a ``geisa/api2`` topic hierarchy would be created.  The topic names
 are provided in the specification, and the associated protobuf schemas are held
-within the specification respository.  As a result, it is possible to determine
+within the specification repository.  As a result, it is possible to determine
 exactly which version of a schema is associated with a given version of the
 GEISA specification.
 
