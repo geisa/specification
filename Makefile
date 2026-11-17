@@ -59,9 +59,10 @@ help:
 	@echo "GEISA Specification targets:"
 	@echo "  clean       Clean repo"
 	@echo "  cleanlatex  Clean LaTex build directory"
+	@echo "  cleanhtml   Clean HTML build directory"
 	@echo "  all         Build all GEISA specification outputs ($(SPHINXTARGETS))"
 	@for TT in $(SPHINXTARGETS); do printf "  %-10s  Build GEISA %s output\n" $$TT $$TT; done
-	@echo 
+	@echo
 	@echo "GEISA Schema targets:"
 	@echo "  schemas-examples-c"
 	@echo "  schemas-demos"
@@ -87,7 +88,10 @@ clean:
 cleanlatex:
 	rm -r $(BUILDDIR)/latex
 
-prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF) 
+cleanhtml:
+	rm -r ${BUILDDIR}/html
+
+prep: $(MERMAIDSVG) $(IMAGEPDF) $(MERMAIDPDF) $(DRAWIOSVG) $(DRAWIOPDF)
 
 all: $(SPHINXTARGETS)
 
