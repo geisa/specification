@@ -39,6 +39,9 @@ on the Vendor Application Manifest and allows the System Operator to set
 permissions and resource allocations for the target environment, use case, and
 security requirements.
 
+The Application Deployment Manifest SHALL also include the EMS-assigned numeric
+``AppID``, corresponding to LwM2M Resource ``4050``.
+
 A manifest may describe external communication or dependency requirements
 needed to interact with a Vendor Application Server. It does not deploy or
 configure a Vendor Application Server.

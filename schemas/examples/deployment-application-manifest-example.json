@@ -5,6 +5,7 @@
         "manifest": {
             "$comment": "Application identity and compatibility are carried forward from the vendor application manifest. Deployment-time changes apply to operator policy, configuration, and allocated resources as defined below.",
             "app-id": "org.lfenergy.geisa.testapp",
+            "AppID": 42,
             "author": "GEISA Developer",
             "name": "Awesome App",
             "description": "This app makes your device awesome",
@@ -86,7 +87,7 @@
         "signatures": [
             {
                 "signerRole": "operator",
-                "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCavSy4QAKCRAoV+memssgbdvPAQDN6vqWpsr56t1yasEdJuCGzMdc8cHYf49VtRk6+P7pdwEA9H5Hd3pSm8bVYuSpgDg+hcheQoznQIXG3teUfNHSdwk="
+                "signatureValue": "iJEEABYKADkWIQRxKinOVqB1gf+p27IoV+memssgbQUCavzRYxsUgAAAAAAEAA5tYW51MiwyLjUrMS4xMiwwLDMACgkQKFfpnprLIG37OgD9HcUDQwz4+u9AChm6kEodrDCISgEVPDyO3Y0CZcb1zPIA/jW4lCWygYTTQlF/RwFDQvE+xADjFf52cZxc92xkO6wL"
             }
         ]
     }

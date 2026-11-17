@@ -218,9 +218,9 @@ identifier.
 .. note::
 
    Objects ``/20``, ``/3600``, ``/3602``, and ``/3604`` use an Unsigned Integer
-   for Resource 4050 (AppID), while the application manifest represents
-   ``app-id`` as a reverse-DNS string. The EMS MUST be able to resolve the
-   numeric ``AppID`` to the corresponding manifest ``app-id`` using the
+   for Resource 4050 (AppID). The Application Deployment Manifest includes both
+   the numeric ``AppID`` and reverse-DNS ``app-id``. The EMS MUST be able to
+   resolve the numeric ``AppID`` to the corresponding manifest ``app-id`` using the
    originating Edge Device identity and its application deployment or
    provisioning information. Numeric AppID values are not necessarily unique
    across Edge Devices.
