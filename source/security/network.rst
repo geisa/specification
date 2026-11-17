@@ -27,7 +27,7 @@ https://github.com/geisa/specification/blob/main/schemas/geisa-application-manif
 through the communications object.  Applications may be given access to the
 Field Area Network (FAN) interface, the Home Area Network (HAN) interface, or
 the messaging interface.  Access to each is independent.  System operators may
-grant access to any, all, or none of these interfaces.  
+grant access to any, all, or none of these interfaces.
 
 Generally, the FAN interface is the operator-facing network.  This is
 potentially an AMI mesh network, a private cellular network or a public carrier
@@ -96,18 +96,19 @@ separated by colons.  For example:
   tcp:192.0.2.30:502
   udp::5540
   tcp:203.0.113.57:443
-  udp:2001:db8:13::ba76:93f:5683
-  tcp:fe80::1234:5678:90ab:cdef:80
+  udp:[2001:db8:13::ba76:93f]:5683
+  tcp:[fe80::1234:5678:90ab:cdef]:80
 
 
-Address may be omitted.  Transport and port are always required.  Both IPv4
-and IPv6 addresses are acceptable.  Only raw IP addresses are supported in this
-version of the specification, not domain names.  This version of the
-specification only allows TCP and UDP as transports.
+Address may be omitted.  Transport and port are always required.  Both IPv4 and
+IPv6 addresses are acceptable.  IPv6 addresses must be enclosed in brackets.
+Only raw IP addresses are supported in this version of the specification, not
+domain names.  This version of the specification only allows TCP and UDP as
+transports.
 
 Platforms MUST translate these tuples into appropriate firewall rules to
 inbound and/or outbound traffic as indicated.  Communication classes may have
-multiple network access tuple entries.  
+multiple network access tuple entries.
 
 
 |geisa-pyramid|
