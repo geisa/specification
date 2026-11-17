@@ -11,7 +11,7 @@
             "items": {
                 "type": "string",
                 "minLength": 1,
-                "pattern": "^([Tt][Cc][Pp]:|[Uu][Dd][Pp]:)([0-9A-Fa-f:\\.]+|\\[[0-9A-Fa-f:\\.]+\\]|)(:[0-9]+)$",
+                "pattern": "^([Tt][Cc][Pp]:|[Uu][Dd][Pp]:)([0-9A-Fa-f:\\]\\.]+|\\[[0-9A-Fa-f:\\.]+\\]|)(:[0-9]+)$",
                 "$comment": "The RegEx above will match things beginning with a TCP, UDP, or nothing, followed by an IPv4 or v6 address (or not), and a port (required).  It does not validate the address itself."
             },
             "uniqueItems": true
