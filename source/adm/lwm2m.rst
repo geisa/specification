@@ -212,7 +212,7 @@ below.
      - :download:`1.xml <external/lwm2m-registry/1.xml>`
    * - ``/3``
      - Device
-     - 1.2
+     - 1.3
      - :download:`3.xml <external/lwm2m-registry/3.xml>`
    * - ``/4``
      - Connectivity Monitoring
