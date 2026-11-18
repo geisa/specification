@@ -209,8 +209,8 @@ new consumer exists.
 
 Kafka topic names used by GEISA Data Distribution MUST be structured.
 
-The illustrative format ``appid.type`` uses the reverse-DNS application
-identifier from the manifest for ``appid`` and an existing GEISA Message Type
+The illustrative format ``appname.type`` uses the reverse-DNS application
+identifier from the manifest for ``appname`` and an existing GEISA Message Type
 for ``type``. For example, ``com.example.geisa.waveformanalyzer.ALARM``.
 This is not the finalized topic grammar. Numeric OMA AppID is a separate
 identifier.
@@ -219,8 +219,8 @@ identifier.
 
    Objects ``/20``, ``/3600``, ``/3602``, and ``/3604`` use an Unsigned Integer
    for Resource 4050 (AppID). The Application Deployment Manifest includes both
-   the numeric ``AppID`` and reverse-DNS ``app-id``. The EMS MUST be able to
-   resolve the numeric ``AppID`` to the corresponding manifest ``app-id`` using the
+   the numeric ``AppID`` and reverse-DNS ``app-name``. The EMS MUST be able to
+   resolve the numeric ``AppID`` to the corresponding manifest ``app-name`` using the
    originating Edge Device identity and its application deployment or
    provisioning information. Numeric AppID values are not necessarily unique
    across Edge Devices.
@@ -1227,11 +1227,11 @@ Data Selection and Routing
 * When multiple routes resolve to the same Kafka endpoint and topic, should
   the EMS publish the matching record only once?
 
-* How should structured ``appid.type`` topics handle different authorization
+* How should structured ``appname.type`` topics handle different authorization
   scopes? For example, a vendor authorized for alarms from 500 of 10,000
   devices must not receive alarms from the remaining devices.
 
-* Should topic names use the reverse-DNS manifest ``app-id`` or numeric OMA
+* Should topic names use the reverse-DNS manifest ``app-name`` or numeric OMA
   ``AppID``, and what exact naming rules should GEISA define?
 
 GEISA Data Distribution Record

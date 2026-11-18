@@ -1,10 +1,10 @@
 {
     "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE.",
     "geisa-application-manifest": {
-        "$comment": "Example vendor application manifest. Defines vendor-supplied application identity, compatibility, defaults, requested permissions, and requested resource values before operator review, possible adjustment, and deployment approval.",
+        "$comment": "Example vendor application manifest. Defines vendor-supplied application name, compatibility, defaults, requested permissions, and requested resource values before operator review, possible adjustment, and deployment approval.",
         "manifest": {
             "$comment": "Core application metadata and vendor-recommended settings.",
-            "app-id": "org.lfenergy.geisa.testapp",
+            "app-name": "org.lfenergy.geisa.testapp",
             "author": "GEISA Developer",
             "name": "Awesome App",
             "description": "This app makes your device awesome",
@@ -87,7 +87,7 @@
         "signatures": [
             {
                 "signerRole": "publisher",
-                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavSyFQAKCRBFeoCWIY0eh7mhAPsEymqADzFoJ6Xi10imQWCDBK59a8QseQ++Vxpzz93rNAD+Ibes8LFEZLoHfkI2G4zXR5TsJuFq/YBfxZsXQ5d91AM="
+                "signatureValue": "iHUEABYKAB0WIQQCLIvtYD2tXkl4o11FeoCWIY0ehwUCavz2yQAKCRBFeoCWIY0eh7owAQCnCpK+Ni6OLTgXjk/oVjdEKn/ncS1iAhfMY/cNe1neGAD/brc56j7iocNWhpVzTwsbxf3ZGTIR5P8wHK9yW8MBHwg="
             }
         ]
     }

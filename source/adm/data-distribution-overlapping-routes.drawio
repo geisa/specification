@@ -52,7 +52,7 @@
         <mxCell id="kafka" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fillColor=#fbe5d6;strokeColor=#c77b30;fontStyle=1;" value="Kafka-Compatible Data Distribution Service" vertex="1">
           <mxGeometry height="460" width="330" x="790" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Vendor Application Server target/topic&lt;br&gt;For this record: &amp;lt;app-id&amp;gt;.ALARM" vertex="1">
+        <mxCell id="topic1" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Vendor Application Server target/topic&lt;br&gt;For this record: &amp;lt;app-name&amp;gt;.ALARM" vertex="1">
           <mxGeometry height="82" width="250" x="40" y="137" as="geometry" />
         </mxCell>
         <mxCell id="topic2" parent="kafka" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;fontStyle=1;" value="Utility Operations Topic" vertex="1">
@@ -67,7 +67,7 @@
         <mxCell id="consumerB" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d9e8fb;strokeColor=#4f81bd;" value="Logical Consumer B&lt;br&gt;Independent position" vertex="1">
           <mxGeometry height="58" width="112" x="1171" y="392" as="geometry" />
         </mxCell>
-        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;One AppID 17 ALARM record matches all three routes&lt;br&gt;AppID 17 is numeric; &amp;lt;app-id&amp;gt; denotes the manifest reverse-DNS ID&lt;br&gt;Both consumers are separately authorized for every record in the Vendor target; subscription does not grant authorization." vertex="1">
+        <mxCell id="note1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f2f2f2;strokeColor=#666666;align=left;spacingLeft=10;" value="&lt;b&gt;Example route matching&lt;/b&gt;&lt;br&gt;One AppID 17 ALARM record matches all three routes&lt;br&gt;AppID 17 is numeric; &amp;lt;app-name&amp;gt; denotes the manifest reverse-DNS ID&lt;br&gt;Both consumers are separately authorized for every record in the Vendor target; subscription does not grant authorization." vertex="1">
           <mxGeometry height="96" width="710" x="350" y="680" as="geometry" />
         </mxCell>
         <mxCell id="labelConfig" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;" value="routes, targets, security" vertex="1">

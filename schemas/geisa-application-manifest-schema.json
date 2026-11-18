@@ -151,7 +151,7 @@
                     "type": "object",
                     "required": [
                         "api-access",
-                        "app-id",
+                        "app-name",
                         "app-version",
                         "artifacts",
                         "author",
@@ -166,8 +166,8 @@
                         "resources"
                     ],
                     "properties": {
-                        "app-id": {
-                            "description": "Text-based ID of the application, following reverse DNS name notation.",
+                        "app-name": {
+                            "description": "Text-based name of the application, following reverse DNS name notation.",
                             "type": "string",
                             "minLength": 4
                         },
