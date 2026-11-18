@@ -38,7 +38,7 @@ status and error model documented in :doc:`/api/response-status`.
 
 .. note::
    In the event of a conflict between this API catalog and the specific
-   description in each API reference section, the API reference section SHALL 
+   description in each API reference section, the API reference section SHALL
    prevail.
 
 .. index:: single: API Permissions
@@ -51,7 +51,9 @@ API Topic and Permission Catalog
 .. note::
 
    In the topic definitions below, ``<userid>`` refers to the platform-local
-   identifier of the requesting GEISA application instance (see :doc:`/glossary`) and SName, AppID-A, and AppID-B refers to the Service Name and Application IDs for :doc:`/api/app-to-app`.
+   identifier of the requesting GEISA application instance (see
+   :doc:`/glossary`) and SName, AppName-A, and AppName-B refers to the Service Name
+   and Application Names for :doc:`/api/app-to-app`.
 
 |geisa-landscape|
 
@@ -59,7 +61,7 @@ API Topic and Permission Catalog
    :header-rows: 2
    :widths: 25 10 10 9 30 10
 
-   * - :cspan:`5` Category 
+   * - :cspan:`5` Category
 
    * - Topic
      - Role
@@ -245,23 +247,23 @@ API Topic and Permission Catalog
      - Broadcast
 
    * - :cspan:`5` :doc:`Billing Data <../api/billing>`
-  
+
    * - ``geisa/api/billing/data``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaBillingQuantities``
      - Broadcast
-  
+
    * - ``geisa/api/billing/data``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaBillingQuantities``
      - Broadcast
-  
+
    * - :cspan:`5` :doc:`Waveform Data <../api/waveform>`
-  
+
    * - ``geisa/api/waveform/req/<userid>``
      - Application
      - Publish
@@ -282,30 +284,30 @@ API Topic and Permission Catalog
      - App → Platform
      - ``GeisaWaveform_Req``
      - Request
-  
+
    * - ``geisa/api/waveform/rsp/<userid>``
      - Platform
      - Publish
      - Platform → App
      - ``GeisaWaveform_Rsp``
      - Response
-  
+
    * - :cspan:`5` :doc:`Actuator Status & Control <../api/actuators>`
-  
+
    * - ``geisa/api/actuator/get/req/<userid>``
      - Application
      - Publish
      - App → Platform
      - ``GeisaActuatorGet_Req``
      - Request
-  
+
    * - ``geisa/api/actuator/get/rsp/<userid>``
      - Application
      - Subscribe
      - Platform → App
      - ``GeisaActuatorGet_Rsp``
      - Response
-  
+
    * - ``geisa/api/actuator/set/req/<userid>``
      - Application
      - Publish
@@ -394,7 +396,7 @@ API Topic and Permission Catalog
 
    * - :cspan:`5` :doc:`App-to-App <../api/app-to-app>`
 
-   * - ``geisa/api/app2app/pub/<SName>/<AppID-A>``
+   * - ``geisa/api/app2app/pub/<SName>/<AppName-A>``
      - Application Publisher (A)
      - Publish
      - App A → App B
@@ -415,21 +417,21 @@ API Topic and Permission Catalog
      - N/A
      - Request
 
-   * - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/<AppID-A>``
+   * - ``geisa/api/app2app/rsp/<SName>/<AppName-B>/<AppName-A>``
      - Application Responder (A)
      - Publish
      - App A → App B
      - N/A
      - Response
 
-   * - ``geisa/api/app2app/rsp/<SName>/<AppID-B>/#``
+   * - ``geisa/api/app2app/rsp/<SName>/<AppName-B>/#``
      - Application Requester (B)
      - Wildcard Subscribe
      - App A → App B
      - N/A
      - Response
 
-   * - ``geisa/api/app2app/req/<SName>/<AppID-B>``
+   * - ``geisa/api/app2app/req/<SName>/<AppName-B>``
      - Application Requester (B)
      - Publish
      - App B → App A

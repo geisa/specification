@@ -3,8 +3,8 @@
     "geisa-application-manifest": {
         "$comment": "Example deployment manifest derived from the vendor application manifest. Shows operator-approved effective settings for deployment on a specific class of platform.",
         "manifest": {
-            "$comment": "Application identity and compatibility are carried forward from the vendor application manifest. Deployment-time changes apply to operator policy, configuration, and allocated resources as defined below.",
-            "app-id": "org.lfenergy.geisa.testapp",
+            "$comment": "Application name and compatibility are carried forward from the vendor application manifest. Deployment-time changes apply to operator policy, configuration, and allocated resources as defined below.",
+            "app-name": "org.lfenergy.geisa.testapp",
             "AppID": 42,
             "author": "GEISA Developer",
             "name": "Awesome App",
@@ -87,7 +87,7 @@
         "signatures": [
             {
                 "signerRole": "operator",
-                "signatureValue": "iJEEABYKADkWIQRxKinOVqB1gf+p27IoV+memssgbQUCavzRYxsUgAAAAAAEAA5tYW51MiwyLjUrMS4xMiwwLDMACgkQKFfpnprLIG37OgD9HcUDQwz4+u9AChm6kEodrDCISgEVPDyO3Y0CZcb1zPIA/jW4lCWygYTTQlF/RwFDQvE+xADjFf52cZxc92xkO6wL"
+                "signatureValue": "iHUEABYKAB0WIQRxKinOVqB1gf+p27IoV+memssgbQUCavz2wgAKCRAoV+memssgbf0OAP9IZ5/SELLsP0mbNeWh21sh0XQN4dBghs1WhpZfFcm/vAEAi3rnNBEH/MZXrIqSJKanWc86HDky+NMuVc+j5AAoigM="
             }
         ]
     }

@@ -219,8 +219,8 @@ identifier.
 
    Objects ``/20``, ``/3600``, ``/3602``, and ``/3604`` use an Unsigned Integer
    for Resource 4050 (AppID). The Application Deployment Manifest includes both
-   the numeric ``AppID`` and reverse-DNS ``app-id``. The EMS MUST be able to
-   resolve the numeric ``AppID`` to the corresponding manifest ``app-id`` using the
+   the numeric ``AppID`` and reverse-DNS ``app-name``. The EMS MUST be able to
+   resolve the numeric ``AppID`` to the corresponding manifest ``app-name`` using the
    originating Edge Device identity and its application deployment or
    provisioning information. Numeric AppID values are not necessarily unique
    across Edge Devices.
@@ -1231,7 +1231,7 @@ Data Selection and Routing
   scopes? For example, a vendor authorized for alarms from 500 of 10,000
   devices must not receive alarms from the remaining devices.
 
-* Should topic names use the reverse-DNS manifest ``app-id`` or numeric OMA
+* Should topic names use the reverse-DNS manifest ``app-name`` or numeric OMA
   ``AppID``, and what exact naming rules should GEISA define?
 
 GEISA Data Distribution Record
