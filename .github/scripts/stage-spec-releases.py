@@ -364,6 +364,11 @@ def main() -> None:
         build_error: BaseException | None = None
         cleanup_error: BaseException | None = None
         try:
+            run(
+                ["git", "submodule", "update", "--init", "--recursive"],
+                cwd=worktree,
+                env=env,
+            )
             validate_release_source_version(worktree, version)
             run(build_command, cwd=worktree, env=env)
             ensure_release_outputs(worktree)
