@@ -28,7 +28,7 @@ There are, however, use cases where modularization, collaboration, system
 services, or other conditions require specific Applications to communicate with
 other specific Applications within the same device.
 
-GIESA allows selective App-to-App communication within the same device if
+GEISA allows selective App-to-App communication within the same device if
 requested by an Application Publisher and approved for deployment by a System
 Operator.
 
@@ -89,7 +89,7 @@ services that Application provides and consumes:
 - Subscribing to messages published by other Apps
 
 If present in the Application Deployment Manifest, the GEISA Platform allows
-specific Apps to communicate with other specific Apps via the GIESA API using
+specific Apps to communicate with other specific Apps via the GEISA API using
 MQTT topic permissions.
 
 .. note::

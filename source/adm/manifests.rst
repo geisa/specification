@@ -58,7 +58,7 @@ configure a Vendor Application Server.
 The Vendor Application Manifest and Application Deployment Manifest SHALL
 include:
 
-- Vendor assigned Application name
+- Vendor-assigned reverse-DNS application name (``app-name``)
 
     - Vendor assigned application names (``app-name``) use
       `https://en.wikipedia.org/wiki/Reverse_domain_name_notation Reverse DNS
@@ -66,7 +66,7 @@ include:
     - GEISA recommends ``tld.companyname.geisa.appname`` for application names,
       for example, ``com.example.geisa.waveformanalyzer``.
 
-- Name of the application
+- Application display name (``name``)
 - Description of the application
 - Version Number of the application
 - Signature(s) of the application image artifact(s).
@@ -132,8 +132,8 @@ The Vendor Application Manifest SHALL include:
     - GEISA does not provide a mechanism for loading arbitrary packages.  The
       external dependencies element in the manifest is used exclusively to
       indicate that one application depends on another.
-    - Vendor-assigned Application name of the application this application
-      depends on.
+    - Vendor-assigned application name (``app-name``) of the application
+      this application depends on.
 
 - Default Application Configuration
 

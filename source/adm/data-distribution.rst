@@ -209,8 +209,8 @@ new consumer exists.
 
 Kafka topic names used by GEISA Data Distribution MUST be structured.
 
-The illustrative format ``appid.type`` uses the reverse-DNS application
-identifier from the manifest for ``appid`` and an existing GEISA Message Type
+The illustrative format ``appname.type`` uses the reverse-DNS application
+identifier from the manifest for ``appname`` and an existing GEISA Message Type
 for ``type``. For example, ``com.example.geisa.waveformanalyzer.ALARM``.
 This is not the finalized topic grammar. Numeric OMA AppID is a separate
 identifier.
@@ -1227,7 +1227,7 @@ Data Selection and Routing
 * When multiple routes resolve to the same Kafka endpoint and topic, should
   the EMS publish the matching record only once?
 
-* How should structured ``appid.type`` topics handle different authorization
+* How should structured ``appname.type`` topics handle different authorization
   scopes? For example, a vendor authorized for alarms from 500 of 10,000
   devices must not receive alarms from the remaining devices.
 
