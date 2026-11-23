@@ -139,6 +139,7 @@ The following examples illustrate possible request forms:
 
    GET /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages/latest?message-type=ALARM
    GET /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages?message-type=ALARM&from=...&to=...
+   GET /geisa/adm/v1/devices/{operator-identifier}/apps/{appid}/messages/latest?message-type=101
 
 The path identifies the Edge Device and application. The ``latest`` endpoint
 MUST return the latest available message matching the target and Message Type.
@@ -146,6 +147,10 @@ The historical endpoint MUST return available messages matching the target and
 Message Type within the requested time range. GET requests MAY include
 ``request-id`` as an additional selection criterion. The EMS MUST support
 filtering by ``request-id`` when provided.
+
+The ``message-type`` query parameter MUST accept GEISA-defined type names
+and decimal proprietary values from ``101`` through ``254``. The EMS MUST
+support filtering by proprietary Message Type values.
 
 Message Priority values are:
 
@@ -177,8 +182,8 @@ Message Priority values are:
      - Reserved
      - Reserved for future GEISA use
    * - ``101`` through ``254``
-     - Reserved
-     - Reserved for proprietary use
+     - Proprietary
+     - Available for proprietary use
    * - ``255``
      - Reserved
      -
@@ -227,11 +232,23 @@ Message Type values are:
      - Reserved
      - Reserved for future GEISA use
    * - ``101`` through ``254``
-     - Reserved
-     - Reserved for proprietary use
+     - Proprietary
+     - Available for proprietary use
    * - ``255``
      - Reserved
      -
+
+Applications SHOULD use GEISA-defined Message Types and Priorities where
+applicable. Proprietary values from ``101`` through ``254`` are supported
+for application-specific requirements.
+
+The JSON application-message request uses the defined GEISA enum names or
+integer proprietary values. Protobuf messages carry proprietary values as
+numeric enum values. Platforms and EMS implementations MUST preserve these
+values during message processing and delivery.
+
+Proprietary Message Type meanings are application-specific, and proprietary
+priority handling follows System Operator policy.
 
 Each app message is associated with Message Priority, Message Type, Message
 TTL, Content Type, Request ID, and Message Timestamp metadata. These resources

@@ -28,28 +28,46 @@
         },
         "priority": {
           "description": "ADM object 3600-style message priority for app-facing messaging.",
-          "type": "string",
-          "enum": [
-            "GEISA_APP_MESSAGE_PRIORITY_UNSPECIFIED",
-            "GEISA_APP_MESSAGE_PRIORITY_URGENT",
-            "GEISA_APP_MESSAGE_PRIORITY_IMMEDIATE",
-            "GEISA_APP_MESSAGE_PRIORITY_BEST_EFFORT",
-            "GEISA_APP_MESSAGE_PRIORITY_LATEST"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "GEISA_APP_MESSAGE_PRIORITY_UNSPECIFIED",
+                "GEISA_APP_MESSAGE_PRIORITY_URGENT",
+                "GEISA_APP_MESSAGE_PRIORITY_IMMEDIATE",
+                "GEISA_APP_MESSAGE_PRIORITY_BEST_EFFORT",
+                "GEISA_APP_MESSAGE_PRIORITY_LATEST"
+              ]
+            },
+            {
+              "type": "integer",
+              "minimum": 101,
+              "maximum": 254
+            }
           ]
         },
         "message-type": {
           "description": "App-message type aligned to ADM object 3600 Message Type.",
-          "type": "string",
-          "enum": [
-            "GEISA_APP_MESSAGE_TYPE_UNSPECIFIED",
-            "GEISA_APP_MESSAGE_TYPE_CONFIG",
-            "GEISA_APP_MESSAGE_TYPE_COMMAND",
-            "GEISA_APP_MESSAGE_TYPE_COMMAND_RESULT",
-            "GEISA_APP_MESSAGE_TYPE_STATUS",
-            "GEISA_APP_MESSAGE_TYPE_EVENT",
-            "GEISA_APP_MESSAGE_TYPE_ALARM",
-            "GEISA_APP_MESSAGE_TYPE_APP_DATA",
-            "GEISA_APP_MESSAGE_TYPE_TELEMETRY"
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "GEISA_APP_MESSAGE_TYPE_UNSPECIFIED",
+                "GEISA_APP_MESSAGE_TYPE_CONFIG",
+                "GEISA_APP_MESSAGE_TYPE_COMMAND",
+                "GEISA_APP_MESSAGE_TYPE_COMMAND_RESULT",
+                "GEISA_APP_MESSAGE_TYPE_STATUS",
+                "GEISA_APP_MESSAGE_TYPE_EVENT",
+                "GEISA_APP_MESSAGE_TYPE_ALARM",
+                "GEISA_APP_MESSAGE_TYPE_APP_DATA",
+                "GEISA_APP_MESSAGE_TYPE_TELEMETRY"
+              ]
+            },
+            {
+              "type": "integer",
+              "minimum": 101,
+              "maximum": 254
+            }
           ]
         },
         "timestamp-us": {
