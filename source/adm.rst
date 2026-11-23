@@ -40,12 +40,12 @@ behaviors described.
 
 As described in the GEISA :doc:`api`, GEISA provides a default :doc:`adm/messaging`
 mechanism. ADM-conformant platforms transport these messages over CoAP. An
-ADM-conformant EMS MUST provide the required ReST POST operation for an
+ADM-conformant EMS MUST provide the required REST POST operation for an
 authorized Vendor Application Server to submit messages for delivery to an
 Edge Application. That message is delivered through ``/3600`` Server to
 Client. In the other direction, the EMS MUST make ``/3600`` Client to Server
 application messages available for Kafka-protocol Data Distribution. Configured
-Data Distribution routes determine actual publication. Other EMS ReST
+Data Distribution routes determine actual publication. Other EMS REST
 operations are not required for GEISA interoperability.
 
 |geisa-pyramid|

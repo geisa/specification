@@ -63,7 +63,7 @@ consumers. For example, metrology, waveform, sensor, or similar device data may 
 exposed by the GEISA Platform to Edge Applications without becoming Platform operational
 data or being required to be transported through ADM/EMS systems for distribution.
 
-Note that EMS implementations MAY expose additional interfaces, including ReST APIs,
+Note that EMS implementations MAY expose additional interfaces, including REST APIs,
 operator interfaces, query APIs, MQTT interfaces, or implementation-specific integration
 mechanisms, but such interfaces do not replace the interoperable Data Distribution
 requirements defined here.  Direct IP communication by Edge Applications is a separate
@@ -248,10 +248,10 @@ the System Operator's route configuration.
 
 Application-message Kafka record keys SHALL identify the originating Edge
 Device and application using ``(operator-identifier, numeric AppID)`` from the
-record's ``source`` fields. The EMS uses this key for Kafka partitioning. Records
-are ordered within a topic partition. Consumers SHOULD handle duplicate records,
-including application-defined watermarks where appropriate. The exact key
-encoding remains open.
+record's ``source`` fields. Partition assignment depends on the implementation
+and configured partitioning strategy. Records are ordered within a topic
+partition. Consumers SHOULD handle duplicate records, including application-defined
+watermarks where appropriate. The exact key encoding remains open at this time.
 
 Application Publishers or Application Vendors may provide integration
 requirements or recommendations, but they do not control the System Operator's
@@ -975,6 +975,10 @@ multiple worker instances belonging to the same logical consumer.
 For example, a Vendor Application Server may run several worker processes using
 one consumer group for scaling or failover.
 
+Consumers using Kafka consumer groups MUST use a ``group.id`` unique to each
+independent logical consumer within the Kafka cluster. Worker instances
+belonging to the same logical consumer MAY share a ``group.id``.
+
 GEISA does not require a Data Distribution consumer to use consumer groups or
 prescribe its worker architecture.
 
@@ -1149,7 +1153,7 @@ range, response representation, and error behavior remain under review. Data tha
 is older than the Kafka retention window may be available through other mechanisms,
 including:
 
-* EMS query or ReST APIs
+* EMS query or REST APIs
 * Event Log ``/20``
 * utility-operated archives or data lakes
 * application or Edge Device resend mechanisms where supported
@@ -1204,7 +1208,7 @@ Open Questions
 
 The following questions remain open for review and discussion.
 
-Northbound ReST API
+Northbound REST API
 ~~~~~~~~~~~~~~~~~~~
 
 * What time-range representation and boundary semantics should historical GET use?
