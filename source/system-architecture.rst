@@ -354,11 +354,11 @@ schemas are held within the specification repository.  As a result, it is
 possible to determine exactly which version of a schema is associated with a
 given version of the GEISA specification.
 
-ReST APIs
+REST APIs
 ^^^^^^^^^
 
-GEISA ReST APIs use versioned URI paths, such as ``/geisa/adm/v1/``.
-Breaking changes to a ReST API MUST introduce a new versioned URI path,
+GEISA REST APIs use versioned URI paths, such as ``/geisa/adm/v1/``.
+Breaking changes to a REST API MUST introduce a new versioned URI path,
 such as ``/geisa/adm/v2/``.  Compatible changes MAY retain the existing
 URI version.
 

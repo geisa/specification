@@ -40,15 +40,15 @@ telemetry, or effective configuration state sent by the Edge Application.
 An ADM-conformant EMS MUST obtain these messages and their associated metadata
 using the applicable LwM2M mechanisms.
 
-Application-Message ReST Interface
+Application-Message REST Interface
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An ADM-conformant EMS MUST provide a ReST API that authorized Vendor Application
+An ADM-conformant EMS MUST provide a REST API that authorized Vendor Application
 Servers and Utility Operations clients can use, where permitted by System Operator
 policy, to submit a message for delivery to an Edge Application. These authorized
 clients may also use the API for latest-message and historical GET operations under
 that policy.
-All EMS ReST APIs, including the required application-message POST endpoint and
+All EMS REST APIs, including the required application-message POST endpoint and
 any additional operations, MUST use HTTPS.
 The request MUST identify the target using its provisioned
 :ref:`operator-identifier <operator-identifier>`
@@ -128,7 +128,7 @@ The EMS MUST return the following HTTP response codes as applicable:
 For resources whose existence is sensitive, the EMS MUST NOT distinguish
 unauthorized access from nonexistence and MAY return ``404`` for either.
 
-EMS implementations MAY provide additional ReST operations.
+EMS implementations MAY provide additional REST operations.
 
 **Application-message GET operations**
 
