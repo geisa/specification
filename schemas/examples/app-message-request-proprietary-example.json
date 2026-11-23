@@ -1,0 +1,12 @@
+{
+  "$comment": "Copyright 2025-2026, Contributors to the Grid Edge Interoperability & Security Alliance (GEISA), a Series of LF Projects, LLC. Licensed under the Apache License, Version 2.0. See LICENSE. Proprietary message priority and type request example for the GEISA app-message MQTT request topic.",
+  "geisa-app-message-req": {
+    "request-id": "req-0001",
+    "priority": 101,
+    "message-type": 254,
+    "timestamp-us": 1762862400000000,
+    "ttl-seconds": 300,
+    "content-type": "application/json",
+    "payload-base64": "eyJldmVudCI6Im1ldGVyLXNuYXBzaG90Iiwia3doIjoxMjM0NTY3fQ=="
+  }
+}

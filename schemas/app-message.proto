@@ -19,6 +19,9 @@ syntax = "proto3";
 // Application-facing message priority is aligned with ADM object 3600.
 // Lower numeric values are higher priority.
 // This is for GEISA app messaging, not direct app access to LwM2M/ADM.
+// GEISA-defined priorities are preferred. Values 101-254 are available for
+// proprietary use. Values 5-100 and 255 are reserved.
+// Proprietary priority handling follows operator policy.
 enum GeisaAppMessagePriority {
   GEISA_APP_MESSAGE_PRIORITY_UNSPECIFIED = 0;
   // URGENT requests highest handling priority for exceptional time-sensitive
@@ -31,6 +34,8 @@ enum GeisaAppMessagePriority {
 
 // Application-facing message type aligned with ADM object 3600.
 // This is for GEISA app messaging, not direct app access to LwM2M/ADM.
+// GEISA-defined message types are preferred. Values 101-254 are available
+// for proprietary use. Values 9-100 and 255 are reserved.
 enum GeisaAppMessageType {
   GEISA_APP_MESSAGE_TYPE_UNSPECIFIED = 0;
   GEISA_APP_MESSAGE_TYPE_CONFIG = 1;
